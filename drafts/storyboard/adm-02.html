@@ -86,7 +86,7 @@
               <td colspan="5">
                 <div class="mk-panel">
                   <div class="ph2">▼ 확장 패널 — 나목 교환 승인 (T1)</div>
-                  EXC-20260902-0001 · ORG-A(가입자 K) · 보내는 900 USDC → 받는 899.73 USDT · 확정 비율 0.9997 USDT/USDC · 스프레드 0.10% · 수락 2026-09-02 10:12<br>자동검증 — BLF 정상 · KYT 정상 · 건별 한도 1,215,000원 ≤ 1,500,000 · 기관 KYC 활성 · 교환 재고 USDT 충족
+                  EXC-20260902-0001 · ORG-A(가입자 K) · 보내는 900 USDC → 받는 899.73 USDT · 확정 비율 0.9997 USDT/USDC · 스프레드 0.10% · 예상 가스비 0.0021 ETH ≈ 8,900원 → 6.59 USDT(받는 수량에서 차감 · 차감 후 실수령 893.14 USDT) · 수락 2026-09-02 10:12<br>자동검증 — BLF 정상 · KYT 정상 · 건별 한도 1,215,000원 ≤ 1,500,000(가스비 미포함) · 기관 KYC 활성 · 교환 재고 USDT 충족
                   <div class="hist">처리 이력 — 없음(최초 접수 2026-09-02 10:12)</div>
                 </div>
               </td>
@@ -106,7 +106,7 @@
               <td colspan="5">
                 <div class="mk-panel">
                   <div class="ph2">▼ 확장 패널 — 마목 확정 확인 (T2)</div>
-                  BRK-20260902-0001 · 게시자 ORG-A(가입자 K) ↔ 신청자 ORG-B(가입자 M) · 게시자 보내는 800 USDT / 신청자 보내는 798.40 USDC · 비율 0.9980 USDC/USDT<br>수수료 — 게시자 8.00 USDT · 신청자 7.98 USDC (각자 거래액의 1%) · 수락 2026-09-02 10:31<br>자동검증 — 게시자 BLF·KYT 정상 / 신청자 BLF 정상 · <span>KYT 주의</span>(에스컬레이션 사유) · 양측 건별 한도 1,080,000원 / 1,077,840원 ≤ 1,500,000 · 양측 KYC 활성 · 잔고(수수료 포함) 확보<br>트래블룰 — 양측 필요정보 수집 완료 · 검증 대기 <span class="chk">[확인필요: 적용 범위]</span>
+                  BRK-20260902-0001 · 게시자 ORG-A(가입자 K) ↔ 신청자 ORG-B(가입자 M) · 게시자 보내는 800 USDT / 신청자 보내는 798.40 USDC · 비율 0.9980 USDC/USDT<br>수수료 — 게시자 8.00 USDT · 신청자 7.98 USDC (각자 거래액의 1%) · 수락 2026-09-02 10:31<br>예상 가스비 — 게시자 0.0021 ETH ≈ 8,900원 → 6.59 USDC · 신청자 0.0021 ETH ≈ 8,900원 → 6.59 USDT (각자 받는 수량에서 차감 · 예상액이 상한)<br>자동검증 — 게시자 BLF·KYT 정상 / 신청자 BLF 정상 · <span>KYT 주의</span>(에스컬레이션 사유) · 양측 건별 한도 1,080,000원 / 1,077,840원 ≤ 1,500,000 · 양측 KYC 활성 · 잔고(수수료 포함) 확보<br>트래블룰 — 양측 필요정보 수집 완료 · 검증 대기 <span class="chk">[확인필요: 적용 범위]</span>
                   <div class="hist">처리 이력 — 없음(최초 접수 2026-09-02 10:31)</div>
                 </div>
               </td>
@@ -259,7 +259,7 @@
           <thead><tr><th>건</th><th>상태</th><th>집행 명세</th><th>콜드 집행 결과</th><th>처리</th></tr></thead>
           <tbody>
             <tr>
-              <td class="mono">나목 · EXC-20260902-0001 · ORG-A 900 USDC ⇄ DSRV 899.73 USDT</td>
+              <td class="mono">나목 · EXC-20260902-0001 · ORG-A 900 USDC ⇄ DSRV 899.73 USDT − 가스비 6.59 = 실수령 893.14 USDT</td>
               <td style="font-weight:700;">집행 대기</td>
               <td>
                 <div class="item-area" data-highlight="19" style="position:relative;display:inline-block;padding:3px;border-radius:8px;margin:2px 10px 2px 0;"><div class="pin" data-idx="19" style="top:-10px;right:-10px;">20</div><span class="act">집행 명세 다운로드 (Excel)</span></div>
@@ -272,14 +272,14 @@
               </td>
             </tr>
             <tr>
-              <td class="mono">마목 · BRK-20260902-0001 · ORG-A → ORG-B 800 USDT (게시자분)</td>
+              <td class="mono">마목 · BRK-20260902-0001 · ORG-A → ORG-B 800 USDT − 가스비 6.59 = 실수령 793.41 USDT (게시자분)</td>
               <td style="font-weight:700;">이전 진행</td>
               <td><span class="act">집행 명세 다운로드 (Excel)</span></td>
               <td><div class="field" style="padding:5px 8px;font-size:10px;"><span class="ph">txhash 입력 (0x…)</span></div></td>
               <td><span class="act" style="color:#94a3b8;border-color:#e2e8f0;background:#f1f5f9;">완료 처리</span></td>
             </tr>
             <tr>
-              <td class="mono">마목 · BRK-20260902-0001 · ORG-B → ORG-A 798.40 USDC (신청자분)</td>
+              <td class="mono">마목 · BRK-20260902-0001 · ORG-B → ORG-A 798.40 USDC − 가스비 6.59 = 실수령 791.81 USDC (신청자분)</td>
               <td style="font-weight:700;">이전 진행</td>
               <td><span class="act">집행 명세 다운로드 (Excel)</span></td>
               <td><div class="field" style="padding:5px 8px;font-size:10px;"><span>0x7c1e…</span><span style="color:#166534;font-weight:700;">✓ 명세 일치</span></div></td>
@@ -344,10 +344,10 @@
       <div class="num">2</div>
       <div>
         <div class="itm-title">[승인] — 나목 교환 승인(T1)<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>노출</strong> 유형 '나목 교환 승인' 행에만 보인다. 행마다 반복하고 대표 핀은 1개다.<br><strong>클릭 가능</strong> 행 상태가 승인 대기·에스컬레이션·보류 중 하나이고, 다른 관리자가 그 행을 처리하고 있지 않으며, 교환 재고가 받는 수량 이상이고, 기관 KYC 상태가 '활성'일 때만 활성이다.<br><strong>확인 사항</strong> 확인 다이얼로그를 띄운다(집행 개시는 구속력 있는 행위다). 판단 재료는 확장 패널에서 본다 — 자동검증(BLF·KYT·건별 한도 1,500,000원 상당 이하) · 확정 비율과 스프레드 · 교환 재고(콜드 최소재고) 잔량 · 기관 KYC 상태.<br><strong>액션</strong> 도메인 상태를 <strong>집행 대기</strong>로 바꾸고 집행 대기 표에 행을 만든다(항목 19). 고객 화면은 승인 대기부터 집행 대기까지 EXC-03 '거래 진행중' 하나로만 보이므로 승인 시점에 고객 통지는 없다.<br><span class="basis">근거 states T1 · 09 §0 승인·통제(DSRV 단일 처리 + 콜드 수동 집행) · ISMS 2.2.2</span></div>
+        <div class="itm-desc"><strong>노출</strong> 유형 '나목 교환 승인' 행에만 보인다. 행마다 반복하고 대표 핀은 1개다.<br><strong>클릭 가능</strong> 행 상태가 승인 대기·에스컬레이션·보류 중 하나이고, 다른 관리자가 그 행을 처리하고 있지 않으며, 교환 재고가 받는 수량 이상이고, 기관 KYC 상태가 '활성'일 때만 활성이다.<br><strong>확인 사항</strong> 확인 다이얼로그를 띄운다(집행 개시는 구속력 있는 행위다). 판단 재료는 확장 패널에서 본다 — 자동검증(BLF·KYT·건별 한도 {정책값 1,500,000원 상당} 이하 · 가스비 미포함) · 확정 비율과 스프레드 · 예상 가스비와 차감 후 실수령액(EXC-02 고지값과 같아야 한다) · 교환 재고(콜드 최소재고) 잔량 · 기관 KYC 상태.<br><strong>액션</strong> 도메인 상태를 <strong>집행 대기</strong>로 바꾸고 집행 대기 표에 행을 만든다(항목 19). 고객 화면은 승인 대기부터 집행 대기까지 EXC-03 '거래 진행중' 하나로만 보이므로 승인 시점에 고객 통지는 없다.<br><span class="basis">근거 states T1 · 09 §0 승인·통제(DSRV 단일 처리 + 콜드 수동 집행) · ISMS 2.2.2</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[승인] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①행 상태가 승인 대기·에스컬레이션·보류 이외(종결·집행 대기) ②다른 관리자가 처리 중(행 잠금) ③교환 재고 &lt; 받는 수량 ④기관 KYC 상태 '활성' 아님(ADM-03)</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격) · 사유는 확장 패널 상단 인라인 ⚠(예 "교환 재고가 부족합니다 — 재고 보충 후 승인해 주세요" / "기관 KYC 상태가 활성이 아닙니다")</span></div>
-          <div class="nav-row"><span class="nav-el">[승인] — 클릭(활성)</span><span class="nav-act">클릭 → 다이얼로그: 제목 "나목 교환 승인" / 본문 "EXC-20260902-0001 · ORG-A · 900 USDC → 899.73 USDT(확정 비율 0.9997 USDT/USDC)를 승인합니다. 승인 즉시 집행 대기로 이동하며, 집행은 콜드월렛 수동 절차로 진행됩니다." / [승인] [돌아가기] → [승인] 라벨 "처리 중…"·행 버튼 전부 비활성(중복 클릭 차단)</span><span class="nav-to stay">상태 '집행 대기' → 행 제거 + 토스트 "EXC-20260902-0001 승인 — 집행 대기로 이동했습니다" · 집행 대기 표(항목 19) 행 추가 · 감사로그(처리자·시각)</span></div>
+          <div class="nav-row"><span class="nav-el">[승인] — 클릭(활성)</span><span class="nav-act">클릭 → 다이얼로그: 제목 "나목 교환 승인" / 본문 "EXC-20260902-0001 · ORG-A · 900 USDC → 899.73 USDT(확정 비율 0.9997 USDT/USDC · 예상 가스비 6.59 USDT 차감 → 실수령 893.14 USDT)를 승인합니다. 승인 즉시 집행 대기로 이동하며, 집행은 콜드월렛 수동 절차로 진행됩니다." / [승인] [돌아가기] → [승인] 라벨 "처리 중…"·행 버튼 전부 비활성(중복 클릭 차단)</span><span class="nav-to stay">상태 '집행 대기' → 행 제거 + 토스트 "EXC-20260902-0001 승인 — 집행 대기로 이동했습니다" · 집행 대기 표(항목 19) 행 추가 · 감사로그(처리자·시각)</span></div>
           <div class="nav-row"><span class="nav-el">[승인] — 실패</span><span class="nav-act">경쟁 상태(다른 관리자가 먼저 처리) / 재고 재검증 실패 / 서버 오류</span><span class="nav-to stay">화면 잔류 · 경쟁 → 상단 배너 "이미 처리된 건입니다 — 목록을 갱신했습니다" + 행 최신 상태로 갱신 / 재고 → 인라인 ⚠ 재노출 / 오류 → 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 버튼 라벨 복귀</span></div>
         </div>
       </div>
@@ -383,7 +383,7 @@
       <div class="num">5</div>
       <div>
         <div class="itm-title">[승인] — 마목 확정 확인(T2 → 이전 진행)<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>노출</strong> 유형 '마목 확정 확인' 행에만 보인다.<br><strong>클릭 가능</strong> 행 상태가 확인 대기·에스컬레이션·보류 중 하나이고, 다른 관리자가 처리 중이 아니며, 트래블룰 정보가 갖춰졌고, 양측 기관 KYC 상태가 '활성'이며, 양측 잔고가 충분할 때만 활성이다.<br><strong>확인 사항</strong> 확인 다이얼로그를 띄운다. 판단 재료는 양측 자동검증(BLF·KYT) · 트래블룰 정보 구비 · 양측 보내는 자산 처분 가능분 · 양 기관 KYC 상태 · 게시 시점 대비 시세 이탈(price guard 참고)이다.<br><strong>액션</strong> 확정된 거래(BRK-20260902-0001 · ORG-A 800 USDT ↔ ORG-B 798.40 USDC · 수수료 8.00 USDT / 7.98 USDC)의 <strong>자산 이전을 진행</strong>시킨다. 거래 성립 승인이 아니다 — 수락 시점에 이미 확정되고 구속력이 생겼다. 도메인 상태를 '이전 진행'으로 바꾸고 집행 대기 표에 양측 이전 <strong>2행</strong>을 만든다(항목 19).<br><span class="basis">근거 states T2 · 09 §0 정산(콜드 수동 이전·양건 지시 확인 후 순차 집행) · 수수료 1%(2026-09-02)</span></div>
+        <div class="itm-desc"><strong>노출</strong> 유형 '마목 확정 확인' 행에만 보인다.<br><strong>클릭 가능</strong> 행 상태가 확인 대기·에스컬레이션·보류 중 하나이고, 다른 관리자가 처리 중이 아니며, 트래블룰 정보가 갖춰졌고, 양측 기관 KYC 상태가 '활성'이며, 양측 잔고가 충분할 때만 활성이다.<br><strong>확인 사항</strong> 확인 다이얼로그를 띄운다. 판단 재료는 양측 자동검증(BLF·KYT) · 트래블룰 정보 구비 · 양측 보내는 자산 처분 가능분 · 양측 예상 가스비(각자 받는 수량에서 차감 · BRK-04·07 고지값과 같아야 한다) · 양 기관 KYC 상태 · 게시 시점 대비 시세 이탈(price guard 참고)이다.<br><strong>액션</strong> 확정된 거래(BRK-20260902-0001 · ORG-A 800 USDT ↔ ORG-B 798.40 USDC · 수수료 8.00 USDT / 7.98 USDC)의 <strong>자산 이전을 진행</strong>시킨다. 거래 성립 승인이 아니다 — 수락 시점에 이미 확정되고 구속력이 생겼다. 도메인 상태를 '이전 진행'으로 바꾸고 집행 대기 표에 양측 이전 <strong>2행</strong>을 만든다(항목 19).<br><span class="basis">근거 states T2 · 09 §0 정산(콜드 수동 이전·양건 지시 확인 후 순차 집행) · 수수료 1%(2026-09-02)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[승인] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①행 상태가 확인 대기·에스컬레이션·보류 이외 ②다른 관리자 처리 중 ③트래블룰 정보 미비(확장 패널 "트래블룰 미비" — 보류 후 보완) ④양측 중 KYC 상태 '활성' 아님 ⑤양측 중 잔고 부족</span><span class="nav-to stay">하나라도 해당 → 회색 비활성 · 사유는 확장 패널 인라인 ⚠(예 "트래블룰 정보가 갖춰지지 않았습니다 — 보류 후 보완해 주세요")</span></div>
           <div class="nav-row"><span class="nav-el">[승인] — 클릭(활성)</span><span class="nav-act">클릭 → 다이얼로그: 제목 "마목 이전 진행 승인" / 본문 "BRK-20260902-0001 · ORG-A 800 USDT ↔ ORG-B 798.40 USDC의 자산 이전을 진행합니다. 양측 이전 건이 집행 대기에 생성되며 콜드월렛 수동 절차로 집행됩니다." / [승인] [돌아가기] → "처리 중…"·행 버튼 비활성</span><span class="nav-to stay">행 제거 + 토스트 "BRK-20260902-0001 이전 진행 — 집행 대기 2건 생성" · 집행 대기 표에 게시자분·신청자분 2행 · 고객 화면 BRK-05 '이전 진행' · 감사로그</span></div>
@@ -565,7 +565,7 @@
       <div class="num">19</div>
       <div>
         <div class="itm-title">집행 대기 목록 (표시 전용)</div>
-        <div class="itm-desc">· 행 클릭 없음(확장 없음 — 상세는 집행 명세 Excel) · 열: 건 · 상태 · 집행 명세 · 콜드 집행 결과(txhash) · 처리<br>· <strong>유입</strong>: T1 나목 승인(1건 1행 — 고객→DSRV 900 USDC·DSRV→고객 899.73 USDT 양방향을 한 행으로, 2행 분리 여부 <span class="chk">[확인필요]</span>) · T2 마목 이전 진행(양측 각 1행 = 2행) · T3 출금 승인 · 콜드→핫 보충·스윕(운영 지갑 이동 — 온라인 집행 버튼 없음)<br>· 상태 값: 집행 대기 / 이전 진행 / 조회 중 / 대사 불일치(회송) — 완료 시 행 제거(이후 조회는 CSV ③ 통합 거래)<br>· <strong>목록 규격</strong>: 승인 시각 오름차순(오래된 건 위) · 빈 상태 "집행 대기 건이 없습니다" + "처리함에서 승인한 건이 여기에 표시됩니다" · 로딩 "불러오는 중…" · 전량 표시 · 페이지 스크롤([더 보기]·페이지네이션·무한 스크롤 없음) · 갱신: 처리함 승인 즉시·완료 처리 즉시<br>· 마목 '이전 진행' 건을 states T2 '정산 배치(1영업일 3회)'가 아니라 이 표의 건별 수동 집행으로 처리하는 정합 <span class="chk">[확인필요: BRK-05 정산 배치 서술과 통일]</span><br><span class="basis">근거 states T1·T2·T3 집행 대기 · 09 §0 정산(콜드 수동) · L4 §26 · ISMS 2.7.2</span></div>
+        <div class="itm-desc">· 행 클릭 없음(확장 없음 — 상세는 집행 명세 Excel) · 열: 건 · 상태 · 집행 명세 · 콜드 집행 결과(txhash) · 처리<br>· <strong>유입</strong>: T1 나목 승인(1건 1행 — 고객→DSRV 900 USDC·DSRV→고객 899.73 USDT 양방향을 한 행으로, 2행 분리 여부 <span class="chk">[확인필요]</span>) · T2 마목 이전 진행(양측 각 1행 = 2행) · T3 출금 승인 · 콜드→핫 보충·스윕(운영 지갑 이동 — 온라인 집행 버튼 없음)<br>· 상태 값: 집행 대기 / 이전 진행 / 조회 중 / 대사 불일치(회송) — 완료 시 행 제거(이후 조회는 CSV ③ 통합 거래)<br>· <strong>가스비</strong>: 건 열의 수량은 예상 가스비를 뺀 실수령 수량까지 적는다(고객 화면 EXC-02·BRK-04·07 고지값과 같은 값). 예상·실발생 가스비는 표에 열을 두지 않고 집행 명세(Excel)와 CSV ③에서 본다. 가스비는 고객 부담·받는 수량에서 차감·예상액 상한(2026-09-02(13) 사용자 결정).<br>· <strong>목록 규격</strong>: 승인 시각 오름차순(오래된 건 위) · 빈 상태 "집행 대기 건이 없습니다" + "처리함에서 승인한 건이 여기에 표시됩니다" · 로딩 "불러오는 중…" · 전량 표시 · 페이지 스크롤([더 보기]·페이지네이션·무한 스크롤 없음) · 갱신: 처리함 승인 즉시·완료 처리 즉시<br>· 마목 '이전 진행' 건을 states T2 '정산 배치(1영업일 3회)'가 아니라 이 표의 건별 수동 집행으로 처리하는 정합 <span class="chk">[확인필요: BRK-05 정산 배치 서술과 통일]</span><br><span class="basis">근거 states T1·T2·T3 집행 대기 · 09 §0 정산(콜드 수동) · L4 §26 · ISMS 2.7.2</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">집행 대기 행(버튼·입력 제외 셀)</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용)</span></div>
         </div>
@@ -576,7 +576,7 @@
       <div class="num">20</div>
       <div>
         <div class="itm-title">[집행 명세 다운로드 (Excel)]<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>노출</strong> 집행 대기 표의 모든 행에 보인다(행마다 반복 · 대표 핀 1개).<br><strong>클릭 가능</strong> 행이 표에 있는 동안 항상 활성이다. 온체인 조회 중이거나 대사가 불일치인 상태에서도 재확인용으로 활성이고, 파일 생성 중에만 비활성이다.<br><strong>확인 사항</strong> 없다. 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> 콜드에서 수행할 작업 명세를 1건 1파일로 내려받는다 — 거래번호 · 출금 지갑(내부 식별) · 수신 주소 <strong>전문</strong>(마스킹 없이 소문자) · 자산 · 수량(CSV 규격이라 쉼표 없음) · 명세 생성 시각(ISO 8601 +09:00) · 명세 해시 · 승인자 ID. 파일명은 <code>집행명세_{거래번호}_{YYYYMMDD-HHMM}.xlsx</code>다. 재다운로드를 허용하고 매회 열람 기록 ⑥에 감사기록으로 남긴다. 화면에는 다운로드 이력을 표시하지 않는다(열람 기록은 CSV ⑥으로만 확인한다).<br><span class="basis">근거 notation 주소·해시(CSV·감사기록 전문) · ISMS 2.9.4 · 예외 H4</span></div>
+        <div class="itm-desc"><strong>노출</strong> 집행 대기 표의 모든 행에 보인다(행마다 반복 · 대표 핀 1개).<br><strong>클릭 가능</strong> 행이 표에 있는 동안 항상 활성이다. 온체인 조회 중이거나 대사가 불일치인 상태에서도 재확인용으로 활성이고, 파일 생성 중에만 비활성이다.<br><strong>확인 사항</strong> 없다. 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> 콜드에서 수행할 작업 명세를 1건 1파일로 내려받는다 — 거래번호 · 출금 지갑(내부 식별) · 수신 주소 <strong>전문</strong>(마스킹 없이 소문자) · 자산 · 받는 수량(차감 전) · 예상 가스비(ETH 소수 4자리 · 원화 환산 · 받는 자산 환산액 3열) · <strong>차감 후 실수령 수량</strong>(콜드에서 실제로 이체하는 값 · CSV 규격이라 쉼표 없음) · 명세 생성 시각(ISO 8601 +09:00) · 명세 해시 · 승인자 ID. 파일명은 <code>집행명세_{거래번호}_{YYYYMMDD-HHMM}.xlsx</code>다. 재다운로드를 허용하고 매회 열람 기록 ⑥에 감사기록으로 남긴다. 화면에는 다운로드 이력을 표시하지 않는다(열람 기록은 CSV ⑥으로만 확인한다).<br><span class="chk">[확인필요: 실발생 가스비가 예상액보다 적을 때 차액을 고객에게 돌리는 집행 방법 — 서명 시점 재산정으로 이체 수량을 조정하는지, 사후 차액 이전을 별건으로 두는지(09 §0 2026-09-02(13) ④ "적으면 그만큼 더 받는다"의 집행 절차 미정)]</span><br><span class="basis">근거 notation 주소·해시(CSV·감사기록 전문) · 가스비 표기 · ISMS 2.9.4 · 예외 H4 · 09 §0 2026-09-02(13)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[집행 명세 다운로드] — 활성 조건</span><span class="nav-act">행이 표에 있는 동안 항상 활성(조회 중·대사 불일치 상태에서도 재확인용으로 활성) · 생성 중만 비활성</span><span class="nav-to stay">—</span></div>
           <div class="nav-row"><span class="nav-el">[집행 명세 다운로드] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음 → 라벨 "생성 중…"·중복 클릭 차단 → 브라우저 다운로드</span><span class="nav-to stay">라벨 복귀 · 버튼 아래 다운로드 이력 갱신 · 열람 기록 감사기록 · 이동 없음</span></div>
@@ -605,7 +605,7 @@
       <div class="num">22</div>
       <div>
         <div class="itm-title">[완료 처리]<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>노출</strong> 집행 대기 표의 모든 행에 보인다(행마다 반복 · 대표 핀 1개).<br><strong>클릭 가능</strong> 같은 행의 txhash 형식이 정상일 때만 활성이다.<br><strong>확인 사항</strong> 클릭하면 라벨을 "조회 중…"으로 바꾸고 필드를 비활성으로 둔 뒤 온체인을 조회한다(3초를 넘기면 오류). 명세와 대사(수신 주소·자산(컨트랙트)·수량 일치)가 맞을 때만 확인 다이얼로그를 띄운다 — 제목 "집행 완료 처리" / 본문 "온체인 내역이 집행 명세와 일치합니다(수신 주소·자산·수량). 완료로 확정하면 거래 상태·잔고에 반영되며 되돌릴 수 없습니다." / [완료 확정] [돌아가기].<br><strong>액션</strong> 나목은 EXC 상태를 '완료'로 바꾸고 고객 EXC-04에 표시하며 잔고에 반영하고 이메일 ③을 보낸다. 마목은 해당 방향의 이전을 완료로 두고, <strong>양측 2행이 모두 완료됐을 때</strong> BRK를 '완료'로 바꾸고 BRK-05에 표시하며 이메일 ③을 보낸다. 출금은 완료로 두고 행을 제거한다. txhash를 CSV ③에 기록하고 누가 언제 처리했는지 감사기록에 남긴다.<br><span class="basis">근거 states T1·T2·T3 완료 · notation 이메일 통지 ③ · ISMS 2.9.4</span></div>
+        <div class="itm-desc"><strong>노출</strong> 집행 대기 표의 모든 행에 보인다(행마다 반복 · 대표 핀 1개).<br><strong>클릭 가능</strong> 같은 행의 txhash 형식이 정상일 때만 활성이다.<br><strong>확인 사항</strong> 클릭하면 라벨을 "조회 중…"으로 바꾸고 필드를 비활성으로 둔 뒤 온체인을 조회한다(3초를 넘기면 오류). 명세와 대사(수신 주소·자산(컨트랙트)·수량 일치)가 맞을 때만 확인 다이얼로그를 띄운다 — 제목 "집행 완료 처리" / 본문 "온체인 내역이 집행 명세와 일치합니다(수신 주소·자산·수량). 완료로 확정하면 거래 상태·잔고에 반영되며 되돌릴 수 없습니다." / [완료 확정] [돌아가기].<br><strong>액션</strong> 나목은 EXC 상태를 '완료'로 바꾸고 고객 EXC-04에 표시하며 잔고에 반영하고 이메일 ③을 보낸다. 마목은 해당 방향의 이전을 완료로 두고, <strong>양측 2행이 모두 완료됐을 때</strong> BRK를 '완료'로 바꾸고 BRK-05에 표시하며 이메일 ③을 보낸다. 출금은 완료로 두고 행을 제거한다. txhash와 <strong>실발생 가스비</strong>(온체인 영수증 gasUsed × effectiveGasPrice · ETH 소수 4자리 · 조회 시점 ADM-03 시세로 원화·받는 자산 환산)를 CSV ③에 기록하고, 예상액 초과분은 고객에게 청구하지 않고 운영 비용으로 CSV ④에 전기한다. 누가 언제 처리했는지 감사기록에 남긴다.<br><span class="basis">근거 states T1·T2·T3 완료 · notation 이메일 통지 ③ · ISMS 2.9.4</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[완료 처리] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①txhash 빈칸·형식 오류·중복 ②조회 중 ③이 행의 집행 명세 미다운로드(강제 여부 <span class="chk">[확인필요]</span>)</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격) · 사유는 txhash 필드 인라인 ⚠으로 이미 노출</span></div>
           <div class="nav-row"><span class="nav-el">[완료 처리] — 클릭(활성)</span><span class="nav-act">클릭 → 라벨 "조회 중…"·필드 비활성 → 온체인 조회(3초 초과 → 오류) → 일치 → 다이얼로그: 제목 "집행 완료 처리" / 본문 "온체인 내역이 집행 명세와 일치합니다(수신 주소·자산·수량). 완료로 확정하면 거래 상태·잔고에 반영되며 되돌릴 수 없습니다." / [완료 확정] [돌아가기]</span><span class="nav-to stay">행 제거 + 토스트 "{거래번호} 집행 완료 — 고객 화면에 반영되었습니다" · 고객 이메일 ③(나목·마목 완료 시) · 감사기록</span></div>
@@ -660,11 +660,11 @@
       </div>
       <div class="dtl" data-idx="20">
         <div class="detail-label"><span class="dtl-num">21</span>txhash 대사 규칙</div>
-      <div class="dtl-body"><span class="box">· 대사 항목: 수신 주소(명세 전문과 대소문자 무시 비교) · 자산(ETH 네이티브 / ERC-20 컨트랙트 주소 일치) · 수량(온체인 decimals 환산 후 명세 수량과 완전 일치 — 절사 규칙 아님) · 발신 지갑이 명세의 출금 지갑<br>· 컨펌 수 미달 = '미확인'(⑦) · 다른 건에 이미 등록 = 중복(④) — 1 txhash 1 건<br>· <span class="chk">[확인필요]</span> 필수 컨펌 수 · 1 tx에 복수 이전(배치)이 섞인 경우 처리</span></div>
+      <div class="dtl-body"><span class="box">· 대사 항목: 수신 주소(명세 전문과 대소문자 무시 비교) · 자산(ETH 네이티브 / ERC-20 컨트랙트 주소 일치) · 수량(온체인 decimals 환산 후 명세의 <strong>차감 후 실수령 수량</strong>과 완전 일치 — 절사 규칙 아님) · 발신 지갑이 명세의 출금 지갑<br>· 실발생 가스비는 대사 항목이 아니다 — 영수증 값을 그대로 기록하고 예상액과의 차이는 CSV ④에서 본다(초과분 DSRV 운영 부담 · 09 §0 2026-09-02(13) ④)<br>· 컨펌 수 미달 = '미확인'(⑦) · 다른 건에 이미 등록 = 중복(④) — 1 txhash 1 건<br>· <span class="chk">[확인필요]</span> 필수 컨펌 수 · 1 tx에 복수 이전(배치)이 섞인 경우 처리</span></div>
       </div>
       <div class="dtl" data-idx="22">
         <div class="detail-label"><span class="dtl-num">23</span>CSV 6종 원천 · 구분회계 어드민 전용</div>
-      <div class="dtl-body"><span class="box">· 기관-가입자: 구 ADM-06 ORG 목록 · 거래 요청: 구 ADM-07 큐·처리 이력 · 통합 거래: 구 ADM-04 통합 로그 · 구분회계·3면 대사: 구 ADM-04 집계(EXC-04·BRK-05 발생분과 정합) · 열람 기록: 구 ADM-05<br>· 구분회계 계정명(스프레드수익(운영손익)·중개수수료)은 <strong>이 CSV ④에서만</strong> — 고객 화면(EXC-04·BRK-05) 계정명 행 제거(2026-09-02)<br>· 원본은 WORM·해시무결성·NTP 보존 — 거래 15년·AML 5년 · 화면·CSV는 조회 전용(원장 직접 변경 기능 없음)<br>· 컬럼 정의는 하단 부록 — DB 스키마 v0.7(DB스키마_한글판_20260902) 매핑</span></div>
+      <div class="dtl-body"><span class="box">· 기관-가입자: 구 ADM-06 ORG 목록 · 거래 요청: 구 ADM-07 큐·처리 이력 · 통합 거래: 구 ADM-04 통합 로그 · 구분회계·3면 대사: 구 ADM-04 집계(EXC-04·BRK-05 발생분과 정합) · 열람 기록: 구 ADM-05<br>· 구분회계 계정명(스프레드수익(운영손익)·중개수수료)은 <strong>이 CSV ④에서만</strong> — 고객 화면(EXC-04·BRK-05) 계정명 행 제거(2026-09-02)<br>· 가스비(2026-09-02(13)): 고객 화면은 예상·발생 가스비와 실수령액만 표시하고, 회계 처리(가스비 비용 ETH · 고객 차감분 회수)는 CSV ④에서만 본다 · 3면 대사 ⑤의 ETH 차이 설명 항목<br>· 원본은 WORM·해시무결성·NTP 보존 — 거래 15년·AML 5년 · 화면·CSV는 조회 전용(원장 직접 변경 기능 없음)<br>· 컬럼 정의는 하단 부록 — DB 스키마 v0.7(DB스키마_한글판_20260902) 매핑</span></div>
       </div>
     </div>
   </div>
@@ -680,8 +680,9 @@
       · <strong>[방어 핵심]</strong> 자동검증은 1차 필터일 뿐, 승인·보류·거절은 전부 사람의 판단 — "자동체결·자동심사 아님" 소명. 본인 기안 자기승인 차단(DSRV 내부 직무분리)으로 담보.<br>
       · 예외케이스 귀속: B1·B2(입금 격리·동결) · B6(스윕) · E3·E4·E7(심사) · F6(서명 장애) · H3·H4(출금) · X3(대사 불일치) → 이 화면 처리함 / A1~A6(온보딩·계정)은 ADM-03과 분담.<br>
       · 연결: 유입 EXC-02·BRK-04·AUTH-01(잠금)·입금 감시 / 정책값·기관 관리는 설정(ADM-03) / 처리 결과는 고객 화면에 상태로만 반영(STR 누설 금지)<br>
+      · <strong>가스비(2026-09-02(13) 사용자 결정)</strong> — 고객 부담 · 받는 수량에서 차감 · 예상액 상한 · 건별 한도 판정 미포함. 어드민 반영 = T1·T2 확장 패널 판단 재료(예상 가스비·실수령액) · 집행 대기 건 열과 집행 명세의 차감 후 실수령 수량 · [완료 처리] 시 실발생 가스비 기록 · CSV ③④⑤ 가스비 열. 핀·항목 수 변화 없음.<br>
       · 2026-09-02 설명 형식 개정 적용(핀 = 조작 요소 단위) — 처리 버튼은 종류별 핀(같은 종류가 여러 행에 반복되면 대표 1개), 버튼 행 = 활성 조건 / 클릭(활성) / 실패 3행 · 예시 수량 1,500,000원 상당 이내로 재조정 · 서비스명 DSRV Admin.<br>
-      · <span class="chk">[확인필요]</span> 유휴 10분·관리자 배지 표시값 · 처리함 정렬(에스컬레이션 상단 고정) · 마목 보류/확인 중 고객 문구 · 이전 중지 통지·계약상 귀결 · 출금 거절 고객 통지 방법 · 격리 입금 고객 표시 · 검토 담당자 잠금 · 본인확인 절차 · 나목 집행 대기 2행 분리 · 마목 정산 배치 vs 건별 집행 정합 · 필수 컨펌 수 · 명세 미다운로드 시 완료 차단 · 집행 대사 불일치 워닝 유형(X3 통합).
+      · <span class="chk">[확인필요]</span> 유휴 10분·관리자 배지 표시값 · 처리함 정렬(에스컬레이션 상단 고정) · 마목 보류/확인 중 고객 문구 · 이전 중지 통지·계약상 귀결 · 출금 거절 고객 통지 방법 · 격리 입금 고객 표시 · 검토 담당자 잠금 · 본인확인 절차 · 나목 집행 대기 2행 분리 · 마목 정산 배치 vs 건별 집행 정합 · 필수 컨펌 수 · 명세 미다운로드 시 완료 차단 · 집행 대사 불일치 워닝 유형(X3 통합) · 실발생&lt;예상 가스비 차액의 집행 방법 · 가스비 스키마 필드·계정(f7).
     </div>
   </div>
 </section>
@@ -759,6 +760,9 @@
             <tr><td>상태</td><td class="src">status</td><td></td></tr>
             <tr><td>집행·정산 시각</td><td class="src">executed_at / settled_at</td><td>시간순 정렬 키 · ISO 8601 +09:00</td></tr>
             <tr><td>온체인 txhash</td><td class="src">EXCHANGE_EXECUTION.txhash / BROKER_SETTLEMENT.txhash / WITHDRAWAL_REQUEST.txhash</td><td>명세 대사 일치(recon_ok) 시 완료 · 전문</td></tr>
+            <tr><td>예상 가스비</td><td class="src">EXCHANGE_EXECUTION · BROKER_SETTLEMENT — 가스비 필드 <span class="chk">[확인필요: DB 스키마 v0.7 미반영 · f7 세션]</span></td><td>ETH 소수 4자리 · 원화 환산 · 받는 자산 환산액 3열(쉼표 없음) · 고객 고지값(EXC-02·BRK-04·07)과 동일 · 차감 상한</td></tr>
+            <tr><td>실발생 가스비</td><td class="src">동일 테이블 — 영수증 기록 필드 <span class="chk">[확인필요: 스키마]</span></td><td>[완료 처리] 시 온체인 영수증(gasUsed × effectiveGasPrice) 기록 · 3열 동일 · 예상액 초과분은 고객 미청구</td></tr>
+            <tr><td>실수령 수량</td><td><span class="drv">파생</span> <span class="src">받는 수량 − 가스비 환산액</span></td><td>콜드에서 실제 이체한 수량 · 명세 대사 기준값 · 중개는 양측 각각</td></tr>
           </tbody>
         </table>
       </div>
@@ -770,10 +774,11 @@
           <thead><tr><th>컬럼</th><th>원천 (테이블.필드)</th><th>비고</th></tr></thead>
           <tbody>
             <tr><td>계정 ID</td><td class="src">LEDGER_ACCOUNT.account_id</td><td></td></tr>
-            <tr><td>계정 구분</td><td class="src">LEDGER_ACCOUNT.type</td><td>수탁 / 운영 / 스프레드수익(운영손익) / 중개수수료 — 고객 화면 미노출</td></tr>
+            <tr><td>계정 구분</td><td class="src">LEDGER_ACCOUNT.type</td><td>수탁 / 운영 / 스프레드수익(운영손익) / 중개수수료 / 가스비 비용(운영 · ETH 실발생) / 가스비 회수(고객 차감분 · 받는 자산) — 고객 화면 미노출 · 계정 신설 2건은 <span class="chk">[확인필요: 스키마 v0.7 LEDGER_ACCOUNT.type 값 추가 · f7 세션]</span></td></tr>
             <tr><td>자산</td><td class="src">asset_id → ASSET.symbol · chain</td><td>ETH·USDC·USDT</td></tr>
             <tr><td>잔액</td><td class="src">LEDGER_ACCOUNT.balance</td><td></td></tr>
             <tr><td>기간 수익 발생분</td><td><span class="drv">파생</span> <span class="src">spread_revenue · fee_revenue 합계</span></td><td>예: BRK-20260902-0001 수수료 8.00 USDT + 7.98 USDC</td></tr>
+            <tr><td>기간 가스비 발생·회수분</td><td><span class="drv">파생</span> <span class="src">실발생 가스비 합계(ETH) · 고객 차감분 합계(자산별) · 차이</span></td><td>실발생 &gt; 예상이면 차이 = DSRV 운영 부담(고객 미청구) · 실발생 &lt; 예상이면 차이 = 고객 귀속(차액 반영 방법 [확인필요] — 항목 20) · 수익 계정 아님(비용 회수)</td></tr>
             <tr><td>집계 기준 시각</td><td class="src">LEDGER_ACCOUNT.snapshot_at</td><td>CSV 집계 기준</td></tr>
           </tbody>
         </table>
@@ -788,8 +793,9 @@
             <tr><td>대사 ID</td><td class="src">RECONCILIATION.recon_id</td><td></td></tr>
             <tr><td>자산</td><td class="src">asset_id → ASSET.symbol</td><td></td></tr>
             <tr><td>내부장부 잔액</td><td class="src">internal_bal</td><td></td></tr>
-            <tr><td>온체인 잔액</td><td class="src">onchain_bal</td><td></td></tr>
+            <tr><td>온체인 잔액</td><td class="src">onchain_bal</td><td>ETH는 집행마다 실발생 가스비만큼 줄어든다 — 내부장부에 건별 가스비 비용을 전기해야 일치한다</td></tr>
             <tr><td>커스터디 콜드 잔액</td><td class="src">custody_bal</td><td></td></tr>
+            <tr><td>기간 가스비 소모(ETH)</td><td><span class="drv">파생</span> <span class="src">실발생 가스비 합계(전 스냅숏 이후)</span></td><td>ETH 내부장부 ↔ 온체인 차이의 설명 항목 · 가스비 전기 누락이면 X3로 잡힌다</td></tr>
             <tr><td>일치 여부</td><td class="src">matched</td><td>불일치 시 X3 워닝 · 출금 자동 동결 · [해제·종결] 활성 조건</td></tr>
             <tr><td>대사 시각</td><td class="src">RECONCILIATION.snapshot_at</td><td>정기 배치 스냅숏</td></tr>
           </tbody>

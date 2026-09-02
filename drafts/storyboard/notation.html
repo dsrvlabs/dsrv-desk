@@ -67,7 +67,7 @@
       <td>—</td>
     </tr>
     <tr>
-      <td class="grp-cell" rowspan="5">수량·자산</td>
+      <td class="grp-cell" rowspan="6">수량·자산</td>
       <td class="item">수량 (화면)</td>
       <td>천 단위 쉼표 · 소수점 아래 <b class="key">자산별 최대 자릿수 — ETH 4자리 · USDC·USDT 2자리</b>(2026-09-02 확정 · 종전 "최대 6자리" 폐기 · ETH 4자리 = 0.0001 ETH ≈ 400원대로 천원 미만 분해능(ETH 3,000~3,500 USD · 1 USD ≈ 1,350원 가정), ETH 시세 약 9,500,000원 초과 시 5자리 재검토) · 불필요한 뒤 0 생략(입력 중에는 입력값 그대로) · 숫자와 티커 사이 공백 1칸 · 통화기호(₩·$) 사용 안 함 · 온체인 decimals(ETH 18 · USDC/USDT 6)와 별개의 UI 규칙</td>
       <td><span class="ex">900 USDC</span> <span class="ex">899.82 USDT</span> <span class="ex">0.3489 ETH</span></td>
@@ -91,6 +91,11 @@
       <td class="item">한도 (KRW 환산)</td>
       <td>「<b class="key">{금액}원 상당</b>」 — 건별 한도는 <b class="key">원화</b> 환산액으로 표기(2026-09-02(9) · 종전 USD 상당 표기 폐기) · 환산 시세 = ADM-03 시세 소스의 KRW 시세 · 요청 시점 · ETH·스테이블 모두 환산(USD 1:1 아님) · 원 단위 절사</td>
       <td><span class="ex">1,500,000원 상당</span></td>
+    </tr>
+    <tr>
+      <td class="item">가스비</td>
+      <td>「<b class="key">{ETH 수량} ETH ≈ {원화}원 → {환산액} {받는 자산}</b>」 3값 병기 — ETH 소수 4자리 · 원화 환산은 원 단위 절사(ADM-03 시세 소스 · 조회 시점) · 받는 자산 환산액은 받는 자산 자릿수로 절사 · <b class="key">받는 수량에서 차감</b>(별도 청구 없음) — 예상 단계 라벨 "예상 가스비" 뒤에 "차감" 또는 "— 이전 시 차감", 완료 단계 라벨 "발생 가스비" · 차감 후 수량은 <b class="key">별도 행</b>("차감 후 받는 수량" / "실수령")으로 두고 차감액을 감추지 않는다 · 예상액이 상한(실발생이 넘어도 고객 추가 청구 없음 · 적으면 그만큼 고객 귀속) · 건별 한도 {금액}원 상당 판정에 넣지 않는다 · CSV는 ETH 수량·원화·받는 자산 환산 3열로 분리(쉼표·기호 없음) · 적용 EXC-01·02·04 · BRK-02·03·04·05 · ADM-02 집행 명세·CSV ③④⑤ (2026-09-02(13) 사용자 결정 · 종전 나목 "별도 수수료 없음"은 스프레드에 한정)</td>
+      <td><span class="ex">0.0021 ETH ≈ 8,900원 → 6.59 USDT</span> (예상) · <span class="ex">0.0019 ETH ≈ 8,050원 → 5.96 USDT 차감</span> (발생) · <span class="ex">차감 후 받는 수량 893.14 USDT</span></td>
     </tr>
     <tr>
       <td class="grp-cell" rowspan="2">비율</td>
