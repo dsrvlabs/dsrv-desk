@@ -142,7 +142,7 @@ NAV.forEach(it=>{
   list.appendChild(b);navBtn[it.id]=b;
   const sec=document.createElement('section');sec.className='sec';sec.id='sec-'+it.id;
   const f=document.createElement('iframe');f.title=it.id+' '+it.name;f.setAttribute('scrolling','no');
-  f.addEventListener('load',()=>{if(f.contentWindow)winToFrame.set(f.contentWindow,f);});
+  f.addEventListener('load',()=>{if(f.contentWindow)winToFrame.set(f.contentWindow,f);scheduleVP();});
   f.srcdoc=DOCS[it.file];
   sec.appendChild(f);main.appendChild(sec);
 });
@@ -176,9 +176,22 @@ ovFrame.addEventListener('load',()=>{
 });
 window.addEventListener('message',e=>{
   if(!e.data)return;
-  if(e.data.type==='iframeHeight'&&e.data.h>50){const f=winToFrame.get(e.source);if(f)f.style.height=e.data.h+'px';}
+  if(e.data.type==='iframeHeight'&&e.data.h>50){const f=winToFrame.get(e.source);if(f){f.style.height=e.data.h+'px';scheduleVP();}}
   if(e.data.type==='navigate'&&e.data.pageId){goTo(e.data.pageId);}
 });
+// 보이는 영역을 각 화면 iframe에 전달 → 화면 안에서 목업 패널이 따라온다(screen.js followPanel)
+function pushViewport(){
+  const mr=main.getBoundingClientRect();
+  main.querySelectorAll('.sec iframe').forEach(f=>{
+    const r=f.getBoundingClientRect();
+    if(r.bottom<mr.top-300||r.top>mr.bottom+300)return;
+    if(f.contentWindow)f.contentWindow.postMessage({type:'viewport',top:mr.top-r.top,height:mr.height},'*');
+  });
+}
+let vpReq=false;
+function scheduleVP(){if(vpReq)return;vpReq=true;requestAnimationFrame(()=>{vpReq=false;pushViewport();});}
+main.addEventListener('scroll',scheduleVP,{passive:true});
+window.addEventListener('resize',scheduleVP);
 </script>
 """
 

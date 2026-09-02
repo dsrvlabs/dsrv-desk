@@ -39,6 +39,7 @@ function selectItem(idx,fromTop){
   const itm=document.querySelector(`.itm[data-idx="${idx}"]`); if(itm) itm.classList.add('active');
   const dtl=document.querySelector(`.dtl[data-idx="${idx}"]`); if(dtl){dtl.classList.add('active'); if(fromTop&&dtl.closest('.detail-grid')) dtl.scrollIntoView({block:'nearest',behavior:'smooth'});}
   const line=document.querySelector(`#connSvg line[data-idx="${idx}"]`); if(line){line.setAttribute('stroke','#2563eb');line.setAttribute('stroke-width','1.5');}
+  followPanel(true);
 }
 function clearSelection(){
   activeIdx=null;
@@ -48,6 +49,7 @@ function clearSelection(){
   document.querySelectorAll('.dtl.active').forEach(d=>d.classList.remove('active'));
   document.querySelectorAll('.item-area').forEach(a=>a.style.outline='none');
   document.querySelectorAll('#connSvg line').forEach(l=>{l.setAttribute('stroke','#ccc');l.setAttribute('stroke-width','1');});
+  followPanel(true);
 }
 document.addEventListener('click',(e)=>{
   const pin=e.target.closest('.pin'); const itm=e.target.closest('.itm'); const dtl=e.target.closest('.dtl');
@@ -56,10 +58,50 @@ document.addEventListener('click',(e)=>{
   if(dtl&&dtl.dataset.idx!==undefined){selectItem(dtl.dataset.idx);return;}
   if(!e.target.closest('.zone')&&!e.target.closest('.itm')&&!e.target.closest('.dtl')) clearSelection();
 });
-function relayout(){drawBrackets();drawConnectors();reportH();}
+function relayout(){drawBrackets();drawConnectors();reportH();followPanel(false);}
 function reportH(){var h=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight);window.parent&&window.parent.postMessage({type:"iframeHeight",h:h},"*");}
 window.addEventListener('load',()=>{relayout();setTimeout(relayout,300);setTimeout(relayout,900);});
 window.addEventListener('resize',relayout);
+
+// ── 목업 패널 따라오기 ──
+// 화면은 콘텐츠 높이만큼 늘어난 iframe이라 CSS sticky가 통하지 않는다. 뷰어(index.html · storyboard_share.html)가
+// 스크롤마다 보이는 영역({type:'viewport', top, height} · top = iframe 문서 기준 보이는 영역의 위쪽)을 보내고,
+// 여기서 .screen-panel을 translateY로 그 영역 안에 붙인다. 단독으로 열면 window 스크롤을 그대로 쓴다.
+// 항목·핀·상세 카드를 선택하면(activeIdx) 패널이 뷰포트보다 클 때 그 항목의 프레임 영역이 보이도록 맞춘다.
+let vp=null,snapTimer=null;
+function followPanel(snap){
+  const main=document.querySelector('.main'),panel=document.querySelector('.screen-panel'),items=document.querySelector('.items');
+  if(!main||!panel||!vp)return;
+  panel.style.transform='';
+  const sy=window.scrollY||0,top=r=>r.top+sy;
+  const mR=main.getBoundingClientRect(),pR=panel.getBoundingClientRect();
+  const mainTop=top(mR),mainBot=mainTop+mR.height,panelTop=top(pR),panelH=pR.height;
+  if(items){const iR=items.getBoundingClientRect(); if(top(iR)>=panelTop+panelH-1){drawConnectors();return;}} // 좁은 창: 항목 컬럼이 프레임 아래로 접힘 → 고정 안 함
+  const pad=12,vTop=vp.top,vH=vp.height;
+  let T;
+  if(panelH+pad*2<=vH){ T=vTop+pad; }
+  else{
+    const lo=vTop+vH-panelH-pad,hi=vTop+pad; // 패널이 뷰포트보다 큼: 위·아래 여백이 생기지 않는 범위
+    let anchor=null;
+    if(activeIdx!=null){const a=document.querySelector(`.item-area[data-highlight="${activeIdx}"]`)||document.querySelector(`.pin[data-idx="${activeIdx}"]`); if(a)anchor=top(a.getBoundingClientRect())-panelTop;}
+    if(anchor!=null){ T=vTop+pad+40-anchor; }
+    else{ // 선택 없음: 항목 컬럼 진행률에 따라 패널을 위→아래로 훑어 보인다
+      const travel=Math.max(1,(mainBot-panelH)-panelTop); const p=Math.min(1,Math.max(0,(vTop-panelTop)/travel));
+      T=hi-p*(hi-lo);
+    }
+    T=Math.min(hi,Math.max(lo,T));
+  }
+  T=Math.min(T,mainBot-panelH); T=Math.max(T,panelTop);
+  const y=Math.round(T-panelTop);
+  if(snap){panel.classList.add('snap');clearTimeout(snapTimer);snapTimer=setTimeout(()=>panel.classList.remove('snap'),350);}
+  panel.style.transform=y?`translateY(${y}px)`:'';
+  if(snap){setTimeout(drawConnectors,360);} drawConnectors();
+}
+window.addEventListener('message',e=>{if(e.data&&e.data.type==='viewport'){vp={top:e.data.top,height:e.data.height};followPanel(false);}});
+if(window.parent===window){
+  const own=()=>{vp={top:window.scrollY,height:window.innerHeight};followPanel(false);};
+  window.addEventListener('scroll',own,{passive:true});window.addEventListener('resize',own);window.addEventListener('load',own);
+}
 
 // ── 목업 인터랙션 (어드민 화면 — 행 확장 · 드롭다운 · 관리 메뉴 이동) ──
 function mkCloseMenus(){document.querySelectorAll('.mk-menu').forEach(m=>m.hidden=true);}

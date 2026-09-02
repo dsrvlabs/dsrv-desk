@@ -168,7 +168,7 @@ PAGES.forEach(page => {
   const frame = document.createElement('iframe');
   frame.className = 'page-frame';
   frame.src = page.file; frame.loading = 'lazy'; frame.setAttribute('scrolling', 'no'); frame.style.height = '120px';
-  frame.addEventListener('load', () => { if (frame.contentWindow) winToFrame.set(frame.contentWindow, frame); });
+  frame.addEventListener('load', () => { if (frame.contentWindow) winToFrame.set(frame.contentWindow, frame); scheduleVP(); });
   section.appendChild(frame);
   const blurOverlay = document.createElement('div');
   blurOverlay.className = 'blur-overlay';
@@ -181,7 +181,7 @@ window.addEventListener('message', (e) => {
   if (!e.data) return;
   if (e.data.type === 'iframeHeight' && e.data.h > 50) {
     const frame = winToFrame.get(e.source);
-    if (frame) frame.style.height = e.data.h + 'px';
+    if (frame) { frame.style.height = e.data.h + 'px'; scheduleVP(); }
   }
   // 흐름도에서 화면 박스 클릭 → 해당 섹션으로 이동
   if (e.data.type === 'navigate' && e.data.pageId) {
@@ -190,6 +190,21 @@ window.addEventListener('message', (e) => {
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 });
+
+// 보이는 영역(상단바 48px 아래)을 각 화면 iframe에 전달 → 화면 안에서 목업 패널이 따라온다(screen.js followPanel)
+const TOPBAR_H = 48;
+function pushViewport() {
+  const vTop = TOPBAR_H, vH = window.innerHeight - TOPBAR_H;
+  document.querySelectorAll('.page-frame').forEach(f => {
+    const r = f.getBoundingClientRect();
+    if (r.bottom < vTop - 300 || r.top > window.innerHeight + 300) return;
+    if (f.contentWindow) f.contentWindow.postMessage({ type: 'viewport', top: vTop - r.top, height: vH }, '*');
+  });
+}
+let vpReq = false;
+function scheduleVP() { if (vpReq) return; vpReq = true; requestAnimationFrame(() => { vpReq = false; pushViewport(); }); }
+window.addEventListener('scroll', scheduleVP, { passive: true });
+window.addEventListener('resize', scheduleVP);
 
 let currentPageId = null;
 const observer = new IntersectionObserver((entries) => {
