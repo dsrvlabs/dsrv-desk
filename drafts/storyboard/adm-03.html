@@ -22,7 +22,7 @@
   <span class="defense">정책 파라미터 단일 출처 · 기관·가입자 관리</span>
 </header>
 
-<div class="main">
+<div class="main wide-main">
   <div class="screen-panel">
     <div style="position:relative;display:flex;">
       <div class="labels" id="labels">
@@ -35,7 +35,7 @@
       <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
     </div>
 
-    <div class="frame" id="frame">
+    <div class="frame wide" id="frame">
       <!-- 전역: 관리 메뉴 (핀 없음 — nav-global 행으로 처리) -->
       <div class="zone" data-idx="">
         <div class="zone-highlight"></div>
@@ -44,7 +44,7 @@
           <span class="meta"><span class="c-badge adm">DSRV-OPS-01</span></span>
         </div>
         <div class="c-adminbar" style="margin:0;">
-          <span class="m">홈</span><span class="m on">설정</span>
+          <span class="m" data-go="ADM-02" style="cursor:pointer;">홈</span><span class="m on">설정</span>
         </div>
       </div>
 
@@ -60,9 +60,9 @@
               <td>자산</td>
               <td>취급자산 · 상태 (Ethereum 단일 · 페어는 활성 자산 간 자동 3종)</td>
               <td>
-                <div class="item-area" data-highlight="0" style="position:relative;display:inline-block;padding:3px;border-radius:8px;margin-right:8px;"><div class="pin" data-idx="0" style="top:-10px;right:-10px;">1</div><span class="chip asset">ETH</span> <span class="inp">활성 ▾</span></div>
-                <span class="chip asset">USDC</span> <span class="inp">활성 ▾</span> &nbsp;
-                <span class="chip asset">USDT</span> <span class="inp">활성 ▾</span>
+                <div class="item-area" data-highlight="0" style="position:relative;display:inline-block;padding:3px;border-radius:8px;margin-right:8px;"><div class="pin" data-idx="0" style="top:-10px;right:-10px;">1</div><span class="chip asset">ETH</span> <span class="mk-dd"><span class="inp"><span class="mk-lab">활성</span> ▾</span><div class="mk-menu" hidden><div class="op cur" data-set="활성">활성</div><div class="op warn" data-hint="중지 선택 → 확인 다이얼로그 + 사유 필수(10~500자) → 즉시 적용 · 해당 페어 신규 요청 차단">중지</div></div></span></div>
+                <span class="chip asset">USDC</span> <span class="mk-dd"><span class="inp"><span class="mk-lab">활성</span> ▾</span><div class="mk-menu" hidden><div class="op cur" data-set="활성">활성</div><div class="op warn" data-hint="중지 선택 → 확인 다이얼로그 + 사유 필수(10~500자) → 즉시 적용 · 해당 페어 신규 요청 차단">중지</div></div></span> &nbsp;
+                <span class="chip asset">USDT</span> <span class="mk-dd"><span class="inp"><span class="mk-lab">활성</span> ▾</span><div class="mk-menu" hidden><div class="op cur" data-set="활성">활성</div><div class="op warn" data-hint="중지 선택 → 확인 다이얼로그 + 사유 필수(10~500자) → 즉시 적용 · 해당 페어 신규 요청 차단">중지</div></div></span>
               </td>
             </tr>
             <tr>
@@ -70,9 +70,9 @@
               <td>고정 스프레드 (페어별)</td>
               <td>
                 <div class="item-area" data-highlight="1" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="1" style="top:-10px;right:-10px;">2</div>
-                  <span style="font-size:9.5px;color:#64748b;">ETH↔USDC</span> <span class="inp">0.10<span class="u">%</span></span> &nbsp;
-                  <span style="font-size:9.5px;color:#64748b;">ETH↔USDT</span> <span class="inp">0.10<span class="u">%</span></span> &nbsp;
-                  <span style="font-size:9.5px;color:#64748b;">USDC↔USDT</span> <span class="inp">0.10<span class="u">%</span></span>
+                  <span style="white-space:nowrap;display:inline-block;margin:1px 6px 1px 0;"><span style="font-size:9.5px;color:#64748b;">ETH↔USDC</span> <span class="inp">0.10<span class="u">%</span></span></span> &nbsp;
+                  <span style="white-space:nowrap;display:inline-block;margin:1px 6px 1px 0;"><span style="font-size:9.5px;color:#64748b;">ETH↔USDT</span> <span class="inp">0.10<span class="u">%</span></span></span> &nbsp;
+                  <span style="white-space:nowrap;display:inline-block;margin:1px 6px 1px 0;"><span style="font-size:9.5px;color:#64748b;">USDC↔USDT</span> <span class="inp">0.10<span class="u">%</span></span></span>
                 </div>
                 <div style="font-size:9.5px;color:#b45309;margin-top:2px;">ETH 페어 값은 목업 예시 — 요율 미정 [확인필요: 09 §0]</div>
               </td>
@@ -105,7 +105,7 @@
             <tr>
               <td>공통</td>
               <td>시세(외부지표) 소스 — 단일 선택</td>
-              <td><div class="item-area" data-highlight="7" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="7" style="top:-10px;right:-10px;">8</div><span class="inp">바이낸스 ▾</span></div> <span style="font-size:9.5px;color:#b45309;">조합 없음 · 장애 시 대체 [확인필요]</span></td>
+              <td><div class="item-area" data-highlight="7" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="7" style="top:-10px;right:-10px;">8</div><span class="mk-dd"><span class="inp"><span class="mk-lab">바이낸스</span> ▾</span><div class="mk-menu" hidden><div class="op" data-set="업비트" data-dirty data-hint="저장 전 변경 ● — [변경 저장] 후 신규 요청부터 기준가·USD 환산·price guard 판정에 반영">업비트</div><div class="op" data-set="빗썸" data-dirty data-hint="저장 전 변경 ● — [변경 저장] 후 신규 요청부터 기준가·USD 환산·price guard 판정에 반영">빗썸</div><div class="op cur" data-set="바이낸스">바이낸스</div></div></span></div> <span style="font-size:9.5px;color:#b45309;">조합 없음 · 장애 시 대체 [확인필요]</span></td>
             </tr>
             <tr>
               <td>지갑</td>
@@ -134,15 +134,15 @@
           <tbody>
             <tr>
               <td>A자산운용</td><td>가입자 K</td><td><span class="chip ok">활성</span></td><td><span class="chip ok">활성</span></td>
-              <td><div class="item-area" data-highlight="13" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="13" style="top:-10px;right:-10px;">14</div><span class="act">상태 변경 ▾</span></div></td>
+              <td><div class="item-area" data-highlight="13" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="13" style="top:-10px;right:-10px;">14</div><span class="mk-dd"><span class="act"><span class="mk-lab">상태 변경</span> ▾</span><div class="mk-menu" hidden><div class="op warn" data-hint="확인 다이얼로그 + 사유 필수 → 신규 교환·게시·신청 차단(진행 중 건 유지)">일시제한</div><div class="op warn" data-hint="확인 다이얼로그 + 사유 필수 → 거래·출금 전면 차단 · 홈 처리함 STR 검토 생성">동결</div><div class="op warn" data-hint="확인 다이얼로그 + 사유 필수 → 진행 거래 완결·전량 출금 후 비활성화(되돌릴 수 없음)">해지</div></div></span></div></td>
             </tr>
             <tr>
               <td>B사</td><td>가입자 M</td><td><span class="chip info">심사중 (EDD)</span></td><td><span class="chip info">초대 발송됨</span></td>
-              <td><div class="item-area" data-highlight="12" style="position:relative;display:inline-block;padding:3px;border-radius:8px;margin-right:8px;"><div class="pin" data-idx="12" style="top:-10px;right:-10px;">13</div><span class="act">초대 재발송</span></div><span class="act">상태 변경 ▾</span></td>
+              <td><div class="item-area" data-highlight="12" style="position:relative;display:inline-block;padding:3px;border-radius:8px;margin-right:8px;"><div class="pin" data-idx="12" style="top:-10px;right:-10px;">13</div><span class="act">초대 재발송</span></div><span class="mk-dd"><span class="act"><span class="mk-lab">상태 변경</span> ▾</span><div class="mk-menu" hidden><div class="op" data-hint="확인 다이얼로그 + 사유 필수 → 배너 제거·거래 재개(즉시 적용)">활성</div><div class="op warn" data-hint="확인 다이얼로그 + 사유 필수 → 진행 거래 완결·전량 출금 후 비활성화(되돌릴 수 없음)">해지</div></div></span></td>
             </tr>
             <tr>
               <td>C사</td><td>가입자 N</td><td><span class="sev mid">일시제한 (재이행 미응답)</span></td><td><span class="chip ok">활성</span></td>
-              <td><span class="act">상태 변경 ▾</span></td>
+              <td><span class="mk-dd"><span class="act"><span class="mk-lab">상태 변경</span> ▾</span><div class="mk-menu" hidden><div class="op" data-hint="확인 다이얼로그 + 사유 필수 → 배너 제거·거래 재개(즉시 적용)">활성</div><div class="op warn" data-hint="확인 다이얼로그 + 사유 필수 → 거래·출금 전면 차단 · 홈 처리함 STR 검토 생성">동결</div><div class="op warn" data-hint="확인 다이얼로그 + 사유 필수 → 진행 거래 완결·전량 출금 후 비활성화(되돌릴 수 없음)">해지</div></div></span></td>
             </tr>
           </tbody>
         </table>
@@ -440,6 +440,8 @@
     <div class="note-title">비고</div>
     <div class="note-body">
       · DSRV 내부 관리자 화면(고객사 노출 없음). 어드민은 홈(ADM-02)·설정(ADM-03) 2화면.<br>
+      · <strong>목업 인터랙션(2026-09-02)</strong>: 어드민 프레임 폭을 다른 화면의 <strong>1.5배(810px)</strong>로 넓히고, 드롭다운 3종(취급자산 상태 ▾ · 시세 소스 ▾ · 상태 변경 ▾)을 목업에서 실제로 펼칠 수 있게 함(바깥 클릭·ESC = 변경 없이 닫힘). 확인 다이얼로그가 필요한 선택(중지·일시제한·동결·해지)은 값을 바꾸지 않고 다음 단계를 노란 배지로 표시 — 다이얼로그·사유 모달 자체는 항목 설명 기준. 관리 메뉴 '홈' 클릭 시 ADM-02로 이동.<br>
+
       · <strong>[긴급대응 전용 플래그 없음]</strong> 모든 집행이 사람의 승인·서명을 거치는 구조 — 승인을 멈추면 집행도 멈춤. 별도 '거래정지·긴급출금중단' 버튼 없이 승인 중단 + 사고대응 절차서로 대응 — 근거: ISMS 2.11.1(사고 대응·복구). 취급자산 '중지'는 자산 단위 신규 요청 차단이며 긴급정지 플래그가 아님.<br>
       · <strong>[화이트리스트 관리 제외]</strong> 화이트리스트 지연발효는 커스터디 출금(외부 반출) 전용 — 기존 커스터디 정책·시스템 그대로 사용, 이 콘솔에서 중복 관리하지 않음. 나·마 교환·중개(내부 지갑 간 이전)에는 미적용.<br>
       · 연결: 초대 발송 → ONB-00 · 정책값 표출 EXC-01/02·BRK-02/03/04/07 · 발생 알람 처리(잠금·재이행 도래·격리 등)는 홈(ADM-02) 처리함 · 기관 KYC 상태 = 전 화면 게이팅(G-3) 단일 출처<br>

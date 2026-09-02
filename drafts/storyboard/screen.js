@@ -22,6 +22,7 @@ function drawConnectors(){
   document.querySelectorAll('.pin').forEach(pin=>{
     const idx=pin.dataset.idx; const itm=document.querySelector(`.itm[data-idx="${idx}"]`); if(!itm) return;
     const pRect=pin.getBoundingClientRect(); const iRect=itm.querySelector('.num').getBoundingClientRect();
+    if(iRect.left<pRect.right) return; // 좁은 창에서 항목 컬럼이 프레임 아래로 접히면 연결선 생략
     const line=document.createElementNS('http://www.w3.org/2000/svg','line');
     line.setAttribute('x1',pRect.right-mRect.left+4); line.setAttribute('y1',pRect.top+pRect.height/2-mRect.top);
     line.setAttribute('x2',iRect.left-mRect.left-4); line.setAttribute('y2',iRect.top+iRect.height/2-mRect.top);
@@ -59,3 +60,39 @@ function relayout(){drawBrackets();drawConnectors();reportH();}
 function reportH(){var h=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight);window.parent&&window.parent.postMessage({type:"iframeHeight",h:h},"*");}
 window.addEventListener('load',()=>{relayout();setTimeout(relayout,300);setTimeout(relayout,900);});
 window.addEventListener('resize',relayout);
+
+// ── 목업 인터랙션 (어드민 화면 — 행 확장 · 드롭다운 · 관리 메뉴 이동) ──
+function mkCloseMenus(){document.querySelectorAll('.mk-menu').forEach(m=>m.hidden=true);}
+function mkToggleRow(row){
+  const key=row.dataset.exp; const wasOpen=row.classList.contains('open');
+  document.querySelectorAll('.mk-row.open').forEach(r=>r.classList.remove('open'));
+  document.querySelectorAll('.mk-exp').forEach(x=>x.hidden=true);
+  if(!wasOpen){row.classList.add('open');
+    const exp=document.querySelector('.mk-exp[data-exp="'+key+'"]'); if(exp)exp.hidden=false;}
+  document.querySelectorAll('.mk-row').forEach(r=>{const c=r.querySelector('.mk-caret'); if(c)c.textContent=r.classList.contains('open')?'▼':'▶';});
+  relayout();
+}
+function mkPick(op){
+  const dd=op.closest('.mk-dd'); const menu=op.closest('.mk-menu');
+  menu.hidden=true;
+  const host=dd.parentElement; host.querySelectorAll('.mk-hint').forEach(h=>h.remove());
+  if(op.dataset.set){
+    const lab=dd.querySelector('.mk-lab'); if(lab)lab.textContent=op.dataset.set;
+    menu.querySelectorAll('.op').forEach(o=>o.classList.toggle('cur',o===op));
+    if(op.hasAttribute('data-dirty')){const t=dd.querySelector('.inp'); if(t)t.classList.add('mk-dirty');}
+  }
+  if(op.dataset.hint){const s=document.createElement('span');s.className='mk-hint';s.textContent=op.dataset.hint;dd.insertAdjacentElement('afterend',s);}
+  relayout();
+}
+document.addEventListener('click',(e)=>{
+  if(e.target.closest('.pin')) return;                      // 핀 클릭은 항목 선택 전용
+  const op=e.target.closest('.mk-menu .op'); if(op){mkPick(op);return;}
+  const dd=e.target.closest('.mk-dd');
+  if(dd){const m=dd.querySelector('.mk-menu'); const willOpen=m&&m.hidden; mkCloseMenus(); if(m)m.hidden=!willOpen; relayout(); return;}
+  mkCloseMenus();
+  const go=e.target.closest('[data-go]');
+  if(go){window.parent&&window.parent.postMessage({type:'navigate',pageId:go.dataset.go},'*');return;}
+  if(e.target.closest('.act,.field,.btn,.dl')) return;   // 처리 버튼·입력은 행 확장 대상 아님
+  const row=e.target.closest('.mk-row'); if(row){mkToggleRow(row);return;}
+});
+document.addEventListener('keydown',(e)=>{if(e.key==='Escape')mkCloseMenus();});

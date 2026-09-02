@@ -164,6 +164,29 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);}
 .nav-note{font-size:11px;color:#64748b;line-height:1.65;margin-top:6px;padding-top:6px;border-top:1px solid #eef2f7;}
 .nav-note strong{color:#334155;}
 
+/* ── 넓은 프레임(어드민 전용) — 표 가독성 위해 기본 540px의 1.5배 ── */
+.frame.wide{width:810px;}
+.main.wide-main{flex-wrap:wrap;}
+.main.wide-main .items{max-width:none;}
+/* 목업 인터랙션(어드민): 클릭 가능한 행·드롭다운 */
+.mk-row{cursor:pointer;}
+.mk-row:hover>td{background:#f8fafc;}
+.mk-row.open>td{background:#eef4ff;}
+.mk-caret{display:inline-block;width:11px;color:#94a3b8;font-size:8px;margin-right:3px;line-height:1;}
+.mk-row.open .mk-caret{color:#2563eb;}
+.mk-exp>td{background:#f8fafc;padding:4px 8px 8px !important;}
+.mk-panel{font-size:10px;color:#475569;line-height:1.7;font-family:ui-monospace,Consolas,monospace;}
+.mk-panel .ph2{font-family:var(--font);font-size:9.5px;color:#94a3b8;margin-bottom:3px;}
+.mk-panel .hist{font-family:var(--font);font-size:9.5px;color:#94a3b8;margin-top:5px;padding-top:4px;border-top:1px dashed #e2e8f0;}
+.mk-dd{position:relative;display:inline-block;cursor:pointer;}
+.mk-menu{position:absolute;z-index:20;top:100%;left:0;margin-top:4px;min-width:132px;background:#fff;border:1px solid #d7dbe0;border-radius:8px;box-shadow:0 6px 18px rgba(15,23,42,.12);padding:4px;}
+.mk-menu .op{font-size:10.5px;color:#334155;padding:5px 8px;border-radius:6px;white-space:nowrap;}
+.mk-menu .op:hover{background:#eff6ff;color:#1d4ed8;}
+.mk-menu .op.cur{color:#1d4ed8;font-weight:700;background:#f5f8ff;}
+.mk-menu .op.warn{color:#b91c1c;}
+.mk-dirty{background:#fef9c3;border-color:#fde047;}
+.mk-hint{display:inline-block;font-size:9.5px;color:#92400e;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:2px 7px;margin-left:6px;}
+
 ::-webkit-scrollbar{display:none !important;} *{scrollbar-width:none !important;}
 
 /* ---- Figma 로그인 섹션 반영(2026-09-02): 인증 계열 화면 공용 ---- */
