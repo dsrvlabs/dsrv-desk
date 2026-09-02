@@ -110,9 +110,9 @@
       <div class="num">2</div>
       <div>
         <div class="itm-title">[재설정 메일 발송] 버튼<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 쿨다운 {정책값} 이내이거나 발송 처리 중이면 비활성이다.<br><strong>확인 사항</strong> 없다. 기존 인증수단이 재등록 완료까지 유효하므로 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> ONB-00 초대 재발송 양식으로 1회용 링크를 보낸다(유효기간은 초대 링크와 같다). 이전 미사용 링크를 즉시 무효화해 최신 1개만 유효하게 두고, 발송 이력을 감사기록에 남긴다. 세션은 유지하고 로그아웃은 재등록 완료 시점(ONB-03 [확인])이다.<br><span class="chk">[확인필요: 쿨다운 값]</span><br><span class="basis">근거 ISMS 2.5 · 2.9.4 · ONB-00 재사용</span></div>
+        <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 쿨다운 이내이거나 발송 처리 중이면 비활성이다.<br><strong>확인 사항</strong> 없다. 기존 인증수단이 재등록 완료까지 유효하므로 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> ONB-00 초대 재발송 양식으로 1회용 링크를 보낸다(유효기간은 초대 링크와 같다). 이전 미사용 링크를 즉시 무효화해 최신 1개만 유효하게 두고, 발송 이력을 감사기록에 남긴다. 세션은 유지하고 로그아웃은 재등록 완료 시점(ONB-03 [확인])이다.<br><span class="chk">[확인필요: 쿨다운 값]</span><br><span class="basis">근거 ISMS 2.5 · 2.9.4 · ONB-00 재사용</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">[재설정 메일 발송] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①발송 처리 중 ②쿨다운 중(직전 발송 후 {정책값} 이내)</span><span class="nav-to stay">처리 중 → 회색 비활성 · 라벨 "발송 중…" / 쿨다운 → 회색 비활성 · 라벨 "재발송 ({남은 초}초 후)" 카운트다운 → 0이면 "재설정 메일 재발송"으로 활성 복귀</span></div>
+          <div class="nav-row"><span class="nav-el">[재설정 메일 발송] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①발송 처리 중 ②쿨다운 중(직전 발송 후 쿨다운 시간 이내)</span><span class="nav-to stay">처리 중 → 회색 비활성 · 라벨 "발송 중…" / 쿨다운 → 회색 비활성 · 라벨 "재발송 ({남은 초}초 후)" 카운트다운 → 0이면 "재설정 메일 재발송"으로 활성 복귀</span></div>
           <div class="nav-row"><span class="nav-el">[재설정 메일 발송] — 클릭(활성)</span><span class="nav-act">확인 없음 → 라벨 "발송 중…"·비활성(중복 클릭 차단) → 토큰 생성 · 이메일 발송(ONB-00 양식) · 감사로그</span><span class="nav-to stay">화면 잔류 · 항목 4 발송 결과 배너 노출 · 버튼 → 쿨다운 상태 · 이후 흐름: 이메일 링크 → <strong>계정 활성화(ONB-01 → 02 → 03)</strong> 재수행(비밀번호 재설정 → 2FA 재등록 → 새 복구 코드) → [확인] 시 이전 코드 폐기 · 기존 세션 전체 로그아웃 → <strong>로그인(AUTH-01)</strong></span></div>
           <div class="nav-row"><span class="nav-el">[재설정 메일 발송] — 실패</span><span class="nav-act">발송 오류(메일 서버·서버 오류)</span><span class="nav-to stay">화면 잔류 · 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 버튼 라벨 복귀(쿨다운 없음) · 결과 배너 미노출</span></div>
         </div>

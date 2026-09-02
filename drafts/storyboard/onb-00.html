@@ -144,8 +144,8 @@
         <div class="itm-title">[계정 활성화 · 비밀번호 설정] 링크 버튼<span class="req">필수</span></div>
         <div class="itm-desc"><strong>노출</strong> 초대 메일에 항상 들어간다. 메일 안의 유일한 클릭 요소다.<br><strong>클릭 가능</strong> 메일에서는 항상 클릭된다. 토큰 유효성은 이동한 뒤에 판정한다.<br><strong>확인 사항</strong> ONB-01 진입 시 서버가 토큰을 1회 검증한다(정상 / 만료 / 사용됨 / 재개).<br><strong>액션</strong> 1회용 토큰이 붙은 활성화 URL을 새 탭으로 연다. 재발급 링크는 메일에 두지 않고 ADM-03 초대 재발송으로만 처리한다.<br><span class="basis">근거 ISMS 2.5 · 1회용 활성화 링크</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">링크 — 유효(미사용 · {정책값} 이내)</span><span class="nav-act">클릭 → 토큰 검증 통과</span><span class="nav-to"><strong>계정 활성화(ONB-01)</strong> 정상 상태 — 비밀번호 설정부터 · 중도 이탈 후 재클릭이면 진행 중 화면(ONB-02/03)으로 라우팅(ONB-01 상세 1)</span></div>
-          <div class="nav-row"><span class="nav-el">링크 — 만료(발송 후 {정책값} 초과)</span><span class="nav-act">클릭 → 토큰 검증 실패(만료)</span><span class="nav-to"><strong>계정 활성화(ONB-01)</strong> 토큰 오류 상태 A — 배너 "초대 링크가 만료되었습니다. 관리자에게 재발급을 요청해 주세요" · 입력 구역 전부 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">링크 — 유효(미사용 · {정책값 72시간} 이내)</span><span class="nav-act">클릭 → 토큰 검증 통과</span><span class="nav-to"><strong>계정 활성화(ONB-01)</strong> 정상 상태 — 비밀번호 설정부터 · 중도 이탈 후 재클릭이면 진행 중 화면(ONB-02/03)으로 라우팅(ONB-01 상세 1)</span></div>
+          <div class="nav-row"><span class="nav-el">링크 — 만료(발송 후 {정책값 72시간} 초과)</span><span class="nav-act">클릭 → 토큰 검증 실패(만료)</span><span class="nav-to"><strong>계정 활성화(ONB-01)</strong> 토큰 오류 상태 A — 배너 "초대 링크가 만료되었습니다. 관리자에게 재발급을 요청해 주세요" · 입력 구역 전부 비활성</span></div>
           <div class="nav-row"><span class="nav-el">링크 — 이미 사용됨(활성화 완료 계정)</span><span class="nav-act">클릭 → 토큰 검증 실패(사용됨)</span><span class="nav-to"><strong>계정 활성화(ONB-01)</strong> 토큰 오류 상태 B — 배너 "이미 사용된 링크입니다. 로그인 화면으로 이동해 주세요" + 배너 내 [로그인 화면으로] → <strong>로그인(AUTH-01)</strong></span></div>
           <div class="nav-row"><span class="nav-el">링크 — 진입 후 중도 이탈(활성화 미완료)</span><span class="nav-act">재클릭 → 토큰 유효(진행 중)</span><span class="nav-to"><strong>계정 활성화(ONB-01)</strong> 진행 중 화면(ONB-01/02/03)으로 재개(2026-09-02 채택 — "1회만 사용" = 활성화 완료 1회)</span></div>
         </div>
