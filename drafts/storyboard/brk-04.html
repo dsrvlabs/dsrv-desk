@@ -122,18 +122,13 @@
   <div class="items" id="items">
     <div class="nav-global">
       <div class="nav-global-title">진입 · 전역 이동</div>
-      <div class="nav-note">· <strong>전역 이동</strong> = 고객 콘솔 셸 정본(DASH-01)과 동일<br>
-      · 차이 = 현재 탭 '교환게시판' 재클릭 → <strong>BRK-01 목록</strong> · 이탈 시 미처리 신청은 수락 대기로 유지<br>
-      · <strong>진입</strong>: 내 게시 상세(BRK-06)의 받은 신청 행 클릭 — 유일한 진입 경로(이메일 ① 수신·DASH-01 마목 협의중 행도 BRK-06 경유 · 메일 본문에 링크 없음) · 진입 시 게시·신청 최신 상태 조회("불러오는 중…") → 버튼 활성/비활성 판정<br>
-      · 게시당 동시 신청 1건(2026-09-02 확정) — 이 화면은 <strong>그 1건</strong>의 수락/거절 · 복수 신청 목록·선택 UI 없음(종전 선착순 vs 게시자 선택 이슈 소멸) · 게시 회수는 BRK-06 [게시 내리기]에서(이 화면에 없음)<br>
-      · 목업 예시: 게시 800 USDT ↔ 798.40 USDC(0.9980 USDC/USDT) · 게시자 B사 수수료 8.00 USDT(800 × 1%) · 신청자 A자산운용 수수료 7.98 USDC(미노출) · 영업일 2일·30일·1%는 ADM-03 정책값의 <strong>예시값</strong>(화면은 {정책값} 표시)</div>
     </div>
 
     <div class="itm" data-idx="0">
       <div class="num">1</div>
       <div>
         <div class="itm-title">내 게시 내역 — 공통 포맷 · 게시자 관점 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · kv 8행 · <strong>게시자 측(B사) 콘솔</strong> — BRK-03(신청자 화면)과 동일 거래를 상대 역할에서 본 화면 · 포맷·필드 순서 = '교환거래 요청 내역' 공통 폼, 방향·수량은 게시자 기준<br>· 게시 상태 칩 + 받은 신청 건수(0/1) — 이 화면은 <strong>협의중 · 1건</strong>일 때 진입 · 상태 6종(게재중·협의중·확정·완료·회수·중지)은 BRK-01 상세 1<br>· 게시 유효기한 = 게시 시점 + {정책값}일(ADM-03 · 목업 30일) · 게시 만료 시 미처리 신청도 함께 종결<br><span class="basis">근거 F-1b · 공통 포맷 · 09 §0 마목 게시 상태(2026-09-02)</span></div>
+        <div class="itm-desc"><strong>구성</strong> kv 8행. '교환거래 요청 내역' 공통 폼을 쓰고 방향·수량은 게시자 기준으로 적는다. BRK-03과 같은 거래를 상대 역할에서 본 화면이다.<br><strong>값</strong> 게시 상태 칩과 받은 신청 건수(0/1)를 함께 보여준다. 이 화면은 협의중·1건 상태로 진입한다.<br><strong>유효기한</strong> 게시 유효기한은 게시 시점 + {정책값 30일}(ADM-03)이고, 게시가 만료되면 미처리 신청도 함께 종결한다.<br><span class="basis">근거 F-1b · 공통 포맷 · 09 §0 마목 게시 상태</span></div>
       </div>
     </div>
 
@@ -141,7 +136,7 @@
       <div class="num">2</div>
       <div>
         <div class="itm-title">받은 신청 — 신청자 · 시점 · 유효기한 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · kv 5행 · 신청자 상호는 확정 전 첫 글자만(A***) — BRK-03 상대 마스킹과 대칭 · 신청자 링크 없음(상세 화면 없음) · KYC 완료·거래 안전성 검증 ✓ 표기(신청 시점 신청자 잔고·한도 검증 통과 — BRK-03)<br>· 신청 시점 = 접수 시 서버 시각 · 신청 유효기한 = 접수 + 영업일 {정책값}일(ADM-03 · 목업 2일) — 게시 시점과의 시세 변동 판단은 게시자 몫(DSRV 가격 불관여)<br>· 신청 조건 = 게시 조건 그대로(역제안 없음) → 조건 비교 UI 불요 · 신청 상태: 수락 대기 / 만료 / 종결(중지·회수·게시 만료) / 확정 / 거절 — 수락 대기 외에는 항목 3 안내 + 버튼 비활성<br><span class="basis">근거 F-1b · V2(통신중개 아님)</span></div>
+        <div class="itm-desc"><strong>구성</strong> kv 5행.<br><strong>마스킹</strong> 신청자 상호는 확정 전까지 첫 글자만 노출한다(A***). 신청자 상세 화면과 링크는 두지 않는다. KYC 완료와 거래 안전성 검증은 ✓로 표기한다(신청 시점 BRK-03 검증 통과분).<br><strong>시점</strong> 신청 시점은 접수 시 서버 시각, 신청 유효기한은 접수 + 영업일 {정책값 2영업일}(ADM-03)이다.<br><strong>신청 조건</strong> 게시 조건 그대로이므로 조건 비교 UI를 두지 않는다(역제안 없음).<br><strong>신청 상태</strong> 수락 대기 / 만료 / 종결(중지·회수·게시 만료) / 확정 / 거절. 수락 대기가 아니면 항목 3 안내를 띄우고 버튼을 비활성으로 둔다.<br><span class="basis">근거 F-1b · V2(통신중개 아님)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">(무응답)</span><span class="nav-act">신청 유효기한 경과</span><span class="nav-to stay">자동 만료 — 거절과 동일 효과(신청 종결 · 게시 게재중 복귀 · 자산이동·수수료 없음) · 이 화면 재진입 시 항목 3 안내 + 버튼 비활성</span></div>
         </div>
@@ -152,7 +147,7 @@
       <div class="num">3</div>
       <div>
         <div class="itm-title">처리 불가 안내 (조건부 노출)</div>
-        <div class="itm-desc">· 노출 조건: 신청 상태가 '수락 대기'가 아닐 때 — 해당 1건만 버튼 위에 인라인 노출(공통 UI 규격 비활성 사유 = 인라인 경고) · 정상 시 블록 없음<br>· 문구: <strong>중지</strong>(price guard) "시세 변동으로 게시가 중지되어 이 신청은 종결되었습니다 — 다시 게시하려면 거래의향 등록에서 새로 게시해 주세요" · <strong>신청 만료</strong> "신청 유효기한이 지나 자동 만료되었습니다 — 게시는 게재중으로 돌아갔습니다" · <strong>게시 만료</strong> "게시 유효기간이 만료되어 이 신청은 종결되었습니다" · <strong>이미 처리</strong>(다른 세션에서 수락/거절) "이미 처리된 신청입니다 — 결과는 내 게시 상세에서 확인해 주세요" · <strong>회수</strong> "회수된 게시입니다 — 신청은 종결되었습니다"<br>· 노출 중 [수락]·[거절] 비활성(항목 5·6 활성 조건) · <strong>중지 상태에서 수락 불가</strong>(2026-09-02 확정 — 중지 = 대기 신청 자동 종결 · 재개는 재게시만) · 닫기(×) 없음<br><span class="basis">근거 09 §0 마목 게시 상태 개정(2026-09-02 — 중지·회수·완료 시 대기 신청 종결)</span></div>
+        <div class="itm-desc"><strong>노출</strong> 신청 상태가 '수락 대기'가 아닐 때 해당 1건만 버튼 위에 인라인으로 보인다. 정상 상태에서는 블록 자체가 없고 닫기(×)도 두지 않는다.<br><strong>문구</strong> 중지·신청 만료·게시 만료·이미 처리·회수 5종을 각각 고정 문구로 쓴다(중지는 재게시 안내, 신청 만료는 게재중 복귀 안내, 이미 처리는 내 게시 상세 확인 안내).<br><strong>동작</strong> 노출 중에는 [수락]과 [거절]을 모두 비활성으로 둔다. 중지 상태에서는 수락을 허용하지 않는다(중지 = 대기 신청 자동 종결 · 재개는 재게시만).<br><span class="basis">근거 09 §0 마목 게시 상태 개정</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">안내 블록</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용) · 이동은 [취소](항목 7) → BRK-06</span></div>
         </div>
@@ -163,7 +158,7 @@
       <div class="num">4</div>
       <div>
         <div class="itm-title">내 중개 수수료 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · kv 1행 · 수수료 = 내가 보내는 자산 수량 × {정책값}%(ADM-03 · 목업 1%) → 보내는 자산 자릿수로 <strong>절사</strong>(800 USDT × 1% = 8.00 USDT) · 자기 측 금액만 표시(상대측 7.98 USDC 미노출) · "수락(확정) 시 발생" 병기<br>· 구속력 발생(수락) 전 고지 = 설명의무(4요소④) · 회계 계정명 미노출(공통 UI 규격 정보 노출)<br><span class="basis">근거 09 §0 마목 수수료(2026-09-02) · L6 설명의무 · notation 산정값 절사</span></div>
+        <div class="itm-desc"><strong>값</strong> kv 1행. 내가 보내는 자산 수량 × {정책값 1.00%}(ADM-03)를 보내는 자산 자릿수로 절사한다(800 USDT × 1% = 8.00 USDT).<br><strong>노출 범위</strong> 자기 측 금액만 표시하고 상대측 금액과 회계 계정명은 노출하지 않는다. "수락(확정) 시 발생"을 병기한다.<br><span class="basis">근거 09 §0 마목 수수료 · L6 설명의무 · notation 산정값 절사</span></div>
       </div>
     </div>
 
@@ -171,7 +166,7 @@
       <div class="num">5</div>
       <div>
         <div class="itm-title">[수락] 버튼<span class="req">필수</span></div>
-        <div class="itm-desc">· primary · 게시자(가입자) 단독 실행 — 기관당 가입자 1명(ADM-03) · <strong>수락은 게시자의 능동 선택</strong>(자동 매칭·체결 없음 — 시장개설 아님 방어의 핵심 지점)<br>· 수락 = <strong>즉시 확정 · 구속력 · 수수료 발생</strong>(별도 확정 화면 없음) → 구속력·비가역 행위이므로 <strong>확인 다이얼로그 있음</strong>(공통 UI 규격) → 이전·완료(BRK-05)<br><span class="basis">근거 V2(시장개설 아님) · L6 §9·이용자보호 · F-4 · 1기관 1가입자(ADM-03)</span></div>
+        <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 신청 상태가 '수락 대기'일 때만 활성이다. 항목 3 안내가 뜬 상태에서는 비활성이다.<br><strong>확인 사항</strong> 확인 다이얼로그를 띄운다. 수락은 즉시 확정·구속력·수수료 발생을 낳는 비가역 행위다. 클릭 시 서버가 게시·신청 상태를 다시 판정한다(다른 세션 처리·중지·만료 경쟁).<br><strong>액션</strong> 거래를 확정하고 BRK-05로 넘긴다. 별도 확정 화면은 두지 않는다. 수락은 게시자의 능동 선택이며 자동 매칭·체결은 없다.<br><span class="basis">근거 V2(시장개설 아님) · L6 §9 · F-4 · 1기관 1가입자</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[수락] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①신청 상태가 수락 대기 아님(만료·이미 처리) ②게시 상태가 협의중 아님(중지·회수·완료(만료)) ③게시·신청 조회 실패 ④처리 진행 중("수락 중…"/"거절 중…")</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격) · 사유는 항목 3 인라인 안내로 노출(툴팁 없음) · 버튼은 비노출이 아니라 비활성으로 유지</span></div>
           <div class="nav-row"><span class="nav-el">[수락] — 클릭(활성)</span><span class="nav-act">클릭 → <strong>다이얼로그: 제목 "신청 수락" / 본문 "수락하면 거래가 즉시 확정되어 구속력이 발생하고, 중개 수수료 8.00 USDT(거래액 1%)가 발생합니다. 확정 후에는 취소할 수 없습니다." / [수락] [돌아가기]</strong> → [수락] 클릭 → 버튼 라벨 "수락 중…"·[거절]·[취소] 비활성(중복 클릭 차단) → 신청 유효기한·게시 상태·양측 처분 가능분 서버 재검증 → 상태 확정 · 상호 마스킹 해제 · 양측 이메일 ② · ADM-02 처리함 유입</span><span class="nav-to"><strong>이전·완료(BRK-05)</strong> — 스텝 '확정 ✓ → 이전 진행(현재)' · [돌아가기] = 다이얼로그 닫힘·화면 잔류·변경 없음</span></div>
@@ -184,7 +179,7 @@
       <div class="num">6</div>
       <div>
         <div class="itm-title">[거절] 버튼<span class="req">필수</span></div>
-        <div class="itm-desc">· danger · 게시자(가입자) 단독 실행 · 신청 종결 — <strong>사유 입력 없음</strong>(협상·개입 소지 차단) · 구속력·비가역 행위 아님 → <strong>확인 다이얼로그 없음</strong>(공통 UI 규격 — 거절은 확인 없음)<br>· 거절 후 게시는 <strong>게재중 복귀</strong>(게시판 재노출 · 다른 기관 신청 가능) · 자산이동·수수료 없음<br><span class="basis">근거 V2(통신중개 아님 — 사유·메시지 채널 없음) · 09 §0 마목 게시 상태(거절 → 게재중 복귀)</span></div>
+        <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 신청 상태가 '수락 대기'일 때만 활성이다.<br><strong>확인 사항</strong> 확인 다이얼로그와 사유 입력을 두지 않는다(구속력·비가역 행위가 아니고 협상 채널을 열지 않는다).<br><strong>액션</strong> 신청을 종결하고 게시를 '게재중'으로 되돌려 게시판에 다시 노출한다. 자산 이동과 수수료는 발생하지 않는다.<br><span class="basis">근거 V2(통신중개 아님) · 09 §0 마목 게시 상태</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[거절] — 활성 조건</span><span class="nav-act">[수락]과 동일: ①수락 대기 아님 ②게시 협의중 아님 ③조회 실패 ④처리 진행 중</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격) · 사유는 항목 3 인라인 안내</span></div>
           <div class="nav-row"><span class="nav-el">[거절] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음 → 버튼 라벨 "거절 중…"·[수락]·[취소] 비활성 → 신청 상태 거절(종결) · 게시 상태 게재중 복귀 · 신청자 통지(BRK-07 상태 · DASH-01 — 메일 여부 <span class="chk">[확인필요: 거절 통지 메일 — 4종에 없음]</span>)</span><span class="nav-to"><strong>내 게시 상세·회수(BRK-06)</strong> — 상태 '게재중 · 받은 신청 0건'(빈 상태) · 별도 토스트 없음(기획 가정)</span></div>
@@ -197,7 +192,7 @@
       <div class="num">7</div>
       <div>
         <div class="itm-title">[취소] 버튼</div>
-        <div class="itm-desc">· ghost · 행위 화면 공통 종료 동선 — 처리 없이 직전 화면(내 게시 상세) 복귀 · 신청은 수락 대기로 유지(유효기한 내 재진입 처리 가능)<br>· 2026-09-02 추가 — 종전에는 [거절] 후 자동 복귀만 있고 미처리 이탈 수단이 GNB뿐이었음(점검 지적) · notation 종료 동선 표에는 BRK-02·03만 명시 <span class="chk">[확인필요: notation 종료 동선에 BRK-04 [취소] → BRK-06 추가]</span><br><span class="basis">근거 notation 종료 동선(입력·행위 화면 [취소] = 직전 목록 화면 복귀 · 확인 없음)</span></div>
+        <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 항상 활성이다.<br><strong>확인 사항</strong> 없다.<br><strong>액션</strong> 처리 없이 내 게시 상세(BRK-06)로 돌아간다. 신청은 수락 대기로 유지되어 유효기한 내 다시 처리할 수 있다. <span class="chk">[확인필요: notation 종료 동선 표에 BRK-04 [취소] → BRK-06 추가]</span><br><span class="basis">근거 notation 종료 동선</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[취소] — 활성 조건</span><span class="nav-act">항상 활성("수락 중…"/"거절 중…" 동안만 비활성) — 처리 불가 상태에서도 활성(유일한 화면 내 이탈 수단)</span><span class="nav-to stay">—</span></div>
           <div class="nav-row"><span class="nav-el">[취소] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음 → 처리 없음</span><span class="nav-to"><strong>내 게시 상세·회수(BRK-06)</strong> — 받은 신청 1건 목록 유지</span></div>
@@ -210,7 +205,7 @@
       <div class="num">8</div>
       <div>
         <div class="itm-title">단독 실행 결과 고지 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · 버튼 아래 결과 고지 1문장 상시 노출(공통 UI 규격 '단독 실행 표기' — 즉시 확정·구속력·수수료) · 수수료 금액은 항목 4 값 표시<br>· 거절·무응답 결과(자산이동·수수료 없음 · 게재중 복귀) 병기 · 승인자 지정·2단계 승인 UI 없음(1기관 1가입자)<br><span class="basis">근거 notation 단독 실행 표기(BRK-03·04 하단 문구) · L6 설명의무</span></div>
+        <div class="itm-desc"><strong>문구</strong> 버튼 아래에 결과 고지 1문장을 상시 노출한다(즉시 확정·구속력·수수료). 수수료 금액은 항목 4 값을 쓴다.<br><strong>내용</strong> 거절·무응답 결과(자산 이동·수수료 없음 · 게재중 복귀)를 함께 적는다. 승인자 지정과 2단계 승인 UI는 두지 않는다(1기관 1가입자).<br><span class="basis">근거 notation 단독 실행 표기 · L6 설명의무</span></div>
       </div>
     </div>
 
@@ -218,7 +213,7 @@
       <div class="num">9</div>
       <div>
         <div class="itm-title">"DSRV 비참여·기록만" 고지 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · 고정 문구 · 가격 불관여·당사자성 방어(BRK-03·07과 동일 문구) · 신청·수락·거절 기록 15년 보존 · 문구 변경은 법무 확인 후<br><span class="basis">근거 V2 · L6 §9 · PRD 하지않는행위 · [로펌게이트] 비참여 범위</span></div>
+        <div class="itm-desc"><strong>문구</strong> 고정. BRK-03·07과 같은 문구로 가격 불관여와 당사자성을 적는다. 신청·수락·거절 기록은 15년 보존한다. 변경은 법무 확인 후에 한다.<br><span class="basis">근거 V2 · L6 §9 · [로펌게이트] 비참여 범위</span></div>
       </div>
     </div>
   </div>

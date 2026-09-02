@@ -114,17 +114,13 @@
   <div class="items" id="items">
     <div class="nav-global">
       <div class="nav-global-title">진입 · 전역 이동</div>
-      <div class="nav-note">· <strong>전역 이동</strong> = 고객 콘솔 셸 정본(DASH-01)과 동일<br>
-      · 차이 = 현재 탭 '교환하기'(재클릭 무반응) · GNB 이동 시 입력 중 값 파기(확인 없음)<br>
-      · <strong>진입</strong>: GNB '교환하기' 클릭(전 화면에서) · 진입 시 초기 상태 = 자산 미선택·수량 빈칸·[거래 요청] 비활성 (목업은 입력 완료 상태)<br>
-      · 목업 예시: 900 USDC → 899.82 USDT (한도 1,500,000원 상당 이내 · 2026-09-02 예시 재조정)</div>
     </div>
 
     <div class="itm" data-idx="0">
       <div class="num">1</div>
       <div>
         <div class="itm-title">보내는 자산 ▾<span class="req">필수</span></div>
-        <div class="itm-desc">· 드롭다운 · 옵션 <strong>ETH / USDC / USDT</strong> 3종(ADM-03 취급자산) · 기본값 없음 — 미선택 시 회색 안내 "자산 선택"<br>· <strong>먼저 선택해야 하는 필드</strong> — 이 필드가 비어 있으면 받는 자산 ▾·수량 입력이 비활성<br>· 선택 결과: 칩에 티커 표시, 수량 필드 단위 칩·허용 소수 자릿수(ETH 4 / USDC·USDT 2, notation) 갱신<br><span class="basis">근거 F-1a · 09 §0 취급자산·자산 선택 UX(2026-09-02)</span></div>
+        <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 항상 활성이다.<br><strong>확인 사항</strong> 없다. 확인 다이얼로그를 띄우지 않는다.<br><strong>옵션</strong> ETH · USDC · USDT 3종(ADM-03 취급자산). 기본값은 두지 않고 미선택 시 "자산 선택"을 보여준다.<br><strong>액션</strong> 칩에 티커를 표시하고 목록을 닫는다. 받는 자산 목록에서 이 자산을 빼고, 수량 필드의 단위 칩과 허용 소수 자릿수(ETH 4 / USDC·USDT 2)를 갱신한다. 비어 있는 동안 받는 자산과 수량 입력은 비활성이다.<br><span class="basis">근거 F-1a · 09 §0 취급자산·자산 선택 UX</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">보내는 자산 ▾</span><span class="nav-act">클릭 → 목록 펼침(ETH / USDC / USDT · 현재 선택 강조) → 항목 클릭</span><span class="nav-to stay">칩 갱신·목록 닫힘 · 받는 자산 ▾ 활성화 · 바깥 클릭/ESC = 변경 없이 닫힘</span></div>
           <div class="nav-row"><span class="nav-el">보내는 자산 ▾ (재선택)</span><span class="nav-act">이미 선택된 상태에서 다른 자산 선택</span><span class="nav-to stay">받는 자산 초기화(미선택) · 수량 초기화(빈칸) · 풀·비율 표시 "—" · [거래 요청] 비활성</span></div>
@@ -136,7 +132,7 @@
       <div class="num">2</div>
       <div>
         <div class="itm-title">받는 자산 ▾<span class="req">필수</span></div>
-        <div class="itm-desc">· 드롭다운 · 옵션 = 3종 중 <strong>보내는 자산을 제외한 2종</strong> → 동일 자산 쌍은 구조적으로 선택 불가(별도 오류 검증 없음)<br>· 보내는 자산 선택 전 <strong>비활성</strong>(회색 · 공통 UI 규격 disabled) · 미선택 시 회색 안내 "자산 선택"<br>· 선택 결과: 교환 가능 풀·참고 비율·스프레드 조회 → 항목 4 표시 갱신 · 예상 받는 수량 계산<br><span class="basis">근거 09 §0 자산 선택 UX(2026-09-02) · 페어 3종(ETH↔USDC · ETH↔USDT · USDC↔USDT)</span></div>
+        <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 보내는 자산을 고른 뒤에만 활성이다. 그 전에는 회색 비활성이다.<br><strong>확인 사항</strong> 없다. 확인 다이얼로그를 띄우지 않는다.<br><strong>옵션</strong> 3종에서 보내는 자산을 뺀 2종. 같은 자산 쌍이 목록에 없으므로 동일 자산 오류 검증은 두지 않는다. 미선택 시 "자산 선택".<br><strong>액션</strong> 칩을 갱신하고 목록을 닫는다. 교환 가능 풀·참고 비율·스프레드를 1회 조회해 항목 4를 채우고 예상 받는 수량을 계산한다.<br><span class="basis">근거 09 §0 자산 선택 UX · 페어 3종</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">받는 자산 ▾</span><span class="nav-act">클릭(보내는 자산 선택 후에만) → 목록 2종 펼침 → 항목 클릭</span><span class="nav-to stay">칩 갱신·목록 닫힘 · 풀·비율·스프레드 조회("불러오는 중…" → 값) · 수량이 있으면 예상 받는 수량·한도·풀 재검증</span></div>
           <div class="nav-row"><span class="nav-el">받는 자산 ▾ (비활성 상태)</span><span class="nav-act">보내는 자산 미선택 상태에서 클릭</span><span class="nav-to stay">무반응 · 필드 위 인라인 안내 "보내는 자산을 먼저 선택해 주세요"</span></div>
@@ -148,7 +144,7 @@
       <div class="num">3</div>
       <div>
         <div class="itm-title">보내는 수량 입력<span class="req">필수</span></div>
-        <div class="itm-desc">· 숫자·소수점만 입력 가능 · 소수 자릿수 상한 = 보내는 자산 기준(ETH 4 / USDC·USDT 2) — 초과 입력은 무시 · 천 단위 쉼표 자동 삽입 · 빈칸 안내 "0"<br>· 입력 중 실시간 갱신: 필드 아래 <strong>KRW 환산액</strong>(소수 2자리 · ADM-03 시세 소스 · 스테이블코인도 KRW 시세 환산) · 항목 4의 예상 받는 수량 · 한도·풀 검증<br>· 유효 상한 = min(1회 한도 <strong>1,500,000원 상당</strong>의 해당 자산 환산 수량, 현재 교환 가능 풀) — 상세 2<br>· <strong>상태</strong> ① 빈칸(기본) ② 정상 ③ 한도 초과 — 빨간 테두리 + 필드 아래 인라인 ⚠ "1회 최대 교환 한도(1,500,000원 상당)를 초과했습니다 — 수량을 줄여 다시 입력해 주세요" ④ 풀 초과 — 인라인 ⚠ "현재 교환 가능 풀을 초과해 요청할 수 없습니다 — 수량을 줄여 다시 입력해 주세요" ⑤ 풀 0 — 입력 비활성 + "현재 교환 불가" · ③④ 동시 해당 시 ③만 노출<br>· 라벨 우측 "1회 최대 1,500,000원 상당" 상시 표기(ADM-03 정책값 표시)<br><span class="basis">근거 09 §0 건별 한도·표기 자릿수(2026-09-02) · notation 입력 자릿수</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 보내는 자산을 고른 뒤에만 가능하다. 교환 가능 풀이 0이면 비활성으로 두고 "현재 교환 불가"를 표시한다.<br><strong>허용 문자</strong> 숫자와 소수점만 받는다. 소수 자릿수 상한은 보내는 자산 기준(ETH 4 / USDC·USDT 2)이고 초과 입력은 무시한다. 천 단위 쉼표는 자동으로 넣는다.<br><strong>검증</strong> 입력 중 한도와 풀을 함께 판정한다. 유효 상한은 1회 한도 {정책값 1,500,000원 상당}의 환산 수량과 현재 교환 가능 풀 중 작은 값이다.<br><strong>실패 처리</strong> 한도 초과와 풀 초과에 각각 인라인 ⚠를 띄우고 [거래 요청]을 비활성으로 둔다. 둘 다 해당하면 한도 초과만 보여준다.<br><strong>연동</strong> 입력 중 필드 아래 KRW 환산액(소수 2자리 · ADM-03 시세 소스 · 스테이블코인도 KRW 시세로 환산)과 항목 4의 예상 받는 수량을 갱신한다. 라벨 우측에 "1회 최대 1,500,000원 상당"을 상시 표기한다.<br><span class="basis">근거 09 §0 건별 한도·표기 자릿수 · notation 입력 자릿수</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">수량 필드</span><span class="nav-act">키 입력마다 검증(포커스 아웃 대기 없음)</span><span class="nav-to stay">정상 → 경고 제거·[거래 요청] 활성 / 초과 → 인라인 경고 ③ 또는 ④ 노출·[거래 요청] 비활성</span></div>
           <div class="nav-row"><span class="nav-el">수량 필드 (자산 미선택)</span><span class="nav-act">보내는·받는 자산 중 하나라도 미선택</span><span class="nav-to stay">필드 비활성 · 클릭 시 인라인 안내 "자산을 먼저 선택해 주세요"</span></div>
@@ -160,7 +156,7 @@
       <div class="num">4</div>
       <div>
         <div class="itm-title">교환 가능 풀 · 참고 비율 · 예상 받는 수량 · 스프레드 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · 4개 값은 받는 자산을 선택할 때 1회 조회한다. 화면에 머무는 동안 자동으로 다시 조회하지 않는다.<br>· 교환 가능 풀: 「{수량} {받는자산}」 · 0이면 항목 3 ⑤ 상태<br>· 교환비율(참고): notation 비율 규칙 — 스테이블 페어 {받는}/{주는} 4자리 · ETH 페어 {스테이블}/ETH 2자리 · 확정 비율은 EXC-02 제시 시점 값(이 값과 다를 수 있음 — 안내 문구 상시)<br>· 예상 받는 수량 = 보내는 수량 × 참고 비율(ETH 페어 방향에 따라 ÷) → 받는 자산 자릿수로 절사 · 수량 빈칸이면 "—"<br>· 스프레드: ADM-03 고정값 % 소수 2자리 — 별도 수수료 없음(비용 구조 사전 고지, 상세 3)<br>· 로딩 "불러오는 중…"(3초 초과 → 오류) · 조회 실패 시 값 "—" + 상단 배너 "일시적인 오류입니다…" + [거래 요청] 비활성<br><span class="basis">근거 L6 이용자보호(설명의무) · [확인필요] 풀 정의 — 09 §8</span></div>
+        <div class="itm-desc"><strong>조회</strong> 받는 자산을 고를 때 1회 조회한다. 화면에 머무는 동안 자동으로 다시 조회하지 않는다.<br><strong>값</strong> 교환 가능 풀은 「{수량} {받는자산}」. 비율은 스테이블 페어 {받는}/{주는} 4자리, ETH 페어 {스테이블}/ETH 2자리. 예상 받는 수량은 보내는 수량 × 참고 비율(ETH 페어는 방향에 따라 ÷)을 받는 자산 자릿수로 절사하고, 수량이 비면 "—". 스프레드는 ADM-03 고정값 {정책값 0.10%} 소수 2자리.<br><strong>상태</strong> 로딩 "불러오는 중…"이고 3초를 넘기면 오류로 넘긴다. 조회 실패면 값을 "—"로 두고 상단 배너를 띄우며 [거래 요청]을 비활성으로 둔다.<br><strong>안내</strong> 확정 비율은 EXC-02 제시 시점 값이라 이 값과 다를 수 있다는 문구를 상시 노출한다.<br><span class="basis">근거 L6 이용자보호(설명의무) · <span class="chk">[확인필요: 풀 정의 — 09 §8]</span></span></div>
       </div>
     </div>
 
@@ -168,7 +164,7 @@
       <div class="num">5</div>
       <div>
         <div class="itm-title">성격 고지 (표시 전용)</div>
-        <div class="itm-desc">· 고정 문구 · 클릭 없음 · 문구 변경은 법무 확인 후(상세 4 금지 표현)<br><span class="basis">근거 09 §0 line 51 ②⑤ · V2</span></div>
+        <div class="itm-desc"><strong>문구</strong> 고정이며 변경은 법무 확인 후에 한다(금지 표현은 상세 4).<br><span class="basis">근거 09 §0 line 51 ②⑤ · V2</span></div>
       </div>
     </div>
 
@@ -176,7 +172,7 @@
       <div class="num">6</div>
       <div>
         <div class="itm-title">[거래 요청] 버튼<span class="req">필수</span></div>
-        <div class="itm-desc">· primary · 기안자(가입자) 단독 실행 — 구속력 없음(요청 접수 단계), 별도 승인 없음, <strong>확인 다이얼로그 없음</strong><br>· 클릭 즉시 시스템이 비율을 자동 산정(요청 시점 외부지표 + ADM-03 고정 스프레드 · 2026-09-02 확정)해 EXC-02 진입 · 자동인 것은 산정까지, 체결은 수락·승인·수동 집행으로 분리<br><span class="basis">근거 F-4 · 09 §0 나목 견적 산정(2026-09-02)</span></div>
+        <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 자산 2종과 수량이 채워지고 한도·풀 검증을 통과했을 때만 활성이다. KYC 예외 상태이거나 조회가 실패한 상태면 비활성이다.<br><strong>확인 사항</strong> 확인 다이얼로그는 없다. 클릭 시점에 서버가 한도와 풀을 다시 판정한다.<br><strong>액션</strong> 요청 시점 외부지표와 ADM-03 고정 스프레드 {정책값 0.10%}로 시스템이 비율을 자동 산정해 EXC-02로 넘긴다. 자동인 것은 산정까지이고 체결은 수락·승인·수동 집행으로 분리한다.<br><span class="basis">근거 F-4 · 09 §0 나목 견적 산정</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[거래 요청] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①보내는·받는 자산 미선택 ②수량 빈칸·0 ③한도 초과 경고 노출 중 ④풀 초과 경고 노출 중 ⑤풀 0 ⑥KYC 예외 배너 노출 중 ⑦풀·비율 조회 실패</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격) · 사유는 툴팁이 아니라 해당 위치 인라인 경고로 이미 노출</span></div>
           <div class="nav-row"><span class="nav-el">[거래 요청] — 클릭(활성)</span><span class="nav-act">클릭 → 버튼 라벨 "산정 중…"·비활성(중복 클릭 차단) → 요청번호 EXC-YYYYMMDD-NNNN 채번</span><span class="nav-to"><strong>비율 확인·수락(EXC-02)</strong> — 자동 산정 즉시 진입(대기·담당자 개입 없음)</span></div>
@@ -189,7 +185,7 @@
       <div class="num">7</div>
       <div>
         <div class="itm-title">KYC 예외 배너 (조건부 노출)</div>
-        <div class="itm-desc">· 노출 조건: 기관 KYC 상태가 '활성'이 아닐 때(ADM-03 KYC 상태 — 심사중(EDD)·일시제한·동결) · 정상 시 배너 없음<br>· 노출 중: [거래 요청] 비활성(항목 6 ⑥) · 자산·수량 입력은 가능(조회만) · 내부 사유·AML 심사 내용 미노출(공통 UI 규격 오류 문구 ③)<br>· 문구 고정 · 닫기(×) 없음 · '이메일로 문의' — 링크(mailto) 여부·주소 <span class="chk">[확인필요]</span><br><span class="basis">근거 G-3 · 공통 UI 규격 권한·상태 게이팅</span></div>
+        <div class="itm-desc"><strong>노출</strong> 기관 KYC 상태가 '활성'이 아닐 때만 보인다(심사중(EDD)·일시제한·동결).<br><strong>동작</strong> 노출 중에는 [거래 요청]만 비활성으로 두고 자산·수량 입력과 조회는 그대로 둔다. 내부 사유와 심사 내용은 노출하지 않는다.<br><strong>문구</strong> 고정. <span class="chk">[확인필요: 안내 이메일 주소]</span><br><span class="basis">근거 G-3 · 공통 UI 규격 권한·상태 게이팅</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">배너</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용) · 상태가 '활성'으로 바뀌면 다음 진입 시 배너 제거·버튼 활성</span></div>
         </div>
@@ -213,7 +209,7 @@
       </div>
       <div class="dtl" data-idx="2">
         <div class="detail-label"><span class="dtl-num">3</span>한도·풀 초과 처리</div>
-      <div class="dtl-body"><span class="box">· 유효 상한 = min(1회 한도 1,500,000원 상당의 해당 자산 환산 수량, 가용 풀) — 두 조건 모두 충족해야 요청 가능 · 환산 시세·시점 = ADM-03 시세 소스 · 요청 시점(입력 중 실시간 재계산)<br>· 풀 = 0 : 수량 입력 비활성, <strong>"현재 교환 불가"</strong> 표기<br>· 풀 값 출처 = 커스터디 운영자산 잔고(기존 시스템) + ADM-03 정책 한도 — 별도 지갑 화면 신규 개발 없음<br>· 일간·월간 누적 한도 미정 <span class="chk">[확인필요]</span></span></div>
+      <div class="dtl-body"><span class="box">· 유효 상한 = min(1회 한도 {정책값 1,500,000원 상당}의 해당 자산 환산 수량, 가용 풀) — 두 조건 모두 충족해야 요청 가능 · 환산 시세·시점 = ADM-03 시세 소스 · 요청 시점(입력 중 실시간 재계산)<br>· 풀 = 0 : 수량 입력 비활성, <strong>"현재 교환 불가"</strong> 표기<br>· 풀 값 출처 = 커스터디 운영자산 잔고(기존 시스템) + ADM-03 정책 한도 — 별도 지갑 화면 신규 개발 없음<br>· 일간·월간 누적 한도 미정 <span class="chk">[확인필요]</span></span></div>
       </div>
       <div class="dtl" data-idx="3">
         <div class="detail-label"><span class="dtl-num">4</span>비용 구조 고지 · 계산 규칙</div>

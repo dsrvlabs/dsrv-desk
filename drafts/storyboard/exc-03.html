@@ -102,19 +102,13 @@
   <div class="items" id="items">
     <div class="nav-global">
       <div class="nav-global-title">진입 · 전역 이동</div>
-      <div class="nav-note">· <strong>전역 이동</strong> = 고객 콘솔 셸 정본(DASH-01)과 동일<br>
-      · 차이 = 현재 탭 '교환하기' — 재클릭은 <strong>EXC-01 초기 상태</strong>(진행 중 건과 무관) <span class="chk">[확인필요: DASH-01 행 클릭 진입 시 현재 탭 강조 위치 — 목업은 '교환하기' 강조]</span> · '대시보드'·로고는 [확인]과 같은 목적지 · 진행 중 건은 거래 목록에 남음<br>
-      · <strong>진입</strong> ① 비율 확인·수락(EXC-02) [수락] 직후(수락 처리 응답과 함께 진입 — 이 화면 로딩 없음) ② 대시보드(DASH-01) 거래 목록에서 상태 '진행중'(나목) 행 클릭 — 재진입 시 kv 영역 "불러오는 중…" → 값(3초 초과 → 상단 배너 오류 규격)<br>
-      · <strong>갱신 방식</strong>: 화면 체류 중 자동 갱신(polling) 없음 — 상태는 재진입 시점에 서버 값으로 다시 그림 · 이 화면에서 건이 종결(완료/거절)되어도 실시간 전환 없음 → 다음 DASH-01 행 클릭 시 <strong>내역·완료(EXC-04)</strong>로 진입<br>
-      · 이 화면 내 승인·처리·취소 액션 없음 — DSRV 내부 처리(승인·집행)는 어드민 홈(ADM-02) 처리함에서 · 고객 취소 동선 없음(수락 즉시 확정) · 뒤로가기 미지원(공통 UI 규격)<br>
-      · 목업 예시: 900 USDC → 899.73 USDT, 확정 비율 0.9997 USDT/USDC, 스프레드 0.10%, 요청번호 EXC-20260902-0001, 소요 "약 2영업일" · 모두 예시값(정책값은 ADM-03 값 표시)</div>
     </div>
 
     <div class="itm" data-idx="0">
       <div class="num">1</div>
       <div>
         <div class="itm-title">거래 상태 스텝바 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 — 스텝 클릭 무반응(단계 이동·상세 펼침 없음) · 3단계 고정: <strong>비율 수락</strong>(✓ 완료) → <strong>DSRV 거래 진행중</strong>(현재 · 강조) → <strong>완료 / 거절</strong>(미도달 · 회색)<br>· 이 화면은 2단계 '진행중' 단일 상태 스냅숏 — 다른 변형 없음 · 3단계 도달 건은 EXC-04에서 같은 스텝바로 '완료'(✓) 또는 '거절'(!)로 표시(EXC-04 항목 1)<br>· DSRV 내부 승인·집행·서명 단계는 '진행중' 하나로만 노출 — 내부 심사 상태·담당자·처리 시각 미표시 · <strong>관리자 보류(ADM-02 T1 HOLD) 중에도 이 화면은 변화 없음</strong> — 고객 화면에 '보류' 상태 없음(2026-09-02 결정 · states A4)<br>· 고객사 승인 단계 없음 — 고객사 측 통제는 커스터디 콜드월렛 기존 다중승인 이체로 수행(상세 1)<br><span class="basis">근거 09 §0 승인·통제(2026-08-31) · ISMS 2.2.2 직무분리 · 2.7.2 암호키·서명 관리</span></div>
+        <div class="itm-desc"><strong>구성</strong> 3단계 고정 — 비율 수락(✓ 완료) → DSRV 거래 진행중(현재·강조) → 완료 / 거절(미도달·회색). 스텝 클릭으로 이동하거나 펼치지 않는다.<br><strong>변형</strong> 이 화면은 2단계 '진행중' 단일 상태다. 3단계 도달 건은 EXC-04에서 같은 스텝바로 완료(✓) 또는 거절(!)로 표시한다.<br><strong>노출 범위</strong> DSRV 내부 승인·집행·서명 단계를 '진행중' 하나로만 보여주고 내부 심사 상태·담당자·처리 시각은 넣지 않는다. 관리자 보류(ADM-02 T1 HOLD) 중에도 이 화면은 바뀌지 않는다.<br><span class="basis">근거 09 §0 승인·통제 · ISMS 2.2.2 · 2.7.2</span></div>
       </div>
     </div>
 
@@ -122,7 +116,7 @@
       <div class="num">2</div>
       <div>
         <div class="itm-title">소요 안내 · 결과 확인 경로 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · 고정 문구 2줄: "거래가 접수되었습니다. 약 <strong>{영업일}영업일</strong> 소요됩니다."(ADM-03 값 표시 · 목업 '2'는 예시) / "최종 상태(완료 / 거절)는 대시보드 거래 목록에서 확인할 수 있습니다."<br>· 영업일 = KST 기준 평일(공휴일 제외) · 기산점 = 수락 시각 <span class="chk">[확인필요: 영업일 정의·기산점 약관 명시]</span><br>· 즉시 체결이 아님(콜드 수동 집행)을 고지 — 자동체결 거래소 아님 담보 · 자동검증(한도·BLF·KYT)·트래블룰 확인 내용은 고객 화면 미표시<br>· 승인되지 않은 건은 EXC-04에 '거절' + 일반화 사유로만 표기 — AML 심사 내용·내부 사유 미노출(공통 UI 규격 오류 문구 ③) · 심사가 길어져 관리자가 보류로 두어도 고객에게는 계속 '진행중'<br><span class="basis">근거 L6 설명의무 · STR 누설금지(특정금융정보법 제4조 [원문대조필요]) · 09 §0 콜드 출고 2영업일 약관 명시 [확인필요]</span></div>
+        <div class="itm-desc"><strong>문구</strong> 고정 2줄 — 접수 안내와 약 {정책값 2영업일} 소요(ADM-03 값 표시 · 목업 2는 예시), 최종 상태는 대시보드 거래 목록에서 확인.<br><strong>영업일</strong> KST 기준 평일이고 공휴일은 제외한다. 기산점은 수락 시각이다. <span class="chk">[확인필요: 영업일 정의·기산점 약관 명시]</span><br><strong>노출 범위</strong> 자동검증(한도·BLF·KYT)과 트래블룰 확인 내용은 넣지 않는다. 승인되지 않은 건은 EXC-04에 거절과 일반화 사유로만 표기하고 AML 심사 내용은 노출하지 않는다.<br><span class="basis">근거 L6 설명의무 · STR 누설금지(특정금융정보법 제4조 [원문대조필요]) · 09 §0</span></div>
       </div>
     </div>
 
@@ -130,7 +124,7 @@
       <div class="num">3</div>
       <div>
         <div class="itm-title">교환거래 요청 내역 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · 요청번호 복사 버튼 없음(텍스트 선택만) · 7행 고정 순서: 요청번호 · 교환쌍/방향 · 보내는 수량 · 받는 수량(예정) · 확정 비율 · 스프레드 · 요청 일시<br>· 값은 EXC-02 수락 시점에 확정된 값 그대로(체류 중 재계산 없음) · 수량 자릿수 ETH 4 / USDC·USDT 2, 받는 수량은 절사 · 비율 표기 notation(스테이블 페어 {받는}/{주는} 4자리 · ETH 페어 {스테이블}/ETH 2자리) · 일시 YYYY-MM-DD HH:MM(KST · 초 생략)<br>· '받는 수량(예정)' 라벨은 집행 전이므로 '예정' — EXC-04 완료 시 '받은 자산' 실값, 거절 시 "—"<br>· EXC-03·EXC-04 <strong>공통 하단 블록</strong> — 같은 포맷·필드 순서를 마목(BRK-03·04·05)·관리자(ADM-02 처리함 선택 건)에도 적용(마목은 수수료 행 포함·스프레드 없음)<br><span class="basis">근거 L6 설명의무 · notation 수량·비율·일시 표기</span></div>
+        <div class="itm-desc"><strong>구성</strong> 7행 고정 순서 — 요청번호 · 교환쌍/방향 · 보내는 수량 · 받는 수량(예정) · 확정 비율 · 스프레드 · 요청 일시.<br><strong>값</strong> EXC-02 수락 시점 확정값을 그대로 쓰고 체류 중 재계산하지 않는다. 수량 자릿수는 ETH 4 / USDC·USDT 2이고 받는 수량은 절사한다. 비율은 notation 규칙, 일시는 YYYY-MM-DD HH:MM(KST · 초 생략).<br><strong>라벨</strong> 집행 전이므로 '받는 수량(예정)'으로 쓰고, EXC-04에서 완료면 실값, 거절이면 "—"로 바꾼다.<br><strong>재사용</strong> EXC-03과 EXC-04의 공통 하단 블록이다. 같은 포맷과 필드 순서를 BRK-03·04·05와 ADM-02 선택 건에도 쓴다(마목은 수수료 행을 넣고 스프레드를 뺀다).<br><span class="basis">근거 L6 설명의무 · notation 수량·비율·일시 표기</span></div>
       </div>
     </div>
 
@@ -138,7 +132,7 @@
       <div class="num">4</div>
       <div>
         <div class="itm-title">[확인] 버튼</div>
-        <div class="itm-desc">· primary · 접수 안내 확인 = 나목 flow 종료 동선(공통 UI 규격 '종료 동선': flow 마지막 화면의 [확인] = 대시보드 이동) · 서버 호출 없음(상태 변경 없음)<br>· 진행 중 건은 DASH-01 거래 목록에서 재진입<br><span class="basis">근거 notation 공통 UI 규격 '종료 동선'·'뒤로가기'</span></div>
+        <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 항상 활성이다.<br><strong>확인 사항</strong> 없다. 서버를 호출하지 않고 상태도 바꾸지 않는다.<br><strong>액션</strong> 대시보드로 이동한다(flow 마지막 화면의 종료 동선). 진행 중 건은 DASH-01 거래 목록에서 다시 들어온다.<br><span class="basis">근거 notation '종료 동선'·'뒤로가기'</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[확인] — 활성 조건</span><span class="nav-act">비활성 조건 없음 — 항상 활성(kv 로딩 중에도 활성)</span><span class="nav-to stay">—</span></div>
           <div class="nav-row"><span class="nav-el">[확인] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음 · 로딩 없음(서버 호출 없는 화면 이동)</span><span class="nav-to"><strong>대시보드(DASH-01)</strong> — 거래 목록에 이 건 '진행중' 행 노출 · 토스트 없음</span></div>
