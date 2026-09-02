@@ -90,19 +90,13 @@
   <div class="items" id="items">
     <div class="nav-global">
       <div class="nav-global-title">진입 · 전역 이동</div>
-      <div class="nav-row"><span class="nav-el">브랜드 패널 로고 'DSRV' · 태그라인</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응 (표시 전용)</span></div>
-      <div class="nav-row"><span class="nav-el">브랜드 패널 'DSRV 서비스 소개 보기 →' · 푸터 3링크</span><span class="nav-act">클릭</span><span class="nav-to">외부 소개 페이지 · 문서 페이지(새 탭) — URL <span style="color:#b45309;">[확인필요]</span> · AUTH-01 전역 블록과 동일</span></div>
-      <div class="nav-note">· <strong>진입</strong>: 2FA 앱 연결(ONB-02) 6자리 검증 성공 직후 / 초대 링크 재클릭 시 2FA 확정·활성화 미완료 상태면 서버가 이 화면으로 라우팅(재개 — [확인] 전이므로 동일 코드 재표시)<br>
-      · [확인] = 활성화 완료 · 토큰 소멸 · 비가역(복구 코드 재열람 불가) → 확인 다이얼로그 · 완료 후 자동 로그인 없음 → 로그인(AUTH-01)<br>
-      · 이탈 수단: '이전으로'(항목 6 → ONB-02) · 탭 닫기(재개 가능) · 이 화면에는 '로그인으로 돌아가기' 없음(시안 기준)<br>
-      · 목업 예시: 코드 값은 형식 예시(영숫자 24자 · 4자×6그룹)</div>
     </div>
 
     <div class="itm" data-idx="0">
       <div class="num">1</div>
       <div>
         <div class="itm-title">복구 코드 · 보관 경고 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · 카드 머리글 "복구 코드 저장" · 부제 "2FA 앱을 분실했을 때 사용하는 코드입니다" · 경고 칩 "아래 코드를 안전한 곳에 보관하세요. 재발급이 불가합니다."(시안 문구)<br>· <strong>형식(2026-09-02 확정 · 시안 반영)</strong>: <strong>단일 코드 1개</strong> · 영숫자 24자 · 4자×6그룹(" - " 구분 표시 · 예 3G56 - SYN5 - YVT9 - DT68 - 5DDR - 14QD) · 1회용 — 종전 8자리×6개 폐기 · ONB-02 검증 성공 시 생성<br>· 사용처 = 로그인(AUTH-01) 2단계 '복구 코드로 인증'(AUTH-01 항목 5) · '재발급 불가' = 이 화면 이탈 후 재열람 불가 + 코드 자체 재발급 없음 — 새 코드는 DASH-03 재설정(ONB-01~03 재수행) 완료 시에만 발급되고 이전 코드 폐기<br>· 재진입(재개 · '이전으로' 후 복귀) 시 [확인] 전이면 동일 코드 재표시 · 저장 방식 = 비밀번호와 동일한 해시(원문은 화면 표시용으로만 생성)<br><span class="basis">근거 ISMS 2.5 세션·인증 복구 · AUTH-01 상세 5</span></div>
+        <div class="itm-desc"><strong>값</strong> 단일 코드 1개, 영숫자 24자, 4자씩 6그룹으로 표시하고 1회용이다. ONB-02 검증 성공 시 생성한다.<br><strong>저장</strong> 비밀번호와 같은 방식으로 해시 저장하고 원문은 화면 표시용으로만 만든다.<br><strong>재표시</strong> [확인] 전 재진입 시 같은 코드를 다시 보여준다.<br><strong>재발급</strong> 새 코드는 DASH-03 재설정 완료 시에만 발급하고 이전 코드는 폐기한다.<br><span class="basis">근거 ISMS 2.5 · AUTH-01 상세 5</span></div>
       </div>
     </div>
 
@@ -110,7 +104,7 @@
       <div class="num">2</div>
       <div>
         <div class="itm-title">[복사하기] 버튼</div>
-        <div class="itm-desc">· outline · 복구 코드 24자를 클립보드에 복사(구분자 포함 표시 형식 그대로) · 시안 반영으로 제공 확정<br>· 성공 토스트 "복구 코드가 복사되었습니다"(2초) <span style="color:#b45309;">[확인필요: 문구·시간]</span> · 클립보드 권한 거부 시 토스트 "복사할 수 없습니다. 코드를 직접 선택해 복사해 주세요"<br><span class="basis">근거 시안 'Save Code'</span></div>
+        <div class="itm-desc">· 클릭 시 구분자를 포함한 표시 형식 그대로 클립보드에 복사하고 토스트를 2초 띄운다.<br>· 클립보드 권한이 거부되면 직접 선택해 복사하라는 토스트를 띄운다.<br><span class="basis">근거 시안 'Save Code'</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[복사하기]</span><span class="nav-act">클릭</span><span class="nav-to stay">클립보드 복사 · 토스트 · 화면 잔류</span></div>
         </div>
@@ -121,7 +115,7 @@
       <div class="num">3</div>
       <div>
         <div class="itm-title">[다운로드] 버튼</div>
-        <div class="itm-desc">· outline · 복구 코드를 텍스트 파일로 저장(브라우저 다운로드) · 파일명 <strong>dsrv-desk-recovery-code.txt</strong> · 내용 = 서비스명 · 계정 이메일(마스킹) · 코드 · 발급일시 · 보관 안내 1줄 <span style="color:#b45309;">[확인필요: 파일명·내용 구성]</span><br>· 파일에 평문 코드가 담기므로 안내 칩 문구(안전한 곳 보관)가 이를 대신 고지 · 다운로드 이력 감사로그<br><span class="basis">근거 시안 'Save Code'</span></div>
+        <div class="itm-desc"><strong>파일</strong> 파일명은 dsrv-desk-recovery-code.txt이고 내용은 서비스명 · 계정 이메일(마스킹) · 코드 · 발급일시 · 보관 안내 5줄이다.<br>· 다운로드 이력을 감사로그에 남긴다.<br><span class="basis">근거 시안 'Save Code'</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[다운로드]</span><span class="nav-act">클릭</span><span class="nav-to stay">브라우저 파일 저장 · 화면 잔류</span></div>
         </div>
@@ -132,10 +126,10 @@
       <div class="num">4</div>
       <div>
         <div class="itm-title">[확인] 버튼 (활성화 완료)<span class="req">필수</span></div>
-        <div class="itm-desc">· primary · 계정 활성화 확정(ADM-03 계정 상태 '활성화 진행 중' → 활성 <span style="color:#b45309;">[확인필요: ADM-03 상태 라벨]</span>) · 토큰 소멸(이후 링크 재클릭 = ONB-00 케이스 B)<br>· <strong>확인 다이얼로그 있음</strong> — 복구 코드 재열람 불가가 비가역 행위이므로(공통 UI 규격 확인 다이얼로그 기준) · 시안에는 다이얼로그 없음 <strong>[디자인 요청]</strong><br>· 자동 로그인 없음 — 완료 후 AUTH-01에서 새 비밀번호 + 6자리 코드로 로그인<br><span class="basis">근거 ISMS 2.5 · 32 §2 ONB-01</span></div>
+        <div class="itm-desc"><strong>동작</strong> 계정 활성화를 확정하고 계정 상태를 활성으로 바꾸며 토큰을 소멸시킨다.<br><strong>확인 다이얼로그</strong> 복구 코드 재열람이 불가한 비가역 행위이므로 다이얼로그를 띄운다.<br>· 자동 로그인은 하지 않는다. 완료 후 AUTH-01에서 새 비밀번호와 6자리 코드로 로그인한다.<br><span style="color:#b45309;">[확인필요: ADM-03 계정 상태 라벨]</span> <strong>[디자인 요청]</strong> 다이얼로그는 시안에 없다.<br><span class="basis">근거 ISMS 2.5 · 32 §2 ONB-01</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[확인] — 활성 조건</span><span class="nav-act">다음이 아님: ①처리 중</span><span class="nav-to stay">항상 활성(복사·다운로드는 필수 아님) · 처리 중 → 회색</span></div>
-          <div class="nav-row"><span class="nav-el">[확인] — 클릭(활성)</span><span class="nav-act">다이얼로그: 제목 "복구 코드를 저장했습니까?" / 본문 "이 화면을 벗어나면 복구 코드를 다시 볼 수 없습니다. 인증 앱 분실 시 로그인에 필요합니다." / [활성화 완료] [돌아가기] → [활성화 완료] → 라벨 "처리 중…" → 계정 활성 · 토큰 소멸 · 감사로그</span><span class="nav-to"><strong>로그인(AUTH-01)</strong> — 상단 안내 "계정이 활성화되었습니다. 로그인해 주세요" <span style="color:#b45309;">[확인필요: AUTH-01 안내 노출 여부 — 시안 없음]</span></span></div>
+          <div class="nav-row"><span class="nav-el">[확인] — 클릭(활성)</span><span class="nav-act">다이얼로그: 제목 "복구 코드를 저장했습니까?" / 본문 "이 화면을 벗어나면 복구 코드를 다시 볼 수 없습니다. 인증 앱 분실 시 로그인에 필요합니다." / [활성화 완료] [돌아가기] → [활성화 완료] → 라벨 "처리 중…" → 계정 활성 · 토큰 소멸 · 감사로그</span><span class="nav-to"><strong>로그인(AUTH-01)</strong> — 상단 안내 "계정이 활성화되었습니다. 로그인해 주세요" <span class="chk">[확인필요: AUTH-01 안내 노출 여부 — 시안 없음]</span></span></div>
           <div class="nav-row"><span class="nav-el">[확인] — 실패</span><span class="nav-act">토큰 만료 / 서버 오류</span><span class="nav-to stay">화면 잔류 · 만료 → 상단 배너 "초대 링크가 만료되었습니다. 관리자에게 재발급을 요청해 주세요" / 서버 오류 → 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 라벨 복귀</span></div>
         </div>
       </div>
@@ -145,7 +139,7 @@
       <div class="num">5</div>
       <div>
         <div class="itm-title">'인증이 정상적으로 작동하지 않나요? 문의하기' 링크</div>
-        <div class="itm-desc">· 시안 보조 링크 · ONB-02 항목 4와 동일 동작(문의 이메일 · mailto vs 표시 <span style="color:#b45309;">[확인필요]</span>) · 이 화면에서는 코드 저장 수단(복사·다운로드) 문제 시 출구<br><span class="basis">근거 ONB-02 항목 4</span></div>
+        <div class="itm-desc"><span class="basis">근거 ONB-02 항목 4</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">'문의하기'</span><span class="nav-act">클릭</span><span class="nav-to stay">ONB-02 항목 4와 동일 · 화면 상태 유지</span></div>
         </div>
@@ -156,7 +150,7 @@
       <div class="num">6</div>
       <div>
         <div class="itm-title">'‹ 이전으로' 링크 (→ 2FA 앱 연결)</div>
-        <div class="itm-desc">· 시안 보조 링크 · ONB-02로 복귀 — 2FA는 이미 확정 상태이므로 QR·설정 키는 <strong>등록 완료 표시</strong>(6칸 비활성 + "등록됨") · 앱 재등록이 필요하면 문의(항목 5) <span style="color:#b45309;">[확인필요: 복귀 시 ONB-02 표시 방식 · 다시 ONB-03으로 오는 수단('다음' 필요) — 디자인 요청]</span><br>· 확인 없음 · 복구 코드는 [확인] 전이므로 재진입 시 동일 코드 재표시(항목 1)<br><span class="basis">근거 공통 UI 규격 종료 동선</span></div>
+        <div class="itm-desc">· ONB-02는 2FA 확정 상태라 6칸이 비활성이어서 이 화면으로 돌아올 수단이 없다. 링크 삭제를 권한다.<br><span style="color:#b45309;">[확인필요: 유지 시 ONB-02에 [다음] 추가 필요]</span><br><span class="basis">근거 공통 UI 규격 종료 동선</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">'이전으로'</span><span class="nav-act">클릭 · 확인 없음</span><span class="nav-to"><strong>2FA 앱 연결(ONB-02)</strong> 등록 완료 상태</span></div>
         </div>
@@ -172,11 +166,11 @@
     <div class="detail-grid" id="detailCol">
       <div class="dtl" data-idx="0">
         <div class="detail-label"><span class="dtl-num">1</span>복구 코드 취급</div>
-      <div class="dtl-body"><span class="box">· 단일 코드 · 24자(4×6) · 1회용 · 해시 저장 · 인증 앱 분실 시 AUTH-01 2단계 '복구 코드로 인증'에 입력<br>· 사용 즉시 폐기 · 사용 시 DASH-01 재설정 권고 배너 → DASH-03 재설정(ONB-01~03 재수행)으로 새 코드 발급 · 이전 코드 폐기<br>· 재열람 불가 → [확인]에 확인 다이얼로그(항목 4) · 복사·다운로드 제공(항목 2·3) · 탭 닫기에는 브라우저 제약상 확인 불가 — 단, [확인] 전 이탈이면 재개 시 동일 코드 재표시</span></div>
+      <div class="dtl-body"><span class="box"><strong>형식</strong> 단일 코드 24자(4×6), 1회용, 해시 저장. 인증 앱 분실 시 AUTH-01 2단계에 입력한다.<br><strong>사용 후</strong> 사용 즉시 폐기하고 DASH-01 권고 배너로 DASH-03 재설정을 유도해 새 코드를 발급한다.<br><strong>이탈</strong> [확인] 전 이탈이면 재개 시 같은 코드를 다시 보여준다.</span></div>
       </div>
       <div class="dtl" data-idx="3">
         <div class="detail-label"><span class="dtl-num">4</span>완료 이후 상태</div>
-      <div class="dtl-body"><span class="box">· 계정 상태 전이(ADM-03 기관·가입자 관리에 반영) · 토큰 소멸 · 자동 로그인 없음(AUTH-01에서 2단계 인증 포함 정상 로그인 1회 = 등록 검증 겸함)<br>· 비밀번호 및 2차 인증 재설정(DASH-03) 경로로 재수행 시: [확인] 시점에 기존 세션 전체 로그아웃 · 이전 복구 코드 폐기 · 비밀번호도 새로 설정(DASH-03 안내문과 동일)</span></div>
+      <div class="dtl-body"><span class="box"><strong>상태 전이</strong> 계정 상태를 ADM-03 기관·가입자 관리에 반영하고 토큰을 소멸시킨다.<br><strong>로그인</strong> 자동 로그인 없이 AUTH-01 정상 로그인 1회로 등록을 검증한다.<br><strong>DASH-03 재수행</strong> [확인] 시점에 기존 세션을 전체 로그아웃하고 이전 복구 코드를 폐기하며 비밀번호도 새로 설정한다.</span></div>
       </div>
     </div>
   </div>
@@ -185,13 +179,7 @@
 <section class="footer-note">
   <div class="note-card">
     <div class="note-title">비고</div>
-    <div class="note-body">
-      · 계정 활성화 <strong>3/3 — 복구 코드 저장·활성화 완료</strong>. ONB-02 검증 성공 → 이 화면(코드 1회 노출 · 복사·다운로드) → [확인] → 로그인(AUTH-01).<br>
-      · <strong>[Figma 반영 2026-09-02]</strong> 시안 'Save Code' 적용(단일 복구 코드 · [복사하기][다운로드][확인] · 문의하기 · 이전으로). [확인] 확인 다이얼로그는 시안 없음 — <strong>디자인 요청</strong>. 원본 <span class="mono">reference/figma/_crops/F4_row1_c4.png</span>.<br>
-      · 설명 형식(핀 = 조작 요소 단위) — 표시 1 · 버튼 3 · 링크 2.<br>
-      · <span style="color:#991b1b;">[확인필요]</span> 복사 토스트·다운로드 파일 구성 · ADM-03 상태 라벨 · AUTH-01 완료 안내 · '이전으로' 복귀 후 재진행 수단.<br>
-      · 이전: 2FA 앱 연결(ONB-02) · 다음 화면: 로그인(AUTH-01)
-    </div>
+    <div class="note-body">· 계정 활성화 <strong>3/3 — 복구 코드 저장·활성화 완료</strong> · ONB-02 검증 성공 → 이 화면(코드 1회 노출 · 복사·다운로드) → [확인] → AUTH-01.<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 'Save Code' 적용 · [확인] 확인 다이얼로그는 시안 없음 → <strong>디자인 요청</strong> · 원본 <span class="mono">reference/figma/_crops/F4_row1_c4.png</span>.<br>· <strong>확정(구현 단순 우선)</strong> — 복사 토스트 2초 · 다운로드 파일명 dsrv-desk-recovery-code.txt · 파일 내용 5줄 고정 · 문의는 주소 텍스트(mailto 없음).<br>· 남은 <span style="color:#991b1b;">[확인필요]</span> — ADM-03 계정 상태 라벨 · '이전으로' 링크 처리(삭제 권장 · 유지 시 ONB-02에 [다음] 필요).<br>· 이전 = ONB-02 / 다음 = AUTH-01</div>
   </div>
 </section>
 
