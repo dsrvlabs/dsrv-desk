@@ -198,6 +198,22 @@
       <td>정본 3종 — 인증 셸 <b>AUTH-01</b>(ONB-01·02·03 · DASH-02·03) · 고객 콘솔 셸 <b>DASH-01</b>(EXC-01~04 · BRK-01~07) · 어드민 셸 <b>ADM-02</b>(ADM-03) · ONB-00은 메일 프레임 단독 (2026-09-02 추가)</td>
     </tr>
     <tr>
+      <td class="grp-cell" rowspan="3">항목설명 기재</td>
+      <td class="item">입력창</td>
+      <td>라벨 6개 순서 고정 — <b class="key">입력 가능 → 허용 문자 → 검증(시점·주체) → 실패 처리 → 연동 → 저장(선택)</b> · 1(입력 가능)·5(연동)는 해당 없어도 "항상 가능하다" / "없음"으로 명시, 2~4는 해당 없을 때 줄 생략 · desc = 규칙, nav-row = 이벤트→결과(중복 금지) · 규칙 번호 ①②③과 nav-row 실패 행 1:1</td>
+      <td>정본·예시 <span class="ex">_TEMPLATE_component.md</span> §1 (EXC-01 수량 입력) · 적용 완료 ONB-01·02 · DASH-02 (2026-09-02)</td>
+    </tr>
+    <tr>
+      <td class="item">버튼</td>
+      <td>라벨 4개 순서 고정 — <b class="key">노출 → 클릭 가능 → 확인 사항 → 액션</b> · 1(노출)은 해당 없어도 "항상 보인다", 3(확인 사항)은 "없다. 확인 다이얼로그를 띄우지 않는다"로 명시 · 생략 가능한 줄은 2(= 항상 활성)만 · 노출과 클릭 가능을 반드시 구분(조건부 노출을 비활성으로 잘못 구현하는 것 방지) · <b>드롭다운(▾)도 버튼 템플릿</b> — 옵션은 '옵션' 줄, 입력창의 '허용 문자'로 쓰지 않음 · nav-row는 기존 3행(활성 조건 / 클릭(활성) / 실패) 유지</td>
+      <td>정본·예시 <span class="ex">_TEMPLATE_component.md</span> §2 (EXC-01 [거래 요청]) · 적용 완료 ONB-00·01·03 · DASH-02·03 · ADM-02·03 (2026-09-02)</td>
+    </tr>
+    <tr>
+      <td class="item">정책값 표기</td>
+      <td>ADM-03 파라미터로 바뀔 수 있는 값은 <b class="key">매번 현재값을 병기</b> — <span class="ex">{정책값 1,500,000원 상당}</span> · <span class="ex">{정책값 5회}</span> · <span class="ex">{정책값 72시간}</span> · 중괄호 안 '정책값' 토큰 유지(검색용) · 값 없는 <span class="ex">{정책값}</span> 단독 표기는 폐기 (2026-09-02 사용자 결정)</td>
+      <td>값이 바뀌면 화면 전부 일괄 치환 — 검색 키 "정책값"</td>
+    </tr>
+    <tr>
       <td class="grp-cell" rowspan="4">버튼·확인</td>
       <td class="item">비활성(disabled)</td>
       <td>회색 배경·회색 글자·<b class="key">cursor not-allowed</b>, 클릭 무반응 · 비활성 <b>사유는 툴팁이 아니라 인라인 경고</b>로 버튼 위에 표시(EXC-01 패턴) · 툴팁·hover 설명 사용 안 함</td>
