@@ -411,7 +411,7 @@
       <div class="f"><span class="m fk">FK</span><span class="name">보내는 자산</span><span class="col">from_asset_id</span><span class="desc">→ 취급자산(ASSET)</span></div>
       <div class="f"><span class="m fk">FK</span><span class="name">받는 자산</span><span class="col">to_asset_id</span><span class="desc">→ 취급자산(ASSET)</span></div>
       <div class="f"><span class="m n">·</span><span class="name">보내는 수량</span><span class="col">from_qty</span><span class="desc">상한 = min(건별 한도 1,500,000원 상당, 가용 풀 잔량). 한도는 LIMIT_RULESET 참조</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">상태 (고객 표출)</span><span class="col">status</span><span class="desc"><span class="ev">요청됨 / 비율 제시 / 진행 중 / 완료 / 거절 / 만료</span><br>내부 단계(승인 대기·에스컬레이션·보류·집행 대기)는 고객에게 '진행 중' 하나로만 보이고, 실제 단계는 처리함 <span class="ref">T1</span>에 있다. 고객 표출에 '보류'는 없다(2026-09-02 결정 — 진행 중 → 완료/거절만) · 거절 = 고객 거절(EXC-02)·관리자 거절 공통 라벨, 만료 = 수락 기한 경과·재검증 실패(풀 부족·비율 이탈) · 라벨은 케이스분기 문서(states.html) A표 기준</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">상태 (고객 표출)</span><span class="col">status</span><span class="desc"><span class="ev">요청됨 / 비율 제시 / 진행 중 / 완료 / 거절 / 만료</span><br>내부 단계(승인 대기·에스컬레이션·보류·집행 대기)는 고객에게 '진행 중' 하나로만 보이고, 실제 단계는 처리함 <span class="ref">T1</span>에 있다. 고객 표출에 '보류'는 없다(2026-09-02 결정 — 진행 중 → 완료/거절만) · 거절 = 고객 거절(EXC-02)·관리자 거절 — EXC-04 배너 제목은 「거절 (DSRV 심사)」/「거절 (고객 요청)」으로 주체 구분, 코드는 REJECTED 단일 · 거절·만료 확정 시 고객 이메일 통지(공통 이메일 ⑤ 거래 거절 · ⑥ 거래 만료, 2026-09-02(10)). 발송 시각은 별도 컬럼 없이 감사로그로 남김 <span class="tg">[확인필요]</span> 공통 라벨, 만료 = 수락 기한 경과·재검증 실패(풀 부족·비율 이탈) · 라벨은 케이스분기 문서(states.html) A표 기준</span></div>
       <div class="f"><span class="m n">·</span><span class="name">요청 일시</span><span class="col">requested_at</span><span class="desc"></span></div>
     </div>
 
@@ -490,7 +490,7 @@
       <div class="f"><span class="m n">·</span><span class="name">신청 시점</span><span class="col">applied_at</span><span class="desc">게시 시점과 함께 표시(그 사이 시세 변동 판단은 당사자 몫)</span></div>
       <div class="f"><span class="m n">·</span><span class="name">신청 유효기한</span><span class="col">expires_at</span><span class="desc">신청 + 영업일 2일. 게시자 무응답 시 자동 만료</span></div>
       <div class="f"><span class="m n">·</span><span class="name">상태</span><span class="col">status</span><span class="desc"><span class="ev">신청 / 수락(확정) / 거절 / 만료 / 종결(게시 만료)</span><br>거절 사유 입력 없음. 한 게시에 신청이 여럿일 때 처리 <span class="tg">[결정필요 ⑤: 선착순 vs 게시자 선택]</span></span></div>
-      <div class="f"><span class="m n">·</span><span class="name">이메일 통지</span><span class="col">notified_at</span><span class="desc">3종: 신청 접수(→게시자) / 수락·확정(→양측) / 완료(→양측). 발신전용, 링크 미포함</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">이메일 통지</span><span class="col">notified_at</span><span class="desc">공통 이메일 ①접수(→게시자) / ②확정(→양측) / ③완료(→양측) / ④회수(게시자 회수 시 →신청자). 발신전용, 링크 미포함. 마목 신청 거절·만료 메일(⑤·⑥ 적용 여부) <span class="tg">[확인필요]</span></span></div>
     </div>
 
     <div class="tbl">
@@ -724,6 +724,7 @@
   · 상태값은 상태 전이 문서(states.html)와, 정책값은 관리자 설정 화면(ADM-03)과 같은 값을 쓴다. 예시값은 부록 D에 [확인필요]로 표기.<br>
   · v0.7(2026-09-02)은 v0.6의 테이블·컬럼 구성을 유지하면서 ① §0 참조 안내(용어·처리함 유형·화면 코드·기호) 추가 ② 카드마다 테이블 역할 한 줄 추가 ③ 본문 설명의 약어를 풀어 쓰고 ④ knowledge/09 §0 2026-09-02 확정치(건별 한도 1,500,000원 상당 · 중개 수수료 1% 고정 · 견적 자동 산정 · BRK-06/07 화면)를 반영한 개정본. 컬럼 추가·삭제는 없음.<br>
   · 2026-09-02 보류 폐지 반영: EXCHANGE_REQUEST.status 고객 표출값을 요청됨·비율 제시·진행 중·완료·거절·만료 6종으로 정리('심사 후 보류' 삭제, '미진행'을 거절·만료로 분리) · 고객 표출 사유를 거절·만료로 재분류. 어드민 내부 보류(EXCHANGE_APPROVAL.decision·INBOX_ITEM HOLD)는 유지.<br>
+  · 2026-09-02(10) 통지 정합: 공통 이메일 4종→6종(⑤ 거래 거절 · ⑥ 거래 만료, 나목 교환 대상)에 맞춰 EXCHANGE_REQUEST.status 설명에 거절 주체 표기·통지 ⑤⑥ 추가, RFQ_APPLICATION.notified_at을 공통 번호(①~④)로 정리 · 마목 신청 거절·만료 메일은 [확인필요] 유지. 컬럼 추가 없음.<br>
   · 별도 ERD(db-schema-erd.svg)는 구버전 — 테이블 구성은 이 문서가 기준이며 ERD는 개정 예정.<br>
   · <span class="warn">[결정필요]</span> ① T2 이전 중지 건의 계약상 귀결(약관·법무) ② T4 소명 시한·초과 시 귀결 ③ T7 자동 종결 허용 여부 ④ High 등급 경고 방치 시 상위 에스컬레이션 룰 ⑤ 복수 신청 처리(선착순 vs 게시자 선택 — BRK-04).<br>
   · <span class="warn">[확인필요]</span> 트래블룰 대상에 출금·이전 포함 여부(커스터디 기존 체계와 분담) · 이메일 알림 수신 범위(담당자 단일/복수) · 시세 소스 조합 방식 · 중개 수수료 차감 방식 · 부록 D의 예시값 전반.<br>
