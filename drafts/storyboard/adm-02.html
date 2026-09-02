@@ -332,11 +332,10 @@
       <div class="num">1</div>
       <div>
         <div class="itm-title">처리함 목록 · 행 클릭(확장)<span class="req">필수</span></div>
-        <div class="itm-desc">· 열: 유형 · 대상·내용 · 자동검증·등급 · 상태 · 처리 — 유형 9종(T1 나목 교환 승인 · T2 마목 확정 확인 · T3 출금·이전 · T4 입금 격리 · T5 이상거래 워닝 · T6 월렛·키 알람 · T7 KYC 재이행 · T8 계정 잠금 · X3 3면 대사 불일치) · '상태' 열 값 = states 도메인 상태(상세 1 표) · 자동검증·등급 = 1차 필터 표시(정상 / KYT 주의 / High / Mid / 지연발효 중) — 판단은 사람(자동 승인·거절 없음)<br>· <strong>목록 규격</strong>: 미종결 건만 표시(종결 즉시 행 제거) · 최신 생성순 단일 리스트 · 필터·검색 없음(공통 UI 규격) — 에스컬레이션·High 상단 고정 여부 <span class="chk">[확인필요]</span> · 100행 초과 시 [더 보기] · 빈 상태 점선 박스 "처리할 건이 없습니다" · 로딩 "불러오는 중…"(3초 초과 → 오류 배너)<br>· <strong>갱신</strong>: 화면 진입 시와 브라우저 새로고침 시에만 조회한다. 처리 버튼을 누른 결과는 즉시 반영한다. 자동 주기 갱신·푸시 알림·토스트는 없다.<br>· 다른 관리자가 처리 중인 행은 상태 옆 "처리 중 · DSRV-OPS-02" 표시 + 처리 버튼 전부 비활성(행 잠금 · 경쟁 방지)<br>· 처리 이력(처리자·사유·시각)은 확장 패널 하단에 누적 표시 · 고객 화면으로 이동하는 링크 없음<br><span class="basis">근거 states 처리함 정의 v0.2 · notation 어드민 처리 버튼(별도 상세 화면 없음) · 목록 규격</span></div>
+        <div class="itm-desc">· 열: 유형 · 대상·내용 · 자동검증·등급 · 상태 · 처리 — 유형 9종(T1 나목 교환 승인 · T2 마목 확정 확인 · T3 출금·이전 · T4 입금 격리 · T5 이상거래 워닝 · T6 월렛·키 알람 · T7 KYC 재이행 · T8 계정 잠금 · X3 3면 대사 불일치) · '상태' 열 값 = states 도메인 상태(상세 1 표) · 자동검증·등급 = 1차 필터 표시(정상 / KYT 주의 / High / Mid / 지연발효 중) — 판단은 사람(자동 승인·거절 없음)<br>· <strong>목록 규격</strong>: 미종결 건만 표시(종결 즉시 행 제거) · 최신 생성순 단일 리스트 · 필터·검색 없음(공통 UI 규격) — 에스컬레이션·High 상단 고정 여부 <span class="chk">[확인필요]</span> · 전량 표시 · 페이지 스크롤([더 보기]·페이지네이션·무한 스크롤 없음) · 빈 상태 점선 박스 "처리할 건이 없습니다" · 로딩 "불러오는 중…"(3초 초과 → 오류 배너)<br>· <strong>갱신</strong>: 화면 진입 시와 브라우저 새로고침 시에만 조회한다. 처리 버튼을 누른 결과는 즉시 반영한다. 자동 주기 갱신·푸시 알림·토스트는 없다.<br>· 다른 관리자가 처리 중인 행은 상태 옆 "처리 중 · DSRV-OPS-02" 표시 + 처리 버튼 전부 비활성(행 잠금 · 경쟁 방지)<br>· 처리 이력(처리자·사유·시각)은 확장 패널 하단에 누적 표시 · 고객 화면으로 이동하는 링크 없음<br><span class="basis">근거 states 처리함 정의 v0.2 · notation 어드민 처리 버튼(별도 상세 화면 없음) · 목록 규격</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">처리함 행(처리 버튼 제외 셀 전체)</span><span class="nav-act">클릭 → 행 아래 확장 패널 열림(동시 1개 · 다른 행 클릭 시 교체 · 같은 행 재클릭 = 접기)</span><span class="nav-to stay">유형별 확장 내용(상세 1) · 확장 중에도 처리 버튼은 행 내 위치 그대로 · 이동 없음(별도 상세 화면 없음)</span></div>
           <div class="nav-row"><span class="nav-el">대상·내용의 요청번호(EXC-/BRK-)</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(링크 아님 — 행 클릭과 동일하게 확장)</span></div>
-          <div class="nav-row"><span class="nav-el">[더 보기] (100행 초과 시 하단)</span><span class="nav-act">클릭</span><span class="nav-to stay">다음 100행 이어 붙임 · 로딩 "불러오는 중…"</span></div>
         </div>
       </div>
     </div>
@@ -566,7 +565,7 @@
       <div class="num">19</div>
       <div>
         <div class="itm-title">집행 대기 목록 (표시 전용)</div>
-        <div class="itm-desc">· 행 클릭 없음(확장 없음 — 상세는 집행 명세 Excel) · 열: 건 · 상태 · 집행 명세 · 콜드 집행 결과(txhash) · 처리<br>· <strong>유입</strong>: T1 나목 승인(1건 1행 — 고객→DSRV 900 USDC·DSRV→고객 899.73 USDT 양방향을 한 행으로, 2행 분리 여부 <span class="chk">[확인필요]</span>) · T2 마목 이전 진행(양측 각 1행 = 2행) · T3 출금 승인 · 콜드→핫 보충·스윕(운영 지갑 이동 — 온라인 집행 버튼 없음)<br>· 상태 값: 집행 대기 / 이전 진행 / 조회 중 / 대사 불일치(회송) — 완료 시 행 제거(이후 조회는 CSV ③ 통합 거래)<br>· <strong>목록 규격</strong>: 승인 시각 오름차순(오래된 건 위) · 빈 상태 "집행 대기 건이 없습니다" + "처리함에서 승인한 건이 여기에 표시됩니다" · 로딩 "불러오는 중…" · 100행 초과 [더 보기] · 갱신: 처리함 승인 즉시·완료 처리 즉시<br>· 마목 '이전 진행' 건을 states T2 '정산 배치(1영업일 3회)'가 아니라 이 표의 건별 수동 집행으로 처리하는 정합 <span class="chk">[확인필요: BRK-05 정산 배치 서술과 통일]</span><br><span class="basis">근거 states T1·T2·T3 집행 대기 · 09 §0 정산(콜드 수동) · L4 §26 · ISMS 2.7.2</span></div>
+        <div class="itm-desc">· 행 클릭 없음(확장 없음 — 상세는 집행 명세 Excel) · 열: 건 · 상태 · 집행 명세 · 콜드 집행 결과(txhash) · 처리<br>· <strong>유입</strong>: T1 나목 승인(1건 1행 — 고객→DSRV 900 USDC·DSRV→고객 899.73 USDT 양방향을 한 행으로, 2행 분리 여부 <span class="chk">[확인필요]</span>) · T2 마목 이전 진행(양측 각 1행 = 2행) · T3 출금 승인 · 콜드→핫 보충·스윕(운영 지갑 이동 — 온라인 집행 버튼 없음)<br>· 상태 값: 집행 대기 / 이전 진행 / 조회 중 / 대사 불일치(회송) — 완료 시 행 제거(이후 조회는 CSV ③ 통합 거래)<br>· <strong>목록 규격</strong>: 승인 시각 오름차순(오래된 건 위) · 빈 상태 "집행 대기 건이 없습니다" + "처리함에서 승인한 건이 여기에 표시됩니다" · 로딩 "불러오는 중…" · 전량 표시 · 페이지 스크롤([더 보기]·페이지네이션·무한 스크롤 없음) · 갱신: 처리함 승인 즉시·완료 처리 즉시<br>· 마목 '이전 진행' 건을 states T2 '정산 배치(1영업일 3회)'가 아니라 이 표의 건별 수동 집행으로 처리하는 정합 <span class="chk">[확인필요: BRK-05 정산 배치 서술과 통일]</span><br><span class="basis">근거 states T1·T2·T3 집행 대기 · 09 §0 정산(콜드 수동) · L4 §26 · ISMS 2.7.2</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">집행 대기 행(버튼·입력 제외 셀)</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용)</span></div>
         </div>
@@ -597,7 +596,7 @@
           <div class="nav-row"><span class="nav-el">txhash 필드 — 규칙 ② 위반(중복)</span><span class="nav-act">[완료 처리] 클릭 시 서버 검증</span><span class="nav-to stay">⚠ "이미 다른 건에 등록된 txhash입니다" · 입력값 유지</span></div>
           <div class="nav-row"><span class="nav-el">txhash 필드 — 규칙 ③ 위반(대사 불일치)</span><span class="nav-act">[완료 처리] 클릭 시 온체인 조회</span><span class="nav-to stay">⚠ "온체인 내역이 집행 명세와 일치하지 않습니다 — 주소·자산·수량을 확인해 주세요" · 입력값 유지</span></div>
           <div class="nav-row"><span class="nav-el">txhash 필드 — 규칙 ④ 위반(트랜잭션 미확인)</span><span class="nav-act">[완료 처리] 클릭 시 온체인 조회</span><span class="nav-to stay">⚠ "트랜잭션을 찾을 수 없습니다 — 컨펌 후 다시 시도해 주세요" · 입력값 유지</span></div>
-          <div class="nav-row"><span class="nav-el">txhash 필드 (비활성)</span><span class="nav-act">온체인 조회 중</span><span class="nav-to stay">무반응 · 필드 비활성 · 라벨 "조회 중…"이 사유</span></div></div>
+          <div class="nav-row"><span class="nav-el">txhash 필드 (비활성)</span><span class="nav-act">온체인 조회 중</span><span class="nav-to stay">무반응 · 필드 비활성 · 라벨 "조회 중…"이 사유</span></div>
         </div>
       </div>
     </div>
