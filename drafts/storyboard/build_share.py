@@ -88,7 +88,7 @@ body{font-family:'Noto Sans KR',system-ui,sans-serif;background:var(--bg);color:
 <div class="sidebar">
   <div class="sb-head">
     <h1>교환·중개 화면기획<br>스토리보드</h1>
-    <div class="sub">화면 19개 + IA·표기 규칙(공통 UI 규격)·프로세스맵·케이스분기 · 2026-09-02 기준</div>
+    <div class="sub">화면 21개 + IA·표기 규칙(공통 UI 규격)·프로세스맵·케이스분기 · 2026-09-02 기준</div>
     <span class="tag">내부 검토용 초안 — 제출용 아님</span>
   </div>
   <div class="sb-list" id="sbList">
