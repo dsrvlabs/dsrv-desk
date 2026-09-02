@@ -12,6 +12,7 @@ SCREENS = [
     (None, 'ONB-03', '활성화 · 복구 코드 저장', 'onb-03.html'),
     (None, 'ONB-04', '초대 링크 오류', 'onb-04.html'),
     (None, 'AUTH-01', '로그인', 'auth-01.html'),
+    (None, 'AUTH-02', '2차 인증', 'auth-02.html'),
     ('대시보드', 'DASH-01', '대시보드', 'dash-01.html'),
     (None, 'DASH-02', '비밀번호 수정', 'dash-02.html'),
     (None, 'DASH-03', '2차 인증 재설정', 'dash-03.html'),

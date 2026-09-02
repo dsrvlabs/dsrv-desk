@@ -11,7 +11,7 @@
   <div class="crumb"><span>인증</span><span class="s">›</span><span>로그인</span></div>
   <h1 class="title">로그인</h1>
   <span class="sid">AUTH-01</span>
-  <span class="defense">MFA 의무 · 비정상 로그인 통제</span>
+  <span class="defense">MFA 의무 · 비정상 로그인 통제 · 로그인 1/2</span>
 </header>
 
 <div class="main">
@@ -21,7 +21,6 @@
         <div class="lbl"><span class="lbl-text">전역<br>브랜드 패널</span></div>
         <div class="lbl"><span class="lbl-text">1단계<br>계정 입력</span></div>
         <div class="lbl"><span class="lbl-text">1단계<br>로그인</span></div>
-        <div class="lbl"><span class="lbl-text">2단계<br>코드 입력</span></div>
         <div class="lbl"><span class="lbl-text">계정 잠금<br>안내</span></div>
         <div class="lbl"><span class="lbl-text">푸터</span></div>
       </div>
@@ -43,7 +42,7 @@
       <!-- 1단계 카드: 계정 입력 — 이메일 / 비밀번호 -->
       <div class="zone card" data-idx="0,1">
         <div class="zone-highlight"></div>
-        <div class="step-tag">1단계 · Figma 'Login'</div>
+        <div class="step-tag">Figma 'Login'</div>
         <div class="zone-title" style="margin-bottom:10px;">로그인</div>
         <div class="item-area" data-highlight="0" style="position:relative;padding:4px;border-radius:8px;margin-bottom:4px;">
           <div class="pin" data-idx="0" style="top:-6px;right:-6px;">1</div>
@@ -68,40 +67,18 @@
         </div>
       </div>
 
-      <!-- 2단계 카드: 2차 인증 코드 입력 (Figma 로그인용 2단계 프레임 없음 — 'Set 2FA Code' 컴포넌트 차용) -->
-      <div class="zone card" data-idx="3,4">
-        <div class="zone-highlight"></div>
-        <div class="step-tag">2단계 · [로그인] 성공 후 카드 전환</div>
-        <div style="font-size:9px;color:#888;padding:0 0 6px;">▼ Figma에 로그인용 2단계 프레임 없음 — 'Set 2FA Code'의 6칸 코드·오류 칩·보조 링크 컴포넌트를 차용해 표현 <strong>[디자인 요청]</strong></div>
-        <div class="zone-title" style="margin-bottom:2px;">2차 인증</div>
-        <div style="font-size:10px;color:#788297;margin-bottom:10px;">인증 앱(Google Authenticator 등)에 표시된 6자리 코드를 입력하세요.</div>
-        <div class="item-area" data-highlight="3" style="position:relative;padding:4px;border-radius:8px;">
-          <div class="pin" data-idx="3" style="top:-6px;right:-6px;">4</div>
-          <div class="otp"><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span></div>
-          <div style="font-size:9px;color:#94a3b8;padding:6px 4px 3px;">▼ 검증 실패 직후에만 노출</div>
-          <div class="err-chip" style="display:block;width:fit-content;margin:0 auto;">인증 코드가 올바르지 않습니다 <strong>2회 남음</strong></div>
-        </div>
-        <div class="item-area" data-highlight="4" style="position:relative;padding:4px;border-radius:8px;margin-top:6px;">
-          <div class="pin" data-idx="4" style="top:-6px;right:-6px;">5</div>
-          <div style="font-size:10.5px;color:#2f3747;font-weight:700;text-align:center;">복구 코드로 인증</div>
-          <div style="font-size:9px;color:#888;padding:6px 4px 3px;">▼ 링크 클릭 시 6칸 대신 노출<strong>[디자인 요청]</strong></div>
-          <div class="field fg" style="border-style:dashed;"><span class="ph">복구 코드 입력 (예: 3G56 - SYN5 - YVT9 - DT68 - 5DDR - 14QD)</span></div>
-        </div>
-      </div>
-
-      <!-- 2단계 카드: 보조 링크 — 문의하기 · 로그인으로 돌아가기 -->
 
       <!-- 계정 잠금 안내 (조건부) + 문의 이메일 링크 — Figma 시안 없음(스토리보드 유지 · 2026-09-02 결정) -->
-      <div class="zone card" data-idx="5,6">
+      <div class="zone card" data-idx="3,4">
         <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="5" style="position:relative;padding:4px;border-radius:8px;">
-          <div class="pin" data-idx="5" style="top:-6px;right:-6px;">6</div>
+        <div class="item-area" data-highlight="3" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="3" style="top:-6px;right:-6px;">4</div>
           <div style="font-size:9px;color:#94a3b8;padding:0 4px 3px;">▼ 잠금 상태 계정으로 시도한 직후에만 노출 (정상 시 없음)</div>
           <div style="background:#ffeaee;border:1px solid #ffd0d9;border-radius:8px;padding:10px 12px;font-size:11.5px;color:#c2415a;line-height:1.55;">
             로그인을 5회 이상 실패해 계정이 잠겼습니다.<br>
             잠금 해제는 담당자에게 문의해 주세요 —
-            <div class="item-area" data-highlight="6" style="position:relative;display:inline-block;padding:2px 6px;border-radius:6px;">
-              <div class="pin" data-idx="6" style="top:-8px;right:-8px;">7</div>
+            <div class="item-area" data-highlight="4" style="position:relative;display:inline-block;padding:2px 6px;border-radius:6px;">
+              <div class="pin" data-idx="4" style="top:-8px;right:-8px;">5</div>
               <strong>portal.kyc@dsrvlabs.com</strong>
             </div>
           </div>
@@ -125,10 +102,10 @@
       <div class="nav-row"><span class="nav-el">브랜드 패널 'DSRV 서비스 소개 보기 →'</span><span class="nav-act">클릭</span><span class="nav-to">외부 DSRV 소개 페이지(새 탭) — 대상 URL <span class="chk">[확인필요]</span> · 계정 활성화 3화면(ONB-01·02·03)의 브랜드 패널에는 이 링크가 없다</span></div>
       <div class="nav-row"><span class="nav-el">푸터 '공지사항' / '개인정보처리방침' / '이용약관'</span><span class="nav-act">클릭</span><span class="nav-to">각 문서 페이지(새 탭) — 대상 URL · 이용약관·개인정보처리방침이 ONB 동의 문서와 동일본인지 <span class="chk">[확인필요]</span></span></div>
       <div class="nav-note">· <strong>전역 이동 정본(인증 셸 — 브랜드 패널 2단 프레임)</strong> = ONB-01·02·03 · DASH-02·03 공통. 해당 화면에는 다시 쓰지 않고 차이만 표기한다.<br>
-      · <strong>진입</strong>: 복구 코드 저장(ONB-03) [확인] 직후 / 기관 배지 메뉴 '로그아웃'(전 화면) / 세션 만료(유휴 {정책값 15분}·최대 {정책값 8시간}) 후 재접속 / 브라우저 뒤로가기 안내 후 미인증 상태 · 진입 시 항상 <strong>1단계</strong>부터<br>
-      · <strong>2단계 인증(2026-09-02 확정 · Figma 반영)</strong>: 1단계 = 이메일·비밀번호 → [로그인] / 2단계 = 같은 카드가 2차 인증 코드 입력으로 전환(6자리 자동 검증 · 확인 버튼 없음) · 1단계 성공 상태(사전 인증)는 <strong>{정책값 120초}</strong> 유효, 초과 시 1단계로 복귀 <span class="chk">[확인필요: 사전 인증 유효시간]</span><br>
-      · <strong>실패 카운트·남은 횟수(2026-09-02 확정)</strong>: 계정 단위 <strong>통합 카운터</strong> — 비밀번호 실패·인증 코드 실패·복구 코드 실패를 합산, 로그인 성공 시 0으로 초기화 · 연속 <strong>{정책값 5회}</strong> 도달 시 계정 잠금(항목 6) · 실패 칩에 <strong>"{남은 횟수}회 남음"</strong> 노출(1·2단계 공통) <span class="chk">[확인필요: 합산 카운터 vs 단계별 개별 카운터 — 시안이 두 곳에 같은 '2회 남음'을 보여 합산으로 채택]</span><br>
-      · Enter 키 = 1단계 [로그인] 제출(활성 시) · 2단계는 6번째 자리 입력 즉시 자동 검증(Enter 없음)<br>
+      · <strong>진입</strong>: 복구 코드 저장(ONB-03) [확인] 직후 / 기관 배지 메뉴 '로그아웃'(전 화면) / 세션 만료(유휴 {정책값 15분}·최대 {정책값 8시간}) 후 재접속 / 브라우저 뒤로가기 안내 후 미인증 상태 · 진입 시 항상 이메일·비밀번호부터<br>
+      · <strong>2단계 인증(2026-09-02 확정)</strong>: 이 화면은 1단계(이메일·비밀번호)만 담당하고 2단계는 <strong>2차 인증(AUTH-02)</strong> 별도 화면이다. 1단계 성공 상태(사전 인증)는 <strong>{정책값 120초}</strong> 유효하고 초과하면 이 화면으로 되돌린다 <span class="chk">[확인필요: 사전 인증 유효시간]</span><br>
+      · <strong>실패 카운트·남은 횟수(2026-09-02 확정)</strong>: 계정 단위 <strong>통합 카운터</strong> — 비밀번호 실패·인증 코드 실패·복구 코드 실패를 합산, 로그인 성공 시 0으로 초기화 · 연속 <strong>{정책값 5회}</strong> 도달 시 계정 잠금(항목 4) · 실패 칩에 <strong>"{남은 횟수}회 남음"</strong> 노출(AUTH-02와 공통) <span class="chk">[확인필요: 합산 카운터 vs 단계별 개별 카운터 — 시안이 두 곳에 같은 '2회 남음'을 보여 합산으로 채택]</span><br>
+      · Enter 키 = [로그인] 제출(활성 시)<br>
       · 비밀번호 찾기·아이디 찾기 링크 없음 — 분실 시 비밀번호 및 2차 인증 재설정(DASH-03)·초대 재발송(ADM-03) 운영 절차로 처리<br>
       · 세션 만료 후 재접속 시 안내 문구("세션이 만료되었습니다. 다시 로그인해 주세요") 노출 여부 <span class="chk">[확인필요 — 시안에 없음]</span><br>
       · 목업 예시: "2회 남음"은 {정책값 5회} 중 3회 실패 후 · 유휴 15분·최대 8시간은 현재 정책값 예시</div>
@@ -149,7 +126,7 @@
       <div class="num">2</div>
       <div>
         <div class="itm-title">비밀번호 입력<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다.<br><strong>허용 문자</strong> 제한을 두지 않는다. 로그인은 일치 여부만 보므로 규칙 검증은 ONB-01·DASH-02에서만 한다.<br><strong>검증</strong> 제출 시 서버가 판정하고 클라이언트는 빈칸 여부만 본다. Enter 키를 [로그인] 제출로 처리한다.<br><strong>실패 처리</strong> 필드를 초기화하고 오류는 버튼 위 통합 칩(항목 3)으로만 보여준다. 원인을 구분하지 않으므로 필드별 빨간 테두리는 쓰지 않는다.<br><strong>연동</strong> 실패하면 통합 카운터가 1 오르고 {정책값 5회} 도달 시 계정 잠금(항목 6)으로 넘어간다. 비어 있으면 [로그인]을 비활성으로 둔다.<br><span class="basis">근거 ISMS 2.5.3 · 2.5.4 · 비정상 로그인 통제</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다.<br><strong>허용 문자</strong> 제한을 두지 않는다. 로그인은 일치 여부만 보므로 규칙 검증은 ONB-01·DASH-02에서만 한다.<br><strong>검증</strong> 제출 시 서버가 판정하고 클라이언트는 빈칸 여부만 본다. Enter 키를 [로그인] 제출로 처리한다.<br><strong>실패 처리</strong> 필드를 초기화하고 오류는 버튼 위 통합 칩(항목 3)으로만 보여준다. 원인을 구분하지 않으므로 필드별 빨간 테두리는 쓰지 않는다.<br><strong>연동</strong> 실패하면 통합 카운터가 1 오르고 {정책값 5회} 도달 시 계정 잠금(항목 4)으로 넘어간다. 비어 있으면 [로그인]을 비활성으로 둔다.<br><span class="basis">근거 ISMS 2.5.3 · 2.5.4 · 비정상 로그인 통제</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">비밀번호 필드</span><span class="nav-act">입력 · Enter</span><span class="nav-to stay">빈칸 아님 → [로그인] 활성 조건 ② 해소 · Enter = [로그인] 클릭과 동일(항목 3)</span></div>
         </div>
@@ -160,10 +137,10 @@
       <div class="num">3</div>
       <div>
         <div class="itm-title">[로그인] 버튼 · 실패 칩<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>노출</strong> 1단계 카드에 항상 보인다.<br><strong>클릭 가능</strong> 이메일 형식이 맞고 비밀번호가 채워졌을 때만 활성이다. 클릭 후 응답이 오기 전까지 중복 클릭을 막는다.<br><strong>확인 사항</strong> 서버가 이메일과 비밀번호 일치를 판정한다. 확인 다이얼로그는 없다.<br><strong>액션</strong> 성공하면 세션을 만들지 않고 사전 인증 상태로 두고 2단계 카드로 전환한다. 실패하면 버튼 위 칩에 {남은 횟수}를 표기하고(원인 미구분) 재입력을 시작하면 칩을 지운다. 잠금 계정은 칩 대신 항목 6 배너를 띄운다.<br><span class="basis">근거 ISMS 2.5(인증) · 2.6(접근통제)</span></div>
+        <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 이메일 형식이 맞고 비밀번호가 채워졌을 때만 활성이다. 클릭 후 응답이 오기 전까지 중복 클릭을 막는다.<br><strong>확인 사항</strong> 서버가 이메일과 비밀번호 일치를 판정한다. 확인 다이얼로그는 없다.<br><strong>액션</strong> 성공하면 세션을 만들지 않고 사전 인증 상태로 두고 <strong>2차 인증(AUTH-02)</strong>으로 이동한다. 실패하면 버튼 위 칩에 {남은 횟수}를 표기하고(원인 미구분) 재입력을 시작하면 칩을 지운다. 잠금 계정은 칩 대신 항목 4 배너를 띄운다.<br><span class="basis">근거 ISMS 2.5(인증) · 2.6(접근통제)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[로그인] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①이메일 빈칸·형식 오류 ②비밀번호 빈칸 ③요청 진행 중</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격) · 잠금 상태는 클라이언트가 모르므로 비활성 조건 아님(제출 후 배너로 통지)</span></div>
-          <div class="nav-row"><span class="nav-el">[로그인] — 클릭(활성) · Enter</span><span class="nav-act">확인 없음 → 라벨 "로그인 중…"·비활성(중복 클릭 차단) → 서버: 이메일·비밀번호 검증 · 감사로그</span><span class="nav-to stay">성공 → 카드가 <strong>2단계(항목 4)</strong>로 전환 · 사전 인증 상태 시작 / 실패(불일치) → 화면 잔류 · 실패 칩 노출 · 비밀번호 초기화(이메일 유지) · 카운터 +1 / {정책값 5회}째 실패 또는 잠금 상태 → 항목 6 배너(칩 대신) / 서버 오류 → 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 라벨 복귀</span></div>
+          <div class="nav-row"><span class="nav-el">[로그인] — 클릭(활성) · Enter</span><span class="nav-act">확인 없음 → 라벨 "로그인 중…"·비활성(중복 클릭 차단) → 서버: 이메일·비밀번호 검증 · 감사로그</span><span class="nav-to stay">성공 → 카드가 <strong>2단계(항목 4)</strong>로 전환 · 사전 인증 상태 시작 / 실패(불일치) → 화면 잔류 · 실패 칩 노출 · 비밀번호 초기화(이메일 유지) · 카운터 +1 / {정책값 5회}째 실패 또는 잠금 상태 → 항목 4 배너(칩 대신) / 서버 오류 → 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 라벨 복귀</span></div>
         </div>
       </div>
     </div>
@@ -171,39 +148,16 @@
     <div class="itm" data-idx="3">
       <div class="num">4</div>
       <div>
-        <div class="itm-title">2차 인증 코드 입력 (6칸 · 자동 검증)<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 2단계 카드에서만 가능하다. 검증 중에는 읽기 전용이다.<br><strong>허용 문자</strong> 숫자만 받고 한 칸에 1자를 넣는다. 입력하면 다음 칸으로 포커스를 옮긴다.<br><strong>검증</strong> 6번째 자리를 채우는 즉시 서버에 검증을 요청한다. 확인 버튼은 두지 않는다.<br><strong>실패 처리</strong> 6칸을 초기화하고 첫 칸에 포커스를 주며 오류 칩에 {남은 횟수}를 표기한다. 통합 카운터가 1 오르고 {정책값 5회} 도달 시 계정을 잠그고 1단계 카드로 되돌린 뒤 항목 6 배너를 띄운다.<br><strong>연동</strong> 성공하면 세션을 만들고, 계정당 1세션 원칙에 따라 다른 기기의 기존 세션을 즉시 종료한다(기존 기기는 다음 요청 때 AUTH-01로 온다). 복구 코드는 이 칸에 넣지 않고 항목 5 링크로 전환해 받는다.<br><span class="chk">[확인필요: 세션 유휴·최대 시간 값 · 기존 세션 종료 안내 문구]</span><br><span class="basis">근거 ISMS 2.5 · F-5 · 전 권한자 MFA 의무</span></div>
-        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">6칸 코드 — 6자리 완성</span><span class="nav-act">자동 검증("확인 중…" · 중복 검증 차단) → 세션 생성(기존 세션 종료) · 카운터 초기화 · 감사로그</span><span class="nav-to">성공 → <strong>대시보드(DASH-01)</strong> / 실패 → 칩 "인증 코드가 올바르지 않습니다 {남은 횟수}회 남음" · 6칸 초기화 / {정책값 5회} 도달 → 1단계 복귀 + 항목 6 배너 / 사전 인증 만료 → 1단계 복귀 + 상단 안내 "시간이 초과되었습니다. 다시 로그인해 주세요" <span class="chk">[확인필요: 문구]</span></span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="itm" data-idx="4">
-      <div class="num">5</div>
-      <div>
-        <div class="itm-title">'복구 코드로 인증' 링크 → 복구 코드 입력</div>
-        <div class="itm-desc"><strong>노출</strong> 2단계 카드에 항상 보인다.<br><strong>클릭 가능</strong> 항상 활성이다.<br><strong>액션</strong> 6칸 대신 복구 코드 텍스트 필드 1개로 바꾸고 링크 문구를 '인증 앱 코드로 인증'으로 토글한다.<br><strong>입력 가능</strong> 링크로 전환한 뒤에만 가능하다. 6칸과 동시에 쓰이지 않는다.<br><strong>허용 문자</strong> 전환된 필드는 영숫자 24자를 받는다. 하이픈과 공백은 받아서 무시하고 소문자는 대문자로 바꾼다.<br><strong>검증</strong> 24자를 채우는 즉시 자동 검증한다.<br><strong>실패 처리</strong> 오류 칩에 {남은 횟수}를 표기하고 통합 카운터를 1 올린다.<br><strong>연동</strong> 성공하면 코드를 즉시 폐기한다. 코드가 1개뿐이라 인증 앱을 복구하지 않으면 로그인 수단이 없으므로 DASH-01 상단에 재설정 권고 배너를 띄운다. 재발급은 DASH-03 재설정 완료 시에만 한다.<br><strong>저장</strong> 비밀번호와 같은 방식으로 해시 저장하고 사용·실패를 감사로그에 남긴다.<br><span class="chk">[디자인 요청]</span> 복구 코드 필드는 시안에 없다(6칸 컴포넌트에 24자를 넣을 수 없어 기획으로 추가).<br><span class="basis">근거 ISMS 2.5 세션·인증 복구 · ONB-03 항목 1</span></div>
-        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">'복구 코드로 인증' 링크</span><span class="nav-act">클릭</span><span class="nav-to stay">6칸 → 복구 코드 필드로 전환(입력값 초기화) · 링크 문구 토글 · 다시 클릭 시 6칸으로 복귀</span></div>
-          <div class="nav-row"><span class="nav-el">복구 코드 필드 — 24자 완성</span><span class="nav-act">자동 검증 → 성공 시 코드 폐기 · 세션 생성 · 감사로그</span><span class="nav-to">성공 → <strong>대시보드(DASH-01)</strong> + 상단 2차 인증 재설정 권고 배너 / 실패(사용된 코드·오타) → 칩 · 필드 초기화 · 카운터 +1 / {정책값 5회} 도달 → 1단계 복귀 + 항목 6 배너</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="itm" data-idx="5">
-      <div class="num">6</div>
-      <div>
         <div class="itm-title">계정 잠금 안내 배너 (조건부 노출 · 시안 없음)</div>
-        <div class="itm-desc"><strong>노출</strong> 잠금 상태 계정으로 1단계를 제출한 직후, 또는 통합 카운터가 {정책값 5회}에 도달한 직후에 보인다(2단계였으면 1단계 카드로 복귀한 뒤). 새로고침하면 사라지지만 잠금 상태는 서버에 남는다.<br><strong>문구</strong> {정책값 5회}와 {문의 이메일}을 넣는다. 비밀번호·인증 코드·복구 코드 실패를 합산하므로 '로그인을 {정책값 5회} 이상 실패' 표현을 쓴다.<br><strong>동작</strong> 잠금 중에도 필드와 버튼을 비활성으로 만들지 않는다(다른 계정 로그인 가능). 다른 계정을 입력하면 배너를 지우고 잠긴 계정으로 다시 시도하면 다시 띄운다.<br><strong>통지</strong> 잠금 발생 즉시 ADM-02 알람함에 알린다. 고객 화면에는 내부 처리 상태를 보여주지 않는다.<br><span class="chk">[디자인 요청]</span> 시안에 없는 요소다.<br><span class="basis">근거 비정상 로그인 통제 · ISMS 2.5 · 2.6 · 공통 UI 규격 오류 문구 ③</span></div>
+        <div class="itm-desc"><strong>노출</strong> 잠금 상태 계정으로 로그인을 제출한 직후, 또는 통합 카운터가 {정책값 5회}에 도달한 직후에 보인다(AUTH-02에서 도달했으면 이 화면으로 되돌린 뒤). 새로고침하면 사라지지만 잠금 상태는 서버에 남는다.<br><strong>문구</strong> {정책값 5회}와 {문의 이메일}을 넣는다. 비밀번호·인증 코드·복구 코드 실패를 합산하므로 '로그인을 {정책값 5회} 이상 실패' 표현을 쓴다.<br><strong>동작</strong> 잠금 중에도 필드와 버튼을 비활성으로 만들지 않는다(다른 계정 로그인 가능). 다른 계정을 입력하면 배너를 지우고 잠긴 계정으로 다시 시도하면 다시 띄운다.<br><strong>통지</strong> 잠금 발생 즉시 ADM-02 알람함에 알린다. 고객 화면에는 내부 처리 상태를 보여주지 않는다.<br><span class="chk">[디자인 요청]</span> 시안에 없는 요소다.<br><span class="basis">근거 비정상 로그인 통제 · ISMS 2.5 · 2.6 · 공통 UI 규격 오류 문구 ③</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">배너 본문</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용) · 해제는 어드민 홈(ADM-02) 처리함 '계정 잠금' 알람 처리 → 해제 후 다음 제출부터 정상 · 해제 시 카운터 0</span></div>
         </div>
       </div>
     </div>
 
-    <div class="itm" data-idx="6">
-      <div class="num">7</div>
+    <div class="itm" data-idx="4">
+      <div class="num">5</div>
       <div>
         <div class="itm-title">문의 이메일 링크 (배너 내)</div>
         <div class="itm-desc"><strong>노출</strong> 잠금 배너와 함께만 보인다.<br><strong>확인 사항</strong> 없다. 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> 문의 이메일 주소를 굵게 표시한다. 주소는 ONB-00 발신 주소와 같은 값을 쓴다(단일 출처).<br><span class="basis">근거 잠금 해제 운영 프로세스(상세 8)</span></div>
@@ -222,18 +176,10 @@
     <div class="detail-grid" id="detailCol">
       <div class="dtl" data-idx="0">
         <div class="detail-label"><span class="dtl-num">1</span>접근 전제</div>
-      <div class="dtl-body"><span class="box"><strong>계정</strong> 초대받은 ORG 담당자만 계정을 가진다.<br><strong>게이팅</strong> KYC·계약 완료 전에는 로그인 후에도 기능을 막는다(G-3 배너 — EXC-01·DASH-01).<br><strong>오류 문구</strong> 1단계는 통합 문구를 쓴다. 이메일 존재 여부와 틀린 필드는 알리지 않고 남은 횟수만 노출한다.</span></div>
+      <div class="dtl-body"><span class="box"><strong>계정</strong> 초대받은 ORG 담당자만 계정을 가진다.<br><strong>게이팅</strong> KYC·계약 완료 전에는 로그인 후에도 기능을 막는다(G-3 배너 — EXC-01·DASH-01).<br><strong>오류 문구</strong> 통합 문구를 쓴다. 이메일 존재 여부와 틀린 필드는 알리지 않고 남은 횟수만 노출한다.</span></div>
       </div>
       <div class="dtl" data-idx="3">
-        <div class="detail-label"><span class="dtl-num">4</span>2단계 인증 · 세션</div>
-      <div class="dtl-body"><span class="box"><strong>흐름</strong> 1단계 성공 → 사전 인증 상태({정책값 120초}) → 2단계 TOTP 또는 복구 코드 → 세션 생성. 2단계를 건너뛰고 세션이 생기는 경로는 없다.<br><strong>MFA 범위</strong> 로그인 시 1회, 그리고 승인·정책변경 같은 민감행위와 계정정보 변경(DASH-02·03)에서 다시 인증한다.<br><strong>동시세션</strong> 1개만 둔다. 새 로그인이 기존 세션을 끊고 기존 기기는 다음 요청에서 AUTH-01로 온다.<br><strong>세션 값</strong> 유휴·최대 시간은 고정 설정이다. <span class="chk">[확인필요: 값 · 기존 세션 종료 안내 문구]</span></span></div>
-      </div>
-      <div class="dtl" data-idx="4">
-        <div class="detail-label"><span class="dtl-num">5</span>복구 코드 규격</div>
-      <div class="dtl-body"><span class="box"><strong>형식</strong> 단일 코드 1개, 영숫자 24자(4자×6그룹, 표시 시 " - " 구분), 1회용, 해시 저장. 사용·실패를 감사로그에 남긴다.<br><strong>사용 후</strong> 복구 수단이 없어지므로 DASH-01 권고 배너로 DASH-03 재설정을 유도해 새 코드를 발급하고 이전 코드를 폐기한다.<br><strong>전면 분실</strong> 복구 코드까지 없으면 관리자 본인확인 후 초대 재발송으로 처리한다.<br><strong>입력 UI</strong> 6칸이 아니라 텍스트 필드를 쓴다(항목 5). <span class="chk">[디자인 요청]</span></span></div>
-      </div>
-      <div class="dtl" data-idx="5">
-        <div class="detail-label"><span class="dtl-num">6</span>실패 카운트 · 잠금 해제</div>
+        <div class="detail-label"><span class="dtl-num">4</span>실패 카운트 · 잠금 해제</div>
       <div class="dtl-body"><span class="box"><strong>통합 카운터</strong> 비밀번호·인증 코드·복구 코드 실패를 합산하고 성공 시 0으로 되돌린다. {정책값 5회} 도달 시 잠그고 남은 횟수를 칩에 노출한다.<br><strong>잠금 해제</strong> 관리자가 본인확인 후 해제하거나 초대를 재발송한다. 처리 창구는 ADM-02 처리함의 계정 잠금 알람이며 복구 코드 분실과 같은 프로세스다.<br><strong>기록</strong> 잠금·해제·알림 이력을 감사로그에 남긴다.<br><strong>적용하지 않는 통제</strong> 시간 경과 자동 해제, 허용 IP 화이트리스트, 디바이스·위치 이상 탐지는 넣지 않는다.</span></div>
       </div>
     </div>
