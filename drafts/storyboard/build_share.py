@@ -44,7 +44,7 @@ proc = proc.replace(
     "<script>window.addEventListener('message',function(e){"
     "if(e.data&&e.data.type==='screenDocs')window.SCREEN_DOCS=e.data.docs;});</script>\n</body>", 1)
 
-# IA(정보구조)·표기 규칙·상태 전이 — 자립형 문서, navigate postMessage는 뷰어 리스너가 그대로 처리
+# IA(정보구조)·표기 규칙·케이스분기 — 자립형 문서, navigate postMessage는 뷰어 리스너가 그대로 처리
 IA = open('ia.html', encoding='utf-8').read()
 GLOSS = open('notation.html', encoding='utf-8').read()
 STATES = open('states.html', encoding='utf-8').read()
@@ -88,13 +88,13 @@ body{font-family:'Noto Sans KR',system-ui,sans-serif;background:var(--bg);color:
 <div class="sidebar">
   <div class="sb-head">
     <h1>교환·중개 화면기획<br>스토리보드</h1>
-    <div class="sub">화면 19개 + IA·표기 규칙(공통 UI 규격)·프로세스맵·상태 전이 · 2026-09-02 기준</div>
+    <div class="sub">화면 19개 + IA·표기 규칙(공통 UI 규격)·프로세스맵·케이스분기 · 2026-09-02 기준</div>
     <span class="tag">내부 검토용 초안 — 제출용 아님</span>
   </div>
   <div class="sb-list" id="sbList">
     <button class="nav proc" data-ia="1"><span class="nid">◫</span><span>IA (정보구조)</span></button>
     <button class="nav proc" data-gloss="1"><span class="nid">≡</span><span>표기 규칙 · 공통 UI 규격</span></button>
-    <button class="nav proc" data-states="1"><span class="nid">⇄</span><span>상태 전이 (처리함)</span></button>
+    <button class="nav proc" data-states="1"><span class="nid">⇄</span><span>케이스분기</span></button>
     <button class="nav proc" data-proc="1"><span class="nid">◈</span><span>화면 흐름도 (프로세스맵)</span></button>
   </div>
 </div>

@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>상태 전이 — 알람·워닝 처리함 (교환·중개 콘솔)</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>케이스분기 — 거래·계정 상태 분기와 화면 반영 (교환·중개 콘솔)</title>
 <style>
   @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -74,70 +73,69 @@
   .foot b { color:#334155; }
   .foot ol { margin:6px 0 0 18px; }
   .foot li + li { margin-top:3px; }
+
+  /* v0.4 케이스분기 추가 */
+  .sec { max-width:1060px; margin:26px auto 10px; display:flex; align-items:baseline; gap:10px; }
+  .sec .no { font-family:ui-monospace, Consolas, monospace; font-size:11px; font-weight:800; color:#fff; background:#0f172a; border-radius:6px; padding:1px 8px; }
+  .sec h2 { font-size:15px; font-weight:800; letter-spacing:-.01em; }
+  .sec .hint { font-size:11px; color:#64748b; }
+  .tblwrap { overflow-x:auto; }
+  .ct { width:100%; border-collapse:collapse; font-size:10.5px; margin-top:8px; min-width:900px; }
+  .ct th { background:#f1f5f9; color:#475569; font-weight:700; text-align:left; padding:5px 7px; border-bottom:1px solid #e2e8f0; font-size:10px; white-space:nowrap; }
+  .ct td { padding:6px 7px; border-bottom:1px solid #f1f1ee; color:#334155; vertical-align:top; line-height:1.5; }
+  .ct td:first-child { font-family:ui-monospace, Consolas, monospace; font-size:9.5px; color:#94a3b8; white-space:nowrap; }
+  .ct td .st { font-size:9.5px; padding:1px 7px; }
+  .ct tr.sub td { background:#fbfbf9; color:#64748b; font-size:10px; }
+  .st.gray { border-color:#cbd5e1; color:#64748b; background:#f8fafc; }
+  .who { display:inline-block; font-size:9px; font-weight:700; border-radius:4px; padding:0 5px; margin-right:3px; vertical-align:1px; }
+  .who.c { color:#b45309; background:#fef3c7; }      /* 고객 */
+  .who.a { color:#9d174d; background:#fce7f3; }      /* 관리자 */
+  .who.s { color:#0369a1; background:#e0f2fe; }      /* 시스템 */
+  .card { display:inline-block; font-size:9.5px; font-weight:700; border-radius:4px; padding:0 6px; border:1px solid; white-space:nowrap; }
+  .card.w { color:#1d4ed8; border-color:#bfdbfe; background:#eff6ff; }
+  .card.p { color:#b45309; border-color:#fde68a; background:#fffbeb; }
+  .card.d { color:#15803d; border-color:#bbf7d0; background:#f0fdf4; }
+  .card.x { color:#64748b; border-color:#e2e8f0; background:#f8fafc; text-decoration:line-through; }
+  .card.k { color:#0f172a; border-color:#cbd5e1; background:#fff; }
+  .rule { font-size:10.5px; color:#475569; margin-top:8px; }
+  .rule li { margin-top:3px; }
+  .rule ul { margin-left:16px; }
+  .legend-row { font-size:10.5px; color:#64748b; margin-top:6px; display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center; }
 </style>
 </head>
 <body>
 
 <div class="doc-head">
-  <h1>상태 전이 — 알람·워닝 처리함</h1>
-  <div class="sub">ADM-02 처리함에 쌓이는 아이템의 유형별 생성 조건 · 상태값 · 상태 전이 정의 (개발 이관용) · v0.3 2026-09-02 개정 — 마목 게시 상태(게재중 → 협의중 → 확정 → 완료 · 종결 = 회수·완료(만료)·중지) · EXC-02 수락 = 즉시 확정(확인 없음) 반영</div>
+  <h1>케이스분기 — 거래·계정 상태가 갈리는 경우와 화면 반영</h1>
+  <div class="sub">한 건이 갈라지는 경우 · 트리거 · 고객 목록/상세·어드민 반영 · 카드 집계 (개발 이관용) · v0.4 2026-09-02 — 종전 "상태 전이(처리함)" 문서를 케이스분기로 확장: 나목·마목 고객 케이스 표 신설, DASH-01 카드·ADM-02 KPI 집계 정의 신설 · 어드민 유형 T1~T8·X3 전이는 §4에 유지</div>
 </div>
 
-<!-- 처리함이란 -->
-<div class="wide">
-  <div class="panel">
-    <div class="panel-title">처리함이란</div>
-    <div class="intro">
-      <p>처리함은 관리자 홈(<span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>홈</span>)의 작업 목록이다.
-      시스템이 <b>승인·확인·조사가 필요한 일</b>을 감지하면 '아이템'을 자동으로 만들어 이 목록에 쌓고,
-      관리자가 내용을 확인한 뒤 승인·거절·해제 등으로 <b>종결</b>한다. 아이템 유형은 8종 + 1종(T1~T8, X3)이다.</p>
-      <p><b>핵심 원칙 — 생성은 시스템, 종결은 사람.</b> 자동 체결·자동 승인·자동 거절이 없다
-      (유일한 예외는 T7의 재이행 완료 자동 종결). 본인이 올린 건은 본인이 승인할 수 없고,
-      보류·거절에는 사유 입력이 필수이며, 모든 상태 변경은 감사로그에 남는다.</p>
-    </div>
-  </div>
+<div class="wide"><div class="panel"><div class="panel-title">이 문서를 읽는 법</div>
+<div class="intro">
+<p><b>케이스분기</b> = 거래 한 건(교환 요청·게시·신청·출금·입금) 또는 계정 하나가 시작해서 끝날 때까지 <b>갈라질 수 있는 경우</b>를 전부 나열한 것이다. 경우마다 ① 무엇이 상태를 바꾸는지(<b>트리거</b>), ② 그 결과 고객 화면과 어드민 화면에 <b>각각 무엇이 보이는지</b>, ③ <b>대시보드·KPI 카드 어디에 세어지는지</b>를 한 행에 적었다.</p>
+<p>상태는 세 축으로 나뉜다. <b>고객 상태</b>(DASH-01 칩 라벨 — 내부 심사 단계를 감춘 고객용 이름) · <b>어드민 업무 상태</b>(ADM-02 처리함 '상태' 컬럼 — 승인 대기·격리 중 등 실제 업무) · <b>처리함 공통 상태 5종</b>(OPEN·ESCALATED·IN_PROGRESS·HOLD·RESOLVED — KPI 집계용). 같은 순간에 세 축의 값이 서로 다를 수 있고, 그 대응을 §1~§3 표가 정의한다. 코드 후보(영문)는 CSV·DB enum 초안이며 확정 전이다<span class="need">결정필요 ⑨</span>.</p>
+<p>화면 박스(<span class="mono">EXC-02</span> 등)를 클릭하면 해당 화면기획으로 이동한다. 어드민 유형(T1~T8·X3)의 상세 전이는 §4에 그대로 두었다.</p>
+</div><div class="legend-row"><b>주체</b> <span class="who c">고객</span>고객·게시자·신청자 <span class="who a">관리자</span>DSRV 관리자 <span class="who s">시스템</span>타이머·룰·배치·온체인 <b style="margin-left:10px;">칩 색</b> <span class="st start">대기</span>파랑 <span class="st mid">진행</span>노랑 <span class="st end">완료</span>초록 <span class="st gray">종결</span>회색 <b style="margin-left:10px;">카드</b> <span class="card w">대기</span><span class="card p">진행 중</span><span class="card d">완료(누적)</span><span class="card x">미집계</span> = DASH-01 3카드 귀속 · 미집계는 종결 계열</div></div></div>
 
-  <div class="panel">
-    <div class="panel-title">용어</div>
-    <dl class="gloss">
-      <dt>나목 교환</dt><dd>고객이 DSRV를 상대방으로 하는 ETH·USDC·USDT 교환 (예: ETH↔USDC, USDC↔USDT · 2026-09-02 ETH 편입). 가상자산사업자 신고 업종 구분에서 온 이름으로, 이 문서에서는 "DSRV와의 직접 교환"으로 읽으면 된다.</dd>
-      <dt>마목 중개</dt><dd>고객 간 교환을 DSRV가 게시판 방식으로 중개하는 것. 게시자가 신청을 수락하는 순간 거래가 확정되고 법적 구속력이 생긴다. 게시당 신청은 동시에 1건만 받는다(신청 1건 접수 = 게시 '협의중' · 추가 신청 차단). 확정 전까지 게시자는 게시를 회수할 수 있다(BRK-06 · 2026-09-02). 중개 수수료는 거래액의 1% 고정, 양측 각자 부담(기준 = 각자 보내는 자산 수량).</dd>
-      <dt>KYT</dt><dd>트랜잭션의 자금 출처·경로 위험도를 자동 분석하는 검사 (Know Your Transaction).</dd>
-      <dt>BLF</dt><dd>제재 대상·블랙리스트에 오른 지갑 주소인지 대조하는 필터.</dd>
-      <dt>STR</dt><dd>의심거래보고. 자금세탁이 의심되는 거래를 금융당국(FIU)에 보고하는 절차. 보고 대상 고객이 보고 사실을 알게 해서는 안 된다(누설 금지).</dd>
-      <dt>에스컬레이션</dt><dd>자동검증에서 위험등급 '주의' 이상이 잡힌 건. 일반 대기 건과 구분해 우선 검토한다.</dd>
-      <dt>지연발효</dt><dd>새 출금 주소를 등록해도 일정 시간이 지나야 실제 출금이 가능해지는 보호장치. 계정 탈취 시 즉시 출금 피해를 막는다.</dd>
-      <dt>격리 지갑</dt><dd>위험 신호가 있는 입금을 고객 잔고에 반영하지 않고 따로 보관하는 지갑.</dd>
-      <dt>3면 대사</dt><dd>내부 장부 · 블록체인 실제 잔고 · 콜드월렛 기록, 세 곳의 수치가 서로 일치하는지 맞춰보는 정기 점검.</dd>
-      <dt>트래블룰</dt><dd>가상자산을 이전할 때 송신인·수신인 정보를 함께 전달해야 하는 규제 요건.</dd>
-    </dl>
-  </div>
+<div class="sec"><span class="no">§1</span><h2>고객 거래 케이스분기</h2><span class="hint">나목 교환 · 마목 게시 · 마목 신청 — 한 행 = 갈라지는 경우 하나</span></div>
+<div class="wide"><div class="panel"><div class="panel-title">나목 교환 — 고객 상태 흐름 <span class="scope">EXC-01 → 02 → 03/04 · DASH-01 칩</span></div>
+<div class="flow">
+  <span class="st start">요청됨</span><span class="fa"><span class="by sys">견적 자동 산정</span>→</span>
+  <span class="st start">비율 제시</span><span class="fa"><span class="by">고객 수락(EXC-02)</span>→</span>
+  <span class="st mid">진행 중</span><span class="fa"><span class="by">관리자 승인 → 집행(ADM-02)</span>→</span>
+  <span class="st end">완료</span>
 </div>
-
-<!-- 상태 모델 -->
-<div class="wide">
-  <div class="panel">
-    <div class="panel-title">상태 모델 — 2계층 분리 <span class="scope">아이템 공통 상태 + 대상 도메인 상태</span></div>
-    <div class="intro" style="margin-bottom:8px;">
-      <p>8가지 유형은 대상 업무가 서로 달라(교환 승인, 입금 격리, 계정 잠금…) 상태 이름을 하나로 통일하면 실제 업무가 안 보인다. 그래서 두 층으로 나눈다.</p>
-      <p>① <b>아이템 공통 상태 (5종)</b> — 유형과 무관하게 "아직 안 봤나 / 처리 중인가 / 끝났나"를 집계하는 공통 축. 화면 상단 KPI(처리 대기 N건 등)가 이 축을 센다.<br>
-      ② <b>도메인 상태</b> — 유형별 실제 업무 상태(승인 대기, 격리 중, 잠금 등). 목록의 '상태' 컬럼에 표시되는 값. 아래 유형별 패널과 맨 아래 총목록이 이 축이다.</p>
-    </div>
-    <div class="flow">
-      <span style="font-size:10px;font-weight:700;color:#64748b;margin-right:6px;">아이템 공통 (5종)</span>
-      <span class="st start">OPEN 미처리</span><span class="fa">→</span>
-      <span class="st esc">ESCALATED 에스컬레이션</span><span class="fa">→</span>
-      <span class="st mid">IN_PROGRESS 처리중</span><span class="fa">→</span>
-      <span class="st mid">HOLD 보류</span><span class="fa">→</span>
-      <span class="st end">RESOLVED 종결 + 결과코드</span>
-    </div>
-    <div style="font-size:10.5px;color:#64748b;margin-top:4px;">
-      · 자동검증 등급이 '주의' 이상이면 처음부터 ESCALATED로 생성된다 · RESOLVED에는 결과코드가 붙는다: 승인 / 거절 / 소명 인정 / 동결 / STR 이관 / 무혐의 / 조치완료 / 해제 / 제한 적용 / 자동 종결(T7)<br>
-      · <b style="color:#334155;">누가 상태를 바꾸는가</b> — <b style="color:#0369a1;">시스템(자동)</b>: 아이템 생성 전부 · 지연발효 타이머 만료(T3) · 온체인 확정 반영(T1·T3) · 재이행 완료 자동 종결(T7) · 격리/동결/잠금의 개시 / <b style="color:#b45309;">사람(관리자)</b>: 종결로 가는 판단 전부 — 자동 체결·자동 승인·자동 거절 없음 · 본인 기안 자기승인 차단 · 보류/거절 사유 필수 · 모든 전이 감사로그 기록
-    </div>
-  </div>
+<div class="flow">
+  <span class="st start">비율 제시</span><span class="fa"><span class="by">고객 거절</span>→</span><span class="st bad">거절</span>
+  <span class="fa">/</span><span class="fa"><span class="by sys">기한 만료 · 재검증 실패</span>→</span><span class="st bad">만료</span>
 </div>
-
+<div class="flow">
+  <span class="st mid">진행 중</span><span class="fa"><span class="by">관리자 보류(사유)</span>→</span><span class="st mid">보류</span>
+  <span class="fa"><span class="by">재검토</span>→</span><span class="st end">완료</span><span class="fa">/</span><span class="st bad">거절</span>
+  <span class="fa">·</span><span class="st mid">진행 중</span><span class="fa"><span class="by">관리자 거절(사유)</span>→</span><span class="st bad">거절</span>
+</div>
+<div style="font-size:10.5px;color:#64748b;margin-top:4px;">· 고객 라벨 "진행 중" 하나가 어드민의 승인 대기·에스컬레이션·집행 대기 세 단계를 덮는다(EXC-03 — 내부 단계·담당자 미노출) · 스키마 v0.7 EXCHANGE_REQUEST.status(요청·비율 제시·DSRV 거래 진행중·완료·심사 후 보류·미진행)와 라벨이 다름 — 본 표 기준으로 정합 필요 <span class="need">결정필요 ⑨</span></div></div></div>
+<div class="wide"><div class="panel"><div class="panel-title">A. 나목 교환 (DSRV 상대 교환) <span class="scope">고객 1건 = 요청번호 EXC-YYYYMMDD-NNNN 1개</span></div><div class="panel-note">내부 승인 3단계(승인 대기·에스컬레이션·집행 대기)는 고객에게 "진행 중" 하나로만 보인다. 어드민 열의 "행"은 ADM-02 처리함 행을 뜻한다.</div><div class="tblwrap"><table class="ct"><thead><tr><th>#</th><th>케이스 (무슨 일이 생겼나)</th><th>트리거 (누가·무엇이 바꾸나)</th><th>고객 상태 라벨 · 코드 후보</th><th>고객 목록 (DASH-01 칩 → 카드)</th><th>고객 상세 화면</th><th>어드민 (ADM-02 · ADM-03)</th><th>통지</th></tr></thead><tbody><tr><td>A1</td><td>거래 요청 접수</td><td><span class="who c">고객</span><span class="scr" data-pid="EXC-01"><span class="sid">EXC-01</span>[거래 요청]</span></td><td>요청됨 · <span class="mono">REQUESTED</span></td><td><span class="st start">대기</span> → <span class="card w">대기</span></td><td><span class="scr" data-pid="EXC-02"><span class="sid">EXC-02</span></span> 견적 산정 중("불러오는 중…")</td><td>처리함 행 없음 — 견적은 시스템 자동 산정</td><td>—</td></tr><tr><td>A2</td><td>확정 비율 제시</td><td><span class="who s">시스템</span> 견적 자동 산정 완료(ADM-03 스프레드·시세 소스)</td><td>비율 제시 · <span class="mono">QUOTED</span></td><td><span class="st start">대기</span> → <span class="card w">대기</span></td><td><span class="scr" data-pid="EXC-02"><span class="sid">EXC-02</span></span> 카운트다운 · [수락]·[거절] 활성</td><td>행 없음</td><td>—</td></tr><tr><td>A3</td><td>고객 수락 → DSRV 내부 승인 시작</td><td><span class="who c">고객</span><span class="scr" data-pid="EXC-02"><span class="sid">EXC-02</span>[수락]</span> 클릭 즉시 확정(확인 없음)</td><td>진행 중 · <span class="mono">IN_PROGRESS</span> — 내부 승인 대기·집행 대기를 한 라벨로</td><td><span class="st mid">진행</span> → <span class="card p">진행 중</span></td><td><span class="scr" data-pid="EXC-03"><span class="sid">EXC-03</span></span> 스텝 2 "진행중" · 내부 단계·담당자 미노출</td><td><b>T1 행 생성</b> 승인 대기 / 등급 주의↑이면 에스컬레이션 · 자동검증(한도·BLF·KYT·재고) 첨부</td><td>없음(화면 접수 안내)</td></tr><tr><td>A4</td><td>관리자 보류</td><td><span class="who a">관리자</span> ADM-02 [보류] + 사유(필수)</td><td>보류 · <span class="mono">ON_HOLD</span></td><td><span class="st mid">진행</span> → <span class="card p">진행 중</span> <span class="need">결정필요 ⑦ 칩 색·카드 귀속</span></td><td><span class="scr" data-pid="EXC-04"><span class="sid">EXC-04</span></span> 스텝 3 "심사 후 보류" + 일반화 사유 배너(4종)</td><td>행 유지 · 상태 보류 · 공통 HOLD · [승인]·[거절]로 재검토</td><td>이메일 <span class="need">[확인필요]</span></td></tr><tr><td>A5</td><td>관리자 승인 → 집행 대기</td><td><span class="who a">관리자</span> ADM-02 [승인](본인 기안 불가 · 재고·KYC 재검증)</td><td>진행 중 (변화 없음)</td><td><span class="st mid">진행</span> → <span class="card p">진행 중</span></td><td><span class="scr" data-pid="EXC-03"><span class="sid">EXC-03</span></span> 변화 없음</td><td>처리함 행 제거 · 공통 RESOLVED(승인) → <b>집행 대기 표</b>에 행 "집행 대기"</td><td>없음</td></tr><tr><td>A6</td><td>집행 완료</td><td><span class="who a">관리자</span> 집행 대기 표 [완료 처리] — txhash 온체인 대사(주소·자산·수량) 일치 시만</td><td>완료 · <span class="mono">COMPLETED</span></td><td><span class="st end">완료</span> → <span class="card d">완료(누적)</span></td><td><span class="scr" data-pid="EXC-04"><span class="sid">EXC-04</span></span> 스텝 3 ✓ 완료 · 집행 방식·완료 일시·풀 차감</td><td>집행 대기 표 행 제거 → 이후 조회는 CSV ③</td><td>이메일 <span class="need">[확인필요]</span></td></tr><tr><td>A7</td><td>관리자 거절</td><td><span class="who a">관리자</span> ADM-02 [거절] + 사유(필수 · 되돌릴 수 없음)</td><td>거절 · <span class="mono">REJECTED</span> — 고객 거절(A8)과 같은 라벨 <span class="need">결정필요 ⑨</span></td><td><span class="st gray">종결</span> → <span class="card x">미집계</span></td><td><span class="scr" data-pid="EXC-04"><span class="sid">EXC-04</span></span> <span class="need">[확인필요] 거절 변형 없음(현재 완료/보류 2종)</span></td><td>행 제거 · RESOLVED(거절) · AML 사유면 STR 검토 아이템 생성</td><td>일반화 사유만 · STR 누설 금지</td></tr><tr><td>A8</td><td>고객 거절</td><td><span class="who c">고객</span><span class="scr" data-pid="EXC-02"><span class="sid">EXC-02</span>[거절]</span>(확인 없음)</td><td>거절 · <span class="mono">REJECTED</span></td><td><span class="st gray">종결</span> → <span class="card x">미집계</span></td><td><span class="scr" data-pid="EXC-04"><span class="sid">EXC-04</span></span> 결과 확인 <span class="need">[확인필요] 상세 진입 여부</span></td><td>행 없음(견적 QUOTE 상태 거절 · 처리함 무관)</td><td>없음</td></tr><tr><td>A9</td><td>수락 기한 만료</td><td><span class="who s">시스템</span> 카운트다운 00:00 · 종결 판정은 서버</td><td>만료 · <span class="mono">EXPIRED</span></td><td><span class="st gray">종결</span> → <span class="card x">미집계</span></td><td><span class="scr" data-pid="EXC-02"><span class="sid">EXC-02</span></span> 체류 중이면 "만료됨 — 비율 무효" · 재진입 시 <span class="scr" data-pid="EXC-04"><span class="sid">EXC-04</span></span><span class="need">[확인필요]</span></td><td>행 없음</td><td>없음 · 재요청은 EXC-01(새 번호)</td></tr><tr><td>A10</td><td>수락 재검증 실패(풀 부족 · 비율 이탈)</td><td><span class="who s">시스템</span> [수락] 클릭 후 서버 재검증</td><td>만료 · <span class="mono">EXPIRED</span> (기획 가정 — QUOTE "이탈"을 고객에게는 만료로)</td><td><span class="st gray">종결</span> → <span class="card x">미집계</span></td><td><span class="scr" data-pid="EXC-02"><span class="sid">EXC-02</span></span> 실패 안내 노출 · [수락] 비활성</td><td>행 없음</td><td>없음</td></tr></tbody></table></div></div></div>
 <!-- 고객 도메인: 마목 게시 상태 (2026-09-02 개정) -->
 <div class="wide">
   <div class="panel">
@@ -181,6 +179,68 @@
   </div>
 </div>
 
+
+<div class="wide"><div class="panel"><div class="panel-title">B. 마목 게시 (게시자 관점) <span class="scope">게시번호 BRK-YYYYMMDD-NNNN 1개 · 게시당 동시 신청 1건</span></div><div class="panel-note">게시·회수·중지·만료는 관리자 승인 대상이 아니라 처리함 행이 생기지 않는다. 처리함(T2)은 수락으로 확정된 순간에만 생긴다.</div><div class="tblwrap"><table class="ct"><thead><tr><th>#</th><th>케이스 (무슨 일이 생겼나)</th><th>트리거 (누가·무엇이 바꾸나)</th><th>고객 상태 라벨 · 코드 후보</th><th>고객 목록 (DASH-01 칩 → 카드)</th><th>고객 상세 화면</th><th>어드민 (ADM-02 · ADM-03)</th><th>통지</th></tr></thead><tbody><tr><td>B1</td><td>게시</td><td><span class="who c">고객</span><span class="scr" data-pid="BRK-02"><span class="sid">BRK-02</span>[게시]</span> 서버 재검증(처분 가능분·한도·편차) 통과</td><td>게재중 · <span class="mono">POSTED</span></td><td><span class="st start">대기</span> → <span class="card w">대기</span></td><td><span class="scr" data-pid="BRK-06"><span class="sid">BRK-06</span></span> 받은 신청 빈 상태 · [게시 내리기] 활성 / <span class="scr" data-pid="BRK-01"><span class="sid">BRK-01</span></span> 게재중 칩 + "내 게시"</td><td>행 없음 — 게시는 관리자 승인 대상 아님</td><td>없음</td></tr><tr><td>B2</td><td>신청 1건 접수</td><td><span class="who s">시스템</span> 타 기관 <span class="scr" data-pid="BRK-03"><span class="sid">BRK-03</span>[이 조건으로 신청]</span> 접수 → 게시당 동시 1건</td><td>협의중 · <span class="mono">NEGOTIATING</span></td><td><span class="st start">대기</span> → <span class="card w">대기</span></td><td><span class="scr" data-pid="BRK-06"><span class="sid">BRK-06</span></span> 신청 카드 + [신청 보기] → <span class="scr" data-pid="BRK-04"><span class="sid">BRK-04</span></span> / <span class="scr" data-pid="BRK-01"><span class="sid">BRK-01</span></span> 협의중 칩(추가 신청 차단)</td><td>행 없음</td><td>이메일 ① 접수(게시자)</td></tr><tr><td>B3</td><td>거절 또는 신청 유효기한 만료 → 게재중 복귀</td><td><span class="who c">게시자</span><span class="scr" data-pid="BRK-04"><span class="sid">BRK-04</span>[거절]</span> / <span class="who s">시스템</span> 신청 기한 경과(무응답)</td><td>게재중 (복귀) · <span class="mono">POSTED</span></td><td><span class="st start">대기</span> → <span class="card w">대기</span></td><td><span class="scr" data-pid="BRK-06"><span class="sid">BRK-06</span></span> 빈 상태 복귀(카드 제거) / <span class="scr" data-pid="BRK-01"><span class="sid">BRK-01</span></span> 재노출·다른 기관 신청 가능</td><td>행 없음</td><td>신청자 통지 메일 없음 <span class="need">[확인필요]</span></td></tr><tr><td>B4</td><td>수락 → 확정(구속력 발생)</td><td><span class="who c">게시자</span><span class="scr" data-pid="BRK-04"><span class="sid">BRK-04</span>[수락]</span> 확인 다이얼로그 → 재검증(기한·게시 상태·양측 처분 가능분)</td><td>확정 · <span class="mono">CONFIRMED</span></td><td><span class="st mid">진행</span> → <span class="card p">진행 중</span></td><td><span class="scr" data-pid="BRK-06"><span class="sid">BRK-06</span></span> 상호 마스킹 해제 + [이전 진행 보기 →] → <span class="scr" data-pid="BRK-05"><span class="sid">BRK-05</span></span> 스텝 1 확정 / <span class="scr" data-pid="BRK-01"><span class="sid">BRK-01</span></span> 목록 제외</td><td><b>T2 행 생성</b> 확인 대기 / KYT 주의↑ 에스컬레이션 · 판단 재료: 양측 BLF·KYT·트래블룰·처분 가능분·KYC</td><td>이메일 ② 확정(양측)</td></tr><tr><td>B5</td><td>DSRV 이전 진행 승인</td><td><span class="who a">관리자</span> ADM-02 [승인]</td><td>확정 (칩 변화 없음) — BRK-05 스텝 이전 진행</td><td><span class="st mid">진행</span> → <span class="card p">진행 중</span></td><td><span class="scr" data-pid="BRK-05"><span class="sid">BRK-05</span></span> 스텝 2~3 양건 확인 → 이전 진행 · 양측 이전 지시 상태 · 트래블룰 확인</td><td>처리함 행 제거 · RESOLVED(승인) → 집행 대기 표 "이전 진행"(양측 이전 건)</td><td>없음</td></tr><tr><td>B6</td><td>DSRV 보류(트래블룰 미비 등)</td><td><span class="who a">관리자</span> ADM-02 [보류] + 사유</td><td>확정 (칩 유지) — BRK-05 "이전 보류" 배너 <span class="need">결정필요 ⑧</span></td><td><span class="st mid">진행</span> → <span class="card p">진행 중</span></td><td><span class="scr" data-pid="BRK-05"><span class="sid">BRK-05</span></span> 상태 ⑤ 이전 보류 배너(일반화 사유)</td><td>행 유지 · 보류 · HOLD · 보완되면 [승인]</td><td>이메일 <span class="need">[확인필요]</span></td></tr><tr><td>B7</td><td>DSRV 이전 중지</td><td><span class="who a">관리자</span> ADM-02 [이전 중지] + 사유 · 되돌릴 수 없음</td><td>이전 중지 · <span class="mono">STOPPED</span> — DASH-01 칩 신설 필요 <span class="need">결정필요 ⑧</span></td><td><span class="st gray">종결</span> → <span class="card x">미집계</span></td><td><span class="scr" data-pid="BRK-05"><span class="sid">BRK-05</span></span> 상태 ⑥ 이전 중지 배너</td><td>행 제거 · RESOLVED(이전 중지) · 계약상 귀결 <span class="need">결정필요 ①</span></td><td>양측 통지 <span class="need">[확인필요]</span></td></tr><tr><td>B8</td><td>양측 이전 완결</td><td><span class="who s">시스템</span> 정산 배치(1영업일 3회) · 완결성 확인</td><td>완료 · <span class="mono">COMPLETED</span></td><td><span class="st end">완료</span> → <span class="card d">완료(누적)</span></td><td><span class="scr" data-pid="BRK-06"><span class="sid">BRK-06</span></span> 완료 + 링크 유지 / <span class="scr" data-pid="BRK-05"><span class="sid">BRK-05</span></span> 스텝 4 ✓ · 완료 배너</td><td>집행 대기 표 행 제거 → CSV ③</td><td>이메일 ③ 완료(양측)</td></tr><tr><td>B9</td><td>게시 내리기(회수)</td><td><span class="who c">게시자</span><span class="scr" data-pid="BRK-06"><span class="sid">BRK-06</span>[게시 내리기]</span> 다이얼로그 확인 — 게재중·협의중에서만</td><td>회수 · <span class="mono">WITHDRAWN</span></td><td><span class="st gray">종결</span> → <span class="card x">미집계</span></td><td><span class="scr" data-pid="BRK-06"><span class="sid">BRK-06</span></span> 버튼 비노출 · 결과 조회 / <span class="scr" data-pid="BRK-01"><span class="sid">BRK-01</span></span> 즉시 제외</td><td>행 없음 · 감사로그만</td><td>이메일 ④ 회수(대기 중 신청자)</td></tr><tr><td>B10</td><td>게시 유효기간 만료</td><td><span class="who s">시스템</span> ADM-03 게시 유효기간(현재 30일) 경과</td><td>완료(유효기간 만료) — 라벨·칩 <span class="need">결정필요 ⑥</span> (기획 가정: 별개 라벨 "만료" 회색)</td><td><span class="st gray">종결</span> → <span class="card x">미집계</span></td><td><span class="scr" data-pid="BRK-06"><span class="sid">BRK-06</span></span> "완료 · 유효기간 만료" 부기 · 링크 없음 / <span class="scr" data-pid="BRK-01"><span class="sid">BRK-01</span></span> 제외</td><td>행 없음</td><td>없음 <span class="need">[확인필요]</span></td></tr><tr><td>B11</td><td>price guard 자동 중지</td><td><span class="who s">시스템</span> 게시 시점 외부지표 대비 ±{정책값}% 이탈</td><td>중지 · <span class="mono">SUSPENDED</span></td><td><span class="st gray">종결</span> → <span class="card x">미집계</span></td><td><span class="scr" data-pid="BRK-06"><span class="sid">BRK-06</span></span> 중지 표시 · 재개 = 재게시 / <span class="scr" data-pid="BRK-01"><span class="sid">BRK-01</span></span> 제외 / 협의중이던 <span class="scr" data-pid="BRK-04"><span class="sid">BRK-04</span></span> [수락] 비활성</td><td>행 없음 · 대기 신청 자동 종결 <span class="need">[확인필요] 어드민 통지 여부</span></td><td>양측 이메일(규격 <span class="need">[확인필요]</span>)</td></tr></tbody></table></div></div></div>
+<div class="wide"><div class="panel"><div class="panel-title">C. 마목 신청 (신청자 관점) <span class="scope">같은 거래를 신청자 쪽에서 본 것 · BRK-07</span></div><div class="panel-note">신청 상태는 게시 상태와 1:1로 따라간다 — 신청자가 스스로 바꿀 수 있는 전이는 없다(신청 취소 없음).</div><div class="tblwrap"><table class="ct"><thead><tr><th>#</th><th>케이스 (무슨 일이 생겼나)</th><th>트리거 (누가·무엇이 바꾸나)</th><th>고객 상태 라벨 · 코드 후보</th><th>고객 목록 (DASH-01 칩 → 카드)</th><th>고객 상세 화면</th><th>어드민 (ADM-02 · ADM-03)</th><th>통지</th></tr></thead><tbody><tr><td>C1</td><td>신청</td><td><span class="who c">고객</span><span class="scr" data-pid="BRK-03"><span class="sid">BRK-03</span>[이 조건으로 신청]</span> 다이얼로그 확인 · 자기 자산 보유·한도 검증</td><td>협의중 · <span class="mono">PENDING_ACCEPT</span></td><td><span class="st start">대기</span> → <span class="card w">대기</span></td><td><span class="scr" data-pid="BRK-07"><span class="sid">BRK-07</span></span> 스텝 2 "협의중 · 게시자 수락 대기" · 유효기한 · 내 수수료</td><td>행 없음</td><td>이메일 ①은 게시자에게</td></tr><tr><td>C2</td><td>수락됨 → 확정</td><td><span class="who c">게시자</span> <span class="scr" data-pid="BRK-04"><span class="sid">BRK-04</span>[수락]</span></td><td>확정 · <span class="mono">CONFIRMED</span></td><td><span class="st mid">진행</span> → <span class="card p">진행 중</span></td><td><span class="scr" data-pid="BRK-07"><span class="sid">BRK-07</span></span> 스텝 3 + [이전 진행 보기 →] → <span class="scr" data-pid="BRK-05"><span class="sid">BRK-05</span></span> (신청자 관점 수수료)</td><td>B4와 같은 T2 행(거래 1건 = 행 1개)</td><td>이메일 ② 확정</td></tr><tr><td>C3</td><td>거절됨</td><td><span class="who c">게시자</span> <span class="scr" data-pid="BRK-04"><span class="sid">BRK-04</span>[거절]</span> (사유 입력 없음)</td><td>거절됨 · <span class="mono">REJECTED</span></td><td><span class="st gray">종결</span> → <span class="card x">미집계</span></td><td><span class="scr" data-pid="BRK-07"><span class="sid">BRK-07</span></span> 종결 칩 · 스텝 2에서 정지</td><td>행 없음</td><td>메일 없음 <span class="need">[확인필요]</span></td></tr><tr><td>C4</td><td>신청 유효기한 만료(무응답)</td><td><span class="who s">시스템</span> 신청 시점 + 영업일 {정책값} 경과</td><td>만료 · <span class="mono">EXPIRED</span></td><td><span class="st gray">종결</span> → <span class="card x">미집계</span></td><td><span class="scr" data-pid="BRK-07"><span class="sid">BRK-07</span></span> 종결 칩</td><td>행 없음</td><td>메일 없음 <span class="need">[확인필요]</span></td></tr><tr><td>C5</td><td>게시 회수로 종결</td><td><span class="who c">게시자</span> <span class="scr" data-pid="BRK-06"><span class="sid">BRK-06</span>[게시 내리기]</span></td><td>종결(게시 회수) · <span class="mono">CLOSED_BY_POSTING / WITHDRAWN</span></td><td><span class="st gray">종결</span> → <span class="card x">미집계</span></td><td><span class="scr" data-pid="BRK-07"><span class="sid">BRK-07</span></span> 종결 칩 · 사유 "게시 회수"</td><td>행 없음</td><td>이메일 ④</td></tr><tr><td>C6</td><td>게시 중지로 종결</td><td><span class="who s">시스템</span> price guard</td><td>종결(중지) · <span class="mono">CLOSED_BY_POSTING / SUSPENDED</span></td><td><span class="st gray">종결</span> → <span class="card x">미집계</span></td><td><span class="scr" data-pid="BRK-07"><span class="sid">BRK-07</span></span> 종결 칩 · 사유 "게시 중지"</td><td>행 없음</td><td>양측 이메일</td></tr><tr><td>C7</td><td>게시 유효기간 만료로 종결</td><td><span class="who s">시스템</span> 게시 유효기간 경과(협의중 상태에서)</td><td>종결(게시 만료) · <span class="mono">CLOSED_BY_POSTING / EXPIRED</span></td><td><span class="st gray">종결</span> → <span class="card x">미집계</span></td><td><span class="scr" data-pid="BRK-07"><span class="sid">BRK-07</span></span> 종결 칩</td><td>행 없음</td><td><span class="need">[확인필요]</span></td></tr><tr><td>C8</td><td>이전 보류 · 이전 중지 · 완료</td><td><span class="who a">관리자</span> / <span class="who s">시스템</span> — B5~B8과 동일(거래 1건 공유)</td><td>확정(유지) / 이전 중지 / 완료</td><td>B6·B7·B8과 동일</td><td><span class="scr" data-pid="BRK-07"><span class="sid">BRK-07</span></span> 스텝 4 · 상세는 <span class="scr" data-pid="BRK-05"><span class="sid">BRK-05</span></span></td><td>B5~B8</td><td>B5~B8</td></tr></tbody></table></div></div></div>
+
+<div class="sec"><span class="no">§2</span><h2>거래 밖 케이스분기</h2><span class="hint">출금·입금·계정 — 고객 목록 행이 아니라 잔고·배너·로그인으로 반영</span></div>
+<div class="wide"><div class="panel"><div class="panel-title">D. 출금·이전 (서면 접수 · T3) <span class="scope">고객 콘솔에 출금 요청 화면 없음</span></div><div class="tblwrap"><table class="ct"><thead><tr><th>#</th><th>케이스 (무슨 일이 생겼나)</th><th>트리거 (누가·무엇이 바꾸나)</th><th>고객 상태 라벨 · 코드 후보</th><th>고객 목록 (DASH-01 칩 → 카드)</th><th>고객 상세 화면</th><th>어드민 (ADM-02 · ADM-03)</th><th>통지</th></tr></thead><tbody><tr><td>D1</td><td>서면 접수 → 등록</td><td><span class="who a">관리자</span> 서면 신청 접수 후 ADM-02 등록</td><td>고객 콘솔 표시 없음 — DASH-01 거래 목록 대상 아님 <span class="need">[확인필요] 출금 진행 표시 여부</span></td><td>—</td><td>—</td><td><b>T3 행 생성</b> 대기(지연발효 중) — 신규 주소면 화이트리스트 타이머 자동 시작 · 기존 주소면 대기(승인 가능)</td><td>—</td></tr><tr><td>D2</td><td>지연발효 타이머 만료</td><td><span class="who s">시스템</span> 커스터디 정책값 경과</td><td>—</td><td>—</td><td>—</td><td>상태 대기(승인 가능) · [승인 → 집행 대기] 활성화만(자동 승인 아님)</td><td>—</td></tr><tr><td>D3</td><td>승인 → 집행 대기</td><td><span class="who a">관리자</span> [승인 → 집행 대기] (본인 등록 건 불가 · KYC 활성 필수)</td><td>—</td><td>—</td><td>—</td><td>행 제거 · RESOLVED(승인) → 집행 대기 표 · 집행 명세 생성 시 BLF 재검사</td><td>—</td></tr><tr><td>D4</td><td>집행 완료</td><td><span class="who a">관리자</span> 집행 대기 표 [완료 처리] · txhash 대사</td><td>잔고 감소 반영(DASH-01 지갑 잔고)</td><td>—</td><td><span class="scr" data-pid="DASH-01"><span class="sid">DASH-01</span></span> 지갑 잔고</td><td>집행 대기 표 행 제거 → CSV ③</td><td><span class="need">[확인필요]</span></td></tr><tr><td>D5</td><td>거절</td><td><span class="who a">관리자</span> [거절] + 사유</td><td>—</td><td>—</td><td>—</td><td>행 제거 · RESOLVED(거절)</td><td><span class="need">[확인필요]</span></td></tr><tr><td>D6</td><td>출금 시점 BLF 적중 → 차단</td><td><span class="who s">시스템</span> 집행 명세 생성 시 제재 리스트 재검사</td><td>—</td><td>—</td><td>—</td><td>행 상태 차단 → 제거 · <b>STR 검토 행 신규 생성</b>(T5 성격) · 배너 "제재 리스트 적중으로 차단되었습니다"</td><td>고객 통지 없음(STR 누설 금지)</td></tr></tbody></table></div></div></div>
+<div class="wide"><div class="panel"><div class="panel-title">E. 입금 (T4 · 입금 예외) <span class="scope">입금은 상시 감시 — 정상이면 잔고에만 반영</span></div><div class="tblwrap"><table class="ct"><thead><tr><th>#</th><th>케이스 (무슨 일이 생겼나)</th><th>트리거 (누가·무엇이 바꾸나)</th><th>고객 상태 라벨 · 코드 후보</th><th>고객 목록 (DASH-01 칩 → 카드)</th><th>고객 상세 화면</th><th>어드민 (ADM-02 · ADM-03)</th><th>통지</th></tr></thead><tbody><tr><td>E1</td><td>정상 입금 컨펌 중 → 반영</td><td><span class="who s">시스템</span> 온체인 컨펌 기준 충족 · KYT·BLF 정상</td><td>컨펌 중 → 반영 완료</td><td>잔고 반영(DASH-01 지갑 잔고) · 거래 목록 행 아님</td><td><span class="scr" data-pid="DASH-01"><span class="sid">DASH-01</span></span> 지갑 잔고 <span class="need">[확인필요] 컨펌 기준·갱신 주기</span></td><td>행 없음</td><td>—</td></tr><tr><td>E2</td><td>KYT 고위험 → 격리</td><td><span class="who s">시스템</span> 입금 감시 룰 적중 → 격리 지갑 분리 · 잔고 미반영</td><td>격리 중 — 고객 화면 "상태만 노출" <span class="need">[확인필요] 표시 위치·문구</span></td><td>—</td><td>—</td><td><b>T4 행 생성</b> 격리 중 · 등급 High → 에스컬레이션 · [소명 요청]·[STR·동결]</td><td>없음(소명 요청 시에만 이메일)</td></tr><tr><td>E3</td><td>제재·블랙리스트 적중</td><td><span class="who s">시스템</span> BLF 적중</td><td>동결</td><td>—</td><td>—</td><td>T4 행 생성 시부터 동결 · [STR 검토]만 표시 · 법정 통지·보고 <span class="red">[원문대조필요]</span></td><td>고객 통지 없음</td></tr><tr><td>E4</td><td>소명 요청 → 소명 대기</td><td><span class="who a">관리자</span> [소명 요청](확인 없음)</td><td>소명 대기</td><td>—</td><td>—</td><td>행 유지 · HOLD · 상태 "소명 대기 · 요청 {날짜}" · 버튼 [소명 인정]으로 교체 · 시한 <span class="need">결정필요 ②</span></td><td>소명 요청 이메일</td></tr><tr><td>E5</td><td>소명 인정 → 해제·잔고 반영</td><td><span class="who a">관리자</span> [소명 인정] 다이얼로그</td><td>해제·반영 → 잔고 반영</td><td>잔고 반영</td><td><span class="scr" data-pid="DASH-01"><span class="sid">DASH-01</span></span> 지갑 잔고</td><td>행 제거 · RESOLVED(소명 인정)</td><td><span class="need">[확인필요]</span></td></tr><tr><td>E6</td><td>불인정 → 동결 + STR 검토</td><td><span class="who a">관리자</span> [STR·동결] + 사유</td><td>동결</td><td>—</td><td>—</td><td>행 제거 · RESOLVED(동결) · STR 검토 아이템 신규 생성(T5 성격)</td><td>통지 없음(STR 누설 금지)</td></tr><tr><td>E7</td><td>오입금 · 스팸 토큰</td><td><span class="who s">시스템</span> 미취급 자산·체인 감지</td><td>오입금 / 스팸 — 잔고 미반영 · 안내</td><td>—</td><td><span class="need">[확인필요] 안내 위치</span></td><td>행 없음 · 오입금 반환은 별도 운영 절차</td><td><span class="need">[확인필요]</span></td></tr></tbody></table></div></div></div>
+<div class="wide"><div class="panel"><div class="panel-title">F. 기관·계정 상태 (ADM-03 · T7 · T8) <span class="scope">전 화면 게이팅 G-3의 단일 출처 = ORG.status</span></div><div class="tblwrap"><table class="ct"><thead><tr><th>#</th><th>케이스 (무슨 일이 생겼나)</th><th>트리거 (누가·무엇이 바꾸나)</th><th>고객 상태 라벨 · 코드 후보</th><th>고객 목록 (DASH-01 칩 → 카드)</th><th>고객 상세 화면</th><th>어드민 (ADM-02 · ADM-03)</th><th>통지</th></tr></thead><tbody><tr><td>F1</td><td>기관 KYC 심사중(EDD) · 일시제한 · 동결</td><td><span class="who a">관리자</span> <span class="scr" data-pid="ADM-03"><span class="sid">ADM-03</span>[상태 변경 ▾]</span> 확인 다이얼로그 + 사유 / T7 [신규 거래 제한] / T8 [동결 전환]</td><td>기관 상태(ORG.status) — G-3 단일 출처</td><td>거래 목록 무관 · 카드 무관</td><td>전 화면 상단 KYC 예외 배너 + 거래 버튼 비활성(<span class="scr" data-pid="EXC-01"><span class="sid">EXC-01</span></span>·<span class="scr" data-pid="BRK-02"><span class="sid">BRK-02</span></span>·<span class="scr" data-pid="BRK-03"><span class="sid">BRK-03</span></span>) · 조회는 가능</td><td>ADM-03 KYC 상태 칩 활성(초록)/심사중(파랑)/일시제한(노랑)/동결(빨강)/해지(회색)</td><td>고객 통지 <span class="need">[확인필요]</span></td></tr><tr><td>F2</td><td>KYC 재이행 기한 초과·미응답</td><td><span class="who s">시스템</span> KYC_RECORD 재이행 도래·초과 / 이벤트 트리거</td><td>—</td><td>—</td><td>아직 변화 없음(제한 적용 전)</td><td><b>T7 행 생성</b> 일시제한 예정 · [신규 거래 제한] → 제한 적용 = 기관 일시제한(F1)</td><td>재이행 안내 <span class="need">[확인필요]</span></td></tr><tr><td>F3</td><td>재이행 완료</td><td><span class="who s">시스템</span> KYC 시스템 결과 반영</td><td>—</td><td>—</td><td>배너 제거(다음 진입)</td><td>T7 자동 종결 <span class="need">결정필요 ③</span> · 일시제한→활성 복귀는 ADM-03에서 사람이</td><td>—</td></tr><tr><td>F4</td><td>로그인 5회 실패 → 계정 잠금</td><td><span class="who s">시스템</span> <span class="scr" data-pid="AUTH-01"><span class="sid">AUTH-01</span></span> 실패 카운터</td><td>계정 상태 잠금(USER.status)</td><td>—</td><td><span class="scr" data-pid="AUTH-01"><span class="sid">AUTH-01</span></span> 잠금 안내 · 로그인 불가</td><td><b>T8 행 생성</b> 잠금 · [본인확인 후 해제]</td><td>잠금 안내 이메일 <span class="need">[확인필요]</span></td></tr><tr><td>F5</td><td>본인확인 후 해제</td><td><span class="who a">관리자</span> [본인확인 후 해제] — 본인확인은 콘솔 밖(유선·서면)</td><td>활성 복귀 · 실패 카운트 0</td><td>—</td><td>기존 비밀번호·OTP로 로그인 재개</td><td>행 제거 · RESOLVED(해제)</td><td><span class="need">[확인필요]</span></td></tr><tr><td>F6</td><td>탈취 의심 → 동결 전환</td><td><span class="who a">관리자</span> [동결 전환] + 사유 (High 행)</td><td>기관 동결(F1) + 세션 차단</td><td>—</td><td>전 화면 배너 · 로그인 세션 종료</td><td>행 제거 · RESOLVED(동결 전환) · STR 검토 아이템 생성</td><td>통지 없음(STR 누설 금지)</td></tr><tr><td>F7</td><td>해지</td><td><span class="who a">관리자</span> ADM-03 해지 — 진행 거래·잔고 0 전제</td><td>기관·계정 해지</td><td>—</td><td>로그인 불가</td><td>ADM-03 회색 칩 · 행 "해지된 기관입니다"</td><td><span class="need">[확인필요]</span></td></tr></tbody></table></div></div></div>
+<div class="wide"><div class="panel"><div class="panel-title">G. 어드민 전용 — 고객 화면에 반영되지 않는 케이스 <span class="scope">T5 · T6 · X3 · 집행 대사</span></div><div class="tblwrap"><table class="ct"><thead><tr><th>#</th><th>케이스 (무슨 일이 생겼나)</th><th>트리거 (누가·무엇이 바꾸나)</th><th>고객 상태 라벨 · 코드 후보</th><th>고객 목록 (DASH-01 칩 → 카드)</th><th>고객 상세 화면</th><th>어드민 (ADM-02 · ADM-03)</th><th>통지</th></tr></thead><tbody><tr><td>G1</td><td>이상거래 룰 적중(T5)</td><td><span class="who s">시스템</span> 연관 당사자 매칭·게시/취소 반복·사후 패턴</td><td><b>고객 화면 반영 없음</b>(STR 누설 금지) — 결과는 개별 거래 상태(A7·B7 등)로만 간접 반영</td><td>—</td><td>—</td><td>T5 행 미처리 → [검토] 검토중 → [STR 검토] STR 이관 / [무혐의 종결]</td><td>없음</td></tr><tr><td>G2</td><td>월렛·키 알람(T6)</td><td><span class="who s">시스템</span> 비인가 이체 시도(High) · 핫월렛 비중 {정책값}% 초과 · 서명 장애</td><td>반영 없음</td><td>—</td><td>—</td><td>T6 행 미확인 → [확인] → [조치완료] · 실제 조치는 운영 절차</td><td>없음</td></tr><tr><td>G3</td><td>3면 대사 불일치(X3)</td><td><span class="who s">시스템</span> 대사 배치 세 값 불일치 → 해당 지갑 출금 자동 동결</td><td>반영 없음(출금은 T3 단계에서 막힘)</td><td>—</td><td>—</td><td>X3 행 미처리 → 원인 규명 중 → 일치 확인 시 동결 해제·종결 · <span class="red">ADM-02 표에 유형 추가 필요</span></td><td>없음</td></tr><tr><td>G4</td><td>집행 대기 표의 대사 불일치(회송)</td><td><span class="who a">관리자</span> [완료 처리] 시 온체인 내역 ≠ 집행 명세</td><td>고객 라벨 변화 없음(진행 중·확정 유지)</td><td>—</td><td>—</td><td>집행 대기 표 상태 "대사 불일치(회송)" · 재집행·정정은 운영 절차 <span class="need">[확인필요]</span></td><td>없음</td></tr></tbody></table></div></div></div>
+
+<div class="sec"><span class="no">§3</span><h2>카드 집계 정의</h2><span class="hint">각 상태가 어느 카드에 세어지는가</span></div>
+<div class="wide"><div class="panel"><div class="panel-title">DASH-01 거래 요약 카드 3종 — 상태 → 카드 <span class="scope">나목 + 마목 게시 + 마목 신청 통합 · 기관(ORG) 단위</span></div><div class="tblwrap"><table class="ct"><thead><tr><th>구분</th><th>고객 상태 라벨</th><th>칩 색</th><th>DASH-01 카드</th><th>비고</th></tr></thead><tbody><tr class="sub"><td colspan="5">나목 교환 (EXC)</td></tr><tr><td></td><td>요청됨</td><td><span class="st start">대기</span></td><td><span class="card w">대기</span></td><td>고객 행동 대기(견적 확인)</td></tr><tr><td></td><td>비율 제시</td><td><span class="st start">대기</span></td><td><span class="card w">대기</span></td><td>수락 기한 내</td></tr><tr><td></td><td>진행 중</td><td><span class="st mid">진행</span></td><td><span class="card p">진행 중</span></td><td>내부 T1 승인 대기·에스컬레이션·집행 대기 전부 포함</td></tr><tr><td></td><td>보류</td><td><span class="st mid">진행</span></td><td><span class="card p">진행 중</span> <span class="need">결정필요 ⑦</span></td><td>DASH-01은 진행(노랑), EXC-04 상세는 회색(종결 계열)으로 기재 — 한쪽으로 통일 필요. 기획 가정 = 진행 중(재검토로 완료·거절 가능)</td></tr><tr><td></td><td>완료</td><td><span class="st end">완료</span></td><td><span class="card d">완료(누적)</span></td><td>전 기간 누적 · 기간 필터 없음</td></tr><tr><td></td><td>거절 (고객·관리자 공통 라벨)</td><td><span class="st gray">종결</span></td><td><span class="card x">미집계</span></td><td>회색 처리 · 클릭 가능</td></tr><tr><td></td><td>만료</td><td><span class="st gray">종결</span></td><td><span class="card x">미집계</span></td><td>재검증 실패(풀 부족·이탈) 포함(기획 가정)</td></tr><tr class="sub"><td colspan="5">마목 게시 (내 게시 · 게시자)</td></tr><tr><td></td><td>게재중</td><td><span class="st start">대기</span></td><td><span class="card w">대기</span></td><td>신청 대기</td></tr><tr><td></td><td>협의중</td><td><span class="st start">대기</span></td><td><span class="card w">대기</span></td><td>게시자 행동 대기(수락/거절)</td></tr><tr><td></td><td>확정</td><td><span class="st mid">진행</span></td><td><span class="card p">진행 중</span></td><td>T2 확인 대기·보류·이전 진행 전부 "확정" 칩 유지(BRK-05 스텝으로 세분)</td></tr><tr><td></td><td>완료</td><td><span class="st end">완료</span></td><td><span class="card d">완료(누적)</span></td><td>거래 완료(양측 이전 완결)만</td></tr><tr><td></td><td>완료(유효기간 만료) → 라벨 "만료"(가정)</td><td><span class="st gray">종결</span></td><td><span class="card x">미집계</span> <span class="need">결정필요 ⑥</span></td><td>"완료" 라벨로 두면 완료(누적)에 섞임 — 별개 라벨 권고</td></tr><tr><td></td><td>회수</td><td><span class="st gray">종결</span></td><td><span class="card x">미집계</span></td><td></td></tr><tr><td></td><td>중지 (price guard)</td><td><span class="st gray">종결</span></td><td><span class="card x">미집계</span></td><td></td></tr><tr><td></td><td>이전 중지 (T2 관리자)</td><td><span class="st gray">종결</span></td><td><span class="card x">미집계</span> <span class="need">결정필요 ⑧</span></td><td>현 DASH-01 마목 enum 6종에 없음 — 칩 신설 필요(price guard "중지"와 구분)</td></tr><tr class="sub"><td colspan="5">마목 신청 (내 신청 · 신청자)</td></tr><tr><td></td><td>협의중</td><td><span class="st start">대기</span></td><td><span class="card w">대기</span></td><td>게시자 수락 대기</td></tr><tr><td></td><td>확정</td><td><span class="st mid">진행</span></td><td><span class="card p">진행 중</span></td><td>게시 측과 동일</td></tr><tr><td></td><td>완료</td><td><span class="st end">완료</span></td><td><span class="card d">완료(누적)</span></td><td></td></tr><tr><td></td><td>거절됨 · 만료 · 종결(회수·중지·게시 만료)</td><td><span class="st gray">종결</span></td><td><span class="card x">미집계</span></td><td>BRK-07 라벨 그대로 회색 · 현 DASH-01 마목 enum에 "거절됨·만료" 미포함 <span class="need">[확인필요]</span></td></tr><tr><td></td><td>이전 중지</td><td><span class="st gray">종결</span></td><td><span class="card x">미집계</span> <span class="need">결정필요 ⑧</span></td><td>게시 측과 동일</td></tr></tbody></table></div>
+<ul class="rule">
+<li><b>카드 = 같은 조회 시점의 거래 목록 행을 상태 칩 그룹으로 합산</b>한 값. 진입 시 1회 조회, 자동 갱신 없음(목록과 동일 시점). 목업 1 / 1 / 2 = 목록 6행과 정합(종결 3행 제외).</li>
+<li><b>한 행은 카드 1곳에만</b> 세어진다(중복 없음). 종결 계열(거절·만료·회수·중지·이전 중지·신청 종결)은 어느 카드에도 세지 않는다 → 진행 중 + 대기 + 완료(누적) ≠ 목록 행 수.</li>
+<li><b>완료(누적)</b>은 기간 제한 없는 전 기간 누적. 진행 중·대기는 현재 스냅숏이라 시간이 지나면 줄어든다.</li>
+<li><b>기관 단위 집계</b>. 마목 확정 거래 1건은 게시자 기관 대시보드에 "내 게시" 행 1개, 신청자 기관 대시보드에 "내 신청" 행 1개로 각각 세어진다(같은 기관 안에서는 1건).</li>
+<li>값 0은 "0"으로 표시 · 조회 실패는 "—" + 상단 배너. 카드 클릭 필터 없음<span class="need">[확인필요] 필터 도입 여부</span>.</li>
+</ul></div></div>
+<div class="wide"><div class="panel"><div class="panel-title">ADM-02 처리 현황 KPI 카드 4종 — 정의 <span class="scope">DSRV 관리자 콘솔 · 전 기관 합산</span></div><div class="tblwrap"><table class="ct"><thead><tr><th>카드</th><th>정의(무엇을 세나)</th><th>세는 축</th><th>포함</th><th>제외</th></tr></thead><tbody><tr><td>처리 대기</td><td>처리함 미종결 아이템 수</td><td>INBOX_ITEM.item_status ∈ {OPEN, ESCALATED, IN_PROGRESS, HOLD}</td><td>T1~T8·X3 전 유형 · 보류(HOLD) 포함 · 다른 관리자가 처리 중인 행 포함</td><td>RESOLVED(승인·거절·해제 등) · 집행 대기 표 행</td></tr><tr><td>High 워닝</td><td>미종결 중 등급 High</td><td>item_status ≠ RESOLVED ∧ grade = High</td><td>T4 제재 적중·T5·T6 비인가 이체·T8 탈취 의심 등</td><td>등급 주의(Mid)·정상 · 종결 건</td></tr><tr><td>집행 대기</td><td>집행 대기 표 행 수</td><td>EXCHANGE_EXECUTION 집행 대기 + BROKER_SETTLEMENT 미완료(양건 확인·이전 진행·홀드) + WITHDRAWAL_REQUEST 집행 대기</td><td>"조회 중" · "대사 불일치(회송)" 행 포함</td><td>완료 처리된 행(제거 → CSV ③)</td></tr><tr><td>오늘 처리</td><td>당일 종결 건 수</td><td>resolved_at ≥ 당일 00:00 KST ∧ item_status = RESOLVED</td><td>승인·거절·해제·무혐의·STR 이관·자동 종결(T7) 전부 · 관리자 무관(콘솔 전체)</td><td>보류(가역 · 종결 아님) · 집행 완료 처리(처리함 아이템이 아님)</td></tr></tbody></table></div><div class="rule">· 처리 대기와 집행 대기는 서로 배타적이다 — 승인 순간 처리함 행이 RESOLVED로 빠지고 집행 대기 표 행이 생긴다(같은 건이 두 카드에 동시에 세어지지 않음). · 갱신은 처리함·집행 대기 표와 같은 시점(처리 클릭 결과 즉시 · 신규 유입 자동). · 처리 대기 = 콘솔 전체(관리자별 필터 없음).</div></div></div>
+<div class="wide"><div class="panel"><div class="panel-title">어드민 업무 상태 → 처리함 공통 상태 대응표 <span class="scope">ADM-02 상태 컬럼의 값이 어느 공통 상태(=어느 KPI)에 속하는지</span></div><div class="panel-note">"승인"은 처리함 입장에서 종결(RESOLVED·결과코드 승인)이고, 그 건은 집행 대기 표로 넘어간다. 집행 대기 표의 완료 처리는 처리함 아이템 상태가 아니라 대상 테이블(EXCHANGE_EXECUTION 등)의 status를 바꾼다.</div><div class="tblwrap"><table class="ct"><thead><tr><th>유형</th><th>업무 상태(ADM-02 상태 컬럼)</th><th>공통 상태 → 카드</th><th>비고</th></tr></thead><tbody><tr><td>T1 나목 승인</td><td>승인 대기 / 에스컬레이션 / 보류 / 집행 대기 / 완료 / 거절</td><td>OPEN·ESCALATED·HOLD → 처리 대기 ｜ 승인 = RESOLVED → 행 제거 + 집행 대기 표 → 집행 대기 ｜ 거절 = RESOLVED</td><td>완료는 집행 대기 표에서 처리 — 처리함 아이템 상태가 아님</td></tr><tr><td>T2 마목 확인</td><td>확인 대기 / 에스컬레이션 / 보류 / 이전 진행 / 완료 / 이전 중지</td><td>OPEN·ESCALATED·HOLD → 처리 대기 ｜ 승인 = RESOLVED → 집행 대기 표 "이전 진행" ｜ 이전 중지 = RESOLVED</td><td></td></tr><tr><td>T3 출금·이전</td><td>대기(지연발효 중) / 대기(승인 가능) / 집행 대기 / 완료 / 거절 / 차단</td><td>두 "대기" 모두 OPEN → 처리 대기 ｜ 승인 = RESOLVED → 집행 대기 표 ｜ 거절·차단 = RESOLVED</td><td>차단은 STR 검토 아이템을 새로 만들어 처리 대기 +1</td></tr><tr><td>T4 입금 격리</td><td>격리 중 / 소명 대기 / 해제 / 동결</td><td>격리 중 = OPEN(High면 ESCALATED) ｜ 소명 대기 = HOLD ｜ 해제·동결 = RESOLVED</td><td>제재 적중 건은 생성 시 동결이지만 아이템은 OPEN/ESCALATED(STR 검토 전)</td></tr><tr><td>T5 이상거래</td><td>미처리 / 검토중 / STR 이관 / 무혐의</td><td>미처리 = OPEN(High면 ESCALATED) ｜ 검토중 = IN_PROGRESS ｜ STR 이관·무혐의 = RESOLVED</td><td></td></tr><tr><td>T6 월렛·키</td><td>미확인 / 확인 / 조치완료</td><td>미확인 = OPEN/ESCALATED ｜ 확인 = IN_PROGRESS ｜ 조치완료 = RESOLVED</td><td></td></tr><tr><td>T7 KYC 재이행</td><td>일시제한 예정 / 제한 적용 / 자동 종결</td><td>일시제한 예정 = OPEN ｜ 제한 적용·자동 종결 = RESOLVED</td><td>제한 적용 후 ADM-03 복귀는 처리함 밖</td></tr><tr><td>T8 계정 잠금</td><td>잠금 / 해제 / 동결 전환</td><td>잠금 = OPEN(탈취 의심 = ESCALATED·High) ｜ 해제·동결 전환 = RESOLVED</td><td></td></tr><tr><td>X3 3면 대사</td><td>미처리 / 원인 규명 중 / 해제·종결</td><td>미처리 = OPEN ｜ 원인 규명 중 = IN_PROGRESS ｜ 해제 = RESOLVED</td><td></td></tr></tbody></table></div></div></div>
+
+<div class="sec"><span class="no">§4</span><h2>어드민 처리함 유형별 전이 (T1~T8 · X3)</h2><span class="hint">종전 "상태 전이(처리함)" 본문 — 그대로 유지</span></div>
+<div class="wide">
+<div class="panel">
+    <div class="panel-title">용어</div>
+    <dl class="gloss">
+      <dt>나목 교환</dt><dd>고객이 DSRV를 상대방으로 하는 ETH·USDC·USDT 교환 (예: ETH↔USDC, USDC↔USDT · 2026-09-02 ETH 편입). 가상자산사업자 신고 업종 구분에서 온 이름으로, 이 문서에서는 "DSRV와의 직접 교환"으로 읽으면 된다.</dd>
+      <dt>마목 중개</dt><dd>고객 간 교환을 DSRV가 게시판 방식으로 중개하는 것. 게시자가 신청을 수락하는 순간 거래가 확정되고 법적 구속력이 생긴다. 게시당 신청은 동시에 1건만 받는다(신청 1건 접수 = 게시 '협의중' · 추가 신청 차단). 확정 전까지 게시자는 게시를 회수할 수 있다(BRK-06 · 2026-09-02). 중개 수수료는 거래액의 1% 고정, 양측 각자 부담(기준 = 각자 보내는 자산 수량).</dd>
+      <dt>KYT</dt><dd>트랜잭션의 자금 출처·경로 위험도를 자동 분석하는 검사 (Know Your Transaction).</dd>
+      <dt>BLF</dt><dd>제재 대상·블랙리스트에 오른 지갑 주소인지 대조하는 필터.</dd>
+      <dt>STR</dt><dd>의심거래보고. 자금세탁이 의심되는 거래를 금융당국(FIU)에 보고하는 절차. 보고 대상 고객이 보고 사실을 알게 해서는 안 된다(누설 금지).</dd>
+      <dt>에스컬레이션</dt><dd>자동검증에서 위험등급 '주의' 이상이 잡힌 건. 일반 대기 건과 구분해 우선 검토한다.</dd>
+      <dt>지연발효</dt><dd>새 출금 주소를 등록해도 일정 시간이 지나야 실제 출금이 가능해지는 보호장치. 계정 탈취 시 즉시 출금 피해를 막는다.</dd>
+      <dt>격리 지갑</dt><dd>위험 신호가 있는 입금을 고객 잔고에 반영하지 않고 따로 보관하는 지갑.</dd>
+      <dt>3면 대사</dt><dd>내부 장부 · 블록체인 실제 잔고 · 콜드월렛 기록, 세 곳의 수치가 서로 일치하는지 맞춰보는 정기 점검.</dd>
+      <dt>트래블룰</dt><dd>가상자산을 이전할 때 송신인·수신인 정보를 함께 전달해야 하는 규제 요건.</dd>
+    </dl>
+  </div>
+</div>
+<div class="wide">
+  <div class="panel">
+    <div class="panel-title">상태 모델 — 2계층 분리 <span class="scope">아이템 공통 상태 + 대상 업무 상태</span></div>
+    <div class="intro" style="margin-bottom:8px;">
+      <p>8가지 유형은 대상 업무가 서로 달라(교환 승인, 입금 격리, 계정 잠금…) 상태 이름을 하나로 통일하면 실제 업무가 안 보인다. 그래서 두 층으로 나눈다.</p>
+      <p>① <b>아이템 공통 상태 (5종)</b> — 유형과 무관하게 "아직 안 봤나 / 처리 중인가 / 끝났나"를 집계하는 공통 축. ADM-02 상단 KPI(처리 대기 N건 등)가 이 축을 센다(§3 대응표).<br>
+      ② <b>업무 상태</b> — 유형별 실제 업무 상태(승인 대기, 격리 중, 잠금 등). 처리함 '상태' 컬럼에 표시되는 값. 아래 유형별 패널과 총목록이 이 축이다.</p>
+    </div>
+    <div class="flow">
+      <span style="font-size:10px;font-weight:700;color:#64748b;margin-right:6px;">아이템 공통 (5종)</span>
+      <span class="st start">OPEN 미처리</span><span class="fa">→</span>
+      <span class="st esc">ESCALATED 에스컬레이션</span><span class="fa">→</span>
+      <span class="st mid">IN_PROGRESS 처리중</span><span class="fa">→</span>
+      <span class="st mid">HOLD 보류</span><span class="fa">→</span>
+      <span class="st end">RESOLVED 종결 + 결과코드</span>
+    </div>
+    <div style="font-size:10.5px;color:#64748b;margin-top:4px;">
+      · 자동검증 등급이 '주의' 이상이면 처음부터 ESCALATED로 생성된다 · RESOLVED에는 결과코드가 붙는다: 승인 / 거절 / 소명 인정 / 동결 / STR 이관 / 무혐의 / 조치완료 / 해제 / 제한 적용 / 이전 중지 / 차단 / 자동 종결(T7)<br>
+      · <b style="color:#334155;">누가 상태를 바꾸는가</b> — <b style="color:#0369a1;">시스템(자동)</b>: 아이템 생성 전부 · 지연발효 타이머 만료(T3) · 온체인 확정 반영(T1·T3) · 재이행 완료 자동 종결(T7) · 격리/동결/잠금의 개시 / <b style="color:#b45309;">사람(관리자)</b>: 종결로 가는 판단 전부 — 자동 체결·자동 승인·자동 거절 없음 · 본인 기안 자기승인 차단 · 보류/거절 사유 필수 · 모든 전이 감사로그 기록
+    </div>
+  </div>
+</div>
 <div class="cols">
 
   <!-- T1 -->
@@ -376,6 +436,7 @@
 
 </div>
 
+
 <!-- 상태값 총목록 -->
 <div class="wide">
   <div class="panel">
@@ -397,6 +458,8 @@
   </div>
 </div>
 
+
+
 <div class="foot">
   <b>[결정필요]</b> 아직 확정하지 않은 사항 — 확정 전까지 본 문서의 해당 부분은 기획 가정이다.
   <ol>
@@ -404,9 +467,13 @@
     <li>T4 입금 격리의 소명 시한과, 시한 초과 시 기본 처리 방향</li>
     <li>T7 재이행 완료 시 자동 종결 허용 여부 — 불허로 결정되면 관리자 '확인 후 종결' 버튼으로 변경</li>
     <li>High 등급 워닝이 방치될 때 상위 보고 룰 — N시간 미처리 시 통지 (야간·주말 확인 주체 <span class="red">[확인필요]</span>와 연동)</li>
-    <li>DB 스키마 개정 — 알람·워닝이 여러 테이블에 분산된 구 구조를 처리함 중심으로 통합(공통 아이템 테이블 + 유형별 상세 연결), 상태값(enum)은 본 문서 기준으로 갱신</li>
-    <li>고객 화면 도메인 상태(고객 콘솔) 확정 — 나목(요청됨·제시·진행중·완료·보류·거절·만료) · 마목 게시(게재중·협의중·확정·완료·회수·중지 — 위 '마목 게시 상태' 패널, 2026-09-02 개정) · 마목 신청(협의중·확정·완료·거절됨·만료·종결) · 마목 이전(BRK-05: 확정·양건 확인·이전 진행·완료·이전 보류·이전 중지)을 DASH-01 상태 칩(진행·대기·완료·종결 4색)과 함께 enum으로 확정 필요 · 유효기간 만료를 '완료'와 별개 라벨로 둘지 포함 (BRK-05·06·07 상세에 초안)</li>
+    <li>DB 스키마 개정 — 처리함 중심 통합은 v0.7에 반영됨. 남은 것은 ⑨의 enum 명칭 정합</li>
+    <li>마목 게시 유효기간 만료의 고객 라벨 — "완료(유효기간 만료)"로 두면 DASH-01 완료(누적)에 섞임. 기획 가정 = 별개 라벨 "만료"(회색·미집계)</li>
+    <li>나목 "보류"의 칩 색·카드 귀속 — DASH-01은 진행(노랑)·진행 중 카드, EXC-04는 회색(종결 계열)으로 기재. 기획 가정 = 진행(노랑)·진행 중(보류는 가역 상태)</li>
+    <li>마목 T2 이전 보류·이전 중지의 DASH-01 표시 — 이전 보류는 "확정" 칩 유지(BRK-05에서 배너), 이전 중지는 회색 칩 "이전 중지" 신설(price guard "중지"와 구분). 현 마목 enum 6종에 없음</li>
+    <li>고객 상태 enum·코드 확정 — 나목 7종(요청됨·비율 제시·진행 중·보류·완료·거절·만료) · 마목 게시 8종(게재중·협의중·확정·완료·만료·회수·중지·이전 중지) · 마목 신청(협의중·확정·완료·거절됨·만료·종결+사유코드·이전 중지). 스키마 v0.7의 EXCHANGE_REQUEST·RFQ_INTENT(신청접수·중지(시세변동) 구명칭)·RFQ_APPLICATION enum과 라벨 불일치 — 본 표 기준으로 스키마 갱신. 나목 "거절"을 고객 거절/관리자 거절로 나눌지 포함</li>
   </ol>
+  <div style="margin-top:8px;"><b>[확인필요]</b> 나목 거절·만료 건의 EXC-04 상세 진입 여부(EXC-04 변형은 현재 완료/보류 2종) · 보류·거절·완료 시 고객 이메일 통지 종류(현 이메일 4종은 마목 ①~④만) · 마목 신청 거절·만료 통지 메일 · price guard 중지 시 어드민 통지 · 출금·입금 진행 상태의 고객 표시 위치(DASH-01은 잔고만) · 오입금·스팸 안내 위치 · 집행 대사 불일치(회송) 후속 절차.</div>
   <div style="margin-top:8px;">화면 박스(<span class="mono">EXC-02</span> 등)를 클릭하면 해당 화면기획으로 이동한다.</div>
 </div>
 
