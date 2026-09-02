@@ -20,7 +20,6 @@
       <div class="labels" id="labels">
         <div class="lbl"><span class="lbl-text">전역<br>브랜드 패널</span></div>
         <div class="lbl"><span class="lbl-text">2FA 앱<br>연결</span></div>
-        <div class="lbl"><span class="lbl-text">보조 링크</span></div>
         <div class="lbl"><span class="lbl-text">푸터</span></div>
       </div>
       <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
@@ -60,17 +59,6 @@
       </div>
 
       <!-- 보조 링크 -->
-      <div class="zone card" data-idx="3,4">
-        <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="3" style="position:relative;padding:4px;border-radius:8px;">
-          <div class="pin" data-idx="3" style="top:-6px;right:-6px;">4</div>
-          <div class="aux-link">인증이 정상적으로 작동하지 않나요? <strong>문의하기</strong></div>
-        </div>
-        <div class="item-area" data-highlight="4" style="position:relative;padding:4px;border-radius:8px;margin-top:4px;">
-          <div class="pin" data-idx="4" style="top:-6px;right:-6px;">5</div>
-          <div class="aux-back">‹ &nbsp;로그인으로 돌아가기</div>
-        </div>
-      </div>
 
       <div class="zone" data-idx="">
         <div class="zone-highlight"></div>
@@ -116,28 +104,6 @@
         </div>
       </div>
     </div>
-
-    <div class="itm" data-idx="3">
-      <div class="num">4</div>
-      <div>
-        <div class="itm-title">'인증이 정상적으로 작동하지 않나요? 문의하기' 링크</div>
-        <div class="itm-desc"><span class="basis">근거 AUTH-01 상세 8</span></div>
-        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">'문의하기'</span><span class="nav-act">클릭</span><span class="nav-to stay">mailto → 새 메일(수신 = 문의 주소) / 텍스트 → 주소 노출 · 화면 상태 유지</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="itm" data-idx="4">
-      <div class="num">5</div>
-      <div>
-        <div class="itm-title">'‹ 로그인으로 돌아가기' 링크</div>
-        <div class="itm-desc"><strong>재개</strong> ONB-01 완료가 서버에 기록되어 있어 링크 재클릭 시 이 화면으로 돌아온다.<br><strong>로그인 시도</strong> 계정이 '활성화 진행 중'이면 AUTH-01 로그인을 막고 안내는 1단계 실패 칩 문구를 그대로 쓴다.<br><span class="basis">근거 공통 UI 규격 종료 동선</span></div>
-        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">'로그인으로 돌아가기'</span><span class="nav-act">클릭 · 확인 없음</span><span class="nav-to"><strong>로그인(AUTH-01)</strong> 1단계 · 진행 상태 서버 보존</span></div>
-        </div>
-      </div>
-    </div>
   </div>
 
 </div>
@@ -157,7 +123,7 @@
 <section class="footer-note">
   <div class="note-card">
     <div class="note-title">비고</div>
-    <div class="note-body">· 계정 활성화 <strong>2/3 — 2FA 앱 연결</strong> · ONB-01 [다음] → 이 화면(QR·설정 키·6자리 검증) → 성공 시 ONB-03.<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 'Set 2FA Code'·'Invalid Credentials' 적용(남은 횟수 노출 포함) · 등록 완료 상태 표시는 시안 없음 → <span class="chk">[디자인 요청]</span> · 원본 <span class="mono">reference/figma/_crops/F2_row1_c2.png · F3_row1_c3.png</span>.<br>· <strong>확정(구현 단순 우선)</strong> — 6자리 붙여넣기 칸별 분배 삭제(2026-09-02 편의기능 제거 · paste 가로채기 없음) · 설정 키 복사 버튼 없음 · 연속 실패 도달 시 시크릿 재생성(토큰 무효화 없음) · 미완료 계정 로그인 안내는 기존 실패 칩 문구 재사용.<br>· 남은 <span class="chk">[확인필요]</span> — 연속 실패 임계 값 · 등록 완료 상태 디자인.<br>· 이전 = ONB-01 / 다음 = ONB-03</div>
+    <div class="note-body">· 계정 활성화 <strong>2/3 — 2FA 앱 연결</strong> · ONB-01 [다음] → 이 화면(QR·설정 키·6자리 검증) → 성공 시 ONB-03.<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 'Set 2FA Code'·'Invalid Credentials' 적용(남은 횟수 노출 포함) · 등록 완료 상태 표시는 시안 없음 → <span class="chk">[디자인 요청]</span> · 원본 <span class="mono">reference/figma/_crops/F2_row1_c2.png · F3_row1_c3.png</span>.<br>· <strong>확정(2026-09-02)</strong> — 보조 링크 영역 삭제(문의하기 · 로그인으로 돌아가기) · 활성화 도중 외부 이탈 동선 없음.<br>· <strong>확정(구현 단순 우선)</strong> — 6자리 붙여넣기 칸별 분배 삭제(2026-09-02 편의기능 제거 · paste 가로채기 없음) · 설정 키 복사 버튼 없음 · 연속 실패 도달 시 시크릿 재생성(토큰 무효화 없음) · 미완료 계정 로그인 안내는 기존 실패 칩 문구 재사용.<br>· 남은 <span class="chk">[확인필요]</span> — 연속 실패 임계 값 · 등록 완료 상태 디자인.<br>· 이전 = ONB-01 / 다음 = ONB-03</div>
   </div>
 </section>
 
