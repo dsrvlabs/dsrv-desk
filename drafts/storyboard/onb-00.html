@@ -107,7 +107,7 @@
           <div class="pin" data-idx="4" style="top:-6px;right:-6px;">5</div>
           <div style="font-size:10.5px;color:#9da8bb;">계정 관련 문의는 <span style="color:#788297;">portal.kyc@dsrvlabs.com</span> 으로 보내주세요.</div>
           <div class="hr-line"></div>
-          <div style="text-align:center;font-size:9.5px;color:#9da8bb;line-height:1.8;">This is an automated email, please do not reply.<br><span style="color:#0556ff;">contact@dsrvlabs.com</span> &nbsp;/&nbsp; Tel: {대표 연락처}<br>© 2026. DSRV labs. All rights reserved</div>
+          <div style="text-align:center;font-size:9.5px;color:#9da8bb;line-height:1.8;">This is an automated email, please do not reply.<br><span style="color:#0556ff;">portal.kyc@dsrvlabs.com</span><br>© 2026. DSRV labs. All rights reserved</div>
         </div>
       </div>
 
@@ -164,7 +164,7 @@
       <div class="num">5</div>
       <div>
         <div class="itm-title">문의 안내 · 메일 푸터 (표시 전용)</div>
-        <div class="itm-desc"><strong>값</strong> 연락처와 연도는 고정 텍스트로 넣고 자동 갱신하지 않는다.<br><span class="chk">[확인필요: 대표 연락처 확정값]</span><br><span class="basis">근거 notation 이메일 통지</span></div>
+        <div class="itm-desc"><strong>값</strong> 푸터 주소는 발신·문의 주소와 같은 portal.kyc@dsrvlabs.com 하나만 쓴다. 전화번호는 넣지 않는다. 연도는 고정 텍스트로 두고 자동 갱신하지 않는다.<br><span class="basis">근거 notation 이메일 통지</span></div>
       </div>
     </div>
   </div>
@@ -185,7 +185,7 @@
       </div>
       <div class="dtl" data-idx="2">
         <div class="detail-label"><span class="dtl-num">3</span>토큰 케이스 → 표시 위치</div>
-      <div class="dtl-body"><span class="box"><strong>표시 위치</strong> 토큰 오류는 ONB-01 한 곳에만 표시하고 별도 오류 화면을 만들지 않는다.<br><strong>A 만료</strong> 발송 시각 + 72시간 경과. 재발급은 ADM-03 초대 재발송이며 이전 토큰은 즉시 무효가 된다.<br><strong>B 사용됨</strong> 활성화 완료로 소멸한 토큰이다. 정상 계정이므로 AUTH-01 링크를 제공한다.<br><strong>재개</strong> 완료 전 재클릭은 진행 중 화면으로 라우팅한다.<br><strong>문구</strong> 오류 문구에 내부 사유를 넣지 않는다.</span></div>
+      <div class="dtl-body"><span class="box"><strong>표시 위치</strong> 토큰 오류는 <strong>초대 링크 오류(ONB-04)</strong> 한 화면에서만 보여준다. ONB-01에 배너 변형을 두지 않는다.<br><strong>통합</strong> 만료(발송 + 72시간 경과)와 이미 사용됨(활성화 완료로 소멸)을 구분하지 않고 같은 문구를 쓴다 — 토큰 상태를 알려주지 않는다.<br><strong>재발급</strong> ADM-03 초대 재발송으로만 한다(새 토큰 · 이전 토큰 즉시 무효).<br><strong>재개</strong> 활성화 미완료 상태의 재클릭은 재개로 처리해 진행 중 화면으로 라우팅하므로 오류 화면에 오지 않는다.</span></div>
       </div>
     </div>
   </div>
@@ -194,7 +194,7 @@
 <section class="footer-note">
   <div class="note-card">
     <div class="note-title">비고</div>
-    <div class="note-body">· 온보딩 시작점 · KYC 게이팅 화면 없음 — 계정은 KYC 완료 법인에만 생성·초대 · KYC 예외는 EXC-01 배너 + 거래 요청 차단으로 처리(ADM-03 종속).<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 메일 프레임 적용 · 1조직 1계정 고지는 시안 없음 → 기획 유지 <span class="chk">[디자인 요청]</span> · 원본 <span class="mono">reference/figma/_crops/F0_mail.png</span>.<br>· <strong>확정(구현 단순 우선)</strong> — 발신·문의 주소 단일 · 유효시간 72시간 고정값(파라미터화 없음) · 연락처·연도 고정 텍스트 · 중도 이탈 재클릭은 재개.<br>· 남은 <span class="chk">[확인필요]</span> — 활성화 URL 도메인 · 대표 연락처 확정값.<br>· 다음 = ONB-01 → ONB-02 → ONB-03</div>
+    <div class="note-body">· 온보딩 시작점 · KYC 게이팅 화면 없음 — 계정은 KYC 완료 법인에만 생성·초대 · KYC 예외는 EXC-01 배너 + 거래 요청 차단으로 처리(ADM-03 종속).<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 메일 프레임 적용 · 1조직 1계정 고지는 시안 없음 → 기획 유지 <span class="chk">[디자인 요청]</span> · 원본 <span class="mono">reference/figma/_crops/F0_mail.png</span>.<br>· <strong>확정(구현 단순 우선)</strong> — 발신·문의 주소 단일 · 유효시간 72시간 고정값(파라미터화 없음) · 연락처·연도 고정 텍스트 · 중도 이탈 재클릭은 재개.<br>· 남은 <span class="chk">[확인필요]</span> — 활성화 URL 도메인.<br>· <strong>확정(2026-09-02)</strong> — 메일 하단 연락처는 portal.kyc@dsrvlabs.com 단일 · 전화번호 미표기.<br>· 다음 = ONB-01 → ONB-02 → ONB-03 / 토큰 오류 = ONB-04</div>
   </div>
 </section>
 

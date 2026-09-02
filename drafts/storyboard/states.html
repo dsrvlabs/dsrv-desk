@@ -38,7 +38,12 @@
   .desc .trg b { color:#334155; }
 
   /* 상태 pill flow */
-  .flow { display:flex; flex-wrap:wrap; align-items:center; row-gap:6px; margin:8px 0 4px; }
+  /* 상태 흐름: 한 줄 유지 + 가로 스크롤 (줄바꿈으로 연결이 끊기지 않게) */
+  .flow { display:flex; flex-wrap:nowrap; align-items:center; gap:0; margin:8px 0 6px;
+          overflow-x:auto; padding-bottom:4px; }
+  .flow::-webkit-scrollbar { height:5px; }
+  .flow::-webkit-scrollbar-thumb { background:#cbd5e1; border-radius:3px; }
+  .flow .st { flex:0 0 auto; }
   .st { display:inline-block; font-size:10.5px; font-weight:700; padding:2px 9px; border-radius:12px;
         border:1px solid #cbd5e1; color:#334155; background:#fff; white-space:nowrap; }
   .st.start { border-color:#93c5fd; color:#1d4ed8; background:#eff6ff; }
@@ -46,9 +51,17 @@
   .st.mid   { border-color:#fcd34d; color:#b45309; background:#fffbeb; }
   .st.end   { border-color:#86efac; color:#15803d; background:#f0fdf4; }
   .st.bad   { border-color:#fca5a5; color:#b91c1c; background:#fef2f2; }
-  .fa { color:#94a3b8; font-size:11px; padding:0 5px; }
-  .fa .by { display:block; font-size:8.5px; line-height:1.1; text-align:center; color:#b45309; font-weight:700; }
-  .fa .by.sys { color:#0369a1; }
+  /* 연결선: 라벨(위) + 실선 화살표(아래) */
+  .fa { flex:0 0 auto; display:inline-flex; flex-direction:column; align-items:center; justify-content:center;
+        color:#64748b; font-size:11px; padding:0 2px; }
+  .fa .by { display:block; font-size:9.5px; line-height:1.25; text-align:center; color:#92400e; font-weight:700;
+            background:#fffbeb; border:1px solid #fde68a; border-radius:5px; padding:1px 6px; margin-bottom:3px;
+            white-space:nowrap; }
+  .fa .by.sys { color:#075985; background:#f0f9ff; border-color:#bae6fd; }
+  .fa .ar { display:block; width:100%; min-width:52px; height:0; border-top:1.5px solid #64748b; position:relative; }
+  .fa .ar::after { content:""; position:absolute; right:-1px; top:-4.5px;
+                   border-left:7px solid #64748b; border-top:4.5px solid transparent; border-bottom:4.5px solid transparent; }
+  .fa:not(:has(.ar)) { font-size:12px; color:#94a3b8; padding:0 7px; font-weight:700; }
 
   .tbl { width:auto; max-width:100%; border-collapse:collapse; table-layout:auto; font-size:11px; margin-top:8px; }
   .tbl th { background:#f1f5f9; color:#64748b; font-weight:700; text-align:left; padding:5px 8px;
@@ -120,17 +133,17 @@
 <div class="sec"><span class="no">§1</span><h2>고객 거래 케이스분기</h2><span class="hint">나목 교환 · 마목 게시 · 마목 신청 — 한 행 = 갈라지는 경우 하나</span></div>
 <div class="wide"><div class="panel"><div class="panel-title">나목 교환 — 고객 상태 흐름 <span class="scope">EXC-01 → 02 → 03/04 · DASH-01 칩</span></div>
 <div class="flow">
-  <span class="st start">요청됨</span><span class="fa"><span class="by sys">견적 자동 산정</span>→</span>
-  <span class="st start">비율 제시</span><span class="fa"><span class="by">고객 수락(EXC-02)</span>→</span>
-  <span class="st mid">진행 중</span><span class="fa"><span class="by">관리자 승인 → 집행(ADM-02)</span>→</span>
+  <span class="st start">요청됨</span><span class="fa"><span class="by sys">견적 자동 산정</span><i class="ar"></i></span>
+  <span class="st start">비율 제시</span><span class="fa"><span class="by">고객 수락(EXC-02)</span><i class="ar"></i></span>
+  <span class="st mid">진행 중</span><span class="fa"><span class="by">관리자 승인 → 집행(ADM-02)</span><i class="ar"></i></span>
   <span class="st end">완료</span>
 </div>
 <div class="flow">
-  <span class="st start">비율 제시</span><span class="fa"><span class="by">고객 거절</span>→</span><span class="st bad">거절</span>
-  <span class="fa">/</span><span class="fa"><span class="by sys">기한 만료 · 재검증 실패</span>→</span><span class="st bad">만료</span>
+  <span class="st start">비율 제시</span><span class="fa"><span class="by">고객 거절</span><i class="ar"></i></span><span class="st bad">거절</span>
+  <span class="fa">/</span><span class="fa"><span class="by sys">기한 만료 · 재검증 실패</span><i class="ar"></i></span><span class="st bad">만료</span>
 </div>
 <div class="flow">
-  <span class="st mid">진행 중</span><span class="fa"><span class="by">관리자 거절(사유 · ADM-02)</span>→</span><span class="st bad">거절</span>
+  <span class="st mid">진행 중</span><span class="fa"><span class="by">관리자 거절(사유 · ADM-02)</span><i class="ar"></i></span><span class="st bad">거절</span>
 </div>
 <div style="font-size:10.5px;color:#64748b;margin-top:4px;">· 고객 라벨 "진행 중" 하나가 어드민의 승인 대기·에스컬레이션·<b>보류</b>·집행 대기 네 단계를 덮는다(EXC-03 — 내부 단계·담당자 미노출) · <b>고객 화면에 "보류" 상태 없음</b>(2026-09-02 결정) — 진행 중에서 갈 수 있는 곳은 완료 또는 거절 둘뿐. 관리자 보류는 어드민 내부 상태(T1 HOLD)로만 존재하고 고객에게는 진행 중으로 보인다 · 스키마 v0.7 EXCHANGE_REQUEST.status도 같은 6종(요청됨·비율 제시·진행 중·완료·거절·만료)으로 정합 완료(2026-09-02) · 거절은 단일 enum이고 화면 표기만 「거절 (DSRV 심사)」/「거절 (고객 요청)」로 구분(2026-09-02(10))</div></div></div>
 <div class="wide"><div class="panel"><div class="panel-title">A. 나목 교환 (DSRV 상대 교환) <span class="scope">고객 1건 = 요청번호 EXC-YYYYMMDD-NNNN 1개</span></div><div class="panel-note">내부 승인 3단계(승인 대기·에스컬레이션·집행 대기)는 고객에게 "진행 중" 하나로만 보인다. 어드민 열의 "행"은 ADM-02 처리함 행을 뜻한다.</div><div class="tblwrap"><table class="ct"><thead><tr><th>#</th><th>케이스 (무슨 일이 생겼나)</th><th>트리거 (누가·무엇이 바꾸나)</th><th>고객 상태 라벨 · 코드 후보</th><th>고객 목록 (DASH-01 칩 → 카드)</th><th>고객 상세 화면</th><th>어드민 (ADM-02 · ADM-03)</th><th>통지</th></tr></thead><tbody><tr><td>A1</td><td>거래 요청 접수</td><td><span class="who c">고객</span><span class="scr" data-pid="EXC-01"><span class="sid">EXC-01</span>[거래 요청]</span></td><td>요청됨 · <span class="mono">REQUESTED</span></td><td><span class="st start">대기</span> → <span class="card w">대기</span></td><td><span class="scr" data-pid="EXC-02"><span class="sid">EXC-02</span></span> 견적 산정 중("불러오는 중…")</td><td>처리함 행 없음 — 견적은 시스템 자동 산정</td><td>—</td></tr><tr><td>A2</td><td>확정 비율 제시</td><td><span class="who s">시스템</span> 견적 자동 산정 완료(ADM-03 스프레드·시세 소스)</td><td>비율 제시 · <span class="mono">QUOTED</span></td><td><span class="st start">대기</span> → <span class="card w">대기</span></td><td><span class="scr" data-pid="EXC-02"><span class="sid">EXC-02</span></span> 카운트다운 · [수락]·[거절] 활성</td><td>행 없음</td><td>—</td></tr><tr><td>A3</td><td>고객 수락 → DSRV 내부 승인 시작</td><td><span class="who c">고객</span><span class="scr" data-pid="EXC-02"><span class="sid">EXC-02</span>[수락]</span> 클릭 즉시 확정(확인 없음)</td><td>진행 중 · <span class="mono">IN_PROGRESS</span> — 내부 승인 대기·집행 대기를 한 라벨로</td><td><span class="st mid">진행</span> → <span class="card p">진행 중</span></td><td><span class="scr" data-pid="EXC-03"><span class="sid">EXC-03</span></span> 스텝 2 "진행중" · 내부 단계·담당자 미노출</td><td><b>T1 행 생성</b> 승인 대기 / 등급 주의↑이면 에스컬레이션 · 자동검증(한도·BLF·KYT·재고) 첨부</td><td>없음(화면 접수 안내)</td></tr><tr><td>A4</td><td>관리자 보류 (내부)</td><td><span class="who a">관리자</span> ADM-02 [보류] + 사유(필수)</td><td>진행 중 (변화 없음) — 고객 화면에 보류 라벨 없음(2026-09-02 결정)</td><td><span class="st mid">진행</span> → <span class="card p">진행 중</span></td><td><span class="scr" data-pid="EXC-03"><span class="sid">EXC-03</span></span> 변화 없음 · 보류 사유 미노출</td><td>행 유지 · 상태 보류 · 공통 HOLD · [승인]·[거절]로 재검토 → A5 또는 A7</td><td>없음</td></tr><tr><td>A5</td><td>관리자 승인 → 집행 대기</td><td><span class="who a">관리자</span> ADM-02 [승인](본인 기안 불가 · 재고·KYC 재검증)</td><td>진행 중 (변화 없음)</td><td><span class="st mid">진행</span> → <span class="card p">진행 중</span></td><td><span class="scr" data-pid="EXC-03"><span class="sid">EXC-03</span></span> 변화 없음</td><td>처리함 행 제거 · 공통 RESOLVED(승인) → <b>집행 대기 표</b>에 행 "집행 대기"</td><td>없음</td></tr><tr><td>A6</td><td>집행 완료</td><td><span class="who a">관리자</span> 집행 대기 표 [완료 처리] — txhash 온체인 대사(주소·자산·수량) 일치 시만</td><td>완료 · <span class="mono">COMPLETED</span></td><td><span class="st end">완료</span> → <span class="card d">완료(누적)</span></td><td><span class="scr" data-pid="EXC-04"><span class="sid">EXC-04</span></span> 스텝 3 ✓ 완료 · 집행 방식·완료 일시·풀 차감</td><td>집행 대기 표 행 제거 → 이후 조회는 CSV ③</td><td>이메일 ③ 거래 완료</td></tr><tr><td>A7</td><td>관리자 거절</td><td><span class="who a">관리자</span> ADM-02 [거절] + 사유(필수 · 되돌릴 수 없음)</td><td>거절 · <span class="mono">REJECTED</span> — enum은 A8과 동일, 화면 표기는 「거절 (DSRV 심사)」로 구분(2026-09-02(10))</td><td><span class="st gray">종결</span> → <span class="card x">미집계</span></td><td><span class="scr" data-pid="EXC-04"><span class="sid">EXC-04</span></span> 「거절 (DSRV 심사)」 변형 + 사유 배너</td><td>행 제거 · RESOLVED(거절) · AML 사유면 STR 검토 아이템 생성</td><td>이메일 ⑤ 거래 거절 — 일반화 사유만 · STR 누설 금지</td></tr><tr><td>A8</td><td>고객 거절</td><td><span class="who c">고객</span><span class="scr" data-pid="EXC-02"><span class="sid">EXC-02</span>[거절]</span>(확인 없음)</td><td>거절 · <span class="mono">REJECTED</span></td><td><span class="st gray">종결</span> → <span class="card x">미집계</span></td><td><span class="scr" data-pid="EXC-04"><span class="sid">EXC-04</span></span> 「거절 (고객 요청)」 변형 + 고정 문구 배너</td><td>행 없음(견적 QUOTE 상태 거절 · 처리함 무관)</td><td>이메일 ⑤ 거래 거절(고객 요청 문구)</td></tr><tr><td>A9</td><td>수락 기한 만료</td><td><span class="who s">시스템</span> 카운트다운 00:00 · 종결 판정은 서버</td><td>만료 · <span class="mono">EXPIRED</span></td><td><span class="st gray">종결</span> → <span class="card x">미집계</span></td><td><span class="scr" data-pid="EXC-02"><span class="sid">EXC-02</span></span> 체류 중이면 "만료됨 — 비율 무효" · 재진입 시 <span class="scr" data-pid="EXC-04"><span class="sid">EXC-04</span></span> 「만료」 변형</td><td>행 없음</td><td>이메일 ⑥ 거래 만료 · 재요청은 EXC-01(새 번호)</td></tr><tr><td>A10</td><td>풀 부족 · 비율 이탈 — 수락 클릭 시 재검증 실패, 또는 수락 후 집행 전 이탈(집행 정지)</td><td><span class="who s">시스템</span> 서버 재검증 / 외부지표 ADM-03 이탈 임계 초과</td><td>만료 · <span class="mono">EXPIRED</span> (기획 가정 — QUOTE "이탈"을 고객에게는 만료로 · EXC-04 만료 사유 "가용 풀 부족·비율 변동")</td><td><span class="st gray">종결</span> → <span class="card x">미집계</span></td><td><span class="scr" data-pid="EXC-02"><span class="sid">EXC-02</span></span> 실패 안내 노출 · [수락] 비활성</td><td>행 없음</td><td>없음</td></tr></tbody></table></div></div></div>
@@ -141,30 +154,30 @@
     <div class="panel-note">처리함 아이템이 아닌 고객 콘솔의 게시 상태. T2는 이 상태가 '확정'으로 전이할 때 생성된다. 종전 명칭·복수 신청(선착순/게시자 선택) 처리 규칙은 폐기 — 게시당 동시 신청 1건.</div>
     <div class="flow">
       <span class="st start">게재중</span>
-      <span class="fa"><span class="by sys">신청 1건 접수</span>→</span>
+      <span class="fa"><span class="by sys">신청 1건 접수</span><i class="ar"></i></span>
       <span class="st mid">협의중</span>
-      <span class="fa"><span class="by">게시자 수락(BRK-04)</span>→</span>
+      <span class="fa"><span class="by">게시자 수락(BRK-04)</span><i class="ar"></i></span>
       <span class="st mid">확정</span>
-      <span class="fa"><span class="by sys">양측 이전 완결(BRK-05)</span>→</span>
+      <span class="fa"><span class="by sys">양측 이전 완결(BRK-05)</span><i class="ar"></i></span>
       <span class="st end">완료</span>
     </div>
     <div class="flow">
       <span class="st mid">협의중</span>
-      <span class="fa"><span class="by">거절(BRK-04)</span>→</span>
+      <span class="fa"><span class="by">거절(BRK-04)</span><i class="ar"></i></span>
       <span class="st start">게재중 복귀</span>
       <span class="fa">/</span>
-      <span class="fa"><span class="by sys">신청 유효기한 만료(무응답)</span>→</span>
+      <span class="fa"><span class="by sys">신청 유효기한 만료(무응답)</span><i class="ar"></i></span>
       <span class="st start">게재중 복귀</span>
     </div>
     <div class="flow">
       <span class="st start">게재중</span><span class="fa">·</span><span class="st mid">협의중</span>
-      <span class="fa"><span class="by">게시 내리기(BRK-06)</span>→</span>
+      <span class="fa"><span class="by">게시 내리기(BRK-06)</span><i class="ar"></i></span>
       <span class="st bad">회수</span>
       <span class="fa">/</span>
-      <span class="fa"><span class="by sys">게시 유효기간 만료</span>→</span>
+      <span class="fa"><span class="by sys">게시 유효기간 만료</span><i class="ar"></i></span>
       <span class="st end">완료(유효기간 만료)</span>
       <span class="fa">/</span>
-      <span class="fa"><span class="by sys">price guard ±{정책값}% 이탈</span>→</span>
+      <span class="fa"><span class="by sys">price guard ±{정책값}% 이탈</span><i class="ar"></i></span>
       <span class="st bad">중지</span>
     </div>
     <div style="font-size:10.5px;color:#64748b;margin-top:4px;">
@@ -227,10 +240,10 @@
     </div>
     <div class="flow">
       <span style="font-size:10px;font-weight:700;color:#64748b;margin-right:6px;">아이템 공통 (5종)</span>
-      <span class="st start">OPEN 미처리</span><span class="fa">→</span>
-      <span class="st esc">ESCALATED 에스컬레이션</span><span class="fa">→</span>
-      <span class="st mid">IN_PROGRESS 처리중</span><span class="fa">→</span>
-      <span class="st mid">HOLD 보류</span><span class="fa">→</span>
+      <span class="st start">OPEN 미처리</span><span class="fa"><i class="ar"></i></span>
+      <span class="st esc">ESCALATED 에스컬레이션</span><span class="fa"><i class="ar"></i></span>
+      <span class="st mid">IN_PROGRESS 처리중</span><span class="fa"><i class="ar"></i></span>
+      <span class="st mid">HOLD 보류</span><span class="fa"><i class="ar"></i></span>
       <span class="st end">RESOLVED 종결 + 결과코드</span>
     </div>
     <div style="font-size:10.5px;color:#64748b;margin-top:4px;">
@@ -250,19 +263,19 @@
     </div>
     <div class="flow">
       <span class="st start">승인 대기</span>
-      <span class="fa"><span class="by">승인(사람)</span>→</span>
+      <span class="fa"><span class="by">승인(사람)</span><i class="ar"></i></span>
       <span class="st mid">집행 대기</span>
-      <span class="fa"><span class="by sys">서명·집행(오프라인)</span>→</span>
+      <span class="fa"><span class="by sys">서명·집행(오프라인)</span><i class="ar"></i></span>
       <span class="st end">완료</span>
     </div>
     <div class="flow">
       <span class="st start">승인 대기</span>
-      <span class="fa"><span class="by">보류(사유)</span>→</span>
+      <span class="fa"><span class="by">보류(사유)</span><i class="ar"></i></span>
       <span class="st mid">보류</span>
-      <span class="fa"><span class="by">재검토</span>→</span>
+      <span class="fa"><span class="by">재검토</span><i class="ar"></i></span>
       <span class="st start">복귀</span>
       <span class="fa">/</span>
-      <span class="fa"><span class="by">거절(사유)</span>→</span>
+      <span class="fa"><span class="by">거절(사유)</span><i class="ar"></i></span>
       <span class="st bad">거절</span>
     </div>
     <div style="font-size:10.5px;color:#64748b;margin-top:4px;">· 위험등급 '주의' 이상이면 <span class="st esc" style="font-size:9.5px;padding:1px 7px;">에스컬레이션</span> 상태로 생성 · 고객 화면에는 승인 대기~집행 대기를 'DSRV 거래 진행중' 하나로만 표시해 내부 단계를 노출하지 않고(<span class="scr" data-pid="EXC-03"><span class="sid">EXC-03</span></span>), 보류 중에도 고객에게는 '진행 중'으로만 보인다(고객 화면 보류 라벨 폐지 · 2026-09-02) — <span class="scr" data-pid="EXC-04"><span class="sid">EXC-04</span></span>의 '심사 후 보류' 변형은 후속 정리 대상 · AML 사유로 거절한 건은 STR 검토로 연계</div>
@@ -277,17 +290,17 @@
     </div>
     <div class="flow">
       <span class="st start">확인 대기</span>
-      <span class="fa"><span class="by">승인(사람)</span>→</span>
+      <span class="fa"><span class="by">승인(사람)</span><i class="ar"></i></span>
       <span class="st mid">이전 진행</span>
-      <span class="fa"><span class="by sys">정산 배치</span>→</span>
+      <span class="fa"><span class="by sys">정산 배치</span><i class="ar"></i></span>
       <span class="st end">완료</span>
     </div>
     <div class="flow">
       <span class="st start">확인 대기</span>
-      <span class="fa"><span class="by">보류(사유)</span>→</span>
+      <span class="fa"><span class="by">보류(사유)</span><i class="ar"></i></span>
       <span class="st mid">보류</span>
       <span class="fa">/</span>
-      <span class="fa"><span class="by">거절·차단</span>→</span>
+      <span class="fa"><span class="by">거절·차단</span><i class="ar"></i></span>
       <span class="st bad">이전 중지</span>
     </div>
     <div style="font-size:10.5px;color:#64748b;margin-top:4px;">· 거절은 거래 취소가 아니라 <b>이전 중지</b> — 이미 확정된 거래를 중지했을 때의 계약상 처리(무산·위약 여부)는 약관·법무 확인 필요<span class="need">결정필요 ①</span> · 트래블룰 정보가 갖춰지지 않은 건은 보류했다가 보완되면 재진행 · 실제 이전은 <span class="scr" data-pid="BRK-05"><span class="sid">BRK-05</span></span> 정산 배치(1영업일 3회)로 실행</div>
@@ -302,18 +315,18 @@
     </div>
     <div class="flow">
       <span class="st start">대기 (지연발효 중)</span>
-      <span class="fa"><span class="by sys">타이머 만료</span>→</span>
+      <span class="fa"><span class="by sys">타이머 만료</span><i class="ar"></i></span>
       <span class="st start">대기 (승인 가능)</span>
-      <span class="fa"><span class="by">승인(사람)</span>→</span>
+      <span class="fa"><span class="by">승인(사람)</span><i class="ar"></i></span>
       <span class="st mid">집행 대기</span>
-      <span class="fa"><span class="by sys">서명·집행</span>→</span>
+      <span class="fa"><span class="by sys">서명·집행</span><i class="ar"></i></span>
       <span class="st end">완료</span>
     </div>
     <div class="flow">
-      <span class="fa"><span class="by">거절(사유)</span>→</span>
+      <span class="fa"><span class="by">거절(사유)</span><i class="ar"></i></span>
       <span class="st bad">거절</span>
       <span class="fa">/</span>
-      <span class="fa"><span class="by sys">출금 시점 BLF 적중</span>→</span>
+      <span class="fa"><span class="by sys">출금 시점 BLF 적중</span><i class="ar"></i></span>
       <span class="st bad">차단</span>
     </div>
     <div style="font-size:10.5px;color:#64748b;margin-top:4px;">· 타이머 만료는 <b>승인 버튼이 활성화되는 것뿐</b> — 자동 승인이 아니다 · 출금 실행 시점에 주소를 다시 검사해 제재 리스트에 적중하면 차단하고, STR 검토 아이템(T5 성격)을 새로 생성</div>
@@ -328,14 +341,14 @@
     </div>
     <div class="flow">
       <span class="st bad">격리 중</span>
-      <span class="fa"><span class="by">소명 요청</span>→</span>
+      <span class="fa"><span class="by">소명 요청</span><i class="ar"></i></span>
       <span class="st mid">소명 대기 (HOLD)</span>
-      <span class="fa"><span class="by">소명 인정</span>→</span>
+      <span class="fa"><span class="by">소명 인정</span><i class="ar"></i></span>
       <span class="st end">해제 · 잔고 반영</span>
     </div>
     <div class="flow">
       <span class="st mid">소명 대기</span>
-      <span class="fa"><span class="by">불인정</span>→</span>
+      <span class="fa"><span class="by">불인정</span><i class="ar"></i></span>
       <span class="st bad">동결 + STR 검토</span>
     </div>
     <div style="font-size:10.5px;color:#64748b;margin-top:4px;">· STR 검토 자체는 별도 AML 시스템에서 진행(작성자·보고자 분리) · 제재 적중 건의 법정 통지·보고 절차는 <span class="chk">[원문대조필요]</span> · 소명 시한과 시한 초과 시 기본 처리 미정<span class="need">결정필요 ②</span></div>
@@ -350,12 +363,12 @@
     </div>
     <div class="flow">
       <span class="st start">미처리</span>
-      <span class="fa"><span class="by">검토</span>→</span>
+      <span class="fa"><span class="by">검토</span><i class="ar"></i></span>
       <span class="st mid">검토중</span>
-      <span class="fa"><span class="by">STR 검토</span>→</span>
+      <span class="fa"><span class="by">STR 검토</span><i class="ar"></i></span>
       <span class="st bad">STR 이관</span>
       <span class="fa">/</span>
-      <span class="fa"><span class="by">무혐의</span>→</span>
+      <span class="fa"><span class="by">무혐의</span><i class="ar"></i></span>
       <span class="st end">무혐의 종결</span>
     </div>
     <div style="font-size:10.5px;color:#64748b;margin-top:4px;">· STR 이관 시 필요하면 해당 기관 계정에 신규 거래 일시제한을 함께 적용(T7 경로) · 고객 화면에는 어떤 표시도 하지 않는다(<b>STR 누설 금지</b>) — 처리 결과는 개별 거래의 상태로만 간접 반영</div>
@@ -370,9 +383,9 @@
     </div>
     <div class="flow">
       <span class="st start">미확인</span>
-      <span class="fa"><span class="by">확인(사람)</span>→</span>
+      <span class="fa"><span class="by">확인(사람)</span><i class="ar"></i></span>
       <span class="st mid">확인</span>
-      <span class="fa"><span class="by">조치완료</span>→</span>
+      <span class="fa"><span class="by">조치완료</span><i class="ar"></i></span>
       <span class="st end">조치완료</span>
     </div>
     <div style="font-size:10.5px;color:#64748b;margin-top:4px;">· 실제 조치(키 교체·콜드 이관 스윕·비상 대응)는 화면 밖 운영 절차로 수행 — 처리함에는 확인과 조치 결과만 기록</div>
@@ -387,10 +400,10 @@
     </div>
     <div class="flow">
       <span class="st start">일시제한 예정</span>
-      <span class="fa"><span class="by">신규 거래 제한(사람)</span>→</span>
+      <span class="fa"><span class="by">신규 거래 제한(사람)</span><i class="ar"></i></span>
       <span class="st bad">제한 적용</span>
       <span class="fa">/</span>
-      <span class="fa"><span class="by sys">재이행 완료</span>→</span>
+      <span class="fa"><span class="by sys">재이행 완료</span><i class="ar"></i></span>
       <span class="st end">자동 종결</span>
     </div>
     <div style="font-size:10.5px;color:#64748b;margin-top:4px;">· '제한 적용' = 계정 상태를 활성→일시제한으로 변경(<span class="scr" data-pid="ADM-03"><span class="sid">ADM-03</span>상태 기계</span> — 전 화면 접근 게이팅 G-3의 단일 출처) · 고객이 재이행을 완료하면 자동 종결 — "종결은 사람" 원칙의 <b>유일한 예외로 둔 기획 가정</b><span class="need">결정필요 ③</span> · 일시제한→활성 복귀는 사람이 ADM-03에서 수행</div>
@@ -405,10 +418,10 @@
     </div>
     <div class="flow">
       <span class="st bad">잠금</span>
-      <span class="fa"><span class="by">본인확인 후 해제</span>→</span>
+      <span class="fa"><span class="by">본인확인 후 해제</span><i class="ar"></i></span>
       <span class="st end">해제 · 활성 복귀</span>
       <span class="fa">/</span>
-      <span class="fa"><span class="by">탈취 의심 판단</span>→</span>
+      <span class="fa"><span class="by">탈취 의심 판단</span><i class="ar"></i></span>
       <span class="st bad">동결 전환</span>
     </div>
     <div style="font-size:10.5px;color:#64748b;margin-top:4px;">· 동결로 전환하면 STR 검토 아이템(T5 성격)을 새로 생성 · 계정 상태 전이는 ADM-03 상태 기계를 따름</div>
@@ -423,9 +436,9 @@
     </div>
     <div class="flow">
       <span class="st start">미처리</span>
-      <span class="fa"><span class="by">규명 착수</span>→</span>
+      <span class="fa"><span class="by">규명 착수</span><i class="ar"></i></span>
       <span class="st mid">원인 규명 중</span>
-      <span class="fa"><span class="by">일치 확인</span>→</span>
+      <span class="fa"><span class="by">일치 확인</span><i class="ar"></i></span>
       <span class="st end">동결 해제 · 종결</span>
     </div>
     <div style="font-size:10.5px;color:#64748b;margin-top:4px;">· <strong>ADM-02 처리함 행 유형 목록에 이 유형 추가 필요</strong></div>
