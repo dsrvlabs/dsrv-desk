@@ -40,36 +40,32 @@
       </div>
 
       <!-- 초대·계정 확인 (표시 전용 + 토큰 오류 배너 조건부) -->
-      <div class="zone card" data-idx="0">
+      <div class="zone card" data-idx="">
         <div class="zone-highlight"></div>
-        <div class="zone-title" style="margin-bottom:10px;">계정 활성화</div>
-        <div class="item-area" data-highlight="0" style="position:relative;padding:4px;border-radius:8px;">
-          <div class="pin" data-idx="0" style="top:-4px;right:-4px;">1</div>
-          <div class="info-box"><span class="k">초대 대상 ORG</span>· &nbsp;{ORG명}<br><span class="k">담당자 이메일</span>· &nbsp;{담당자 이메일(마스킹)}</div>
-          <div style="font-size:9px;color:#94a3b8;padding:6px 0 0;">▼ 토큰이 유효하지 않으면 이 화면을 열지 않고 초대 링크 오류(ONB-04)로 보낸다 — 배너 변형 없음</div>
-        </div>
+        <div class="zone-title">계정 활성화</div>
+        <div style="font-size:9px;color:#94a3b8;padding:6px 0 0;">▼ 제목만 둔다(2026-09-02 사용자 결정 — 초대 대상 ORG·담당자 이메일 표기 삭제) · 토큰이 유효하지 않으면 이 화면을 열지 않고 ONB-04로 보낸다</div>
       </div>
 
       <!-- 비밀번호 설정 -->
-      <div class="zone card" data-idx="1,2">
+      <div class="zone card" data-idx="0,1">
         <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="1" style="position:relative;padding:4px;border-radius:8px;margin-bottom:4px;">
-          <div class="pin" data-idx="1" style="top:-6px;right:-6px;">2</div>
+        <div class="item-area" data-highlight="0" style="position:relative;padding:4px;border-radius:8px;margin-bottom:4px;">
+          <div class="pin" data-idx="0" style="top:-6px;right:-6px;">1</div>
           <div class="flabel">새 비밀번호<span class="star">*</span></div>
           <div class="field fg"><span class="ph">비밀번호 입력</span></div>
         </div>
-        <div class="item-area" data-highlight="2" style="position:relative;padding:4px;border-radius:8px;">
-          <div class="pin" data-idx="2" style="top:-6px;right:-6px;">3</div>
+        <div class="item-area" data-highlight="1" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="1" style="top:-6px;right:-6px;">2</div>
           <div class="flabel">새 비밀번호 확인<span class="star">*</span></div>
           <div class="field fg"><span class="ph">비밀번호 재입력</span></div>
         </div>
       </div>
 
       <!-- 규칙 안내 + [다음] -->
-      <div class="zone card" data-idx="3,4">
+      <div class="zone card" data-idx="2,3">
         <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="3" style="position:relative;padding:4px;border-radius:8px;">
-          <div class="pin" data-idx="3" style="top:-6px;right:-6px;">4</div>
+        <div class="item-area" data-highlight="2" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="2" style="top:-6px;right:-6px;">3</div>
           <div class="rule-box">
             안전한 비밀번호를 위해 아래를 지켜주세요.<br>
             ○ 영문 대·소문자, 숫자, 특수문자 중 3종 이상 조합 8자 이상<br>
@@ -78,8 +74,8 @@
             ○ 특수문자는 !@#$%^&amp;*() 만 사용 가능
           </div>
         </div>
-        <div class="item-area" data-highlight="4" style="position:relative;padding:4px;border-radius:8px;margin-top:6px;">
-          <div class="pin" data-idx="4" style="top:-8px;right:-6px;">5</div>
+        <div class="item-area" data-highlight="3" style="position:relative;padding:4px;border-radius:8px;margin-top:6px;">
+          <div class="pin" data-idx="3" style="top:-8px;right:-6px;">4</div>
           <div class="btn primary fg">다음</div>
         </div>
       </div>
@@ -103,20 +99,8 @@
     <div class="itm" data-idx="0">
       <div class="num">1</div>
       <div>
-        <div class="itm-title">초대 대상 ORG · 담당자 이메일 (표시 전용 · 토큰 오류 배너 조건부)</div>
-        <div class="itm-desc"><strong>값</strong> 토큰에 묶인 기관명과 이메일을 그대로 표시하고 수정하지 않는다. 이메일은 마스킹한다.<br><strong>검증</strong> 진입 시 1회 백엔드에서 토큰을 판정한다.<br><strong>분기</strong> 유효하면 이 화면을 열고, 만료·이미 사용됨이면 <strong>초대 링크 오류(ONB-04)</strong>로 보낸다. 이 화면에 오류 배너 변형을 두지 않는다.<br><strong>재개</strong> 비밀번호가 이미 저장된 토큰이면 ONB-02 또는 ONB-03으로 라우팅한다.<br><span class="basis">근거 32 §2 ONB-01 · 09 §0 결정(2026-09-02) 오류 케이스 통합</span></div>
-        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">배너 내 [로그인 화면으로] (오류 B에서만)</span><span class="nav-act">클릭</span><span class="nav-to"><strong>로그인(AUTH-01)</strong></span></div>
-          <div class="nav-row"><span class="nav-el">배너(오류 A) · 정보 박스</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용) · 재발급은 관리자 요청(화면 내 수단 없음)</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="itm" data-idx="1">
-      <div class="num">2</div>
-      <div>
         <div class="itm-title">새 비밀번호 입력<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 토큰이 유효하지 않으면 이 화면 자체가 열리지 않는다.<br><strong>허용 문자</strong> 영문 대·소문자 · 숫자 · 특수문자 !@#$%^&amp;*()만 받고 그 외 문자는 입력 시점에 무시한다. <span class="chk">[확인필요: 길이 상한 값]</span><br><strong>검증</strong> 키 입력마다 규칙 ①~④를 판정하고, [다음] 제출 시 서버가 다시 검증한다. 규칙 수치는 AUTH-01 비고 [비밀번호 규칙]의 고정값이며 ADM-03 파라미터로 두지 않는다.<br><strong>실패</strong> 포커스 아웃 시 미충족 규칙이 남으면 인라인 ⚠를 띄우고 [다음]을 비활성으로 둔다.<br><strong>연동</strong> 항목 4 규칙 안내의 ○를 ✓로 바꾼다. 값이 바뀌면 항목 3의 일치 비교를 다시 수행한다.<br><strong>저장</strong> 단방향 해시와 salt로만 저장한다.<br><span class="basis">근거 ISMS 2.5.3 · 2.5.4</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 토큰이 유효하지 않으면 이 화면 자체가 열리지 않는다.<br><strong>허용 문자</strong> 영문 대·소문자 · 숫자 · 특수문자 !@#$%^&amp;*()만 받고 그 외 문자는 입력 시점에 무시한다. <span class="chk">[확인필요: 길이 상한 값]</span><br><strong>검증</strong> 키 입력마다 규칙 ①~④를 판정하고, [다음] 제출 시 서버가 다시 검증한다. 규칙 수치는 AUTH-01 비고 [비밀번호 규칙]의 고정값이며 ADM-03 파라미터로 두지 않는다.<br><strong>실패</strong> 포커스 아웃 시 미충족 규칙이 남으면 인라인 ⚠를 띄우고 [다음]을 비활성으로 둔다.<br><strong>연동</strong> 항목 3 규칙 안내의 ○를 ✓로 바꾼다. 값이 바뀌면 항목 2의 일치 비교를 다시 수행한다.<br><strong>저장</strong> 단방향 해시와 salt로만 저장한다.<br><span class="basis">근거 ISMS 2.5.3 · 2.5.4</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">새 비밀번호 필드</span><span class="nav-act">키 입력마다 규칙 ①~④ 판정 · 포커스 아웃 시 오류 표시</span><span class="nav-to stay">항목 4 안내문 ○/✓ 갱신 · 4개 충족 시 [다음] 활성 조건 ② 해소 / 위반 시 빨간 테두리 + ⚠ · 버튼 비활성 유지</span></div>
           <div class="nav-row"><span class="nav-el">새 비밀번호 필드 (비활성 상태)</span><span class="nav-act">토큰 오류(항목 1 ②③)에서 클릭</span><span class="nav-to stay">무반응 · 인라인 안내 없음(배너가 사유)</span></div>
@@ -124,8 +108,8 @@
       </div>
     </div>
 
-    <div class="itm" data-idx="2">
-      <div class="num">3</div>
+    <div class="itm" data-idx="1">
+      <div class="num">2</div>
       <div>
         <div class="itm-title">새 비밀번호 확인 입력<span class="req">필수</span></div>
         <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 토큰이 유효하지 않으면 이 화면 자체가 열리지 않는다.<br><strong>허용 문자</strong> 항목 2와 같다.<br><strong>검증</strong> 키 입력마다 항목 2 값과 비교한다. 표시는 포커스 아웃 시에만 하고, 항목 2가 규칙 위반이어도 비교는 수행한다.<br><strong>실패</strong> 불일치하면 인라인 ⚠를 띄우고 [다음]을 비활성으로 둔다. 일치하면 필드 우측에 ✓를 붙인다.<br><strong>연동</strong> 항목 2가 바뀌면 즉시 재비교한다.<br><span class="basis">근거 ISMS 2.5.3 · 공통 UI 규격 오류 문구 ①</span></div>
@@ -135,16 +119,16 @@
       </div>
     </div>
 
-    <div class="itm" data-idx="3">
-      <div class="num">4</div>
+    <div class="itm" data-idx="2">
+      <div class="num">3</div>
       <div>
         <div class="itm-title">비밀번호 규칙 안내 (표시 전용 · 실시간 체크)</div>
-        <div class="itm-desc"><strong>표시</strong> 규칙 4항목 앞에 ○와 ✓를 두고 항목 2 입력에 따라 갱신한다. 빈칸이면 전부 ○.<br><strong>규칙 ② 판정</strong> 담당자 이메일 @ 앞부분과 대소문자 무시 전체 일치일 때만 위반으로 본다. 부분 포함은 통과다.<br><span class="chk">[디자인 요청]</span> ○/✓ 표시는 시안에 없다.<br><span class="basis">근거 ISMS 2.5.4</span></div>
+        <div class="itm-desc"><strong>표시</strong> 규칙 4항목 앞에 ○와 ✓를 두고 항목 2 입력에 따라 갱신한다. 빈칸이면 전부 ○.<br><strong>규칙 ② 판정</strong> 로그인 계정 이메일의 @ 앞부분과 대소문자 무시 전체 일치일 때만 위반으로 본다. 부분 포함은 통과다.<br><span class="chk">[디자인 요청]</span> ○/✓ 표시는 시안에 없다.<br><span class="basis">근거 ISMS 2.5.4</span></div>
       </div>
     </div>
 
-    <div class="itm" data-idx="4">
-      <div class="num">5</div>
+    <div class="itm" data-idx="3">
+      <div class="num">4</div>
       <div>
         <div class="itm-title">[다음] 버튼 (→ 2FA 앱 연결)<span class="req">필수</span></div>
         <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 두 필드가 규칙·일치 검증을 통과했을 때만 활성이다. Enter 키도 같이 처리한다.<br><strong>확인 사항</strong> 서버가 비밀번호 규칙을 다시 검증한다. 확인 다이얼로그는 없다.<br><strong>액션</strong> 비밀번호를 저장하고 계정 상태를 '활성화 진행 중'으로 기록해 재개 지점을 만든 뒤 ONB-02로 넘긴다. 활성화 중 비밀번호를 다시 바꾸는 동선은 만들지 않는다.<br><span class="basis">근거 ISMS 2.5.4 · 32 §2 ONB-01</span></div>
@@ -164,11 +148,7 @@
     <div class="note-title">상세내용</div>
     <div class="detail-grid" id="detailCol">
       <div class="dtl" data-idx="0">
-        <div class="detail-label"><span class="dtl-num">1</span>토큰 검증 · 재개 라우팅</div>
-      <div class="dtl-body"><span class="box"><strong>검증</strong> 1회용·72시간 토큰을 진입 시 1회 검증해 정상 / A 만료 / B 사용됨 / 재개 넷으로 갈라 표시한다.<br><strong>진행 기록</strong> ONB-01 비밀번호 저장과 ONB-02 2FA 확정을 서버에 기록하고, 재클릭 시 서버가 진입 화면을 정한다.<br><strong>재발급</strong> 만료 시 ADM-03 초대 재발송으로 새 토큰을 만들고 이전 토큰과 진행 상태를 무효화한다.</span></div>
-      </div>
-      <div class="dtl" data-idx="1">
-        <div class="detail-label"><span class="dtl-num">2</span>비번 방식 근거</div>
+        <div class="detail-label"><span class="dtl-num">1</span>비번 방식 근거</div>
       <div class="dtl-body"><span class="box"><strong>방식</strong> 초기 비밀번호를 생성·전달하지 않고 활성화 링크에서 본인이 설정한다.<br><strong>2중 검증</strong> 클라이언트 실시간 판정은 안내용이고 서버가 저장 시 다시 검증한다.</span></div>
       </div>
     </div>
@@ -178,7 +158,7 @@
 <section class="footer-note">
   <div class="note-card">
     <div class="note-title">비고</div>
-    <div class="note-body">· 계정 활성화 <strong>1/3 — 비밀번호 본인 설정</strong> · ONB-00 링크 → 이 화면 → ONB-02 → ONB-03 → AUTH-01 · 2026-09-02 시안 프레임 단위로 3화면 분리(종전 단일 화면·3단계 카드 전환 폐기).<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 'Set Password' 적용 · 토큰 오류 배너·규칙 ○/✓ 표시는 시안 없음 → <span class="chk">[디자인 요청]</span> · 원본 <span class="mono">reference/figma/_crops/F1_row1_c1.png</span>.<br>· <strong>확정(구현 단순 우선)</strong> — 표시 토글 없음 · 규칙 수치는 고정(ADM-03 파라미터화 없음) · 규칙 ② 판정은 @ 앞부분 전체 일치 · 활성화 중 비밀번호 재설정 동선 없음.<br>· 남은 <span class="chk">[확인필요]</span> — 비밀번호 길이 상한 값 · 이메일 마스킹 규칙(DASH-03과 단일화).<br>· 오류 화면 분리(2026-09-02) — 만료·사용됨 배너 2종을 ONB-04 단일 화면으로 옮김.<br>· 이전 = ONB-00 / 다음 = ONB-02 / 오류 = ONB-04</div>
+    <div class="note-body">· 계정 활성화 <strong>1/3 — 비밀번호 본인 설정</strong> · ONB-00 링크 → 이 화면 → ONB-02 → ONB-03 → AUTH-01 · 2026-09-02 시안 프레임 단위로 3화면 분리(종전 단일 화면·3단계 카드 전환 폐기).<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 'Set Password' 적용 · 토큰 오류 배너·규칙 ○/✓ 표시는 시안 없음 → <span class="chk">[디자인 요청]</span> · 원본 <span class="mono">reference/figma/_crops/F1_row1_c1.png</span>.<br>· <strong>확정(구현 단순 우선)</strong> — 표시 토글 없음 · 규칙 수치는 고정(ADM-03 파라미터화 없음) · 규칙 ② 판정은 @ 앞부분 전체 일치 · 활성화 중 비밀번호 재설정 동선 없음.<br>· 남은 <span class="chk">[확인필요]</span> — 비밀번호 길이 상한 값.<br>· <strong>토큰 라우팅</strong> 진입 시 1회 검증해 정상이면 이 화면, 만료·사용됨이면 ONB-04, 비밀번호가 이미 저장된 토큰이면 ONB-02·03으로 보낸다. 만료 시 재발급은 ADM-03 초대 재발송(새 토큰 · 이전 토큰과 진행 상태 무효).<br>· 오류 화면 분리(2026-09-02) — 만료·사용됨 배너 2종을 ONB-04 단일 화면으로 옮김.<br>· 이전 = ONB-00 / 다음 = ONB-02 / 오류 = ONB-04</div>
   </div>
 </section>
 

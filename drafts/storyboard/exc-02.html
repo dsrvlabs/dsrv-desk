@@ -115,6 +115,11 @@
   <div class="items" id="items">
     <div class="nav-global">
       <div class="nav-global-title">진입 · 전역 이동</div>
+      <div class="nav-note">· <strong>전역 이동</strong> = 고객 콘솔 셸 정본(DASH-01)과 동일<br>
+      · 차이 = 현재 탭 '교환하기' — 재클릭은 무반응이 아니라 <strong>EXC-01 초기 상태</strong>(새 요청) · GNB 이동으로 이탈한 결과는 아래 '재진입 없음' 참조<br>
+      · <strong>진입</strong>: 교환하기(EXC-01) [거래 요청] 클릭 → 시스템 자동 산정("산정 중…") 완료 즉시 진입 — 이 화면 자체 로딩 없음(값은 진입 시 전부 확정) · 대기·담당자 개입 없음<br>
+      · <strong>재진입 없음</strong>: 이 화면을 벗어나면(GNB 이동·브라우저 닫기) 돌아올 경로 없음 — 미수락 건은 서버 기한 경과 시 '만료'로 자동 종결 · 브라우저 뒤로가기 미지원(공통 UI 규격) <span class="chk">[확인필요: 만료·거절 건의 DASH-01 거래 목록 노출 여부]</span><br>
+      · 목업 예시: 900 USDC → <strong>899.73 USDT</strong>, 확정 비율 0.9997 USDT/USDC(EXC-01 참고 비율 0.9998과 다른 값 — "참고와 다를 수 있음" 예시), 스프레드 0.10%, 요청번호 EXC-20260902-0001, 수락 기한 02:00 · 모두 예시값(정책값은 ADM-03 현재값)</div>
     </div>
 
     <div class="itm" data-idx="0">

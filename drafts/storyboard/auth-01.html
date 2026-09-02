@@ -137,6 +137,14 @@
       <div class="nav-row"><span class="nav-el">브랜드 패널 로고 'DSRV' · 태그라인</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응 (표시 전용 — 로그인 전이라 GNB·기관 배지 없음)</span></div>
       <div class="nav-row"><span class="nav-el">브랜드 패널 'DSRV 서비스 소개 보기 →'</span><span class="nav-act">클릭</span><span class="nav-to">외부 DSRV 소개 페이지(새 탭) — 대상 URL <span class="chk">[확인필요]</span> · 계정 활성화 3화면(ONB-01·02·03)의 브랜드 패널에는 이 링크가 없다</span></div>
       <div class="nav-row"><span class="nav-el">푸터 '공지사항' / '개인정보처리방침' / '이용약관'</span><span class="nav-act">클릭</span><span class="nav-to">각 문서 페이지(새 탭) — 대상 URL · 이용약관·개인정보처리방침이 ONB 동의 문서와 동일본인지 <span class="chk">[확인필요]</span></span></div>
+      <div class="nav-note">· <strong>전역 이동 정본(인증 셸 — 브랜드 패널 2단 프레임)</strong> = ONB-01·02·03 · DASH-02·03 공통. 해당 화면에는 다시 쓰지 않고 차이만 표기한다.<br>
+      · <strong>진입</strong>: 복구 코드 저장(ONB-03) [확인] 직후 / 기관 배지 메뉴 '로그아웃'(전 화면) / 세션 만료(유휴 {정책값 15분}·최대 {정책값 8시간}) 후 재접속 / 브라우저 뒤로가기 안내 후 미인증 상태 · 진입 시 항상 <strong>1단계</strong>부터<br>
+      · <strong>2단계 인증(2026-09-02 확정 · Figma 반영)</strong>: 1단계 = 이메일·비밀번호 → [로그인] / 2단계 = 같은 카드가 2차 인증 코드 입력으로 전환(6자리 자동 검증 · 확인 버튼 없음) · 1단계 성공 상태(사전 인증)는 <strong>{정책값 120초}</strong> 유효, 초과 시 1단계로 복귀 <span class="chk">[확인필요: 사전 인증 유효시간]</span><br>
+      · <strong>실패 카운트·남은 횟수(2026-09-02 확정)</strong>: 계정 단위 <strong>통합 카운터</strong> — 비밀번호 실패·인증 코드 실패·복구 코드 실패를 합산, 로그인 성공 시 0으로 초기화 · 연속 <strong>{정책값 5회}</strong> 도달 시 계정 잠금(항목 8) · 실패 칩에 <strong>"{남은 횟수}회 남음"</strong> 노출(1·2단계 공통) <span class="chk">[확인필요: 합산 카운터 vs 단계별 개별 카운터 — 시안이 두 곳에 같은 '2회 남음'을 보여 합산으로 채택]</span><br>
+      · Enter 키 = 1단계 [로그인] 제출(활성 시) · 2단계는 6번째 자리 입력 즉시 자동 검증(Enter 없음)<br>
+      · 비밀번호 찾기·아이디 찾기 링크 없음 — 분실 시 비밀번호 및 2차 인증 재설정(DASH-03)·초대 재발송(ADM-03) 운영 절차로 처리<br>
+      · 세션 만료 후 재접속 시 안내 문구("세션이 만료되었습니다. 다시 로그인해 주세요") 노출 여부 <span class="chk">[확인필요 — 시안에 없음]</span><br>
+      · 목업 예시: "2회 남음"은 {정책값 5회} 중 3회 실패 후 · 유휴 15분·최대 8시간은 현재 정책값 예시(ADM-03 파라미터 아님)</div>
     </div>
 
     <div class="itm" data-idx="0">
