@@ -99,13 +99,13 @@
             </tr>
             <tr>
               <td>공통</td>
-              <td>건별 한도 (나·마 공통 · USD 환산)</td>
-              <td><div class="item-area" data-highlight="6" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="6" style="top:-10px;right:-10px;">7</div><span class="inp">1,000<span class="u">USD 상당</span></span></div> <span style="font-size:9.5px;color:#64748b;">환산 = 시세 소스 USD 시세 · 요청 시점</span></td>
+              <td>건별 한도 (나·마 공통 · 원화 환산)</td>
+              <td><div class="item-area" data-highlight="6" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="6" style="top:-10px;right:-10px;">7</div><span class="inp">1,500,000<span class="u">원 상당</span></span></div> <span style="font-size:9.5px;color:#64748b;">환산 = 시세 소스 KRW 시세 · 요청 시점</span></td>
             </tr>
             <tr>
               <td>공통</td>
               <td>시세(외부지표) 소스 — 단일 선택</td>
-              <td><div class="item-area" data-highlight="7" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="7" style="top:-10px;right:-10px;">8</div><span class="mk-dd"><span class="inp"><span class="mk-lab">바이낸스</span> ▾</span><div class="mk-menu" hidden><div class="op" data-set="업비트" data-dirty data-hint="저장 전 변경 ● — [변경 저장] 후 신규 요청부터 기준가·USD 환산·price guard 판정에 반영">업비트</div><div class="op" data-set="빗썸" data-dirty data-hint="저장 전 변경 ● — [변경 저장] 후 신규 요청부터 기준가·USD 환산·price guard 판정에 반영">빗썸</div><div class="op cur" data-set="바이낸스">바이낸스</div></div></span></div> <span style="font-size:9.5px;color:#b45309;">조합 없음 · 장애 시 대체 [확인필요]</span></td>
+              <td><div class="item-area" data-highlight="7" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="7" style="top:-10px;right:-10px;">8</div><span class="mk-dd"><span class="inp"><span class="mk-lab">바이낸스</span> ▾</span><div class="mk-menu" hidden><div class="op" data-set="업비트" data-dirty data-hint="저장 전 변경 ● — [변경 저장] 후 신규 요청부터 기준가·KRW 환산·price guard 판정에 반영">업비트</div><div class="op" data-set="빗썸" data-dirty data-hint="저장 전 변경 ● — [변경 저장] 후 신규 요청부터 기준가·KRW 환산·price guard 판정에 반영">빗썸</div><div class="op cur" data-set="바이낸스">바이낸스</div></div></span></div> <span style="font-size:9.5px;color:#b45309;">조합 없음 · 장애 시 대체 [확인필요]</span></td>
             </tr>
             <tr>
               <td>지갑</td>
@@ -186,7 +186,7 @@
       <div class="nav-note">· <strong>진입</strong>: 어드민 홈(ADM-02) '설정' 탭 클릭 · 진입 시 초기 상태 = 저장값 렌더링 · dirty 0 · [되돌리기]·[변경 저장] 비활성 (목업은 price guard 1건 수정 상태)<br>
       · 발생 알람 처리(잠금 해제·재이행 도래·격리 등)는 이 화면이 아니라 홈(ADM-02) 처리함에서 · 어드민 역할 1종 — 전 기능 동일 노출<br>
       · <strong>적용 원칙</strong>: 수치·선택 파라미터(항목 2~9) = [변경 저장] 일괄 반영 · 확인 없음 · <strong>신규 요청부터 적용</strong>(진행 중 건은 요청 시점 값 유지) / 즉시 적용형 2종(취급자산 상태 ▾ · 기관 KYC 상태 변경 ▾) = 저장 버튼과 무관 · 차단 방향은 확인 다이얼로그<br>
-      · 토스트 규격(어드민 공통): 우측 상단 · 3초 자동 닫힘 · 클릭 시 즉시 닫힘 · 정책값 현재 예시: 건별 한도 1,000 USD 상당 · 마목 수수료 1% 고정 · 나목 스프레드 0.10% · price guard ±{정책값}% · 자릿수 ETH 4 / USDC·USDT 2(notation)</div>
+      · 토스트 규격(어드민 공통): 우측 상단 · 3초 자동 닫힘 · 클릭 시 즉시 닫힘 · 정책값 현재 예시: 건별 한도 1,500,000원 상당 · 마목 수수료 1% 고정 · 나목 스프레드 0.10% · price guard ±{정책값}% · 자릿수 ETH 4 / USDC·USDT 2(notation)</div>
     </div>
 
     <div class="itm" data-idx="0">
@@ -260,8 +260,8 @@
     <div class="itm" data-idx="6">
       <div class="num">7</div>
       <div>
-        <div class="itm-title">건별 한도 입력 (USD 상당)<span class="req">필수</span></div>
-        <div class="itm-desc">· 단위 USD 상당 · 정수 · 천 단위 쉼표 자동 삽입 · 최대 7자리 · 범위 1~1,000,000(상세 2) · 현재 <strong>1,000</strong>(2026-09-02 확정 · 나·마 공통 1회)<br>· 검증: 키 입력마다 문자 / 포커스 아웃 빈칸·범위 · ②빈칸 ⚠ "값을 입력해 주세요" ③범위 ⚠ "1~1,000,000 사이 정수를 입력해 주세요" · dirty ●<br>· 적용: EXC-01 수량 한도 검증·표기 "1회 최대 {정책값} USD 상당" · BRK-02 게시 게이트 · BRK-03 신청자 거래 안전성 검증 — 환산 = 시세 소스 USD 시세 · 요청 시점(스테이블 1:1) · 저장 후 신규 요청부터<br>· 일간·월간 누적 한도 파라미터 없음 <span style="color:#b45309;">[확인필요: 09 §0]</span><br><span class="basis">근거 09 §0 건별 한도(2026-09-02) · notation 한도 표기</span></div>
+        <div class="itm-title">건별 한도 입력 (원 상당)<span class="req">필수</span></div>
+        <div class="itm-desc">· 단위 <strong>원 상당</strong> · 정수 · 천 단위 쉼표 자동 삽입 · 최대 10자리 · 범위 10,000~1,000,000,000(상세 2) · 현재 <strong>1,500,000</strong>(2026-09-02(9) 원화 기준으로 변경 · 나·마 공통 1회)<br>· 검증: 키 입력마다 문자 / 포커스 아웃 빈칸·범위 · ②빈칸 ⚠ "값을 입력해 주세요" ③범위 ⚠ "10,000~1,000,000,000 사이 정수를 입력해 주세요" · dirty ●<br>· 적용: EXC-01 수량 한도 검증·표기 "1회 최대 {정책값}원 상당" · BRK-02 게시 게이트 · BRK-03 신청자 거래 안전성 검증 — 환산 = 시세 소스 <strong>KRW 시세</strong> · 요청 시점(ETH·USDC·USDT 모두 KRW 시세 환산 — 종전 스테이블 USD 1:1 전제 폐기) · 저장 후 신규 요청부터<br>· 일간·월간 누적 한도 파라미터 없음 <span style="color:#b45309;">[확인필요: 09 §0]</span><br><span class="basis">근거 09 §0 건별 한도(2026-09-02) · notation 한도 표기</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">건별 한도 필드</span><span class="nav-act">키 입력마다 / 포커스 아웃 검증 · 쉼표 자동 포맷</span><span class="nav-to stay">정상 → dirty ● / 오류 → 인라인 ⚠ · [변경 저장] 비활성</span></div>
         </div>
@@ -272,7 +272,7 @@
       <div class="num">8</div>
       <div>
         <div class="itm-title">시세(외부지표) 소스 ▾<span class="req">필수</span></div>
-        <div class="itm-desc">· 드롭다운 · 옵션 <strong>업비트 / 빗썸 / 바이낸스</strong> · 단일 선택(복수 조합·가중 없음) · 현재 바이낸스(목업 예시 · 확정값 아님) · 저장형(변경 저장으로 반영 · dirty ●)<br>· 용도: 나목 비율 산정 기준가(EXC-02) · 건별 한도 USD 환산(EXC-01·BRK-02·BRK-03) · price guard 이탈 판정(BRK 게시) — <strong>소스명은 고객 화면 미노출</strong>(09 §0 2026-09-02)<br>· 업비트·빗썸은 KRW 마켓 → USD 환산 경로(환율·USDT 마켓) <span style="color:#b45309;">[확인필요]</span> · 소스 수신 장애 시 대체 소스·요청 차단 처리 <span style="color:#b45309;">[확인필요]</span><br><span class="basis">근거 09 §0 나목 외부지표 참조 스프레드 고정·price guard · 고객 화면 미노출 · notation 드롭다운 규격</span></div>
+        <div class="itm-desc">· 드롭다운 · 옵션 <strong>업비트 / 빗썸 / 바이낸스</strong> · 단일 선택(복수 조합·가중 없음) · 현재 바이낸스(목업 예시 · 확정값 아님) · 저장형(변경 저장으로 반영 · dirty ●)<br>· 용도: 나목 비율 산정 기준가(EXC-02) · 건별 한도 KRW 환산(EXC-01·BRK-02·BRK-03) · price guard 이탈 판정(BRK 게시) — <strong>소스명은 고객 화면 미노출</strong>(09 §0 2026-09-02)<br>· 업비트·빗썸은 KRW 마켓이라 한도 환산에 직접 사용 · 바이낸스는 USD 마켓 → <strong>USD→KRW 환율 소스 필요</strong> <span style="color:#b45309;">[확인필요]</span> · 소스 수신 장애 시 대체 소스·요청 차단 처리 <span style="color:#b45309;">[확인필요]</span><br><span class="basis">근거 09 §0 나목 외부지표 참조 스프레드 고정·price guard · 고객 화면 미노출 · notation 드롭다운 규격</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">시세 소스 ▾</span><span class="nav-act">클릭 → 목록 펼침(업비트 / 빗썸 / 바이낸스 · 현재 선택 강조) → 항목 클릭</span><span class="nav-to stay">칩 갱신·목록 닫힘 · 바깥 클릭/ESC = 변경 없이 닫힘 · 셀 dirty ● · 저장 후 신규 요청부터 기준가·환산·판정에 반영</span></div>
         </div>
@@ -409,11 +409,11 @@
       </div>
       <div class="dtl" data-idx="1">
         <div class="detail-label"><span class="dtl-num">2</span>입력 범위 표 · 단일 출처 원칙</div>
-      <div class="dtl-body"><span class="box">· <strong>범위(기획 가정 — 상·하한 전부 <span class="red">[확인필요]</span>)</strong>: 스프레드 0.01~5.00% 2자리 · 견적 유효시간 30~600 s 정수 · 수수료율 0.00~5.00% 2자리 · 게시 유효기간 1~90일 정수 · 신청 유효기간 1~10영업일 정수 · price guard 0.1~10.0% 1자리 · 건별 한도 1~1,000,000 USD 정수 · 핫월렛 비중 0~20% 정수<br>· 공통 입력 규격: 숫자·소수점만 · 자릿수 초과 입력 무시 · 오류 = 빨간 테두리 + 셀 아래 인라인 ⚠(원인 + 해결 행동) · dirty = ● + 노란 배경<br>· EXC-01/02·BRK-02/03/04/07은 이 값을 표출만 — 화면 하드코딩 없음, '가격형성 아님' 소명값의 단일 출처<br>· 수수료 1% = 거래액 기준 고정·양측 각자(2026-09-02 확정) · 건별 한도 1,000 USD 상당(2026-09-02 확정 · 종전 원화 환산·코인 수량 한도 표기 폐기)<br>· <span class="red">[확인필요]</span> 1% 요율 합리성·설명의무 소명 수위(09 §8) · 한도 환산 시세 장애 시 처리</span></div>
+      <div class="dtl-body"><span class="box">· <strong>범위(기획 가정 — 상·하한 전부 <span class="red">[확인필요]</span>)</strong>: 스프레드 0.01~5.00% 2자리 · 견적 유효시간 30~600 s 정수 · 수수료율 0.00~5.00% 2자리 · 게시 유효기간 1~90일 정수 · 신청 유효기간 1~10영업일 정수 · price guard 0.1~10.0% 1자리 · 건별 한도 10,000~1,000,000,000원 정수 · 핫월렛 비중 0~20% 정수<br>· 공통 입력 규격: 숫자·소수점만 · 자릿수 초과 입력 무시 · 오류 = 빨간 테두리 + 셀 아래 인라인 ⚠(원인 + 해결 행동) · dirty = ● + 노란 배경<br>· EXC-01/02·BRK-02/03/04/07은 이 값을 표출만 — 화면 하드코딩 없음, '가격형성 아님' 소명값의 단일 출처<br>· 수수료 1% = 거래액 기준 고정·양측 각자(2026-09-02 확정) · 건별 한도 1,500,000원 상당(2026-09-02(9) 원화 기준 · 종전 표기(1,000 USD 상당 · 그 이전 원화 억 단위 · 코인 수량) 모두 폐기)<br>· <span class="red">[확인필요]</span> 1% 요율 합리성·설명의무 소명 수위(09 §8) · 한도 환산 시세 장애 시 처리</span></div>
       </div>
       <div class="dtl" data-idx="7">
-        <div class="detail-label"><span class="dtl-num">8</span>시세 소스 용도 · USD 환산 경로</div>
-      <div class="dtl-body"><span class="box">· 용도 3종: ① 나목 기준가(EXC-02 산정 = 기준가 ± 스프레드) ② 건별 한도 USD 환산(스테이블 1:1 · ETH는 소스 USD 시세) ③ price guard 이탈 판정(게시 시점 기준가 vs 현재)<br>· 소스명은 고객 콘솔 어디에도 미노출(09 §0 2026-09-02) — 고객 화면은 "외부지표 기준" 문구만<br>· <span class="red">[확인필요]</span> 업비트·빗썸 KRW 마켓 → USD 환산(환율 소스·USDT 마켓 대용) · 소스 장애 시 대체 소스 자동 전환 vs 신규 요청 차단 · 마목은 시세 불관여 원칙 — price guard는 '가드'로만 사용</span></div>
+        <div class="detail-label"><span class="dtl-num">8</span>시세 소스 용도 · KRW 환산 경로</div>
+      <div class="dtl-body"><span class="box">· 용도 3종: ① 나목 기준가(EXC-02 산정 = 기준가 ± 스프레드) ② 건별 한도 KRW 환산(ETH·USDC·USDT 모두 소스 KRW 시세 · USD 마켓 소스면 환율 경유) ③ price guard 이탈 판정(게시 시점 기준가 vs 현재)<br>· 소스명은 고객 콘솔 어디에도 미노출(09 §0 2026-09-02) — 고객 화면은 "외부지표 기준" 문구만<br>· <span class="red">[확인필요]</span> 바이낸스(USD 마켓) 선택 시 USD→KRW 환율 소스·갱신 주기 · 소스 장애 시 대체 소스 자동 전환 vs 신규 요청 차단 · 마목은 시세 불관여 원칙 — price guard는 '가드'로만 사용</span></div>
       </div>
       <div class="dtl" data-idx="10">
         <div class="detail-label"><span class="dtl-num">11</span>저장·버전·적용 시점</div>
@@ -446,7 +446,7 @@
       · <strong>[화이트리스트 관리 제외]</strong> 화이트리스트 지연발효는 커스터디 출금(외부 반출) 전용 — 기존 커스터디 정책·시스템 그대로 사용, 이 콘솔에서 중복 관리하지 않음. 나·마 교환·중개(내부 지갑 간 이전)에는 미적용.<br>
       · 연결: 초대 발송 → ONB-00 · 정책값 표출 EXC-01/02·BRK-02/03/04/07 · 발생 알람 처리(잠금·재이행 도래·격리 등)는 홈(ADM-02) 처리함 · 기관 KYC 상태 = 전 화면 게이팅(G-3) 단일 출처<br>
       · 2026-09-02 설명 형식 개정 적용(핀 = 조작 요소 단위) — 파라미터는 그룹 단위 핀(입력 규격 명시), '페어별' 스프레드 프레임을 3페어 입력 3개로 수정, 취급자산 상태·정책 버전 라인·dirty 표시 추가, 조치 열 '—' 제거([상태 변경 ▾] 전 행), 저장 = 확인 없음 / 자산 중지·KYC 상태 변경 = 확인 다이얼로그로 통일 · 서비스명 DSRV Admin.<br>
-      · <span style="color:#991b1b;">[확인필요]</span> 입력 범위 상·하한 전부 · ETH 페어 스프레드 요율 · 스프레드 갱신주기 파라미터 · 수수료율 변경 절차 · 영업일 캘린더 · price guard 기본값 vs 고정값 · 일간·월간 누적 한도 · 시세 소스 USD 환산 경로·장애 대체 · 콜드 80% 고시 원문 · 이력 CSV · 관리자 이탈 경고 예외 · 가입자 열 표시값 · 백업코드 소진 경로 · 재발송 횟수 제한 · 동결 → 활성 복귀 · 동결 시 STR 자동 생성 · KYC 초기값 · 개인 이메일 도메인 · 게재중 게시 자동 중지(자산 중지 시).
+      · <span style="color:#991b1b;">[확인필요]</span> 입력 범위 상·하한 전부 · ETH 페어 스프레드 요율 · 스프레드 갱신주기 파라미터 · 수수료율 변경 절차 · 영업일 캘린더 · price guard 기본값 vs 고정값 · 일간·월간 누적 한도 · 시세 소스 KRW 환산 경로·장애 대체 · 콜드 80% 고시 원문 · 이력 CSV · 관리자 이탈 경고 예외 · 가입자 열 표시값 · 백업코드 소진 경로 · 재발송 횟수 제한 · 동결 → 활성 복귀 · 동결 시 STR 자동 생성 · KYC 초기값 · 개인 이메일 도메인 · 게재중 게시 자동 중지(자산 중지 시).
     </div>
   </div>
 </section>

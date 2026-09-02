@@ -79,7 +79,7 @@
 
         <div class="item-area" data-highlight="2" style="position:relative;padding:4px;border-radius:8px;margin-top:6px;">
           <div class="pin" data-idx="2" style="top:-6px;right:-6px;">3</div>
-          <div style="font-size:10px;color:#16a34a;padding:0 2px;">보유 9,300.00 USDC · 처분 가능 <strong>9,300.00 USDC</strong> ✓ (필요 798.40 USDC · ≈ 798.40 USD 상당, 1회 한도 1,000 USD 상당 이내)</div>
+          <div style="font-size:10px;color:#16a34a;padding:0 2px;">보유 9,300.00 USDC · 처분 가능 <strong>9,300.00 USDC</strong> ✓ (필요 798.40 USDC · ≈ 1,077,840원 상당, 1회 한도 1,500,000원 상당 이내)</div>
           <div style="font-size:9px;color:#94a3b8;padding:6px 4px 3px;">▼ 게시 상태가 게재중이 아니거나 게이트 미충족 시에만 노출 (아래는 문구 예시 — 실제로는 해당 1건만)</div>
           <div style="font-size:10px;color:#b45309;background:#fef3c7;border:1px solid #fde68a;border-radius:6px;padding:5px 8px;">⚠ 협의 중인 게시입니다 — 다른 신청이 처리되면 다시 신청할 수 있습니다</div>
           <div style="font-size:10px;color:#b91c1c;background:#fef2f2;border:1px solid #fecaca;border-radius:6px;padding:5px 8px;margin-top:4px;">⚠ 보유·처분 가능 수량이 부족합니다 — 798.40 USDC가 필요합니다 (처분 가능 {수량} USDC)</div>
@@ -124,7 +124,7 @@
       <div class="nav-row"><span class="nav-el">기관 배지</span><span class="nav-act">클릭 → 메뉴(로그아웃) → '로그아웃' 클릭</span><span class="nav-to"><strong>로그인(AUTH-01)</strong> · 확인 없음 · 세션 즉시 파기(공통 UI 규격)</span></div>
       <div class="nav-note">· <strong>진입</strong>: 교환 게시판(BRK-01)의 타사 게시 행 클릭(게재중 · 협의중 모두) · 진입 시 게시 최신 상태·내 잔고 조회("불러오는 중…") → [이 조건으로 신청] 활성/비활성 판정<br>
       · 신청자 측 전용 — 수락·거절 버튼 없음(게시자의 BRK-04) · 조건 수정 입력란 없음(역제안 없음) · 신청 후 진행 조회 = 내 신청 상세(BRK-07)<br>
-      · 목업 예시: 게시 800 USDT ↔ 798.40 USDC(0.9980 USDC/USDT · 게시자 B사) · 신청자 A자산운용이 보내는 798.40 USDC · 수수료 7.98 USDC(798.40 × 1% = 7.984 → 절사) · 잔고 9,300.00 USDC(한도와 무관한 예시) · 영업일 2일·한도 1,000 USD·1%는 ADM-03 정책값의 <strong>예시값</strong>(화면은 {정책값} 렌더링)</div>
+      · 목업 예시: 게시 800 USDT ↔ 798.40 USDC(0.9980 USDC/USDT · 게시자 B사) · 신청자 A자산운용이 보내는 798.40 USDC · 수수료 7.98 USDC(798.40 × 1% = 7.984 → 절사) · 잔고 9,300.00 USDC(한도와 무관한 예시) · 영업일 2일·한도 1,500,000원·1%는 ADM-03 정책값의 <strong>예시값</strong>(화면은 {정책값} 렌더링)</div>
     </div>
 
     <div class="itm" data-idx="0">
@@ -147,7 +147,7 @@
       <div class="num">3</div>
       <div>
         <div class="itm-title">신청 가능 여부 게이트 — 잔고·한도 표시 + 상태·게이트 경고 (표시 · 조건부 노출)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · <strong>신청자 거래 안전성 검증</strong>(2026-09-02 확정): 진입 시 + [이 조건으로 신청] 클릭 시 서버 재검증<br>· 상시 1줄: 「보유 {수량} {자산} · 처분 가능 {수량} {자산} ✓ (필요 {내가 보내는 수량} · ≈ {USD} USD 상당, 1회 한도 {정책값} USD 상당 이내)」 — 처분 가능 = 실보유 − 기게시·기신청 중복분(BRK-02 상세 4와 동일 정의) · 충족 초록 ✓ / 미충족 빨강<br>· <strong>인라인 경고(조건부 · 해당 1건만 · 버튼 바로 위)</strong> — 게시 상태: 협의중 "협의 중인 게시입니다 — 다른 신청이 처리되면 다시 신청할 수 있습니다" · 중지 "시세 변동으로 중지된 게시입니다 — 신청할 수 없습니다" · 회수 "게시자가 회수한 게시입니다 — 신청할 수 없습니다" · 완료 "유효기간이 만료된 게시입니다 — 신청할 수 없습니다" / 게이트: 잔고 "보유·처분 가능 수량이 부족합니다 — {필요 수량} {자산}가 필요합니다 (처분 가능 {수량} {자산})" · 한도 "1회 한도({정책값} USD 상당)를 초과하는 신청입니다 — 신청할 수 없습니다" · 우선순위: 게시 상태 &gt; 한도 &gt; 잔고<br>· 한도 환산 = 내가 보내는 수량 × ADM-03 시세(요청 시점) — 게시 시점엔 한도 이내였어도 시세 변동(ETH)으로 초과될 수 있어 신청자 측에서도 판정<br>· 잔고 조회 실패 → "—" + 상단 배너 + 버튼 비활성<br><span class="basis">근거 09 §0 신청자 거래 안전성 검증·건별 한도(2026-09-02) · V2(4요소①) · 공통 UI 규격 비활성 사유 = 인라인 경고</span></div>
+        <div class="itm-desc">· 클릭 요소 없음 · <strong>신청자 거래 안전성 검증</strong>(2026-09-02 확정): 진입 시 + [이 조건으로 신청] 클릭 시 서버 재검증<br>· 상시 1줄: 「보유 {수량} {자산} · 처분 가능 {수량} {자산} ✓ (필요 {내가 보내는 수량} · ≈ {원화 환산액}원 상당, 1회 한도 {정책값}원 상당 이내)」 — 처분 가능 = 실보유 − 기게시·기신청 중복분(BRK-02 상세 4와 동일 정의) · 충족 초록 ✓ / 미충족 빨강<br>· <strong>인라인 경고(조건부 · 해당 1건만 · 버튼 바로 위)</strong> — 게시 상태: 협의중 "협의 중인 게시입니다 — 다른 신청이 처리되면 다시 신청할 수 있습니다" · 중지 "시세 변동으로 중지된 게시입니다 — 신청할 수 없습니다" · 회수 "게시자가 회수한 게시입니다 — 신청할 수 없습니다" · 완료 "유효기간이 만료된 게시입니다 — 신청할 수 없습니다" / 게이트: 잔고 "보유·처분 가능 수량이 부족합니다 — {필요 수량} {자산}가 필요합니다 (처분 가능 {수량} {자산})" · 한도 "1회 한도({정책값}원 상당)를 초과하는 신청입니다 — 신청할 수 없습니다" · 우선순위: 게시 상태 &gt; 한도 &gt; 잔고<br>· 한도 환산 = 내가 보내는 수량 × ADM-03 시세(요청 시점) — 게시 시점엔 한도 이내였어도 시세 변동(ETH)으로 초과될 수 있어 신청자 측에서도 판정<br>· 잔고 조회 실패 → "—" + 상단 배너 + 버튼 비활성<br><span class="basis">근거 09 §0 신청자 거래 안전성 검증·건별 한도(2026-09-02) · V2(4요소①) · 공통 UI 규격 비활성 사유 = 인라인 경고</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">경고 블록</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용) · 닫기(×) 없음 · 재진입 시 재판정</span></div>
         </div>
@@ -160,7 +160,7 @@
         <div class="itm-title">[이 조건으로 신청] 버튼<span class="req">필수</span></div>
         <div class="itm-desc">· primary · 신청자(가입자) 단독 실행 — 기관당 가입자 1명(ADM-03) · 게시된 조건 그대로 신청(흥정·역제안 없음)<br>· 수락 시 즉시 구속력이 발생하는 청약이므로 <strong>확인 다이얼로그 있음</strong>(공통 UI 규격 — 구속력 행위 직전) · 신청 자체는 수락 전까지 구속력 없음<br>· 접수 = 게시 상태 게재중 → <strong>협의중</strong>(게시당 동시 신청 1건 · 다른 기관 추가 신청 차단) · 게시자 이메일 ①<br><span class="basis">근거 F-1b · V2(통신중개 아님) · F-4 · 09 §0 마목 게시 상태(2026-09-02)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">[이 조건으로 신청] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①게시 상태가 게재중 아님(협의중·회수·완료·중지) ②내가 보내는 수량 &gt; 처분 가능분 ③건별 한도 {정책값} USD 상당 초과 ④KYC 예외 배너 노출 중 ⑤게시·잔고 조회 실패 ⑥내 게시(구조적 불가 — BRK-01에서 BRK-06으로 분기)</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격) · 사유는 항목 3 인라인 경고로 노출(툴팁 없음)</span></div>
+          <div class="nav-row"><span class="nav-el">[이 조건으로 신청] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①게시 상태가 게재중 아님(협의중·회수·완료·중지) ②내가 보내는 수량 &gt; 처분 가능분 ③건별 한도 {정책값}원 상당 초과 ④KYC 예외 배너 노출 중 ⑤게시·잔고 조회 실패 ⑥내 게시(구조적 불가 — BRK-01에서 BRK-06으로 분기)</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격) · 사유는 항목 3 인라인 경고로 노출(툴팁 없음)</span></div>
           <div class="nav-row"><span class="nav-el">[이 조건으로 신청] — 클릭(활성)</span><span class="nav-act">클릭 → <strong>다이얼로그: 제목 "이 조건으로 신청" / 본문 "게시자가 수락하면 즉시 확정되어 구속력이 발생합니다. 중개 수수료 7.98 USDC(거래액 1%)는 확정 시 발생합니다." / [신청] [돌아가기]</strong> → [신청] 클릭 → 버튼 라벨 "신청 중…"·비활성(중복 클릭 차단) → 게시 상태·잔고·한도 서버 재검증 → 접수(신청 시점 확정 · 유효기한 = 접수 + 영업일 {정책값}일) · 게시 상태 협의중 · 게시자 이메일 ① 발송</span><span class="nav-to"><strong>내 신청 상세(BRK-07)</strong> — 단계 '수락 대기'(2026-09-02 변경 — 종전 BRK-01 복귀 폐기) · [돌아가기] = 다이얼로그 닫힘·화면 잔류·변경 없음</span></div>
           <div class="nav-row"><span class="nav-el">[이 조건으로 신청] — 실패</span><span class="nav-act">재검증 실패: 클릭 사이 타 기관 신청 접수(협의중) · 회수 · 만료 · 중지 / 잔고·한도 미충족 / 시스템 오류</span><span class="nav-to stay">화면 잔류 · 상태 변경 → 게시 상태 칩 갱신 + 항목 3 해당 경고 노출 + 버튼 비활성 / 잔고·한도 → 항목 3 경고 + 비활성 / 오류 → 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 버튼 라벨 복귀</span></div>
         </div>

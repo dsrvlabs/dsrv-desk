@@ -50,7 +50,7 @@
           <div class="pin" data-idx="0" style="top:-6px;right:-6px;">1</div>
           <div class="kv"><span class="k">요청번호</span><span class="v">EXC-20260902-0001</span></div>
           <div class="kv"><span class="k">교환쌍 · 방향</span><span class="v">USDC → USDT</span></div>
-          <div class="kv"><span class="k">보내는 수량</span><span class="v">900 USDC <span style="color:#64748b;font-weight:400;">(≈ 900.00 USD)</span></span></div>
+          <div class="kv"><span class="k">보내는 수량</span><span class="v">900 USDC <span style="color:#64748b;font-weight:400;">(≈ 1,215,000원)</span></span></div>
         </div>
       </div>
 
@@ -128,7 +128,7 @@
       <div class="num">1</div>
       <div>
         <div class="itm-title">요청 요약 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · EXC-01 [거래 요청] 시 입력값을 그대로 표시 — 이 화면에서 수정 불가(수정은 [거절] → EXC-01 재요청)<br>· 요청번호: <strong>EXC-YYYYMMDD-NNNN</strong>(요청일 + 당일 일련번호 4자리, notation 채번) — 진입 시 이미 채번 완료 · 복사 버튼 없음(텍스트 선택만)<br>· 교환쌍 · 방향: 「{보내는} → {받는}」 티커 대문자<br>· 보내는 수량: 「{수량} {티커}」 보내는 자산 자릿수(ETH 4 / USDC·USDT 2) + 괄호 안 USD 환산(소수 2자리 · 요청 시점 ADM-03 시세 · 스테이블 1:1) — 한도 1,000 USD 상당 이내임을 확인한 값<br><span class="basis">근거 notation 채번·수량 표기 · 09 §0 건별 한도(2026-09-02)</span></div>
+        <div class="itm-desc">· 클릭 요소 없음 · EXC-01 [거래 요청] 시 입력값을 그대로 표시 — 이 화면에서 수정 불가(수정은 [거절] → EXC-01 재요청)<br>· 요청번호: <strong>EXC-YYYYMMDD-NNNN</strong>(요청일 + 당일 일련번호 4자리, notation 채번) — 진입 시 이미 채번 완료 · 복사 버튼 없음(텍스트 선택만)<br>· 교환쌍 · 방향: 「{보내는} → {받는}」 티커 대문자<br>· 보내는 수량: 「{수량} {티커}」 보내는 자산 자릿수(ETH 4 / USDC·USDT 2) + 괄호 안 KRW 환산(소수 2자리 · 요청 시점 ADM-03 시세 · 스테이블코인도 KRW 시세 환산) — 한도 1,500,000원 상당 이내임을 확인한 값<br><span class="basis">근거 notation 채번·수량 표기 · 09 §0 건별 한도(2026-09-02)</span></div>
       </div>
     </div>
 
@@ -199,7 +199,7 @@
     <div class="detail-grid" id="detailCol">
       <div class="dtl" data-idx="0">
         <div class="detail-label"><span class="dtl-num">1</span>요청 요약 — 표시 규칙</div>
-      <div class="dtl-body"><span class="box">· 요청번호는 EXC-01 [거래 요청] 클릭 시 채번 → EXC-02·03·04·DASH-01·ADM-02가 같은 번호 사용<br>· 보내는 수량의 USD 환산은 요청 시점 값으로 고정(체류 중 재환산 없음) — 한도 검증은 EXC-01에서 완료, 이 화면은 재검증하지 않음<br>· 예시 900 USDC ≈ 900.00 USD(스테이블 1:1) · ETH 예: 0.3 ETH ≈ 955.20 USD(3,184.00 USDC/ETH 가정)</span></div>
+      <div class="dtl-body"><span class="box">· 요청번호는 EXC-01 [거래 요청] 클릭 시 채번 → EXC-02·03·04·DASH-01·ADM-02가 같은 번호 사용<br>· 보내는 수량의 KRW 환산은 요청 시점 값으로 고정(체류 중 재환산 없음) — 한도 검증은 EXC-01에서 완료, 이 화면은 재검증하지 않음<br>· 예시 900 USDC ≈ 1,215,000원 · ETH 예: 0.3 ETH ≈ 1,289,520원(3,184.00 USDC/ETH · 1 USDC ≈ 1,350원 가정 — 실제 환산은 요청 시점 KRW 시세)</span></div>
       </div>
       <div class="dtl" data-idx="1">
         <div class="detail-label"><span class="dtl-num">2</span>외부지표 소스 — 내부 관리 (화면 미노출)</div>

@@ -66,9 +66,9 @@
 
         <div class="item-area" data-highlight="2" style="position:relative;padding:4px;border-radius:8px;">
           <div class="pin" data-idx="2" style="top:-6px;right:-6px;">3</div>
-          <div style="font-size:11px;color:#94a3b8;font-weight:600;margin-bottom:6px;">보내는 수량 <span style="float:right;color:#64748b;">1회 최대 1,000 USD 상당</span></div>
+          <div style="font-size:11px;color:#94a3b8;font-weight:600;margin-bottom:6px;">보내는 수량 <span style="float:right;color:#64748b;">1회 최대 1,500,000원 상당</span></div>
           <div class="field"><span>800</span><span class="chip asset">USDT</span></div>
-          <div style="font-size:10px;color:#64748b;margin-top:4px;">≈ 800.00 USD</div>
+          <div style="font-size:10px;color:#64748b;margin-top:4px;">≈ 1,080,000원</div>
         </div>
 
         <div class="item-area" data-highlight="3" style="position:relative;padding:4px;border-radius:8px;margin-bottom:6px;">
@@ -136,7 +136,7 @@
       <div class="nav-row"><span class="nav-el">GNB '교환게시판'(현재 섹션 강조)</span><span class="nav-act">클릭</span><span class="nav-to"><strong>교환 게시판(BRK-01)</strong> · 입력 중 값은 파기(확인 없음) — [취소]와 동일 결과</span></div>
       <div class="nav-row"><span class="nav-el">기관 배지</span><span class="nav-act">클릭 → 메뉴(로그아웃) → '로그아웃' 클릭</span><span class="nav-to"><strong>로그인(AUTH-01)</strong> · 확인 없음 · 세션 즉시 파기(공통 UI 규격)</span></div>
       <div class="nav-note">· <strong>진입</strong>: 교환 게시판(BRK-01) [+ 거래의향 등록] 클릭 · 진입 시 초기 상태 = 자산 미선택·수량 빈칸·잔고·시세 "—"·[게시] 비활성 (목업은 입력 완료 상태)<br>
-      · 목업 예시: 800 USDT → 798.40 USDC(환산 비율 0.9980 USDC/USDT · 현 시세 1.0000 · 편차 -0.20%) — 한도 1,000 USD 상당 이내(2026-09-02 예시 재조정) · 목업의 30일·±2.0%는 ADM-03 정책값의 <strong>예시값</strong>(화면은 {정책값} 렌더링)<br>
+      · 목업 예시: 800 USDT → 798.40 USDC(환산 비율 0.9980 USDC/USDT · 현 시세 1.0000 · 편차 -0.20%) — 한도 1,500,000원 상당 이내(2026-09-02 예시 재조정) · 목업의 30일·±2.0%는 ADM-03 정책값의 <strong>예시값</strong>(화면은 {정책값} 렌더링)<br>
       · 게시 이후: 내 게시 상세(BRK-06)에서 조회·회수 · 상대 신청 → 이메일 ① → BRK-06 신청 행 → 받은 신청·수락(BRK-04) · 게시자 수수료(8.00 USDT = 800 × 1%)는 BRK-04 수락 전 고시</div>
     </div>
 
@@ -169,7 +169,7 @@
       <div class="num">3</div>
       <div>
         <div class="itm-title">보내는 수량 입력<span class="req">필수</span></div>
-        <div class="itm-desc">· 숫자·소수점만 입력 가능 · 소수 자릿수 상한 = 보내는 자산 기준(ETH 4 / USDC·USDT 2) — 초과 입력은 무시 · 천 단위 쉼표 자동 삽입 · 빈칸 안내 "0"<br>· 입력 중 실시간 갱신: 필드 아래 <strong>USD 환산액</strong>(소수 2자리 · ADM-03 시세 · 요청 시점) · 환산 비율·편차(항목 6) · 처분 가능분·한도 검증<br>· 라벨 우측 "1회 최대 {정책값} USD 상당" 상시 표기(ADM-03 값 렌더링 · 목업 1,000)<br>· <strong>상태</strong> ① 빈칸(기본) ② 정상 ③ 한도 초과 — 빨간 테두리 + 필드 아래 인라인 ⚠ "1회 최대 게시 한도({정책값} USD 상당)를 초과했습니다 — 수량을 줄여 다시 입력해 주세요" ④ 처분 가능분 초과 — 인라인 ⚠ "보유·처분 가능 수량을 초과했습니다 — 처분 가능 {수량} {자산} 이내로 입력해 주세요" ⑤ 잔고 조회 실패 — 입력 가능·[게시] 비활성(항목 4) · ③④ 동시 해당 시 ③만 노출<br><span class="basis">근거 09 §0 건별 한도·표기 자릿수(2026-09-02) · notation 입력 자릿수 · V2 거래 안전성 검증(4요소①)</span></div>
+        <div class="itm-desc">· 숫자·소수점만 입력 가능 · 소수 자릿수 상한 = 보내는 자산 기준(ETH 4 / USDC·USDT 2) — 초과 입력은 무시 · 천 단위 쉼표 자동 삽입 · 빈칸 안내 "0"<br>· 입력 중 실시간 갱신: 필드 아래 <strong>KRW 환산액</strong>(소수 2자리 · ADM-03 시세 · 요청 시점) · 환산 비율·편차(항목 6) · 처분 가능분·한도 검증<br>· 라벨 우측 "1회 최대 {정책값}원 상당" 상시 표기(ADM-03 값 렌더링 · 목업 1,000)<br>· <strong>상태</strong> ① 빈칸(기본) ② 정상 ③ 한도 초과 — 빨간 테두리 + 필드 아래 인라인 ⚠ "1회 최대 게시 한도({정책값}원 상당)를 초과했습니다 — 수량을 줄여 다시 입력해 주세요" ④ 처분 가능분 초과 — 인라인 ⚠ "보유·처분 가능 수량을 초과했습니다 — 처분 가능 {수량} {자산} 이내로 입력해 주세요" ⑤ 잔고 조회 실패 — 입력 가능·[게시] 비활성(항목 4) · ③④ 동시 해당 시 ③만 노출<br><span class="basis">근거 09 §0 건별 한도·표기 자릿수(2026-09-02) · notation 입력 자릿수 · V2 거래 안전성 검증(4요소①)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">보내는 수량 필드</span><span class="nav-act">키 입력마다 검증(포커스 아웃 대기 없음)</span><span class="nav-to stay">정상 → 경고 제거 / 초과 → 인라인 경고 ③ 또는 ④ 노출·[게시] 비활성 · 받는 수량이 있으면 환산 비율·편차 재계산</span></div>
           <div class="nav-row"><span class="nav-el">보내는 수량 필드 (자산 미선택)</span><span class="nav-act">보내는·받는 자산 중 하나라도 미선택</span><span class="nav-to stay">필드 비활성 · 클릭 시 인라인 안내 "자산을 먼저 선택해 주세요"</span></div>
@@ -238,7 +238,7 @@
         <div class="itm-title">[게시] 버튼<span class="req">필수</span></div>
         <div class="itm-desc">· primary · 게시자(가입자) 단독 실행 — 구속력 없는 거래의향 표시이므로 별도 승인 없음, <strong>확인 다이얼로그 없음</strong>(공통 UI 규격 — 구속력·비가역 행위 아님)<br>· 게시자 거래 안전성 게이트(보유·처분 가능분·건별 한도)·편차 게이트·KYC 게이트는 전부 활성 조건으로 처리 — 클릭 후 오류가 아니라 사전 비활성<br><span class="basis">근거 F-4 · V2(4요소①) · 1기관 1가입자(ADM-03)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">[게시] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①보내는·받는 자산 미선택 ②보내는·받는 수량 빈칸·0 ③보내는 수량 &gt; 처분 가능분 ④건별 한도 {정책값} USD 상당 초과 ⑤편차 경고 노출 중 ⑥KYC 예외 배너 노출 중 ⑦잔고·현 시세 조회 실패</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격) · 사유는 해당 위치 인라인 경고로 이미 노출(툴팁 없음)</span></div>
+          <div class="nav-row"><span class="nav-el">[게시] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①보내는·받는 자산 미선택 ②보내는·받는 수량 빈칸·0 ③보내는 수량 &gt; 처분 가능분 ④건별 한도 {정책값}원 상당 초과 ⑤편차 경고 노출 중 ⑥KYC 예외 배너 노출 중 ⑦잔고·현 시세 조회 실패</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격) · 사유는 해당 위치 인라인 경고로 이미 노출(툴팁 없음)</span></div>
           <div class="nav-row"><span class="nav-el">[게시] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음 → 버튼 라벨 "게시 중…"·비활성(중복 클릭 차단) → 처분 가능분·한도·편차 서버 재검증 → 요청번호 BRK-YYYYMMDD-NNNN 채번 · 상태 게재중 · 게시 시점 시세 스냅숏 저장 · 게시판 게재</span><span class="nav-to"><strong>내 게시 상세·회수(BRK-06)</strong> — 상태 행 '게재중 · 받은 신청 0건'(2026-09-02 변경 — 종전 BRK-01 복귀 폐기) · 별도 토스트 없음</span></div>
           <div class="nav-row"><span class="nav-el">[게시] — 실패</span><span class="nav-act">재검증 실패(클릭 사이 잔고 변동·시세 이동으로 편차 초과) / 시세 소스 장애 / 시스템 오류</span><span class="nav-to stay">화면 잔류 · 잔고 → 항목 3 ④ 경고 재노출 / 편차 → 항목 7 경고 노출(현 시세 갱신) / 장애·오류 → 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 입력값 유지 · 버튼 라벨 복귀</span></div>
         </div>
@@ -282,7 +282,7 @@
       </div>
       <div class="dtl" data-idx="2">
         <div class="detail-label"><span class="dtl-num">3</span>한도 · 처분 가능분 판정 (게시자 거래 안전성 검증)</div>
-      <div class="dtl-body"><span class="box">· 유효 상한 = min(1회 한도 {정책값} USD 상당의 보내는 자산 환산 수량, 처분 가능분) — 두 조건 모두 충족해야 게시 가능 · 환산 시세·시점 = ADM-03 · 요청 시점(입력 중 실시간, 클릭 시 서버 재검증)<br>· 한도 예: 1,000 USD ÷ 3,184.00 = 0.3140 ETH(절사) · 스테이블 1:1 → 1,000.00 USDC/USDT<br>· 판정 시점: 입력 중(활성 조건) + [게시] 클릭 시 재검증(실패 시 인라인 경고 재노출) — 게시 후 잔고 변동은 BRK-04 수락 시점 재검증으로 보완(BRK-04 상세)<br>· <span class="red">[확인필요]</span> 마목 대량 거래(블록딜)와의 정합 — 분할 게시 여부 · 일간·월간 누적 한도</span></div>
+      <div class="dtl-body"><span class="box">· 유효 상한 = min(1회 한도 {정책값}원 상당의 보내는 자산 환산 수량, 처분 가능분) — 두 조건 모두 충족해야 게시 가능 · 환산 시세·시점 = ADM-03 · 요청 시점(입력 중 실시간, 클릭 시 서버 재검증)<br>· 한도 예: 1,500,000원 ÷ 4,298,400원(= 3,184.00 USDC × 1,350원 가정) = 0.3489 ETH(절사) · 스테이블도 KRW 시세로 환산(USD 1:1 아님) → 1,500,000원 ÷ 1,350원 ≈ 1,111.11 USDC/USDT<br>· 판정 시점: 입력 중(활성 조건) + [게시] 클릭 시 재검증(실패 시 인라인 경고 재노출) — 게시 후 잔고 변동은 BRK-04 수락 시점 재검증으로 보완(BRK-04 상세)<br>· <span class="red">[확인필요]</span> 마목 대량 거래(블록딜)와의 정합 — 분할 게시 여부 · 일간·월간 누적 한도</span></div>
       </div>
       <div class="dtl" data-idx="3">
         <div class="detail-label"><span class="dtl-num">4</span>처분 가능분 정의</div>

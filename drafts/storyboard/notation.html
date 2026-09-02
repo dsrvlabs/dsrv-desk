@@ -37,7 +37,7 @@
 
 <div class="doc-head">
   <h1>표기 규칙</h1>
-  <div class="sub">화면·문서·CSV 공통 표기 기준 · 현재 화면 19개에서 실제 사용 중인 표기를 집계해 정리 (2026-09-01 · 09-02 개정 — 한도 USD 표기·공통 UI 규격 추가) · 규칙을 바꾸면 이 표를 먼저 고치고 화면을 일괄 수정</div>
+  <div class="sub">화면·문서·CSV 공통 표기 기준 · 현재 화면 19개에서 실제 사용 중인 표기를 집계해 정리 (2026-09-01 · 09-02 개정 — 한도 원화 표기·공통 UI 규격 추가) · 규칙을 바꾸면 이 표를 먼저 고치고 화면을 일괄 수정</div>
 </div>
 
 <div class="tbl-wrap">
@@ -70,8 +70,8 @@
     <tr>
       <td class="grp-cell" rowspan="5">수량·자산</td>
       <td class="item">수량 (화면)</td>
-      <td>천 단위 쉼표 · 소수점 아래 <b class="key">자산별 최대 자릿수 — ETH 4자리 · USDC·USDT 2자리</b>(2026-09-02 확정 · 종전 "최대 6자리" 폐기 · ETH 4자리 = 0.0001 ETH ≈ 0.3 USD로 원화 천원 미만 분해능, ETH 시세 약 7,000 USD 초과 시 5자리 재검토) · 불필요한 뒤 0 생략(입력 중에는 입력값 그대로) · 숫자와 티커 사이 공백 1칸 · 통화기호(₩·$) 사용 안 함 · 온체인 decimals(ETH 18 · USDC/USDT 6)와 별개의 UI 규칙</td>
-      <td><span class="ex">900 USDC</span> <span class="ex">899.82 USDT</span> <span class="ex">0.3140 ETH</span></td>
+      <td>천 단위 쉼표 · 소수점 아래 <b class="key">자산별 최대 자릿수 — ETH 4자리 · USDC·USDT 2자리</b>(2026-09-02 확정 · 종전 "최대 6자리" 폐기 · ETH 4자리 = 0.0001 ETH ≈ 400원대로 천원 미만 분해능(ETH 3,000~3,500 USD · 1 USD ≈ 1,350원 가정), ETH 시세 약 9,500,000원 초과 시 5자리 재검토) · 불필요한 뒤 0 생략(입력 중에는 입력값 그대로) · 숫자와 티커 사이 공백 1칸 · 통화기호(₩·$) 사용 안 함 · 온체인 decimals(ETH 18 · USDC/USDT 6)와 별개의 UI 규칙</td>
+      <td><span class="ex">900 USDC</span> <span class="ex">899.82 USDT</span> <span class="ex">0.3489 ETH</span></td>
     </tr>
     <tr>
       <td class="item">수량 (CSV)</td>
@@ -80,8 +80,8 @@
     </tr>
     <tr>
       <td class="item">입력 자릿수·절사</td>
-      <td>입력: 숫자·소수점만 허용, 자산별 최대 자릿수 <b class="key">초과 입력은 무시(차단)</b> · 천 단위 쉼표 자동 삽입 · 산정값(받는 수량·수수료·USD 환산액)은 <b class="key">해당 자산 자릿수로 절사(내림)</b> — 반올림 아님 · USD 환산 표시는 소수 2자리 (2026-09-02 확정)</td>
-      <td><span class="ex">333.33 USDC × 0.9998 = 333.26 USDT</span> (333.263334 절사) · <span class="ex">0.3 ETH × 1% = 0.003 ETH</span> · <span class="ex">0.3140 ETH × 1% = 0.0031 ETH</span> (0.003140 절사)</td>
+      <td>입력: 숫자·소수점만 허용, 자산별 최대 자릿수 <b class="key">초과 입력은 무시(차단)</b> · 천 단위 쉼표 자동 삽입 · 산정값(받는 수량·수수료)은 <b class="key">해당 자산 자릿수로 절사(내림)</b> — 반올림 아님 · <b class="key">KRW 환산액은 원 단위 절사</b>(소수 없음 · 천 단위 쉼표 · 2026-09-02(9))</td>
+      <td><span class="ex">333.33 USDC × 0.9998 = 333.26 USDT</span> (333.263334 절사) · <span class="ex">0.3 ETH × 1% = 0.003 ETH</span> · <span class="ex">0.3489 ETH × 1% = 0.0034 ETH</span> (0.003489 절사)</td>
     </tr>
     <tr>
       <td class="item">자산명</td>
@@ -89,9 +89,9 @@
       <td><span class="ex">ETH · USDC · USDT</span></td>
     </tr>
     <tr>
-      <td class="item">한도 (USD 환산)</td>
-      <td>「<b class="key">{금액} USD 상당</b>」 — 건별 한도는 USD 환산액으로 표기(2026-09-02 확정) · 환산 시세 = ADM-03 시세 소스 · 요청 시점 · 종전 원화 환산(억 원 상당)·코인 수량 한도 표기 폐기</td>
-      <td><span class="ex">1,000 USD 상당</span></td>
+      <td class="item">한도 (KRW 환산)</td>
+      <td>「<b class="key">{금액}원 상당</b>」 — 건별 한도는 <b class="key">원화</b> 환산액으로 표기(2026-09-02(9) · 종전 USD 상당 표기 폐기) · 환산 시세 = ADM-03 시세 소스의 KRW 시세 · 요청 시점 · ETH·스테이블 모두 환산(USD 1:1 아님) · 원 단위 절사</td>
+      <td><span class="ex">1,500,000원 상당</span></td>
     </tr>
     <tr>
       <td class="grp-cell" rowspan="2">비율</td>

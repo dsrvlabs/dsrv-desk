@@ -410,7 +410,7 @@
       <div class="f"><span class="m fk">FK</span><span class="name">기안자</span><span class="col">drafter_id</span><span class="desc">→ 가입자 계정(USER). 고객사 담당자 단독 실행. 견적 수락 전까지는 구속력 없음</span></div>
       <div class="f"><span class="m fk">FK</span><span class="name">보내는 자산</span><span class="col">from_asset_id</span><span class="desc">→ 취급자산(ASSET)</span></div>
       <div class="f"><span class="m fk">FK</span><span class="name">받는 자산</span><span class="col">to_asset_id</span><span class="desc">→ 취급자산(ASSET)</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">보내는 수량</span><span class="col">from_qty</span><span class="desc">상한 = min(건별 한도 1,000 USD 상당, 가용 풀 잔량). 한도는 LIMIT_RULESET 참조</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">보내는 수량</span><span class="col">from_qty</span><span class="desc">상한 = min(건별 한도 1,500,000원 상당, 가용 풀 잔량). 한도는 LIMIT_RULESET 참조</span></div>
       <div class="f"><span class="m n">·</span><span class="name">상태 (고객 표출)</span><span class="col">status</span><span class="desc"><span class="ev">요청됨 / 비율 제시 / 진행 중 / 완료 / 거절 / 만료</span><br>내부 단계(승인 대기·에스컬레이션·보류·집행 대기)는 고객에게 '진행 중' 하나로만 보이고, 실제 단계는 처리함 <span class="ref">T1</span>에 있다. 고객 표출에 '보류'는 없다(2026-09-02 결정 — 진행 중 → 완료/거절만) · 거절 = 고객 거절(EXC-02)·관리자 거절 공통 라벨, 만료 = 수락 기한 경과·재검증 실패(풀 부족·비율 이탈) · 라벨은 케이스분기 문서(states.html) A표 기준</span></div>
       <div class="f"><span class="m n">·</span><span class="name">요청 일시</span><span class="col">requested_at</span><span class="desc"></span></div>
     </div>
@@ -592,7 +592,7 @@
       <div class="role">거래 한도와 자동검증 임계값. 적용 범위(공통 / 기관 / 등급)별로 행을 둔다.</div>
       <div class="f"><span class="m pk">PK</span><span class="name">룰 ID</span><span class="col">rule_id</span><span class="desc"></span></div>
       <div class="f"><span class="m n">·</span><span class="name">적용 범위</span><span class="col">scope</span><span class="desc"><span class="ev">공통 / 기관 / 등급</span></span></div>
-      <div class="f"><span class="m n">·</span><span class="name">건별 한도</span><span class="col">tx_limit</span><span class="desc">1회 1,000 USD 상당(직접 교환·게시판 중개 공통, 2026-09-02 확정). USD 환산: 스테이블코인 1:1, ETH는 시세 소스의 USD 시세로 요청 시점 환산. 일간·월간 누적 한도 <span class="tg">[확인필요]</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">건별 한도</span><span class="col">tx_limit</span><span class="desc">1회 1,500,000원 상당(직접 교환·게시판 중개 공통, 2026-09-02(9) 원화 기준으로 변경). KRW 환산: ETH·USDC·USDT 모두 시세 소스의 KRW 시세로 요청 시점 환산(종전 스테이블 USD 1:1 전제 폐기) · 환산값 원 단위 절사. 일간·월간 누적 한도 <span class="tg">[확인필요]</span></span></div>
       <div class="f"><span class="m n">·</span><span class="name">신규주소 지연발효</span><span class="col">wl_delay</span><span class="desc">24시간. 커스터디 출금(외부 반출) 전용, 교환·중개에는 미적용</span></div>
       <div class="f"><span class="m n">·</span><span class="name">KYT·BLF 임계</span><span class="col">kyt_blf_thr</span><span class="desc">자동검증 1차 필터의 에스컬레이션 기준</span></div>
       <div class="f"><span class="m n">·</span><span class="name">핫월렛 비중 임계</span><span class="col">hot_ratio_thr</span><span class="desc">20%. 초과 시 스윕 경고(처리함 <span class="ref">T6</span>)</span></div>
@@ -710,7 +710,7 @@
       <tr><td class="fld">중개 수수료 (게시판 중개)</td><td><span class="v">거래액의 1.0% 고정 · 양측 각자</span> · 기준 = 각자 보내는 자산 수량</td><td>2026-09-02 확정 · 기준 금액은 기획 가정 · 차감 방식·1% 합리성 <span class="warn2">[확인필요]</span> · 설명의무 소명 수위 [로펌게이트]</td></tr>
       <tr><td class="fld">게시 / 신청 유효기간 (게시판 중개)</td><td><span class="v">30일</span> / <span class="v">영업일 2일</span></td><td>화면 확정 표기 (BRK-02·03)</td></tr>
       <tr><td class="fld">시세변동 자동중지 임계 (게시판 중개)</td><td><span class="v">±2.0%</span> (게시 시점 대비)</td><td>ADM-03 연동 <span class="warn2">[확인필요]</span></td></tr>
-      <tr><td class="fld">건별 한도 (공통)</td><td><span class="v">1회 1,000 USD 상당</span> · USD 환산(스테이블 1:1 · ETH는 시세 소스 USD 시세, 요청 시점)</td><td>2026-09-02 확정(종전 '1억 원 상당 / 100,000 수량' 표기 폐기) · 일간·월간 누적 한도 <span class="warn2">[확인필요]</span></td></tr>
+      <tr><td class="fld">건별 한도 (공통)</td><td><span class="v">1회 1,500,000원 상당</span> · KRW 환산(ETH·스테이블 모두 시세 소스 KRW 시세, 요청 시점 · 원 단위 절사)</td><td>2026-09-02(9) 원화 기준(종전 '1,000 USD 상당'·'1억 원 상당 / 100,000 수량' 표기 폐기) · 일간·월간 누적 한도 <span class="warn2">[확인필요]</span></td></tr>
       <tr><td class="fld">핫월렛 비중 임계 (지갑)</td><td><span class="v">20%</span> 초과 시 스윕 경고</td><td>ADM-03 표기</td></tr>
       <tr><td class="fld">신규주소 지연발효</td><td><span class="v">24시간</span></td><td>커스터디 출금 전용 — 교환·중개 미적용</td></tr>
       <tr><td class="fld">인증·세션</td><td>초대 링크 72시간·1회 · 로그인 실패 5회 잠금 · 유휴 15분 · 세션 최대 8시간 · 계정당 1세션 · 백업코드 6개·8자리·1회용</td><td>특권계정 유휴값·동시세션 예외 <span class="warn2">[확인필요]</span></td></tr>
@@ -722,7 +722,7 @@
 <div class="foot">
   <b>비고</b><br>
   · 상태값은 상태 전이 문서(states.html)와, 정책값은 관리자 설정 화면(ADM-03)과 같은 값을 쓴다. 예시값은 부록 D에 [확인필요]로 표기.<br>
-  · v0.7(2026-09-02)은 v0.6의 테이블·컬럼 구성을 유지하면서 ① §0 참조 안내(용어·처리함 유형·화면 코드·기호) 추가 ② 카드마다 테이블 역할 한 줄 추가 ③ 본문 설명의 약어를 풀어 쓰고 ④ knowledge/09 §0 2026-09-02 확정치(건별 한도 1,000 USD 상당 · 중개 수수료 1% 고정 · 견적 자동 산정 · BRK-06/07 화면)를 반영한 개정본. 컬럼 추가·삭제는 없음.<br>
+  · v0.7(2026-09-02)은 v0.6의 테이블·컬럼 구성을 유지하면서 ① §0 참조 안내(용어·처리함 유형·화면 코드·기호) 추가 ② 카드마다 테이블 역할 한 줄 추가 ③ 본문 설명의 약어를 풀어 쓰고 ④ knowledge/09 §0 2026-09-02 확정치(건별 한도 1,500,000원 상당 · 중개 수수료 1% 고정 · 견적 자동 산정 · BRK-06/07 화면)를 반영한 개정본. 컬럼 추가·삭제는 없음.<br>
   · 2026-09-02 보류 폐지 반영: EXCHANGE_REQUEST.status 고객 표출값을 요청됨·비율 제시·진행 중·완료·거절·만료 6종으로 정리('심사 후 보류' 삭제, '미진행'을 거절·만료로 분리) · 고객 표출 사유를 거절·만료로 재분류. 어드민 내부 보류(EXCHANGE_APPROVAL.decision·INBOX_ITEM HOLD)는 유지.<br>
   · 별도 ERD(db-schema-erd.svg)는 구버전 — 테이블 구성은 이 문서가 기준이며 ERD는 개정 예정.<br>
   · <span class="warn">[결정필요]</span> ① T2 이전 중지 건의 계약상 귀결(약관·법무) ② T4 소명 시한·초과 시 귀결 ③ T7 자동 종결 허용 여부 ④ High 등급 경고 방치 시 상위 에스컬레이션 룰 ⑤ 복수 신청 처리(선착순 vs 게시자 선택 — BRK-04).<br>

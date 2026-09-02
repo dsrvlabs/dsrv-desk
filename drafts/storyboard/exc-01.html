@@ -72,9 +72,9 @@
 
         <div class="item-area" data-highlight="2" style="position:relative;padding:4px;border-radius:8px;margin-bottom:6px;">
           <div class="pin" data-idx="2" style="top:-6px;right:-6px;">3</div>
-          <div style="font-size:11px;color:#94a3b8;font-weight:600;margin-bottom:6px;">보내는 수량 <span style="float:right;color:#64748b;">1회 최대 1,000 USD 상당</span></div>
+          <div style="font-size:11px;color:#94a3b8;font-weight:600;margin-bottom:6px;">보내는 수량 <span style="float:right;color:#64748b;">1회 최대 1,500,000원 상당</span></div>
           <div class="field"><span>900</span><span class="chip asset">USDC</span></div>
-          <div style="font-size:10px;color:#64748b;margin-top:4px;">≈ 900.00 USD</div>
+          <div style="font-size:10px;color:#64748b;margin-top:4px;">≈ 1,215,000원</div>
         </div>
 
         <div class="item-area" data-highlight="3" style="position:relative;padding:4px;border-radius:8px;">
@@ -119,7 +119,7 @@
       <div class="nav-row"><span class="nav-el">GNB '교환하기'(현재)</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응 (현재 탭 — 공통 UI 규격)</span></div>
       <div class="nav-row"><span class="nav-el">기관 배지(상단 우측)</span><span class="nav-act">클릭 → 메뉴(로그아웃) → 로그아웃 클릭</span><span class="nav-to"><strong>로그인(AUTH-01)</strong> · 확인 없음 · 세션 즉시 파기 · 입력 중 값 파기 (notation 로그아웃 규격)</span></div>
       <div class="nav-note">· <strong>진입</strong>: GNB '교환하기' 클릭(전 화면에서) · 진입 시 초기 상태 = 자산 미선택·수량 빈칸·[거래 요청] 비활성 (목업은 입력 완료 상태)<br>
-      · 목업 예시: 900 USDC → 899.82 USDT (한도 1,000 USD 상당 이내 · 2026-09-02 예시 재조정)</div>
+      · 목업 예시: 900 USDC → 899.82 USDT (한도 1,500,000원 상당 이내 · 2026-09-02 예시 재조정)</div>
     </div>
 
     <div class="itm" data-idx="0">
@@ -150,7 +150,7 @@
       <div class="num">3</div>
       <div>
         <div class="itm-title">보내는 수량 입력<span class="req">필수</span></div>
-        <div class="itm-desc">· 숫자·소수점만 입력 가능 · 소수 자릿수 상한 = 보내는 자산 기준(ETH 4 / USDC·USDT 2) — 초과 입력은 무시 · 천 단위 쉼표 자동 삽입 · 빈칸 안내 "0"<br>· 입력 중 실시간 갱신: 필드 아래 <strong>USD 환산액</strong>(소수 2자리 · ADM-03 시세 소스 · 스테이블 1:1) · 항목 4의 예상 받는 수량 · 한도·풀 검증<br>· 유효 상한 = min(1회 한도 <strong>1,000 USD 상당</strong>의 해당 자산 환산 수량, 현재 교환 가능 풀) — 상세 2<br>· <strong>상태</strong> ① 빈칸(기본) ② 정상 ③ 한도 초과 — 빨간 테두리 + 필드 아래 인라인 ⚠ "1회 최대 교환 한도(1,000 USD 상당)를 초과했습니다 — 수량을 줄여 다시 입력해 주세요" ④ 풀 초과 — 인라인 ⚠ "현재 교환 가능 풀을 초과해 요청할 수 없습니다 — 수량을 줄여 다시 입력해 주세요" ⑤ 풀 0 — 입력 비활성 + "현재 교환 불가" · ③④ 동시 해당 시 ③만 노출<br>· 라벨 우측 "1회 최대 1,000 USD 상당" 상시 표기(ADM-03 정책값 렌더링)<br><span class="basis">근거 09 §0 건별 한도·표기 자릿수(2026-09-02) · notation 입력 자릿수</span></div>
+        <div class="itm-desc">· 숫자·소수점만 입력 가능 · 소수 자릿수 상한 = 보내는 자산 기준(ETH 4 / USDC·USDT 2) — 초과 입력은 무시 · 천 단위 쉼표 자동 삽입 · 빈칸 안내 "0"<br>· 입력 중 실시간 갱신: 필드 아래 <strong>KRW 환산액</strong>(소수 2자리 · ADM-03 시세 소스 · 스테이블코인도 KRW 시세 환산) · 항목 4의 예상 받는 수량 · 한도·풀 검증<br>· 유효 상한 = min(1회 한도 <strong>1,500,000원 상당</strong>의 해당 자산 환산 수량, 현재 교환 가능 풀) — 상세 2<br>· <strong>상태</strong> ① 빈칸(기본) ② 정상 ③ 한도 초과 — 빨간 테두리 + 필드 아래 인라인 ⚠ "1회 최대 교환 한도(1,500,000원 상당)를 초과했습니다 — 수량을 줄여 다시 입력해 주세요" ④ 풀 초과 — 인라인 ⚠ "현재 교환 가능 풀을 초과해 요청할 수 없습니다 — 수량을 줄여 다시 입력해 주세요" ⑤ 풀 0 — 입력 비활성 + "현재 교환 불가" · ③④ 동시 해당 시 ③만 노출<br>· 라벨 우측 "1회 최대 1,500,000원 상당" 상시 표기(ADM-03 정책값 렌더링)<br><span class="basis">근거 09 §0 건별 한도·표기 자릿수(2026-09-02) · notation 입력 자릿수</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">수량 필드</span><span class="nav-act">키 입력마다 검증(포커스 아웃 대기 없음)</span><span class="nav-to stay">정상 → 경고 제거·[거래 요청] 활성 / 초과 → 인라인 경고 ③ 또는 ④ 노출·[거래 요청] 비활성</span></div>
           <div class="nav-row"><span class="nav-el">수량 필드 (자산 미선택)</span><span class="nav-act">보내는·받는 자산 중 하나라도 미선택</span><span class="nav-to stay">필드 비활성 · 클릭 시 인라인 안내 "자산을 먼저 선택해 주세요"</span></div>
@@ -215,11 +215,11 @@
       </div>
       <div class="dtl" data-idx="2">
         <div class="detail-label"><span class="dtl-num">3</span>한도·풀 초과 처리</div>
-      <div class="dtl-body"><span class="box">· 유효 상한 = min(1회 한도 1,000 USD 상당의 해당 자산 환산 수량, 가용 풀) — 두 조건 모두 충족해야 요청 가능 · 환산 시세·시점 = ADM-03 시세 소스 · 요청 시점(입력 중 실시간 재계산)<br>· 풀 = 0 : 수량 입력 비활성, <span class="red">"현재 교환 불가"</span> 표기<br>· 풀 값 출처 = 커스터디 운영자산 잔고(기존 시스템) + ADM-03 정책 한도 — 별도 지갑 화면 신규 개발 없음<br>· 일간·월간 누적 한도 미정 <span class="red">[확인필요]</span></span></div>
+      <div class="dtl-body"><span class="box">· 유효 상한 = min(1회 한도 1,500,000원 상당의 해당 자산 환산 수량, 가용 풀) — 두 조건 모두 충족해야 요청 가능 · 환산 시세·시점 = ADM-03 시세 소스 · 요청 시점(입력 중 실시간 재계산)<br>· 풀 = 0 : 수량 입력 비활성, <span class="red">"현재 교환 불가"</span> 표기<br>· 풀 값 출처 = 커스터디 운영자산 잔고(기존 시스템) + ADM-03 정책 한도 — 별도 지갑 화면 신규 개발 없음<br>· 일간·월간 누적 한도 미정 <span class="red">[확인필요]</span></span></div>
       </div>
       <div class="dtl" data-idx="3">
         <div class="detail-label"><span class="dtl-num">4</span>비용 구조 고지 · 계산 규칙</div>
-      <div class="dtl-body"><span class="box">· 나목 교환은 <strong>별도 수수료 없음</strong> — 비용은 스프레드(% 고정)로 비율에 내재, 적용 비율은 EXC-02에서 고시 후 수락<br>· 예상 받는 수량은 참고값 — 900 USDC × 0.9998 = 899.82 USDT(절사) · ETH 페어 예: 0.3 ETH × 3,184.00 = 955.20 USDC / 955.20 USDC ÷ 3,184.00 = 0.3 ETH · 한도 1,000 USD ÷ 3,184.00 = 0.3140 ETH(0.314070… 절사)<br>· 마목 중개 수수료(거래액 1% 고정 · BRK-03/04/07 사전 고시)와 혼동 방지 문구</span></div>
+      <div class="dtl-body"><span class="box">· 나목 교환은 <strong>별도 수수료 없음</strong> — 비용은 스프레드(% 고정)로 비율에 내재, 적용 비율은 EXC-02에서 고시 후 수락<br>· 예상 받는 수량은 참고값 — 900 USDC × 0.9998 = 899.82 USDT(절사) · ETH 페어 예: 0.3 ETH × 3,184.00 = 955.20 USDC / 955.20 USDC ÷ 3,184.00 = 0.3 ETH · 한도 1,500,000원 ÷ 4,298,400원(= 3,184.00 USDC × 1,350원 가정) = 0.3489 ETH(0.348970… 절사)<br>· 마목 중개 수수료(거래액 1% 고정 · BRK-03/04/07 사전 고시)와 혼동 방지 문구</span></div>
       </div>
       <div class="dtl" data-idx="4">
         <div class="detail-label"><span class="dtl-num">5</span>라벨 금지 · UI 문구 통제</div>
