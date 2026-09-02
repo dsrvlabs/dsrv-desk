@@ -2,104 +2,94 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>화면기획 — 계정 활성화</title>
+<title>화면기획 — 계정 활성화 · 비밀번호 설정</title>
 <link rel="stylesheet" href="screen.css">
-<style>
-  .qr{width:104px;height:104px;border-radius:8px;border:1px solid var(--line);
-      background:
-        repeating-linear-gradient(0deg,#111 0 6px,#fff 6px 12px),
-        repeating-linear-gradient(90deg,#111 0 6px,#fff 6px 12px);
-      background-blend-mode:multiply;flex-shrink:0;}
-  .qr-wrap{display:flex;gap:12px;align-items:center;}
-  .bkcode{font-family:monospace;font-size:11px;color:#334155;background:#f8fafc;border:1px dashed var(--line);
-          border-radius:6px;padding:8px 10px;letter-spacing:.05em;line-height:1.8;}
-</style>
 </head>
 <body>
 
 <header class="header">
-  <div class="crumb"><span>인증·온보딩</span><span class="s">›</span><span>계정 활성화</span></div>
-  <h1 class="title">계정 활성화</h1>
+  <div class="crumb"><span>인증·온보딩</span><span class="s">›</span><span>계정 활성화</span><span class="s">›</span><span>비밀번호 설정</span></div>
+  <h1 class="title">계정 활성화 · 비밀번호 설정</h1>
   <span class="sid">ONB-01</span>
-  <span class="defense">초대 기반 · 비번 본인설정 · MFA 등록</span>
+  <span class="defense">초대 기반 · 비번 본인설정 · 활성화 1/3</span>
 </header>
 
 <div class="main">
   <div class="screen-panel">
     <div style="position:relative;display:flex;">
       <div class="labels" id="labels">
-        <div class="lbl"><span class="lbl-text">전역 상단</span></div>
-        <div class="lbl"><span class="lbl-text">초대·계정<br>확인</span></div>
+        <div class="lbl"><span class="lbl-text">전역<br>브랜드 패널</span></div>
+        <div class="lbl"><span class="lbl-text">초대 확인</span></div>
         <div class="lbl"><span class="lbl-text">비밀번호<br>설정</span></div>
-        <div class="lbl"><span class="lbl-text">2차 인증<br>(QR)</span></div>
-        <div class="lbl"><span class="lbl-text">완료·<br>백업코드</span></div>
+        <div class="lbl"><span class="lbl-text">규칙 · 다음</span></div>
+        <div class="lbl"><span class="lbl-text">푸터</span></div>
       </div>
       <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
     </div>
 
-    <div class="frame" id="frame">
-      <!-- 전역: 활성화 진입 (로그인 전 — ORG 미표시) -->
+    <div class="frame" id="frame" style="background:linear-gradient(135deg,#e3eafc 0%,#f1f4fa 55%,#edf3fb 100%);">
+      <!-- 전역: 브랜드 패널 (Figma 좌측 · 로그인 전 — GNB·기관 배지 없음 · 핀 없음) -->
       <div class="zone" data-idx="">
         <div class="zone-highlight"></div>
-        <div class="c-top" style="border-radius:8px;">
-          <span class="brand">DSRV Desk</span>
-          <span class="meta"><span class="c-badge">계정 활성화</span><span>보안 설정</span></span>
+        <div style="font-size:9px;color:#94a3b8;padding:0 0 6px;">▼ Figma 'Set Password' 1920 레이아웃 = 좌 브랜드 패널 · 우 카드(폭 600) — 활성화 3화면(ONB-01 → 02 → 03) 중 첫 화면</div>
+        <div class="brand-panel">
+          <div class="bp-logo">DSRV<span>®</span></div>
+          <div class="bp-tag">한 번의 연동으로 완성하는<br><strong>쉽고 강력한 온체인 금융 OS</strong></div>
+          <div class="bp-sub">자산의 발행·결제·운용·보관을 위한 엔터프라이즈급 블록체인 인프라.</div>
+          <div class="bp-link">DSRV 서비스 소개 보기 →</div>
         </div>
       </div>
 
-      <!-- 초대·계정 확인 -->
-      <div class="zone" data-idx="0">
+      <!-- 초대·계정 확인 (표시 전용 + 토큰 오류 배너 조건부) -->
+      <div class="zone card" data-idx="0">
         <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="0" style="position:relative;padding:8px;border-radius:8px;">
+        <div class="zone-title" style="margin-bottom:10px;">계정 활성화</div>
+        <div class="item-area" data-highlight="0" style="position:relative;padding:4px;border-radius:8px;">
           <div class="pin" data-idx="0" style="top:-4px;right:-4px;">1</div>
-          <div class="kv"><span class="k">초대 대상 ORG</span><span class="v">A자산운용</span></div>
-          <div class="kv"><span class="k">담당자 이메일</span><span class="v mono">manager@***.co.kr</span></div>
+          <div class="info-box"><span class="k">초대 대상 ORG</span>· &nbsp;{ORG명}<br><span class="k">담당자 이메일</span>· &nbsp;{담당자 이메일(마스킹)}</div>
+          <div style="font-size:9px;color:#94a3b8;padding:6px 0 0;">▼ 토큰 오류 시만 노출 (정상 시 배너 없음 · 오류 시 아래 입력·버튼 비활성) · Figma 시안 없음 — 기획 유지</div>
+          <div class="c-banner warn" style="border-radius:6px;margin-top:2px;">⚠ 초대 링크가 만료되었습니다. 관리자에게 재발급을 요청해 주세요.</div>
         </div>
       </div>
 
       <!-- 비밀번호 설정 -->
-      <div class="zone" data-idx="1">
+      <div class="zone card" data-idx="1,2">
         <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="1" style="position:relative;padding:8px;border-radius:8px;">
-          <div class="pin" data-idx="1" style="top:-4px;right:-4px;">2</div>
-          <div style="font-size:11px;color:#94a3b8;font-weight:600;margin-bottom:6px;">비밀번호 설정</div>
-          <div class="field" style="margin-bottom:8px;"><span class="ph">새 비밀번호</span></div>
-          <div class="field"><span class="ph">새 비밀번호 확인</span></div>
-          <div class="pw-guide" style="margin-top:8px;line-height:1.75;font-size:11px;color:#475569;background:#fbfbf9;border:1px solid var(--line);border-radius:8px;padding:10px 12px;">
-            <strong style="color:#1a1a1a;">안전한 비밀번호를 위해 아래를 지켜주세요.</strong><br>
-            ① 영문 대·소문자, 숫자, 특수문자 중 3종 이상 조합 8자 이상<br>
-            ② 이메일과 동일한 문자 사용 불가<br>
-            ③ 동일 문자 4번 이상 사용 불가<br>
-            ④ 특수문자는 !@#$%^&amp;*() 만 사용 가능
-          </div>
+        <div class="item-area" data-highlight="1" style="position:relative;padding:4px;border-radius:8px;margin-bottom:4px;">
+          <div class="pin" data-idx="1" style="top:-6px;right:-6px;">2</div>
+          <div class="flabel">새 비밀번호<span class="star">*</span></div>
+          <div class="field fg"><span class="ph">비밀번호 입력</span></div>
+        </div>
+        <div class="item-area" data-highlight="2" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="2" style="top:-6px;right:-6px;">3</div>
+          <div class="flabel">새 비밀번호 확인<span class="star">*</span></div>
+          <div class="field fg"><span class="ph">비밀번호 재입력</span></div>
         </div>
       </div>
 
-      <!-- 2FA QR -->
-      <div class="zone" data-idx="2">
+      <!-- 규칙 안내 + [다음] -->
+      <div class="zone card" data-idx="3,4">
         <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="2" style="position:relative;padding:8px;border-radius:8px;">
-          <div class="pin" data-idx="2" style="top:-4px;right:-4px;">3</div>
-          <div style="font-size:11px;color:#94a3b8;font-weight:600;margin-bottom:6px;">2차 인증 등록 (Google Authenticator)</div>
-          <div class="qr-wrap">
-            <div class="qr"></div>
-            <div style="flex:1;">
-              <div style="margin-top:0;font-size:11px;color:#64748b;">Google Authenticator 앱으로 QR을 스캔한 뒤, 표시되는 6자리 코드를 입력하세요.</div>
-              <div class="field" style="margin-top:8px;text-align:center;letter-spacing:.3em;"><span class="ph">· · · · · ·</span></div>
-            </div>
+        <div class="item-area" data-highlight="3" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="3" style="top:-6px;right:-6px;">4</div>
+          <div class="rule-box">
+            안전한 비밀번호를 위해 아래를 지켜주세요.<br>
+            ○ 영문 대·소문자, 숫자, 특수문자 중 3종 이상 조합 8자 이상<br>
+            ○ 이메일과 동일한 문자 사용 불가<br>
+            ○ 동일 문자 4번 이상 사용 불가<br>
+            ○ 특수문자는 !@#$%^&amp;*() 만 사용 가능
           </div>
+        </div>
+        <div class="item-area" data-highlight="4" style="position:relative;padding:4px;border-radius:8px;margin-top:6px;">
+          <div class="pin" data-idx="4" style="top:-8px;right:-6px;">5</div>
+          <div class="btn primary fg">다음</div>
         </div>
       </div>
 
-      <!-- 완료·백업코드 -->
-      <div class="zone" data-idx="3">
+      <!-- 푸터 -->
+      <div class="zone" data-idx="">
         <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="3" style="position:relative;padding:8px;border-radius:8px;">
-          <div class="pin" data-idx="3" style="top:-6px;right:-4px;">4</div>
-          <div style="font-size:11px;color:#94a3b8;font-weight:600;margin-bottom:6px;">백업코드 저장 (기기 분실 대비)</div>
-          <div class="bkcode">4F2A-9C11 · 7B0E-3D5A · A18C-62F4<br>D904-1EB7 · 2C6F-88AB · 55E3-0A9D</div>
-          <div class="btn primary" style="margin-top:10px;">활성화 완료 → 로그인</div>
-        </div>
+        <div class="pg-footer"><span>© dsrv labs Co., Ltd. All Rights Reserved</span><span class="lnk">공지사항</span><span class="lnk">개인정보처리방침</span><span class="lnk">이용약관</span></div>
       </div>
     </div>
   </div>
@@ -109,43 +99,67 @@
   <div class="items" id="items">
     <div class="nav-global">
       <div class="nav-global-title">진입 · 전역 이동</div>
-      <div class="nav-note">· <strong>진입</strong>: 초대 이메일(ONB-00) 링크 클릭(1회용·72시간) — 콘솔 GNB 밖(로그인 전) · 2차 인증 재설정(DASH-03) 재발송 링크도 이 화면 재수행<br>
-      · 중도 이탈·링크 만료 시 재진입은 초대 재발급(ADM-03)으로만 <span style="color:#991b1b;">[확인필요: 중도 이탈 시 기존 링크 재사용 허용 여부]</span></div>
+      <div class="nav-row"><span class="nav-el">브랜드 패널 로고 'DSRV' · 태그라인</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응 (표시 전용 — 로그인 전이라 GNB·기관 배지 없음)</span></div>
+      <div class="nav-row"><span class="nav-el">브랜드 패널 'DSRV 서비스 소개 보기 →' · 푸터 3링크</span><span class="nav-act">클릭</span><span class="nav-to">외부 소개 페이지 · 문서 페이지(새 탭) — URL <span style="color:#b45309;">[확인필요]</span> · AUTH-01 전역 블록과 동일</span></div>
+      <div class="nav-note">· <strong>진입</strong>: 초대 이메일(ONB-00) 링크 클릭(1회용 · {정책값} 유효) — 콘솔 GNB 밖(로그인 전) · 비밀번호 및 2차 인증 재설정(DASH-03) 재발송 링크도 이 화면부터 재수행<br>
+      · <strong>활성화 = 3화면 순차(2026-09-02 확정 · Figma 프레임 단위)</strong>: <strong>ONB-01 비밀번호 설정</strong> → [다음] → ONB-02 2FA 앱 연결 → 검증 성공 → ONB-03 복구 코드 저장 → [확인] → 로그인(AUTH-01) · 각 화면 완료는 서버에 기록되어 <strong>중도 이탈 후 링크 재클릭 시 진행 중 화면으로 바로 진입</strong>(토큰 유효 내 · 2026-09-02 채택) — 링크 진입 시 서버가 진행 상태를 보고 ONB-01/02/03 중 하나로 라우팅<br>
+      · 이탈 수단: 브라우저 탭 닫기(이 화면에는 돌아가기 링크 없음 — 시안 기준) · 링크 만료 시 재진입은 초대 재발급(ADM-03)만<br>
+      · Enter 키 = [다음] 제출(활성 시)<br>
+      · 목업 예시: {ORG명}·{담당자 이메일(마스킹)}은 초대 토큰의 기관·이메일 렌더링(시안 manager@***.co.kr 형식 마스킹 <span style="color:#b45309;">[확인필요: 마스킹 규칙 — DASH-03과 단일화]</span>)</div>
     </div>
+
     <div class="itm" data-idx="0">
       <div class="num">1</div>
       <div>
-        <div class="itm-title">초대 토큰 검증<span class="req">필수</span></div>
-        <div class="itm-desc">· 초대 이메일 링크의 일회성·유효기간 토큰 검증<br>· 셀프가입 없음(초대 기반 ORG) · 만료 시 재발급<br><span class="basis">근거 32 §2 ONB-01 · 초대 기반</span></div>
+        <div class="itm-title">초대 대상 ORG · 담당자 이메일 (표시 전용 · 토큰 오류 배너 조건부)</div>
+        <div class="itm-desc">· 클릭 요소 없음 · 수정 불가 — 토큰에 묶인 기관명·이메일을 그대로 표시(ADM-03 초대 발송 입력값) · 이메일은 마스킹 표시(시안)<br>· <strong>상태</strong> ① 정상 — 값 표시·배너 없음·입력 가능 ② 오류 A 만료 — 배너 "초대 링크가 만료되었습니다. 관리자에게 재발급을 요청해 주세요" · 값은 표시 · 항목 2~5 비활성(회색) ③ 오류 B 사용됨(활성화 완료 토큰) — 배너 "이미 사용된 링크입니다. 로그인 화면으로 이동해 주세요" + 배너 내 [로그인 화면으로] 링크 · 입력 비활성 ④ 재개 — 비밀번호가 이미 저장된 토큰이면 이 화면을 건너뛰고 ONB-02 또는 ONB-03으로 진입<br>· 토큰 검증은 진입 시 1회(백엔드) · 오류 문구에 내부 사유 미노출(공통 UI 규격 오류 문구 ③) · 오류 배너는 Figma 시안 없음 — 기획 유지 <strong>[디자인 요청]</strong><br><span class="basis">근거 32 §2 ONB-01 · 초대 기반 · ONB-00 항목 3 케이스 분리</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">배너 내 [로그인 화면으로] (오류 B에서만)</span><span class="nav-act">클릭</span><span class="nav-to"><strong>로그인(AUTH-01)</strong></span></div>
+          <div class="nav-row"><span class="nav-el">배너(오류 A) · 정보 박스</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용) · 재발급은 관리자 요청(화면 내 수단 없음)</span></div>
+        </div>
       </div>
     </div>
+
     <div class="itm" data-idx="1">
       <div class="num">2</div>
       <div>
-        <div class="itm-title">비밀번호 본인 설정<span class="req">필수</span></div>
-        <div class="itm-desc">· 담당자가 직접 설정(회사가 초기 비밀번호를 만들어 전달하지 않음)<br>· 비밀번호 규칙 4개 항목 안내 노출 · 원문 저장·전송 없음 · <strong>같은 안내문구를 비밀번호 수정(DASH-02)에서도 재사용</strong><br><span class="basis">근거: 계정 활성화·비밀번호 설정 화면 · 정보보호 관리체계(ISMS) 인증기준 2.5.3·2.5.4(비밀번호 관리)</span></div>
+        <div class="itm-title">새 비밀번호 입력<span class="req">필수</span></div>
+        <div class="itm-desc">· 마스킹(●) · 표시 토글 없음(시안 기준) <span style="color:#b45309;">[확인필요: 표시/숨김 토글 제공]</span> · 붙여넣기 허용 · 앞뒤 공백 제거<br>· 허용 문자 = 영문 대·소문자·숫자·특수문자 !@#$%^&amp;*() — 그 외 문자는 입력 시점에 무시(규칙 ④) · 길이 상한 <span style="color:#b45309;">[확인필요]</span><br>· <strong>검증 시점</strong>: 키 입력마다 규칙 ①~④를 판정해 항목 4 안내문의 각 항목 표시를 ○(미충족·회색) → ✓(충족·초록)으로 갱신 · 포커스 아웃 시 미충족 항목이 남으면 빨간 테두리 + 필드 아래 인라인 ⚠ "비밀번호 규칙을 확인해 주세요"<br>· <strong>상태</strong> ① 빈칸(기본 · 라벨 "새 비밀번호 *" · 안내 "비밀번호 입력") ② 입력 중(규칙 표시 실시간) ③ 규칙 위반(포커스 아웃 · 빨간 테두리 + ⚠) ④ 통과(테두리 정상 · 안내문 ✓ 4개) ⑤ 비활성(항목 1 토큰 오류 시)<br>· 규칙 수치(3종·8자·4번)는 <strong>{정책값}</strong> — 출처 AUTH-01 비고 [비밀번호 규칙] · ADM-03 파라미터 아님 <span style="color:#b45309;">[확인필요: 고정 규칙 유지 vs 관리자 설정값]</span> · 값 변경 시 확인 필드(항목 3) 재검증<br>· 원문 저장·전송 없음(단방향 해시+salt) · <strong>같은 안내문구를 비밀번호 변경(DASH-02)에서도 재사용</strong><br><span class="basis">근거: 계정 활성화·비밀번호 설정 화면 · 정보보호 관리체계(ISMS) 인증기준 2.5.3·2.5.4(비밀번호 관리)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">새 비밀번호 · 확인 입력</span><span class="nav-act">비밀번호 규칙(4항목) 검증 — 위반 시 다음 진행 불가</span><span class="nav-to stay">화면 내 (이동 없음)</span></div>
+          <div class="nav-row"><span class="nav-el">새 비밀번호 필드</span><span class="nav-act">키 입력마다 규칙 ①~④ 판정 · 포커스 아웃 시 오류 표시</span><span class="nav-to stay">항목 4 안내문 ○/✓ 갱신 · 4개 충족 시 [다음] 활성 조건 ② 해소 / 위반 시 빨간 테두리 + ⚠ · 버튼 비활성 유지</span></div>
+          <div class="nav-row"><span class="nav-el">새 비밀번호 필드 (비활성 상태)</span><span class="nav-act">토큰 오류(항목 1 ②③)에서 클릭</span><span class="nav-to stay">무반응 · 인라인 안내 없음(배너가 사유)</span></div>
         </div>
       </div>
     </div>
+
     <div class="itm" data-idx="2">
       <div class="num">3</div>
       <div>
-        <div class="itm-title">2FA(Google Authenticator) QR 등록<span class="req">필수</span></div>
-        <div class="itm-desc">· Google Authenticator로 QR 스캔 → 6자리 코드로 등록 확인<br>· 전 권한자 MFA 의무<br><span class="basis">근거 ISMS 2.5 · F-5</span></div>
+        <div class="itm-title">새 비밀번호 확인 입력<span class="req">필수</span></div>
+        <div class="itm-desc">· 마스킹 · 허용 문자 = 항목 2와 동일 · 붙여넣기 허용<br>· <strong>검증 시점</strong>: 키 입력마다 항목 2 값과 일치 비교 · 불일치 표시는 포커스 아웃 시(입력 도중 깜빡임 방지) · 항목 2 값이 바뀌면 즉시 재비교<br>· <strong>상태</strong> ① 빈칸(기본 · 라벨 "새 비밀번호 확인 *" · 안내 "비밀번호 재입력") ② 일치(테두리 정상 · 필드 우측 ✓) ③ 불일치 — 빨간 테두리 + 필드 아래 인라인 ⚠ "비밀번호가 일치하지 않습니다" ④ 비활성(토큰 오류)<br>· 항목 2가 규칙 위반 상태여도 비교는 수행(두 경고 동시 노출 가능)<br><span class="basis">근거: ISMS 2.5.3 · 입력 오류 규격(공통 UI 규격 오류 문구 ①)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">QR 스캔 + 6자리 코드 입력</span><span class="nav-act">Google Authenticator 등록 확인 — 실패·우회 시도는 감사로그</span><span class="nav-to stay">화면 내 (이동 없음)</span></div>
+          <div class="nav-row"><span class="nav-el">새 비밀번호 확인 필드</span><span class="nav-act">키 입력마다 비교 · 포커스 아웃 시 오류 표시</span><span class="nav-to stay">일치 → ✓·[다음] 활성 조건 ③ 해소 / 불일치 → ⚠ "비밀번호가 일치하지 않습니다" · 버튼 비활성 유지</span></div>
         </div>
       </div>
     </div>
+
     <div class="itm" data-idx="3">
       <div class="num">4</div>
       <div>
-        <div class="itm-title">백업코드·활성화 완료<span class="req">필수</span></div>
-        <div class="itm-desc">· 백업코드 발급(기기 분실 대비) · 저장 안내<br>· 활성화 완료 → 로그인 이동<br><span class="basis">근거 ISMS 2.5 세션·인증 복구</span></div>
+        <div class="itm-title">비밀번호 규칙 안내 (표시 전용 · 실시간 체크)</div>
+        <div class="itm-desc">· 클릭 요소 없음 · 고정 문구 4항목 + 머리글(시안 문구 그대로) · 각 항목 앞 표시 ○(미충족 · 회색) / ✓(충족 · 초록) — 항목 2 입력에 따라 실시간 갱신, 빈칸이면 전부 ○(○/✓ 표시는 시안에 없음 — 기획 추가 <strong>[디자인 요청]</strong>)<br>· 문구·수치는 AUTH-01 비고 [비밀번호 규칙] ①~④와 동일(단일 출처) · DASH-02는 여기에 "※ 주기적 변경은 권고" 1줄 추가<br>· 규칙 ② '이메일과 동일한 문자' = 항목 1 담당자 이메일의 @ 앞부분과 대소문자 무시 일치 <span style="color:#b45309;">[확인필요: 판정 범위(전체 일치 vs 부분 포함)]</span><br><span class="basis">근거: ISMS 2.5.4(비밀번호 관리)</span></div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="4">
+      <div class="num">5</div>
+      <div>
+        <div class="itm-title">[다음] 버튼 (→ 2FA 앱 연결)<span class="req">필수</span></div>
+        <div class="itm-desc">· primary · 서버 규칙 재검증 후 <strong>비밀번호 저장(해시)</strong> · 계정 상태 '활성화 진행 중'(ONB-01 완료 기록 → 재개 지점) · 확인 다이얼로그 없음<br>· 저장 후 이 화면으로 되돌아오는 수단 없음(ONB-02·03에 '이전으로'는 ONB-02로만) — 비밀번호를 다시 바꾸려면 활성화 완료 후 DASH-02 <span style="color:#b45309;">[확인필요: 활성화 중 비밀번호 재설정 동선 필요 여부]</span><br>· Enter 키 = 클릭과 동일(활성 시)<br><span class="basis">근거 ISMS 2.5.4 · 32 §2 ONB-01</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">[활성화 완료 → 로그인] 버튼</span><span class="nav-act">클릭 — 비밀번호 설정·2FA 등록 완료가 전제 · 백업코드 발급 후 활성화 확정</span><span class="nav-to"><strong>로그인(AUTH-01)</strong> 이동</span></div>
+          <div class="nav-row"><span class="nav-el">[다음] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①토큰 오류(항목 1 ②③) ②새 비밀번호 규칙 미충족·빈칸 ③확인 불일치·빈칸 ④처리 중</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격) · 사유는 각 필드 인라인 경고로 이미 노출</span></div>
+          <div class="nav-row"><span class="nav-el">[다음] — 클릭(활성) · Enter</span><span class="nav-act">라벨 "처리 중…"·비활성 → 서버 규칙 재검증 · 저장 · ONB-01 완료 기록 · 감사로그</span><span class="nav-to"><strong>2FA 앱 연결(ONB-02)</strong> · 시크릿·QR 생성</span></div>
+          <div class="nav-row"><span class="nav-el">[다음] — 실패</span><span class="nav-act">서버 규칙 재검증 실패 / 토큰 만료 / 서버 오류</span><span class="nav-to stay">화면 잔류 · 규칙 → 항목 2 ③ ⚠ / 만료 → 항목 1 오류 A / 서버 오류 → 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 라벨 복귀 · 입력값 유지</span></div>
         </div>
       </div>
     </div>
@@ -157,17 +171,13 @@
   <div class="note-card">
     <div class="note-title">상세내용</div>
     <div class="detail-grid" id="detailCol">
+      <div class="dtl" data-idx="0">
+        <div class="detail-label"><span class="dtl-num">1</span>토큰 검증 · 재개 라우팅</div>
+      <div class="dtl-body"><span class="box">· 초대 이메일 링크의 일회성·유효기간({정책값} · ADM-03 초대 발송 기재 72시간) 토큰을 진입 시 1회 검증 — 결과 3종(정상 / A 만료 / B 사용됨) + 재개(진행 중)를 표시(ONB-00 상세 3)<br>· 화면 완료는 서버 기록(ONB-01 비밀번호 저장 · ONB-02 2FA 확정) → 재클릭 시 서버가 진행 상태로 ONB-01/02/03 중 진입 화면 결정 · "1회만 사용" = 활성화 완료(ONB-03 [확인]) 1회<br>· 셀프가입 없음(초대 기반 ORG) · 만료 시 재발급 = ADM-03 초대 재발송(새 토큰 · 이전 토큰 즉시 무효 · 진행 상태 초기화)</span></div>
+      </div>
       <div class="dtl" data-idx="1">
         <div class="detail-label"><span class="dtl-num">2</span>비번 방식 근거</div>
-      <div class="dtl-body"><span class="box">· '초기 비밀번호 생성·전달' 대신 <strong>활성화 링크 → 본인 설정</strong><br>· 비밀번호가 서버·이메일에 평문으로 존재한 적 없음<br>· 심사기관 설명·감사 대응 용이</span></div>
-      </div>
-      <div class="dtl" data-idx="2">
-        <div class="detail-label"><span class="dtl-num">3</span>2FA 등록·복구</div>
-      <div class="dtl-body"><span class="box">· Google Authenticator 사용 — 시간 기반 일회용 비밀번호(TOTP, RFC 6238) 표준 · 로그인·민감행위 재인증에 사용<br>· 등록 실패·우회 시도는 감사로그 기록</span></div>
-      </div>
-      <div class="dtl" data-idx="3">
-        <div class="detail-label"><span class="dtl-num">4</span>백업코드 취급</div>
-      <div class="dtl-body"><span class="box">· 기기 분실 시 로그인 2FA 입력칸에 그대로 입력(AUTH-01 · 별도 화면 없음)<br>· 1회용 — 사용 즉시 폐기 · 사용 이력 로그<br>· 재발급은 2FA 재설정(초대 재발송→ONB-01 재수행) 완료 시 자동 — 이전 코드 전량 폐기</span></div>
+      <div class="dtl-body"><span class="box">· '초기 비밀번호 생성·전달' 대신 <strong>활성화 링크 → 본인 설정</strong><br>· 비밀번호가 서버·이메일에 평문으로 존재한 적 없음<br>· 규칙 판정을 클라이언트 실시간 + 서버 저장 시 재검증 2중 — 클라이언트 표시는 안내 목적</span></div>
       </div>
     </div>
   </div>
@@ -177,8 +187,11 @@
   <div class="note-card">
     <div class="note-title">비고</div>
     <div class="note-body">
-      · 가입 완료 직후 <strong>1회성 계정 활성화</strong> 화면. 초대 이메일 링크 → 비밀번호 본인 설정 + 2FA(QR) 등록 → 백업코드 → 로그인.<br>
-      · 이전: 초대 이메일(ONB-00) · 다음 화면: 로그인(AUTH-01)
+      · 계정 활성화 <strong>1/3 — 비밀번호 본인 설정</strong>. 초대 이메일 링크 → 이 화면 → [다음] → 2FA 앱 연결(ONB-02) → 복구 코드 저장(ONB-03) → 로그인(AUTH-01). 2026-09-02 시안 프레임 단위로 3화면 분리(종전 단일 화면·3단계 카드 전환 폐기).<br>
+      · <strong>[Figma 반영 2026-09-02]</strong> 시안 'Set Password' 적용. 토큰 오류 배너·규칙 ○/✓ 표시는 시안 없음 — <strong>디자인 요청</strong>. 원본 <span class="mono">reference/figma/_crops/F1_row1_c1.png</span>.<br>
+      · 설명 형식(핀 = 조작 요소 단위) — 표시 2(초대 확인·규칙) · 입력 2 · 버튼 1.<br>
+      · <span style="color:#991b1b;">[확인필요]</span> 이메일 마스킹 규칙 · 표시 토글 · 길이 상한 · 규칙 수치 정책값화 · 규칙 ② 판정 범위 · 활성화 중 비밀번호 재설정 동선.<br>
+      · 이전: 초대 이메일(ONB-00) · 다음 화면: 2FA 앱 연결(ONB-02)
     </div>
   </div>
 </section>

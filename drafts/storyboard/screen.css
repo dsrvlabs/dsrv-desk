@@ -165,3 +165,39 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);}
 .nav-note strong{color:#334155;}
 
 ::-webkit-scrollbar{display:none !important;} *{scrollbar-width:none !important;}
+
+/* ---- Figma 로그인 섹션 반영(2026-09-02): 인증 계열 화면 공용 ---- */
+.zone.card{background:rgba(255,255,255,.72);}
+.brand-panel{padding:4px 2px 2px;}
+.brand-panel .bp-logo{font-weight:900;font-size:15px;letter-spacing:-.02em;color:#1d2430;}
+.brand-panel .bp-logo span{font-size:8px;vertical-align:super;font-weight:700;}
+.brand-panel .bp-tag{margin-top:10px;font-size:13px;color:#2f3747;line-height:1.4;}
+.brand-panel .bp-tag strong{font-size:14.5px;font-weight:800;}
+.brand-panel .bp-sub{font-size:10px;color:#9da8bb;margin-top:5px;}
+.brand-panel .bp-link{font-size:10.5px;font-weight:700;color:#2f3747;margin-top:8px;}
+.flabel{font-size:10.5px;color:#2f3747;font-weight:600;margin:2px 0 5px;}
+.flabel .star{color:#0556ff;margin-left:2px;}
+.field.fg{border-color:#d1d8e3;border-radius:12px;padding:11px 12px;}
+.field.fg .ph{color:#b9c2d2;}
+.btn.primary.fg{background:#0556ff;border-radius:12px;padding:13px;}
+.err-chip{display:inline-block;background:#ffeaee;color:#ff677f;font-size:10.5px;font-weight:600;border-radius:8px;padding:5px 10px;margin:0 auto 8px;text-align:center;}
+.err-chip strong{color:#ff677f;}
+.zone.card .item-area .err-chip{display:block;width:fit-content;margin-left:auto;margin-right:auto;}
+.otp{display:flex;gap:6px;justify-content:space-between;}
+.otp span{flex:1;height:36px;border:1px solid #d1d8e3;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;color:#2f3747;font-family:var(--mono);}
+.pg-footer{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:12px;font-size:9.5px;color:#9da8bb;}
+.pg-footer .lnk{color:#788297;}
+.step-tag{display:inline-block;font-size:9px;font-weight:700;color:#0556ff;background:#e6eeff;border-radius:6px;padding:2px 7px;margin-bottom:6px;}
+.card-sub{font-size:10px;color:#788297;margin:-6px 0 10px;}
+.info-box{background:#f8f9fb;border:1px solid #eef1f5;border-radius:8px;padding:9px 12px;font-size:10.5px;color:#475569;line-height:1.7;}
+.info-box .k{color:#94a3b8;margin-right:8px;}
+.rule-box{background:#f8f9fb;border-radius:8px;padding:9px 12px;font-size:10.5px;color:#788297;line-height:1.8;}
+.qr-img{width:96px;height:96px;margin:0 auto;border-radius:8px;background:#fff;border:1px solid #eef1f5;
+  background-image:repeating-linear-gradient(0deg,#111 0 5px,#fff 5px 10px),repeating-linear-gradient(90deg,#111 0 5px,#fff 5px 10px);background-blend-mode:multiply;}
+.warn-chip{display:block;width:fit-content;margin:0 auto 8px;background:#ffeaee;color:#ff677f;font-size:10.5px;font-weight:600;border-radius:8px;padding:5px 10px;}
+.rc-code{border:1px solid #d1d8e3;border-radius:12px;background:#fff;padding:11px 12px;text-align:center;font-family:var(--mono);font-size:11.5px;color:#2f3747;letter-spacing:.04em;}
+.btn.outline{border:1.5px solid #407eff;color:#0556ff;background:#fff;border-radius:12px;padding:9px 12px;font-size:11.5px;}
+.aux-link{font-size:10px;color:#9da8bb;text-align:center;}
+.aux-link strong{color:#2f3747;}
+.aux-back{font-size:10px;color:#788297;text-align:center;}
+.hr-line{border-top:1px solid #e9ecf2;margin:8px 0;}

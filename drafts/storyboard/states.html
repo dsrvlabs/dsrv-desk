@@ -80,7 +80,7 @@
 
 <div class="doc-head">
   <h1>상태 전이 — 알람·워닝 처리함</h1>
-  <div class="sub">ADM-02 처리함에 쌓이는 아이템의 유형별 생성 조건 · 상태값 · 상태 전이 정의 (개발 이관용) · v0.2 2026-09-01</div>
+  <div class="sub">ADM-02 처리함에 쌓이는 아이템의 유형별 생성 조건 · 상태값 · 상태 전이 정의 (개발 이관용) · v0.3 2026-09-02 개정 — 마목 게시 상태(게재중 → 협의중 → 확정 → 완료 · 종결 = 회수·완료(만료)·중지) · EXC-02 수락 = 즉시 확정(확인 없음) 반영</div>
 </div>
 
 <!-- 처리함이란 -->
@@ -101,7 +101,7 @@
     <div class="panel-title">용어</div>
     <dl class="gloss">
       <dt>나목 교환</dt><dd>고객이 DSRV를 상대방으로 하는 ETH·USDC·USDT 교환 (예: ETH↔USDC, USDC↔USDT · 2026-09-02 ETH 편입). 가상자산사업자 신고 업종 구분에서 온 이름으로, 이 문서에서는 "DSRV와의 직접 교환"으로 읽으면 된다.</dd>
-      <dt>마목 중개</dt><dd>고객 간 교환을 DSRV가 게시판 방식으로 중개하는 것. 게시자가 신청을 수락하는 순간 거래가 확정되고 법적 구속력이 생긴다. 확정 전까지 게시자는 게시를 회수할 수 있다(BRK-06 · 2026-09-02). 중개 수수료는 거래액의 1% 고정, 양측 각자 부담.</dd>
+      <dt>마목 중개</dt><dd>고객 간 교환을 DSRV가 게시판 방식으로 중개하는 것. 게시자가 신청을 수락하는 순간 거래가 확정되고 법적 구속력이 생긴다. 게시당 신청은 동시에 1건만 받는다(신청 1건 접수 = 게시 '협의중' · 추가 신청 차단). 확정 전까지 게시자는 게시를 회수할 수 있다(BRK-06 · 2026-09-02). 중개 수수료는 거래액의 1% 고정, 양측 각자 부담(기준 = 각자 보내는 자산 수량).</dd>
       <dt>KYT</dt><dd>트랜잭션의 자금 출처·경로 위험도를 자동 분석하는 검사 (Know Your Transaction).</dd>
       <dt>BLF</dt><dd>제재 대상·블랙리스트에 오른 지갑 주소인지 대조하는 필터.</dd>
       <dt>STR</dt><dd>의심거래보고. 자금세탁이 의심되는 거래를 금융당국(FIU)에 보고하는 절차. 보고 대상 고객이 보고 사실을 알게 해서는 안 된다(누설 금지).</dd>
@@ -138,13 +138,56 @@
   </div>
 </div>
 
+<!-- 고객 도메인: 마목 게시 상태 (2026-09-02 개정) -->
+<div class="wide">
+  <div class="panel">
+    <div class="panel-title">마목 게시 상태 — 고객 도메인 <span class="scope">BRK-01 칩 · BRK-06 상태 행 · 개정 2026-09-02</span></div>
+    <div class="panel-note">처리함 아이템이 아닌 고객 콘솔의 게시 상태. T2는 이 상태가 '확정'으로 전이할 때 생성된다. 종전 명칭·복수 신청(선착순/게시자 선택) 처리 규칙은 폐기 — 게시당 동시 신청 1건.</div>
+    <div class="flow">
+      <span class="st start">게재중</span>
+      <span class="fa"><span class="by sys">신청 1건 접수</span>→</span>
+      <span class="st mid">협의중</span>
+      <span class="fa"><span class="by">게시자 수락(BRK-04)</span>→</span>
+      <span class="st mid">확정</span>
+      <span class="fa"><span class="by sys">양측 이전 완결(BRK-05)</span>→</span>
+      <span class="st end">완료</span>
+    </div>
+    <div class="flow">
+      <span class="st mid">협의중</span>
+      <span class="fa"><span class="by">거절(BRK-04)</span>→</span>
+      <span class="st start">게재중 복귀</span>
+      <span class="fa">/</span>
+      <span class="fa"><span class="by sys">신청 유효기한 만료(무응답)</span>→</span>
+      <span class="st start">게재중 복귀</span>
+    </div>
+    <div class="flow">
+      <span class="st start">게재중</span><span class="fa">·</span><span class="st mid">협의중</span>
+      <span class="fa"><span class="by">게시 내리기(BRK-06)</span>→</span>
+      <span class="st bad">회수</span>
+      <span class="fa">/</span>
+      <span class="fa"><span class="by sys">게시 유효기간 만료</span>→</span>
+      <span class="st end">완료(유효기간 만료)</span>
+      <span class="fa">/</span>
+      <span class="fa"><span class="by sys">price guard ±{정책값}% 이탈</span>→</span>
+      <span class="st bad">중지</span>
+    </div>
+    <div style="font-size:10.5px;color:#64748b;margin-top:4px;">
+      · <b style="color:#334155;">협의중</b> = 게시판(BRK-01)에 '협의중' 칩, 추가 신청 차단 · 게시자 화면(BRK-06)에 받은 신청 1건 카드 + [신청 보기] → BRK-04<br>
+      · <b style="color:#334155;">회수</b>(게시자 능동 행위)와 <b style="color:#334155;">중지</b>(시스템 자동)는 협의중이던 대기 신청을 <b>자동 종결</b> — 회수는 신청자에게 이메일 ④, 중지는 양측 이메일(규격 <span class="need">[확인필요]</span>) · 재개는 재게시(새 게시번호)만 · 자산 이동·수수료 없음<br>
+      · <b style="color:#334155;">확정</b> 이후 회수 불가 — 중지는 T2 '이전 중지'(관리자)만 · 확정·완료 게시는 BRK-05 링크로 이전 상태 조회<br>
+      · 신청자 도메인(BRK-07): 협의중 → 확정 → 완료 / 종결 = 거절됨 · 만료 · 종결(게시 회수·중지·유효기간 만료) — 게시 상태와 1:1 대응 · 신청 취소 없음(기존 결정)<br>
+      · 유효기간 만료 종결의 고객 라벨('완료' vs 별개 '만료')과 DASH-01 칩 매핑은 <span class="need">결정필요 ⑥</span>
+    </div>
+  </div>
+</div>
+
 <div class="cols">
 
   <!-- T1 -->
   <div class="panel">
     <div class="panel-title"><span class="tno">T1</span>나목 교환 승인 <span class="scope">대상: 교환 요청</span></div>
     <div class="desc">
-      고객이 DSRV와의 교환 비율을 수락하면 요청이 확정되고, 실제 집행 전에 <b>관리자 승인</b>을 거친다. 그 승인 건이 여기 쌓인다. 모든 요청이 예외 없이 유입되며(자동 통과 없음), 시스템이 건별 한도·잔고·BLF·KYT 자동검증 결과를 붙여서 생성한다.
+      고객이 DSRV와의 교환 비율을 수락하면(<span class="scr" data-pid="EXC-02"><span class="sid">EXC-02</span>[수락]</span> — <b>클릭 즉시 확정, 확인 다이얼로그 없음</b> · 참고 비율(EXC-01)·확정 비율(EXC-02) 2회 고지로 대체, 2026-09-02 결정) 요청이 확정되고, 실제 집행 전에 <b>관리자 승인</b>을 거친다. 그 승인 건이 여기 쌓인다. 모든 요청이 예외 없이 유입되며(자동 통과 없음), 시스템이 건별 한도·잔고·BLF·KYT 자동검증 결과를 붙여서 생성한다.
       <span class="trg"><b>생성 시점</b> — <span class="scr" data-pid="EXC-02"><span class="sid">EXC-02</span>비율 수락</span> 즉시</span>
     </div>
     <div class="flow">
@@ -172,7 +215,7 @@
     <div class="panel-title"><span class="tno">T2</span>마목 확정 확인 <span class="scope">대상: 확정 거래</span></div>
     <div class="desc">
       중개 거래는 게시자가 신청을 수락하는 순간 <b>이미 확정</b>되어 법적 구속력이 생긴다. 그래서 이 아이템은 거래 성립을 승인하는 것이 아니라, <b>확정된 거래의 자산 이전(정산)을 진행해도 되는지 확인</b>하는 절차다.
-      <span class="trg"><b>생성 시점</b> — <span class="scr" data-pid="BRK-04"><span class="sid">BRK-04</span>게시자 수락</span>(=확정) 즉시</span>
+      <span class="trg"><b>생성 시점</b> — <span class="scr" data-pid="BRK-04"><span class="sid">BRK-04</span>게시자 수락</span>(=확정 · 확인 다이얼로그 후 실행) 즉시 — 고객 도메인의 게시 상태 협의중 → 확정 전이와 동시(아래 '마목 게시 상태' 패널)</span>
     </div>
     <div class="flow">
       <span class="st start">확인 대기</span>
@@ -362,7 +405,7 @@
     <li>T7 재이행 완료 시 자동 종결 허용 여부 — 불허로 결정되면 관리자 '확인 후 종결' 버튼으로 변경</li>
     <li>High 등급 워닝이 방치될 때 상위 보고 룰 — N시간 미처리 시 통지 (야간·주말 확인 주체 <span class="red">[확인필요]</span>와 연동)</li>
     <li>DB 스키마 개정 — 알람·워닝이 여러 테이블에 분산된 구 구조를 처리함 중심으로 통합(공통 아이템 테이블 + 유형별 상세 연결), 상태값(enum)은 본 문서 기준으로 갱신</li>
-    <li>고객 화면 도메인 상태(고객 콘솔) 섹션 미작성 — 나목(요청됨·제시·진행중·완료·보류·거절·만료)·마목 게시(게재중·신청접수·확정·완료(유효기간 만료)·회수)·마목 신청(신청 접수·수락 대기·확정·이전 진행·완료·거절·만료·게시 회수)을 DASH-01 상태 칩과 함께 확정 필요 (BRK-07 상세에 초안)</li>
+    <li>고객 화면 도메인 상태(고객 콘솔) 확정 — 나목(요청됨·제시·진행중·완료·보류·거절·만료) · 마목 게시(게재중·협의중·확정·완료·회수·중지 — 위 '마목 게시 상태' 패널, 2026-09-02 개정) · 마목 신청(협의중·확정·완료·거절됨·만료·종결) · 마목 이전(BRK-05: 확정·양건 확인·이전 진행·완료·이전 보류·이전 중지)을 DASH-01 상태 칩(진행·대기·완료·종결 4색)과 함께 enum으로 확정 필요 · 유효기간 만료를 '완료'와 별개 라벨로 둘지 포함 (BRK-05·06·07 상세에 초안)</li>
   </ol>
   <div style="margin-top:8px;">화면 박스(<span class="mono">EXC-02</span> 등)를 클릭하면 해당 화면기획으로 이동한다.</div>
 </div>

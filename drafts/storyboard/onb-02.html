@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화면기획 — 계정 활성화 · 2FA 앱 연결</title>
+<link rel="stylesheet" href="screen.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="crumb"><span>인증·온보딩</span><span class="s">›</span><span>계정 활성화</span><span class="s">›</span><span>2FA 앱 연결</span></div>
+  <h1 class="title">계정 활성화 · 2FA 앱 연결</h1>
+  <span class="sid">ONB-02</span>
+  <span class="defense">MFA 등록(TOTP) · 활성화 2/3</span>
+</header>
+
+<div class="main">
+  <div class="screen-panel">
+    <div style="position:relative;display:flex;">
+      <div class="labels" id="labels">
+        <div class="lbl"><span class="lbl-text">전역<br>브랜드 패널</span></div>
+        <div class="lbl"><span class="lbl-text">2FA 앱<br>연결</span></div>
+        <div class="lbl"><span class="lbl-text">보조 링크</span></div>
+        <div class="lbl"><span class="lbl-text">푸터</span></div>
+      </div>
+      <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
+    </div>
+
+    <div class="frame" id="frame" style="background:linear-gradient(135deg,#e3eafc 0%,#f1f4fa 55%,#edf3fb 100%);">
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div style="font-size:9px;color:#94a3b8;padding:0 0 6px;">▼ Figma 'Set 2FA Code' · 'Invalid Credentials'(오류 상태) — 활성화 3화면 중 두 번째 · ONB-01 [다음] 직후 진입</div>
+        <div class="brand-panel">
+          <div class="bp-logo">DSRV<span>®</span></div>
+          <div class="bp-tag">한 번의 연동으로 완성하는<br><strong>쉽고 강력한 온체인 금융 OS</strong></div>
+          <div class="bp-sub">자산의 발행·결제·운용·보관을 위한 엔터프라이즈급 블록체인 인프라.</div>
+          <div class="bp-link">DSRV 서비스 소개 보기 →</div>
+        </div>
+      </div>
+
+      <!-- 2FA 앱 연결 — QR / 설정 키 / 6칸 코드 -->
+      <div class="zone card" data-idx="0,1,2">
+        <div class="zone-highlight"></div>
+        <div class="zone-title" style="margin-bottom:2px;">2FA 앱 연결</div>
+        <div class="card-sub" style="margin-top:0;">Google Authenticator 등 2FA 앱으로 QR 코드를 스캔하세요.</div>
+        <div class="item-area" data-highlight="0" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="0" style="top:-6px;right:-6px;">1</div>
+          <div class="qr-img"></div>
+        </div>
+        <div class="item-area" data-highlight="1" style="position:relative;padding:4px;border-radius:8px;margin-top:6px;">
+          <div class="pin" data-idx="1" style="top:-6px;right:-6px;">2</div>
+          <div class="flabel">설정 키</div>
+          <div class="field fg" style="font-family:var(--mono);color:#2f3747;">JBSWY3DPEHPK3PXP</div>
+        </div>
+        <div class="hr-line"></div>
+        <div class="item-area" data-highlight="2" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="2" style="top:-6px;right:-6px;">3</div>
+          <div class="otp"><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span></div>
+          <div style="font-size:9px;color:#94a3b8;padding:6px 4px 3px;">▼ 검증 실패 직후에만 노출 (Figma 'Invalid Credentials')</div>
+          <div class="warn-chip" style="margin-bottom:0;">인증 코드가 올바르지 않습니다 <strong>2회 남음</strong></div>
+        </div>
+      </div>
+
+      <!-- 보조 링크 -->
+      <div class="zone card" data-idx="3,4">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="3" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="3" style="top:-6px;right:-6px;">4</div>
+          <div class="aux-link">인증이 정상적으로 작동하지 않나요? <strong>문의하기</strong></div>
+        </div>
+        <div class="item-area" data-highlight="4" style="position:relative;padding:4px;border-radius:8px;margin-top:4px;">
+          <div class="pin" data-idx="4" style="top:-6px;right:-6px;">5</div>
+          <div class="aux-back">‹ &nbsp;로그인으로 돌아가기</div>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="pg-footer"><span>© dsrv labs Co., Ltd. All Rights Reserved</span><span class="lnk">공지사항</span><span class="lnk">개인정보처리방침</span><span class="lnk">이용약관</span></div>
+      </div>
+    </div>
+  </div>
+
+  <svg id="connSvg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;"></svg>
+
+  <div class="items" id="items">
+    <div class="nav-global">
+      <div class="nav-global-title">진입 · 전역 이동</div>
+      <div class="nav-row"><span class="nav-el">브랜드 패널 로고 'DSRV' · 태그라인</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응 (표시 전용)</span></div>
+      <div class="nav-row"><span class="nav-el">브랜드 패널 'DSRV 서비스 소개 보기 →' · 푸터 3링크</span><span class="nav-act">클릭</span><span class="nav-to">외부 소개 페이지 · 문서 페이지(새 탭) — URL <span style="color:#b45309;">[확인필요]</span> · AUTH-01 전역 블록과 동일</span></div>
+      <div class="nav-note">· <strong>진입</strong>: 비밀번호 설정(ONB-01) [다음] 직후 / 초대 링크 재클릭 시 ONB-01 완료·2FA 미확정 상태면 서버가 이 화면으로 라우팅(재개) / 복구 코드 저장(ONB-03) '이전으로'(2FA 확정 상태 — 등록 완료 표시)<br>
+      · 진입 시 계정별 TOTP 시크릿 생성(첫 진입) · 재진입·새로고침 시 <strong>동일 시크릿 유지</strong>(등록 확정 전까지)<br>
+      · 확인 버튼 없음 — 6번째 자리 입력 즉시 자동 검증(시안) · Enter 없음<br>
+      · 이 화면에서 ONB-01로 되돌아가는 링크 없음(시안 기준 — 비밀번호는 이미 저장됨) · 이탈 = '로그인으로 돌아가기'(항목 5) · 탭 닫기<br>
+      · 목업 예시: 설정 키는 Base32 형식 예시 · "2회 남음"은 {정책값} 5회 중 3회 실패 후</div>
+    </div>
+
+    <div class="itm" data-idx="0">
+      <div class="num">1</div>
+      <div>
+        <div class="itm-title">2FA QR (표시 전용)</div>
+        <div class="itm-desc">· 클릭 요소 없음 · Google Authenticator 등 TOTP(RFC 6238) 앱 등록용 QR — 계정별 시크릿 · 카드 머리글 "2FA 앱 연결" · 부제 "Google Authenticator 등 2FA 앱으로 QR 코드를 스캔하세요."(시안)<br>· 재생성 버튼 없음 · 연속 실패 {정책값} 도달 시에만 시크릿 재생성 + QR 갱신(항목 3)<br>· <strong>상태</strong> ① 표시(기본) ② 등록 완료 — ONB-03에서 '이전으로'로 복귀한 경우: QR·설정 키 흐림 처리 + "등록됨" 배지 · 6칸 비활성 <span style="color:#b45309;">[확인필요: 등록 완료 상태 표시 — 시안 없음 · 디자인 요청]</span><br><span class="basis">근거 ISMS 2.5 · F-5 · 전 권한자 MFA 의무</span></div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="1">
+      <div class="num">2</div>
+      <div>
+        <div class="itm-title">설정 키 (표시 전용 · 수동 입력용)</div>
+        <div class="itm-desc">· QR 스캔이 어려운 환경을 위한 시크릿 텍스트(Base32 · 시안 예시 JBSWY3DPEHPK3PXP) — 2026-09-02 시안 반영으로 노출 확정<br>· 읽기 전용 필드 · 드래그 선택·복사 가능 · 복사 버튼 없음(시안 기준) <span style="color:#b45309;">[확인필요: 복사 버튼]</span> · QR과 동일 시크릿(단일 출처)<br>· 등록 확정(ONB-03 진입) 후에는 어떤 화면에도 재노출 없음(등록 완료 상태로 복귀 시 흐림 처리)<br><span class="basis">근거 ISMS 2.5 · 접근성(QR 대체 수단)</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">설정 키 필드</span><span class="nav-act">클릭 · 드래그</span><span class="nav-to stay">텍스트 선택만(편집 불가)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="2">
+      <div class="num">3</div>
+      <div>
+        <div class="itm-title">6자리 인증 코드 입력 (6칸 · 자동 검증)<span class="req">필수</span></div>
+        <div class="itm-desc">· 숫자만 · 6칸 개별 입력(한 칸 1자 · 자동 다음 칸 포커스 · 6자리 붙여넣기 분배) · 복구 코드 입력 불가(등록 전이라 존재하지 않음)<br>· <strong>검증 시점</strong>: 6번째 자리 입력 즉시 자동 검증(확인 버튼 없음 — 시안 기준) · 검증 중 칸 읽기 전용 + 아래 "확인 중…"<br>· <strong>상태</strong> ① 빈칸(기본) ② 입력 중(1~5자리) ③ 확인 중 ④ 실패 — 6칸 초기화 · 첫 칸 포커스 · 아래 오류 칩 "인증 코드가 올바르지 않습니다 <strong>{남은 횟수}회 남음</strong>"(시안) ⑤ 성공 → 2FA 등록 확정 · 복구 코드 생성 · ONB-03 이동 ⑥ 등록 완료(ONB-03에서 복귀) — 비활성<br>· 연속 실패 <strong>{정책값}</strong>(예시 5)회 도달 시 시크릿 재생성 + QR·설정 키 갱신 + 칩 "인증 코드를 {정책값}회 잘못 입력해 QR 코드가 새로 발급되었습니다. 앱에서 다시 등록해 주세요" · 토큰은 유지 <span style="color:#b45309;">[확인필요: 도달 시 처리 — 재생성(채택) vs 토큰 무효]</span> · 실패는 감사로그<br><span class="basis">근거 ISMS 2.5 · F-5</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">6칸 코드 — 6자리 완성</span><span class="nav-act">자동 검증("확인 중…" · 중복 검증 차단) → 성공 시 2FA 확정 · 복구 코드 생성 · ONB-02 완료 기록 · 감사로그</span><span class="nav-to">성공 → <strong>복구 코드 저장(ONB-03)</strong> / 실패 → 칩 · 6칸 초기화 / {정책값}회 도달 → 시크릿·QR 재생성 · 칩 안내</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="3">
+      <div class="num">4</div>
+      <div>
+        <div class="itm-title">'인증이 정상적으로 작동하지 않나요? 문의하기' 링크</div>
+        <div class="itm-desc">· 시안 보조 링크 · 앱 등록이 계속 실패할 때의 출구 — 문의 이메일(portal.kyc@dsrvlabs.com) · mailto vs 주소 표시 <span style="color:#b45309;">[확인필요: AUTH-01 항목 6·9와 동일 미결]</span><br>· 클릭해도 진행 상태(비밀번호 저장·시크릿)는 유지<br><span class="basis">근거 인증수단 복구 운영 프로세스(AUTH-01 상세 8)</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">'문의하기'</span><span class="nav-act">클릭</span><span class="nav-to stay">mailto → 새 메일(수신 = 문의 주소) / 텍스트 → 주소 노출 · 화면 상태 유지</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="4">
+      <div class="num">5</div>
+      <div>
+        <div class="itm-title">'‹ 로그인으로 돌아가기' 링크</div>
+        <div class="itm-desc">· 시안 보조 링크 · 활성화를 중단하고 로그인 화면으로 이동 — 확인 없음 · ONB-01 완료(비밀번호)는 서버에 기록되어 <strong>링크 재클릭 시 이 화면으로 재개</strong>(토큰 유효 내)<br>· 계정은 아직 '활성화 진행 중'이므로 AUTH-01에서 로그인 불가(1단계 실패 칩과 동일 문구 · 상태 미노출) <span style="color:#b45309;">[확인필요: 미완료 계정 로그인 시도 안내 문구 별도 여부]</span><br><span class="basis">근거 공통 UI 규격 종료 동선</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">'로그인으로 돌아가기'</span><span class="nav-act">클릭 · 확인 없음</span><span class="nav-to"><strong>로그인(AUTH-01)</strong> 1단계 · 진행 상태 서버 보존</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<section class="footer-note" style="padding-bottom:0;">
+  <div class="note-card">
+    <div class="note-title">상세내용</div>
+    <div class="detail-grid" id="detailCol">
+      <div class="dtl" data-idx="2">
+        <div class="detail-label"><span class="dtl-num">3</span>2FA 등록 · 시크릿</div>
+      <div class="dtl-body"><span class="box">· Google Authenticator 등 TOTP(RFC 6238) 표준 · 로그인·민감행위 재인증에 사용 · QR과 설정 키는 동일 시크릿<br>· 등록 확인 = 6자리 코드 1회 검증 성공 · 실패는 감사로그 · 연속 {정책값}회 도달 시 시크릿 재생성(채택) <span class="red">[확인필요]</span><br>· 시크릿은 등록 확정 전까지 유지(재개·복귀에 동일 값) · 확정 후 재노출 없음 · 확정 시 복구 코드(ONB-03)를 함께 생성</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="footer-note">
+  <div class="note-card">
+    <div class="note-title">비고</div>
+    <div class="note-body">
+      · 계정 활성화 <strong>2/3 — 2FA 앱 연결</strong>. ONB-01 [다음] → 이 화면(QR·설정 키·6자리 검증) → 성공 시 복구 코드 저장(ONB-03).<br>
+      · <strong>[Figma 반영 2026-09-02]</strong> 시안 'Set 2FA Code'·'Invalid Credentials' 적용(남은 횟수 노출 포함). 등록 완료 상태 표시(ONB-03 복귀 시)는 시안 없음 — <strong>디자인 요청</strong>. 원본 <span class="mono">reference/figma/_crops/F2_row1_c2.png · F3_row1_c3.png</span>.<br>
+      · 설명 형식(핀 = 조작 요소 단위) — 표시 2(QR·설정 키) · 입력 1 · 링크 2.<br>
+      · <span style="color:#991b1b;">[확인필요]</span> 설정 키 복사 버튼 · OTP 연속 실패 도달 처리 · 미완료 계정 로그인 안내 · 등록 완료 상태 표시 · 문의 mailto.<br>
+      · 이전: 비밀번호 설정(ONB-01) · 다음 화면: 복구 코드 저장(ONB-03)
+    </div>
+  </div>
+</section>
+
+<script src="screen.js"></script>
+</body>
+</html>

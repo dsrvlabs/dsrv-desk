@@ -7,7 +7,9 @@ JS = open('screen.js', encoding='utf-8').read()
 
 SCREENS = [
     ('인증·온보딩', 'ONB-00', '초대 이메일', 'onb-00.html'),
-    (None, 'ONB-01', '계정 활성화', 'onb-01.html'),
+    (None, 'ONB-01', '활성화 · 비밀번호 설정', 'onb-01.html'),
+    (None, 'ONB-02', '활성화 · 2FA 앱 연결', 'onb-02.html'),
+    (None, 'ONB-03', '활성화 · 복구 코드 저장', 'onb-03.html'),
     (None, 'AUTH-01', '로그인', 'auth-01.html'),
     ('대시보드', 'DASH-01', '대시보드', 'dash-01.html'),
     (None, 'DASH-02', '비밀번호 수정', 'dash-02.html'),

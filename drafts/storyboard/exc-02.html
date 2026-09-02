@@ -18,9 +18,9 @@
   <div class="screen-panel">
     <div style="position:relative;display:flex;">
       <div class="labels" id="labels">
-        <div class="lbl"><span class="lbl-text">전역</span></div>
-        <div class="lbl"><span class="lbl-text">견적 요약</span></div>
-        <div class="lbl"><span class="lbl-text">비율·근거<br>고시</span></div>
+        <div class="lbl"><span class="lbl-text">전역<br>상단</span></div>
+        <div class="lbl"><span class="lbl-text">요청 요약</span></div>
+        <div class="lbl"><span class="lbl-text">확정 비율<br>고시</span></div>
         <div class="lbl"><span class="lbl-text">수락 기한</span></div>
         <div class="lbl"><span class="lbl-text">성격 고지</span></div>
         <div class="lbl"><span class="lbl-text">액션·분기</span></div>
@@ -29,63 +29,82 @@
     </div>
 
     <div class="frame" id="frame">
+      <!-- 전역: 콘솔 상단 + GNB (핀 없음 — nav-global 행으로 처리) -->
       <div class="zone" data-idx="">
         <div class="zone-highlight"></div>
-        <div class="c-top" style="border-radius:8px;">
-          <span class="brand">DSRV Desk</span>
+        <div class="c-top" style="border-radius:8px 8px 0 0;">
+          <span class="brand" style="cursor:pointer;">DSRV Desk</span>
           <span class="meta"><span class="c-badge">A자산운용</span></span>
         </div>
-      </div>
-
-      <div class="zone" data-idx="">
-        <div class="zone-highlight"></div>
-        <div class="kv"><span class="k">요청 건</span><span class="v">EXC-20260831-0142</span></div>
-        <div class="kv"><span class="k">교환쌍 · 방향</span><span class="v">USDC → USDT</span></div>
-        <div class="kv"><span class="k">보내는 수량</span><span class="v">100,000 USDC</span></div>
-      </div>
-
-      <div class="zone" data-idx="0">
-        <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="0" style="position:relative;padding:6px;border-radius:8px;">
-          <div class="pin" data-idx="0" style="top:-4px;right:-4px;">1</div>
-          <div class="zone-title">DSRV 제시 비율</div>
-          <div style="font-size:22px;font-weight:800;color:#0f172a;font-family:var(--mono);">0.9989 USDT/USDC</div>
-          <div style="font-size:13px;color:#334155;margin:6px 0 10px;">받는 수량(예상) <strong>≈ 99,890 USDT</strong></div>
-          <div class="kv"><span class="k">스프레드</span><span class="v">0.10%</span></div>
+        <div class="c-adminbar" style="margin:0;">
+          <span class="m">대시보드</span>
+          <span class="m on" style="background:#dbeafe;color:#1d4ed8;">교환하기</span>
+          <span class="m">교환게시판</span>
         </div>
       </div>
 
+      <!-- 요청 요약 (표시 전용) -->
+      <div class="zone" data-idx="0">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="0" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="0" style="top:-6px;right:-6px;">1</div>
+          <div class="kv"><span class="k">요청번호</span><span class="v">EXC-20260902-0001</span></div>
+          <div class="kv"><span class="k">교환쌍 · 방향</span><span class="v">USDC → USDT</span></div>
+          <div class="kv"><span class="k">보내는 수량</span><span class="v">900 USDC <span style="color:#64748b;font-weight:400;">(≈ 900.00 USD)</span></span></div>
+        </div>
+      </div>
+
+      <!-- 확정 비율 고시 (표시 전용) -->
       <div class="zone" data-idx="1">
         <div class="zone-highlight"></div>
         <div class="item-area" data-highlight="1" style="position:relative;padding:6px;border-radius:8px;">
           <div class="pin" data-idx="1" style="top:-4px;right:-4px;">2</div>
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:12px;color:#334155;font-weight:600;">수락 기한 (만료 시 비율 무효 → 재요청)</span>
-            <span style="font-size:15px;font-weight:800;color:#dc2626;font-family:var(--mono);">02:00</span>
-          </div>
+          <div class="zone-title">DSRV 제시 비율 (확정)</div>
+          <div style="font-size:22px;font-weight:800;color:#0f172a;font-family:var(--mono);">0.9997 USDT/USDC</div>
+          <div style="font-size:13px;color:#334155;margin:6px 0 10px;">받는 수량 <strong>899.73 USDT</strong></div>
+          <div class="kv"><span class="k">스프레드</span><span class="v">0.10% 고정</span></div>
+          <div style="font-size:10px;color:#94a3b8;margin:2px 0 0;">교환하기의 참고 비율과 다를 수 있습니다 · 이 비율로 수락 시 확정됩니다</div>
         </div>
       </div>
 
+      <!-- 수락 기한 카운트다운 (표시 전용) -->
       <div class="zone" data-idx="2">
         <div class="zone-highlight"></div>
         <div class="item-area" data-highlight="2" style="position:relative;padding:6px;border-radius:8px;">
           <div class="pin" data-idx="2" style="top:-4px;right:-4px;">3</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;color:#334155;font-weight:600;">수락 기한 (만료 시 비율 무효 → 재요청)</span>
+            <span style="font-size:15px;font-weight:800;color:#dc2626;font-family:var(--mono);">02:00</span>
+          </div>
+          <div style="font-size:9px;color:#94a3b8;padding:4px 0 0;">▼ [상태: 만료(00:00) 시] 타이머 자리에 "만료됨 — 비율 무효" · [수락] 회색 비활성 · 아래 안내(핀 7) 유지</div>
+        </div>
+      </div>
+
+      <!-- 성격 고지 (표시 전용) -->
+      <div class="zone" data-idx="3">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="3" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="3" style="top:-4px;right:-4px;">4</div>
           <div class="note-inline reg">이 비율은 DSRV가 형성한 시세가 아니라, 외부지표에 사전 고시된 고정 스프레드를 가산해 건별로 계산한 값입니다. 교환 상대방은 DSRV입니다.</div>
         </div>
       </div>
 
-      <div class="zone" data-idx="3,4">
+      <!-- 액션·분기: [수락] · [거절] 각각 핀 + 집행 불가 안내 -->
+      <div class="zone" data-idx="4,5,6">
         <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="3" style="position:relative;padding:6px;border-radius:8px;margin-bottom:10px;">
-          <div class="pin" data-idx="3" style="top:-4px;right:-4px;">4</div>
-          <div class="row">
-            <div class="btn primary" style="flex:1;">수락</div>
-            <div class="btn ghost" style="flex:.6;">거절</div>
+        <div class="row" style="margin-bottom:10px;">
+          <div class="item-area" data-highlight="4" style="position:relative;flex:1;padding:4px;border-radius:8px;">
+            <div class="pin" data-idx="4" style="top:-6px;right:-6px;">5</div>
+            <div class="btn primary" style="width:100%;">수락</div>
+          </div>
+          <div class="item-area" data-highlight="5" style="position:relative;flex:.6;padding:4px;border-radius:8px;">
+            <div class="pin" data-idx="5" style="top:-6px;right:-6px;">6</div>
+            <div class="btn ghost" style="width:100%;">거절</div>
           </div>
         </div>
-        <div class="item-area" data-highlight="4" style="position:relative;padding:6px;border-radius:8px;">
-          <div class="pin" data-idx="4" style="top:-4px;right:-4px;">5</div>
-          <div class="note-inline">만료·스프레드 이탈·가용 풀 부족 시 이 건은 집행되지 않습니다 (재요청 필요).</div>
+        <div class="item-area" data-highlight="6" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="6" style="top:-6px;right:-6px;">7</div>
+          <div class="note-inline">수락은 클릭 즉시 확정됩니다. 만료·비율 변동·가용 풀 부족 시 이 건은 집행되지 않습니다 (재요청 필요).</div>
         </div>
       </div>
     </div>
@@ -96,49 +115,78 @@
   <div class="items" id="items">
     <div class="nav-global">
       <div class="nav-global-title">진입 · 전역 이동</div>
-      <div class="nav-row"><span class="nav-el">상단 GNB(전 화면 공통)</span><span class="nav-act">대시보드/교환하기/교환게시판 메뉴 · 로고 클릭 — 목업에는 상단 요약만 표시</span><span class="nav-to"><strong>DASH-01 / EXC-01 / BRK-01</strong> (규칙: DASH-01 항목 5) · 미수락 이탈 시 기한 경과로 자동 만료</span></div>
-      <div class="nav-note">· <strong>진입</strong>: 교환하기(EXC-01) [거래 요청] → 시스템 자동 산정 즉시 진입 (이 화면 진입 시점 기준으로 확정 비율 결정 · 대기·담당자 개입 없음)</div>
+      <div class="nav-row"><span class="nav-el">GNB '대시보드' · 로고</span><span class="nav-act">클릭 (확인 없음)</span><span class="nav-to"><strong>대시보드(DASH-01)</strong> · 이 건은 미수락 상태로 남아 기한 경과 시 자동 만료(재진입 경로 없음)</span></div>
+      <div class="nav-row"><span class="nav-el">GNB '교환하기'(현재 탭)</span><span class="nav-act">클릭 (확인 없음)</span><span class="nav-to"><strong>교환하기(EXC-01)</strong> 초기 상태 — 새 요청 · 이 건은 미수락 → 기한 경과 시 자동 만료</span></div>
+      <div class="nav-row"><span class="nav-el">GNB '교환게시판'</span><span class="nav-act">클릭 (확인 없음)</span><span class="nav-to"><strong>교환 게시판(BRK-01)</strong> · 이 건은 미수락 → 기한 경과 시 자동 만료</span></div>
+      <div class="nav-row"><span class="nav-el">기관 배지</span><span class="nav-act">클릭 → 메뉴(로그아웃) → 로그아웃 클릭</span><span class="nav-to"><strong>로그인(AUTH-01)</strong> · 세션 즉시 파기 · 확인 없음(공통 UI 규격 '로그아웃') <span style="color:#b45309;">[확인필요: EXC-01 표본은 배지 '무반응'으로 기재 — 규격 통일]</span></span></div>
+      <div class="nav-note">· <strong>진입</strong>: 교환하기(EXC-01) [거래 요청] 클릭 → 시스템 자동 산정("산정 중…") 완료 즉시 진입 — 이 화면 자체 로딩 없음(값은 진입 시 전부 확정) · 대기·담당자 개입 없음<br>
+      · <strong>재진입 없음</strong>: 이 화면을 벗어나면(GNB 이동·브라우저 닫기) 돌아올 경로 없음 — 미수락 건은 서버 기한 경과 시 '만료'로 자동 종결 · 브라우저 뒤로가기 미지원(공통 UI 규격) <span style="color:#b45309;">[확인필요: 만료·거절 건의 DASH-01 거래 목록 노출 여부]</span><br>
+      · 목업 예시: 900 USDC → <strong>899.73 USDT</strong>, 확정 비율 0.9997 USDT/USDC(EXC-01 참고 비율 0.9998과 다른 값 — "참고와 다를 수 있음" 예시), 스프레드 0.10%, 요청번호 EXC-20260902-0001, 수락 기한 02:00 · 모두 예시값(정책값은 ADM-03 렌더링)</div>
     </div>
+
     <div class="itm" data-idx="0">
       <div class="num">1</div>
       <div>
-        <div class="itm-title">제시 비율·스프레드 고시<span class="req">필수</span></div>
-        <div class="itm-desc">· DSRV 제시 비율 + 스프레드율 고시 — 외부지표 소스 항목은 화면 미노출<br>· 비율은 <strong>시스템 자동 산정</strong>(2026-09-02 확정): 요청 시점 외부지표에 ADM-03 고정 스프레드 가산 — 담당자 수동 입력·재량 없음<br>· <strong>확정 비율은 이 화면 진입(제시) 시점 기준으로 결정</strong> — 그 시점의 외부지표에 고정 스프레드를 가산해 산정, EXC-01의 '교환비율'은 참고 표시일 뿐<br>· 산정 방식은 성격 고지 문구(항목 3)로 설명 · 소스 관리는 ADM-03(내부)<br><span class="basis">근거 V2 · 용어4 · 09 line 51 ①</span></div>
+        <div class="itm-title">요청 요약 (표시 전용)</div>
+        <div class="itm-desc">· 클릭 요소 없음 · EXC-01 [거래 요청] 시 입력값을 그대로 표시 — 이 화면에서 수정 불가(수정은 [거절] → EXC-01 재요청)<br>· 요청번호: <strong>EXC-YYYYMMDD-NNNN</strong>(요청일 + 당일 일련번호 4자리, notation 채번) — 진입 시 이미 채번 완료 · 복사 버튼 없음(텍스트 선택만)<br>· 교환쌍 · 방향: 「{보내는} → {받는}」 티커 대문자<br>· 보내는 수량: 「{수량} {티커}」 보내는 자산 자릿수(ETH 4 / USDC·USDT 2) + 괄호 안 USD 환산(소수 2자리 · 요청 시점 ADM-03 시세 · 스테이블 1:1) — 한도 1,000 USD 상당 이내임을 확인한 값<br><span class="basis">근거 notation 채번·수량 표기 · 09 §0 건별 한도(2026-09-02)</span></div>
       </div>
     </div>
+
     <div class="itm" data-idx="1">
       <div class="num">2</div>
       <div>
-        <div class="itm-title">수락 기한(견적 만료)<span class="req">필수</span></div>
-        <div class="itm-desc">· 유효시간 = <strong>수락까지의 기한</strong> — 기한 내 수락 시 비율 고정, 이후 DSRV 거래 진행·집행은 별도 진행(기한과 무관)<br>· 건별 요청에만 산정·제시(상시 자동호가·스트리밍 호가 아님)를 담보 · 만료 시 자동 무효 → 재요청<br><span class="basis">근거 V2 · 유효시간 수치 [확인필요]</span></div>
+        <div class="itm-title">확정 비율 · 받는 수량 · 스프레드 고시 (표시 전용)</div>
+        <div class="itm-desc">· 클릭 요소 없음 · 3개 값은 <strong>진입(제시) 시점에 확정된 고정값</strong> — 화면 체류 중 갱신·재계산 없음(기한 내 수락 시 이 값 그대로 확정, 시세 변동 반영 안 함)<br>· 확정 비율: 시스템 자동 산정(요청 시점 외부지표 + ADM-03 고정 스프레드 가산 · 담당자 수동 입력·재량 없음) · 표기 = notation 비율 규칙 — 스테이블 페어 「{비율} {받는}/{주는}」 소수 4자리 · ETH 페어 방향 무관 「{비율} {스테이블}/ETH」 소수 2자리<br>· 받는 수량 = 보내는 수량 × 확정 비율(스테이블→ETH는 ÷) → 받는 자산 자릿수로 <strong>절사</strong> — 예 900 × 0.9997 = 899.73 USDT · '예상'이 아닌 확정 수량(라벨에 ≈ 없음)<br>· 스프레드: ADM-03 고정값 % 소수 2자리 · 별도 수수료 없음(스프레드 내재) — 비율과 항상 별도 항목(notation)<br>· 하단 안내 문구 고정: "교환하기의 참고 비율과 다를 수 있습니다 · 이 비율로 수락 시 확정됩니다" — 참고(EXC-01)·확정(EXC-02) 2회 고지가 확인 다이얼로그를 대체(상세 5)<br>· 외부지표 <strong>시세 소스명은 화면 미노출</strong>(09 §0 고객 화면 미노출 정보 · 상세 2)<br><span class="basis">근거 V2 · 09 §0 나목 견적 산정·표기 자릿수(2026-09-02) · L6 설명의무</span></div>
       </div>
     </div>
+
     <div class="itm" data-idx="2">
       <div class="num">3</div>
       <div>
-        <div class="itm-title">"자체 시세 아님 · DSRV 상대방" 고지<span class="req">필수</span></div>
-        <div class="itm-desc">· 딜러/거래소 오인 방어 문구 상시 노출<br><span class="basis">근거 V2 · [로펌게이트] 문구 확정</span></div>
+        <div class="itm-title">수락 기한 카운트다운 (표시 전용)</div>
+        <div class="itm-desc">· 클릭 요소 없음 · 형식 <strong>MM:SS</strong> 1초 단위 감소 · 시작값 = <strong>{유효시간}초</strong>(ADM-03 값 렌더링 · 목업 02:00은 예시) · 색 = 상시 강조색(잔여 시간에 따른 색 변경·점멸 없음)<br>· 기준 시각: 진입 시 서버가 준 <strong>만료 시각</strong>을 기준으로 클라이언트가 표시 — 표시는 안내용, 만료 판정의 정본은 [수락] 클릭 시 <strong>서버 재검증</strong>(상세 3)<br>· <strong>상태</strong> ① 진행(00:01 이상) — 숫자 감소 · [수락] 활성 ② <strong>만료(00:00 도달)</strong> — 타이머 자리 텍스트 "만료됨 — 비율 무효"(같은 색) · [수락] 즉시 회색 비활성(서버 응답 대기 없음) · [거절] 활성 유지(이탈 수단, 항목 6) · 토스트·모달 없음(인라인 표시만) ③ 탭 비활성·절전 후 복귀 — 서버 만료 시각 기준으로 잔여 재계산(이미 지났으면 ② 상태)<br>· 기한은 <strong>수락 행위에만</strong> 적용 — 수락 후 DSRV 거래 진행(EXC-03, 약 {영업일}영업일)은 기한과 무관<br><span class="basis">근거 V2 (건별 요청에만 산정 · 상시 호가 아님 담보) · 유효시간 수치 <span style="color:#b45309;">[확인필요: ADM-03 정책값]</span></span></div>
       </div>
     </div>
+
     <div class="itm" data-idx="3">
       <div class="num">4</div>
       <div>
-        <div class="itm-title">수락 / 거절<span class="req">필수</span></div>
-        <div class="itm-desc">· 수락 = <strong>비율 고정 + DSRV 거래 진행</strong>(EXC-03) — 별도 고객사 승인 단계 없음<br>· 고정 후에도 집행 전 스프레드 이탈 시 집행 정지(항목 5) · 자동 확정 없음<br>· 재요청 버튼 없음 — 만료·거절 후 새 비율은 교환 요청(EXC-01)부터 다시<br><span class="basis">근거 F-1a</span></div>
-        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">[수락] 버튼</span><span class="nav-act">수락 기한 내 클릭 — 비율 고정, 별도 고객사 승인 없음</span><span class="nav-to"><strong>승인 진행(EXC-03)</strong> — DSRV 거래 진행 시작</span></div>
-          <div class="nav-row"><span class="nav-el">[거절] 버튼</span><span class="nav-act">클릭 — 이 건 종결(재요청 버튼 없음)</span><span class="nav-to"><strong>교환하기(EXC-01)</strong>로 회귀 — 새 요청부터 다시</span></div>
-        </div>
+        <div class="itm-title">"자체 시세 아님 · DSRV 상대방" 성격 고지 (표시 전용)</div>
+        <div class="itm-desc">· 고정 문구 · 클릭 없음 · 상시 노출(만료 상태에도 유지) · 문구 변경은 법무 확인 후(상세 4 [로펌게이트])<br>· 소스명·조합 방식 등 산정 내부는 기재하지 않음 — "외부지표 + 사전 고시 고정 스프레드"까지만<br><span class="basis">근거 V2 · 09 §0 line 51 ①⑤ · [로펌게이트] 문구 확정</span></div>
       </div>
     </div>
+
     <div class="itm" data-idx="4">
       <div class="num">5</div>
       <div>
-        <div class="itm-title">이탈·만료·풀 부족 시 교환 불가<span class="req">필수</span></div>
-        <div class="itm-desc">· 스프레드 이탈 또는 가용 풀 부족 시 집행하지 않음<br><span class="basis">근거 09 line 51 ① · F-1a</span></div>
+        <div class="itm-title">[수락] 버튼<span class="req">필수</span></div>
+        <div class="itm-desc">· primary · 가입자 1인 단독 실행 · <strong>클릭 즉시 확정 — 확인 다이얼로그 없음</strong>(2026-09-02 결정: 참고 비율(EXC-01)·확정 비율(EXC-02) 2회 고지로 대체) · 구속력 행위이므로 버튼 아래 결과 고지 1문장 상시 노출(항목 7 · 공통 UI 규격 '단독 실행 표기')<br>· 수락 = 확정 비율·받는 수량 고정 + 건 상태 '수락(확정)' 전이 → DSRV 승인 + 콜드 수동 집행(EXC-03) · 별도 고객사 승인 단계 없음<br>· 재요청 버튼 없음 — 만료·거절 후 새 비율은 교환하기(EXC-01)부터<br><span class="basis">근거 F-1a · 09 §0 나목 견적 산정(2026-09-02) · notation 공통 UI 규격 '확인 다이얼로그'(EXC-02 [수락]은 확인 없음)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">[수락] — 기한 만료 후</span><span class="nav-act">클릭 시 "견적이 만료되었습니다" — 비율 자동 무효</span><span class="nav-to stay">화면 잔류 · 새 비율은 <strong>교환하기(EXC-01)</strong>에서 재요청</span></div>
+          <div class="nav-row"><span class="nav-el">[수락] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①카운트다운 만료(00:00 도달) ②처리 중(클릭 후 응답 대기) ③수락 실패 후 안내 노출 중(만료·풀 부족)</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격) · 사유는 타이머 자리·버튼 위 인라인 안내로 노출(툴팁 없음)</span></div>
+          <div class="nav-row"><span class="nav-el">[수락] — 클릭(활성)</span><span class="nav-act">클릭 → <strong>확인 없음</strong> → 라벨 "처리 중…"·비활성(중복 클릭 차단 · [거절]도 함께 비활성) → 서버 재검증(기한·가용 풀) 통과 → 건 상태 '수락(확정)' · 카운트다운 정지</span><span class="nav-to"><strong>승인 진행(EXC-03)</strong> — 즉시 이동(토스트 없음 · EXC-03 스텝 '비율 수락 ✓'로 결과 인지)</span></div>
+          <div class="nav-row"><span class="nav-el">[수락] — 실패</span><span class="nav-act">ⓐ 서버 기준 기한 경과 / ⓑ 수락 시점 가용 풀 부족 / ⓒ 시스템 오류</span><span class="nav-to stay">화면 잔류 · ⓐ 타이머 "만료됨 — 비율 무효" + 버튼 위 인라인 ⚠ "견적이 만료되었습니다 — 교환하기에서 다시 요청해 주세요" · [수락] 비활성 유지 / ⓑ 인라인 ⚠ "현재 교환 가능 풀이 부족해 이 건을 진행할 수 없습니다 — 교환하기에서 다시 요청해 주세요" · 건 '종결(풀 부족)' · [수락] 비활성 유지 / ⓒ 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 라벨 복귀·재클릭 가능(기한 내) · 모두 [거절] 활성 복귀</span></div>
         </div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="5">
+      <div class="num">6</div>
+      <div>
+        <div class="itm-title">[거절] 버튼</div>
+        <div class="itm-desc">· ghost · <strong>확인 없음 · 사유 입력 없음</strong>(공통 UI 규격: 취소·거절은 확인 없음) · 클릭 = 이 요청 건 종결('거절') — 채번된 요청번호 재사용 없음<br>· 만료 상태에서도 활성 유지 — 만료 후에는 상태 변경 없이 화면 이탈 수단으로만 동작 <span style="color:#b45309;">[확인필요: 만료 후 라벨을 '돌아가기'로 바꿀지(기획 가정: 라벨 유지)]</span><br><span class="basis">근거 notation 공통 UI 규격 '확인 다이얼로그'·'종료 동선'(ghost = 직전 화면 복귀)</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">[거절] — 활성 조건</span><span class="nav-act">다음이 아님: ①[수락] 처리 중(응답 대기)</span><span class="nav-to stay">처리 중에만 회색 비활성 · 만료·실패 상태에서는 활성</span></div>
+          <div class="nav-row"><span class="nav-el">[거절] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음 → 라벨 "처리 중…"·비활성 → 건 상태 '거절' 종결(만료·풀 부족으로 이미 종결된 건이면 상태 변경 없음)</span><span class="nav-to"><strong>교환하기(EXC-01)</strong> 초기 상태(자산 미선택·수량 빈칸) — 새 요청부터 다시 · 토스트 없음</span></div>
+          <div class="nav-row"><span class="nav-el">[거절] — 실패</span><span class="nav-act">시스템 오류(상태 저장 실패)</span><span class="nav-to stay">화면 잔류 · 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 라벨 복귀 · 기한 경과 시 서버가 '만료'로 종결하므로 재시도 불필요</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="6">
+      <div class="num">7</div>
+      <div>
+        <div class="itm-title">즉시 확정 · 집행 불가 3분기 안내 (표시 전용)</div>
+        <div class="itm-desc">· 고정 문구 · 클릭 없음 · 상시 노출: "수락은 클릭 즉시 확정됩니다. 만료·비율 변동·가용 풀 부족 시 이 건은 집행되지 않습니다 (재요청 필요)."<br>· 역할 ① [수락] 단독 실행 결과 고지(확인 다이얼로그 대체) ② 교환 불가 3분기 사전 고지 — 각 분기의 인지 시점·화면은 상세 7<br>· '비율 변동' = 수락 후 집행 전 외부지표가 ADM-03 이탈 임계를 벗어난 경우 → EXC-04 '심사 후 보류' 사유 ④로 표기(임계값·소스명 미노출)<br><span class="basis">근거 09 §0 line 51 ① · F-1a · notation 공통 UI 규격 '단독 실행 표기'</span></div>
       </div>
     </div>
   </div>
@@ -150,24 +198,32 @@
     <div class="note-title">상세내용</div>
     <div class="detail-grid" id="detailCol">
       <div class="dtl" data-idx="0">
-        <div class="detail-label"><span class="dtl-num">1</span>외부지표 소스 — 내부 관리 (화면 미노출)</div>
+        <div class="detail-label"><span class="dtl-num">1</span>요청 요약 — 표시 규칙</div>
+      <div class="dtl-body"><span class="box">· 요청번호는 EXC-01 [거래 요청] 클릭 시 채번 → EXC-02·03·04·DASH-01·ADM-02가 같은 번호 사용<br>· 보내는 수량의 USD 환산은 요청 시점 값으로 고정(체류 중 재환산 없음) — 한도 검증은 EXC-01에서 완료, 이 화면은 재검증하지 않음<br>· 예시 900 USDC ≈ 900.00 USD(스테이블 1:1) · ETH 예: 0.3 ETH ≈ 955.20 USD(3,184.00 USDC/ETH 가정)</span></div>
+      </div>
+      <div class="dtl" data-idx="1">
+        <div class="detail-label"><span class="dtl-num">2</span>외부지표 소스 — 내부 관리 (화면 미노출)</div>
       <div class="dtl-body">
-        <span class="box">· 소스: <strong>업비트·빗썸·바이낸스</strong> 시세 — 조합 방식(중앙값·평균·우선순위) [확인필요]<br>· USDC↔USDT: 디페그/1:1 기준(동일통화) — 가격 거의 동일, 지표 1 근접<br>· ETH↔USDC · ETH↔USDT: 거래소 ETH 시세 기준 — 변동성 있음, 견적 유효시간 내 이탈 임계 적용<br>· JPYSC 미취급 — 환율지표 페어 없음<br>· 소스·스프레드율·갱신주기·이탈 임계는 <strong>ADM-03</strong> 단일 출처에서 관리</span>
+        <span class="box">· 소스: <strong>업비트·빗썸·바이낸스</strong> 시세 — 조합 방식(중앙값·평균·우선순위) <span class="red">[확인필요]</span> · 소스명·조합 방식은 고객 화면 어디에도 표시하지 않음(09 §0 2026-09-02)<br>· USDC↔USDT: 디페그/1:1 기준(동일통화) — 가격 거의 동일, 지표 1 근접<br>· ETH↔USDC · ETH↔USDT: 거래소 ETH 시세 기준 — 변동성 있음, 확정 후 집행 전 이탈 임계 적용 · ETH 페어 스프레드 요율 <span class="red">[확인필요]</span><br>· JPYSC 미취급 — 환율지표 페어 없음<br>· 소스·스프레드율·유효시간·이탈 임계는 <strong>ADM-03</strong> 단일 출처에서 관리 — 이 화면은 값을 표출만</span>
         <span style="display:block;margin-top:6px;" class="red">가격형성(시장가) 아님 — 외부지표에 스프레드만 가산</span>
       </div>
       </div>
-      <div class="dtl" data-idx="1">
-        <div class="detail-label"><span class="dtl-num">2</span>만료 처리</div>
-      <div class="dtl-body"><span class="box">· 카운트다운 0 → 비율 자동 무효<br>· 만료 후 수락 시도: <span class="red">"견적이 만료되었습니다"</span> → 새 비율은 EXC-01에서 재요청<br>· 수락 기한은 수락 행위에만 적용 — 이후 DSRV 거래 진행(약 2영업일)은 기한과 무관(진행 지연 리스크 분리)</span></div>
-      </div>
       <div class="dtl" data-idx="2">
-        <div class="detail-label"><span class="dtl-num">3</span>문구 통제 [로펌게이트]</div>
-      <div class="dtl-body"><span class="box">'시세 제시 = 가격형성'으로 오인되지 않도록 문구 확정 필요. G0 사전면담 소명자료와 정합(09 §8).</span></div>
+        <div class="detail-label"><span class="dtl-num">3</span>만료 처리 · 시각 동기</div>
+      <div class="dtl-body"><span class="box">· 만료 판정 정본 = 서버(제시 시각 + {유효시간}초) · 클라이언트 타이머는 서버가 준 만료 시각을 표시만 — 클라이언트 시계 오차·탭 절전으로 표시가 어긋나도 서버 판정이 우선<br>· 표시상 00:00 도달 → 즉시 [수락] 비활성(서버 왕복 없음) · 표시상 잔여가 있어도 서버 기한 경과면 [수락] 실패 ⓐ("견적이 만료되었습니다")<br>· 만료 건 상태 = '만료' 자동 종결 → 새 비율은 EXC-01에서 재요청(같은 요청번호 재사용 없음)<br>· 기한은 수락 행위에만 적용 — 수락 후 DSRV 거래 진행(약 {영업일}영업일)은 기한과 무관(진행 지연 리스크 분리)</span></div>
+      </div>
+      <div class="dtl" data-idx="3">
+        <div class="detail-label"><span class="dtl-num">4</span>문구 통제 [로펌게이트]</div>
+      <div class="dtl-body"><span class="box">'시세 제시 = 가격형성'으로 오인되지 않도록 문구 확정 필요. G0 사전면담 소명자료와 정합(09 §8). 금지 표현('공식 LP'·'마켓메이커'·'플랫폼 보증'·'최저가 보장')은 EXC-01 상세 5와 동일.</span></div>
       </div>
       <div class="dtl" data-idx="4">
-        <div class="detail-label"><span class="dtl-num">5</span>교환 불가 3분기</div>
+        <div class="detail-label"><span class="dtl-num">5</span>[수락] 확인 다이얼로그 없음 — 결정 근거 · 수락 후 상태</div>
+      <div class="dtl-body"><span class="box">· 2026-09-02(4) 결정: EXC-01 참고 비율 + EXC-02 확정 비율 2회 고지 + 버튼 아래 결과 고지 1문장으로 구속력 인지 충족 → 모달 확인 생략(수락 기한 내 클릭 수 최소화) · 종전 ADM-03 상세 "구속력 행위는 확인 문구"와의 불일치는 notation 공통 UI 규격에 예외로 명기<br>· 수락 후 상태: 수락(확정) → DSRV 거래 진행중(EXC-03) → 완료 / 심사 후 보류(EXC-04) · 고객사 측 통제는 커스터디 콜드월렛 다중승인 이체로 수행(ISMS 2.2.2)<br>· 수락 후 고객 취소 동선 없음 — 취소·보류는 DSRV 처리(ADM-02)만</span></div>
+      </div>
+      <div class="dtl" data-idx="6">
+        <div class="detail-label"><span class="dtl-num">7</span>교환 불가 3분기 — 인지 시점·화면</div>
       <div class="dtl-body">
-        <span class="box">① <strong>만료</strong>: 재요청<br>② <strong>스프레드 이탈</strong>: 지표 급변으로 임계 초과 → 집행 정지<br>③ <strong>풀 부족</strong>: 확정 시점 가용 풀 미달 → 집행 불가</span>
+        <span class="box">① <strong>만료</strong>: 이 화면 — 타이머 "만료됨" + [수락] 비활성(항목 3 ②) / 이탈 후 만료는 서버 자동 종결(고객 통지 없음 <span class="red">[확인필요]</span>) → EXC-01 재요청<br>② <strong>가용 풀 부족</strong>: [수락] 클릭 시 서버 재검증 실패 ⓑ — 이 화면 인라인 ⚠ → EXC-01 재요청 / 수락 후 집행 시점 부족은 EXC-04 보류 사유 ④<br>③ <strong>비율 변동(스프레드 이탈)</strong>: 수락 후 집행 전 외부지표가 ADM-03 이탈 임계 초과 → 집행 정지 → EXC-04 '심사 후 보류' 사유 ④ + 이메일 통지 <span class="red">[확인필요: 통지 종류 — 공통 4종 외]</span></span>
       </div>
       </div>
     </div>
@@ -179,8 +235,10 @@
     <div class="note-title">비고</div>
     <div class="note-body">
       · <strong>[방어 핵심]</strong> "DSRV가 가격을 만든다"가 아니라 "외부지표 + 사전 고시된 고정 스프레드로 시스템이 <strong>건별 비율을 자동 계산해 고시</strong>한다(사람의 재량 없음 = 가격형성 아님)"를 증빙하는 화면. 스프레드·수락 기한·성격 고지를 화면에 노출.<br>
-      · 비율·스프레드·수락 기한·이탈 임계값의 <strong>단일 출처는 ADM-03</strong> — 이 화면은 그 값을 표출만.<br>
-      · <span style="color:#991b1b;">[확인필요]</span> 수락 기한·스프레드 갱신주기·이탈 임계 수치 미확정(ADM-03의 120s 등은 예시값, 27 서비스flow).<br>
+      · 비율·스프레드·수락 기한·이탈 임계값의 <strong>단일 출처는 ADM-03</strong> — 이 화면은 그 값을 표출만. 시세 소스명은 고객 화면 미노출.<br>
+      · <strong>[수락] = 클릭 즉시 확정 · 확인 다이얼로그 없음</strong>(2026-09-02 결정) · [거절] 확인 없음 → EXC-01 복귀.<br>
+      · 2026-09-02 설명 형식 개정 적용(핀 = 조작 요소 단위) — 표시 5 · 버튼 2([수락]·[거절] 분리), 버튼 행 = 활성 조건 / 클릭 후 / 실패 3행 · 프레임에 GNB 추가(EXC-01과 동일) · 만료 상태 태그 추가 · 예시 900 USDC → 899.73 USDT(0.9997)로 교체.<br>
+      · <span style="color:#991b1b;">[확인필요]</span> 수락 기한 {유효시간}·이탈 임계 수치(ADM-03 정책값 미확정) · 만료·거절 건의 DASH-01 목록 노출 여부 · 만료 후 [거절] 라벨· 이탈 후 만료 건 고객 통지 여부.<br>
       · 다음 화면: 승인 진행 (EXC-03)
     </div>
   </div>

@@ -70,18 +70,18 @@
     <tr>
       <td class="grp-cell" rowspan="5">수량·자산</td>
       <td class="item">수량 (화면)</td>
-      <td>천 단위 쉼표 · 소수점 아래 <b class="key">자산별 최대 자릿수 — ETH 6자리 · USDC·USDT 2자리</b>(2026-09-02 확정 · 종전 "최대 6자리" 폐기) · 불필요한 뒤 0 생략(입력 중에는 입력값 그대로) · 숫자와 티커 사이 공백 1칸 · 통화기호(₩·$) 사용 안 함 · 온체인 decimals(ETH 18 · USDC/USDT 6)와 별개의 UI 규칙</td>
-      <td><span class="ex">900 USDC</span> <span class="ex">899.82 USDT</span> <span class="ex">0.3141 ETH</span></td>
+      <td>천 단위 쉼표 · 소수점 아래 <b class="key">자산별 최대 자릿수 — ETH 4자리 · USDC·USDT 2자리</b>(2026-09-02 확정 · 종전 "최대 6자리" 폐기 · ETH 4자리 = 0.0001 ETH ≈ 0.3 USD로 원화 천원 미만 분해능, ETH 시세 약 7,000 USD 초과 시 5자리 재검토) · 불필요한 뒤 0 생략(입력 중에는 입력값 그대로) · 숫자와 티커 사이 공백 1칸 · 통화기호(₩·$) 사용 안 함 · 온체인 decimals(ETH 18 · USDC/USDT 6)와 별개의 UI 규칙</td>
+      <td><span class="ex">900 USDC</span> <span class="ex">899.82 USDT</span> <span class="ex">0.3140 ETH</span></td>
     </tr>
     <tr>
       <td class="item">수량 (CSV)</td>
       <td>쉼표·통화기호 없음 — 단위는 자산 열이 정함</td>
-      <td><span class="ex">100000.000000</span></td>
+      <td><span class="ex">900.00</span> · <span class="ex">0.3140</span></td>
     </tr>
     <tr>
       <td class="item">입력 자릿수·절사</td>
       <td>입력: 숫자·소수점만 허용, 자산별 최대 자릿수 <b class="key">초과 입력은 무시(차단)</b> · 천 단위 쉼표 자동 삽입 · 산정값(받는 수량·수수료·USD 환산액)은 <b class="key">해당 자산 자릿수로 절사(내림)</b> — 반올림 아님 · USD 환산 표시는 소수 2자리 (2026-09-02 확정)</td>
-      <td><span class="ex">333.33 USDC × 0.9998 = 333.26 USDT</span> (333.263334 절사) · <span class="ex">0.3141 ETH × 1% = 0.003141 ETH</span></td>
+      <td><span class="ex">333.33 USDC × 0.9998 = 333.26 USDT</span> (333.263334 절사) · <span class="ex">0.3 ETH × 1% = 0.003 ETH</span> · <span class="ex">0.3140 ETH × 1% = 0.0031 ETH</span> (0.003140 절사)</td>
     </tr>
     <tr>
       <td class="item">자산명</td>
@@ -191,7 +191,7 @@
     <tr>
       <td class="item">종료 동선</td>
       <td>flow 마지막 화면의 <b class="key">[확인]</b> = 대시보드 이동 · 입력·행위 화면의 <b class="key">[취소]</b>(ghost) = 입력값 파기 후 직전 목록 화면 복귀, 확인 문구 없음</td>
-      <td>EXC-03·04·BRK-05 [확인] → DASH-01 · BRK-02·03 [취소] → BRK-01 · DASH-02·03 [취소] → DASH-01 (2026-09-02 추가 — 뒤로가기 미지원 규칙은 유지)</td>
+      <td>EXC-03·04·BRK-05 [확인] → DASH-01 · BRK-02·03 [취소] → BRK-01 · BRK-04 [취소] → BRK-06 · DASH-02·03 [취소] → DASH-01 (2026-09-02 추가 — 뒤로가기 미지원 규칙은 유지)</td>
     </tr>
     <tr>
       <td class="grp-cell" rowspan="4">버튼·확인</td>
@@ -207,7 +207,7 @@
     <tr>
       <td class="item">확인 다이얼로그</td>
       <td><b class="key">구속력·비가역 행위 직전에만</b> 모달 확인 — 제목(행위명) + 결과 1~2문장 + [실행]/[돌아가기] · 그 외(취소·거절·저장)는 확인 없음</td>
-      <td>BRK-03 신청 · BRK-04 수락 · BRK-06 게시 내리기 · EXC-02 수락 · ADM-02 승인/거절/이전 중지</td>
+      <td>BRK-03 신청 · BRK-04 수락 · BRK-06 게시 내리기 · ADM-02 승인/거절/이전 중지 · <b class="key">EXC-02 [수락]은 확인 없음</b>(클릭 즉시 확정 — 참고·확정 비율 2회 고지로 대체, 2026-09-02)</td>
     </tr>
     <tr>
       <td class="item">단독 실행 표기</td>
@@ -243,7 +243,7 @@
     </tr>
     <tr>
       <td class="item">행 클릭</td>
-      <td>행 전체가 클릭 영역 · 이동 목적지는 각 화면 「화면 이동·인터랙션」 표에 명시 · 선택 불가 행(만료 · 타사 게시 '협의중' 등)은 회색 처리·클릭 무반응</td>
+      <td>행 전체가 클릭 영역 · 이동 목적지는 각 화면 「화면 이동·인터랙션」 표에 명시 · 선택 불가 행(만료 등)은 회색 처리·클릭 무반응 · 타사 게시 '협의중'은 <b class="key">행 클릭 가능 — 상세(BRK-03) 열림, [이 조건으로 신청] 비활성 + 인라인 안내 "협의 중인 게시입니다"</b>(2026-09-02 개정)</td>
       <td>BRK-01 → BRK-03/06 · DASH-01 → EXC-03/04·BRK-05/06/07</td>
     </tr>
     <tr>

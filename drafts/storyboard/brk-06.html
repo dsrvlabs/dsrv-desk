@@ -18,7 +18,7 @@
   <div class="screen-panel">
     <div style="position:relative;display:flex;">
       <div class="labels" id="labels">
-        <div class="lbl"><span class="lbl-text">전역</span></div>
+        <div class="lbl"><span class="lbl-text">전역<br>상단</span></div>
         <div class="lbl"><span class="lbl-text">내 게시 내역</span></div>
         <div class="lbl"><span class="lbl-text">받은 신청</span></div>
         <div class="lbl"><span class="lbl-text">게시 관리</span></div>
@@ -28,58 +28,87 @@
     </div>
 
     <div class="frame" id="frame">
+      <!-- 전역: 콘솔 상단 + GNB -->
       <div class="zone" data-idx="">
         <div class="zone-highlight"></div>
-        <div class="c-top" style="border-radius:8px;">
-          <span class="brand">DSRV Desk</span>
+        <div class="c-top" style="border-radius:8px 8px 0 0;">
+          <span class="brand" style="cursor:pointer;">DSRV Desk</span>
           <span class="meta"><span class="c-badge">B사 (게시자)</span></span>
         </div>
-      </div>
-
-      <div class="zone" data-idx="0">
-        <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="0" style="position:relative;padding:6px;border-radius:8px;">
-          <div class="pin" data-idx="0" style="top:-4px;right:-4px;">1</div>
-          <div class="zone-title">내 게시 — 교환거래 요청 내역</div>
-          <div class="kv"><span class="k">요청번호</span><span class="v">BRK-20260830-0027</span></div>
-          <div class="kv"><span class="k">교환쌍 · 방향</span><span class="v">USDT → USDC</span></div>
-          <div class="kv"><span class="k">보내는 수량</span><span class="v">500,000 USDT</span></div>
-          <div class="kv"><span class="k">받는 수량</span><span class="v">499,000 USDC</span></div>
-          <div class="kv"><span class="k">비율</span><span class="v">0.9980 USDC/USDT</span></div>
-          <div class="kv"><span class="k">요청 일시 (게시)</span><span class="v">2026-08-30 14:20</span></div>
-          <div class="kv"><span class="k">게시 유효기한</span><span class="v">2026-09-29 14:20까지 (30일)</span></div>
-          <div class="kv"><span class="k">상태</span><span class="v">게재중 · 받은 신청 0건</span></div>
+        <div class="c-adminbar" style="margin:0;border-radius:0 0 8px 8px;">
+          <span class="m">대시보드</span>
+          <span class="m">교환하기</span>
+          <span class="m on" style="background:#dbeafe;color:#1d4ed8;">교환게시판</span>
         </div>
       </div>
 
-      <div class="zone" data-idx="1">
+      <!-- 내 게시 내역 -->
+      <div class="zone" data-idx="0,1,2">
         <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="1" style="position:relative;padding:6px;border-radius:8px;">
-          <div class="pin" data-idx="1" style="top:-4px;right:-4px;">2</div>
-          <div class="zone-title">받은 신청</div>
+        <div class="zone-title" style="margin-bottom:4px;">내 게시 — 교환거래 요청 내역</div>
+        <div class="item-area" data-highlight="0" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="0" style="top:-6px;right:-6px;">1</div>
+          <div class="kv"><span class="k">게시번호</span><span class="v">BRK-20260902-0001</span></div>
+          <div class="kv"><span class="k">교환쌍 · 방향</span><span class="v">USDT → USDC</span></div>
+          <div class="kv"><span class="k">보내는 수량</span><span class="v">800 USDT <span style="color:#94a3b8;">(≈ 800.00 USD 상당)</span></span></div>
+          <div class="kv"><span class="k">받는 수량</span><span class="v">798.40 USDC</span></div>
+          <div class="kv"><span class="k">비율</span><span class="v">0.9980 USDC/USDT</span></div>
+          <div class="kv"><span class="k">게시 일시</span><span class="v">2026-09-02 10:00</span></div>
+          <div class="kv"><span class="k">게시 유효기한</span><span class="v">2026-10-02 10:00까지 (30일)</span></div>
+        </div>
+        <div class="item-area" data-highlight="1" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="1" style="top:-6px;right:-6px;">2</div>
+          <div class="kv"><span class="k">상태</span><span class="v"><span class="chip info">게재중</span> &nbsp;받은 신청 0건</span></div>
+        </div>
+        <div class="item-area" data-highlight="2" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="2" style="top:-6px;right:-6px;">3</div>
+          <div style="font-size:9px;color:#94a3b8;padding:0 8px 2px;">▼ 상태 '확정'·'완료(거래 완료)'에서만 노출 (목업 상태 '게재중'에서는 없음)</div>
+          <div style="padding:0 8px 4px;font-size:11px;"><span style="color:#1d4ed8;font-weight:700;text-decoration:underline;cursor:pointer;">이전 진행 보기 →</span></div>
+        </div>
+      </div>
+
+      <!-- 받은 신청 -->
+      <div class="zone" data-idx="3,4,5">
+        <div class="zone-highlight"></div>
+        <div class="zone-title" style="margin-bottom:4px;">받은 신청</div>
+        <div class="item-area" data-highlight="3" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="3" style="top:-6px;right:-6px;">4</div>
           <div style="text-align:center;padding:14px 8px;border:1px dashed #d7dbe0;border-radius:8px;font-size:11px;color:#94a3b8;">받은 신청이 없습니다 — 신청이 접수되면 등록 이메일로 알려드립니다</div>
         </div>
+        <div class="item-area" data-highlight="4" style="position:relative;padding:4px;border-radius:8px;margin-top:4px;">
+          <div class="pin" data-idx="4" style="top:-6px;right:-6px;">5</div>
+          <div style="font-size:9px;color:#94a3b8;padding:0 4px 2px;">▼ 상태 '협의중'(신청 1건) 이후에만 노출 — 위 빈 상태 박스를 대체</div>
+          <div style="border:1px solid #e2e8f0;border-radius:8px;padding:6px 8px;">
+            <div class="kv"><span class="k">신청자</span><span class="v">A*** (KYC 완료 · 거래 안전성 검증 ✓)</span></div>
+            <div class="kv"><span class="k">신청 시점</span><span class="v">2026-09-02 11:30</span></div>
+            <div class="kv"><span class="k">신청 유효기한</span><span class="v">2026-09-04 11:30까지 (영업일 2일)</span></div>
+            <div class="kv"><span class="k">신청 상태</span><span class="v">수락 대기</span></div>
+          </div>
+        </div>
+        <div class="item-area" data-highlight="5" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="5" style="top:-6px;right:-6px;">6</div>
+          <div class="btn ghost" style="color:#1d4ed8;border-color:#93c5fd;">신청 보기</div>
+        </div>
       </div>
 
-      <div class="zone" data-idx="2">
+      <!-- 게시 관리 -->
+      <div class="zone" data-idx="6">
         <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="2" style="position:relative;padding:6px;border-radius:8px;">
-          <div class="pin" data-idx="2" style="top:-4px;right:-4px;">3</div>
-          <div style="display:flex;gap:8px;">
-            <div class="btn danger">게시 내리기</div>
-          </div>
+        <div class="item-area" data-highlight="6" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="6" style="top:-8px;right:-6px;">7</div>
+          <div class="btn danger">게시 내리기</div>
           <div style="font-size:10px;color:#64748b;margin-top:6px;">게시를 내리면 게시판에서 즉시 제외되며 <strong>되돌릴 수 없습니다</strong>. 자산 이동·수수료는 발생하지 않습니다. 다시 게시하려면 거래의향 등록에서 새로 게시해 주세요</div>
         </div>
       </div>
 
-      <div class="zone" data-idx="3">
+      <!-- 비참여 고지 -->
+      <div class="zone" data-idx="7">
         <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="3" style="position:relative;padding:6px;border-radius:8px;">
-          <div class="pin" data-idx="3" style="top:-4px;right:-4px;">4</div>
+        <div class="item-area" data-highlight="7" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="7" style="top:-6px;right:-6px;">8</div>
           <div class="note-inline reg">DSRV는 가격 협의에 참여하지 않으며 게시·신청·수락 기록만 보존합니다. 게시는 구속력이 없는 거래의향 표시이며, 신청 수락 시 즉시 확정됩니다.</div>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -88,47 +117,90 @@
   <div class="items" id="items">
     <div class="nav-global">
       <div class="nav-global-title">진입 · 전역 이동</div>
-      <div class="nav-row"><span class="nav-el">상단 GNB(전 화면 공통)</span><span class="nav-act">대시보드/교환하기/교환게시판 메뉴 · 로고 클릭 — 목업에는 상단 요약만 표시</span><span class="nav-to"><strong>DASH-01 / EXC-01 / BRK-01</strong> (규칙: DASH-01 항목 5)</span></div>
-      <div class="nav-note">· <strong>진입</strong>: 교환 게시판(BRK-01)의 내 게시 행 클릭 / 거래의향 등록(BRK-02) 게시 완료 직후 / 대시보드(DASH-01) 거래 목록의 마목 내 게시 행 / 신청 접수 이메일 ① 수신 후 콘솔 직접 접속(메일 본문에 링크 없음)<br>
-      · 조회 전용 + 회수 1개 버튼 — 게시 조건 수정 기능 없음(수정 = 회수 후 재게시, 역제안·조건 변경 소지 차단)<br>
-      · 게시자 화면 3종: <strong>BRK-06(허브)</strong> → 신청 행 선택 시 BRK-04 → 확정 후 BRK-05 (2026-09-02 신설)</div>
+      <div class="nav-row"><span class="nav-el">GNB '대시보드' · 로고</span><span class="nav-act">클릭</span><span class="nav-to"><strong>대시보드(DASH-01)</strong> · 확인 없음(조회 화면 — 파기할 입력값 없음)</span></div>
+      <div class="nav-row"><span class="nav-el">GNB '교환하기'</span><span class="nav-act">클릭</span><span class="nav-to"><strong>교환하기(EXC-01)</strong></span></div>
+      <div class="nav-row"><span class="nav-el">GNB '교환게시판'(현재 탭)</span><span class="nav-act">클릭</span><span class="nav-to"><strong>교환 게시판(BRK-01)</strong> — 현재 화면이 목록이 아니므로 탭 재클릭은 목록 복귀</span></div>
+      <div class="nav-row"><span class="nav-el">기관 배지 'B사'</span><span class="nav-act">클릭 → 메뉴(로그아웃) → 항목 클릭</span><span class="nav-to"><strong>로그인(AUTH-01)</strong> · 확인 없음 · 세션 즉시 파기(공통 UI 규격)</span></div>
+      <div class="nav-note">· <strong>진입</strong>: 교환 게시판(BRK-01) 내 게시 행 클릭 / 거래의향 등록(BRK-02) 게시 완료 직후 / 받은 신청·수락(BRK-04) [거절] 후 복귀 / 대시보드(DASH-01) 거래 목록의 마목 내 게시 행 / 신청 접수 이메일 ① 수신 후 콘솔 직접 접속(메일 본문에 링크 없음)<br>
+      · <strong>화면 성격</strong>: 게시 1건 상세(허브) — 조회 + 조작 요소 2개([신청 보기] · [게시 내리기]) · 게시 조건 수정 기능 없음(수정 = 회수 후 재게시 — 역제안·조건 변경 소지 차단) · 진입 시 서버에서 최신 상태 조회, 체류 중 자동 갱신 없음(재진입·새로고침으로 갱신)<br>
+      · <strong>목업 상태</strong>: '게재중 · 받은 신청 0건'. 다른 상태의 변형은 항목 2 상태 목록으로 정의(프레임 추가 없음) · 조건부 요소(항목 3·5·6)는 "▼ …에서만 노출" 태그로 표시<br>
+      · <strong>목업 예시</strong>: 800 USDT → 798.40 USDC(0.9980 USDC/USDT · 800.00 USD 상당 · 한도 1,000 USD 이내) · 유효기간 30일 / 영업일 2일 / ±% 임계는 <code>{정책값}</code>(ADM-03 값 렌더링)의 예시값</div>
     </div>
+
     <div class="itm" data-idx="0">
       <div class="num">1</div>
       <div>
-        <div class="itm-title">내 게시 내역 — 공통 포맷 · 게시자 관점<span class="req">필수</span></div>
-        <div class="itm-desc">· <strong>게시자 측(B사) 콘솔</strong>의 게시 단건 상세 — 신청 유무와 무관하게 내 게시를 여는 기본 화면(2026-09-02 신설)<br>· 포맷·필드 순서 = '교환거래 요청 내역' 공통 폼, 방향·수량은 게시자 기준<br>· 상태 행 = 게시 상태 + 받은 신청 건수 — 게재중 / 신청접수 / 확정 / 완료(유효기간 만료) / <strong>회수</strong>(2026-09-02 추가)<br>· 게시 유효기간 기본 30일 — 유효기한 표기<br><span class="basis">근거 F-1b · 공통 포맷</span></div>
-        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">상태 행 (확정 이후)</span><span class="nav-act">수락으로 확정된 게시를 열면 — [게시 내리기] 미노출, 상태 행에 '확정' + 이동 링크</span><span class="nav-to"><strong>이전·완료(BRK-05)</strong> 이동 링크 표시</span></div>
-        </div>
+        <div class="itm-title">내 게시 내역 — 공통 포맷 (표시 전용)</div>
+        <div class="itm-desc">· 클릭 요소 없음 · 필드 순서 = '교환거래 요청 내역' 공통 폼 — 게시번호(BRK-YYYYMMDD-NNNN, notation 채번) · 교환쌍·방향 · 보내는 수량 · 받는 수량 · 비율 · 게시 일시 · 게시 유효기한<br>· 방향·수량은 <strong>게시자 기준</strong>(내가 보내는 800 USDT → 받는 798.40 USDC) · 보내는 수량 우측 USD 환산 「≈ {금액} USD 상당」(ADM-03 시세 · 게시 시점 값 고정)<br>· 자릿수: ETH 4 / USDC·USDT 2, 뒤 0 생략(notation) · 비율은 스테이블 페어 {받는}/{주는} 4자리 · ETH 페어 {스테이블}/ETH 2자리<br>· 게시 유효기한 = 게시 일시 + <code>{정책값}</code>일(ADM-03 값 렌더링 · 예시 30일) — 「YYYY-MM-DD HH:MM까지 (N일)」<br>· 로딩 "불러오는 중…"(3초 초과 → 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" + 값 "—" + [게시 내리기] 비활성)<br><span class="basis">근거 F-1b · 공통 포맷 · notation 채번·자릿수(2026-09-02)</span></div>
       </div>
     </div>
+
     <div class="itm" data-idx="1">
       <div class="num">2</div>
       <div>
-        <div class="itm-title">받은 신청 목록 — 0건 빈 상태 · 행 선택 시 처리<span class="req">필수</span></div>
-        <div class="itm-desc">· 신청 0건이면 <strong>빈 상태 문구</strong>(공통 UI 규격 — notation) 표시, 신청이 있으면 목록(신청자 A*** · 신청 시점 · 유효기한) 표시<br>· 목록 행 클릭 → <strong>받은 신청·수락(BRK-04)</strong>에서 수락·거절 처리 — 이 화면에서는 수락·거절 버튼 없음(행위 화면 분리)<br>· 신청자 상호는 수락 전 첫 글자만 노출(A***) — BRK-03·04와 동일 마스킹<br>· 복수 신청 처리 방식은 BRK-04 참조 [확인필요: 선착순 vs 게시자 선택]<br><span class="basis">근거 F-1b · V2(통신중개 아님)</span></div>
-        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">받은 신청 목록 행</span><span class="nav-act">클릭 — 신청이 1건 이상일 때만 표시 · 만료 건은 회색 처리·선택 불가(공통 UI 규격 행 클릭)</span><span class="nav-to"><strong>받은 신청·수락(BRK-04)</strong> — 해당 신청의 수락·거절</span></div>
-          <div class="nav-row"><span class="nav-el">(빈 상태)</span><span class="nav-act">신청 0건 — 점선 박스 문구 "받은 신청이 없습니다" + 다음 행동 1줄</span><span class="nav-to stay">화면 내 (이동 없음) · 신청 접수 시 이메일 ① 후 목록 갱신</span></div>
-        </div>
+        <div class="itm-title">상태 행 — 게시 상태 칩 + 받은 신청 건수 (표시 전용)</div>
+        <div class="itm-desc">· 클릭 요소 없음 · 「{상태 칩} · 받은 신청 {0|1}건」 — 건수는 <strong>0 또는 1</strong>(게시당 동시 신청 1건 · 2026-09-02 확정) · 칩 색은 공통 UI 규격(대기 파랑 · 진행 노랑 · 완료 초록 · 종결 회색)<br>· <strong>상태 목록(이 화면의 변형 정의 — 프레임은 게재중만)</strong><br>&nbsp;&nbsp;① <strong>게재중</strong>(파랑) — 신청 0건 · 게시판(BRK-01) 노출 · 항목 4 빈 상태 · [게시 내리기] 활성 · 항목 3 링크 없음<br>&nbsp;&nbsp;② <strong>협의중</strong>(노랑) — 신청 1건 접수 · 게시판에 '협의중' 칩·추가 신청 차단 · 항목 4 → 항목 5 신청 카드 + 항목 6 [신청 보기] · [게시 내리기] 활성(다이얼로그에 대기 신청 자동 종결 문장 추가) · 거절 또는 신청 유효기한 만료 → ① 게재중 복귀(건수 0)<br>&nbsp;&nbsp;③ <strong>확정</strong>(노랑) — [신청 수락] 직후 · 신청 카드 상호 마스킹 해제(A자산운용) · 항목 3 [이전 진행 보기 →] 노출 → BRK-05 · [게시 내리기] <strong>비노출</strong>(구속력 발생 후 — 안내 문구 "확정된 거래는 회수할 수 없습니다. 이전 진행은 이전·완료 화면에서 확인해 주세요") · 이후 중지는 DSRV 처리함 T2 '이전 중지'만<br>&nbsp;&nbsp;④ <strong>완료</strong>(초록) — (a) 거래 완료: 양측 이전 완결 · 항목 3 링크 유지 / (b) 유효기간 만료: 「완료 · 유효기간 만료」 부기 · 링크 없음 · 협의중이던 신청도 함께 종결 <span style="color:#b45309;">[확인필요: 유효기간 만료를 '완료'와 별개 라벨('만료')로 분리할지 — 고객 상태 enum]</span><br>&nbsp;&nbsp;⑤ <strong>회수</strong>(회색) — 항목 7 실행 결과 · 「회수 · {회수 일시}」 · 버튼 비노출 · 안내 "다시 게시하려면 거래의향 등록에서 새로 게시해 주세요"<br>&nbsp;&nbsp;⑥ <strong>중지</strong>(회색) — price guard 자동중지(게시 시점 대비 시세 ±<code>{정책값}</code>% 이탈 · ADM-03 값 렌더링) · 협의중이던 대기 신청 자동 종결 + 양측 이메일 · 버튼 비노출 · 안내 "시세 변동으로 게시가 자동 중지되었습니다. 대기 중이던 신청은 종결되었으며 자산 이동·수수료는 발생하지 않습니다. 재개하려면 거래의향 등록에서 새로 게시해 주세요" · 시세 소스명 미노출<br>· ⑤⑥과 ④(b)는 종결 상태 — 게시판에서 제외, 대시보드 거래 내역에 잔존<br><span class="basis">근거 09 §0 마목 게시 상태(2026-09-02 개정) · 공통 UI 규격 상태 칩 · states.html 마목 게시</span></div>
       </div>
     </div>
+
     <div class="itm" data-idx="2">
       <div class="num">3</div>
       <div>
-        <div class="itm-title">게시 내리기(회수) — 게시자 능동 행위<span class="req">필수</span></div>
-        <div class="itm-desc">· <strong>[게시 내리기]</strong> = 게시자(가입자) 단독 실행 — 클릭 시 확인 문구(되돌릴 수 없음 · 대기 중 신청 자동 종결) 고지 후 실행<br>· 가능 조건: 상태가 <strong>게재중 또는 신청접수</strong>일 때만 — 확정(수락) 이후에는 버튼 미노출(확정 건은 BRK-05 이전 단계, 중지는 DSRV 처리함 T2 '이전 중지'만)<br>· 회수 시 게시판(BRK-01)에서 즉시 제외 · 상태 '회수' · 자산이동·수수료 없음 · 재게시는 BRK-02에서 새 요청번호로<br>· 대기 중 신청이 있으면 <strong>전부 자동 종결(거절과 동일 효과)</strong> + 신청자에게 이메일 ④ 통지 (기획 가정)<br><span class="basis">근거 V2(자동 매칭 없음 — 게시·회수 모두 게시자 행위) · [확인필요] 대기 신청 종결 규칙</span></div>
+        <div class="itm-title">[이전 진행 보기 →] 링크 (조건부 노출)</div>
+        <div class="itm-desc">· 노출 조건: 상태 ③ 확정 · ④(a) 완료(거래 완료) — 그 외 상태에서는 렌더링하지 않음(비활성 링크 없음)<br>· 텍스트 링크(밑줄·파랑) · 상태 행 아래 1줄 · 라벨 고정 "이전 진행 보기 →"(완료 상태에서도 동일 라벨 — 도착 화면이 완료 표시를 담당)<br><span class="basis">근거 공통 UI 규격 행 클릭(이동 목적지 명시)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">[게시 내리기] 버튼</span><span class="nav-act">클릭 — 확인 다이얼로그(되돌릴 수 없음 · 대기 중 신청 자동 종결) 후 실행 · 게시자(가입자) 단독 실행 · 상태 게재중/신청접수일 때만 노출</span><span class="nav-to">상태 '회수' → <strong>교환 게시판(BRK-01)</strong> 복귀(리스트에서 제외) · 대기 중 신청자에게 이메일 ④ 발송 · 자산이동·수수료 없음</span></div>
+          <div class="nav-row"><span class="nav-el">[이전 진행 보기 →]</span><span class="nav-act">클릭 · 확인 없음</span><span class="nav-to"><strong>이전·완료(BRK-05)</strong> — 같은 게시번호의 이전 상태(게시자 관점 수수료 8.00 USDT)</span></div>
         </div>
       </div>
     </div>
+
     <div class="itm" data-idx="3">
       <div class="num">4</div>
       <div>
-        <div class="itm-title">"DSRV 비참여·기록만" 고지<span class="req">필수</span></div>
-        <div class="itm-desc">· 가격 불관여·당사자성 방어 문구 상시 노출(BRK-03·04와 동일 계열 문구)<br>· 게시·회수·신청·수락 기록 15년 보존<br><span class="basis">근거 V2 · PRD 하지않는행위 · [로펌게이트] 비참여 범위</span></div>
+        <div class="itm-title">받은 신청 — 빈 상태 (표시 전용)</div>
+        <div class="itm-desc">· 클릭 요소 없음 · 상태 ① 게재중(신청 0건)에서 노출 — 점선 박스 + 문구 "받은 신청이 없습니다 — 신청이 접수되면 등록 이메일로 알려드립니다"(공통 UI 규격 빈 상태: 문구 1줄 + 다음 행동 1줄, 아이콘 없음)<br>· 신청 1건 접수 시(다음 진입부터) 항목 5 카드로 대체 · 거절·만료로 게재중 복귀 시 다시 빈 상태<br>· 목록 규격(정렬·[더 보기]·100행) 해당 없음 — 동시 신청 1건이므로 목록이 아니라 카드 1장<br><span class="basis">근거 공통 UI 규격 빈 상태 · 09 §0 동시 신청 1건(2026-09-02)</span></div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="4">
+      <div class="num">5</div>
+      <div>
+        <div class="itm-title">받은 신청 카드 — 신청 1건 (조건부 노출 · 표시 전용)</div>
+        <div class="itm-desc">· 노출 조건: 상태 ② 협의중 이후(③ 확정 · ④ 완료 포함) — 카드 클릭 무반응(이동은 항목 6 버튼만)<br>· 행: 신청자 · 신청 시점 · 신청 유효기한 · 신청 상태<br>· 신청자 상호: 확정 전 첫 글자만(A***) + "KYC 완료 · 거래 안전성 검증 ✓"(BRK-03 신청 시점 검증 결과 — 보유·처분 가능분 + 건별 한도) · 확정 시 마스킹 해제(BRK-03·04와 대칭)<br>· 신청 유효기한 = 신청 시점 + 영업일 <code>{정책값}</code>일(ADM-03 값 렌더링 · 예시 2일) — 「YYYY-MM-DD HH:MM까지 (영업일 N일)」<br>· 신청 상태: 수락 대기(②) / 확정(③) / 완료(④a) / 만료(유효기한 경과 → 게시는 ① 복귀, 카드는 다음 진입 시 제거) / 종결(⑤ 회수 · ⑥ 중지 · ④b 만료로 자동 종결 — 카드 회색 처리)<br><span class="basis">근거 F-1b · V2(통신중개 아님 — 신청 조건 = 게시 조건, 비교 UI 없음)</span></div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="5">
+      <div class="num">6</div>
+      <div>
+        <div class="itm-title">[신청 보기] 버튼 (조건부 노출)</div>
+        <div class="itm-desc">· ghost · 노출 조건 = 항목 5와 동일(상태 ② 이후) · 수락·거절은 이 화면에 없음 — 행위 화면 BRK-04로 분리(감사 추적)<br><span class="basis">근거 공통 UI 규격 비활성·확인 다이얼로그(구속력 행위 분리)</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">[신청 보기] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①신청 상태가 '수락 대기'가 아님(확정·완료·만료·종결) ②신청 정보 로딩 중·조회 실패</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격) · ①은 카드의 신청 상태 값으로 사유 노출(툴팁 없음)</span></div>
+          <div class="nav-row"><span class="nav-el">[신청 보기] — 클릭(활성)</span><span class="nav-act">클릭 · 확인 없음 · 로딩 없음(화면 이동)</span><span class="nav-to"><strong>받은 신청·수락(BRK-04)</strong> — 이 신청 1건의 수락·거절</span></div>
+          <div class="nav-row"><span class="nav-el">[신청 보기] — 실패</span><span class="nav-act">이동 시점 재조회에서 신청 상태가 바뀐 경우(신청 만료 · price guard 중지)</span><span class="nav-to stay">화면 잔류 · 상태 행·카드 갱신 + 상단 배너 "신청 상태가 변경되었습니다. 최신 상태를 확인해 주세요" · 버튼 비활성 전환</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="6">
+      <div class="num">7</div>
+      <div>
+        <div class="itm-title">[게시 내리기] 버튼 — 회수(게시자 능동 행위)</div>
+        <div class="itm-desc">· danger · 게시자(가입자) 단독 실행 — 승인자 지정 없음(1기관 1가입자) · 버튼 아래 결과 고지 1문장 상시(공통 UI 규격 단독 실행 표기)<br>· 노출 조건: 상태 ① 게재중 · ② 협의중 — ③ 확정 이후·④⑤⑥ 종결에서는 <strong>버튼 비노출</strong>(비활성 아님 — 행위 자체가 성립하지 않음, 항목 2 상태별 안내 문구로 대체) · 2026-09-02 결정: "비활성 vs 비노출" → 비노출<br>· 회수 = 구속력 발생 전 게시자 행위 — 자산 이동·수수료 없음 · 재게시는 BRK-02에서 새 게시번호<br><span class="basis">근거 V2(자동 매칭 없음 — 게시·회수 모두 게시자 행위) · 공통 UI 규격 확인 다이얼로그(BRK-06 게시 내리기 = 비가역)</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">[게시 내리기] — 활성 조건</span><span class="nav-act">(노출 상태 ①②에서) 다음이 모두 아님: ①게시 정보 로딩 중·조회 실패(항목 1) ②회수 처리 중("처리 중…")</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격) · ①은 상단 오류 배너가 사유</span></div>
+          <div class="nav-row"><span class="nav-el">[게시 내리기] — 클릭(활성)</span><span class="nav-act">클릭 → 다이얼로그: 제목 "게시 내리기" / 본문 "게시를 내리면 게시판에서 즉시 제외되며 되돌릴 수 없습니다. 자산 이동·수수료는 발생하지 않습니다." + (상태 ② 협의중일 때만 추가) "대기 중인 신청 1건은 자동 종결되며 신청자에게 이메일로 통지됩니다." / [게시 내리기] [돌아가기] → [게시 내리기] 클릭 → 버튼 라벨 "처리 중…"·비활성(중복 클릭 차단) → 상태 '회수'(회수 일시 기록 · AUDIT_LOG 행위자·시각) · 협의중이면 대기 신청 종결 + 이메일 ④</span><span class="nav-to"><strong>교환 게시판(BRK-01)</strong> 복귀 — 목록에서 해당 게시 제외 · 복귀 화면 상단 배너 "게시가 회수되었습니다 — BRK-20260902-0001"(자동 닫힘) <span style="color:#b45309;">[확인필요: 완료 피드백 규격 — notation에 토스트·배너 자동 닫힘 미정의]</span> · [돌아가기] = 변경 없이 닫힘</span></div>
+          <div class="nav-row"><span class="nav-el">[게시 내리기] — 실패</span><span class="nav-act">① 경쟁 상태: 다이얼로그 확인 시점에 이미 종결(price guard 중지 · 유효기간 만료) / ② 시스템 오류</span><span class="nav-to stay">화면 잔류 · ① 상태 행 갱신(중지·완료) + 버튼 비노출 전환 + 상단 배너 "이미 종결된 게시입니다" / ② 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 버튼 라벨 복귀 · 다이얼로그 열린 사이 신청이 접수된 경우는 실패 아님 — 회수 처리하며 그 신청을 자동 종결(협의중 규칙과 동일)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="7">
+      <div class="num">8</div>
+      <div>
+        <div class="itm-title">"DSRV 비참여·기록만" 고지 (표시 전용)</div>
+        <div class="itm-desc">· 고정 문구 · 클릭 없음 · 상태와 무관하게 상시 노출 · BRK-03·04·07과 동일 계열 문구 — 변경은 법무 확인 후<br>· 게시·회수·신청·수락 기록 15년 보존<br><span class="basis">근거 V2 · PRD 하지않는행위 · [로펌게이트] 비참여 범위</span></div>
       </div>
     </div>
   </div>
@@ -141,15 +213,19 @@
     <div class="detail-grid" id="detailCol">
       <div class="dtl" data-idx="0">
         <div class="detail-label"><span class="dtl-num">1</span>게시자 화면 3종의 역할</div>
-      <div class="dtl-body"><span class="box">· <strong>BRK-06 내 게시 상세</strong>(게시 단건의 허브 — 조회·회수·신청 목록) / BRK-04 받은 신청·수락(선택한 신청 1건의 처리) / BRK-05 이전·완료(확정 후, 양측 공용)<br>· BRK-01 내 게시 행 → 항상 BRK-06으로 진입(2026-09-02 변경 — 종전 BRK-04 직행 폐기) → 신청 행 선택 시 BRK-04<br>· 행위 화면 분리: 회수는 여기, 수락·거절은 BRK-04 — 한 화면에 성격이 다른 구속력 행위를 섞지 않음(감사 추적)</span></div>
+      <div class="dtl-body"><span class="box">· <strong>BRK-06 내 게시 상세</strong>(게시 1건의 허브 — 조회·회수·받은 신청 1건 진입) / BRK-04 받은 신청·수락(그 1건의 수락·거절) / BRK-05 이전·완료(확정 후, 양측 공용)<br>· BRK-01 내 게시 행 → 항상 BRK-06으로 진입(2026-09-02 변경 — 종전 BRK-04 직행 폐기) → [신청 보기]로 BRK-04 · BRK-04 [거절] → BRK-06 복귀(게재중)<br>· 행위 화면 분리: 회수는 여기, 수락·거절은 BRK-04 — 한 화면에 성격이 다른 구속력 행위를 섞지 않음(감사 추적)</span></div>
       </div>
       <div class="dtl" data-idx="1">
-        <div class="detail-label"><span class="dtl-num">2</span>빈 상태 · 목록 규격</div>
-      <div class="dtl-body"><span class="box">· 빈 상태 문구 = "받은 신청이 없습니다 — 신청이 접수되면 등록 이메일로 알려드립니다" (공통 UI 규격: 문구 + 다음 행동 안내 1줄)<br>· 목록 컬럼: 신청자(마스킹) · 신청 시점 · 신청 유효기한 · 상태(수락 대기/만료) — 필터·정렬·페이징 없음(최신순)<br>· 만료된 신청은 목록에 '만료'로 남기고 선택 불가</span></div>
+        <div class="detail-label"><span class="dtl-num">2</span>게시 상태 전이 · 이 화면의 요소 노출 표</div>
+      <div class="dtl-body"><span class="box">· 전이: 게재중 →(신청 1건 접수)→ 협의중 →(수락)→ 확정 →(양측 이전 완결)→ 완료 · 협의중 →(거절 · 신청 만료)→ 게재중 · 게재중/협의중 →(회수)→ 회수 · 게재중/협의중 →(price guard)→ 중지 · 게재중/협의중 →(게시 유효기간 만료)→ 완료(유효기간 만료)<br>· 요소 노출: 게재중 = 빈 상태 · [게시 내리기] / 협의중 = 신청 카드 · [신청 보기] · [게시 내리기] / 확정 = 신청 카드(마스킹 해제) · [이전 진행 보기] / 완료(거래) = 카드 · 링크 / 완료(만료)·회수·중지 = 카드(있었다면 회색) · 버튼·링크 없음 · 상태별 안내 문구<br>· 시스템이 하는 것은 상태 표시·기한 만료·price guard 중지만 — 매칭·체결·정리 없음(V2)</span></div>
       </div>
-      <div class="dtl" data-idx="2">
-        <div class="detail-label"><span class="dtl-num">3</span>회수 상태 전이 · 이메일 ④ 게시 회수 (수신: 대기 중 신청자)</div>
-      <div class="dtl-body"><span class="box">· 게시 상태: 게재중/신청접수 → <span class="red">회수</span>(종결 상태 — 완료(유효기간 만료)와 구분) · 시세변동 자동중지(내부 정책)와 별개로 게시자가 직접 내리는 경로<br>· 회수 시 대기 중 신청: 상태 '게시 회수로 종결' — 신청자 화면(BRK-07)에 표시, 자산이동·수수료 없음<br>· <strong>[이메일 ④ 게시 회수 (수신: 대기 중 신청자, 있을 때만)]</strong> 제목 "[DSRV] 신청한 교환 게시가 회수되었습니다 — BRK-20260830-0027" · 본문: "게시자가 게시를 회수하여 회원님의 신청이 종결되었습니다. 자산 이동·수수료는 발생하지 않습니다." + 요청 내역(공통 포맷) — 발신전용·링크 미포함 등 공통 원칙은 BRK-03 상세 참조<br>· 회수 이력(행위자·시각)은 AUDIT_LOG — 게시·회수 반복은 ADM-02 이상거래(T5) 룰 대상</span></div>
+      <div class="dtl" data-idx="4">
+        <div class="detail-label"><span class="dtl-num">5</span>동시 신청 1건 규칙 → 목록 규격 소멸</div>
+      <div class="dtl-body"><span class="box">· 게시당 신청은 동시에 1건만 접수(협의중 = 게시판에서 추가 신청 차단) — 선착순/게시자 선택 이슈·복수 신청 목록·[더 보기]·정렬 규격이 이 화면에서 소멸(2026-09-02 확정)<br>· 신청이 거절·만료되면 게재중으로 복귀해 다른 신청을 받을 수 있음 — 이전 신청은 카드에서 제거(대시보드 거래 내역에는 잔존)<br>· 신청 시점의 거래 안전성 검증(보유·처분 가능분 + 건별 한도)은 BRK-03에서 수행, 이 카드에는 결과 ✓만 표기</span></div>
+      </div>
+      <div class="dtl" data-idx="6">
+        <div class="detail-label"><span class="dtl-num">7</span>회수 상태 전이 · 이메일 ④ 게시 회수 (수신: 대기 중 신청자)</div>
+      <div class="dtl-body"><span class="box">· 게시 상태: 게재중/협의중 → <span class="red">회수</span>(종결 — 완료·중지와 구분) · price guard 중지(시스템)와 별개로 게시자가 직접 내리는 경로<br>· 협의중 회수 시 대기 신청: 상태 '종결(게시 회수)' — 신청자 화면(BRK-07)에 표시, 자산 이동·수수료 없음<br>· <strong>[이메일 ④ 게시 회수 (수신: 대기 중 신청자, 있을 때만)]</strong> 제목 "[DSRV] 신청한 교환 게시가 회수되었습니다 — BRK-20260902-0001" · 본문: "게시자가 게시를 회수하여 회원님의 신청이 종결되었습니다. 자산 이동·수수료는 발생하지 않습니다." + 요청 내역(공통 포맷) — 발신전용·링크 미포함 등 공통 원칙은 BRK-03 상세 참조<br>· 회수 이력(행위자·시각)은 AUDIT_LOG — 게시·회수 반복은 ADM-02 이상거래(T5) 룰 대상 · 반복 임계 <span class="red">[확인필요]</span><br>· <strong>중지(price guard) 통지</strong>: 양측(게시자 + 대기 신청자) 이메일 — 공통 원칙 4종(①~④)에 미포함 <span class="red">[확인필요: 이메일 ⑤ 자동중지 통지 제목·본문 규격]</span></span></div>
       </div>
     </div>
   </div>
@@ -161,8 +237,9 @@
     <div class="note-body">
       · 2026-09-02 신설 — 종전에는 신청이 들어온 뒤의 화면(BRK-04)만 있고 신청 없는 내 게시를 열어 볼 화면과 회수 동선이 없었음.<br>
       · <strong>[방어 핵심]</strong> 게시·회수 모두 게시자의 능동 행위 — 시스템이 게시를 매칭·체결·정리하지 않음(시장개설 아님). 회수는 구속력 발생 전(확정 전)에만 가능하므로 계약 무산 논점 없음.<br>
-      · <span style="color:#991b1b;">[확인필요]</span> 대기 중 신청 자동 종결 규칙(선착순 정책과 연동) · 회수 반복 임계(이상거래 룰).<br>
-      · 다음: 신청 도착 시 받은 신청·수락 (BRK-04) / 회수 시 교환 게시판 (BRK-01)
+      · 2026-09-02 설명 형식 개정 적용(핀 = 조작 요소 단위) — 표시 5 · 링크 1 · 버튼 2(각 활성 조건 / 클릭 / 실패 3행) · 상태 변형은 프레임 추가 대신 항목 2 상태 목록 + 상세 2 노출 표.<br>
+      · <span style="color:#991b1b;">[확인필요]</span> 회수 완료 피드백(토스트·배너 자동 닫힘) 규격 · 유효기간 만료 라벨('완료' vs '만료') · price guard 중지 이메일 ⑤ 규격 · 회수 반복 임계(이상거래 룰).<br>
+      · 다음: 신청 1건 도착 시 [신청 보기] → 받은 신청·수락 (BRK-04) / 확정 후 [이전 진행 보기] → 이전·완료 (BRK-05) / 회수 시 교환 게시판 (BRK-01)
     </div>
   </div>
 </section>

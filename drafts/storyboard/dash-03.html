@@ -11,44 +11,83 @@
   <div class="crumb"><span>홈</span><span class="s">›</span><span>계정·보안</span><span class="s">›</span><span>2차 인증 재설정</span></div>
   <h1 class="title">2차 인증 재설정</h1>
   <span class="sid">DASH-03</span>
-  <span class="defense">2FA 재설정 · 백업코드 재발급</span>
+  <span class="defense">비밀번호·2FA 재설정 · 복구 코드 재발급 · 독립 페이지</span>
 </header>
 
 <div class="main">
   <div class="screen-panel">
     <div style="position:relative;display:flex;">
       <div class="labels" id="labels">
-        <div class="lbl"><span class="lbl-text">전역 상단</span></div>
-        <div class="lbl"><span class="lbl-text">2차 인증<br>재설정</span></div>
+        <div class="lbl"><span class="lbl-text">전역<br>브랜드 패널</span></div>
+        <div class="lbl"><span class="lbl-text">재설정<br>안내</span></div>
+        <div class="lbl"><span class="lbl-text">액션</span></div>
+        <div class="lbl"><span class="lbl-text">발송 결과</span></div>
+        <div class="lbl"><span class="lbl-text">이전으로</span></div>
+        <div class="lbl"><span class="lbl-text">푸터</span></div>
       </div>
       <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
     </div>
 
-    <div class="frame" id="frame">
-      <!-- 전역: 로그인 후 계정·보안 진입 -->
+    <div class="frame" id="frame" style="background:linear-gradient(135deg,#e3eafc 0%,#f1f4fa 55%,#edf3fb 100%);">
+      <!-- 전역: 브랜드 패널 — 독립 페이지(콘솔 GNB 없음) · 핀 없음 -->
       <div class="zone" data-idx="">
         <div class="zone-highlight"></div>
-        <div class="c-top" style="border-radius:8px;">
-          <span class="brand">DSRV Desk</span>
-          <span class="meta"><span class="c-badge">A자산운용</span></span>
+        <div style="font-size:9px;color:#94a3b8;padding:0 0 6px;">▼ Figma 'Reset Credentials' = 독립 페이지 레이아웃(좌 브랜드 패널 · 우 카드) — 콘솔 GNB·기관 배지 없음 · 세션은 유지</div>
+        <div class="brand-panel">
+          <div class="bp-logo">DSRV<span>®</span></div>
+          <div class="bp-tag">한 번의 연동으로 완성하는<br><strong>쉽고 강력한 온체인 금융 OS</strong></div>
+          <div class="bp-sub">자산의 발행·결제·운용·보관을 위한 엔터프라이즈급 블록체인 인프라.</div>
+          <div class="bp-link">DSRV 서비스 소개 보기 →</div>
         </div>
       </div>
 
-      <!-- 2차 인증 재설정 -->
-      <div class="zone" data-idx="0">
+      <!-- 카드: 재설정 안내 (표시 전용) -->
+      <div class="zone card" data-idx="0">
         <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="0" style="position:relative;padding:8px;border-radius:8px;">
-          <div class="pin" data-idx="0" style="top:-4px;right:-4px;">1</div>
-          <div style="font-size:11px;color:#94a3b8;font-weight:600;margin-bottom:6px;">2차 인증 재설정</div>
-          <div style="font-size:11px;color:#475569;line-height:1.7;background:#fbfbf9;border:1px solid var(--line);border-radius:8px;padding:10px 12px;">
-            인증 앱을 새 기기로 옮기거나 백업코드를 다시 받으려면 재설정하세요.<br>
-            본인 이메일로 재설정 링크가 발송되며, 링크에서 <strong style="color:#1a1a1a;">비밀번호 재설정과 2차 인증 재등록</strong>을 진행합니다.<br>
-            <span style="color:#94a3b8;">※ 재등록이 끝나면 새 백업코드가 발급되고 이전 코드는 모두 폐기됩니다</span>
+        <div class="zone-title" style="margin-bottom:10px;">비밀번호 및 2차 인증 재설정</div>
+        <div class="item-area" data-highlight="0" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="0" style="top:-6px;right:-6px;">1</div>
+          <div class="info-box" style="line-height:1.75;">
+            인증 앱을 새 기기로 옮기거나 복구 코드를 다시 받으려면 재설정하세요. 본인 이메일 <strong style="color:#2f3747;">{담당자 이메일(마스킹)}</strong>로 재설정 링크가 발송되며, 링크에서 비밀번호 재설정과 2차 인증 재등록을 진행합니다.<br><br>
+            ※ 재등록이 끝나면 새 복구 코드가 발급되고 이전 코드는 모두 폐기됩니다<span style="color:#b9c2d2;">. 재등록 완료 전까지 현재 인증 앱·복구 코드는 그대로 사용할 수 있습니다.</span>
           </div>
-          <div class="btn" style="margin-top:10px;">재설정 이메일 발송</div>
         </div>
       </div>
 
+      <!-- 액션: 재설정 메일 발송 -->
+      <div class="zone card" data-idx="1">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="1" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="1" style="top:-8px;right:-6px;">2</div>
+          <div class="btn primary fg">재설정 메일 발송</div>
+        </div>
+      </div>
+
+      <!-- 발송 결과 (조건부 · 시안 없음 · 기획 유지) -->
+      <div class="zone card" data-idx="3">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="3" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="3" style="top:-6px;right:-6px;">4</div>
+          <div style="font-size:9px;color:#94a3b8;padding:0 4px 3px;">▼ 발송 성공 후에만 노출 (기본 상태에서는 없음) · Figma 시안 없음 — 기획 유지</div>
+          <div class="c-banner kyc" style="border-radius:8px;">✓ 재설정 링크를 {담당자 이메일(마스킹)}로 보냈습니다. 메일의 링크에서 재등록을 진행해 주세요. 메일이 오지 않으면 잠시 후 다시 발송할 수 있습니다.</div>
+        </div>
+      </div>
+
+      <!-- 이전으로 -->
+      <div class="zone card" data-idx="2">
+        <div class="zone-highlight"></div>
+        <div class="hr-line" style="margin-top:0;"></div>
+        <div class="item-area" data-highlight="2" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="2" style="top:-6px;right:-6px;">3</div>
+          <div class="aux-back">‹ &nbsp;이전으로</div>
+        </div>
+      </div>
+
+      <!-- 푸터 -->
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="pg-footer"><span>© dsrv labs Co., Ltd. All Rights Reserved</span><span class="lnk">공지사항</span><span class="lnk">개인정보처리방침</span><span class="lnk">이용약관</span></div>
+      </div>
     </div>
   </div>
 
@@ -57,16 +96,53 @@
   <div class="items" id="items">
     <div class="nav-global">
       <div class="nav-global-title">진입 · 전역 이동</div>
-      <div class="nav-row"><span class="nav-el">상단 GNB(전 화면 공통)</span><span class="nav-act">대시보드/교환하기/교환게시판 메뉴 · 로고 클릭 — 목업에는 상단 요약만 표시</span><span class="nav-to"><strong>DASH-01 / EXC-01 / BRK-01</strong> (규칙: DASH-01 항목 5)</span></div>
-      <div class="nav-note">· <strong>진입</strong>: 대시보드(DASH-01) 계정·보안 → '2차 인증 재설정' 카드 클릭 · 기기 분실로 로그인 불가 시에는 백업코드 로그인(AUTH-01) 후 이 화면 진입</div>
+      <div class="nav-row"><span class="nav-el">브랜드 패널 로고 'DSRV'</span><span class="nav-act">클릭</span><span class="nav-to"><strong>대시보드(DASH-01)</strong> · 확인 없음(발송 완료 상태는 서버 보존) <span style="color:#b45309;">[확인필요: DASH-02와 동일 — 세션 유무 분기]</span></span></div>
+      <div class="nav-row"><span class="nav-el">브랜드 패널 'DSRV 서비스 소개 보기 →' · 푸터 3링크</span><span class="nav-act">클릭</span><span class="nav-to">외부 소개 페이지 · 문서 페이지(새 탭) — URL <span style="color:#b45309;">[확인필요]</span> · AUTH-01 전역 블록과 동일</span></div>
+      <div class="nav-note">· <strong>진입</strong>: 대시보드(DASH-01) 계정·보안 → '2차 인증 재설정' 카드 클릭 · 인증 앱 분실이면 복구 코드 로그인(AUTH-01 항목 5) 후 이 화면 진입(DASH-01 권고 배너가 안내) · <strong>독립 페이지</strong>(2026-09-02 확정 · Figma 반영) — 콘솔 GNB 없음 · 세션 유지 · 진입 시 초기 상태 = 안내문 + [재설정 메일 발송] 활성 · 발송 결과 배너 없음<br>
+      · 종료 동선: '이전으로'(항목 3 · 시안 반영 — 종전 [취소] 버튼을 대체) → DASH-01 · 브라우저 뒤로가기 미지원(전역 규칙) · 2FA 재인증 입력 없음(기기 분실 상태 전제)<br>
+      · {담당자 이메일(마스킹)} = 로그인 계정 이메일 마스킹 표시(ONB-01 시안 형식 manager@***.co.kr <span style="color:#b45309;">[확인필요: 마스킹 규칙 — ONB-01과 단일화]</span>) · 시안 안내문은 이메일 미표기·'백업코드' 표기 → 기획은 마스킹 이메일 명시·'복구 코드'로 용어 통일</div>
     </div>
+
     <div class="itm" data-idx="0">
       <div class="num">1</div>
       <div>
-        <div class="itm-title">2차 인증 재설정<span class="req">필수</span></div>
-        <div class="itm-desc">· 버튼 클릭 → 본인 이메일로 재설정 링크 발송(초대 재발송 ONB-00 재사용 — 신규 화면 없음)<br>· 링크에서 <strong>비밀번호 재설정 + 2차 인증 재등록</strong>(ONB-01 절차 재수행)<br>· 완료 시 새 백업코드 발급·이전 코드 전량 폐기 · 기존 세션 전체 로그아웃<br>· <strong>2FA 재인증 입력 없음</strong> — 기기 분실 상태에서 진입하는 화면이므로 코드 입력을 요구하지 않고, 본인 확인은 본인 이메일 링크 수신으로 갈음<br><span class="basis">근거: 인증수단 재등록 · 정보보호 관리체계(ISMS) 인증기준 2.5(인증)</span></div>
+        <div class="itm-title">재설정 안내문 (표시 전용)</div>
+        <div class="itm-desc">· 클릭 요소 없음 · 카드 머리글 "비밀번호 및 2차 인증 재설정"(시안) · 시안 안내문 + 가변값 {담당자 이메일(마스킹)}(발송 대상 사전 고지 — 이메일 변경 수단 없음) + "재등록 완료 전까지 현재 인증 앱·복구 코드는 그대로 사용할 수 있습니다" 1줄(기획 추가 · 시안 없음)<br>· 안내 내용: 용도(기기 이전·복구 코드 재발급) · 방식(본인 이메일 링크 → 비밀번호 재설정 + 2차 인증 재등록 = ONB-01~03 재수행) · 결과(새 복구 코드 발급 · 이전 코드 폐기) · <strong>무효화 시점 = 재등록 완료 시</strong><br>· 용어: 시안 '백업코드' → '복구 코드'(ONB-03 카드 머리글과 통일) <strong>[디자인 요청]</strong><br>· 2FA 재인증 입력 없음 — 기기 분실 상태에서 진입하는 화면이므로 코드 입력을 요구하지 않고, 본인 확인은 이메일 링크 수신으로 갈음<br><span class="basis">근거: 인증수단 재등록 · 정보보호 관리체계(ISMS) 인증기준 2.5(인증) · ONB-03 상세 1</span></div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="1">
+      <div class="num">2</div>
+      <div>
+        <div class="itm-title">[재설정 메일 발송] 버튼<span class="req">필수</span></div>
+        <div class="itm-desc">· primary · 시안 라벨 "재설정 메일 발송" · <strong>확인 다이얼로그 없음</strong> — 발송 자체는 비가역 행위가 아님(기존 인증수단은 재등록 완료까지 유효 · 공통 UI 규격 확인 다이얼로그 기준)<br>· 발송 = 초대 재발송 양식(ONB-00) 재사용 — 신규 화면 없음 · 링크 유효 <strong>{정책값}</strong> <span style="color:#b45309;">[확인필요: 초대 링크와 동일 72시간 여부]</span> · 1회용<br>· 재발송 쿨다운 <strong>{정책값}</strong> <span style="color:#b45309;">[확인필요: 시간 · 발송 시 이전 링크 무효화 여부]</span> · 발송 이력 감사기록<br>· 발송 후 현재 세션 유지 — 로그아웃은 재등록 완료 시점(ONB-03 [확인])<br><span class="basis">근거 ISMS 2.5 · 2.9.4 · ONB-00 재사용</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">[재설정 이메일 발송] 버튼</span><span class="nav-act">클릭 — 본인 이메일로 재설정 링크 발송(ONB-00 재사용) · 발송 이력 감사기록</span><span class="nav-to stay">화면 이동 없음 — 발송 완료 안내 표시 · 이후 흐름: 이메일 링크 → <strong>ONB-01 재수행</strong>(비밀번호 재설정 + 2FA 재등록) → 완료 시 새 백업코드 발급·기존 세션 전체 로그아웃 → <strong>AUTH-01</strong> 재로그인</span></div>
+          <div class="nav-row"><span class="nav-el">[재설정 메일 발송] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①발송 처리 중 ②쿨다운 중(직전 발송 후 {정책값} 이내)</span><span class="nav-to stay">처리 중 → 회색 비활성 · 라벨 "발송 중…" / 쿨다운 → 회색 비활성 · 라벨 "재발송 ({남은 초}초 후)" 카운트다운 → 0이면 "재설정 메일 재발송"으로 활성 복귀</span></div>
+          <div class="nav-row"><span class="nav-el">[재설정 메일 발송] — 클릭(활성)</span><span class="nav-act">확인 없음 → 라벨 "발송 중…"·비활성(중복 클릭 차단) → 토큰 생성 · 이메일 발송(ONB-00 양식) · 감사로그</span><span class="nav-to stay">화면 잔류 · 항목 4 발송 결과 배너 노출 · 버튼 → 쿨다운 상태 · 이후 흐름: 이메일 링크 → <strong>계정 활성화(ONB-01 → 02 → 03)</strong> 재수행(비밀번호 재설정 → 2FA 재등록 → 새 복구 코드) → [확인] 시 이전 코드 폐기 · 기존 세션 전체 로그아웃 → <strong>로그인(AUTH-01)</strong></span></div>
+          <div class="nav-row"><span class="nav-el">[재설정 메일 발송] — 실패</span><span class="nav-act">발송 오류(메일 서버·서버 오류)</span><span class="nav-to stay">화면 잔류 · 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 버튼 라벨 복귀(쿨다운 없음) · 결과 배너 미노출</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="2">
+      <div class="num">3</div>
+      <div>
+        <div class="itm-title">'‹ 이전으로' 링크</div>
+        <div class="itm-desc">· 시안 보조 링크(2026-09-02 시안 반영 — 종전 [취소] ghost 버튼을 대체 · 종료 동선 규칙은 이 링크로 충족) · 발송 처리 중 제외 항상 활성 — 발송 완료 후에도 복귀 가능(발송 자체는 취소되지 않음)<br>· 확인 없음(공통 UI 규격 종료 동선) · 파기할 입력값 없음(입력 필드 없는 화면)<br><span class="basis">근거 notation 공통 UI 규격 '종료 동선' · 09 §0 종료 동선(2026-09-02)</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">'이전으로' — 활성 조건</span><span class="nav-act">다음이 아님: ①발송 처리 중</span><span class="nav-to stay">처리 중 → 비활성(회색)</span></div>
+          <div class="nav-row"><span class="nav-el">'이전으로' — 클릭(활성)</span><span class="nav-act">확인 없음</span><span class="nav-to"><strong>대시보드(DASH-01)</strong> · 토스트 없음 · 이미 발송된 링크는 유효 유지</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="3">
+      <div class="num">4</div>
+      <div>
+        <div class="itm-title">발송 결과 배너 (조건부 노출 · 시안 없음)</div>
+        <div class="itm-desc">· Figma 시안에 없는 요소 — 기획 유지(2026-09-02 결정) <strong>[디자인 요청]</strong> · 노출 조건: 항목 2 발송 성공 응답 직후 · 기본 상태·실패 시 없음 · 화면 이탈 후 재진입 시 미노출(쿨다운 상태만 버튼 라벨로 표시)<br>· 문구 "재설정 링크를 {담당자 이메일(마스킹)}로 보냈습니다. 메일의 링크에서 재등록을 진행해 주세요. 메일이 오지 않으면 잠시 후 다시 발송할 수 있습니다" · 인라인 배너(토스트 아님 — 다음 행동이 콘솔 밖 이메일이므로 상시 표시) · 닫기(×) 없음<br>· 메일 본문 링크는 ONB-00 규격 · 복구 코드까지 분실해 로그인 자체가 안 되면 이 화면에 못 오므로 DSRV 관리자 본인확인 후 초대 재발송(운영 처리 — 상세 2)<br><span class="basis">근거 공통 UI 규격 상태 표시 · ONB-00</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">배너</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용) · 이후 행동은 이메일 링크(콘솔 밖) → ONB-01</span></div>
         </div>
       </div>
     </div>
@@ -80,7 +156,11 @@
     <div class="detail-grid" id="detailCol">
       <div class="dtl" data-idx="0">
         <div class="detail-label"><span class="dtl-num">1</span>진입 경로 · 재설정 흐름</div>
-      <div class="dtl-body"><span class="box">· 대시보드(DASH-01) → 계정·보안 → '2차 인증 재설정'에서 진입 · 화면은 이 단락 하나(안내문 + 발송 버튼) · 비밀번호 수정은 별도 화면(DASH-02)<br>· 발송 → 이메일 링크(ONB-00 방식) → 활성화·재등록(ONB-01) → 새 백업코드 발급<br>· 기기 분실로 로그인 자체가 안 되면: 백업코드 로그인(AUTH-01) 후 이 화면에서 재설정<br>· 백업코드까지 분실·소진 시 DSRV 관리자 본인확인 후 초대 재발송(운영 처리)<br>· 발송·재등록·폐기 이력은 감사로그 기록</span></div>
+      <div class="dtl-body"><span class="box">· 대시보드(DASH-01) → 계정·보안 → '2차 인증 재설정'에서 진입 · 독립 페이지 = 안내문 + 발송 버튼 + 결과 배너 + 이전으로 · 비밀번호 수정은 별도 화면(DASH-02)<br>· 발송 → 이메일 링크(ONB-00 방식) → ONB-01~03 재수행 → [확인] 시 새 복구 코드 발급 · 이전 코드 폐기 · 기존 세션 전체 로그아웃 → AUTH-01 재로그인<br>· 인증 앱 분실로 로그인 자체가 안 되면: 복구 코드 로그인(AUTH-01 2단계) 후 이 화면에서 재설정 · 발송·재등록·폐기 이력은 감사로그 기록</span></div>
+      </div>
+      <div class="dtl" data-idx="1">
+        <div class="detail-label"><span class="dtl-num">2</span>무효화 시점 · 운영 예외</div>
+      <div class="dtl-body"><span class="box">· <strong>기존 OTP·복구 코드 무효화 = 재등록 완료 시</strong>(발송 시 아님) — 이메일 미수신·중도 이탈 시에도 로그인 수단이 끊기지 않도록 · ONB-03 상세 1·DASH-03 안내문과 단일 출처<br>· 발송 링크 만료·미사용 시: 아무 변화 없음(기존 수단 유효) · 재발송으로 새 토큰<br>· 복구 코드까지 분실·사용 후 인증 앱도 없으면 DSRV 관리자 본인확인 후 초대 재발송(ADM-03 · 운영 처리) — 잠금 해제와 동일 프로세스(AUTH-01 상세 8)<br>· <span class="red">[확인필요]</span> 재발송 시 이전 미사용 링크 즉시 무효화 여부 · 링크 유효시간 · 쿨다운 · 이메일 마스킹 규칙</span></div>
       </div>
     </div>
   </div>
@@ -90,9 +170,12 @@
   <div class="note-card">
     <div class="note-title">비고</div>
     <div class="note-body">
-      · 대시보드(DASH-01) 계정·보안의 '2차 인증 재설정' 진입 화면 — 안내문 + 발송 버튼만 있는 최소 화면.<br>
+      · 대시보드(DASH-01) 계정·보안의 '2차 인증 재설정' 진입 화면 — 안내문 + 발송 버튼 + 발송 결과 배너 + 이전으로. <strong>독립 페이지</strong>(2026-09-02 확정 · 콘솔 GNB 없음).<br>
       · <strong>[백엔드 통제]</strong> 발송·재등록·폐기 이력은 화면 표시 없이 감사기록으로 보존 — 근거: 정보보호 관리체계(ISMS) 인증기준 2.9.4.<br>
-      · 이전: 대시보드(DASH-01) · 관련: 비밀번호 수정(DASH-02) · 재등록 절차: 계정 활성화(ONB-01)
+      · <strong>[Figma 반영 2026-09-02]</strong> 시안 'Reset Credentials' 적용(카드 머리글·안내문·[재설정 메일 발송]·'이전으로'). 발송 결과 배너·마스킹 이메일 명시·'복구 코드' 용어는 기획 유지 <strong>디자인 요청</strong>. [취소] 버튼은 '이전으로'로 대체(09 §0 종료 동선 규칙 충족). 원본 <span class="mono">reference/figma/_crops/F8_row2_c4.png</span>.<br>
+      · 설명 형식(핀 = 조작 요소 단위) — 표시 1 · 버튼 1 · 링크 1 · 조건부 배너 1.<br>
+      · <span style="color:#991b1b;">[확인필요]</span> 링크 유효시간 · 재발송 쿨다운·이전 링크 무효화 · 이메일 마스킹 규칙 · 로고 클릭 동작.<br>
+      · 이전: 대시보드(DASH-01) · 관련: 비밀번호 수정(DASH-02) · 재등록 절차: 계정 활성화(ONB-01~03)
     </div>
   </div>
 </section>

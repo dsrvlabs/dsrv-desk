@@ -11,50 +11,87 @@
   <div class="crumb"><span>홈</span><span class="s">›</span><span>계정·보안</span><span class="s">›</span><span>비밀번호 수정</span></div>
   <h1 class="title">비밀번호 수정</h1>
   <span class="sid">DASH-02</span>
-  <span class="defense">현재 비밀번호 확인 · 비밀번호 규칙</span>
+  <span class="defense">현재 비밀번호 확인 · 비밀번호 규칙 · 독립 페이지</span>
 </header>
 
 <div class="main">
   <div class="screen-panel">
     <div style="position:relative;display:flex;">
       <div class="labels" id="labels">
-        <div class="lbl"><span class="lbl-text">전역 상단</span></div>
+        <div class="lbl"><span class="lbl-text">전역<br>브랜드 패널</span></div>
         <div class="lbl"><span class="lbl-text">비밀번호<br>변경</span></div>
+        <div class="lbl"><span class="lbl-text">액션</span></div>
+        <div class="lbl"><span class="lbl-text">푸터</span></div>
       </div>
       <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
     </div>
 
-    <div class="frame" id="frame">
-      <!-- 전역: 로그인 후 계정·보안 진입 -->
+    <div class="frame" id="frame" style="background:linear-gradient(135deg,#e3eafc 0%,#f1f4fa 55%,#edf3fb 100%);">
+      <!-- 전역: 브랜드 패널 — 독립 페이지(콘솔 GNB 없음 · 2026-09-02 확정) · 핀 없음 -->
       <div class="zone" data-idx="">
         <div class="zone-highlight"></div>
-        <div class="c-top" style="border-radius:8px;">
-          <span class="brand">DSRV Desk</span>
-          <span class="meta"><span class="c-badge">A자산운용</span></span>
+        <div style="font-size:9px;color:#94a3b8;padding:0 0 6px;">▼ Figma 'Change Password' = 로그인과 같은 독립 페이지 레이아웃(좌 브랜드 패널 · 우 카드) — 콘솔 GNB·기관 배지 없음 · 세션은 유지</div>
+        <div class="brand-panel">
+          <div class="bp-logo">DSRV<span>®</span></div>
+          <div class="bp-tag">한 번의 연동으로 완성하는<br><strong>쉽고 강력한 온체인 금융 OS</strong></div>
+          <div class="bp-sub">자산의 발행·결제·운용·보관을 위한 엔터프라이즈급 블록체인 인프라.</div>
+          <div class="bp-link">DSRV 서비스 소개 보기 →</div>
         </div>
       </div>
 
-      <!-- 비밀번호 변경 -->
-      <div class="zone" data-idx="0">
+      <!-- 카드: 비밀번호 변경 입력 -->
+      <div class="zone card" data-idx="0,1,2,3">
         <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="0" style="position:relative;padding:8px;border-radius:8px;">
-          <div class="pin" data-idx="0" style="top:-4px;right:-4px;">1</div>
-          <div style="font-size:11px;color:#94a3b8;font-weight:600;margin-bottom:6px;">비밀번호 변경</div>
-          <div class="field" style="margin-bottom:8px;"><span class="ph">현재 비밀번호</span></div>
-          <div class="field" style="margin-bottom:8px;"><span class="ph">새 비밀번호</span></div>
-          <div class="field"><span class="ph">새 비밀번호 확인</span></div>
-          <div class="pw-guide" style="margin-top:8px;line-height:1.75;font-size:11px;color:#475569;background:#fbfbf9;border:1px solid var(--line);border-radius:8px;padding:10px 12px;">
-            <strong style="color:#1a1a1a;">안전한 비밀번호를 위해 아래를 지켜주세요.</strong><br>
-            ① 영문 대·소문자, 숫자, 특수문자 중 3종 이상 조합 8자 이상<br>
-            ② 이메일과 동일한 문자 사용 불가<br>
-            ③ 동일 문자 4번 이상 사용 불가<br>
-            ④ 특수문자는 !@#$%^&amp;*() 만 사용 가능<br>
-            <span style="color:#94a3b8;">※ 주기적 변경은 권고 사항이며, 유출이 의심되면 즉시 변경하세요</span>
+        <div class="zone-title" style="margin-bottom:10px;">비밀번호 변경</div>
+        <div class="item-area" data-highlight="0" style="position:relative;padding:4px;border-radius:8px;margin-bottom:4px;">
+          <div class="pin" data-idx="0" style="top:-6px;right:-6px;">1</div>
+          <div class="flabel">기존 비밀번호<span class="star">*</span></div>
+          <div class="field fg"><span class="ph">비밀번호 입력</span></div>
+        </div>
+        <div class="item-area" data-highlight="1" style="position:relative;padding:4px;border-radius:8px;margin-bottom:4px;">
+          <div class="pin" data-idx="1" style="top:-6px;right:-6px;">2</div>
+          <div class="flabel">새 비밀번호<span class="star">*</span></div>
+          <div class="field fg"><span class="ph">비밀번호 입력</span></div>
+        </div>
+        <div class="item-area" data-highlight="2" style="position:relative;padding:4px;border-radius:8px;margin-bottom:4px;">
+          <div class="pin" data-idx="2" style="top:-6px;right:-6px;">3</div>
+          <div class="flabel">새 비밀번호 확인<span class="star">*</span></div>
+          <div class="field fg"><span class="ph">비밀번호 재입력</span></div>
+        </div>
+        <div class="item-area" data-highlight="3" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="3" style="top:-6px;right:-6px;">4</div>
+          <div class="rule-box">
+            안전한 비밀번호를 위해 아래를 지켜주세요.<br>
+            ○ 영문 대·소문자, 숫자, 특수문자 중 3종 이상 조합 8자 이상<br>
+            ○ 이메일과 동일한 문자 사용 불가<br>
+            ○ 동일 문자 4번 이상 사용 불가<br>
+            ○ 특수문자는 !@#$%^&amp;*() 만 사용 가능<br>
+            <span style="color:#b9c2d2;">※ 주기적 변경은 권고 사항이며, 유출이 의심되면 즉시 변경하세요 — 시안 없음(기획 유지)</span>
           </div>
-          <div class="btn primary" style="margin-top:10px;">비밀번호 변경 저장</div>
         </div>
       </div>
 
+      <!-- 액션: 취소(시안 없음 · 기획 유지) / 다음 -->
+      <div class="zone card" data-idx="4,5">
+        <div class="zone-highlight"></div>
+        <div style="font-size:9px;color:#b45309;padding:0 4px 4px;">▼ 시안은 [다음] 1개 — [취소]는 종료 동선 규칙(09 §0 · 뒤로가기 미지원)으로 기획 유지 <strong>[디자인 요청]</strong></div>
+        <div class="row" style="gap:8px;">
+          <div class="item-area" data-highlight="4" style="position:relative;flex:1;padding:4px;border-radius:8px;">
+            <div class="pin" data-idx="4" style="top:-8px;right:-6px;">5</div>
+            <div class="btn ghost" style="border-radius:12px;">취소</div>
+          </div>
+          <div class="item-area" data-highlight="5" style="position:relative;flex:2;padding:4px;border-radius:8px;">
+            <div class="pin" data-idx="5" style="top:-8px;right:-6px;">6</div>
+            <div class="btn primary fg">다음</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 푸터 -->
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="pg-footer"><span>© dsrv labs Co., Ltd. All Rights Reserved</span><span class="lnk">공지사항</span><span class="lnk">개인정보처리방침</span><span class="lnk">이용약관</span></div>
+      </div>
     </div>
   </div>
 
@@ -63,17 +100,75 @@
   <div class="items" id="items">
     <div class="nav-global">
       <div class="nav-global-title">진입 · 전역 이동</div>
-      <div class="nav-row"><span class="nav-el">상단 GNB(전 화면 공통)</span><span class="nav-act">대시보드/교환하기/교환게시판 메뉴 · 로고 클릭 — 목업에는 상단 요약만 표시</span><span class="nav-to"><strong>DASH-01 / EXC-01 / BRK-01</strong> (규칙: DASH-01 항목 5)</span></div>
-      <div class="nav-note">· <strong>진입</strong>: 대시보드(DASH-01) 계정·보안 → '비밀번호 수정' 카드 클릭</div>
+      <div class="nav-row"><span class="nav-el">브랜드 패널 로고 'DSRV'</span><span class="nav-act">클릭</span><span class="nav-to"><strong>대시보드(DASH-01)</strong> · 입력 중 값은 파기(확인 없음) <span style="color:#b45309;">[확인필요: 로그인 전 화면(AUTH-01)에서는 무반응 — 세션 유무로 동작 분기 여부]</span></span></div>
+      <div class="nav-row"><span class="nav-el">브랜드 패널 'DSRV 서비스 소개 보기 →' · 푸터 3링크</span><span class="nav-act">클릭</span><span class="nav-to">외부 소개 페이지 · 문서 페이지(새 탭) — URL <span style="color:#b45309;">[확인필요]</span> · AUTH-01 전역 블록과 동일</span></div>
+      <div class="nav-note">· <strong>진입</strong>: 대시보드(DASH-01) 계정·보안 → '비밀번호 수정' 카드 클릭 · <strong>독립 페이지(2026-09-02 확정 · Figma 반영)</strong> — 콘솔 GNB·기관 배지 없이 로그인과 같은 레이아웃, 세션은 유지(로그아웃 아님) · 진입 시 초기 상태 = 3필드 빈칸 · [다음] 비활성<br>
+      · 종료 동선: [취소](항목 5) 또는 저장 완료 → DASH-01 · 브라우저 뒤로가기 미지원(전역 규칙) · MFA 재인증 없음 — 본인 확인은 기존 비밀번호(항목 1)<br>
+      · 시안 버튼 라벨 '다음'은 후속 단계가 없는 저장 버튼 — 라벨 '변경' 등으로 조정 요청 <span style="color:#b45309;">[확인필요 · 디자인 요청]</span></div>
     </div>
+
     <div class="itm" data-idx="0">
       <div class="num">1</div>
       <div>
-        <div class="itm-title">비밀번호 변경 입력·규칙 안내<span class="req">필수</span></div>
-        <div class="itm-desc">· <strong>MFA 재인증 없음</strong> — 본인 확인은 <strong>현재 비밀번호 확인</strong>으로 수행, 새 비밀번호는 본인이 직접 입력<br>· 안내문구 4개 항목 + 주기 변경 권고(※) 노출 · 규칙 위반 시 저장 불가<br><span class="basis">근거: 정보보호 관리체계(ISMS) 인증기준 2.5.4(비밀번호 관리)</span></div>
+        <div class="itm-title">기존 비밀번호 입력<span class="req">필수</span></div>
+        <div class="itm-desc">· 마스킹(●) · 표시 토글 없음(시안 기준) <span style="color:#b45309;">[확인필요: 토글 제공]</span> · 붙여넣기 허용 · 허용 문자 제한 없음(일치 여부만)<br>· <strong>검증 시점</strong>: [다음] 제출 시(서버 일치 확인) · 클라이언트는 빈칸 여부만<br>· <strong>상태</strong> ① 빈칸(기본 · 라벨 "기존 비밀번호 *" · 안내 "비밀번호 입력") ② 입력됨 ③ 제출 후 불일치 — 빨간 테두리 + 필드 아래 인라인 ⚠ "기존 비밀번호가 일치하지 않습니다" · 이 필드만 초기화(새 비밀번호·확인 값 유지)<br>· 연속 불일치 = AUTH-01 통합 실패 카운터에 합산 · {정책값}회 도달 → 로그아웃 + 계정 잠금 <span style="color:#b45309;">[확인필요: 연동 확정]</span><br><span class="basis">근거: 정보보호 관리체계(ISMS) 인증기준 2.5.4(비밀번호 관리) · 2.10.4(중요정보 변경 시 재인증 — 기존 비밀번호 확인으로 충족 해석 [확인필요])</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">현재 · 새 비밀번호 입력</span><span class="nav-act">규칙(4항목) 검증 — 위반 시 저장 불가</span><span class="nav-to stay">화면 내 (이동 없음)</span></div>
-          <div class="nav-row"><span class="nav-el">[비밀번호 변경 저장] 버튼</span><span class="nav-act">클릭 — 현재 비밀번호 일치 확인 후 변경 · 타 기기 세션 전체 로그아웃·감사기록(백엔드)</span><span class="nav-to">저장 완료 → <strong>대시보드(DASH-01)</strong> 복귀 (별도 완료 화면 없음 — 기획 가정)</span></div>
+          <div class="nav-row"><span class="nav-el">기존 비밀번호 필드</span><span class="nav-act">입력(빈칸 아님)</span><span class="nav-to stay">[다음] 활성 조건 ① 해소 · 일치 여부는 제출 시(항목 6)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="1">
+      <div class="num">2</div>
+      <div>
+        <div class="itm-title">새 비밀번호 입력<span class="req">필수</span></div>
+        <div class="itm-desc">· 마스킹 · 허용 문자 = 영문 대·소문자·숫자·특수문자 !@#$%^&amp;*()(그 외 입력 무시 — 규칙 ④) · 길이 상한 <span style="color:#b45309;">[확인필요]</span><br>· <strong>검증 시점</strong>: 키 입력마다 규칙 ①~④ 판정 → 항목 4 안내문 ○/✓ 갱신 · 포커스 아웃 시 미충족 항목 남으면 빨간 테두리 + 인라인 ⚠ "비밀번호 규칙을 확인해 주세요" — ONB-01 항목 2와 동일 규격<br>· <strong>상태</strong> ① 빈칸(라벨 "새 비밀번호 *" · 안내 "비밀번호 입력") ② 입력 중 ③ 규칙 위반(포커스 아웃) ④ 통과 ⑤ 제출 후 기존 비밀번호와 동일 — 인라인 ⚠ "기존 비밀번호와 다른 비밀번호를 입력해 주세요" <span style="color:#b45309;">[확인필요: 이전 비밀번호 재사용 제한 범위(직전 1회 vs N회)]</span><br>· 규칙 수치 = {정책값}(출처 AUTH-01 비고 [비밀번호 규칙] · ADM-03 파라미터 아님) · 규칙 ② 비교 대상 = 로그인 계정 이메일<br><span class="basis">근거 ISMS 2.5.4 · ONB-01 항목 2(동일 규칙)</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">새 비밀번호 필드</span><span class="nav-act">키 입력마다 규칙 판정 · 포커스 아웃 시 오류 표시</span><span class="nav-to stay">4개 충족 → [다음] 활성 조건 ② 해소 / 위반 → ⚠ · [다음] 비활성 · 값 변경 시 항목 3 재비교</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="2">
+      <div class="num">3</div>
+      <div>
+        <div class="itm-title">새 비밀번호 확인 입력<span class="req">필수</span></div>
+        <div class="itm-desc">· 마스킹 · 허용 문자 = 항목 2와 동일<br>· <strong>검증 시점</strong>: 키 입력마다 항목 2와 비교 · 불일치 표시는 포커스 아웃 시 · 항목 2 변경 시 즉시 재비교<br>· <strong>상태</strong> ① 빈칸(라벨 "새 비밀번호 확인 *" · 안내 "비밀번호 재입력") ② 일치(필드 우측 ✓) ③ 불일치 — 빨간 테두리 + 인라인 ⚠ "비밀번호가 일치하지 않습니다"<br><span class="basis">근거 공통 UI 규격 오류 문구 ① · ONB-01 항목 3</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">새 비밀번호 확인 필드</span><span class="nav-act">키 입력마다 비교 · 포커스 아웃 시 오류 표시</span><span class="nav-to stay">일치 → ✓ · [다음] 활성 조건 ③ 해소 / 불일치 → ⚠ · [다음] 비활성</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="3">
+      <div class="num">4</div>
+      <div>
+        <div class="itm-title">비밀번호 규칙 안내 (표시 전용 · 실시간 체크)</div>
+        <div class="itm-desc">· 클릭 요소 없음 · ONB-01 항목 4와 <strong>동일 문구 재사용</strong>(시안 문구) + 수정 화면 전용 "※ 주기적 변경은 권고 사항이며, 유출이 의심되면 즉시 변경하세요" 1줄 추가(시안 없음 — 기획 유지 <strong>[디자인 요청]</strong>)<br>· 각 항목 앞 ○(미충족·회색) / ✓(충족·초록) — 항목 2 입력에 따라 실시간 갱신(○/✓ 표시도 시안 없음)<br>· 변경주기 강제 없음(권고) — AUTH-01 비고 ⑦<br><span class="basis">근거 ISMS 2.5.4(비밀번호 관리)</span></div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="4">
+      <div class="num">5</div>
+      <div>
+        <div class="itm-title">[취소] 버튼 (시안 없음 · 기획 유지)</div>
+        <div class="itm-desc">· ghost · 종료 동선 규칙(09 §0 2026-09-02 · 뒤로가기 미지원 충돌 해소)으로 유지 · Figma 'Change Password'에는 없음 <strong>[디자인 요청]</strong> · 항상 활성(저장 처리 중 제외)<br>· 입력값 파기 · 확인 없음(공통 UI 규격 종료 동선 — 입력·행위 화면 [취소])<br><span class="basis">근거 notation 공통 UI 규격 '종료 동선' · 09 §0 종료 동선(2026-09-02)</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">[취소] — 활성 조건</span><span class="nav-act">다음이 아님: ①저장 처리 중</span><span class="nav-to stay">처리 중 → 회색 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">[취소] — 클릭(활성)</span><span class="nav-act">확인 없음 · 3필드 입력값 파기</span><span class="nav-to"><strong>대시보드(DASH-01)</strong> · 토스트 없음</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="5">
+      <div class="num">6</div>
+      <div>
+        <div class="itm-title">[다음] 버튼 (= 비밀번호 변경 저장)<span class="req">필수</span></div>
+        <div class="itm-desc">· primary · 시안 라벨 '다음'(라벨 조정 요청 — nav-note) · <strong>확인 다이얼로그 없음</strong>(저장 — 공통 UI 규격) · MFA 재인증 없음<br>· 저장 시 백엔드: 단방향 해시+salt 저장(원문 미보관) · <strong>타 기기 세션 전체 로그아웃 · 현재 세션 유지</strong> · 변경 이력 감사기록 · 통합 실패 카운터 초기화<br>· 별도 완료 화면 없음 — DASH-01 복귀 + 토스트<br><span class="basis">근거 ISMS 2.5.4 · 2.9.4 · 종료 동선</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">[다음] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①기존 비밀번호 빈칸 ②새 비밀번호 규칙 미충족·빈칸 ③확인 불일치·빈칸 ④처리 중</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격) · 사유는 각 필드 인라인 경고로 이미 노출</span></div>
+          <div class="nav-row"><span class="nav-el">[다음] — 클릭(활성) · Enter</span><span class="nav-act">확인 없음 → 라벨 "저장 중…"·비활성(중복 클릭 차단) → 서버: 기존 비밀번호 일치 확인 → 규칙 재검증 → 저장 · 타 기기 세션 종료 · 감사로그</span><span class="nav-to"><strong>대시보드(DASH-01)</strong> · 상단 토스트 "비밀번호가 변경되었습니다"(3초 자동 닫힘) <span style="color:#b45309;">[확인필요: 토스트 문구·시간]</span></span></div>
+          <div class="nav-row"><span class="nav-el">[다음] — 실패</span><span class="nav-act">기존 비밀번호 불일치 / 새 비밀번호 = 기존 비밀번호 / 서버 규칙 재검증 실패 / 서버 오류</span><span class="nav-to stay">화면 잔류 · 불일치 → 항목 1 ③ ⚠ / 동일 → 항목 2 ⑤ ⚠ / 규칙 → 항목 2 ③ ⚠ / 서버 오류 → 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 버튼 라벨 복귀 · 해당 필드 외 값 유지</span></div>
         </div>
       </div>
     </div>
@@ -86,8 +181,16 @@
     <div class="note-title">상세내용</div>
     <div class="detail-grid" id="detailCol">
       <div class="dtl" data-idx="0">
-        <div class="detail-label"><span class="dtl-num">1</span>진입 경로 · 안내문구 정합</div>
-      <div class="dtl-body"><span class="box">· 홈(DASH-01) → 계정·보안 → '비밀번호 수정'에서 진입 — 입력 → 저장의 최소 화면<br>· 화면 안내문구는 최초 설정(ONB-01)과 동일 문구 재사용 + 수정 화면에는 '주기 변경 권고(※)' 한 줄 추가<br>· 규칙 판정(조합·길이·이메일 동일 문자·동일 문자 반복·허용 특수문자)은 AUTH-01 정책과 동일</span></div>
+        <div class="detail-label"><span class="dtl-num">1</span>본인 확인 방식</div>
+      <div class="dtl-body"><span class="box">· 기존 비밀번호 확인 = ISMS 2.10.4(중요정보 변경 시 재인증)의 충족 수단으로 해석 — 2차 인증 코드 재입력은 요구하지 않음 <span class="red">[확인필요: 심사 시 해석]</span><br>· 불일치 시 어느 필드가 틀렸는지는 노출(로그인과 달리 이미 인증된 세션이므로 계정 존재 노출 이슈 없음)<br>· 잠금 연동: 통합 실패 카운터 합산으로 정리(2026-09-02) — 확정 전까지 <span class="red">[확인필요]</span></span></div>
+      </div>
+      <div class="dtl" data-idx="3">
+        <div class="detail-label"><span class="dtl-num">4</span>안내문구 정합</div>
+      <div class="dtl-body"><span class="box">· 화면 안내문구는 최초 설정(ONB-01)과 동일 문구 재사용 + 수정 화면에는 '주기 변경 권고(※)' 한 줄 추가<br>· 규칙 판정(조합·길이·이메일 동일 문자·동일 문자 반복·허용 특수문자)은 AUTH-01 비고 [비밀번호 규칙] 단일 출처 — 수치 변경 시 ONB-01·DASH-02·AUTH-01 비고 3곳 동시 수정</span></div>
+      </div>
+      <div class="dtl" data-idx="5">
+        <div class="detail-label"><span class="dtl-num">6</span>변경 후 처리(백엔드)</div>
+      <div class="dtl-body"><span class="box">· 화면 표시 없이 시스템 동작 — 타 기기 세션 전체 로그아웃(현재 세션 유지) · 변경 이력 감사기록 · 단방향 해시+salt 저장(원문 미보관)<br>· 계정당 1세션 원칙(AUTH-01)이라 실제로는 '다른 세션'이 없는 것이 정상 — 로그아웃 처리는 방어적 동작<br>· 변경 알림 이메일 발송 여부 <span class="red">[확인필요: notation 이메일 통지 4종에 없음]</span></span></div>
       </div>
     </div>
   </div>
@@ -97,10 +200,12 @@
   <div class="note-card">
     <div class="note-title">비고</div>
     <div class="note-body">
-      · 홈(DASH-01) 계정·보안의 '비밀번호 수정' 진입 화면 — <strong>현재 비밀번호 확인 → 변경</strong>의 최소 화면.<br>
+      · 홈(DASH-01) 계정·보안의 '비밀번호 수정' 진입 화면 — <strong>기존 비밀번호 확인 → 변경</strong>의 최소 화면. <strong>독립 페이지</strong>(2026-09-02 확정 · 콘솔 GNB 없음).<br>
       · <strong>[백엔드 통제]</strong> '변경 후 처리'는 화면 표시 없이 시스템 동작 — 변경 시 타 기기 세션 전체 로그아웃 · 변경 이력 감사기록 · 단방향 해시+salt 저장(원문 미보관). 근거: 정보보호 관리체계(ISMS) 인증기준 2.5.4·2.9.4.<br>
-      · <span style="color:#991b1b;">[확인필요]</span> ISMS 2.10.4(중요정보 변경 시 재인증)의 현재 비밀번호 확인 충족 해석 · 강제 변경주기 도입 여부.<br>
-      · 이전: 대시보드(DASH-01) · 관련: 2차 인증 재설정(DASH-03) · 규칙 전문: 로그인(AUTH-01) 비고
+      · <strong>[Figma 반영 2026-09-02]</strong> 시안 'Change Password' 적용(브랜드 패널·카드·라벨·플레이스홀더·[다음]). [취소]·권고 1줄·○/✓ 표시는 시안 없음 — 기획 유지 <strong>디자인 요청</strong>. 원본 <span class="mono">reference/figma/_crops/F7_row2_c3.png</span>.<br>
+      · 설명 형식(핀 = 조작 요소 단위) — 입력 3 · 표시 1 · 버튼 2.<br>
+      · <span style="color:#991b1b;">[확인필요]</span> ISMS 2.10.4 충족 해석 · 강제 변경주기 도입 여부 · 잠금 카운터 연동 확정 · 이전 비밀번호 재사용 제한 · 표시 토글 · 길이 상한 · 완료 토스트 · 변경 알림 이메일 · 버튼 라벨 '다음' 조정 · 로고 클릭 동작.<br>
+      · 이전: 대시보드(DASH-01) · 관련: 비밀번호 및 2차 인증 재설정(DASH-03) · 규칙 전문: 로그인(AUTH-01) 비고
     </div>
   </div>
 </section>
