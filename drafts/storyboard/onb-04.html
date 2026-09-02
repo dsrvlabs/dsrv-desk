@@ -38,7 +38,7 @@
       </div>
 
       <!-- 오류 안내 카드 -->
-      <div class="zone card" data-idx="0,1,2">
+      <div class="zone card" data-idx="0,1">
         <div class="zone-highlight"></div>
         <div class="zone-title" style="margin-bottom:10px;">계정 활성화</div>
         <div class="item-area" data-highlight="0" style="position:relative;padding:4px;border-radius:8px;">
@@ -46,12 +46,8 @@
           <div class="err-chip">⚠ 이 초대 링크는 사용할 수 없습니다</div>
           <div class="info-box" style="text-align:center;">만료되었거나 이미 사용된 링크입니다.<br>관리자에게 초대 재발송을 요청해 주세요.</div>
         </div>
-        <div class="item-area" data-highlight="1" style="position:relative;padding:4px;border-radius:8px;margin-top:8px;">
+        <div class="item-area" data-highlight="1" style="position:relative;padding:4px;border-radius:8px;margin-top:6px;">
           <div class="pin" data-idx="1" style="top:-6px;right:-6px;">2</div>
-          <div class="btn outline">로그인 화면으로</div>
-        </div>
-        <div class="item-area" data-highlight="2" style="position:relative;padding:4px;border-radius:8px;margin-top:6px;">
-          <div class="pin" data-idx="2" style="top:-6px;right:-6px;">3</div>
           <div class="aux-link">계정 관련 문의는 <strong>portal.kyc@dsrvlabs.com</strong></div>
         </div>
       </div>
@@ -73,17 +69,6 @@
     <div class="itm" data-idx="1">
       <div class="num">2</div>
       <div>
-        <div class="itm-title">[로그인 화면으로] 버튼</div>
-        <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 항상 활성이다.<br><strong>확인 사항</strong> 없다. 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> 로그인(AUTH-01)으로 이동한다. 계정이 이미 활성인 경우의 정상 진입 경로이기도 하다.<br><span class="basis">근거 공통 UI 규격 종료 동선</span></div>
-        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">[로그인 화면으로]</span><span class="nav-act">클릭</span><span class="nav-to"><strong>로그인(AUTH-01)</strong></span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="itm" data-idx="2">
-      <div class="num">3</div>
-      <div>
         <div class="itm-title">문의 안내 (표시 전용)</div>
         <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>값</strong> 문의 주소는 ONB-00 발신 주소와 같은 값을 쓴다(단일 출처). 주소는 텍스트로만 두고 mailto 링크를 걸지 않는다.<br><span class="basis">근거 notation 이메일 통지 · ONB-00 항목 1</span></div>
       </div>
@@ -98,7 +83,7 @@
     <div class="detail-grid" id="detailCol">
       <div class="dtl" data-idx="0">
         <div class="detail-label"><span class="dtl-num">1</span>토큰 케이스 통합</div>
-        <div class="dtl-body"><span class="box"><strong>통합 대상</strong> 만료(A)와 이미 사용됨(B) 두 경우를 화면 하나·문구 하나로 처리한다. 종전 ONB-01 배너 2종과 [로그인 화면으로] 조건부 노출은 폐기한다.<br><strong>이 화면에 오지 않는 경우</strong> 활성화 미완료 상태의 재클릭은 재개로 처리해 ONB-01·02·03 중 진행 중 화면으로 라우팅한다.<br><strong>재발급</strong> ADM-03 초대 재발송으로만 한다(새 토큰 발급 · 이전 토큰 즉시 무효 · 진행 상태 초기화).<br><strong>통합 이유</strong> 분기 화면·문구를 두지 않아 구현이 단순하고, 토큰이 만료인지 사용된 것인지를 알려주지 않는다.</span></div>
+        <div class="dtl-body"><span class="box"><strong>통합 대상</strong> 만료(A)와 이미 사용됨(B) 두 경우를 화면 하나·문구 하나로 처리한다. 종전 ONB-01 배너 2종과 [로그인 화면으로] 조건부 노출은 폐기한다.<br><strong>이 화면에 오지 않는 경우</strong> 활성화 미완료 상태의 재클릭은 재개로 처리해 ONB-01·02·03 중 진행 중 화면으로 라우팅한다.<br><strong>재발급</strong> ADM-03 초대 재발송으로만 한다(새 토큰 발급 · 이전 토큰 즉시 무효 · 진행 상태 초기화).<br><strong>조작 요소</strong> 두지 않는다 — 계정이 이미 활성이어서 로그인하려는 경우도 이용자가 직접 로그인 화면에 접속한다.<br><strong>통합 이유</strong> 분기 화면·문구를 두지 않아 구현이 단순하고, 토큰이 만료인지 사용된 것인지를 알려주지 않는다.</span></div>
       </div>
     </div>
   </div>
@@ -107,7 +92,7 @@
 <section class="footer-note">
   <div class="note-card">
     <div class="note-title">비고</div>
-    <div class="note-body">· 초대 링크(ONB-00)를 눌렀을 때 토큰이 유효하지 않으면 진입하는 <strong>종결 화면</strong>. 2026-09-02 사용자 결정으로 신설 — 종전에는 ONB-01 항목 1의 배너 2종(만료·사용됨)으로만 정의돼 있었다.<br>· <strong>확정(구현 단순 우선)</strong> — 만료·사용됨 단일 문구 · 재발급 링크를 화면에 두지 않음(관리자 요청) · mailto 없음.<br>· <span class="chk">[디자인 요청]</span> Figma 시안 없음 — ONB-01~03과 같은 로그인 전 레이아웃으로 기획 유지.<br>· 이전 = ONB-00 초대 이메일 / 다음 = AUTH-01 로그인</div>
+    <div class="note-body">· 초대 링크(ONB-00)를 눌렀을 때 토큰이 유효하지 않으면 진입하는 <strong>종결 화면</strong>. 2026-09-02 사용자 결정으로 신설 — 종전에는 ONB-01 항목 1의 배너 2종(만료·사용됨)으로만 정의돼 있었다.<br>· <strong>확정(구현 단순 우선)</strong> — 만료·사용됨 단일 문구 · 재발급 링크 없음(관리자 요청) · [로그인 화면으로] 버튼 없음 · mailto 없음. 조작 요소가 없는 화면이다.<br>· <span class="chk">[디자인 요청]</span> Figma 시안 없음 — ONB-01~03과 같은 로그인 전 레이아웃으로 기획 유지.<br>· <strong>종결 화면</strong> — 이 화면에서 다른 화면으로 가는 버튼·링크를 두지 않는다(2026-09-02 사용자 결정). 재발급은 관리자 요청, 로그인은 이용자가 직접 접속한다.<br>· 이전 = ONB-00 초대 이메일</div>
   </div>
 </section>
 
