@@ -160,7 +160,7 @@
       <div class="num">4</div>
       <div>
         <div class="itm-title">교환 가능 풀 · 참고 비율 · 예상 받는 수량 · 스프레드 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · 4개 값은 받는 자산 선택 시 조회, 이후 화면 체류 중 <strong>주기 갱신</strong> — 주기 <span style="color:#b45309;">[확인필요: ADM-03 반영주기]</span><br>· 교환 가능 풀: 「{수량} {받는자산}」 · 0이면 항목 3 ⑤ 상태<br>· 교환비율(참고): notation 비율 규칙 — 스테이블 페어 {받는}/{주는} 4자리 · ETH 페어 {스테이블}/ETH 2자리 · 확정 비율은 EXC-02 제시 시점 값(이 값과 다를 수 있음 — 안내 문구 상시)<br>· 예상 받는 수량 = 보내는 수량 × 참고 비율(ETH 페어 방향에 따라 ÷) → 받는 자산 자릿수로 절사 · 수량 빈칸이면 "—"<br>· 스프레드: ADM-03 고정값 % 소수 2자리 — 별도 수수료 없음(비용 구조 사전 고지, 상세 3)<br>· 로딩 "불러오는 중…"(3초 초과 → 오류) · 조회 실패 시 값 "—" + 상단 배너 "일시적인 오류입니다…" + [거래 요청] 비활성<br><span class="basis">근거 L6 이용자보호(설명의무) · [확인필요] 풀 정의 — 09 §8</span></div>
+        <div class="itm-desc">· 클릭 요소 없음 · 4개 값은 받는 자산 선택 시 조회, 이후 화면 체류 중 <strong>주기 갱신</strong> — 주기 <span class="chk">[확인필요: ADM-03 반영주기]</span><br>· 교환 가능 풀: 「{수량} {받는자산}」 · 0이면 항목 3 ⑤ 상태<br>· 교환비율(참고): notation 비율 규칙 — 스테이블 페어 {받는}/{주는} 4자리 · ETH 페어 {스테이블}/ETH 2자리 · 확정 비율은 EXC-02 제시 시점 값(이 값과 다를 수 있음 — 안내 문구 상시)<br>· 예상 받는 수량 = 보내는 수량 × 참고 비율(ETH 페어 방향에 따라 ÷) → 받는 자산 자릿수로 절사 · 수량 빈칸이면 "—"<br>· 스프레드: ADM-03 고정값 % 소수 2자리 — 별도 수수료 없음(비용 구조 사전 고지, 상세 3)<br>· 로딩 "불러오는 중…"(3초 초과 → 오류) · 조회 실패 시 값 "—" + 상단 배너 "일시적인 오류입니다…" + [거래 요청] 비활성<br><span class="basis">근거 L6 이용자보호(설명의무) · [확인필요] 풀 정의 — 09 §8</span></div>
       </div>
     </div>
 
@@ -189,7 +189,7 @@
       <div class="num">7</div>
       <div>
         <div class="itm-title">KYC 예외 배너 (조건부 노출)</div>
-        <div class="itm-desc">· 노출 조건: 기관 KYC 상태가 '활성'이 아닐 때(ADM-03 KYC 상태 — 심사중(EDD)·일시제한·동결) · 정상 시 배너 없음<br>· 노출 중: [거래 요청] 비활성(항목 6 ⑥) · 자산·수량 입력은 가능(조회만) · 내부 사유·AML 심사 내용 미노출(공통 UI 규격 오류 문구 ③)<br>· 문구 고정 · 닫기(×) 없음 · '이메일로 문의' — 링크(mailto) 여부·주소 <span style="color:#b45309;">[확인필요]</span><br><span class="basis">근거 G-3 · 공통 UI 규격 권한·상태 게이팅</span></div>
+        <div class="itm-desc">· 노출 조건: 기관 KYC 상태가 '활성'이 아닐 때(ADM-03 KYC 상태 — 심사중(EDD)·일시제한·동결) · 정상 시 배너 없음<br>· 노출 중: [거래 요청] 비활성(항목 6 ⑥) · 자산·수량 입력은 가능(조회만) · 내부 사유·AML 심사 내용 미노출(공통 UI 규격 오류 문구 ③)<br>· 문구 고정 · 닫기(×) 없음 · '이메일로 문의' — 링크(mailto) 여부·주소 <span class="chk">[확인필요]</span><br><span class="basis">근거 G-3 · 공통 UI 규격 권한·상태 게이팅</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">배너</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용) · 상태가 '활성'으로 바뀌면 다음 진입 시 배너 제거·버튼 활성</span></div>
         </div>
@@ -205,7 +205,7 @@
     <div class="detail-grid" id="detailCol">
       <div class="dtl" data-idx="0">
         <div class="detail-label"><span class="dtl-num">1</span>페어 성격</div>
-      <div class="dtl-body"><span class="box">· USDC ↔ USDT : <strong>동일통화(USD연동)</strong> = 디페그/1:1 기준, 가격 거의 동일<br>· ETH ↔ USDC / ETH ↔ USDT : <strong>코인↔스테이블</strong> = 외부지표 시세 기준(변동성) — 견적 유효시간·이탈 임계 민감 <span class="red">[확인필요]</span><br>· <span class="red">[전제 변경 2026-09-02]</span> ETH 재편입 — '전부 스테이블코인' 소명 논거 소멸, 구조 통제(자기재고·수동집행·외부지표 스프레드·비MM)로 소명 · JPYSC 미취급 유지</span></div>
+      <div class="dtl-body"><span class="box">· USDC ↔ USDT : <strong>동일통화(USD연동)</strong> = 디페그/1:1 기준, 가격 거의 동일<br>· ETH ↔ USDC / ETH ↔ USDT : <strong>코인↔스테이블</strong> = 외부지표 시세 기준(변동성) — 견적 유효시간·이탈 임계 민감 <span class="chk">[확인필요]</span><br>· <strong>[전제 변경 2026-09-02]</strong> ETH 재편입 — '전부 스테이블코인' 소명 논거 소멸, 구조 통제(자기재고·수동집행·외부지표 스프레드·비MM)로 소명 · JPYSC 미취급 유지</span></div>
       </div>
       <div class="dtl" data-idx="1">
         <div class="detail-label"><span class="dtl-num">2</span>자산 선택 순서 강제 이유</div>
@@ -213,7 +213,7 @@
       </div>
       <div class="dtl" data-idx="2">
         <div class="detail-label"><span class="dtl-num">3</span>한도·풀 초과 처리</div>
-      <div class="dtl-body"><span class="box">· 유효 상한 = min(1회 한도 1,500,000원 상당의 해당 자산 환산 수량, 가용 풀) — 두 조건 모두 충족해야 요청 가능 · 환산 시세·시점 = ADM-03 시세 소스 · 요청 시점(입력 중 실시간 재계산)<br>· 풀 = 0 : 수량 입력 비활성, <span class="red">"현재 교환 불가"</span> 표기<br>· 풀 값 출처 = 커스터디 운영자산 잔고(기존 시스템) + ADM-03 정책 한도 — 별도 지갑 화면 신규 개발 없음<br>· 일간·월간 누적 한도 미정 <span class="red">[확인필요]</span></span></div>
+      <div class="dtl-body"><span class="box">· 유효 상한 = min(1회 한도 1,500,000원 상당의 해당 자산 환산 수량, 가용 풀) — 두 조건 모두 충족해야 요청 가능 · 환산 시세·시점 = ADM-03 시세 소스 · 요청 시점(입력 중 실시간 재계산)<br>· 풀 = 0 : 수량 입력 비활성, <strong>"현재 교환 불가"</strong> 표기<br>· 풀 값 출처 = 커스터디 운영자산 잔고(기존 시스템) + ADM-03 정책 한도 — 별도 지갑 화면 신규 개발 없음<br>· 일간·월간 누적 한도 미정 <span class="chk">[확인필요]</span></span></div>
       </div>
       <div class="dtl" data-idx="3">
         <div class="detail-label"><span class="dtl-num">4</span>비용 구조 고지 · 계산 규칙</div>
@@ -221,7 +221,7 @@
       </div>
       <div class="dtl" data-idx="4">
         <div class="detail-label"><span class="dtl-num">5</span>라벨 금지 · UI 문구 통제</div>
-      <div class="dtl-body"><span class="box">금지 표현: '공식 LP', '마켓메이커', '플랫폼 보증', '최저가 보장' 등<br>허용: 'DSRV가 상대방인 교환', '외부지표 기준 스프레드'<br><span class="red">평판 뱃지 미사용(2026-08-31 결정)</span></span></div>
+      <div class="dtl-body"><span class="box">금지 표현: '공식 LP', '마켓메이커', '플랫폼 보증', '최저가 보장' 등<br>허용: 'DSRV가 상대방인 교환', '외부지표 기준 스프레드'<br><strong>평판 뱃지 미사용(2026-08-31 결정)</strong></span></div>
       </div>
       <div class="dtl" data-idx="5">
         <div class="detail-label"><span class="dtl-num">6</span>요청 이후 상태</div>
@@ -229,7 +229,7 @@
       </div>
       <div class="dtl" data-idx="6">
         <div class="detail-label"><span class="dtl-num">7</span>KYC 상태 → 배너 매핑</div>
-      <div class="dtl-body"><span class="box">· ADM-03 기관 KYC 상태: 활성(배너 없음) / 심사중(EDD)·일시제한·동결(배너 노출·요청 차단) — 상태 라벨은 states.html 도메인 상태와 동일 <span class="red">[확인필요: 상태별 문구 차등 여부]</span><br>· 배너는 EXC-01·BRK-02·BRK-03(행위 화면)에 동일 규격으로 노출, DASH-01에는 요약 배너 <span class="red">[확인필요]</span></span></div>
+      <div class="dtl-body"><span class="box">· ADM-03 기관 KYC 상태: 활성(배너 없음) / 심사중(EDD)·일시제한·동결(배너 노출·요청 차단) — 상태 라벨은 states.html 도메인 상태와 동일 <span class="chk">[확인필요: 상태별 문구 차등 여부]</span><br>· 배너는 EXC-01·BRK-02·BRK-03(행위 화면)에 동일 규격으로 노출, DASH-01에는 요약 배너 <span class="chk">[확인필요]</span></span></div>
       </div>
     </div>
   </div>

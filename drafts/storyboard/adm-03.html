@@ -74,7 +74,7 @@
                   <span style="white-space:nowrap;display:inline-block;margin:1px 6px 1px 0;"><span style="font-size:9.5px;color:#64748b;">ETH↔USDT</span> <span class="inp">0.10<span class="u">%</span></span></span> &nbsp;
                   <span style="white-space:nowrap;display:inline-block;margin:1px 6px 1px 0;"><span style="font-size:9.5px;color:#64748b;">USDC↔USDT</span> <span class="inp">0.10<span class="u">%</span></span></span>
                 </div>
-                <div style="font-size:9.5px;color:#b45309;margin-top:2px;">ETH 페어 값은 목업 예시 — 요율 미정 [확인필요: 09 §0]</div>
+                <div style="font-size:9.5px;color:#888;margin-top:2px;">ETH 페어 값은 목업 예시 — 요율 미정 [확인필요: 09 §0]</div>
               </td>
             </tr>
             <tr>
@@ -181,7 +181,7 @@
     <div class="nav-global">
       <div class="nav-global-title">진입 · 전역 이동</div>
       <div class="nav-note">· <strong>전역 이동</strong> = 어드민 셸 정본(ADM-02)와 동일<br>
-      · 차이 = 현재 탭 '설정'(재클릭 무반응) · '홈' 탭·로고 이동과 로그아웃 시 <strong>저장되지 않은 변경 파기</strong>(확인 없음 · 관리자 예외 여부 <span style="color:#b45309;">[확인필요]</span>)<br>
+      · 차이 = 현재 탭 '설정'(재클릭 무반응) · '홈' 탭·로고 이동과 로그아웃 시 <strong>저장되지 않은 변경 파기</strong>(확인 없음 · 관리자 예외 여부 <span class="chk">[확인필요]</span>)<br>
       · <strong>진입</strong>: 어드민 홈(ADM-02) '설정' 탭 클릭 · 진입 시 초기 상태 = 저장값 표시 · dirty 0 · [되돌리기]·[변경 저장] 비활성 (목업은 price guard 1건 수정 상태)<br>
       · 발생 알람 처리(잠금 해제·재이행 도래·격리 등)는 이 화면이 아니라 홈(ADM-02) 처리함에서 · 어드민 역할 1종 — 전 기능 동일 노출<br>
       · <strong>적용 원칙</strong>: 수치·선택 파라미터(항목 2~9) = [변경 저장] 일괄 반영 · 확인 없음 · <strong>신규 요청부터 적용</strong>(진행 중 건은 요청 시점 값 유지) / 즉시 적용형 2종(취급자산 상태 ▾ · 기관 KYC 상태 변경 ▾) = 저장 버튼과 무관 · 차단 방향은 확인 다이얼로그<br>
@@ -192,7 +192,7 @@
       <div class="num">1</div>
       <div>
         <div class="itm-title">취급자산 상태 ▾ × 3<span class="req">필수</span></div>
-        <div class="itm-desc">· 자산별 드롭다운 3개(ETH / USDC / USDT · 대표 핀 = ETH) · 옵션 <strong>활성 / 중지</strong> · 자산 추가·삭제 UI 없음(취급자산 변경 = 변경신고 사안 · 화면 밖) · 페어는 활성 자산 간 자동 3종(ETH↔USDC · ETH↔USDT · USDC↔USDT)<br>· <strong>중지 효과</strong>: 그 자산 포함 페어 2종의 신규 교환 요청·게시·신청 차단 — EXC-01·BRK-02 자산 목록에서 제외 · 진행 중 건은 유지 · 게재중 게시의 자동 중지 여부 <span style="color:#b45309;">[확인필요]</span><br>· <strong>즉시 적용형</strong>(저장 버튼과 무관) · '중지' 선택 = 확인 다이얼로그 + 사유 필수 · '활성' 복귀 = 확인 없음 · 변경은 감사로그(ASSET 상태 · POLICY_VERSION과 별개)<br><span class="basis">근거 09 §0 취급자산 3종·Ethereum 단일(2026-09-02) · notation 드롭다운·확인 다이얼로그 규격</span></div>
+        <div class="itm-desc">· 자산별 드롭다운 3개(ETH / USDC / USDT · 대표 핀 = ETH) · 옵션 <strong>활성 / 중지</strong> · 자산 추가·삭제 UI 없음(취급자산 변경 = 변경신고 사안 · 화면 밖) · 페어는 활성 자산 간 자동 3종(ETH↔USDC · ETH↔USDT · USDC↔USDT)<br>· <strong>중지 효과</strong>: 그 자산 포함 페어 2종의 신규 교환 요청·게시·신청 차단 — EXC-01·BRK-02 자산 목록에서 제외 · 진행 중 건은 유지 · 게재중 게시의 자동 중지 여부 <span class="chk">[확인필요]</span><br>· <strong>즉시 적용형</strong>(저장 버튼과 무관) · '중지' 선택 = 확인 다이얼로그 + 사유 필수 · '활성' 복귀 = 확인 없음 · 변경은 감사로그(ASSET 상태 · POLICY_VERSION과 별개)<br><span class="basis">근거 09 §0 취급자산 3종·Ethereum 단일(2026-09-02) · notation 드롭다운·확인 다이얼로그 규격</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">취급자산 ▾ → '활성'</span><span class="nav-act">클릭 → 목록 펼침(활성 / 중지 · 현재 선택 강조) → '활성' 클릭</span><span class="nav-to stay">칩 갱신·목록 닫힘 · 바깥 클릭/ESC = 변경 없이 닫힘 · 즉시 적용 · 토스트 "{자산} 취급을 재개했습니다" · 고객 화면 목록 복귀</span></div>
           <div class="nav-row"><span class="nav-el">취급자산 ▾ → '중지'</span><span class="nav-act">'중지' 클릭 → 다이얼로그: 제목 "{자산} 취급 중지" / 본문 "{자산}이 포함된 페어({페어 2종})의 신규 교환 요청·게시·신청이 즉시 차단됩니다. 진행 중 건은 유지됩니다." / 사유 입력(필수 · 10~500자) / [중지] [돌아가기] → "처리 중…"</span><span class="nav-to stay">칩 '중지'(회색) · 토스트 "{자산} 취급을 중지했습니다 — 신규 요청 차단" · EXC-01·BRK-02 목록 제외 · 감사로그(사유 포함)</span></div>
@@ -205,7 +205,7 @@
       <div class="num">2</div>
       <div>
         <div class="itm-title">나목 고정 스프레드 — 페어별 입력 3개<span class="req">필수</span></div>
-        <div class="itm-desc">· 입력 3개(ETH↔USDC · ETH↔USDT · USDC↔USDT) · 단위 % · 허용 문자 숫자·소수점 · <strong>소수 2자리</strong>(초과 입력 무시) · 범위 0.01~5.00(상세 2 — 기획 가정) · 화면 표기 소수 2자리 · CSV 표기 소수 4자리 소수(0.0010)<br>· 검증 시점: 문자·자릿수 = 키 입력마다 / 빈칸·범위 = 포커스 아웃 · <strong>상태</strong> ①정상 ②빈칸 — 빨간 테두리 + 셀 아래 인라인 ⚠ "값을 입력해 주세요" ③범위 초과 — ⚠ "0.01~5.00 사이 값을 입력해 주세요" · 변경된 셀 = ● + 노란 배경(dirty)<br>· 적용: 저장 후 <strong>신규 요청부터</strong> — EXC-01 스프레드 표시·EXC-02 비율 산정(외부지표 + 이 값) · 제시된 견적은 요청 시점 값 유지<br>· ETH 페어 값 0.10은 목업 예시 — 요율 미정 <span style="color:#b45309;">[확인필요: 09 §0 ETH 페어 스프레드]</span> · 스프레드 갱신주기(시세 반영 주기) 파라미터 별도 필요 여부 <span style="color:#b45309;">[확인필요]</span><br><span class="basis">근거 09 §0 나목 견적 산정(2026-09-02) · V2 · notation 스프레드 표기</span></div>
+        <div class="itm-desc">· 입력 3개(ETH↔USDC · ETH↔USDT · USDC↔USDT) · 단위 % · 허용 문자 숫자·소수점 · <strong>소수 2자리</strong>(초과 입력 무시) · 범위 0.01~5.00(상세 2 — 기획 가정) · 화면 표기 소수 2자리 · CSV 표기 소수 4자리 소수(0.0010)<br>· 검증 시점: 문자·자릿수 = 키 입력마다 / 빈칸·범위 = 포커스 아웃 · <strong>상태</strong> ①정상 ②빈칸 — 빨간 테두리 + 셀 아래 인라인 ⚠ "값을 입력해 주세요" ③범위 초과 — ⚠ "0.01~5.00 사이 값을 입력해 주세요" · 변경된 셀 = ● + 노란 배경(dirty)<br>· 적용: 저장 후 <strong>신규 요청부터</strong> — EXC-01 스프레드 표시·EXC-02 비율 산정(외부지표 + 이 값) · 제시된 견적은 요청 시점 값 유지<br>· ETH 페어 값 0.10은 목업 예시 — 요율 미정 <span class="chk">[확인필요: 09 §0 ETH 페어 스프레드]</span> · 스프레드 갱신주기(시세 반영 주기) 파라미터 별도 필요 여부 <span class="chk">[확인필요]</span><br><span class="basis">근거 09 §0 나목 견적 산정(2026-09-02) · V2 · notation 스프레드 표기</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">스프레드 필드(각각)</span><span class="nav-act">키 입력마다 문자·자릿수 검증 / 포커스 아웃 시 빈칸·범위 검증</span><span class="nav-to stay">정상 → 셀 dirty ● · [변경 저장] 활성 조건 재검사 / 오류 → 인라인 ⚠ ②·③ · [변경 저장] 비활성</span></div>
         </div>
@@ -227,7 +227,7 @@
       <div class="num">4</div>
       <div>
         <div class="itm-title">마목 중개 수수료율 입력<span class="req">필수</span></div>
-        <div class="itm-desc">· 단위 % · 숫자·소수점 · 소수 2자리 · 범위 0.00~5.00(상세 2) · 현재 <strong>1.00</strong>(2026-09-02 확정 — 거래액 1% 고정 · 양측 각자 · 기준 = 각자 보내는 자산 수량)<br>· 검증: 키 입력마다 문자·자릿수 / 포커스 아웃 빈칸·범위 · ①정상 ②빈칸 ⚠ "값을 입력해 주세요" ③범위 ⚠ "0.00~5.00 사이 값을 입력해 주세요" · dirty ●<br>· 적용: BRK-03·04·07 수수료 고시·계산(보내는 수량 × 요율 → 해당 자산 자릿수 절사 — 예 800 USDT × 1% = 8.00 USDT · 798.40 USDC × 1% = 7.98 USDC) · 신규 게시·신청부터 · 요율 변경은 약관·고시 문구 변경 동반 <span style="color:#b45309;">[확인필요: 변경 절차]</span><br><span class="basis">근거 09 §0 수수료(2026-09-02) · notation 입력 자릿수·절사</span></div>
+        <div class="itm-desc">· 단위 % · 숫자·소수점 · 소수 2자리 · 범위 0.00~5.00(상세 2) · 현재 <strong>1.00</strong>(2026-09-02 확정 — 거래액 1% 고정 · 양측 각자 · 기준 = 각자 보내는 자산 수량)<br>· 검증: 키 입력마다 문자·자릿수 / 포커스 아웃 빈칸·범위 · ①정상 ②빈칸 ⚠ "값을 입력해 주세요" ③범위 ⚠ "0.00~5.00 사이 값을 입력해 주세요" · dirty ●<br>· 적용: BRK-03·04·07 수수료 고시·계산(보내는 수량 × 요율 → 해당 자산 자릿수 절사 — 예 800 USDT × 1% = 8.00 USDT · 798.40 USDC × 1% = 7.98 USDC) · 신규 게시·신청부터 · 요율 변경은 약관·고시 문구 변경 동반 <span class="chk">[확인필요: 변경 절차]</span><br><span class="basis">근거 09 §0 수수료(2026-09-02) · notation 입력 자릿수·절사</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">수수료율 필드</span><span class="nav-act">키 입력마다 / 포커스 아웃 검증</span><span class="nav-to stay">정상 → dirty ● / 오류 → 인라인 ⚠ · [변경 저장] 비활성</span></div>
         </div>
@@ -238,7 +238,7 @@
       <div class="num">5</div>
       <div>
         <div class="itm-title">마목 유효기간 입력 2개 — 게시(일) · 신청(영업일)<span class="req">필수</span></div>
-        <div class="itm-desc">· 게시 유효기간: 정수 일 · 최대 2자리 · 범위 1~90(상세 2) · 현재 30 — 만료 시 게시 상태 '완료'(유효기간 만료) · 신청 유효기간: 정수 영업일 · 최대 2자리 · 범위 1~10 · 현재 2 — 만료 시 신청 종결·게시 '게재중' 복귀 · 영업일 = KST 평일(공휴일 캘린더 출처 <span style="color:#b45309;">[확인필요]</span>)<br>· 검증: 키 입력마다 문자 / 포커스 아웃 빈칸·범위 · ②빈칸 ⚠ "값을 입력해 주세요" ③범위 ⚠ "1~90 사이 정수를 입력해 주세요" / "1~10 사이 정수를 입력해 주세요" · dirty ●<br>· 적용: 신규 게시·신청부터(BRK-02 게시 시·BRK-03 신청 시 이 값을 표시) · 게재중 게시·대기 중 신청은 생성 시점 값<br><span class="basis">근거 09 §0 마목 게시 상태 개정(2026-09-02) · states 고객 도메인 초안</span></div>
+        <div class="itm-desc">· 게시 유효기간: 정수 일 · 최대 2자리 · 범위 1~90(상세 2) · 현재 30 — 만료 시 게시 상태 '완료'(유효기간 만료) · 신청 유효기간: 정수 영업일 · 최대 2자리 · 범위 1~10 · 현재 2 — 만료 시 신청 종결·게시 '게재중' 복귀 · 영업일 = KST 평일(공휴일 캘린더 출처 <span class="chk">[확인필요]</span>)<br>· 검증: 키 입력마다 문자 / 포커스 아웃 빈칸·범위 · ②빈칸 ⚠ "값을 입력해 주세요" ③범위 ⚠ "1~90 사이 정수를 입력해 주세요" / "1~10 사이 정수를 입력해 주세요" · dirty ●<br>· 적용: 신규 게시·신청부터(BRK-02 게시 시·BRK-03 신청 시 이 값을 표시) · 게재중 게시·대기 중 신청은 생성 시점 값<br><span class="basis">근거 09 §0 마목 게시 상태 개정(2026-09-02) · states 고객 도메인 초안</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">게시·신청 유효기간 필드(각각)</span><span class="nav-act">키 입력마다 / 포커스 아웃 검증</span><span class="nav-to stay">정상 → dirty ● / 오류 → 인라인 ⚠ · [변경 저장] 비활성</span></div>
         </div>
@@ -249,7 +249,7 @@
       <div class="num">6</div>
       <div>
         <div class="itm-title">price guard 자동중지 임계 입력<span class="req">필수</span></div>
-        <div class="itm-desc">· 단위 ±% · 숫자·소수점 · 소수 1자리 · 범위 0.1~10.0(상세 2) · 저장값 2.0 · <strong>목업 = 2.5로 수정된 dirty 상태</strong>(● 노란 배경 · 상단 "저장되지 않은 변경 1건")<br>· 검증: 키 입력마다 문자·자릿수 / 포커스 아웃 빈칸·범위 · ②빈칸 ⚠ "값을 입력해 주세요" ③범위 ⚠ "0.1~10.0 사이 값을 입력해 주세요"<br>· 적용: 게시 시점 기준가(시세 소스) 대비 이탈이 임계 초과 → 게시 자동 '중지' · 대기 신청 전부 종결 · 양측 이메일 · 재개는 재게시 · 판정 시세 = 항목 8 시세 소스 · BRK-02 게시자 설정값의 <strong>기본값</strong>인지 고정값인지 <span style="color:#b45309;">[확인필요]</span><br><span class="basis">근거 09 §0 price guard(외부지표 = 이탈 감지 가드 · 가격 결정 아님) · 마목 게시 상태 '중지'(2026-09-02)</span></div>
+        <div class="itm-desc">· 단위 ±% · 숫자·소수점 · 소수 1자리 · 범위 0.1~10.0(상세 2) · 저장값 2.0 · <strong>목업 = 2.5로 수정된 dirty 상태</strong>(● 노란 배경 · 상단 "저장되지 않은 변경 1건")<br>· 검증: 키 입력마다 문자·자릿수 / 포커스 아웃 빈칸·범위 · ②빈칸 ⚠ "값을 입력해 주세요" ③범위 ⚠ "0.1~10.0 사이 값을 입력해 주세요"<br>· 적용: 게시 시점 기준가(시세 소스) 대비 이탈이 임계 초과 → 게시 자동 '중지' · 대기 신청 전부 종결 · 양측 이메일 · 재개는 재게시 · 판정 시세 = 항목 8 시세 소스 · BRK-02 게시자 설정값의 <strong>기본값</strong>인지 고정값인지 <span class="chk">[확인필요]</span><br><span class="basis">근거 09 §0 price guard(외부지표 = 이탈 감지 가드 · 가격 결정 아님) · 마목 게시 상태 '중지'(2026-09-02)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">임계 필드</span><span class="nav-act">키 입력마다 / 포커스 아웃 검증</span><span class="nav-to stay">정상 → dirty ● / 오류 → 인라인 ⚠ · [변경 저장] 비활성</span></div>
         </div>
@@ -260,7 +260,7 @@
       <div class="num">7</div>
       <div>
         <div class="itm-title">건별 한도 입력 (원 상당)<span class="req">필수</span></div>
-        <div class="itm-desc">· 단위 <strong>원 상당</strong> · 정수 · 천 단위 쉼표 자동 삽입 · 최대 10자리 · 범위 10,000~1,000,000,000(상세 2) · 현재 <strong>1,500,000</strong>(2026-09-02(9) 원화 기준으로 변경 · 나·마 공통 1회)<br>· 검증: 키 입력마다 문자 / 포커스 아웃 빈칸·범위 · ②빈칸 ⚠ "값을 입력해 주세요" ③범위 ⚠ "10,000~1,000,000,000 사이 정수를 입력해 주세요" · dirty ●<br>· 적용: EXC-01 수량 한도 검증·표기 "1회 최대 {정책값}원 상당" · BRK-02 게시 게이트 · BRK-03 신청자 거래 안전성 검증 — 환산 = 시세 소스 <strong>KRW 시세</strong> · 요청 시점(ETH·USDC·USDT 모두 KRW 시세 환산 — 종전 스테이블 USD 1:1 전제 폐기) · 저장 후 신규 요청부터<br>· 일간·월간 누적 한도 파라미터 없음 <span style="color:#b45309;">[확인필요: 09 §0]</span><br><span class="basis">근거 09 §0 건별 한도(2026-09-02) · notation 한도 표기</span></div>
+        <div class="itm-desc">· 단위 <strong>원 상당</strong> · 정수 · 천 단위 쉼표 자동 삽입 · 최대 10자리 · 범위 10,000~1,000,000,000(상세 2) · 현재 <strong>1,500,000</strong>(2026-09-02(9) 원화 기준으로 변경 · 나·마 공통 1회)<br>· 검증: 키 입력마다 문자 / 포커스 아웃 빈칸·범위 · ②빈칸 ⚠ "값을 입력해 주세요" ③범위 ⚠ "10,000~1,000,000,000 사이 정수를 입력해 주세요" · dirty ●<br>· 적용: EXC-01 수량 한도 검증·표기 "1회 최대 {정책값}원 상당" · BRK-02 게시 게이트 · BRK-03 신청자 거래 안전성 검증 — 환산 = 시세 소스 <strong>KRW 시세</strong> · 요청 시점(ETH·USDC·USDT 모두 KRW 시세 환산 — 종전 스테이블 USD 1:1 전제 폐기) · 저장 후 신규 요청부터<br>· 일간·월간 누적 한도 파라미터 없음 <span class="chk">[확인필요: 09 §0]</span><br><span class="basis">근거 09 §0 건별 한도(2026-09-02) · notation 한도 표기</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">건별 한도 필드</span><span class="nav-act">키 입력마다 / 포커스 아웃 검증 · 쉼표 자동 포맷</span><span class="nav-to stay">정상 → dirty ● / 오류 → 인라인 ⚠ · [변경 저장] 비활성</span></div>
         </div>
@@ -271,7 +271,7 @@
       <div class="num">8</div>
       <div>
         <div class="itm-title">시세(외부지표) 소스 ▾<span class="req">필수</span></div>
-        <div class="itm-desc">· 드롭다운 · 옵션 <strong>업비트 / 빗썸 / 바이낸스</strong> · 단일 선택(복수 조합·가중 없음) · 현재 바이낸스(목업 예시 · 확정값 아님) · 저장형(변경 저장으로 반영 · dirty ●)<br>· 용도: 나목 비율 산정 기준가(EXC-02) · 건별 한도 KRW 환산(EXC-01·BRK-02·BRK-03) · price guard 이탈 판정(BRK 게시) — <strong>소스명은 고객 화면 미노출</strong>(09 §0 2026-09-02)<br>· 업비트·빗썸은 KRW 마켓이라 한도 환산에 직접 사용 · 바이낸스는 USD 마켓 → USD→KRW 환율 경유 — <strong>환율 소스·갱신 주기는 개발 결정</strong>(기획 미지정 · 2026-09-02(10) 사용자 결정) · 소스 수신 장애 시 대체 소스·요청 차단 처리 <span style="color:#b45309;">[확인필요]</span><br><span class="basis">근거 09 §0 나목 외부지표 참조 스프레드 고정·price guard · 고객 화면 미노출 · notation 드롭다운 규격</span></div>
+        <div class="itm-desc">· 드롭다운 · 옵션 <strong>업비트 / 빗썸 / 바이낸스</strong> · 단일 선택(복수 조합·가중 없음) · 현재 바이낸스(목업 예시 · 확정값 아님) · 저장형(변경 저장으로 반영 · dirty ●)<br>· 용도: 나목 비율 산정 기준가(EXC-02) · 건별 한도 KRW 환산(EXC-01·BRK-02·BRK-03) · price guard 이탈 판정(BRK 게시) — <strong>소스명은 고객 화면 미노출</strong>(09 §0 2026-09-02)<br>· 업비트·빗썸은 KRW 마켓이라 한도 환산에 직접 사용 · 바이낸스는 USD 마켓 → USD→KRW 환율 경유 — <strong>환율 소스·갱신 주기는 개발 결정</strong>(기획 미지정 · 2026-09-02(10) 사용자 결정) · 소스 수신 장애 시 대체 소스·요청 차단 처리 <span class="chk">[확인필요]</span><br><span class="basis">근거 09 §0 나목 외부지표 참조 스프레드 고정·price guard · 고객 화면 미노출 · notation 드롭다운 규격</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">시세 소스 ▾</span><span class="nav-act">클릭 → 목록 펼침(업비트 / 빗썸 / 바이낸스 · 현재 선택 강조) → 항목 클릭</span><span class="nav-to stay">칩 갱신·목록 닫힘 · 바깥 클릭/ESC = 변경 없이 닫힘 · 셀 dirty ● · 저장 후 신규 요청부터 기준가·환산·판정에 반영</span></div>
         </div>
@@ -282,7 +282,7 @@
       <div class="num">9</div>
       <div>
         <div class="itm-title">핫월렛 비중 임계 입력<span class="req">필수</span></div>
-        <div class="itm-desc">· 단위 % · 정수 · 최대 2자리 · 범위 0~20(콜드 80% 요건의 상한 — 고시 원문 <span style="color:#b45309;">[확인필요]</span>) · 현재 20<br>· 검증: 키 입력마다 문자 / 포커스 아웃 빈칸·범위 · ②빈칸 ⚠ "값을 입력해 주세요" ③범위 ⚠ "0~20 사이 정수를 입력해 주세요" · dirty ●<br>· 적용: 핫월렛 보유 비중이 임계 초과 시 ADM-02 처리함 월렛·키 알람(T6 스윕 워닝) 생성 — 저장 후 다음 감시 주기부터 · 현행 운영은 100% 콜드(핫월렛 신설 없음)라 실질 0%<br><span class="basis">근거 states T6 · 09 §0 지갑(콜드 100% 수동 운영) · §11 콜드 80%</span></div>
+        <div class="itm-desc">· 단위 % · 정수 · 최대 2자리 · 범위 0~20(콜드 80% 요건의 상한 — 고시 원문 <span class="chk">[확인필요]</span>) · 현재 20<br>· 검증: 키 입력마다 문자 / 포커스 아웃 빈칸·범위 · ②빈칸 ⚠ "값을 입력해 주세요" ③범위 ⚠ "0~20 사이 정수를 입력해 주세요" · dirty ●<br>· 적용: 핫월렛 보유 비중이 임계 초과 시 ADM-02 처리함 월렛·키 알람(T6 스윕 워닝) 생성 — 저장 후 다음 감시 주기부터 · 현행 운영은 100% 콜드(핫월렛 신설 없음)라 실질 0%<br><span class="basis">근거 states T6 · 09 §0 지갑(콜드 100% 수동 운영) · §11 콜드 80%</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">핫월렛 비중 필드</span><span class="nav-act">키 입력마다 / 포커스 아웃 검증</span><span class="nav-to stay">정상 → dirty ● / 오류 → 인라인 ⚠ · [변경 저장] 비활성</span></div>
         </div>
@@ -306,7 +306,7 @@
       <div class="num">11</div>
       <div>
         <div class="itm-title">[변경 저장] 버튼<span class="req">필수</span></div>
-        <div class="itm-desc">· primary · 항목 2~9 변경값 일괄 저장 → <strong>POLICY_VERSION +1</strong>(변경자·전후값·시각 감사로그) · 구속력 없는 설정 저장 = <strong>확인 다이얼로그 없음</strong>(공통 UI 규격 "그 외 저장은 확인 없음") · 2인 승인 없음(DSRV 단일 처리 — 09 §0)<br>· 적용 시점: 새 값은 저장 이후 신규 요청·게시·신청부터 · 진행 중 건(제시된 견적·게재중 게시·대기 신청)은 생성 시점 값 유지 · EXC-01/02·BRK-02/03/04/07은 이 값을 표출만(하드코딩 없음)<br>· 저장 후 상단 라인 "현재 정책 버전 v{N} · 최종 변경 {일시} · {관리자 ID}" 갱신 · 변경 이력 조회 UI 없음 — 감사로그(DB)에서 · 이력 CSV 추가 여부 <span style="color:#b45309;">[확인필요]</span><br><span class="basis">근거 V2 · 09 §0 line 51 · 정책 변경통제 [스키마 POLICY_VERSION] · notation 확인 다이얼로그 규격</span></div>
+        <div class="itm-desc">· primary · 항목 2~9 변경값 일괄 저장 → <strong>POLICY_VERSION +1</strong>(변경자·전후값·시각 감사로그) · 구속력 없는 설정 저장 = <strong>확인 다이얼로그 없음</strong>(공통 UI 규격 "그 외 저장은 확인 없음") · 2인 승인 없음(DSRV 단일 처리 — 09 §0)<br>· 적용 시점: 새 값은 저장 이후 신규 요청·게시·신청부터 · 진행 중 건(제시된 견적·게재중 게시·대기 신청)은 생성 시점 값 유지 · EXC-01/02·BRK-02/03/04/07은 이 값을 표출만(하드코딩 없음)<br>· 저장 후 상단 라인 "현재 정책 버전 v{N} · 최종 변경 {일시} · {관리자 ID}" 갱신 · 변경 이력 조회 UI 없음 — 감사로그(DB)에서 · 이력 CSV 추가 여부 <span class="chk">[확인필요]</span><br><span class="basis">근거 V2 · 09 §0 line 51 · 정책 변경통제 [스키마 POLICY_VERSION] · notation 확인 다이얼로그 규격</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[변경 저장] — 활성 조건</span><span class="nav-act">다음이 모두 참: ①dirty 셀 1개 이상 ②인라인 오류 0 ③저장 중 아님</span><span class="nav-to stay">하나라도 미충족 → 회색 비활성(공통 UI 규격) · 사유는 해당 셀 인라인 ⚠으로 이미 노출</span></div>
           <div class="nav-row"><span class="nav-el">[변경 저장] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음 → 라벨 "저장 중…"·전 필드 비활성(중복 클릭 차단) → 서버 검증(범위·자릿수 재검증) → 저장</span><span class="nav-to stay">토스트 "정책값이 저장되었습니다 (v13) — 신규 요청부터 적용" · 버전 라인 갱신 · dirty 표시 제거 · 두 버튼 비활성 복귀 · 감사로그</span></div>
@@ -319,7 +319,7 @@
       <div class="num">12</div>
       <div>
         <div class="itm-title">기관·가입자 목록 (표시 전용)</div>
-        <div class="itm-desc">· 행 클릭 없음 · 열: 기관 · 가입자 · KYC 상태 · 계정 상태 · 조치 — 조치 열은 모든 행 [상태 변경 ▾], 계정 상태 '초대 발송됨' 행에만 [초대 재발송] 추가<br>· <strong>KYC 상태 칩</strong>(기관 · G-3 게이팅 단일 출처): 활성(초록) / 심사중(EDD)(파랑) / 일시제한(노랑 · 부가 사유 "재이행 미응답" 등) / 동결(빨강) / 해지(회색) · <strong>계정 상태 칩</strong>(가입자): 초대 발송됨(파랑) / 활성(초록) / 잠금(노랑) / 해지(회색) — 계정 상태는 시스템·홈 처리함이 전이(ONB-01~03 활성화 · AUTH-01 잠금 · ADM-02 T8 해제), 이 화면에서 직접 변경 없음<br>· 가입자 열 표시값(이름 vs 이메일 마스킹) <span style="color:#b45309;">[확인필요]</span> · 기관당 가입자 1명 — 고객사 기안·승인 2인 분리 없음<br>· <strong>목록 규격</strong>: 최신 등록순 단일 리스트 · 검색·필터·정렬 없음(전체 조회는 ADM-02 CSV ①) · 빈 상태 "등록된 기관이 없습니다" + "아래 초대 발송으로 첫 기관을 초대하세요" · 로딩 "불러오는 중…" · 100행 초과 [더 보기] · 갱신: 초대 발송·상태 변경·ADM-02 처리(잠금 해제·신규 거래 제한) 즉시<br><span class="basis">근거 F-12 관리자 콘솔 ORG·KYC 통합 · 예외 A1·A2·A6 · notation 상태 칩·목록 규격</span></div>
+        <div class="itm-desc">· 행 클릭 없음 · 열: 기관 · 가입자 · KYC 상태 · 계정 상태 · 조치 — 조치 열은 모든 행 [상태 변경 ▾], 계정 상태 '초대 발송됨' 행에만 [초대 재발송] 추가<br>· <strong>KYC 상태 칩</strong>(기관 · G-3 게이팅 단일 출처): 활성(초록) / 심사중(EDD)(파랑) / 일시제한(노랑 · 부가 사유 "재이행 미응답" 등) / 동결(빨강) / 해지(회색) · <strong>계정 상태 칩</strong>(가입자): 초대 발송됨(파랑) / 활성(초록) / 잠금(노랑) / 해지(회색) — 계정 상태는 시스템·홈 처리함이 전이(ONB-01~03 활성화 · AUTH-01 잠금 · ADM-02 T8 해제), 이 화면에서 직접 변경 없음<br>· 가입자 열 표시값(이름 vs 이메일 마스킹) <span class="chk">[확인필요]</span> · 기관당 가입자 1명 — 고객사 기안·승인 2인 분리 없음<br>· <strong>목록 규격</strong>: 최신 등록순 단일 리스트 · 검색·필터·정렬 없음(전체 조회는 ADM-02 CSV ①) · 빈 상태 "등록된 기관이 없습니다" + "아래 초대 발송으로 첫 기관을 초대하세요" · 로딩 "불러오는 중…" · 100행 초과 [더 보기] · 갱신: 초대 발송·상태 변경·ADM-02 처리(잠금 해제·신규 거래 제한) 즉시<br><span class="basis">근거 F-12 관리자 콘솔 ORG·KYC 통합 · 예외 A1·A2·A6 · notation 상태 칩·목록 규격</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">기관 행(조치 버튼 제외)</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용 — 기관 상세 화면 없음)</span></div>
         </div>
@@ -330,7 +330,7 @@
       <div class="num">13</div>
       <div>
         <div class="itm-title">[초대 재발송] 버튼</div>
-        <div class="itm-desc">· 계정 상태 '초대 발송됨'(링크 만료 72h·미수신·분실) 행에만 노출·활성 · 활성 계정 행에는 미노출 · 백업코드 소진 케이스는 가입자 자체 재설정(DASH-03)과 재초대 중 어느 경로인지 <span style="color:#b45309;">[확인필요]</span><br>· 동작: 기존 링크 즉시 무효 → 새 링크 72시간·1회 유효 → ONB-00 이메일 재발송(발신전용 · 링크는 초대 이메일 예외) · 확인 다이얼로그 없음 · 재발송 횟수 제한 <span style="color:#b45309;">[확인필요]</span><br><span class="basis">근거 ONB-00 초대(72h·1회) · ISMS 2.5</span></div>
+        <div class="itm-desc">· 계정 상태 '초대 발송됨'(링크 만료 72h·미수신·분실) 행에만 노출·활성 · 활성 계정 행에는 미노출 · 백업코드 소진 케이스는 가입자 자체 재설정(DASH-03)과 재초대 중 어느 경로인지 <span class="chk">[확인필요]</span><br>· 동작: 기존 링크 즉시 무효 → 새 링크 72시간·1회 유효 → ONB-00 이메일 재발송(발신전용 · 링크는 초대 이메일 예외) · 확인 다이얼로그 없음 · 재발송 횟수 제한 <span class="chk">[확인필요]</span><br><span class="basis">근거 ONB-00 초대(72h·1회) · ISMS 2.5</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[초대 재발송] — 활성 조건</span><span class="nav-act">계정 상태 '초대 발송됨' · 발송 중 아님</span><span class="nav-to stay">그 외 → 버튼 미노출(활성 계정) 또는 회색 비활성(발송 중)</span></div>
           <div class="nav-row"><span class="nav-el">[초대 재발송] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음 → 라벨 "발송 중…"·중복 클릭 차단</span><span class="nav-to stay">토스트 "초대 이메일을 다시 발송했습니다 — 72시간 유효" · 기존 링크 무효 · 라벨 복귀 · 감사로그 · 이동 없음(<strong>초대 이메일(ONB-00)</strong> 재발송)</span></div>
@@ -343,10 +343,10 @@
       <div class="num">14</div>
       <div>
         <div class="itm-title">[상태 변경 ▾] — 기관 KYC 상태<span class="req">필수</span></div>
-        <div class="itm-desc">· 행마다 반복(대표 핀 = A행) · 드롭다운 · 옵션 = <strong>현재 상태에서 허용된 전이만</strong>(현재 상태 제외): 심사중(EDD) → 활성 · 해지 / 활성 → 일시제한 · 동결 · 해지 / 일시제한 → 활성 · 동결 · 해지 / 동결 → 일시제한 · 해지(동결 → 활성 직접 복귀 불가 <span style="color:#b45309;">[확인필요]</span>) / 해지 → 없음(버튼 비활성)<br>· <strong>즉시 적용형</strong>(저장 버튼과 무관) · 모든 전이 = 확인 다이얼로그 + 사유 필수(계정 상태 변경 = 게이팅 변경) · 전 화면 게이팅 G-3 단일 출처 — 변경 즉시 고객 다음 요청·진입부터 반영(EXC-01·BRK-02·BRK-03 KYC 배너)<br>· 심사 자체는 별도 AML 시스템 — 이 화면은 결과 반영(상태 전이·계정 조치)만 · '해지' 확정 시 가입자 계정 상태도 '해지' 연동(상세 14)<br><span class="basis">근거 L1 §5의2 고객확인 재이행 · 예외 A1·A4·A6 · G-3 · notation 드롭다운·확인 다이얼로그(ADM-03 상태 변경)</span></div>
+        <div class="itm-desc">· 행마다 반복(대표 핀 = A행) · 드롭다운 · 옵션 = <strong>현재 상태에서 허용된 전이만</strong>(현재 상태 제외): 심사중(EDD) → 활성 · 해지 / 활성 → 일시제한 · 동결 · 해지 / 일시제한 → 활성 · 동결 · 해지 / 동결 → 일시제한 · 해지(동결 → 활성 직접 복귀 불가 <span class="chk">[확인필요]</span>) / 해지 → 없음(버튼 비활성)<br>· <strong>즉시 적용형</strong>(저장 버튼과 무관) · 모든 전이 = 확인 다이얼로그 + 사유 필수(계정 상태 변경 = 게이팅 변경) · 전 화면 게이팅 G-3 단일 출처 — 변경 즉시 고객 다음 요청·진입부터 반영(EXC-01·BRK-02·BRK-03 KYC 배너)<br>· 심사 자체는 별도 AML 시스템 — 이 화면은 결과 반영(상태 전이·계정 조치)만 · '해지' 확정 시 가입자 계정 상태도 '해지' 연동(상세 14)<br><span class="basis">근거 L1 §5의2 고객확인 재이행 · 예외 A1·A4·A6 · G-3 · notation 드롭다운·확인 다이얼로그(ADM-03 상태 변경)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[상태 변경 ▾] — 활성 조건</span><span class="nav-act">현재 KYC 상태가 '해지' 아님 · 다른 관리자가 이 기관 변경 중 아님</span><span class="nav-to stay">해당 없음 → 회색 비활성 · 해지 행은 인라인 "해지된 기관입니다"</span></div>
-          <div class="nav-row"><span class="nav-el">[상태 변경 ▾] — 클릭(활성)</span><span class="nav-act">클릭 → 목록 펼침(허용 전이만 · 예 A자산운용: 일시제한 / 동결 / 해지) → 항목 클릭 → 다이얼로그: 제목 "KYC 상태 변경 — {기관} {현재} → {선택}" / 본문(상태별): 활성 "고객 화면 안내 배너가 제거되고 거래가 재개됩니다." · 일시제한 "신규 교환 요청·게시·신청이 즉시 차단되고 고객 화면에 안내 배너가 표시됩니다. 진행 중 건은 유지됩니다." · 동결 "모든 거래·출금이 차단됩니다. 홈 처리함에 STR 검토 건이 생성됩니다." · 해지 "진행 중 거래 완결·전량 출금 확인 후 계정이 비활성화됩니다. 되돌릴 수 없습니다." / 사유 입력(필수 · 10~500자) / [변경] [돌아가기] · 바깥 클릭/ESC = 변경 없이 닫힘 → [변경] → "처리 중…"</span><span class="nav-to stay">칩 갱신 + 토스트 "{기관} KYC 상태를 {상태}로 변경했습니다" · 감사로그(사유) · G-3 게이팅 반영 · 동결 시 ADM-02 처리함 'STR 검토' 행 생성 <span style="color:#b45309;">[확인필요]</span></span></div>
+          <div class="nav-row"><span class="nav-el">[상태 변경 ▾] — 클릭(활성)</span><span class="nav-act">클릭 → 목록 펼침(허용 전이만 · 예 A자산운용: 일시제한 / 동결 / 해지) → 항목 클릭 → 다이얼로그: 제목 "KYC 상태 변경 — {기관} {현재} → {선택}" / 본문(상태별): 활성 "고객 화면 안내 배너가 제거되고 거래가 재개됩니다." · 일시제한 "신규 교환 요청·게시·신청이 즉시 차단되고 고객 화면에 안내 배너가 표시됩니다. 진행 중 건은 유지됩니다." · 동결 "모든 거래·출금이 차단됩니다. 홈 처리함에 STR 검토 건이 생성됩니다." · 해지 "진행 중 거래 완결·전량 출금 확인 후 계정이 비활성화됩니다. 되돌릴 수 없습니다." / 사유 입력(필수 · 10~500자) / [변경] [돌아가기] · 바깥 클릭/ESC = 변경 없이 닫힘 → [변경] → "처리 중…"</span><span class="nav-to stay">칩 갱신 + 토스트 "{기관} KYC 상태를 {상태}로 변경했습니다" · 감사로그(사유) · G-3 게이팅 반영 · 동결 시 ADM-02 처리함 'STR 검토' 행 생성 <span class="chk">[확인필요]</span></span></div>
           <div class="nav-row"><span class="nav-el">[상태 변경 ▾] — 실패</span><span class="nav-act">해지 전제 미충족(진행 중 거래·잔고 있음) / 경쟁 상태 / 서버 오류</span><span class="nav-to stay">화면 잔류 · 해지 전제 → 다이얼로그 내 인라인 ⚠ "진행 중 거래 또는 잔고가 있어 해지할 수 없습니다 — 완결·출금 후 다시 시도해 주세요" · [변경] 비활성 / 경쟁 → 배너 "상태가 이미 변경되었습니다 — 최신 상태를 불러왔습니다" · 칩 리로드 / 오류 → 공통 배너 · 칩 원복</span></div>
         </div>
       </div>
@@ -367,7 +367,7 @@
       <div class="num">16</div>
       <div>
         <div class="itm-title">가입자 이메일 입력<span class="req">필수</span></div>
-        <div class="itm-desc">· 형식 로컬@도메인.TLD · 최대 254자 · 소문자 자동 정규화 · 공백 제거 · 플레이스홀더 "가입자 이메일" · 저장 시 USER.email(CSV·화면 표시는 마스킹) · 개인 이메일 도메인 허용 여부 <span style="color:#b45309;">[확인필요: 법인 도메인 제한]</span><br>· 검증 시점: 형식 = 포커스 아웃 / 중복 = [초대 발송] 클릭 시 서버 검증 · <strong>상태</strong> ①빈칸 ②정상 ③형식 오류 — 빨간 테두리 + 인라인 ⚠ "이메일 형식이 올바르지 않습니다" ④중복 — ⚠ "이미 초대·가입된 이메일입니다"<br><span class="basis">근거 ONB-00 본인 이메일 초대(셀프가입 없음) · ISMS 2.5</span></div>
+        <div class="itm-desc">· 형식 로컬@도메인.TLD · 최대 254자 · 소문자 자동 정규화 · 공백 제거 · 플레이스홀더 "가입자 이메일" · 저장 시 USER.email(CSV·화면 표시는 마스킹) · 개인 이메일 도메인 허용 여부 <span class="chk">[확인필요: 법인 도메인 제한]</span><br>· 검증 시점: 형식 = 포커스 아웃 / 중복 = [초대 발송] 클릭 시 서버 검증 · <strong>상태</strong> ①빈칸 ②정상 ③형식 오류 — 빨간 테두리 + 인라인 ⚠ "이메일 형식이 올바르지 않습니다" ④중복 — ⚠ "이미 초대·가입된 이메일입니다"<br><span class="basis">근거 ONB-00 본인 이메일 초대(셀프가입 없음) · ISMS 2.5</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">이메일 필드</span><span class="nav-act">포커스 아웃 시 검증 · 키 입력 시 기존 오류 해제</span><span class="nav-to stay">정상 → [초대 발송] 활성 조건 재검사 / 오류 → 인라인 ⚠ ③ · [초대 발송] 비활성</span></div>
         </div>
@@ -378,7 +378,7 @@
       <div class="num">17</div>
       <div>
         <div class="itm-title">[초대 발송] 버튼<span class="req">필수</span></div>
-        <div class="itm-desc">· primary · 온보딩 진입점 — ORG 생성(ORG-NNNN 채번) + USER 생성(계정 상태 '초대 발송됨') + <strong>초대 이메일(ONB-00)</strong> 발송(72시간·1회 유효) → 가입자가 ONB-01~03(활성화·2FA) → AUTH-01 · 확인 다이얼로그 없음 · 목업 = 빈칸 상태(비활성)<br>· 초대 시 KYC 상태 초기값 = '심사중(EDD)'로 생성, 활성 전환은 [상태 변경 ▾] — 초기값 <span style="color:#b45309;">[확인필요: CDD 오프라인 완료 전제라면 '활성']</span><br>· 기관당 1계정 — 기존 가입자 있는 기관은 해지 후에만(기관명 중복 ④)<br><span class="basis">근거 ONB-00 · ISMS 2.5(계정·인증 관리) · 09 §0 고객(CDD 완료 법인)</span></div>
+        <div class="itm-desc">· primary · 온보딩 진입점 — ORG 생성(ORG-NNNN 채번) + USER 생성(계정 상태 '초대 발송됨') + <strong>초대 이메일(ONB-00)</strong> 발송(72시간·1회 유효) → 가입자가 ONB-01~03(활성화·2FA) → AUTH-01 · 확인 다이얼로그 없음 · 목업 = 빈칸 상태(비활성)<br>· 초대 시 KYC 상태 초기값 = '심사중(EDD)'로 생성, 활성 전환은 [상태 변경 ▾] — 초기값 <span class="chk">[확인필요: CDD 오프라인 완료 전제라면 '활성']</span><br>· 기관당 1계정 — 기존 가입자 있는 기관은 해지 후에만(기관명 중복 ④)<br><span class="basis">근거 ONB-00 · ISMS 2.5(계정·인증 관리) · 09 §0 고객(CDD 완료 법인)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[초대 발송] — 활성 조건</span><span class="nav-act">다음이 모두 참: ①기관명 정상 ②이메일 정상 ③인라인 오류 0 ④발송 중 아님</span><span class="nav-to stay">하나라도 미충족 → 회색 비활성(공통 UI 규격) · 사유는 필드 인라인 ⚠</span></div>
           <div class="nav-row"><span class="nav-el">[초대 발송] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음 → 라벨 "발송 중…"·필드 비활성 → 서버 중복 검증 → ORG·USER 생성 → 이메일 발송(원자적 — 발송 실패 시 생성 롤백)</span><span class="nav-to stay">목록 최상단 행 추가(KYC '심사중(EDD)' · 계정 '초대 발송됨' · [초대 재발송] 노출) · 폼 초기화 · 토스트 "초대 이메일을 발송했습니다 — {이메일 마스킹} · 72시간 유효" · 감사로그 · 이동 없음</span></div>
@@ -404,31 +404,31 @@
     <div class="detail-grid" id="detailCol">
       <div class="dtl" data-idx="0">
         <div class="detail-label"><span class="dtl-num">1</span>자산 중지 파급 범위</div>
-      <div class="dtl-body"><span class="box">· 중지 자산 포함 페어: EXC-01 보내는/받는 자산 ▾ 목록 제외 · BRK-02 자산 칩 목록 제외 · BRK-01 게재중 게시(해당 자산) 표시·신청 가능 여부 <span class="red">[확인필요]</span><br>· 진행 중 건(수락된 견적·확정 거래·집행 대기)은 영향 없음 — 집행은 콜드 수동 절차로 계속<br>· 자산 3종 중 2종 이상 중지 시 페어 0 → 나·마 서비스 전체 정지와 동일 — 별도 '서비스 정지' 플래그 없음(승인 중단 + 사고대응 절차서, ADM-02 비고)</span></div>
+      <div class="dtl-body"><span class="box">· 중지 자산 포함 페어: EXC-01 보내는/받는 자산 ▾ 목록 제외 · BRK-02 자산 칩 목록 제외 · BRK-01 게재중 게시(해당 자산) 표시·신청 가능 여부 <span class="chk">[확인필요]</span><br>· 진행 중 건(수락된 견적·확정 거래·집행 대기)은 영향 없음 — 집행은 콜드 수동 절차로 계속<br>· 자산 3종 중 2종 이상 중지 시 페어 0 → 나·마 서비스 전체 정지와 동일 — 별도 '서비스 정지' 플래그 없음(승인 중단 + 사고대응 절차서, ADM-02 비고)</span></div>
       </div>
       <div class="dtl" data-idx="1">
         <div class="detail-label"><span class="dtl-num">2</span>입력 범위 표 · 단일 출처 원칙</div>
-      <div class="dtl-body"><span class="box">· <strong>범위(기획 가정 — 상·하한 전부 <span class="red">[확인필요]</span>)</strong>: 스프레드 0.01~5.00% 2자리 · 견적 유효시간 30~600 s 정수 · 수수료율 0.00~5.00% 2자리 · 게시 유효기간 1~90일 정수 · 신청 유효기간 1~10영업일 정수 · price guard 0.1~10.0% 1자리 · 건별 한도 10,000~1,000,000,000원 정수 · 핫월렛 비중 0~20% 정수<br>· 공통 입력 규격: 숫자·소수점만 · 자릿수 초과 입력 무시 · 오류 = 빨간 테두리 + 셀 아래 인라인 ⚠(원인 + 해결 행동) · dirty = ● + 노란 배경<br>· EXC-01/02·BRK-02/03/04/07은 이 값을 표출만 — 화면 하드코딩 없음, '가격형성 아님' 소명값의 단일 출처<br>· 수수료 1% = 거래액 기준 고정·양측 각자(2026-09-02 확정) · 건별 한도 1,500,000원 상당(2026-09-02(9) 원화 기준 · 종전 표기(1,000 USD 상당 · 그 이전 원화 억 단위 · 코인 수량) 모두 폐기)<br>· <span class="red">[확인필요]</span> 1% 요율 합리성·설명의무 소명 수위(09 §8) · 한도 환산 시세 장애 시 처리</span></div>
+      <div class="dtl-body"><span class="box">· <strong>범위(기획 가정 — 상·하한 전부 <span class="chk">[확인필요]</span>)</strong>: 스프레드 0.01~5.00% 2자리 · 견적 유효시간 30~600 s 정수 · 수수료율 0.00~5.00% 2자리 · 게시 유효기간 1~90일 정수 · 신청 유효기간 1~10영업일 정수 · price guard 0.1~10.0% 1자리 · 건별 한도 10,000~1,000,000,000원 정수 · 핫월렛 비중 0~20% 정수<br>· 공통 입력 규격: 숫자·소수점만 · 자릿수 초과 입력 무시 · 오류 = 빨간 테두리 + 셀 아래 인라인 ⚠(원인 + 해결 행동) · dirty = ● + 노란 배경<br>· EXC-01/02·BRK-02/03/04/07은 이 값을 표출만 — 화면 하드코딩 없음, '가격형성 아님' 소명값의 단일 출처<br>· 수수료 1% = 거래액 기준 고정·양측 각자(2026-09-02 확정) · 건별 한도 1,500,000원 상당(2026-09-02(9) 원화 기준 · 종전 표기(1,000 USD 상당 · 그 이전 원화 억 단위 · 코인 수량) 모두 폐기)<br>· <span class="chk">[확인필요]</span> 1% 요율 합리성·설명의무 소명 수위(09 §8) · 한도 환산 시세 장애 시 처리</span></div>
       </div>
       <div class="dtl" data-idx="7">
         <div class="detail-label"><span class="dtl-num">8</span>시세 소스 용도 · KRW 환산 경로</div>
-      <div class="dtl-body"><span class="box">· 용도 3종: ① 나목 기준가(EXC-02 산정 = 기준가 ± 스프레드) ② 건별 한도 KRW 환산(ETH·USDC·USDT 모두 소스 KRW 시세 · USD 마켓 소스면 환율 경유) ③ price guard 이탈 판정(게시 시점 기준가 vs 현재)<br>· 소스명은 고객 콘솔 어디에도 미노출(09 §0 2026-09-02) — 고객 화면은 "외부지표 기준" 문구만<br>· 바이낸스(USD 마켓) 선택 시 USD→KRW 환율 소스·갱신 주기는 <strong>개발 결정</strong>(기획 미지정 · 2026-09-02(10)) · <span class="red">[확인필요]</span> 소스 장애 시 대체 소스 자동 전환 vs 신규 요청 차단 · 마목은 시세 불관여 원칙 — price guard는 '가드'로만 사용</span></div>
+      <div class="dtl-body"><span class="box">· 용도 3종: ① 나목 기준가(EXC-02 산정 = 기준가 ± 스프레드) ② 건별 한도 KRW 환산(ETH·USDC·USDT 모두 소스 KRW 시세 · USD 마켓 소스면 환율 경유) ③ price guard 이탈 판정(게시 시점 기준가 vs 현재)<br>· 소스명은 고객 콘솔 어디에도 미노출(09 §0 2026-09-02) — 고객 화면은 "외부지표 기준" 문구만<br>· 바이낸스(USD 마켓) 선택 시 USD→KRW 환율 소스·갱신 주기는 <strong>개발 결정</strong>(기획 미지정 · 2026-09-02(10)) · <span class="chk">[확인필요]</span> 소스 장애 시 대체 소스 자동 전환 vs 신규 요청 차단 · 마목은 시세 불관여 원칙 — price guard는 '가드'로만 사용</span></div>
       </div>
       <div class="dtl" data-idx="10">
         <div class="detail-label"><span class="dtl-num">11</span>저장·버전·적용 시점</div>
-      <div class="dtl-body"><span class="box">· 저장 1회 = POLICY_VERSION 1건(전후값·변경자·시각) — 진행 중 건은 자기 생성 시점의 버전을 참조(견적·게시·신청 레코드에 version 기록)<br>· 확인 다이얼로그 없음 = 저장 자체는 구속력 없음(고객 거래는 신규 요청부터) · 즉시 적용형 2종(자산 상태·KYC 상태)만 확인<br>· 동시 수정 = 낙관적 잠금(버전 불일치 → 리로드) · 2인 승인 없음(DSRV 단일 처리)<br>· dirty 상태 이탈('홈' 탭·로그아웃) = 파기·확인 없음(공통) — 관리자 화면 예외(이탈 경고) 여부 <span class="red">[확인필요]</span> · 변경 이력 조회 UI 없음 — 이력 CSV 추가 여부 <span class="red">[확인필요]</span></span></div>
+      <div class="dtl-body"><span class="box">· 저장 1회 = POLICY_VERSION 1건(전후값·변경자·시각) — 진행 중 건은 자기 생성 시점의 버전을 참조(견적·게시·신청 레코드에 version 기록)<br>· 확인 다이얼로그 없음 = 저장 자체는 구속력 없음(고객 거래는 신규 요청부터) · 즉시 적용형 2종(자산 상태·KYC 상태)만 확인<br>· 동시 수정 = 낙관적 잠금(버전 불일치 → 리로드) · 2인 승인 없음(DSRV 단일 처리)<br>· dirty 상태 이탈('홈' 탭·로그아웃) = 파기·확인 없음(공통) — 관리자 화면 예외(이탈 경고) 여부 <span class="chk">[확인필요]</span> · 변경 이력 조회 UI 없음 — 이력 CSV 추가 여부 <span class="chk">[확인필요]</span></span></div>
       </div>
       <div class="dtl" data-idx="13">
         <div class="detail-label"><span class="dtl-num">14</span>KYC 상태 기계 → 게이팅·연동</div>
-      <div class="dtl-body"><span class="box">· 활성 = 배너 없음·전 기능 / 심사중(EDD)·일시제한·동결 = EXC-01·BRK-02·BRK-03 KYC 예외 배너 + 요청 차단(내부 사유 미노출) / 해지 = 로그인 불가<br>· 전이 주체: 활성 → 일시제한은 ADM-02 T7 [신규 거래 제한]·T5 [STR 검토] 체크박스에서도 발생 · 동결 전환은 ADM-02 T8(탈취 의심)에서도 · 일시제한 → 활성 복귀는 이 화면에서만(사람)<br>· 해지 = 기관 KYC '해지' + 가입자 계정 '해지' 연동 · 전제: 진행 중 거래 0·잔고 0(전량 출금) — 미충족 시 다이얼로그 내 차단<br>· 1기관 1가입자: 고객사 내부 기안↔승인 분리 전제 없음 — 구속력 행위는 고객 화면 결과 고지 1문장으로 대체 · DSRV 측 직무분리(자기승인 차단)는 ADM-02 유지<br>· <span class="red">[확인필요]</span> 동결 → 활성 직접 복귀 허용 여부 · 동결 시 STR 검토 자동 생성 여부 · 일시제한 중 조회·출금 허용 범위</span></div>
+      <div class="dtl-body"><span class="box">· 활성 = 배너 없음·전 기능 / 심사중(EDD)·일시제한·동결 = EXC-01·BRK-02·BRK-03 KYC 예외 배너 + 요청 차단(내부 사유 미노출) / 해지 = 로그인 불가<br>· 전이 주체: 활성 → 일시제한은 ADM-02 T7 [신규 거래 제한]·T5 [STR 검토] 체크박스에서도 발생 · 동결 전환은 ADM-02 T8(탈취 의심)에서도 · 일시제한 → 활성 복귀는 이 화면에서만(사람)<br>· 해지 = 기관 KYC '해지' + 가입자 계정 '해지' 연동 · 전제: 진행 중 거래 0·잔고 0(전량 출금) — 미충족 시 다이얼로그 내 차단<br>· 1기관 1가입자: 고객사 내부 기안↔승인 분리 전제 없음 — 구속력 행위는 고객 화면 결과 고지 1문장으로 대체 · DSRV 측 직무분리(자기승인 차단)는 ADM-02 유지<br>· <span class="chk">[확인필요]</span> 동결 → 활성 직접 복귀 허용 여부 · 동결 시 STR 검토 자동 생성 여부 · 일시제한 중 조회·출금 허용 범위</span></div>
       </div>
       <div class="dtl" data-idx="16">
         <div class="detail-label"><span class="dtl-num">17</span>온보딩 연결</div>
-      <div class="dtl-body"><span class="box">· [초대 발송] → 초대 이메일(ONB-00 · 72h·1회 링크 — 이메일 링크 없음 원칙의 유일한 예외) → 계정 활성화(ONB-01~03 · 비밀번호·Google Authenticator·복구 코드) → 로그인(AUTH-01) · 활성화 완료 시 계정 상태 '초대 발송됨' → '활성'(시스템)<br>· 초대 발송·재발송·상태 변경은 전부 감사로그(ISMS 2.5) · 셀프가입·소셜 로그인 없음<br>· <span class="red">[확인필요]</span> 초대 시 KYC 초기값(심사중 vs 활성) · 재발송 횟수 제한 · 개인 이메일 도메인 허용</span></div>
+      <div class="dtl-body"><span class="box">· [초대 발송] → 초대 이메일(ONB-00 · 72h·1회 링크 — 이메일 링크 없음 원칙의 유일한 예외) → 계정 활성화(ONB-01~03 · 비밀번호·Google Authenticator·복구 코드) → 로그인(AUTH-01) · 활성화 완료 시 계정 상태 '초대 발송됨' → '활성'(시스템)<br>· 초대 발송·재발송·상태 변경은 전부 감사로그(ISMS 2.5) · 셀프가입·소셜 로그인 없음<br>· <span class="chk">[확인필요]</span> 초대 시 KYC 초기값(심사중 vs 활성) · 재발송 횟수 제한 · 개인 이메일 도메인 허용</span></div>
       </div>
       <div class="dtl" data-idx="17">
         <div class="detail-label"><span class="dtl-num">18</span>해지(탈퇴) 흐름 · 기록 보존</div>
-      <div class="dtl-body"><span class="box">해지 요청 → 진행 중 거래 완결 대기(신규 거래는 요청 즉시 차단) → 자산 전량 출금 확인 → 비활성화(기관·가입자 '해지')<br>· 해지 후에도 기록은 법정 기간 보존 — 거래 15년·AML 5년(L6 §9 · 예외 A5) · CSV ①에 '해지' 상태로 잔존<br>· <span class="red">[확인필요]</span> 일시제한 중 조회·출금 허용 범위 · KYC 심사 도구 연동 범위(심사 자체는 별도 AML 시스템 — 이 화면은 상태 전이·계정 조치만)</span></div>
+      <div class="dtl-body"><span class="box">해지 요청 → 진행 중 거래 완결 대기(신규 거래는 요청 즉시 차단) → 자산 전량 출금 확인 → 비활성화(기관·가입자 '해지')<br>· 해지 후에도 기록은 법정 기간 보존 — 거래 15년·AML 5년(L6 §9 · 예외 A5) · CSV ①에 '해지' 상태로 잔존<br>· <span class="chk">[확인필요]</span> 일시제한 중 조회·출금 허용 범위 · KYC 심사 도구 연동 범위(심사 자체는 별도 AML 시스템 — 이 화면은 상태 전이·계정 조치만)</span></div>
       </div>
     </div>
   </div>

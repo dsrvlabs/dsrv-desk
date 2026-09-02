@@ -103,7 +103,7 @@
     <div class="nav-global">
       <div class="nav-global-title">진입 · 전역 이동</div>
       <div class="nav-note">· <strong>전역 이동</strong> = 고객 콘솔 셸 정본(DASH-01)과 동일<br>
-      · 차이 = 현재 탭 '교환하기' — 재클릭은 <strong>EXC-01 초기 상태</strong>(진행 중 건과 무관) <span style="color:#b45309;">[확인필요: DASH-01 행 클릭 진입 시 현재 탭 강조 위치 — 목업은 '교환하기' 강조]</span> · '대시보드'·로고는 [확인]과 같은 목적지 · 진행 중 건은 거래 목록에 남음<br>
+      · 차이 = 현재 탭 '교환하기' — 재클릭은 <strong>EXC-01 초기 상태</strong>(진행 중 건과 무관) <span class="chk">[확인필요: DASH-01 행 클릭 진입 시 현재 탭 강조 위치 — 목업은 '교환하기' 강조]</span> · '대시보드'·로고는 [확인]과 같은 목적지 · 진행 중 건은 거래 목록에 남음<br>
       · <strong>진입</strong> ① 비율 확인·수락(EXC-02) [수락] 직후(수락 처리 응답과 함께 진입 — 이 화면 로딩 없음) ② 대시보드(DASH-01) 거래 목록에서 상태 '진행중'(나목) 행 클릭 — 재진입 시 kv 영역 "불러오는 중…" → 값(3초 초과 → 상단 배너 오류 규격)<br>
       · <strong>갱신 방식</strong>: 화면 체류 중 자동 갱신(polling) 없음 — 상태는 재진입 시점에 서버 값으로 다시 그림 · 이 화면에서 건이 종결(완료/거절)되어도 실시간 전환 없음 → 다음 DASH-01 행 클릭 시 <strong>내역·완료(EXC-04)</strong>로 진입<br>
       · 이 화면 내 승인·처리·취소 액션 없음 — DSRV 내부 처리(승인·집행)는 어드민 홈(ADM-02) 처리함에서 · 고객 취소 동선 없음(수락 즉시 확정) · 뒤로가기 미지원(공통 UI 규격)<br>
@@ -122,7 +122,7 @@
       <div class="num">2</div>
       <div>
         <div class="itm-title">소요 안내 · 결과 확인 경로 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · 고정 문구 2줄: "거래가 접수되었습니다. 약 <strong>{영업일}영업일</strong> 소요됩니다."(ADM-03 값 표시 · 목업 '2'는 예시) / "최종 상태(완료 / 거절)는 대시보드 거래 목록에서 확인할 수 있습니다."<br>· 영업일 = KST 기준 평일(공휴일 제외) · 기산점 = 수락 시각 <span style="color:#b45309;">[확인필요: 영업일 정의·기산점 약관 명시]</span><br>· 즉시 체결이 아님(콜드 수동 집행)을 고지 — 자동체결 거래소 아님 담보 · 자동검증(한도·BLF·KYT)·트래블룰 확인 내용은 고객 화면 미표시<br>· 승인되지 않은 건은 EXC-04에 '거절' + 일반화 사유로만 표기 — AML 심사 내용·내부 사유 미노출(공통 UI 규격 오류 문구 ③) · 심사가 길어져 관리자가 보류로 두어도 고객에게는 계속 '진행중'<br><span class="basis">근거 L6 설명의무 · STR 누설금지(특정금융정보법 제4조 [원문대조필요]) · 09 §0 콜드 출고 2영업일 약관 명시 [확인필요]</span></div>
+        <div class="itm-desc">· 클릭 요소 없음 · 고정 문구 2줄: "거래가 접수되었습니다. 약 <strong>{영업일}영업일</strong> 소요됩니다."(ADM-03 값 표시 · 목업 '2'는 예시) / "최종 상태(완료 / 거절)는 대시보드 거래 목록에서 확인할 수 있습니다."<br>· 영업일 = KST 기준 평일(공휴일 제외) · 기산점 = 수락 시각 <span class="chk">[확인필요: 영업일 정의·기산점 약관 명시]</span><br>· 즉시 체결이 아님(콜드 수동 집행)을 고지 — 자동체결 거래소 아님 담보 · 자동검증(한도·BLF·KYT)·트래블룰 확인 내용은 고객 화면 미표시<br>· 승인되지 않은 건은 EXC-04에 '거절' + 일반화 사유로만 표기 — AML 심사 내용·내부 사유 미노출(공통 UI 규격 오류 문구 ③) · 심사가 길어져 관리자가 보류로 두어도 고객에게는 계속 '진행중'<br><span class="basis">근거 L6 설명의무 · STR 누설금지(특정금융정보법 제4조 [원문대조필요]) · 09 §0 콜드 출고 2영업일 약관 명시 [확인필요]</span></div>
       </div>
     </div>
 
@@ -156,7 +156,7 @@
     <div class="detail-grid" id="detailCol">
       <div class="dtl" data-idx="0">
         <div class="detail-label"><span class="dtl-num">1</span>고객사 승인을 없앤 근거 · 상태 전이</div>
-      <div class="dtl-body"><span class="box">· 교환 이전은 DSRV 수탁 <strong>콜드월렛의 기존 다중승인 절차</strong>를 그대로 거침 — 화면에서 2인 승인을 또 받으면 <strong>동일 통제의 중복</strong><br>· 직무분리(ISMS 2.2.2)는 커스터디 이체 승인 + DSRV 승인↔집행 서명 분리로 충족 · DSRV 집행: 콜드 <strong>2인 멀티시그(2키/2인)</strong> — 승인권과 서명권 분리 유지<br>· 고객 화면 상태 전이: 수락(확정) → <strong>진행중</strong>(이 화면) → 완료 / 거절(EXC-04) — 내부 상태(승인 대기·에스컬레이션·<strong>보류</strong>·집행 대기·서명 중)는 ADM-02에서만 · 고객 화면 상태 enum <span class="red">[확인필요: states 고객 도메인]</span></span></div>
+      <div class="dtl-body"><span class="box">· 교환 이전은 DSRV 수탁 <strong>콜드월렛의 기존 다중승인 절차</strong>를 그대로 거침 — 화면에서 2인 승인을 또 받으면 <strong>동일 통제의 중복</strong><br>· 직무분리(ISMS 2.2.2)는 커스터디 이체 승인 + DSRV 승인↔집행 서명 분리로 충족 · DSRV 집행: 콜드 <strong>2인 멀티시그(2키/2인)</strong> — 승인권과 서명권 분리 유지<br>· 고객 화면 상태 전이: 수락(확정) → <strong>진행중</strong>(이 화면) → 완료 / 거절(EXC-04) — 내부 상태(승인 대기·에스컬레이션·<strong>보류</strong>·집행 대기·서명 중)는 ADM-02에서만 · 고객 화면 상태 enum <span class="chk">[확인필요: states 고객 도메인]</span></span></div>
       </div>
       <div class="dtl" data-idx="1">
         <div class="detail-label"><span class="dtl-num">2</span>거절 표기·사유 카테고리</div>

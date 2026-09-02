@@ -118,7 +118,7 @@
       <div class="nav-note">· <strong>전역 이동</strong> = 고객 콘솔 셸 정본(DASH-01)과 동일<br>
       · 차이 = 현재 탭 '교환하기' — 재클릭은 무반응이 아니라 <strong>EXC-01 초기 상태</strong>(새 요청) · GNB 이동으로 이탈한 결과는 아래 '재진입 없음' 참조<br>
       · <strong>진입</strong>: 교환하기(EXC-01) [거래 요청] 클릭 → 시스템 자동 산정("산정 중…") 완료 즉시 진입 — 이 화면 자체 로딩 없음(값은 진입 시 전부 확정) · 대기·담당자 개입 없음<br>
-      · <strong>재진입 없음</strong>: 이 화면을 벗어나면(GNB 이동·브라우저 닫기) 돌아올 경로 없음 — 미수락 건은 서버 기한 경과 시 '만료'로 자동 종결 · 브라우저 뒤로가기 미지원(공통 UI 규격) <span style="color:#b45309;">[확인필요: 만료·거절 건의 DASH-01 거래 목록 노출 여부]</span><br>
+      · <strong>재진입 없음</strong>: 이 화면을 벗어나면(GNB 이동·브라우저 닫기) 돌아올 경로 없음 — 미수락 건은 서버 기한 경과 시 '만료'로 자동 종결 · 브라우저 뒤로가기 미지원(공통 UI 규격) <span class="chk">[확인필요: 만료·거절 건의 DASH-01 거래 목록 노출 여부]</span><br>
       · 목업 예시: 900 USDC → <strong>899.73 USDT</strong>, 확정 비율 0.9997 USDT/USDC(EXC-01 참고 비율 0.9998과 다른 값 — "참고와 다를 수 있음" 예시), 스프레드 0.10%, 요청번호 EXC-20260902-0001, 수락 기한 02:00 · 모두 예시값(정책값은 ADM-03 값 표시)</div>
     </div>
 
@@ -142,7 +142,7 @@
       <div class="num">3</div>
       <div>
         <div class="itm-title">수락 기한 카운트다운 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · 형식 <strong>MM:SS</strong> 1초 단위 감소 · 시작값 = <strong>{유효시간}초</strong>(ADM-03 값 표시 · 목업 02:00은 예시) · 색 = 상시 강조색(잔여 시간에 따른 색 변경·점멸 없음)<br>· 기준 시각: 진입 시 서버가 준 <strong>만료 시각</strong>을 기준으로 클라이언트가 표시 — 표시는 안내용, 만료 판정의 정본은 [수락] 클릭 시 <strong>서버 재검증</strong>(상세 3)<br>· <strong>상태</strong> ① 진행(00:01 이상) — 숫자 감소 · [수락] 활성 ② <strong>만료(00:00 도달)</strong> — 타이머 자리 텍스트 "만료됨 — 비율 무효"(같은 색) · [수락] 즉시 회색 비활성(서버 응답 대기 없음) · [거절] 활성 유지(이탈 수단, 항목 6) · 토스트·모달 없음(인라인 표시만) ③ 탭 비활성·절전 후 복귀 — 서버 만료 시각 기준으로 잔여 재계산(이미 지났으면 ② 상태)<br>· 기한은 <strong>수락 행위에만</strong> 적용 — 수락 후 DSRV 거래 진행(EXC-03, 약 {영업일}영업일)은 기한과 무관<br><span class="basis">근거 V2 (건별 요청에만 산정 · 상시 호가 아님 담보) · 유효시간 수치 <span style="color:#b45309;">[확인필요: ADM-03 정책값]</span></span></div>
+        <div class="itm-desc">· 클릭 요소 없음 · 형식 <strong>MM:SS</strong> 1초 단위 감소 · 시작값 = <strong>{유효시간}초</strong>(ADM-03 값 표시 · 목업 02:00은 예시) · 색 = 상시 강조색(잔여 시간에 따른 색 변경·점멸 없음)<br>· 기준 시각: 진입 시 서버가 준 <strong>만료 시각</strong>을 기준으로 클라이언트가 표시 — 표시는 안내용, 만료 판정의 정본은 [수락] 클릭 시 <strong>서버 재검증</strong>(상세 3)<br>· <strong>상태</strong> ① 진행(00:01 이상) — 숫자 감소 · [수락] 활성 ② <strong>만료(00:00 도달)</strong> — 타이머 자리 텍스트 "만료됨 — 비율 무효"(같은 색) · [수락] 즉시 회색 비활성(서버 응답 대기 없음) · [거절] 활성 유지(이탈 수단, 항목 6) · 토스트·모달 없음(인라인 표시만) ③ 탭 비활성·절전 후 복귀 — 서버 만료 시각 기준으로 잔여 재계산(이미 지났으면 ② 상태)<br>· 기한은 <strong>수락 행위에만</strong> 적용 — 수락 후 DSRV 거래 진행(EXC-03, 약 {영업일}영업일)은 기한과 무관<br><span class="basis">근거 V2 (건별 요청에만 산정 · 상시 호가 아님 담보) · 유효시간 수치 <span class="chk">[확인필요: ADM-03 정책값]</span></span></div>
       </div>
     </div>
 
@@ -171,7 +171,7 @@
       <div class="num">6</div>
       <div>
         <div class="itm-title">[거절] 버튼</div>
-        <div class="itm-desc">· ghost · <strong>확인 없음 · 사유 입력 없음</strong>(공통 UI 규격: 취소·거절은 확인 없음) · 클릭 = 이 요청 건 종결('거절') — 채번된 요청번호 재사용 없음<br>· 만료 상태에서도 활성 유지 — 만료 후에는 상태 변경 없이 화면 이탈 수단으로만 동작 <span style="color:#b45309;">[확인필요: 만료 후 라벨을 '돌아가기'로 바꿀지(기획 가정: 라벨 유지)]</span><br><span class="basis">근거 notation 공통 UI 규격 '확인 다이얼로그'·'종료 동선'(ghost = 직전 화면 복귀)</span></div>
+        <div class="itm-desc">· ghost · <strong>확인 없음 · 사유 입력 없음</strong>(공통 UI 규격: 취소·거절은 확인 없음) · 클릭 = 이 요청 건 종결('거절') — 채번된 요청번호 재사용 없음<br>· 만료 상태에서도 활성 유지 — 만료 후에는 상태 변경 없이 화면 이탈 수단으로만 동작 <span class="chk">[확인필요: 만료 후 라벨을 '돌아가기'로 바꿀지(기획 가정: 라벨 유지)]</span><br><span class="basis">근거 notation 공통 UI 규격 '확인 다이얼로그'·'종료 동선'(ghost = 직전 화면 복귀)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[거절] — 활성 조건</span><span class="nav-act">다음이 아님: ①[수락] 처리 중(응답 대기)</span><span class="nav-to stay">처리 중에만 회색 비활성 · 만료·실패 상태에서는 활성</span></div>
           <div class="nav-row"><span class="nav-el">[거절] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음 → 라벨 "처리 중…"·비활성 → 건 상태 '거절' 종결(만료·풀 부족으로 이미 종결된 건이면 상태 변경 없음)</span><span class="nav-to"><strong>교환하기(EXC-01)</strong> 초기 상태(자산 미선택·수량 빈칸) — 새 요청부터 다시 · 토스트 없음</span></div>
@@ -202,7 +202,7 @@
       <div class="dtl" data-idx="1">
         <div class="detail-label"><span class="dtl-num">2</span>외부지표 소스 — 내부 관리 (화면 미노출)</div>
       <div class="dtl-body">
-        <span class="box">· 소스: <strong>업비트·빗썸·바이낸스</strong> 시세 — 조합 방식(중앙값·평균·우선순위) <span class="red">[확인필요]</span> · 소스명·조합 방식은 고객 화면 어디에도 표시하지 않음(09 §0 2026-09-02)<br>· USDC↔USDT: 디페그/1:1 기준(동일통화) — 가격 거의 동일, 지표 1 근접<br>· ETH↔USDC · ETH↔USDT: 거래소 ETH 시세 기준 — 변동성 있음, 확정 후 집행 전 이탈 임계 적용 · ETH 페어 스프레드 요율 <span class="red">[확인필요]</span><br>· JPYSC 미취급 — 환율지표 페어 없음<br>· 소스·스프레드율·유효시간·이탈 임계는 <strong>ADM-03</strong> 단일 출처에서 관리 — 이 화면은 값을 표출만</span>
+        <span class="box">· 소스: <strong>업비트·빗썸·바이낸스</strong> 시세 — 조합 방식(중앙값·평균·우선순위) <span class="chk">[확인필요]</span> · 소스명·조합 방식은 고객 화면 어디에도 표시하지 않음(09 §0 2026-09-02)<br>· USDC↔USDT: 디페그/1:1 기준(동일통화) — 가격 거의 동일, 지표 1 근접<br>· ETH↔USDC · ETH↔USDT: 거래소 ETH 시세 기준 — 변동성 있음, 확정 후 집행 전 이탈 임계 적용 · ETH 페어 스프레드 요율 <span class="chk">[확인필요]</span><br>· JPYSC 미취급 — 환율지표 페어 없음<br>· 소스·스프레드율·유효시간·이탈 임계는 <strong>ADM-03</strong> 단일 출처에서 관리 — 이 화면은 값을 표출만</span>
         <span style="display:block;margin-top:6px;" class="red">가격형성(시장가) 아님 — 외부지표에 스프레드만 가산</span>
       </div>
       </div>
@@ -221,7 +221,7 @@
       <div class="dtl" data-idx="6">
         <div class="detail-label"><span class="dtl-num">7</span>교환 불가 3분기 — 인지 시점·화면</div>
       <div class="dtl-body">
-        <span class="box">① <strong>만료</strong>: 이 화면 — 타이머 "만료됨" + [수락] 비활성(항목 3 ②) / 이탈 후 만료도 서버 자동 종결 · <strong>만료 통지 메일 ⑥ 발송</strong>(2026-09-02(10)) → EXC-01 재요청<br>② <strong>가용 풀 부족</strong>: [수락] 클릭 시 서버 재검증 실패 ⓑ — 이 화면 인라인 ⚠ → EXC-01 재요청 / 수락 후 집행 시점 부족은 EXC-04 '만료' 사유(가용 풀 부족·비율 변동)<br>③ <strong>비율 변동(스프레드 이탈)</strong>: 수락 후 집행 전 외부지표가 ADM-03 이탈 임계 초과 → 집행 정지 → EXC-04 '만료' 사유(가용 풀 부족·비율 변동) + 이메일 통지 <span class="red">[확인필요: 통지 종류 — 공통 4종 외]</span></span>
+        <span class="box">① <strong>만료</strong>: 이 화면 — 타이머 "만료됨" + [수락] 비활성(항목 3 ②) / 이탈 후 만료도 서버 자동 종결 · <strong>만료 통지 메일 ⑥ 발송</strong>(2026-09-02(10)) → EXC-01 재요청<br>② <strong>가용 풀 부족</strong>: [수락] 클릭 시 서버 재검증 실패 ⓑ — 이 화면 인라인 ⚠ → EXC-01 재요청 / 수락 후 집행 시점 부족은 EXC-04 '만료' 사유(가용 풀 부족·비율 변동)<br>③ <strong>비율 변동(스프레드 이탈)</strong>: 수락 후 집행 전 외부지표가 ADM-03 이탈 임계 초과 → 집행 정지 → EXC-04 '만료' 사유(가용 풀 부족·비율 변동) + 이메일 통지 <span class="chk">[확인필요: 통지 종류 — 공통 4종 외]</span></span>
       </div>
       </div>
     </div>

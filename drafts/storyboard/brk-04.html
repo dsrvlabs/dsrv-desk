@@ -187,7 +187,7 @@
         <div class="itm-desc">· danger · 게시자(가입자) 단독 실행 · 신청 종결 — <strong>사유 입력 없음</strong>(협상·개입 소지 차단) · 구속력·비가역 행위 아님 → <strong>확인 다이얼로그 없음</strong>(공통 UI 규격 — 거절은 확인 없음)<br>· 거절 후 게시는 <strong>게재중 복귀</strong>(게시판 재노출 · 다른 기관 신청 가능) · 자산이동·수수료 없음<br><span class="basis">근거 V2(통신중개 아님 — 사유·메시지 채널 없음) · 09 §0 마목 게시 상태(거절 → 게재중 복귀)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[거절] — 활성 조건</span><span class="nav-act">[수락]과 동일: ①수락 대기 아님 ②게시 협의중 아님 ③조회 실패 ④처리 진행 중</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격) · 사유는 항목 3 인라인 안내</span></div>
-          <div class="nav-row"><span class="nav-el">[거절] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음 → 버튼 라벨 "거절 중…"·[수락]·[취소] 비활성 → 신청 상태 거절(종결) · 게시 상태 게재중 복귀 · 신청자 통지(BRK-07 상태 · DASH-01 — 메일 여부 <span style="color:#b45309;">[확인필요: 거절 통지 메일 — 4종에 없음]</span>)</span><span class="nav-to"><strong>내 게시 상세·회수(BRK-06)</strong> — 상태 '게재중 · 받은 신청 0건'(빈 상태) · 별도 토스트 없음(기획 가정)</span></div>
+          <div class="nav-row"><span class="nav-el">[거절] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음 → 버튼 라벨 "거절 중…"·[수락]·[취소] 비활성 → 신청 상태 거절(종결) · 게시 상태 게재중 복귀 · 신청자 통지(BRK-07 상태 · DASH-01 — 메일 여부 <span class="chk">[확인필요: 거절 통지 메일 — 4종에 없음]</span>)</span><span class="nav-to"><strong>내 게시 상세·회수(BRK-06)</strong> — 상태 '게재중 · 받은 신청 0건'(빈 상태) · 별도 토스트 없음(기획 가정)</span></div>
           <div class="nav-row"><span class="nav-el">[거절] — 실패</span><span class="nav-act">클릭 사이 신청 만료·게시 중지·회수(이미 종결) / 시스템 오류</span><span class="nav-to stay">화면 잔류 · 이미 종결 → 항목 3 안내 + 버튼 비활성(결과는 동일하므로 오류 배너 없음) / 오류 → 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 버튼 라벨 복귀</span></div>
         </div>
       </div>
@@ -197,7 +197,7 @@
       <div class="num">7</div>
       <div>
         <div class="itm-title">[취소] 버튼</div>
-        <div class="itm-desc">· ghost · 행위 화면 공통 종료 동선 — 처리 없이 직전 화면(내 게시 상세) 복귀 · 신청은 수락 대기로 유지(유효기한 내 재진입 처리 가능)<br>· 2026-09-02 추가 — 종전에는 [거절] 후 자동 복귀만 있고 미처리 이탈 수단이 GNB뿐이었음(점검 지적) · notation 종료 동선 표에는 BRK-02·03만 명시 <span style="color:#b45309;">[확인필요: notation 종료 동선에 BRK-04 [취소] → BRK-06 추가]</span><br><span class="basis">근거 notation 종료 동선(입력·행위 화면 [취소] = 직전 목록 화면 복귀 · 확인 없음)</span></div>
+        <div class="itm-desc">· ghost · 행위 화면 공통 종료 동선 — 처리 없이 직전 화면(내 게시 상세) 복귀 · 신청은 수락 대기로 유지(유효기한 내 재진입 처리 가능)<br>· 2026-09-02 추가 — 종전에는 [거절] 후 자동 복귀만 있고 미처리 이탈 수단이 GNB뿐이었음(점검 지적) · notation 종료 동선 표에는 BRK-02·03만 명시 <span class="chk">[확인필요: notation 종료 동선에 BRK-04 [취소] → BRK-06 추가]</span><br><span class="basis">근거 notation 종료 동선(입력·행위 화면 [취소] = 직전 목록 화면 복귀 · 확인 없음)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[취소] — 활성 조건</span><span class="nav-act">항상 활성("수락 중…"/"거절 중…" 동안만 비활성) — 처리 불가 상태에서도 활성(유일한 화면 내 이탈 수단)</span><span class="nav-to stay">—</span></div>
           <div class="nav-row"><span class="nav-el">[취소] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음 → 처리 없음</span><span class="nav-to"><strong>내 게시 상세·회수(BRK-06)</strong> — 받은 신청 1건 목록 유지</span></div>
@@ -239,11 +239,11 @@
       </div>
       <div class="dtl" data-idx="4">
         <div class="detail-label"><span class="dtl-num">5</span>수락 시 재검증 · 이메일 ② 수락·확정 (수신: 양측)</div>
-      <div class="dtl-body"><span class="box">· 재검증 항목: 신청 유효기한 · 게시 상태(협의중) · 양측 처분 가능분(게시자 800 USDT · 신청자 798.40 USDC) — 신청 시점 검증(BRK-03)의 보완 <span class="red">[확인필요: 수락 시 양측 잔고 재검증 채택 여부 — 기획 가정]</span> · 실패 문구에 상대측 사유 미노출<br>· 확정 시: 상호 마스킹 해제(양측) · 게시 상태 확정 · DSRV 확인 건 ADM-02 처리함 유입 · 콜드 수동 집행(BRK-05)<br>· <strong>[이메일 ② 수락·확정 (수신: 양측)]</strong> 제목 "[DSRV] 교환 거래 확정 — BRK-20260830-0027" · 본문: "게시자가 신청을 수락하여 거래가 확정되었습니다. 구속력이 발생하며 이전(정산) 절차가 시작됩니다." + 확정 조건(공통 포맷: 요청번호·교환쌍·방향·800 USDT ↔ 798.40 USDC·0.9980 USDC/USDT) · 거래 상대방 상호(확정으로 마스킹 해제) · 중개 수수료(거래액 1% · 자기 측 금액만 — 게시자 8.00 USDT / 신청자 7.98 USDC) · 다음 단계(커스터디 콜드 이전 — 정산 배치 1영업일 3회, 완료 시 재안내) — 발신전용·링크 미포함 등 공통 원칙은 BRK-03 상세 4</span></div>
+      <div class="dtl-body"><span class="box">· 재검증 항목: 신청 유효기한 · 게시 상태(협의중) · 양측 처분 가능분(게시자 800 USDT · 신청자 798.40 USDC) — 신청 시점 검증(BRK-03)의 보완 <span class="chk">[확인필요: 수락 시 양측 잔고 재검증 채택 여부 — 기획 가정]</span> · 실패 문구에 상대측 사유 미노출<br>· 확정 시: 상호 마스킹 해제(양측) · 게시 상태 확정 · DSRV 확인 건 ADM-02 처리함 유입 · 콜드 수동 집행(BRK-05)<br>· <strong>[이메일 ② 수락·확정 (수신: 양측)]</strong> 제목 "[DSRV] 교환 거래 확정 — BRK-20260830-0027" · 본문: "게시자가 신청을 수락하여 거래가 확정되었습니다. 구속력이 발생하며 이전(정산) 절차가 시작됩니다." + 확정 조건(공통 포맷: 요청번호·교환쌍·방향·800 USDT ↔ 798.40 USDC·0.9980 USDC/USDT) · 거래 상대방 상호(확정으로 마스킹 해제) · 중개 수수료(거래액 1% · 자기 측 금액만 — 게시자 8.00 USDT / 신청자 7.98 USDC) · 다음 단계(커스터디 콜드 이전 — 정산 배치 1영업일 3회, 완료 시 재안내) — 발신전용·링크 미포함 등 공통 원칙은 BRK-03 상세 4</span></div>
       </div>
       <div class="dtl" data-idx="5">
         <div class="detail-label"><span class="dtl-num">6</span>거절·만료 처리</div>
-      <div class="dtl-body"><span class="box">· 거절/만료된 신청 → 신청 종결 · 게시 상태 '게재중' 복귀(게시판 재노출 · 다른 기관 신청 가능) · 자산이동·수수료 없음 · BRK-06 목록에 '거절'/'만료'로 잔존(선택 불가)<br>· 거절 사유 입력 없음(협상·개입 소지 차단) · 거절 확인 다이얼로그 없음(공통 UI 규격)<br>· 신청자 통지: BRK-07 상태(거절/만료) · DASH-01 거래 내역 — 이메일 4종(①접수 ②확정 ③완료 ④회수)에 거절·만료 없음 <span class="red">[확인필요: 거절·만료 통지 메일 추가 여부]</span><br>· 게시 유효기간 만료 시 게시 자체 종료 → 완료(유효기간 만료) · 미처리 신청도 함께 종결</span></div>
+      <div class="dtl-body"><span class="box">· 거절/만료된 신청 → 신청 종결 · 게시 상태 '게재중' 복귀(게시판 재노출 · 다른 기관 신청 가능) · 자산이동·수수료 없음 · BRK-06 목록에 '거절'/'만료'로 잔존(선택 불가)<br>· 거절 사유 입력 없음(협상·개입 소지 차단) · 거절 확인 다이얼로그 없음(공통 UI 규격)<br>· 신청자 통지: BRK-07 상태(거절/만료) · DASH-01 거래 내역 — 이메일 4종(①접수 ②확정 ③완료 ④회수)에 거절·만료 없음 <span class="chk">[확인필요: 거절·만료 통지 메일 추가 여부]</span><br>· 게시 유효기간 만료 시 게시 자체 종료 → 완료(유효기간 만료) · 미처리 신청도 함께 종결</span></div>
       </div>
     </div>
   </div>

@@ -179,7 +179,7 @@
       <div class="num">4</div>
       <div>
         <div class="itm-title">보유 · 처분 가능 잔고 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · 보내는 자산 선택 시 조회, 보내는 수량 필드 바로 아래 1줄 · 형식 「보유 {수량} {자산} · 처분 가능 {수량} {자산} ✓」<br>· <strong>처분 가능 = 커스터디 실보유 잔고 − 기게시(게재중·협의중) 중복분</strong> — 상세 4 · 확정 후 이전 대기분 차감 여부 <span style="color:#b45309;">[확인필요]</span><br>· 색: 입력 수량 ≤ 처분 가능 → 초록 ✓ / 초과 → 빨강(항목 3 ④ 경고와 동시) · 처분 가능 0 → "처분 가능 0 — 게시할 수 없습니다" + 수량 입력 비활성<br>· 로딩 "불러오는 중…"(3초 초과 → 오류) · 조회 실패 시 "—" + 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" + [게시] 비활성<br>· 목업 예시 12,500.00 USDT는 한도와 무관한 잔고 예시(2026-09-02)<br><span class="basis">근거 V2 거래 안전성 검증(4요소①) · 허위 게시 차단</span></div>
+        <div class="itm-desc">· 클릭 요소 없음 · 보내는 자산 선택 시 조회, 보내는 수량 필드 바로 아래 1줄 · 형식 「보유 {수량} {자산} · 처분 가능 {수량} {자산} ✓」<br>· <strong>처분 가능 = 커스터디 실보유 잔고 − 기게시(게재중·협의중) 중복분</strong> — 상세 4 · 확정 후 이전 대기분 차감 여부 <span class="chk">[확인필요]</span><br>· 색: 입력 수량 ≤ 처분 가능 → 초록 ✓ / 초과 → 빨강(항목 3 ④ 경고와 동시) · 처분 가능 0 → "처분 가능 0 — 게시할 수 없습니다" + 수량 입력 비활성<br>· 로딩 "불러오는 중…"(3초 초과 → 오류) · 조회 실패 시 "—" + 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" + [게시] 비활성<br>· 목업 예시 12,500.00 USDT는 한도와 무관한 잔고 예시(2026-09-02)<br><span class="basis">근거 V2 거래 안전성 검증(4요소①) · 허위 게시 차단</span></div>
       </div>
     </div>
 
@@ -199,7 +199,7 @@
       <div class="num">6</div>
       <div>
         <div class="itm-title">환산 비율 · 현 시세 · 편차 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · 3행 kv · 어느 한 수량이 빈칸이면 환산 비율·편차 "—"<br>· <strong>환산 비율</strong>: 스테이블 페어 = 받는 ÷ 보내는 → 소수 4자리 「{비율} {받는}/{주는}」 · ETH 페어 = 스테이블 수량 ÷ ETH 수량 → 소수 2자리 「{비율} {스테이블}/ETH」(방향 무관) · 자릿수 초과분 절사(notation 산정값 규칙 준용)<br>· <strong>현 시세(참고)</strong>: 같은 표기 형식 · 외부지표 기준(소스·조합은 ADM-03 — 시세 소스명 화면 미노출) · 받는 자산 선택 시 조회 후 주기 갱신 — 주기 <span style="color:#b45309;">[확인필요: ADM-03 반영주기]</span> · 조회 실패 시 "—" + 상단 배너 + [게시] 비활성<br>· <strong>편차</strong> = (환산 비율 − 현 시세) ÷ 현 시세 × 100 · 소수 2자리 · 부호 표기 · 옆에 "(허용 ±{정책값}% 이내)"(ADM-03 값 표시) · 허용 이내 초록 / 초과 빨강 + 항목 7 경고<br>· 현 시세는 <strong>가격 결정이 아닌 편차 판정·중지 판단 기준</strong> — 가격은 당사자 합의<br><span class="basis">근거 09 §0 비율 표기(2026-09-02) · notation 교환비율 · L6 설명의무</span></div>
+        <div class="itm-desc">· 클릭 요소 없음 · 3행 kv · 어느 한 수량이 빈칸이면 환산 비율·편차 "—"<br>· <strong>환산 비율</strong>: 스테이블 페어 = 받는 ÷ 보내는 → 소수 4자리 「{비율} {받는}/{주는}」 · ETH 페어 = 스테이블 수량 ÷ ETH 수량 → 소수 2자리 「{비율} {스테이블}/ETH」(방향 무관) · 자릿수 초과분 절사(notation 산정값 규칙 준용)<br>· <strong>현 시세(참고)</strong>: 같은 표기 형식 · 외부지표 기준(소스·조합은 ADM-03 — 시세 소스명 화면 미노출) · 받는 자산 선택 시 조회 후 주기 갱신 — 주기 <span class="chk">[확인필요: ADM-03 반영주기]</span> · 조회 실패 시 "—" + 상단 배너 + [게시] 비활성<br>· <strong>편차</strong> = (환산 비율 − 현 시세) ÷ 현 시세 × 100 · 소수 2자리 · 부호 표기 · 옆에 "(허용 ±{정책값}% 이내)"(ADM-03 값 표시) · 허용 이내 초록 / 초과 빨강 + 항목 7 경고<br>· 현 시세는 <strong>가격 결정이 아닌 편차 판정·중지 판단 기준</strong> — 가격은 당사자 합의<br><span class="basis">근거 09 §0 비율 표기(2026-09-02) · notation 교환비율 · L6 설명의무</span></div>
       </div>
     </div>
 
@@ -207,7 +207,7 @@
       <div class="num">7</div>
       <div>
         <div class="itm-title">편차 경고 (조건부 노출)</div>
-        <div class="itm-desc">· 노출 조건: |편차| &gt; {정책값}%(ADM-03 값 표시 · 목업 ±2.0%) · 위치: 환산 비율 kv 바로 아래 · 정상 시 블록 없음<br>· 문구 <strong>단일</strong>(종전 프레임/상세 두 문구 통일): "⚠ 현 시세 대비 편차 {편차}% — 허용 범위 ±{정책값}%를 초과해 게시할 수 없습니다. 수량을 조정해 주세요"<br>· 노출 중 [게시] 비활성(항목 10 ⑤) · 수량 수정으로 허용 이내가 되면 즉시 제거 · 닫기(×) 없음<br>· 목적: 자전·이상거래 오인 방지(ADM-02 이상거래 워닝 룰과 동일 기준) · ETH 페어 별도 임계 여부 <span style="color:#b45309;">[확인필요]</span><br><span class="basis">근거 F-1b · ADM-02 이상거래 워닝 연계 · 공통 UI 규격 비활성 사유 = 인라인 경고</span></div>
+        <div class="itm-desc">· 노출 조건: |편차| &gt; {정책값}%(ADM-03 값 표시 · 목업 ±2.0%) · 위치: 환산 비율 kv 바로 아래 · 정상 시 블록 없음<br>· 문구 <strong>단일</strong>(종전 프레임/상세 두 문구 통일): "⚠ 현 시세 대비 편차 {편차}% — 허용 범위 ±{정책값}%를 초과해 게시할 수 없습니다. 수량을 조정해 주세요"<br>· 노출 중 [게시] 비활성(항목 10 ⑤) · 수량 수정으로 허용 이내가 되면 즉시 제거 · 닫기(×) 없음<br>· 목적: 자전·이상거래 오인 방지(ADM-02 이상거래 워닝 룰과 동일 기준) · ETH 페어 별도 임계 여부 <span class="chk">[확인필요]</span><br><span class="basis">근거 F-1b · ADM-02 이상거래 워닝 연계 · 공통 UI 규격 비활성 사유 = 인라인 경고</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">경고 블록</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용) · 편차 재계산으로만 제거</span></div>
         </div>
@@ -218,7 +218,7 @@
       <div class="num">8</div>
       <div>
         <div class="itm-title">게시 유효기간 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · kv 1행 「{정책값}일 · 만료 예정 YYYY-MM-DD HH:MM」 — 일수는 ADM-03 값 표시(목업 30일), 만료 예정 일시 = 현재 시각 + {정책값}일(게시 시 서버 시각으로 확정 → BRK-06 '게시 유효기한')<br>· 게시자 변경 불가 — 입력 필드 아님 <span style="color:#b45309;">[확인필요: 게시자 유효기간 선택 허용 여부]</span><br>· 만료 시 게시 자동 종료 → 상태 <strong>완료(유효기간 만료)</strong> · 대기 중 신청도 함께 종결<br><span class="basis">근거 09 §0 마목 게시 상태(2026-09-02)</span></div>
+        <div class="itm-desc">· 클릭 요소 없음 · kv 1행 「{정책값}일 · 만료 예정 YYYY-MM-DD HH:MM」 — 일수는 ADM-03 값 표시(목업 30일), 만료 예정 일시 = 현재 시각 + {정책값}일(게시 시 서버 시각으로 확정 → BRK-06 '게시 유효기한')<br>· 게시자 변경 불가 — 입력 필드 아님 <span class="chk">[확인필요: 게시자 유효기간 선택 허용 여부]</span><br>· 만료 시 게시 자동 종료 → 상태 <strong>완료(유효기간 만료)</strong> · 대기 중 신청도 함께 종결<br><span class="basis">근거 09 §0 마목 게시 상태(2026-09-02)</span></div>
       </div>
     </div>
 
@@ -260,7 +260,7 @@
       <div class="num">12</div>
       <div>
         <div class="itm-title">KYC 예외 배너 (조건부 노출)</div>
-        <div class="itm-desc">· 노출 조건: 기관 KYC 상태가 '활성'이 아닐 때(ADM-03 KYC 상태 — 심사중(EDD)·일시제한·동결) · 정상 시 배너 없음 · EXC-01과 동일 규격·문구<br>· 노출 중: [게시] 비활성(항목 10 ⑥) · 자산·수량 입력은 가능(조회만) · 내부 사유·AML 심사 내용 미노출(공통 UI 규격 오류 문구 ③)<br>· 문구 고정 · 닫기(×) 없음 · '이메일로 문의' — mailto 여부·주소 <span style="color:#b45309;">[확인필요]</span><br><span class="basis">근거 G-3 · V2 KYC 담보(4요소②) · 공통 UI 규격 권한·상태 게이팅</span></div>
+        <div class="itm-desc">· 노출 조건: 기관 KYC 상태가 '활성'이 아닐 때(ADM-03 KYC 상태 — 심사중(EDD)·일시제한·동결) · 정상 시 배너 없음 · EXC-01과 동일 규격·문구<br>· 노출 중: [게시] 비활성(항목 10 ⑥) · 자산·수량 입력은 가능(조회만) · 내부 사유·AML 심사 내용 미노출(공통 UI 규격 오류 문구 ③)<br>· 문구 고정 · 닫기(×) 없음 · '이메일로 문의' — mailto 여부·주소 <span class="chk">[확인필요]</span><br><span class="basis">근거 G-3 · V2 KYC 담보(4요소②) · 공통 UI 규격 권한·상태 게이팅</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">배너</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용) · 상태가 '활성'으로 바뀌면 다음 진입 시 배너 제거·버튼 활성</span></div>
         </div>
@@ -280,15 +280,15 @@
       </div>
       <div class="dtl" data-idx="2">
         <div class="detail-label"><span class="dtl-num">3</span>한도 · 처분 가능분 판정 (게시자 거래 안전성 검증)</div>
-      <div class="dtl-body"><span class="box">· 유효 상한 = min(1회 한도 {정책값}원 상당의 보내는 자산 환산 수량, 처분 가능분) — 두 조건 모두 충족해야 게시 가능 · 환산 시세·시점 = ADM-03 · 요청 시점(입력 중 실시간, 클릭 시 서버 재검증)<br>· 한도 예: 1,500,000원 ÷ 4,298,400원(= 3,184.00 USDC × 1,350원 가정) = 0.3489 ETH(절사) · 스테이블도 KRW 시세로 환산(USD 1:1 아님) → 1,500,000원 ÷ 1,350원 ≈ 1,111.11 USDC/USDT<br>· 판정 시점: 입력 중(활성 조건) + [게시] 클릭 시 재검증(실패 시 인라인 경고 재노출) — 게시 후 잔고 변동은 BRK-04 수락 시점 재검증으로 보완(BRK-04 상세)<br>· <span class="red">[확인필요]</span> 마목 대량 거래(블록딜)와의 정합 — 분할 게시 여부 · 일간·월간 누적 한도</span></div>
+      <div class="dtl-body"><span class="box">· 유효 상한 = min(1회 한도 {정책값}원 상당의 보내는 자산 환산 수량, 처분 가능분) — 두 조건 모두 충족해야 게시 가능 · 환산 시세·시점 = ADM-03 · 요청 시점(입력 중 실시간, 클릭 시 서버 재검증)<br>· 한도 예: 1,500,000원 ÷ 4,298,400원(= 3,184.00 USDC × 1,350원 가정) = 0.3489 ETH(절사) · 스테이블도 KRW 시세로 환산(USD 1:1 아님) → 1,500,000원 ÷ 1,350원 ≈ 1,111.11 USDC/USDT<br>· 판정 시점: 입력 중(활성 조건) + [게시] 클릭 시 재검증(실패 시 인라인 경고 재노출) — 게시 후 잔고 변동은 BRK-04 수락 시점 재검증으로 보완(BRK-04 상세)<br>· <span class="chk">[확인필요]</span> 마목 대량 거래(블록딜)와의 정합 — 분할 게시 여부 · 일간·월간 누적 한도</span></div>
       </div>
       <div class="dtl" data-idx="3">
         <div class="detail-label"><span class="dtl-num">4</span>처분 가능분 정의</div>
-      <div class="dtl-body"><span class="box">· 처분 가능 = 커스터디 실보유 잔고(기존 시스템 대조) − 기게시 중복분(같은 자산으로 게재중·협의중인 내 게시의 보내는 수량 합계)<br>· 확정 후 이전 대기(BRK-05 진행 중) 수량 차감 여부 <span class="red">[확인필요]</span> — 차감하지 않으면 이중 처분 소지<br>· 별도 지갑 화면 신규 개발 없음 — 잔고 출처는 DASH-01 지갑 잔고와 동일</span></div>
+      <div class="dtl-body"><span class="box">· 처분 가능 = 커스터디 실보유 잔고(기존 시스템 대조) − 기게시 중복분(같은 자산으로 게재중·협의중인 내 게시의 보내는 수량 합계)<br>· 확정 후 이전 대기(BRK-05 진행 중) 수량 차감 여부 <span class="chk">[확인필요]</span> — 차감하지 않으면 이중 처분 소지<br>· 별도 지갑 화면 신규 개발 없음 — 잔고 출처는 DASH-01 지갑 잔고와 동일</span></div>
       </div>
       <div class="dtl" data-idx="5">
         <div class="detail-label"><span class="dtl-num">6</span>비율 · 편차 계산 예</div>
-      <div class="dtl-body"><span class="box">· 스테이블 페어: 800 USDT → 798.40 USDC ⇒ 798.40 ÷ 800 = 0.9980 USDC/USDT · 현 시세 1.0000 ⇒ 편차 (0.9980 − 1.0000) ÷ 1.0000 = -0.20%<br>· ETH 페어: 0.3 ETH → 955.20 USDC ⇒ 955.20 ÷ 0.3 = 3,184.00 USDC/ETH · 955.20 USDC → 0.3 ETH도 같은 3,184.00 USDC/ETH(방향 무관)<br>· 경고 예: 800 USDT → 776.00 USDC ⇒ 0.9700 ⇒ -3.00% → 허용 ±2.0% 초과 → 게시 불가<br>· 비율 자릿수 초과분은 절사(notation 산정값 규칙 준용) <span class="red">[확인필요: 비율 반올림 규칙 명시 — notation]</span></span></div>
+      <div class="dtl-body"><span class="box">· 스테이블 페어: 800 USDT → 798.40 USDC ⇒ 798.40 ÷ 800 = 0.9980 USDC/USDT · 현 시세 1.0000 ⇒ 편차 (0.9980 − 1.0000) ÷ 1.0000 = -0.20%<br>· ETH 페어: 0.3 ETH → 955.20 USDC ⇒ 955.20 ÷ 0.3 = 3,184.00 USDC/ETH · 955.20 USDC → 0.3 ETH도 같은 3,184.00 USDC/ETH(방향 무관)<br>· 경고 예: 800 USDT → 776.00 USDC ⇒ 0.9700 ⇒ -3.00% → 허용 ±2.0% 초과 → 게시 불가<br>· 비율 자릿수 초과분은 절사(notation 산정값 규칙 준용) <span class="chk">[확인필요: 비율 반올림 규칙 명시 — notation]</span></span></div>
       </div>
       <div class="dtl" data-idx="6">
         <div class="detail-label"><span class="dtl-num">7</span>편차 경고 로직 · 목적</div>
@@ -296,11 +296,11 @@
       </div>
       <div class="dtl" data-idx="8">
         <div class="detail-label"><span class="dtl-num">9</span>시세변동 자동중지(price guard) 동작</div>
-      <div class="dtl-body"><span class="box">· 기준 = 게시 시점 외부지표 스냅숏(소스·조합은 ADM-03 정책값 · 소스명 고객 화면 미노출)<br>· 변동 ±{정책값}% 초과 → 상태 <span class="red">중지</span> · 게시판 즉시 제외 · 대기 중 신청 전부 자동 종결(자산이동·수수료 없음) · 게시자·신청자 이메일<br>· 협의중(신청 접수) 상태에서 중지되면 BRK-04 [수락] 비활성 · 재개는 재게시만(중지 게시 되살리기 없음) — 게시자가 직접 내리는 회수(BRK-06)와 별도 경로<br>· <span class="red">가격은 당사자 합의 — 외부지표는 가격 결정이 아닌 중지 판단에만 사용</span></span></div>
+      <div class="dtl-body"><span class="box">· 기준 = 게시 시점 외부지표 스냅숏(소스·조합은 ADM-03 정책값 · 소스명 고객 화면 미노출)<br>· 변동 ±{정책값}% 초과 → 상태 <strong>중지</strong> · 게시판 즉시 제외 · 대기 중 신청 전부 자동 종결(자산이동·수수료 없음) · 게시자·신청자 이메일<br>· 협의중(신청 접수) 상태에서 중지되면 BRK-04 [수락] 비활성 · 재개는 재게시만(중지 게시 되살리기 없음) — 게시자가 직접 내리는 회수(BRK-06)와 별도 경로<br>· <strong>가격은 당사자 합의 — 외부지표는 가격 결정이 아닌 중지 판단에만 사용</strong></span></div>
       </div>
       <div class="dtl" data-idx="9">
         <div class="detail-label"><span class="dtl-num">10</span>게시 이후 상태 · 게시자 동선</div>
-      <div class="dtl-body"><span class="box">· 게재중(BRK-06 · [게시 내리기] 가능) → 협의중(신청 1건 · 이메일 ① · BRK-06 신청 행 → BRK-04) → 확정(수락 · BRK-05) → 완료 / 종결: 회수 · 완료(유효기간 만료) · 중지<br>· 게시 = 구속력 없음 → 확인 다이얼로그 없음 · 구속력 발생 지점은 BRK-04 [수락](확인 다이얼로그 있음)<br>· 게시자 중개 수수료 = 보내는 800 USDT × 1% = 8.00 USDT — BRK-04 수락 전 고시(4요소④) · 이 화면에는 수수료 표시 없음 <span class="red">[확인필요: 게시 시점 수수료 예고 표시 여부]</span></span></div>
+      <div class="dtl-body"><span class="box">· 게재중(BRK-06 · [게시 내리기] 가능) → 협의중(신청 1건 · 이메일 ① · BRK-06 신청 행 → BRK-04) → 확정(수락 · BRK-05) → 완료 / 종결: 회수 · 완료(유효기간 만료) · 중지<br>· 게시 = 구속력 없음 → 확인 다이얼로그 없음 · 구속력 발생 지점은 BRK-04 [수락](확인 다이얼로그 있음)<br>· 게시자 중개 수수료 = 보내는 800 USDT × 1% = 8.00 USDT — BRK-04 수락 전 고시(4요소④) · 이 화면에는 수수료 표시 없음 <span class="chk">[확인필요: 게시 시점 수수료 예고 표시 여부]</span></span></div>
       </div>
     </div>
   </div>

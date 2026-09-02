@@ -25,7 +25,7 @@
   .ex { font-family:ui-monospace, 'SF Mono', Consolas, monospace; font-size:11px; background:#f1f5f9;
         border:1px solid #e2e8f0; border-radius:4px; padding:0 5px; white-space:nowrap; }
   b.key { color:#1d4ed8; }
-  .need { display:inline-block; font-size:9.5px; font-weight:700; color:#b45309; background:#fef3c7;
+  .need { display:inline-block; font-size:9.5px; font-weight:700; color:#888; background:#f2f2f2;
           border-radius:5px; padding:0 6px; margin-left:4px; vertical-align:1px; }
 
   .foot { max-width:1060px; margin:16px auto 0; background:#fbfbf9; border:1px solid #e7e5e0; border-radius:10px;
@@ -178,7 +178,7 @@
   </thead>
   <tbody>
     <tr>
-      <td class="grp-cell" rowspan="3">전역 내비게이션</td>
+      <td class="grp-cell" rowspan="4">전역 내비게이션</td>
       <td class="item">로그아웃</td>
       <td>상단바 우측 <b class="key">기관 배지 클릭 → 메뉴(로그아웃)</b> — 전 화면 동일 위치, 확인 문구 없음 · 세션 즉시 파기</td>
       <td>→ AUTH-01 · 어드민 콘솔도 동일(→ 어드민 로그인)</td>
@@ -192,6 +192,11 @@
       <td class="item">종료 동선</td>
       <td>flow 마지막 화면의 <b class="key">[확인]</b> = 대시보드 이동 · 입력·행위 화면의 <b class="key">[취소]</b>(ghost) = 입력값 파기 후 직전 목록 화면 복귀, 확인 문구 없음</td>
       <td>EXC-03·04·BRK-05 [확인] → DASH-01 · BRK-02·03 [취소] → BRK-01 · BRK-04 [취소] → BRK-06 · DASH-02·03 [취소] → DASH-01 (2026-09-02 추가 — 뒤로가기 미지원 규칙은 유지)</td>
+    </tr>
+    <tr>
+      <td class="item">기재 규칙</td>
+      <td>같은 프레임(셸)을 쓰는 화면군은 '진입 · 전역 이동'의 이동 행을 <b class="key">셸 정본 화면에만 한 번</b> 적는다 — 나머지 화면은 "전역 이동 = ○○ 셸 정본(화면 ID)과 동일" 한 줄 + <b>차이만</b>(현재 탭 위치 · 입력 중 값 파기 여부 · 상세 화면의 탭 재클릭 동작 등) · 진입 경로는 화면마다 그대로 적는다</td>
+      <td>정본 3종 — 인증 셸 <b>AUTH-01</b>(ONB-01·02·03 · DASH-02·03) · 고객 콘솔 셸 <b>DASH-01</b>(EXC-01~04 · BRK-01~07) · 어드민 셸 <b>ADM-02</b>(ADM-03) · ONB-00은 메일 프레임 단독 (2026-09-02 추가)</td>
     </tr>
     <tr>
       <td class="grp-cell" rowspan="4">버튼·확인</td>

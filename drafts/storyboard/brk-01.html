@@ -123,11 +123,9 @@
   <div class="items" id="items">
     <div class="nav-global">
       <div class="nav-global-title">진입 · 전역 이동</div>
-      <div class="nav-row"><span class="nav-el">GNB '대시보드' · 로고</span><span class="nav-act">클릭</span><span class="nav-to"><strong>대시보드(DASH-01)</strong> · 확인 없음</span></div>
-      <div class="nav-row"><span class="nav-el">GNB '교환하기'</span><span class="nav-act">클릭</span><span class="nav-to"><strong>교환하기(EXC-01)</strong> · 확인 없음</span></div>
-      <div class="nav-row"><span class="nav-el">GNB '교환게시판'(현재)</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응 (표시 전용 — 공통 UI 규격)</span></div>
-      <div class="nav-row"><span class="nav-el">기관 배지</span><span class="nav-act">클릭 → 메뉴(로그아웃) → '로그아웃' 클릭</span><span class="nav-to"><strong>로그인(AUTH-01)</strong> · 확인 없음 · 세션 즉시 파기(공통 UI 규격 전역 내비게이션)</span></div>
-      <div class="nav-note">· <strong>진입</strong>: GNB '교환게시판' 클릭(전 화면에서) · BRK-02 [취소] · BRK-03 [취소] · BRK-06 [게시 내리기] 실행 후 복귀 — 진입 시마다 목록 재조회(자동 갱신 없음)<br>
+      <div class="nav-note">· <strong>전역 이동</strong> = 고객 콘솔 셸 정본(DASH-01)과 동일<br>
+      · 차이 = 현재 탭 '교환게시판'(이 화면이 목록이므로 재클릭 무반응)<br>
+      · <strong>진입</strong>: GNB '교환게시판' 클릭(전 화면에서) · BRK-02 [취소] · BRK-03 [취소] · BRK-06 [게시 내리기] 실행 후 복귀 — 진입 시마다 목록 재조회(자동 갱신 없음)<br>
       · 목업 예시(2026-09-02 예시 재조정 · 한도 1,500,000원 상당 이내): 800 USDT ↔ 798.40 USDC(0.9980 USDC/USDT) · 0.3 ETH ↔ 955.20 USDC(3,184.00 USDC/ETH) · 650 USDC ↔ 649.87 USDT(0.9998 USDT/USDC) · 0.25 ETH ↔ 796.00 USDT(3,184.00 USDT/ETH) · 게시 일시 열은 지면상 MM-DD HH:MM으로 축약 — 실제 표기는 notation YYYY-MM-DD HH:MM<br>
       · 이 화면에는 게시자 상호를 표시하지 않음 — 상대 확인은 상세(BRK-03·07)에서 마스킹(첫 글자만)으로</div>
     </div>
@@ -136,7 +134,7 @@
       <div class="num">1</div>
       <div>
         <div class="itm-title">거래의향 목록 — 컬럼 헤더 · 상태 칩 · 목록 규격 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음(헤더 클릭 = 정렬 변경 없음 · 무반응) · 컬럼 6개: <strong>교환코인</strong>({보내는} → {받는}, 게시자 기준) · <strong>보내는 수량</strong> · <strong>받는 수량</strong> · <strong>비율</strong> · <strong>게시 일시</strong> · <strong>상태</strong> — DASH-01 거래 목록과 표기 통일<br>· 수량 = 자산 자릿수(ETH 4 / USDC·USDT 2 · 뒤 0 생략) · 비율 = 스테이블 페어 {받는}/{주는} 4자리, ETH 페어 방향 무관 {스테이블}/ETH 2자리(notation) · 사자/팔자 구분 없음 — "A코인 X개 ↔ B코인 Y개" 수량 쌍<br>· <strong>상태 칩</strong>(목록에 등장하는 2종): <span class="chip info">게재중</span> 신청 가능(대기 계열·파랑) · <span class="chip" style="background:#fef3c7;color:#92400e;">협의중</span> 신청 1건 접수 → 추가 신청 차단(진행 계열·노랑, 게시당 동시 신청 1건) · 보조 칩 <span class="chip">내 게시</span> / <span class="chip">내 신청</span> = 열람자 기관이 게시자/신청자인 행에 상태 칩 옆 병기 — 상세 4<br>· <strong>목록 제외</strong>: 확정·완료(유효기간 만료)·회수·중지(price guard) 게시 — 타사·내 게시 공통 · 내 종결 건은 DASH-01 거래 내역 → BRK-06/07에서 열람 — 상태 6종 정의는 상세 1<br>· <strong>정렬</strong>: 게시 일시 내림차순(최신순) 단일 리스트 · 필터·정렬 변경·페이징 없음 · 100행 초과 시 [더 보기](항목 6)로 이어 붙임(공통 UI 규격 목록)<br>· <strong>빈 상태</strong>: 표 대신 점선 박스 "게시된 거래의향이 없습니다" + "[+ 거래의향 등록]으로 첫 거래의향을 올릴 수 있습니다" · <strong>로딩</strong>: 표 영역에 "불러오는 중…"(3초 초과 → 오류) · <strong>오류</strong>: 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" + 빈 표(공통 UI 규격 오류 문구 ②)<br>· <strong>갱신 시점</strong>: 진입 시 1회 조회 · 화면 체류 중 자동 갱신 없음 → 상태 칩은 조회 시점 값, 최신 상태 판정은 클릭 후 상세(BRK-03)에서 수행(항목 2·3 · 상세 2)<br>· 행 hover: 배경 강조 <span style="color:#b45309;">[확인필요: hover 규격 — notation 미정의]</span><br><span class="basis">근거 F-1b · 09 §0 마목 게시 상태(2026-09-02) · notation 목록 규격·상태 칩</span></div>
+        <div class="itm-desc">· 클릭 요소 없음(헤더 클릭 = 정렬 변경 없음 · 무반응) · 컬럼 6개: <strong>교환코인</strong>({보내는} → {받는}, 게시자 기준) · <strong>보내는 수량</strong> · <strong>받는 수량</strong> · <strong>비율</strong> · <strong>게시 일시</strong> · <strong>상태</strong> — DASH-01 거래 목록과 표기 통일<br>· 수량 = 자산 자릿수(ETH 4 / USDC·USDT 2 · 뒤 0 생략) · 비율 = 스테이블 페어 {받는}/{주는} 4자리, ETH 페어 방향 무관 {스테이블}/ETH 2자리(notation) · 사자/팔자 구분 없음 — "A코인 X개 ↔ B코인 Y개" 수량 쌍<br>· <strong>상태 칩</strong>(목록에 등장하는 2종): <span class="chip info">게재중</span> 신청 가능(대기 계열·파랑) · <span class="chip" style="background:#fef3c7;color:#92400e;">협의중</span> 신청 1건 접수 → 추가 신청 차단(진행 계열·노랑, 게시당 동시 신청 1건) · 보조 칩 <span class="chip">내 게시</span> / <span class="chip">내 신청</span> = 열람자 기관이 게시자/신청자인 행에 상태 칩 옆 병기 — 상세 4<br>· <strong>목록 제외</strong>: 확정·완료(유효기간 만료)·회수·중지(price guard) 게시 — 타사·내 게시 공통 · 내 종결 건은 DASH-01 거래 내역 → BRK-06/07에서 열람 — 상태 6종 정의는 상세 1<br>· <strong>정렬</strong>: 게시 일시 내림차순(최신순) 단일 리스트 · 필터·정렬 변경·페이징 없음 · 100행 초과 시 [더 보기](항목 6)로 이어 붙임(공통 UI 규격 목록)<br>· <strong>빈 상태</strong>: 표 대신 점선 박스 "게시된 거래의향이 없습니다" + "[+ 거래의향 등록]으로 첫 거래의향을 올릴 수 있습니다" · <strong>로딩</strong>: 표 영역에 "불러오는 중…"(3초 초과 → 오류) · <strong>오류</strong>: 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" + 빈 표(공통 UI 규격 오류 문구 ②)<br>· <strong>갱신 시점</strong>: 진입 시 1회 조회 · 화면 체류 중 자동 갱신 없음 → 상태 칩은 조회 시점 값, 최신 상태 판정은 클릭 후 상세(BRK-03)에서 수행(항목 2·3 · 상세 2)<br>· 행 hover: 배경 강조 <span class="chk">[확인필요: hover 규격 — notation 미정의]</span><br><span class="basis">근거 F-1b · 09 §0 마목 게시 상태(2026-09-02) · notation 목록 규격·상태 칩</span></div>
       </div>
     </div>
 
@@ -156,7 +154,7 @@
       <div class="num">3</div>
       <div>
         <div class="itm-title">거래의향 행 — 타사 게시 · 협의중<span class="req">필수</span></div>
-        <div class="itm-desc">· 타사 게시에 다른 기관의 신청 1건이 접수된 상태 — 조건 열람은 가능, <strong>신청은 차단</strong>(게시당 동시 신청 1건)<br>· 행은 회색 처리 없이 클릭 가능 — notation 행 클릭 규격("타사 게시 '협의중'은 회색·클릭 무반응")과 <strong>상이</strong>: 이 화면은 상세 열람 허용·신청만 비활성으로 정의 <span style="color:#b45309;">[확인필요: notation 행 클릭 규격 개정]</span> — 상세 3<br><span class="basis">근거 09 §0 마목 게시 상태 개정(2026-09-02) — 협의중 = 추가 신청 차단</span></div>
+        <div class="itm-desc">· 타사 게시에 다른 기관의 신청 1건이 접수된 상태 — 조건 열람은 가능, <strong>신청은 차단</strong>(게시당 동시 신청 1건)<br>· 행은 회색 처리 없이 클릭 가능 — notation 행 클릭 규격("타사 게시 '협의중'은 회색·클릭 무반응")과 <strong>상이</strong>: 이 화면은 상세 열람 허용·신청만 비활성으로 정의 <span class="chk">[확인필요: notation 행 클릭 규격 개정]</span> — 상세 3<br><span class="basis">근거 09 §0 마목 게시 상태 개정(2026-09-02) — 협의중 = 추가 신청 차단</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">행(협의중 · 타사)</span><span class="nav-act">클릭</span><span class="nav-to"><strong>신청하기(BRK-03)</strong> — 상세는 열리되 [이 조건으로 신청] 비활성 + 인라인 안내 "협의 중인 게시입니다 — 다른 신청이 처리되면 다시 신청할 수 있습니다"</span></div>
           <div class="nav-row"><span class="nav-el">행(협의중 · 타사) — 거절·만료로 게재중 복귀 후</span><span class="nav-act">재진입·재조회</span><span class="nav-to stay">칩 게재중으로 갱신 → 항목 2 동선</span></div>
@@ -168,7 +166,7 @@
       <div class="num">4</div>
       <div>
         <div class="itm-title">거래의향 행 — 내 게시<span class="req">필수</span></div>
-        <div class="itm-desc">· 열람자 기관이 게시자인 행 — 상태 칩(게재중 / 협의중) + 보조 칩 '내 게시' · 행 배경 연회색(목업) <span style="color:#b45309;">[확인필요: 내 게시·내 신청 구분 표기 디자인 규격]</span><br>· 내 게시에 스스로 신청하는 경로 없음(행이 BRK-06으로 가므로 구조적 불가)<br><span class="basis">근거 F-1b · BRK-06 신설(2026-09-02)</span></div>
+        <div class="itm-desc">· 열람자 기관이 게시자인 행 — 상태 칩(게재중 / 협의중) + 보조 칩 '내 게시' · 행 배경 연회색(목업) <span class="chk">[확인필요: 내 게시·내 신청 구분 표기 디자인 규격]</span><br>· 내 게시에 스스로 신청하는 경로 없음(행이 BRK-06으로 가므로 구조적 불가)<br><span class="basis">근거 F-1b · BRK-06 신설(2026-09-02)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">행(내 게시 · 게재중)</span><span class="nav-act">클릭</span><span class="nav-to"><strong>내 게시 상세·회수(BRK-06)</strong> — 받은 신청 0건 빈 상태 · [게시 내리기] 노출</span></div>
           <div class="nav-row"><span class="nav-el">행(내 게시 · 협의중)</span><span class="nav-act">클릭</span><span class="nav-to"><strong>내 게시 상세·회수(BRK-06)</strong> — 받은 신청 1건 표시 → 신청 행 클릭 시 받은 신청·수락(BRK-04)</span></div>
@@ -231,7 +229,7 @@
     <div class="detail-grid" id="detailCol">
       <div class="dtl" data-idx="0">
         <div class="detail-label"><span class="dtl-num">1</span>마목 게시 상태 6종 · 목록 노출 · 동선</div>
-      <div class="dtl-body"><span class="box">· <strong>게재중</strong>(대기·파랑) 목록 노출 · 타사 → BRK-03 신청 가능 / 내 게시 → BRK-06<br>· <strong>협의중</strong>(진행·노랑) 목록 노출 · 신청 1건 접수 = 추가 신청 차단 · 타사 → BRK-03(신청 비활성) / 내 게시 → BRK-06 → BRK-04 / 내 신청 → BRK-07<br>· <strong>확정</strong>(진행) 목록 제외 · 수락 즉시 — 양측 DASH-01 → BRK-05<br>· <strong>완료</strong>(완료·초록) 목록 제외 · 이전 완료 또는 유효기간 만료 — DASH-01 거래 내역<br>· <strong>회수</strong>(종결·회색) 목록 제외 · 게시자 [게시 내리기](BRK-06) — 대기 신청 자동 종결 + 이메일 ④<br>· <strong>중지</strong>(종결·회색) 목록 제외 · price guard 자동중지(게시 시점 대비 ±{정책값}% 초과 · ADM-03 값) — 대기 신청 전부 자동 종결·양측 이메일 · 재개 = BRK-02 재게시(새 요청번호)<br>· 색 3계열·라벨은 notation 상태 칩 규격 <span class="red">[확인필요: 고객 화면 상태 enum 확정 — states 고객 도메인]</span> · 종전 명칭·복수 신청(선착순/선택) 이슈는 2026-09-02 개정(게시당 동시 신청 1건)으로 소멸</span></div>
+      <div class="dtl-body"><span class="box">· <strong>게재중</strong>(대기·파랑) 목록 노출 · 타사 → BRK-03 신청 가능 / 내 게시 → BRK-06<br>· <strong>협의중</strong>(진행·노랑) 목록 노출 · 신청 1건 접수 = 추가 신청 차단 · 타사 → BRK-03(신청 비활성) / 내 게시 → BRK-06 → BRK-04 / 내 신청 → BRK-07<br>· <strong>확정</strong>(진행) 목록 제외 · 수락 즉시 — 양측 DASH-01 → BRK-05<br>· <strong>완료</strong>(완료·초록) 목록 제외 · 이전 완료 또는 유효기간 만료 — DASH-01 거래 내역<br>· <strong>회수</strong>(종결·회색) 목록 제외 · 게시자 [게시 내리기](BRK-06) — 대기 신청 자동 종결 + 이메일 ④<br>· <strong>중지</strong>(종결·회색) 목록 제외 · price guard 자동중지(게시 시점 대비 ±{정책값}% 초과 · ADM-03 값) — 대기 신청 전부 자동 종결·양측 이메일 · 재개 = BRK-02 재게시(새 요청번호)<br>· 색 3계열·라벨은 notation 상태 칩 규격 <span class="chk">[확인필요: 고객 화면 상태 enum 확정 — states 고객 도메인]</span> · 종전 명칭·복수 신청(선착순/선택) 이슈는 2026-09-02 개정(게시당 동시 신청 1건)으로 소멸</span></div>
       </div>
       <div class="dtl" data-idx="1">
         <div class="detail-label"><span class="dtl-num">2</span>상태 판정 위치 — 목록이 아니라 상세</div>
@@ -239,11 +237,11 @@
       </div>
       <div class="dtl" data-idx="2">
         <div class="detail-label"><span class="dtl-num">3</span>협의중 타사 게시 — 열람 허용·신청 차단 (notation 상이)</div>
-      <div class="dtl-body"><span class="box">· notation 공통 UI 규격 '행 클릭': "선택 불가 행(만료 · 타사 게시 '협의중' 등)은 회색 처리·클릭 무반응"<br>· 이 화면 정의: 협의중 타사 게시도 클릭 → BRK-03 열림, [이 조건으로 신청] 비활성 + "협의 중인 게시입니다 — 다른 신청이 처리되면 다시 신청할 수 있습니다"<br>· 이유: 거절·만료로 게재중 복귀가 잦아 조건 열람 수요가 있고, 상태 판정을 상세 1곳으로 모으기 위함(상세 2) · 자동 매칭·대기열(웨이팅) 기능은 두지 않음 — 복귀 후 재클릭·재신청만<br>· <span class="red">[확인필요]</span> notation 행 클릭 규격을 이 정의로 개정할지, 아니면 이 화면을 회색·무반응으로 되돌릴지 — 결정 전까지 이 화면 정의를 단일 출처로 유지(2026-09-02)</span></div>
+      <div class="dtl-body"><span class="box">· notation 공통 UI 규격 '행 클릭': "선택 불가 행(만료 · 타사 게시 '협의중' 등)은 회색 처리·클릭 무반응"<br>· 이 화면 정의: 협의중 타사 게시도 클릭 → BRK-03 열림, [이 조건으로 신청] 비활성 + "협의 중인 게시입니다 — 다른 신청이 처리되면 다시 신청할 수 있습니다"<br>· 이유: 거절·만료로 게재중 복귀가 잦아 조건 열람 수요가 있고, 상태 판정을 상세 1곳으로 모으기 위함(상세 2) · 자동 매칭·대기열(웨이팅) 기능은 두지 않음 — 복귀 후 재클릭·재신청만<br>· <span class="chk">[확인필요]</span> notation 행 클릭 규격을 이 정의로 개정할지, 아니면 이 화면을 회색·무반응으로 되돌릴지 — 결정 전까지 이 화면 정의를 단일 출처로 유지(2026-09-02)</span></div>
       </div>
       <div class="dtl" data-idx="3">
         <div class="detail-label"><span class="dtl-num">4</span>내 게시·내 신청 행 구분 표기</div>
-      <div class="dtl-body"><span class="box">· 보조 칩 '내 게시' / '내 신청'(회색 chip) + 행 배경 연회색 — 기획 가정 <span class="red">[확인필요: 디자인 규격 — 칩 vs 좌측 색 바 vs 배경만]</span><br>· 상호는 게시판에 표시하지 않으므로(마스킹 규칙과 무관) 열람자 자신의 건은 보조 칩으로만 식별<br>· 내 게시·내 신청 건도 종결(확정·완료·회수·중지)되면 목록에서 빠짐 — 이후 진입은 DASH-01 거래 내역 → BRK-06/07/05</span></div>
+      <div class="dtl-body"><span class="box">· 보조 칩 '내 게시' / '내 신청'(회색 chip) + 행 배경 연회색 — 기획 가정 <span class="chk">[확인필요: 디자인 규격 — 칩 vs 좌측 색 바 vs 배경만]</span><br>· 상호는 게시판에 표시하지 않으므로(마스킹 규칙과 무관) 열람자 자신의 건은 보조 칩으로만 식별<br>· 내 게시·내 신청 건도 종결(확정·완료·회수·중지)되면 목록에서 빠짐 — 이후 진입은 DASH-01 거래 내역 → BRK-06/07/05</span></div>
       </div>
       <div class="dtl" data-idx="6">
         <div class="detail-label"><span class="dtl-num">7</span>4요소 방어 (단순 게시판 아님)</div>
