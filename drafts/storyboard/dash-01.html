@@ -159,14 +159,14 @@
       <div class="nav-row"><span class="nav-el">GNB '대시보드'(현재) · 로고 'DSRV Desk'</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응 · 재조회 없음 · 다른 화면에서는 이 화면으로 이동</span></div>
       <div class="nav-row"><span class="nav-el">기관 배지 '{ORG명}'</span><span class="nav-act">클릭</span><span class="nav-to">로그아웃 메뉴 1개 펼침 → '로그아웃' → 확인 없이 세션 파기 → <strong>로그인(AUTH-01)</strong></span></div>
       <div class="nav-row"><span class="nav-el">브라우저 뒤로가기</span><span class="nav-act">전 화면 미지원(전역 규칙)</span><span class="nav-to">"접근할 수 없는 화면입니다" 안내 후 <strong>DASH-01</strong> 이동</span></div>
-      <div class="nav-note">· <strong>진입</strong> = AUTH-01 로그인 성공 직후 · 전 화면 GNB '대시보드'·로고 · EXC-03·EXC-04·BRK-05 [확인] · DASH-02·03 [취소]·저장 완료<br>· 진입 시 목록·요약 카드·잔고 1회 조회("불러오는 중…") · <strong>자동 주기 갱신 없음</strong> — 재진입·새로고침으로만 재조회<br>· 목업 = 6건 전량 표시([더 보기] 미노출 상태)</div>
+      <div class="nav-note">· <strong>진입</strong> — AUTH-01 로그인에 성공하면 처음 열리는 화면이다. 다른 화면에서는 GNB '대시보드'나 로고를 눌러 온다. EXC-03·EXC-04·BRK-05의 [확인], DASH-02·03의 [취소]와 저장 완료로도 돌아온다.<br>· 진입할 때 목록·요약 카드·잔고를 한 번 조회한다("불러오는 중…").<br>· 자동으로 다시 불러오지 않는다. 값을 갱신하려면 다시 들어오거나 새로고침해야 한다.<br>· 목업은 6건을 모두 보여준 상태다. 그래서 [더 보기]가 나오지 않는다.</div>
     </div>
 
     <div class="itm" data-idx="0">
       <div class="num">1</div>
       <div>
         <div class="itm-title">KYC 예외 요약 배너 (조건부 노출)</div>
-        <div class="itm-desc">· 노출 조건 = 기관 KYC 상태 ≠ 활성(심사중(EDD)·일시제한·동결) · 활성이면 미렌더<br>· 문구 고정 · 상태별 차등 없음 · 클릭·닫기(×)·링크 없음<br>· 내부 사유·심사 내용 미노출 <span style="color:#b45309;">[확인필요: 안내 이메일 주소]</span><br>· 배너 노출 중에도 이 화면 기능은 전부 동작 · 거래 차단은 EXC-01·BRK-02·BRK-03<br><span class="basis">근거 G-3 · 공통 UI 규격 상태 게이팅</span></div>
+        <div class="itm-desc">· <strong>언제 보이나</strong> — 기관 KYC 상태가 '활성'이 아닐 때만 보인다(심사중(EDD)·일시제한·동결).<br>· 상태가 '활성'이면 배너를 아예 그리지 않는다.<br>· 문구는 하나로 고정한다. 상태별로 문구를 나누지 않고 내부 사유·심사 내용은 쓰지 않는다.<br>· 클릭·닫기(×)·링크가 모두 없다.<br>· 배너가 떠 있어도 이 화면의 조회·계정·CSV는 그대로 쓸 수 있다. 거래를 막는 곳은 EXC-01·BRK-02·BRK-03이다.<br>· <span style="color:#b45309;">[확인필요: 안내 이메일 주소]</span><br><span class="basis">근거 G-3 · 공통 UI 규격 상태 게이팅</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">배너</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응 · 상태 '활성' 전환 시 다음 진입에서 소멸</span></div>
         </div>
@@ -177,7 +177,7 @@
       <div class="num">2</div>
       <div>
         <div class="itm-title">2차 인증 재설정 권고 배너 (조건부 노출)</div>
-        <div class="itm-desc">· 노출 조건 = 현재 세션이 복구 코드 로그인 · 로그아웃·세션 만료 시 소멸 · 복구 코드 재로그인 시 재노출<br>· 문구 고정 · 클릭·닫기·링크 없음 · 재설정 진입은 항목 10<br>· KYC 배너와 동시 노출 시 KYC 상단<br><span class="basis">근거 AUTH-01 항목 5</span></div>
+        <div class="itm-desc">· <strong>언제 보이나</strong> — 지금 세션이 복구 코드로 로그인한 세션일 때만 보인다.<br>· 로그아웃하거나 세션이 만료되면 사라지고, 복구 코드로 다시 로그인하면 또 보인다.<br>· 문구는 고정이고 클릭·닫기·링크가 없다.<br>· KYC 배너와 같이 뜨면 KYC 배너를 위에 놓는다.<br>· 재설정하러 가는 길은 항목 10 카드뿐이다. 배너 안에는 링크를 두지 않는다.<br><span class="basis">근거 AUTH-01 항목 5</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">배너</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응 · 재설정 진입은 항목 10 카드</span></div>
         </div>
@@ -188,7 +188,7 @@
       <div class="num">3</div>
       <div>
         <div class="itm-title">거래 요약 카드 3종 (표시 전용)</div>
-        <div class="itm-desc">· 표시 전용 · 클릭·필터 없음<br>· 집계(states 카드 귀속) 대기 = 교환 '요청됨'·'비율 제시' + 게시 '게재중'·'협의중' + 신청 '협의중' / 진행 중 = 교환 '진행 중' + 게시·신청 '확정' / 완료(누적) = 3계열 '완료' 누적 / 종결 계열 전부 미집계<br>· 값 = 건수 정수 · 0도 표시 · 목록(항목 4)과 동일 응답에서 산출 · 실패 시 "—"<br><span class="basis">근거 32 §3 DASH-01</span></div>
+        <div class="itm-desc">· 표시 전용이다. 카드를 눌러도 목록이 걸러지지 않는다.<br>· 값은 건수(정수)이고 0이어도 "0"으로 적는다.<br>· <strong>대기</strong> — 교환 '요청됨'·'비율 제시', 게시 '게재중'·'협의중', 신청 '협의중'을 센다.<br>· <strong>진행 중</strong> — 교환 '진행 중', 게시와 신청의 '확정'을 센다.<br>· <strong>완료(누적)</strong> — 교환·게시·신청 세 계열의 '완료'를 모두 센다.<br>· 종결 계열(거절·만료·회수·중지)은 어느 카드에도 넣지 않는다.<br>· 목록(항목 4)과 같은 응답에서 계산한다. 조회에 실패하면 "—"를 보인다.<br><span class="basis">근거 32 §3 DASH-01</span></div>
       </div>
     </div>
 
@@ -196,7 +196,7 @@
       <div class="num">4</div>
       <div>
         <div class="itm-title">거래 목록 행 (클릭)<span class="req">필수</span></div>
-        <div class="itm-desc">· 구분 3값 = 행 클릭 분기 키(상세 4)<br>· 요청시점 = 교환 요청 / 게시 / 신청 시점 · 형식 YYYY-MM-DD HH:MM · 거래번호는 목록 미표시(상세 화면에서만)<br>· 비율 = 스테이블 4자리 · ETH 페어 {스테이블}/ETH 2자리 · 대기 건도 비율 채움<br>· 정렬 = 요청시점 내림차순 고정 · 헤더 클릭·정렬 변경·필터·페이징 없음 · 1회 100행 조회<br>· 빈 목록 "거래 내역이 없습니다" · 로딩 "불러오는 중…" · 실패 시 상단 배너<br>· 전 행 클릭 가능 · 종결 행은 회색 처리만<br><span class="basis">근거 32 §3 DASH-01 · 공통 UI 규격 '목록'</span></div>
+        <div class="itm-desc">· 컬럼은 다섯 개로 고정한다. 구분 · 요청시점 · 교환(보내는 → 받는) · 비율 · 상태.<br>· <strong>구분</strong>은 세 값이다. 교환 · 교환게시판 · 교환게시판 신청. 행을 눌렀을 때 어느 화면으로 갈지 이 값으로 정한다(상세 4).<br>· <strong>요청시점</strong>은 교환이면 요청 시각, 게시면 게시 시각, 신청이면 신청 시각이다. 형식은 YYYY-MM-DD HH:MM.<br>· 거래번호는 목록에 넣지 않는다. 상세 화면에서만 보여준다.<br>· <strong>비율</strong>은 스테이블끼리면 소수 4자리, ETH 페어면 {스테이블}/ETH 소수 2자리로 적는다. 아직 대기 중인 건도 비율을 채운다.<br>· 정렬은 요청시점 내림차순 하나뿐이다. 헤더를 눌러도 바뀌지 않고 필터도 페이지 번호도 없다.<br>· 한 번에 100행까지 조회한다. 더 있으면 [더 보기](항목 6)로 이어 붙인다.<br>· 목록이 비면 "거래 내역이 없습니다"를 보이고, 불러오는 동안에는 "불러오는 중…", 실패하면 상단 배너를 띄운다.<br>· 모든 행을 누를 수 있다. 끝난 건은 회색으로만 표시하고 클릭을 막지 않는다.<br><span class="basis">근거 32 §3 DASH-01 · 공통 UI 규격 '목록'</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">행 전체 — 교환 '요청됨'·'비율 제시'</span><span class="nav-act">클릭</span><span class="nav-to"><strong>비율 확인·수락(EXC-02)</strong></span></div>
           <div class="nav-row"><span class="nav-el">행 전체 — 교환 '진행 중'</span><span class="nav-act">클릭</span><span class="nav-to"><strong>승인 진행(EXC-03)</strong></span></div>
@@ -213,7 +213,7 @@
       <div class="num">5</div>
       <div>
         <div class="itm-title">상태 칩 (표시 전용)</div>
-        <div class="itm-desc">· 표시 전용 · 라벨 = 도메인 상태 그대로 · 요약 라벨 없음<br>· 교환 enum 요청됨 · 비율 제시 · 진행 중 · 완료 · 거절 · 만료 — <b>'보류' 없음</b>(어드민 내부 T1 HOLD · 고객에는 '진행 중')<br>· '거절' = DSRV 심사·고객 요청 공통 라벨 · 코드도 REJECTED 단일 · 주체 구분은 EXC-04 배너 제목에서만(목록 칩에서 분기 없음)<br>· 게시 enum 게재중 · 협의중 · 확정 · 완료 · 회수 · 중지 <span style="color:#b45309;">[확인필요: '이전 중지' 칩 신설(states ⑧) · 게시 유효기간 만료 라벨(states ⑥)]</span><br>· 신청 enum 협의중(신청 즉시) · 확정 · 완료 · 거절됨 · 만료 · 종결(게시 회수 / 중지 / 게시 만료) — 신청 행은 신청 상태 표시 · '신청됨' 라벨 없음<br>· 색 4계열 대기 파랑 · 진행 노랑 · 완료 초록 · 종결 회색(매핑 상세 5)<br><span class="basis">근거 notation 상태 칩 · 09 §0</span></div>
+        <div class="itm-desc">· 표시 전용이고 도메인 상태를 그대로 라벨로 쓴다. 따로 요약 라벨을 만들지 않는다.<br>· <strong>교환</strong> — 요청됨 · 비율 제시 · 진행 중 · 완료 · 거절 · 만료.<br>· 교환에는 '보류' 라벨이 없다. 관리자가 보류를 걸어도 고객에게는 '진행 중'으로 보인다(보류는 어드민 내부 상태 T1 HOLD).<br>· '거절'은 DSRV 심사 거절과 고객 거절이 함께 쓰는 라벨이고 코드도 REJECTED 하나다. 주체 구분은 EXC-04 배너 제목에서만 하고 목록 칩에서는 나누지 않는다.<br>· <strong>게시</strong> — 게재중 · 협의중 · 확정 · 완료 · 회수 · 중지. <span style="color:#b45309;">[확인필요: '이전 중지' 칩 신설(states ⑧) · 게시 유효기간 만료 라벨(states ⑥)]</span><br>· <strong>신청</strong> — 협의중(신청하는 순간부터) · 확정 · 완료 · 거절됨 · 만료 · 종결(게시 회수·중지·게시 만료). 신청 행에는 신청 쪽 상태를 보이고 '신청됨'이라는 라벨은 쓰지 않는다.<br>· 색은 네 가지다. 대기는 파랑, 진행은 노랑, 완료는 초록, 종결은 회색이다(매핑은 상세 5).<br><span class="basis">근거 notation 상태 칩 · 09 §0</span></div>
       </div>
     </div>
 
@@ -221,7 +221,7 @@
       <div class="num">6</div>
       <div>
         <div class="itm-title">[더 보기] 버튼 (조건부 노출)</div>
-        <div class="itm-desc">· 노출 조건 = 남은 행 > 0 · 남은 행 0이면 버튼 제거<br>· 클릭 = 다음 100행 이어 붙임 · 페이지 교체 아님 · 스크롤 위치 유지 · 확인 없음<br><span class="basis">근거 공통 UI 규격 '정렬·필터·페이징'</span></div>
+        <div class="itm-desc">· <strong>언제 보이나</strong> — 아직 못 불러온 행이 남아 있을 때만 보인다. 남은 행이 없으면 버튼을 없앤다.<br>· 누르면 다음 100행을 아래에 이어 붙인다. 페이지를 갈아 끼우지 않고 스크롤 위치도 그대로 둔다.<br>· 확인 창은 없다.<br><span class="basis">근거 공통 UI 규격 '정렬·필터·페이징'</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[더 보기] — 활성 조건</span><span class="nav-act">남은 행 > 0 · 로딩 중 아님</span><span class="nav-to stay">로딩 중 → 회색 비활성 · 라벨 "불러오는 중…"</span></div>
           <div class="nav-row"><span class="nav-el">[더 보기] — 클릭(활성)</span><span class="nav-act">다음 100행 조회</span><span class="nav-to stay">행 이어 붙임 · 스크롤 유지 · 남은 행 0이면 버튼 제거</span></div>
@@ -234,7 +234,7 @@
       <div class="num">7</div>
       <div>
         <div class="itm-title">지갑 잔고 표 (표시 전용)</div>
-        <div class="itm-desc">· 표시 전용 · 출금·이전 기능 없음(서면 요청 절차) · 하단 고지 문구 없음<br>· 자릿수 ETH 4 / USDC·USDT 2 · 뒤 0 생략 · 티커 병기 · 보관 칩 "콜드 100%" 고정<br>· 값 = 온체인 컨펌 완료분 · 격리 입금 제외 · 진입 시 1회 조회 · 실패 시 "—" + 상단 배너<br><span class="basis">근거 L7 §11 · L6 구분회계 · 32 §3 WAL-01</span></div>
+        <div class="itm-desc">· 표시 전용이다. 이 화면에서 출금하거나 옮길 수 없다. 출금은 서면 요청 절차로 처리한다.<br>· 자릿수는 ETH 4자리, USDC·USDT 2자리로 적고 뒤에 붙는 0은 생략한다. 티커를 함께 쓴다.<br>· 보관 칩은 "콜드 100%"로 고정한다.<br>· 값은 온체인 컨펌이 끝난 분량만 넣는다. 격리된 입금은 빼고 센다.<br>· 진입할 때 한 번 조회한다. 실패하면 "—"를 보이고 상단 배너를 띄운다.<br><span class="basis">근거 L7 §11 · L6 구분회계 · 32 §3 WAL-01</span></div>
       </div>
     </div>
 
@@ -242,7 +242,7 @@
       <div class="num">8</div>
       <div>
         <div class="itm-title">지갑 주소 (표시 전용)</div>
-        <div class="itm-desc">· 표시 전용 · 마스킹 없이 전문 표시 · 복사 버튼·QR 없음<br>· Ethereum 단일 체인 · ETH·USDC·USDT 공통 주소 1개 · 자산별 주소 없음<br>· 계정 생성 시 고정 · 고객 변경 불가<br><span class="basis">근거 32 §3 WAL-01 · notation 주소 표기</span></div>
+        <div class="itm-desc">· 표시 전용이고 주소를 가리지 않고 전부 보여준다. 복사 버튼과 QR은 두지 않는다.<br>· 체인은 Ethereum 하나이고 ETH·USDC·USDT가 같은 주소를 쓴다. 자산별 주소는 없다.<br>· 주소는 계정을 만들 때 정해지고 고객이 바꿀 수 없다.<br><span class="basis">근거 32 §3 WAL-01 · notation 주소 표기</span></div>
       </div>
     </div>
 
@@ -250,7 +250,7 @@
       <div class="num">9</div>
       <div>
         <div class="itm-title">'비밀번호 수정' 카드 (클릭)</div>
-        <div class="itm-desc">· 카드 전체가 클릭 영역 · 항상 활성(KYC 예외 중에도)<br>· 클릭 = DASH-02 이동 · 확인 다이얼로그·재인증 없음 · 본인 확인은 DASH-02의 현재 비밀번호<br>· 세션·기기 관리 화면 없음 — 계정당 1세션<br><span class="basis">근거 ISMS 2.5 · 2.10.4</span></div>
+        <div class="itm-desc">· 카드 전체가 클릭 영역이다. KYC 예외 중에도 항상 누를 수 있다.<br>· 누르면 바로 DASH-02로 간다. 확인 창도 재인증도 없다. 본인 확인은 DASH-02에서 현재 비밀번호로 한다.<br>· 세션·기기 관리 화면은 없다. 계정당 세션은 하나다.<br><span class="basis">근거 ISMS 2.5 · 2.10.4</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">카드 전체</span><span class="nav-act">클릭 · 확인 없음</span><span class="nav-to"><strong>비밀번호 수정(DASH-02)</strong></span></div>
         </div>
@@ -261,7 +261,7 @@
       <div class="num">10</div>
       <div>
         <div class="itm-title">'2차 인증 재설정' 카드 (클릭)</div>
-        <div class="itm-desc">· 카드 전체가 클릭 영역 · 항상 활성<br>· 클릭 = DASH-03 이동 · 확인 없음 · 이 화면에서 재인증 없음<br><span class="basis">근거 ISMS 2.5 · DASH-03</span></div>
+        <div class="itm-desc">· 카드 전체가 클릭 영역이고 항상 누를 수 있다.<br>· 누르면 바로 DASH-03으로 간다. 이 화면에서는 확인도 재인증도 하지 않는다.<br><span class="basis">근거 ISMS 2.5 · DASH-03</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">카드 전체</span><span class="nav-act">클릭 · 확인 없음</span><span class="nav-to"><strong>2차 인증 재설정(DASH-03)</strong></span></div>
         </div>
@@ -272,7 +272,7 @@
       <div class="num">11</div>
       <div>
         <div class="itm-title">[활동 로그 다운로드 (CSV)] 버튼</div>
-        <div class="itm-desc">· 클릭 = CSV 동기 생성 → 브라우저 다운로드 · 확인 없음 · 기간 선택 없음(전체 기간 1파일)<br>· 생성 중 비활성 · 라벨 "생성 중…" · 중복 클릭 차단 · 실패 시 상단 배너<br>· 파일 = UTF-8(BOM) · 일시 ISO 8601 +09:00 · 수량 쉼표 없음 · 주소 전문 · 0건이면 헤더만 <span style="color:#b45309;">[확인필요: 파일명·컬럼 정의]</span><br>· 다운로드 행위도 감사기록<br><span class="basis">근거 L6 §9 · ISMS 감사로그 · notation CSV 표기</span></div>
+        <div class="itm-desc">· 누르면 CSV를 그 자리에서 만들어 브라우저로 내려받는다. 확인 창은 없다.<br>· 기간을 고르지 않는다. 전체 기간을 한 파일로 만든다.<br>· 만드는 동안 버튼을 비활성으로 두고 라벨을 "생성 중…"으로 바꿔 중복 클릭을 막는다. 실패하면 상단 배너를 띄운다.<br>· 파일은 UTF-8(BOM)로 쓰고, 일시는 ISO 8601 +09:00, 수량은 쉼표 없이, 주소는 전문으로 적는다. 0건이면 헤더만 남긴다.<br>· 내려받은 행위도 감사기록에 남는다.<br>· <span style="color:#b45309;">[확인필요: 파일명·컬럼 정의]</span><br><span class="basis">근거 L6 §9 · ISMS 감사로그 · notation CSV 표기</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[활동 로그 다운로드 (CSV)] — 활성 조건</span><span class="nav-act">생성 중 아님</span><span class="nav-to stay">생성 중 → 회색 비활성 · 라벨 "생성 중…"</span></div>
           <div class="nav-row"><span class="nav-el">[활동 로그 다운로드 (CSV)] — 클릭(활성)</span><span class="nav-act">비활성 · "생성 중…" → 파일 생성 → 브라우저 다운로드 · 감사기록</span><span class="nav-to stay">화면 잔류 · 라벨 복귀 · 토스트 없음</span></div>
