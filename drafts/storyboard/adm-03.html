@@ -74,7 +74,7 @@
                   <span style="white-space:nowrap;display:inline-block;margin:1px 6px 1px 0;"><span style="font-size:9.5px;color:#64748b;">ETH↔USDT</span> <span class="inp">0.10<span class="u">%</span></span></span> &nbsp;
                   <span style="white-space:nowrap;display:inline-block;margin:1px 6px 1px 0;"><span style="font-size:9.5px;color:#64748b;">USDC↔USDT</span> <span class="inp">0.10<span class="u">%</span></span></span>
                 </div>
-                <div style="font-size:9.5px;color:#888;margin-top:2px;">ETH 페어 값은 목업 예시 — 요율 미정 [확인필요: 09 §0]</div>
+                <div style="font-size:9.5px;color:#888;margin-top:2px;">ETH 페어 값은 목업 예시 — 요율 미정 [확인필요]</div>
               </td>
             </tr>
             <tr>
@@ -205,7 +205,7 @@
       <div class="num">2</div>
       <div>
         <div class="itm-title">나목 고정 스프레드 — 페어별 입력 3개<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 페어별로 입력 3개(ETH↔USDC · ETH↔USDT · USDC↔USDT)이고 단위는 %다.<br><strong>허용 문자</strong> 숫자와 소수점만 받는다. 소수 2자리를 넘는 입력은 무시한다.<br><strong>검증</strong> ① 빈칸이 아닐 것 ② 0.01~5.00 범위 안일 것(상세 2). 문자·자릿수는 키 입력마다, ①②는 포커스 아웃 시 클라이언트가 본다. [변경 저장] 클릭 시 서버가 ②를 다시 본다.<br><strong>실패 처리</strong> ① 위반 → 빨간 테두리 + ⚠ "값을 입력해 주세요". ② 위반 → ⚠ "0.01~5.00 사이 값을 입력해 주세요". 어느 쪽이든 [변경 저장] 비활성.<br><strong>연동</strong> 값이 바뀐 셀은 ●와 노란 배경으로 표시하고 상단 "저장되지 않은 변경 {N}건"에 반영한다. 저장한 뒤 신규 요청부터 EXC-01 스프레드 표시와 EXC-02 비율 산정에 쓴다. 이미 제시한 견적은 요청 시점 값을 유지한다. 화면 표기는 소수 2자리, CSV는 소수 4자리다.<br><span class="chk">[확인필요]</span> ETH 페어 요율(목업 0.10은 예시 · 09 §0 미정) · 스프레드 갱신주기 파라미터가 따로 필요한지.<br><span class="basis">근거 09 §0 나목 견적 산정(2026-09-02) · V2 · notation 스프레드 표기</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 페어별로 입력 3개(ETH↔USDC · ETH↔USDT · USDC↔USDT)이고 단위는 %다.<br><strong>허용 문자</strong> 숫자와 소수점만 받는다. 소수 2자리를 넘는 입력은 무시한다.<br><strong>검증</strong> ① 빈칸이 아닐 것 ② 0.01~5.00 범위 안일 것(상세 2). 문자·자릿수는 키 입력마다, ①②는 포커스 아웃 시 클라이언트가 본다. [변경 저장] 클릭 시 서버가 ②를 다시 본다.<br><strong>실패 처리</strong> ① 위반 → 빨간 테두리 + ⚠ "값을 입력해 주세요". ② 위반 → ⚠ "0.01~5.00 사이 값을 입력해 주세요". 어느 쪽이든 [변경 저장] 비활성.<br><strong>연동</strong> 값이 바뀐 셀은 ●와 노란 배경으로 표시하고 상단 "저장되지 않은 변경 {N}건"에 반영한다. 저장한 뒤 신규 요청부터 EXC-01 스프레드 표시와 EXC-02 비율 산정에 쓴다. 이미 제시한 견적은 요청 시점 값을 유지한다. 화면 표기는 소수 2자리, CSV는 소수 4자리다.<br><span class="chk">[확인필요]</span> ETH 페어 요율(목업 0.10은 예시 · 요율 미정) · 스프레드 갱신주기 파라미터가 따로 필요한지.<br><span class="basis">근거 09 §0 나목 견적 산정(2026-09-02) · V2 · notation 스프레드 표기</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">스프레드 필드(각각) — 정상 입력</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">경고 제거 · 셀 dirty ● · [변경 저장] 활성 조건 재검사</span></div>
           <div class="nav-row"><span class="nav-el">스프레드 필드(각각) — 규칙 ① 위반(빈칸)</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "값을 입력해 주세요" · [변경 저장] 비활성</span></div>
@@ -270,7 +270,7 @@
       <div class="num">7</div>
       <div>
         <div class="itm-title">건별 한도 입력 (원 상당)<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 단위는 <strong>원 상당</strong>이고 현재 값은 <strong>1,500,000</strong>이다(2026-09-02(9) 원화 기준 · 나목·마목 공통 1회 한도).<br><strong>허용 문자</strong> 정수만 받고 최대 10자리다. 천 단위 쉼표는 입력하는 동안 자동으로 넣는다.<br><strong>검증</strong> ① 빈칸이 아닐 것 ② 10,000~1,000,000,000 범위 안일 것(상세 2). 문자는 키 입력마다, ①②는 포커스 아웃 시 클라이언트가 본다. 입력하는 동안 천 단위 쉼표를 자동으로 넣는다. [변경 저장] 클릭 시 서버가 ②를 다시 본다.<br><strong>실패 처리</strong> ① 위반 → 빨간 테두리 + ⚠ "값을 입력해 주세요". ② 위반 → ⚠ "10,000~1,000,000,000 사이 정수를 입력해 주세요". 어느 쪽이든 [변경 저장] 비활성.<br><strong>연동</strong> 저장한 뒤 신규 요청부터 EXC-01 수량 한도 검증과 "1회 최대 {정책값 1,500,000원 상당}" 표기, BRK-02 게시 게이트, BRK-03 신청자 검증에 쓴다. 환산은 항목 8 시세 소스의 <strong>KRW 시세</strong>로 요청 시점에 한다(ETH·USDC·USDT 모두 KRW 시세로 환산한다).<br><span class="chk">[확인필요]</span> 일간·월간 누적 한도 파라미터는 두지 않았다(09 §0).<br><span class="basis">근거 09 §0 건별 한도(2026-09-02) · notation 한도 표기</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 단위는 <strong>원 상당</strong>이고 현재 값은 <strong>1,500,000</strong>이다(2026-09-02(9) 원화 기준 · 나목·마목 공통 1회 한도).<br><strong>허용 문자</strong> 정수만 받고 최대 10자리다. 천 단위 쉼표는 입력하는 동안 자동으로 넣는다.<br><strong>검증</strong> ① 빈칸이 아닐 것 ② 10,000~1,000,000,000 범위 안일 것(상세 2). 문자는 키 입력마다, ①②는 포커스 아웃 시 클라이언트가 본다. 입력하는 동안 천 단위 쉼표를 자동으로 넣는다. [변경 저장] 클릭 시 서버가 ②를 다시 본다.<br><strong>실패 처리</strong> ① 위반 → 빨간 테두리 + ⚠ "값을 입력해 주세요". ② 위반 → ⚠ "10,000~1,000,000,000 사이 정수를 입력해 주세요". 어느 쪽이든 [변경 저장] 비활성.<br><strong>연동</strong> 저장한 뒤 신규 요청부터 EXC-01 수량 한도 검증과 "1회 최대 {정책값 1,500,000원 상당}" 표기, BRK-02 게시 게이트, BRK-03 신청자 검증에 쓴다. 환산은 항목 8 시세 소스의 <strong>KRW 시세</strong>로 요청 시점에 한다(ETH·USDC·USDT 모두 KRW 시세로 환산한다).<br><span class="chk">[확인필요]</span> 일간·월간 누적 한도 파라미터는 두지 않았다.<br><span class="basis">근거 09 §0 건별 한도(2026-09-02) · notation 한도 표기</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">건별 한도 필드 — 정상 입력</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">경고 제거 · 셀 dirty ● · [변경 저장] 활성 조건 재검사</span></div>
           <div class="nav-row"><span class="nav-el">건별 한도 필드 — 규칙 ① 위반(빈칸)</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "값을 입력해 주세요" · [변경 저장] 비활성</span></div>
@@ -409,7 +409,7 @@
       <div class="num">18</div>
       <div>
         <div class="itm-title">상태 전이·재이행 요약 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · 기관 KYC 상태 기계(심사중(EDD) → 활성 ⇄ 일시제한 → 동결 → 해지) · 가입자 계정 상태(초대 발송됨 → 활성 ⇄ 잠금 → 해지) · 재이행 주기(고1년·중2년·저3년 + 실소유자·지배구조 변경 등 이벤트 트리거 → 재심사 중 거래 제한, 예외 A4) · 해지 흐름(상세 18)<br>· 고정 문구 · 값은 정책이 아니라 규칙 요약(ADM-03 파라미터 아님)<br><span class="basis">근거 L1 §5의2 · L6 §9 기록 보존 · 예외 A4·A5</span></div>
+        <div class="itm-desc">· 클릭 요소 없음 · 기관 KYC 상태 기계(심사중(EDD) → 활성 ⇄ 일시제한 → 동결 → 해지) · 가입자 계정 상태(초대 발송됨 → 활성 ⇄ 잠금 → 해지) · 재이행 주기(고1년·중2년·저3년 + 실소유자·지배구조 변경 등 이벤트 트리거 → 재심사 중 거래 제한, 예외 A4) · 해지 흐름(상세 18)<br>· 고정 문구 · 값은 이 화면의 수정 가능 파라미터가 아니라 규칙 요약<br><span class="basis">근거 L1 §5의2 · L6 §9 기록 보존 · 예외 A4·A5</span></div>
       </div>
     </div>
   </div>
@@ -422,15 +422,15 @@
     <div class="detail-grid" id="detailCol">
       <div class="dtl" data-idx="0">
         <div class="detail-label"><span class="dtl-num">1</span>자산 중지 파급 범위</div>
-      <div class="dtl-body"><span class="box">· 중지 자산 포함 페어: EXC-01 보내는/받는 자산 ▾ 목록 제외 · BRK-02 자산 칩 목록 제외 · BRK-01 게재중 게시(해당 자산) 표시·신청 가능 여부 <span class="chk">[확인필요]</span><br>· 진행 중 건(수락된 견적·확정 거래·집행 대기)은 영향 없음 — 집행은 콜드 수동 절차로 계속<br>· 자산 3종 중 2종 이상 중지 시 페어 0 → 나·마 서비스 전체 정지와 동일 — 별도 '서비스 정지' 플래그 없음(승인 중단 + 사고대응 절차서, ADM-02 비고)</span></div>
+      <div class="dtl-body"><span class="box">· 중지 자산 포함 페어: EXC-01 보내는/받는 자산 ▾ 목록 제외 · BRK-02 자산 칩 목록 제외 · BRK-01 게재중 게시(해당 자산) 표시·신청 가능 여부 <span class="chk">[확인필요]</span><br>· 진행 중 건(수락된 견적·확정 거래·집행 대기)은 영향 없음 — 집행은 콜드 수동 절차로 계속<br>· 자산 3종 중 2종 이상 중지 시 페어 0 → 나·마 서비스 전체 정지와 동일 — 별도 '서비스 정지' 플래그 없음(승인 중단 + 사고대응 절차서)</span></div>
       </div>
       <div class="dtl" data-idx="1">
         <div class="detail-label"><span class="dtl-num">2</span>입력 범위 표 · 단일 출처 원칙</div>
-      <div class="dtl-body"><span class="box">· <strong>범위(기획 가정 — 상·하한 전부 <span class="chk">[확인필요]</span>)</strong>: 스프레드 0.01~5.00% 2자리 · 견적 유효시간 30~600 s 정수 · 수수료율 0.00~5.00% 2자리 · 게시 유효기간 1~90일 정수 · 신청 유효기간 1~10영업일 정수 · price guard 0.1~10.0% 1자리 · 건별 한도 10,000~1,000,000,000원 정수 · 핫월렛 비중 0~20% 정수<br>· 공통 입력 규격: 숫자·소수점만 · 자릿수 초과 입력 무시 · 오류 = 빨간 테두리 + 셀 아래 인라인 ⚠(원인 + 해결 행동) · dirty = ● + 노란 배경<br>· EXC-01/02·BRK-02/03/04/07은 이 값을 표출만 — 화면 하드코딩 없음, '가격형성 아님' 소명값의 단일 출처<br>· 수수료 1% = 거래액 기준 고정·양측 각자(2026-09-02 확정) · 건별 한도 1,500,000원 상당(2026-09-02(9) 원화 기준 · 종전 표기(1,000 USD 상당 · 그 이전 원화 억 단위 · 코인 수량) 모두 폐기)<br>· <span class="chk">[확인필요]</span> 1% 요율 합리성·설명의무 소명 수위(09 §8) · 한도 환산 시세 장애 시 처리</span></div>
+      <div class="dtl-body"><span class="box">· <strong>범위(기획 가정 — 상·하한 전부 <span class="chk">[확인필요]</span>)</strong>: 스프레드 0.01~5.00% 2자리 · 견적 유효시간 30~600 s 정수 · 수수료율 0.00~5.00% 2자리 · 게시 유효기간 1~90일 정수 · 신청 유효기간 1~10영업일 정수 · price guard 0.1~10.0% 1자리 · 건별 한도 10,000~1,000,000,000원 정수 · 핫월렛 비중 0~20% 정수<br>· 공통 입력 규격: 숫자·소수점만 · 자릿수 초과 입력 무시 · 오류 = 빨간 테두리 + 셀 아래 인라인 ⚠(원인 + 해결 행동) · dirty = ● + 노란 배경<br>· EXC-01/02·BRK-02/03/04/07은 이 값을 표출만 — 화면 하드코딩 없음, '가격형성 아님' 소명값의 단일 출처<br>· 수수료 1% = 거래액 기준 고정·양측 각자(2026-09-02 확정) · 건별 한도 1,500,000원 상당(2026-09-02(9) 원화 기준 · 종전 표기(1,000 USD 상당 · 그 이전 원화 억 단위 · 코인 수량) 모두 폐기)<br>· <span class="chk">[확인필요]</span> 1% 요율 합리성·설명의무 소명 수위 · 한도 환산 시세 장애 시 처리</span></div>
       </div>
       <div class="dtl" data-idx="7">
         <div class="detail-label"><span class="dtl-num">8</span>시세 소스 용도 · KRW 환산 경로</div>
-      <div class="dtl-body"><span class="box">· 용도 3종: ① 나목 기준가(EXC-02 산정 = 기준가 ± 스프레드) ② 건별 한도 KRW 환산(ETH·USDC·USDT 모두 소스 KRW 시세 · USD 마켓 소스면 환율 경유) ③ price guard 이탈 판정(게시 시점 기준가 vs 현재)<br>· 소스명은 고객 콘솔 어디에도 미노출(09 §0 2026-09-02) — 고객 화면은 "외부지표 기준" 문구만<br>· 바이낸스(USD 마켓) 선택 시 USD→KRW 환율 소스·갱신 주기는 <strong>개발 결정</strong>(기획 미지정 · 2026-09-02(10)) · <span class="chk">[확인필요]</span> 소스 장애 시 대체 소스 자동 전환 vs 신규 요청 차단 · 마목은 시세 불관여 원칙 — price guard는 '가드'로만 사용</span></div>
+      <div class="dtl-body"><span class="box">· 용도 3종: ① 나목 기준가(EXC-02 산정 = 기준가 ± 스프레드) ② 건별 한도 KRW 환산(ETH·USDC·USDT 모두 소스 KRW 시세 · USD 마켓 소스면 환율 경유) ③ price guard 이탈 판정(게시 시점 기준가 vs 현재)<br>· 소스명은 고객 콘솔 어디에도 미노출 — 고객 화면은 "외부지표 기준" 문구만<br>· 바이낸스(USD 마켓) 선택 시 USD→KRW 환율 소스·갱신 주기는 <strong>개발 결정</strong>(기획 미지정 · 2026-09-02(10)) · <span class="chk">[확인필요]</span> 소스 장애 시 대체 소스 자동 전환 vs 신규 요청 차단 · 마목은 시세 불관여 원칙 — price guard는 '가드'로만 사용</span></div>
       </div>
       <div class="dtl" data-idx="10">
         <div class="detail-label"><span class="dtl-num">11</span>저장·버전·적용 시점</div>

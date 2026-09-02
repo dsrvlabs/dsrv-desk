@@ -62,7 +62,7 @@
           <div class="pin" data-idx="3" style="top:-6px;right:-6px;">4</div>
           <div class="rule-box">
             안전한 비밀번호를 위해 아래를 지켜주세요.<br>
-            ○ 영문 대·소문자, 숫자, 특수문자 중 3종 이상 조합 8자 이상<br>
+            ○ 영문 대·소문자, 숫자, 특수문자 중 3종 이상 조합 8~20자<br>
             ○ 이메일과 동일한 문자 사용 불가<br>
             ○ 동일 문자 4번 이상 사용 불가<br>
             ○ 특수문자는 !@#$%^&amp;*() 만 사용 가능<br>
@@ -74,7 +74,7 @@
       <!-- 액션: 취소(시안 없음 · 기획 유지) / 다음 -->
       <div class="zone card" data-idx="4,5">
         <div class="zone-highlight"></div>
-        <div style="font-size:9px;color:#b45309;padding:0 4px 4px;">▼ 시안은 [다음] 1개 — [취소]는 종료 동선 규칙(09 §0 · 뒤로가기 미지원)으로 기획 유지 <strong>[디자인 요청]</strong></div>
+        <div style="font-size:9px;color:#b45309;padding:0 4px 4px;">▼ 시안은 [다음] 1개 — [취소]는 종료 동선 규칙(뒤로가기 미지원)으로 기획 유지 <strong>[디자인 요청]</strong></div>
         <div class="row" style="gap:8px;">
           <div class="item-area" data-highlight="4" style="position:relative;flex:1;padding:4px;border-radius:8px;">
             <div class="pin" data-idx="4" style="top:-8px;right:-6px;">5</div>
@@ -117,7 +117,7 @@
       <div class="num">2</div>
       <div>
         <div class="itm-title">새 비밀번호 입력<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다.<br><strong>허용 문자</strong> 영문 대·소문자 · 숫자 · 특수문자 !@#$%^&amp;*()만 받고 그 외 문자는 입력 시점에 무시한다. <span class="chk">[확인필요: 길이 상한 값]</span><br><strong>검증</strong> 키 입력마다 규칙 ①~④를 판정하고, 제출 시 서버가 다시 검증한다. 규칙 수치는 AUTH-01 비고 [비밀번호 규칙]의 고정값이며 규칙 ② 비교 대상은 로그인 계정 이메일이다.<br><strong>실패</strong> 포커스 아웃 시 미충족 규칙이 남으면 인라인 ⚠를 띄우고 [다음]을 비활성으로 둔다. 제출 시 기존 비밀번호와 같으면 인라인 ⚠를 띄운다(비교 범위는 직전 1회 · 해시 1개 보관).<br><strong>연동</strong> 항목 4 규칙 안내의 ○를 ✓로 바꾼다. 값이 바뀌면 항목 3의 일치 비교를 다시 수행한다.<br><strong>저장</strong> 단방향 해시와 salt로만 저장한다.<br><span class="basis">근거 ISMS 2.5.4 · ONB-01 항목 2</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다.<br><strong>허용 문자</strong> 영문 대·소문자 · 숫자 · 특수문자 !@#$%^&amp;*()만 받고 그 외 문자는 입력 시점에 무시한다. 길이는 8~20자로, 20자를 넘는 입력은 받지 않는다.<br><strong>검증</strong> 키 입력마다 입력된 값 전체를 대상으로 규칙 ①~④(항목 4의 안내문 4줄)를 판정한다. 규칙 ② 비교 대상은 로그인 계정 이메일이다. 검증은 이 입력창에서만 하고 제출 시 서버가 규칙을 다시 검증하지 않는다.<br><strong>실패</strong> 포커스 아웃 시 미충족 규칙이 남으면 인라인 ⚠를 띄우고 [다음]을 비활성으로 둔다. 제출 시 기존 비밀번호와 같으면 인라인 ⚠를 띄운다(비교 범위는 직전 1회 · 해시 1개 보관).<br><strong>연동</strong> 항목 4 규칙 안내의 ○를 ✓로 바꾼다. 값이 바뀌면 항목 3의 일치 비교를 다시 수행한다.<br><strong>저장</strong> 단방향 해시와 salt로만 저장한다.<br><span class="basis">근거 ISMS 2.5.4 · ONB-01 항목 1</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">새 비밀번호 필드</span><span class="nav-act">키 입력마다 규칙 판정 · 포커스 아웃 시 오류 표시</span><span class="nav-to stay">4개 충족 → [다음] 활성 조건 ② 해소 / 위반 → ⚠ · [다음] 비활성 · 값 변경 시 항목 3 재비교</span></div>
         </div>
@@ -159,11 +159,11 @@
       <div class="num">6</div>
       <div>
         <div class="itm-title">[다음] 버튼 (= 비밀번호 변경 저장)<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 세 필드가 모두 채워지고 규칙·일치 검증을 통과했을 때만 활성이다.<br><strong>확인 사항</strong> 서버가 기존 비밀번호 일치와 비밀번호 규칙을 다시 검증한다. 확인 다이얼로그와 2차 인증 재입력은 없다.<br><strong>액션</strong> 비밀번호를 단방향 해시와 salt로 저장하고, 타 기기 세션을 전체 로그아웃하며(현재 세션 유지) 변경 이력을 감사기록에 남기고 통합 실패 카운터를 초기화한 뒤 DASH-01로 복귀해 토스트를 띄운다.<br><span class="chk">[디자인 요청]</span> 시안 라벨 '다음'을 '변경' 등으로 조정한다.<br><span class="basis">근거 ISMS 2.5.4 · 2.9.4</span></div>
+        <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 세 필드가 모두 채워지고 규칙·일치 검증을 통과했을 때만 활성이다.<br><strong>확인 사항</strong> 서버가 기존 비밀번호 일치와 새 비밀번호가 기존과 다른지만 확인한다. 비밀번호 규칙은 다시 검증하지 않고, 확인 다이얼로그와 2차 인증 재입력은 없다.<br><strong>액션</strong> 비밀번호를 단방향 해시와 salt로 저장하고, 타 기기 세션을 전체 로그아웃하며(현재 세션 유지) 변경 이력을 감사기록에 남기고 통합 실패 카운터를 초기화한 뒤 DASH-01로 복귀해 토스트를 띄운다.<br><span class="chk">[디자인 요청]</span> 시안 라벨 '다음'을 '변경' 등으로 조정한다.<br><span class="basis">근거 ISMS 2.5.4 · 2.9.4</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[다음] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①기존 비밀번호 빈칸 ②새 비밀번호 규칙 미충족·빈칸 ③확인 불일치·빈칸 ④처리 중</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격) · 사유는 각 필드 인라인 경고로 이미 노출</span></div>
-          <div class="nav-row"><span class="nav-el">[다음] — 클릭(활성) · Enter</span><span class="nav-act">확인 없음 → 라벨 "저장 중…"·비활성(중복 클릭 차단) → 서버: 기존 비밀번호 일치 확인 → 규칙 재검증 → 저장 · 타 기기 세션 종료 · 감사로그</span><span class="nav-to"><strong>대시보드(DASH-01)</strong> · 상단 토스트 "비밀번호가 변경되었습니다"(3초 자동 닫힘) <span class="chk">[확인필요: 토스트 문구·시간]</span></span></div>
-          <div class="nav-row"><span class="nav-el">[다음] — 실패</span><span class="nav-act">기존 비밀번호 불일치 / 새 비밀번호 = 기존 비밀번호 / 서버 규칙 재검증 실패 / 서버 오류</span><span class="nav-to stay">화면 잔류 · 불일치 → 항목 1 ③ ⚠ / 동일 → 항목 2 ⑤ ⚠ / 규칙 → 항목 2 ③ ⚠ / 서버 오류 → 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 버튼 라벨 복귀 · 해당 필드 외 값 유지</span></div>
+          <div class="nav-row"><span class="nav-el">[다음] — 클릭(활성) · Enter</span><span class="nav-act">확인 없음 → 라벨 "저장 중…"·비활성(중복 클릭 차단) → 서버: 기존 비밀번호 일치 확인 → 저장 · 타 기기 세션 종료 · 감사로그</span><span class="nav-to"><strong>대시보드(DASH-01)</strong> · 상단 토스트 "비밀번호가 변경되었습니다"(3초 자동 닫힘) <span class="chk">[확인필요: 토스트 문구·시간]</span></span></div>
+          <div class="nav-row"><span class="nav-el">[다음] — 실패</span><span class="nav-act">기존 비밀번호 불일치 / 새 비밀번호 = 기존 비밀번호 / 서버 오류</span><span class="nav-to stay">화면 잔류 · 불일치 → 항목 1 ③ ⚠ / 동일 → 항목 2 ⑤ ⚠ / 서버 오류 → 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 버튼 라벨 복귀 · 해당 필드 외 값 유지</span></div>
         </div>
       </div>
     </div>
@@ -181,7 +181,7 @@
       </div>
       <div class="dtl" data-idx="3">
         <div class="detail-label"><span class="dtl-num">4</span>안내문구 정합</div>
-      <div class="dtl-body"><span class="box"><strong>단일 출처</strong> 규칙 판정(조합·길이·이메일 동일 문자·동일 문자 반복·허용 특수문자)은 AUTH-01 비고 [비밀번호 규칙]만 참조한다.<br><strong>변경 시</strong> 수치를 바꾸면 ONB-01 · DASH-02 · AUTH-01 비고 3곳을 함께 고친다.</span></div>
+      <div class="dtl-body"><span class="box"><strong>규칙 동일</strong> 규칙 판정(조합·길이 8~20자·이메일 동일 문자·동일 문자 반복·허용 특수문자)은 계정 활성화(ONB-01)의 새 비밀번호 입력과 같다.<br><strong>검증 위치</strong> 규칙 판정은 입력창에서만 하고 서버는 기존 비밀번호 일치 확인과 저장만 한다.</span></div>
       </div>
       <div class="dtl" data-idx="5">
         <div class="detail-label"><span class="dtl-num">6</span>변경 후 처리(백엔드)</div>
@@ -194,7 +194,7 @@
 <section class="footer-note">
   <div class="note-card">
     <div class="note-title">비고</div>
-    <div class="note-body">· DASH-01 계정·보안 '비밀번호 수정' 진입 화면 — 기존 비밀번호 확인 → 변경의 최소 화면 · 독립 페이지(콘솔 GNB 없음).<br>· <strong>[백엔드 통제]</strong> 타 기기 세션 전체 로그아웃 · 변경 이력 감사기록 · 단방향 해시+salt 저장(원문 미보관) — 근거 ISMS 2.5.4·2.9.4.<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 'Change Password' 적용 · [취소]·권고 1줄·○/✓ 표시는 시안 없음 → 기획 유지 <span class="chk">[디자인 요청]</span> · 원본 <span class="mono">reference/figma/_crops/F7_row2_c3.png</span>.<br>· <strong>확정(구현 단순 우선)</strong> — 표시 토글 없음 · 강제 변경주기 없음(권고만) · 잠금 카운터는 AUTH-01 통합 카운터 합산 · 이전 비밀번호 재사용 제한은 직전 1회만 · 변경 알림 이메일 없음.<br>· 남은 <span class="chk">[확인필요]</span> — ISMS 2.10.4 충족 해석 · 비밀번호 길이 상한 값 · 완료 토스트 문구 · 버튼 라벨 '다음' 조정 · 로고 클릭 동작.<br>· 이전 = DASH-01 / 관련 = DASH-03 / 규칙 전문 = AUTH-01 비고</div>
+    <div class="note-body">· DASH-01 계정·보안 '비밀번호 수정' 진입 화면 — 기존 비밀번호 확인 → 변경의 최소 화면 · 독립 페이지(콘솔 GNB 없음).<br>· <strong>[백엔드 통제]</strong> 타 기기 세션 전체 로그아웃 · 변경 이력 감사기록 · 단방향 해시+salt 저장(원문 미보관) — 근거 ISMS 2.5.4·2.9.4.<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 'Change Password' 적용 · [취소]·권고 1줄·○/✓ 표시는 시안 없음 → 기획 유지 <span class="chk">[디자인 요청]</span> · 원본 <span class="mono">reference/figma/_crops/F7_row2_c3.png</span>.<br>· <strong>확정(구현 단순 우선)</strong> — 표시 토글 없음 · 강제 변경주기 없음(권고만) · 잠금 카운터는 AUTH-01 통합 카운터 합산 · 이전 비밀번호 재사용 제한은 직전 1회만 · 변경 알림 이메일 없음.<br>· 남은 <span class="chk">[확인필요]</span> — ISMS 2.10.4 충족 해석 · 완료 토스트 문구 · 버튼 라벨 '다음' 조정 · 로고 클릭 동작.<br>· 이전 = DASH-01 / 관련 = DASH-03</div>
   </div>
 </section>
 
