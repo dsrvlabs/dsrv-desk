@@ -180,10 +180,9 @@
   <div class="items" id="items">
     <div class="nav-global">
       <div class="nav-global-title">진입 · 전역 이동</div>
-      <div class="nav-row"><span class="nav-el">관리 메뉴 '홈' 탭 · 로고 'DSRV Admin'</span><span class="nav-act">클릭</span><span class="nav-to"><strong>어드민 홈(ADM-02)</strong> · 저장되지 않은 변경은 파기(확인 없음 — 공통 UI 규격 · 관리자 예외 여부 <span style="color:#b45309;">[확인필요]</span>)</span></div>
-      <div class="nav-row"><span class="nav-el">관리 메뉴 '설정'(현재)</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응 (현재 화면 — 공통 UI 규격)</span></div>
-      <div class="nav-row"><span class="nav-el">관리자 배지(상단 우측 · 관리자 ID)</span><span class="nav-act">클릭 → 메뉴(로그아웃) → 로그아웃 클릭</span><span class="nav-to"><strong>어드민 로그인</strong>(AUTH-01 규격 공용 · ADM-01 결번) · 확인 없음 · 세션 즉시 파기 · 미저장 변경 파기</span></div>
-      <div class="nav-note">· <strong>진입</strong>: 어드민 홈(ADM-02) '설정' 탭 클릭 · 진입 시 초기 상태 = 저장값 렌더링 · dirty 0 · [되돌리기]·[변경 저장] 비활성 (목업은 price guard 1건 수정 상태)<br>
+      <div class="nav-note">· <strong>전역 이동</strong> = 어드민 셸 정본(ADM-02)와 동일<br>
+      · 차이 = 현재 탭 '설정'(재클릭 무반응) · '홈' 탭·로고 이동과 로그아웃 시 <strong>저장되지 않은 변경 파기</strong>(확인 없음 · 관리자 예외 여부 <span style="color:#b45309;">[확인필요]</span>)<br>
+      · <strong>진입</strong>: 어드민 홈(ADM-02) '설정' 탭 클릭 · 진입 시 초기 상태 = 저장값 표시 · dirty 0 · [되돌리기]·[변경 저장] 비활성 (목업은 price guard 1건 수정 상태)<br>
       · 발생 알람 처리(잠금 해제·재이행 도래·격리 등)는 이 화면이 아니라 홈(ADM-02) 처리함에서 · 어드민 역할 1종 — 전 기능 동일 노출<br>
       · <strong>적용 원칙</strong>: 수치·선택 파라미터(항목 2~9) = [변경 저장] 일괄 반영 · 확인 없음 · <strong>신규 요청부터 적용</strong>(진행 중 건은 요청 시점 값 유지) / 즉시 적용형 2종(취급자산 상태 ▾ · 기관 KYC 상태 변경 ▾) = 저장 버튼과 무관 · 차단 방향은 확인 다이얼로그<br>
       · 토스트 규격(어드민 공통): 우측 상단 · 3초 자동 닫힘 · 클릭 시 즉시 닫힘 · 정책값 현재 예시: 건별 한도 1,500,000원 상당 · 마목 수수료 1% 고정 · 나목 스프레드 0.10% · price guard ±{정책값}% · 자릿수 ETH 4 / USDC·USDT 2(notation)</div>
@@ -217,7 +216,7 @@
       <div class="num">3</div>
       <div>
         <div class="itm-title">나목 견적 유효시간 입력<span class="req">필수</span></div>
-        <div class="itm-desc">· 단위 초(s) · 정수만(소수점 입력 무시) · 최대 3자리 · 범위 30~600(상세 2) · 현재 120<br>· 검증: 문자 = 키 입력마다 / 빈칸·범위 = 포커스 아웃 · ①정상 ②빈칸 ⚠ "값을 입력해 주세요" ③범위 ⚠ "30~600 사이 정수를 입력해 주세요" · dirty ●<br>· 적용: EXC-02 수락 제한 카운트다운(EXC-02 값 렌더링) — 저장 후 신규 요청부터 · 진행 중 견적은 요청 시점 값<br><span class="basis">근거 09 §0 나목 견적(건별 RFQ · 상시 호가 없음) · F-4</span></div>
+        <div class="itm-desc">· 단위 초(s) · 정수만(소수점 입력 무시) · 최대 3자리 · 범위 30~600(상세 2) · 현재 120<br>· 검증: 문자 = 키 입력마다 / 빈칸·범위 = 포커스 아웃 · ①정상 ②빈칸 ⚠ "값을 입력해 주세요" ③범위 ⚠ "30~600 사이 정수를 입력해 주세요" · dirty ●<br>· 적용: EXC-02 수락 제한 카운트다운(EXC-02가 이 값을 표시) — 저장 후 신규 요청부터 · 진행 중 견적은 요청 시점 값<br><span class="basis">근거 09 §0 나목 견적(건별 RFQ · 상시 호가 없음) · F-4</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">견적 유효시간 필드</span><span class="nav-act">키 입력마다 / 포커스 아웃 검증</span><span class="nav-to stay">정상 → dirty ● / 오류 → 인라인 ⚠ · [변경 저장] 비활성</span></div>
         </div>
@@ -239,7 +238,7 @@
       <div class="num">5</div>
       <div>
         <div class="itm-title">마목 유효기간 입력 2개 — 게시(일) · 신청(영업일)<span class="req">필수</span></div>
-        <div class="itm-desc">· 게시 유효기간: 정수 일 · 최대 2자리 · 범위 1~90(상세 2) · 현재 30 — 만료 시 게시 상태 '완료'(유효기간 만료) · 신청 유효기간: 정수 영업일 · 최대 2자리 · 범위 1~10 · 현재 2 — 만료 시 신청 종결·게시 '게재중' 복귀 · 영업일 = KST 평일(공휴일 캘린더 출처 <span style="color:#b45309;">[확인필요]</span>)<br>· 검증: 키 입력마다 문자 / 포커스 아웃 빈칸·범위 · ②빈칸 ⚠ "값을 입력해 주세요" ③범위 ⚠ "1~90 사이 정수를 입력해 주세요" / "1~10 사이 정수를 입력해 주세요" · dirty ●<br>· 적용: 신규 게시·신청부터(BRK-02 게시 시·BRK-03 신청 시 값 렌더링) · 게재중 게시·대기 중 신청은 생성 시점 값<br><span class="basis">근거 09 §0 마목 게시 상태 개정(2026-09-02) · states 고객 도메인 초안</span></div>
+        <div class="itm-desc">· 게시 유효기간: 정수 일 · 최대 2자리 · 범위 1~90(상세 2) · 현재 30 — 만료 시 게시 상태 '완료'(유효기간 만료) · 신청 유효기간: 정수 영업일 · 최대 2자리 · 범위 1~10 · 현재 2 — 만료 시 신청 종결·게시 '게재중' 복귀 · 영업일 = KST 평일(공휴일 캘린더 출처 <span style="color:#b45309;">[확인필요]</span>)<br>· 검증: 키 입력마다 문자 / 포커스 아웃 빈칸·범위 · ②빈칸 ⚠ "값을 입력해 주세요" ③범위 ⚠ "1~90 사이 정수를 입력해 주세요" / "1~10 사이 정수를 입력해 주세요" · dirty ●<br>· 적용: 신규 게시·신청부터(BRK-02 게시 시·BRK-03 신청 시 이 값을 표시) · 게재중 게시·대기 중 신청은 생성 시점 값<br><span class="basis">근거 09 §0 마목 게시 상태 개정(2026-09-02) · states 고객 도메인 초안</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">게시·신청 유효기간 필드(각각)</span><span class="nav-act">키 입력마다 / 포커스 아웃 검증</span><span class="nav-to stay">정상 → dirty ● / 오류 → 인라인 ⚠ · [변경 저장] 비활성</span></div>
         </div>

@@ -118,13 +118,11 @@
   <div class="items" id="items">
     <div class="nav-global">
       <div class="nav-global-title">진입 · 전역 이동</div>
-      <div class="nav-row"><span class="nav-el">GNB '대시보드' · 로고</span><span class="nav-act">클릭</span><span class="nav-to"><strong>대시보드(DASH-01)</strong> · 신청 전 이탈 = 아무 효력 없음(확인 없음)</span></div>
-      <div class="nav-row"><span class="nav-el">GNB '교환하기'</span><span class="nav-act">클릭</span><span class="nav-to"><strong>교환하기(EXC-01)</strong> · 확인 없음</span></div>
-      <div class="nav-row"><span class="nav-el">GNB '교환게시판'(현재 섹션 강조)</span><span class="nav-act">클릭</span><span class="nav-to"><strong>교환 게시판(BRK-01)</strong> · 확인 없음 — [취소]와 동일 결과</span></div>
-      <div class="nav-row"><span class="nav-el">기관 배지</span><span class="nav-act">클릭 → 메뉴(로그아웃) → '로그아웃' 클릭</span><span class="nav-to"><strong>로그인(AUTH-01)</strong> · 확인 없음 · 세션 즉시 파기(공통 UI 규격)</span></div>
-      <div class="nav-note">· <strong>진입</strong>: 교환 게시판(BRK-01)의 타사 게시 행 클릭(게재중 · 협의중 모두) · 진입 시 게시 최신 상태·내 잔고 조회("불러오는 중…") → [이 조건으로 신청] 활성/비활성 판정<br>
+      <div class="nav-note">· <strong>전역 이동</strong> = 고객 콘솔 셸 정본(DASH-01)과 동일<br>
+      · 차이 = 현재 탭 '교환게시판' 재클릭 → <strong>BRK-01 목록</strong>([취소]와 동일 결과) · 신청 전 이탈은 아무 효력 없음<br>
+      · <strong>진입</strong>: 교환 게시판(BRK-01)의 타사 게시 행 클릭(게재중 · 협의중 모두) · 진입 시 게시 최신 상태·내 잔고 조회("불러오는 중…") → [이 조건으로 신청] 활성/비활성 판정<br>
       · 신청자 측 전용 — 수락·거절 버튼 없음(게시자의 BRK-04) · 조건 수정 입력란 없음(역제안 없음) · 신청 후 진행 조회 = 내 신청 상세(BRK-07)<br>
-      · 목업 예시: 게시 800 USDT ↔ 798.40 USDC(0.9980 USDC/USDT · 게시자 B사) · 신청자 A자산운용이 보내는 798.40 USDC · 수수료 7.98 USDC(798.40 × 1% = 7.984 → 절사) · 잔고 9,300.00 USDC(한도와 무관한 예시) · 영업일 2일·한도 1,500,000원·1%는 ADM-03 정책값의 <strong>예시값</strong>(화면은 {정책값} 렌더링)</div>
+      · 목업 예시: 게시 800 USDT ↔ 798.40 USDC(0.9980 USDC/USDT · 게시자 B사) · 신청자 A자산운용이 보내는 798.40 USDC · 수수료 7.98 USDC(798.40 × 1% = 7.984 → 절사) · 잔고 9,300.00 USDC(한도와 무관한 예시) · 영업일 2일·한도 1,500,000원·1%는 ADM-03 정책값의 <strong>예시값</strong>(화면은 {정책값} 표시)</div>
     </div>
 
     <div class="itm" data-idx="0">
@@ -139,7 +137,7 @@
       <div class="num">2</div>
       <div>
         <div class="itm-title">신청 조건 · 내 수수료 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · kv 4행 · 게시 조건을 <strong>신청자 기준으로 뒤집어</strong> 표시(내가 보내는 = 게시자가 받는 798.40 USDC · 내가 받는 = 게시자가 보내는 800 USDT) — 입력 필드 아님(역제안 없음)<br>· <strong>신청 유효기간</strong>: "접수 시점부터 영업일 {정책값}일"(ADM-03 값 렌더링 · 목업 2일) — 신청 시점은 진입 시각이 아니라 <strong>[이 조건으로 신청] 접수 시 서버 시각으로 확정</strong>(BRK-07에 표시) · 종전 '신청 시점' kv 폐기<br>· <strong>내 중개 수수료</strong> = 내가 보내는 자산 수량 × {정책값}%(ADM-03 · 목업 1%) → 보내는 자산 자릿수로 <strong>절사</strong>(798.40 × 1% = 7.984 → 7.98 USDC) · 자기 측 금액만 표시(상대측 8.00 USDT 미노출) · "확정 시 발생" 병기<br><span class="basis">근거 09 §0 마목 수수료(2026-09-02) · L6 설명의무(구속력 발생 전 고지 · 4요소④) · notation 산정값 절사</span></div>
+        <div class="itm-desc">· 클릭 요소 없음 · kv 4행 · 게시 조건을 <strong>신청자 기준으로 뒤집어</strong> 표시(내가 보내는 = 게시자가 받는 798.40 USDC · 내가 받는 = 게시자가 보내는 800 USDT) — 입력 필드 아님(역제안 없음)<br>· <strong>신청 유효기간</strong>: "접수 시점부터 영업일 {정책값}일"(ADM-03 값 표시 · 목업 2일) — 신청 시점은 진입 시각이 아니라 <strong>[이 조건으로 신청] 접수 시 서버 시각으로 확정</strong>(BRK-07에 표시) · 종전 '신청 시점' kv 폐기<br>· <strong>내 중개 수수료</strong> = 내가 보내는 자산 수량 × {정책값}%(ADM-03 · 목업 1%) → 보내는 자산 자릿수로 <strong>절사</strong>(798.40 × 1% = 7.984 → 7.98 USDC) · 자기 측 금액만 표시(상대측 8.00 USDT 미노출) · "확정 시 발생" 병기<br><span class="basis">근거 09 §0 마목 수수료(2026-09-02) · L6 설명의무(구속력 발생 전 고지 · 4요소④) · notation 산정값 절사</span></div>
       </div>
     </div>
 
@@ -184,7 +182,7 @@
       <div class="num">6</div>
       <div>
         <div class="itm-title">단독 실행 결과 고지 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · 버튼 아래 결과 고지 1문장 상시 노출(공통 UI 규격 '단독 실행 표기' — 즉시 확정·구속력·수수료) · 수수료 금액은 항목 2 값 렌더링 · 영업일 {정책값}일은 ADM-03 값<br>· "신청 후 취소 기능은 없습니다" — BRK-07 기획 가정과 연동 <span style="color:#b45309;">[확인필요: 신청 취소 허용 여부(BRK-07) — 허용 시 이 문장 수정]</span><br><span class="basis">근거 notation 단독 실행 표기(BRK-03·04 하단 문구) · L6 설명의무</span></div>
+        <div class="itm-desc">· 클릭 요소 없음 · 버튼 아래 결과 고지 1문장 상시 노출(공통 UI 규격 '단독 실행 표기' — 즉시 확정·구속력·수수료) · 수수료 금액은 항목 2 값 표시 · 영업일 {정책값}일은 ADM-03 값<br>· "신청 후 취소 기능은 없습니다" — BRK-07 기획 가정과 연동 <span style="color:#b45309;">[확인필요: 신청 취소 허용 여부(BRK-07) — 허용 시 이 문장 수정]</span><br><span class="basis">근거 notation 단독 실행 표기(BRK-03·04 하단 문구) · L6 설명의무</span></div>
       </div>
     </div>
 

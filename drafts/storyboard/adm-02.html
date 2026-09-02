@@ -338,7 +338,8 @@
       <div class="nav-row"><span class="nav-el">관리 메뉴 '설정' 탭</span><span class="nav-act">클릭</span><span class="nav-to"><strong>설정(ADM-03)</strong> · 확장 중인 행·미저장 txhash 입력은 파기(확인 없음)</span></div>
       <div class="nav-row"><span class="nav-el">관리 메뉴 '홈'(현재) · 로고 'DSRV Admin'</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응 (현재 화면 — 공통 UI 규격) · 로고 = 홈이므로 동일</span></div>
       <div class="nav-row"><span class="nav-el">관리자 배지(상단 우측 · 관리자 ID)</span><span class="nav-act">클릭 → 메뉴(로그아웃) → 로그아웃 클릭</span><span class="nav-to"><strong>어드민 로그인</strong>(AUTH-01 규격 공용 · ADM-01 결번) · 확인 없음 · 세션 즉시 파기 (notation 로그아웃 규격)</span></div>
-      <div class="nav-note">· <strong>진입</strong>: 어드민 로그인 성공 후 기본(첫) 화면 · 내부 전용 · PAM 전용세션 · 유휴 10분 자동 로그아웃 <span style="color:#b45309;">[확인필요]</span> · 어드민 역할 1종(운영 관리자) — 화면·버튼 노출 차이 없음<br>
+      <div class="nav-note">· <strong>전역 이동 정본(어드민 셸 — 관리 메뉴 2탭 + 관리자 배지)</strong> = ADM-03 공통. 해당 화면에는 다시 쓰지 않고 차이만 표기한다.<br>
+      · <strong>진입</strong>: 어드민 로그인 성공 후 기본(첫) 화면 · 내부 전용 · PAM 전용세션 · 유휴 10분 자동 로그아웃 <span style="color:#b45309;">[확인필요]</span> · 어드민 역할 1종(운영 관리자) — 화면·버튼 노출 차이 없음<br>
       · 배지 표시값 = 관리자 ID(DSRV-OPS-NN) <span style="color:#b45309;">[확인필요: 이름 병기 여부]</span> · 브라우저 뒤로가기 미지원(공통)<br>
       · 처리함 유입: 나목 승인(EXC-02 수락 즉시) · 마목 확정 확인(BRK-04 수락 즉시) · 출금/이전 서면 접수(관리자 등록) · 입금 감시 · 이상거래 룰 · 월렛/키 이벤트 · KYC 재이행 · 계정 잠금(AUTH-01) · 3면 대사 배치<br>
       · <strong>토스트 규격(이 화면)</strong>: 우측 상단 · 3초 자동 닫힘 · 클릭 시 즉시 닫힘 · 2개 이상은 세로 적층<br>
@@ -513,7 +514,7 @@
       <div class="num">14</div>
       <div>
         <div class="itm-title">[확인] — 월렛·키 알람(T6)<span class="req">필수</span></div>
-        <div class="itm-desc">· 보안 이벤트(비인가 이체 시도 High · 핫월렛 비중 {정책값}% 초과 스윕 워닝(ADM-03 값 렌더링) · 서명 시스템 장애) 확인 표시 · 결과 = IN_PROGRESS(확인) · 행 유지 · 상태 "확인 · {관리자 ID} · {일시}" · <strong>확인 다이얼로그 없음</strong><br>· 실제 조치(키 교체·콜드 이관 스윕·비상 대응)는 화면 밖 운영 절차 — 처리함에는 확인·조치 결과만 기록<br><span class="basis">근거 states T6 · ISMS 2.7.2 · 예외 B6·F6</span></div>
+        <div class="itm-desc">· 보안 이벤트(비인가 이체 시도 High · 핫월렛 비중 {정책값}% 초과 스윕 워닝(ADM-03 값 표시) · 서명 시스템 장애) 확인 표시 · 결과 = IN_PROGRESS(확인) · 행 유지 · 상태 "확인 · {관리자 ID} · {일시}" · <strong>확인 다이얼로그 없음</strong><br>· 실제 조치(키 교체·콜드 이관 스윕·비상 대응)는 화면 밖 운영 절차 — 처리함에는 확인·조치 결과만 기록<br><span class="basis">근거 states T6 · ISMS 2.7.2 · 예외 B6·F6</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[확인] — 활성 조건</span><span class="nav-act">상태 '미확인'일 때만</span><span class="nav-to stay">해당 없음 → 회색 비활성(공통 UI 규격)</span></div>
           <div class="nav-row"><span class="nav-el">[확인] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음 → "처리 중…"(1초 내)</span><span class="nav-to stay">상태 "확인 · {관리자 ID} · {일시}" · [확인] 비활성 · [조치완료] 활성으로 전환 · 감사로그</span></div>
