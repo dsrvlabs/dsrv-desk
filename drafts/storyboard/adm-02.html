@@ -320,17 +320,13 @@
   <div class="items" id="items">
     <div class="nav-global">
       <div class="nav-global-title">진입 · 전역 이동</div>
-      <div class="nav-row"><span class="nav-el">관리 메뉴 '설정' 탭</span><span class="nav-act">클릭</span><span class="nav-to"><strong>설정(ADM-03)</strong> · 확장 중인 행·미저장 txhash 입력은 파기(확인 없음)</span></div>
-      <div class="nav-row"><span class="nav-el">관리 메뉴 '홈'(현재) · 로고 'DSRV Admin'</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응 (현재 화면 — 공통 UI 규격) · 로고 = 홈이므로 동일</span></div>
-      <div class="nav-row"><span class="nav-el">관리자 배지(상단 우측 · 관리자 ID)</span><span class="nav-act">클릭 → 메뉴(로그아웃) → 로그아웃 클릭</span><span class="nav-to"><strong>어드민 로그인</strong>(AUTH-01 규격 공용 · ADM-01 결번) · 확인 없음 · 세션 즉시 파기 (notation 로그아웃 규격)</span></div>
-      <div class="nav-note">· <strong>전역 이동 정본(어드민 셸 — 관리 메뉴 2탭 + 관리자 배지)</strong> = ADM-03 공통. 해당 화면에는 다시 쓰지 않고 차이만 표기한다.<br>
-      · <strong>진입</strong>: 어드민 로그인 성공 후 기본(첫) 화면 · 내부 전용 · PAM 전용세션 · 유휴 10분 자동 로그아웃 <span class="chk">[확인필요]</span> · 어드민 역할 1종(운영 관리자) — 화면·버튼 노출 차이 없음<br>
-      · 배지 표시값 = 관리자 ID(DSRV-OPS-NN) <span class="chk">[확인필요: 이름 병기 여부]</span> · 브라우저 뒤로가기 미지원(공통)<br>
-      · 처리함 유입: 나목 승인(EXC-02 수락 즉시) · 마목 확정 확인(BRK-04 수락 즉시) · 출금/이전 서면 접수(관리자 등록) · 입금 감시 · 이상거래 룰 · 월렛/키 이벤트 · KYC 재이행 · 계정 잠금(AUTH-01) · 3면 대사 배치<br>
-      · <strong>토스트 규격(이 화면)</strong>: 우측 상단 · 3초 자동 닫힘 · 클릭 시 즉시 닫힘 · 2개 이상은 세로 적층<br>
-      · 목업 예시: 900 USDC → 899.73 USDT(EXC-20260902-0001, 확정 비율 0.9997) · 800 USDT ↔ 798.40 USDC(BRK-20260902-0001, 수수료 8.00 USDT / 7.98 USDC) — 한도 1,500,000원 상당 이내 · 2026-09-02 예시 재조정 · 출금 80,000 USDC는 건별 한도 대상 아님(교환·중개 한도)</div>
+      <div class="nav-row"><span class="nav-el">관리 메뉴 '설정' 탭</span><span class="nav-act">클릭</span><span class="nav-to"><strong>설정(ADM-03)</strong>. 확장 중인 행과 저장하지 않은 txhash 입력은 확인 없이 버린다.</span></div>
+      <div class="nav-row"><span class="nav-el">관리 메뉴 '홈'(현재) · 로고 'DSRV Admin'</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응. 로고는 홈으로 가는 링크라 이 화면에서는 '홈' 탭과 같다. 설정(ADM-03)에서 누르면 이 화면으로 이동한다.</span></div>
+      <div class="nav-row"><span class="nav-el">관리자 배지(상단 우측 · 관리자 ID)</span><span class="nav-act">클릭</span><span class="nav-to">메뉴에 '로그아웃' 1개가 펼쳐진다. '로그아웃' 클릭 → 확인 없이 세션 즉시 파기 → <strong>어드민 로그인</strong>. 어드민 로그인은 별도 화면 ID 없이 로그인(AUTH-01)과 같은 규격(이메일·비밀번호 + 인증 앱 코드)을 쓴다.</span></div>
+      <div class="nav-row"><span class="nav-el">브라우저 뒤로가기</span><span class="nav-act">전 화면 미지원</span><span class="nav-to">"접근할 수 없는 화면입니다" 안내 후 <strong>어드민 홈(ADM-02)</strong>으로 이동한다. <span class="chk">[확인필요: 목적지 — 고객 콘솔의 '안내 후 대시보드' 규칙을 준용해 홈으로 기재]</span></span></div>
+      <div class="nav-note">· 이 프레임(관리 메뉴 2탭 + 관리자 배지)은 설정(ADM-03)이 같이 쓴다. 프레임 동작은 이 화면에만 적고, ADM-03에는 이 화면과 다른 점만 적는다.<br>
+      · <strong>진입</strong> 어드민 로그인 성공 후 첫 화면 / 설정(ADM-03)에서 '홈' 탭 또는 로고 클릭. 유휴 {정책값 10분}이 지나면 자동 로그아웃되어 어드민 로그인으로 돌아간다 <span class="chk">[확인필요: 유휴 시간 값]</span>.</div>
     </div>
-
 
     <div class="itm" data-idx="0">
       <div class="num">1</div>
@@ -679,6 +675,7 @@
   <div class="note-card">
     <div class="note-title">비고</div>
     <div class="note-body">· 처리 현황 KPI 카드 제거(2026-09-02 사용자 결정) — 어드민 홈은 처리함·집행 대기·다운로드만 두고 집계 표시를 하지 않는다. 처리함 공통 상태 5종(OPEN·ESCALATED·IN_PROGRESS·HOLD·RESOLVED)은 states §3·§4 정의를 따른다.<br>· <span class="chk">[확인필요]</span> High 워닝 N시간 미처리 시 상위 보고 룰 · 24×365 상시 확인 주체·당직 — toast+처리함은 상시 확인 주체 전제<br>
+      · 접속은 내부 전용 · PAM 전용세션에서만 · 관리자 배지 표시값 = 관리자 ID(DSRV-OPS-NN) <span class="chk">[확인필요: 이름 병기 여부]</span> · 어드민 역할 1종(운영 관리자) — 화면·버튼 노출 차이 없음.<br>
       · <strong>목업 인터랙션(2026-09-02)</strong>: 어드민 프레임 폭을 다른 화면의 <strong>1.5배(810px)</strong>로 넓히고, 처리함 <strong>행 클릭 → 유형별 확장 패널</strong>을 목업에서 실제로 열 수 있게 함(동시 1개 · 같은 행 재클릭 = 접기 · 처리 버튼·입력 클릭은 확장 아님 · 핀 클릭은 항목 선택). 관리 메뉴 '설정' 클릭 시 ADM-03으로 이동. 확장 패널의 값은 목업 예시.<br>
       · DSRV 내부 관리자 화면(고객사 노출 없음). 어드민은 <strong>2화면(ADM-02 홈 · ADM-03 설정)</strong> — 처리할 일만 알람·워닝 처리함, 조회성 데이터는 CSV 다운로드 6종.<br>
       · <strong>[방어 핵심]</strong> 자동검증은 1차 필터일 뿐, 승인·보류·거절은 전부 사람의 판단 — "자동체결·자동심사 아님" 소명. 본인 기안 자기승인 차단(DSRV 내부 직무분리)으로 담보.<br>
