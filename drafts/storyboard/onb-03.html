@@ -99,7 +99,7 @@
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[확인] — 활성 조건</span><span class="nav-act">다음이 아님: ①처리 중</span><span class="nav-to stay">항상 활성(복사는 필수 아님) · 처리 중 → 회색</span></div>
           <div class="nav-row"><span class="nav-el">[확인] — 클릭(활성)</span><span class="nav-act">다이얼로그: 제목 "복구 코드를 저장했습니까?" / 본문 "이 화면을 벗어나면 복구 코드를 다시 볼 수 없습니다. 인증 앱 분실 시 로그인에 필요합니다." / [활성화 완료] [돌아가기] → [활성화 완료] → 라벨 "처리 중…" → 계정 활성 · 토큰 소멸 · 감사로그</span><span class="nav-to"><strong>로그인(AUTH-01)</strong> — 상단 안내 "계정이 활성화되었습니다. 로그인해 주세요" <span class="chk">[확인필요: AUTH-01 안내 노출 여부 — 시안 없음]</span></span></div>
-          <div class="nav-row"><span class="nav-el">[확인] — 실패</span><span class="nav-act">토큰 만료 / 서버 오류</span><span class="nav-to stay">화면 잔류 · 만료 → 상단 배너 "초대 링크가 만료되었습니다. 관리자에게 재발급을 요청해 주세요" / 서버 오류 → 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 라벨 복귀</span></div>
+          <div class="nav-row"><span class="nav-el">[확인] — 실패</span><span class="nav-act">토큰 무효(만료·이미 사용) / 서버 오류</span><span class="nav-to">토큰 무효 → <strong>초대 링크 오류(ONB-04)</strong> 이동(ONB-01 [다음]과 동일 처리) / 서버 오류 → 화면 잔류 · 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 라벨 복귀</span></div>
         </div>
       </div>
     </div>
@@ -126,7 +126,7 @@
 <section class="footer-note">
   <div class="note-card">
     <div class="note-title">비고</div>
-    <div class="note-body">· 계정 활성화 <strong>3/3 — 복구 코드 저장·활성화 완료</strong> · ONB-02 검증 성공 → 이 화면(코드 1회 노출 · 복사) → [확인] → AUTH-01.<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 'Save Code' 적용 · [확인] 확인 다이얼로그는 시안 없음 → <span class="chk">[디자인 요청]</span> · 원본 <span class="mono">reference/figma/_crops/F4_row1_c4.png</span>.<br>· <strong>확정(구현 단순 우선)</strong> — 복사 토스트 2초 · <strong>[다운로드] 버튼 삭제(2026-09-02 편의기능 제거)</strong> — 파일 생성·파일명·내용 규격·다운로드 감사로그가 함께 빠짐 · 문의는 주소 텍스트.<br>· 남은 <span class="chk">[확인필요]</span> — ADM-03 계정 상태 라벨.<br>· <strong>확정(2026-09-02)</strong> — 보조 링크 영역 삭제(문의하기 · 이전으로). '이전으로' 유지 시 필요했던 ONB-02 [다음] 추가 이슈도 함께 소멸.<br>· 이전 = ONB-02 / 다음 = AUTH-01</div>
+    <div class="note-body">· 계정 활성화 <strong>3/3 — 복구 코드 저장·활성화 완료</strong> · ONB-02 검증 성공 → 이 화면(코드 1회 노출 · 복사) → [확인] → AUTH-01.<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 'Save Code' 적용 · [확인] 확인 다이얼로그는 시안 없음 → <span class="chk">[디자인 요청]</span> · 원본 <span class="mono">reference/figma/_crops/F4_row1_c4.png</span>.<br>· <strong>확정(구현 단순 우선)</strong> — 복사 토스트 2초 · <strong>[다운로드] 버튼 삭제(2026-09-02 편의기능 제거)</strong> — 파일 생성·파일명·내용 규격·다운로드 감사로그가 함께 빠짐 · 문의는 주소 텍스트.<br>· 남은 <span class="chk">[확인필요]</span> — ADM-03 계정 상태 라벨.<br>· 토큰 무효 시 처리를 ONB-01 [다음]과 통일 — 화면 잔류 배너가 아니라 ONB-04 이동(2026-09-02).<br>· <strong>확정(2026-09-02)</strong> — 보조 링크 영역 삭제(문의하기 · 이전으로). '이전으로' 유지 시 필요했던 ONB-02 [다음] 추가 이슈도 함께 소멸.<br>· 이전 = ONB-02 / 다음 = AUTH-01</div>
   </div>
 </section>
 
