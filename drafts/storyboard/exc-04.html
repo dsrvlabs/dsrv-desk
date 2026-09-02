@@ -42,7 +42,7 @@
         </div>
       </div>
 
-      <!-- 거래 상태: 스텝바(표시 전용) + 보류 배너(조건부 노출) -->
+      <!-- 거래 상태: 스텝바(표시 전용) + 거절 사유 배너(조건부 노출) -->
       <div class="zone" data-idx="0,1">
         <div class="zone-highlight"></div>
         <div class="item-area" data-highlight="0" style="position:relative;padding:6px;border-radius:8px;margin-bottom:6px;">
@@ -51,14 +51,14 @@
           <div class="steps" style="flex-wrap:wrap;gap:8px;">
             <span class="step done"><span class="dot">✓</span>비율 수락</span><span class="arrow">→</span>
             <span class="step done"><span class="dot">✓</span>DSRV 거래 진행</span><span class="arrow">→</span>
-            <span class="step"><span class="dot">!</span>심사 후 보류</span>
+            <span class="step"><span class="dot">!</span>거절</span>
           </div>
-          <div style="font-size:9px;color:#94a3b8;padding:4px 0 0;">▼ [상태: 완료 시] 3단계 = "완료" ✓(초록) · 아래 배너 없음 — 목업은 '심사 후 보류' 변형</div>
+          <div style="font-size:9px;color:#94a3b8;padding:4px 0 0;">▼ [상태: 완료 시] 3단계 = "완료" ✓(초록) · 아래 배너 없음 / [만료 시] 1·2단계도 미도달 · 3단계 "만료" — 목업은 '거절' 변형</div>
         </div>
         <div class="item-area" data-highlight="1" style="position:relative;padding:4px;border-radius:8px;">
           <div class="pin" data-idx="1" style="top:-6px;right:-6px;">2</div>
-          <div style="font-size:9px;color:#94a3b8;padding:0 0 3px;">▼ [상태: 심사 후 보류 시만 노출] 사유 카테고리별 문구 4종 — 상세 2</div>
-          <div style="font-size:10.5px;color:#991b1b;background:#fef2f2;border:1px solid #fecaca;border-radius:6px;padding:6px 10px;display:flex;gap:6px;align-items:center;"><strong>심사 후 보류</strong> — 추가 정보 확인이 필요합니다. 담당자가 별도 안내드립니다. (요청번호 EXC-20260902-0001)</div>
+          <div style="font-size:9px;color:#94a3b8;padding:0 0 3px;">▼ [상태: DSRV 거절·만료 시만 노출] 사유 카테고리별 문구 — 상세 2 · 고객 거절 건은 배너 없음</div>
+          <div style="font-size:10.5px;color:#991b1b;background:#fef2f2;border:1px solid #fecaca;border-radius:6px;padding:6px 10px;display:flex;gap:6px;align-items:center;"><strong>거절</strong> — 추가 정보 확인이 필요합니다. 담당자가 별도 안내드립니다. (요청번호 EXC-20260902-0001)</div>
         </div>
       </div>
 
@@ -69,8 +69,8 @@
           <div class="pin" data-idx="2" style="top:-4px;right:-4px;">3</div>
           <div class="zone-title">집행 정보</div>
           <div class="kv"><span class="k">집행 방식</span><span class="v">100% 콜드 · 수동 · 2인 멀티시그</span></div>
-          <div class="kv"><span class="k">완료 일시</span><span class="v">— (보류 중)</span></div>
-          <div class="kv"><span class="k">가용 풀 차감</span><span class="v">보류 중 — 미차감</span></div>
+          <div class="kv"><span class="k">완료 일시</span><span class="v">— (거절)</span></div>
+          <div class="kv"><span class="k">가용 풀 차감</span><span class="v">미차감(집행 없음)</span></div>
         </div>
       </div>
 
@@ -111,27 +111,27 @@
       <div class="nav-row"><span class="nav-el">GNB '교환하기'</span><span class="nav-act">클릭 (확인 없음)</span><span class="nav-to"><strong>교환하기(EXC-01)</strong> 초기 상태 — 새 요청 <span style="color:#b45309;">[확인필요: DASH-01 행 클릭 진입 시 현재 탭 강조 위치 — 목업은 '교환하기' 강조]</span></span></div>
       <div class="nav-row"><span class="nav-el">GNB '교환게시판'</span><span class="nav-act">클릭 (확인 없음)</span><span class="nav-to"><strong>교환 게시판(BRK-01)</strong></span></div>
       <div class="nav-row"><span class="nav-el">기관 배지</span><span class="nav-act">클릭 → 메뉴(로그아웃) → 로그아웃 클릭</span><span class="nav-to"><strong>로그인(AUTH-01)</strong> · 세션 즉시 파기 · 확인 없음(공통 UI 규격 '로그아웃') <span style="color:#b45309;">[확인필요: EXC-01 표본은 배지 '무반응'으로 기재 — 규격 통일]</span></span></div>
-      <div class="nav-note">· <strong>진입</strong>: 대시보드(DASH-01) 거래 목록에서 나목 <strong>완료 / 심사 후 보류</strong> 행 클릭(유일한 진입점 — EXC-03 진행 건이 종결되면 다음 행 클릭부터 이 화면) · 진입 시 kv·배너 영역 "불러오는 중…" → 값(3초 초과 → 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · [확인]은 활성 유지)<br>
-      · <strong>갱신 방식</strong>: 조회 전용 · 자동 갱신 없음 — 종결 상태이므로 값이 바뀌지 않음 · 보류 건이 담당자 처리로 상태가 바뀌면 재진입 시 반영 <span style="color:#b45309;">[확인필요: 보류 이후 전이(완료 재개 / 종결) 정의]</span><br>
-      · 보류 건 이의·문의 동선은 화면 밖(담당자 별도 안내 — 화면 내 문의 링크·버튼 없음) <span style="color:#b45309;">[확인필요: 이메일 문의 링크 여부 — EXC-01 KYC 배너와 동일 이슈]</span> · 뒤로가기 미지원(공통 UI 규격)<br>
-      · 목업 예시: 900 USDC → 899.73 USDT(완료 시 실값), 확정 비율 0.9997 USDT/USDC, 스프레드 0.10%, 요청번호 EXC-20260902-0001 · 목업은 '심사 후 보류' 변형(받은 자산 "—") · 모두 예시값(정책값은 ADM-03 렌더링)</div>
+      <div class="nav-note">· <strong>진입</strong>: 대시보드(DASH-01) 거래 목록에서 나목 <strong>완료 · 거절 · 만료</strong> 행 클릭(유일한 진입점 · 고객 거절·만료 건도 이 화면을 재사용 — 무반응 분기 없음(2026-09-02 확정) — EXC-03 진행 건이 종결되면 다음 행 클릭부터 이 화면) · 진입 시 kv·배너 영역 "불러오는 중…" → 값(3초 초과 → 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · [확인]은 활성 유지)<br>
+      · <strong>갱신 방식</strong>: 조회 전용 · 자동 갱신 없음 — 종결 상태이므로 값이 바뀌지 않음 · 관리자 보류 건은 종결이 아니므로 이 화면에 오지 않는다(EXC-03 '거래 진행중' 유지 — 고객 화면 '보류' 라벨 폐지 2026-09-02)<br>
+      · 거절 건 이의·문의 동선은 화면 밖(담당자 별도 안내 — 화면 내 문의 링크·버튼 없음) <span style="color:#b45309;">[확인필요: 이메일 문의 링크 여부 — EXC-01 KYC 배너와 동일 이슈]</span> · 뒤로가기 미지원(공통 UI 규격)<br>
+      · 목업 예시: 900 USDC → 899.73 USDT(완료 시 실값), 확정 비율 0.9997 USDT/USDC, 스프레드 0.10%, 요청번호 EXC-20260902-0001 · 목업은 '거절' 변형(받은 자산 "—") · 모두 예시값(정책값은 ADM-03 렌더링)</div>
     </div>
 
     <div class="itm" data-idx="0">
       <div class="num">1</div>
       <div>
         <div class="itm-title">거래 상태 스텝바 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 — 스텝 클릭 무반응 · EXC-03과 동일한 3단계 구조, 이 화면은 종결 시점이므로 3단계가 채워짐<br>· <strong>상태 변형 2종</strong>(상세 1 표) ① <strong>완료</strong>: 3단계 라벨 "완료" · ✓ 초록(done) · 배너(항목 2) 없음 ② <strong>심사 후 보류</strong>: 3단계 라벨 "심사 후 보류" · "!" 회색 · 배너 노출 — 목업은 ②<br>· 1·2단계는 두 변형 모두 ✓(수락·DSRV 거래 진행 완료) · 내부 심사 단계·담당자·처리 시각 미표시<br><span class="basis">근거 STR 누설금지(특정금융정보법 제4조 [원문대조필요]) · notation 상태 칩(완료 초록 · 종결·거절 회색)</span></div>
+        <div class="itm-desc">· 클릭 요소 없음 — 스텝 클릭 무반응 · EXC-03과 동일한 3단계 구조, 이 화면은 종결 시점이므로 3단계가 채워짐<br>· <strong>상태 변형 3종</strong>(상세 1 표) ① <strong>완료</strong>: 3단계 라벨 "완료" · ✓ 초록(done) · 배너(항목 2) 없음 ② <strong>거절</strong>: 3단계 라벨 "거절" · "!" 회색 · 배너 노출(DSRV 거절 시) — 목업은 ② ③ <strong>만료</strong>: 수락 전 종결이므로 1·2단계도 미도달(회색) · 3단계 "만료" · 배너 노출<br>· 1·2단계는 완료·거절 두 변형에서 ✓(수락·DSRV 거래 진행 완료) · 고객 화면에 '심사 후 보류' 변형은 없다(2026-09-02 결정 — 관리자 보류는 EXC-03 '진행중'으로만 보임) · 내부 심사 단계·담당자·처리 시각 미표시<br><span class="basis">근거 STR 누설금지(특정금융정보법 제4조 [원문대조필요]) · notation 상태 칩(완료 초록 · 종결·거절 회색)</span></div>
       </div>
     </div>
 
     <div class="itm" data-idx="1">
       <div class="num">2</div>
       <div>
-        <div class="itm-title">보류 안내 배너 (조건부 노출)</div>
-        <div class="itm-desc">· 노출 조건: 최종 상태 = '심사 후 보류'일 때만 · 완료 건은 배너 없음 · 닫기(×) 없음 · 클릭 요소 없음(문의 링크 없음)<br>· 문구 구조: "<strong>심사 후 보류</strong> — {사유 카테고리 문구}. {다음 행동 1문장} (요청번호 {EXC-YYYYMMDD-NNNN})" · 사유 카테고리 4종 ① 한도 초과 ② 추가 정보 확인 필요 ③ 내부 심사 기준 미충족 ④ 가용 풀 부족·비율 변동(집행 불가) — 카테고리별 문구는 상세 2(초안 · [로펌게이트])<br>· <strong>일반화된 사유만</strong> 표기 — 내부 사유·KYT 점수·의심거래(STR) 여부·시세 소스명·이탈 임계값은 어떤 형태로도 미노출(공통 UI 규격 오류 문구 ③)<br><span class="basis">근거 STR 누설금지(특정금융정보법 제4조 [원문대조필요]) · 09 §0 고객 화면 미노출 정보(2026-09-02)</span></div>
+        <div class="itm-title">거절·만료 안내 배너 (조건부 노출)</div>
+        <div class="itm-desc">· 노출 조건: 최종 상태 = <strong>DSRV 거절</strong> 또는 <strong>만료</strong>일 때 · 완료 건과 고객 거절 건은 배너 없음 <span style="color:#b45309;">[확인필요: 고객 거절 구분 표기 여부]</span> · 닫기(×) 없음 · 클릭 요소 없음(문의 링크 없음)<br>· 문구 구조: "<strong>{상태}</strong> — {사유 카테고리 문구}. {다음 행동 1문장} (요청번호 {EXC-YYYYMMDD-NNNN})" · 거절 사유 3종 ① 한도 초과 ② 추가 정보 확인 필요 ③ 내부 심사 기준 미충족 · 만료 2종 ④ 수락 기한 경과 ⑤ 가용 풀 부족·비율 변동(수락 재검증 실패 — states A10은 고객에게 '만료') — 카테고리별 문구는 상세 2(초안 · [로펌게이트])<br>· <strong>일반화된 사유만</strong> 표기 — 내부 사유·KYT 점수·의심거래(STR) 여부·시세 소스명·이탈 임계값은 어떤 형태로도 미노출(공통 UI 규격 오류 문구 ③)<br><span class="basis">근거 STR 누설금지(특정금융정보법 제4조 [원문대조필요]) · 09 §0 고객 화면 미노출 정보(2026-09-02)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">배너</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용) · 보류 이후 상태 변경 시 재진입 시점에 배너 제거 또는 문구 교체</span></div>
+          <div class="nav-row"><span class="nav-el">배너</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용) · 종결 상태이므로 문구가 바뀌지 않는다</span></div>
         </div>
       </div>
     </div>
@@ -140,7 +140,7 @@
       <div class="num">3</div>
       <div>
         <div class="itm-title">집행 정보 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · 3행 고정: 집행 방식 · 완료 일시 · 가용 풀 차감 — 값은 상태 변형별로 다름(상세 1 표)<br>· 집행 방식: 고정 문구 "100% 콜드 · 수동 · 2인 멀티시그"(두 변형 공통)<br>· 완료 일시: 완료 = 온체인 출고 확정 시각 YYYY-MM-DD HH:MM(KST · 초 생략) / 보류 = "— (보류 중)"<br>· 가용 풀 차감: 완료 = "{받는 자산} {받은 수량} ▼"(예 USDT 899.73 ▼) / 보류 = "보류 중 — 미차감" · 차감 기준 시점 = 온체인 출고 확정(상세 3)<br>· 소요 안내(약 {영업일}영업일)는 EXC-03에서만 — 종결 화면에는 예상값 대신 실제 완료 일시<br><span class="basis">근거 콜드지갑 수동집행 절차 · ISMS 2.7.2(암호키·서명 관리)</span></div>
+        <div class="itm-desc">· 클릭 요소 없음 · 3행 고정: 집행 방식 · 완료 일시 · 가용 풀 차감 — 값은 상태 변형별로 다름(상세 1 표)<br>· 집행 방식: 고정 문구 "100% 콜드 · 수동 · 2인 멀티시그"(두 변형 공통)<br>· 완료 일시: 완료 = 온체인 출고 확정 시각 YYYY-MM-DD HH:MM(KST · 초 생략) / 거절·만료 = "— (거절)" · "— (만료)"<br>· 가용 풀 차감: 완료 = "{받는 자산} {받은 수량} ▼"(예 USDT 899.73 ▼) / 거절·만료 = "미차감(집행 없음)" · 차감 기준 시점 = 온체인 출고 확정(상세 3)<br>· 소요 안내(약 {영업일}영업일)는 EXC-03에서만 — 종결 화면에는 예상값 대신 실제 완료 일시<br><span class="basis">근거 콜드지갑 수동집행 절차 · ISMS 2.7.2(암호키·서명 관리)</span></div>
       </div>
     </div>
 
@@ -148,7 +148,7 @@
       <div class="num">4</div>
       <div>
         <div class="itm-title">교환거래 요청 내역 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · 요청번호 복사 버튼 없음(텍스트 선택만) · 7행 고정 순서: 요청번호 · 교환쌍/방향 · 보낸 자산 · 받은 자산 · 확정 비율 · 스프레드 · 요청 일시 — EXC-03과 <strong>공통 하단 블록</strong>(EXC-03 상세 3 필드 차이)<br>· 받은 자산: <strong>완료 = 실값</strong>(예 899.73 USDT = 900 × 0.9997 절사 · 받는 자산 자릿수) / <strong>보류 = "—"</strong>(집행되지 않았으므로 수량 미표시 · '예상'값도 쓰지 않음) — 목업은 보류 변형<br>· 보낸 자산: 보류 건도 실값(요청 수량 그대로 — 보류 중 고객 자산은 이동 없음) · 자릿수 ETH 4 / USDC·USDT 2 · 비율 notation 규칙 · 일시 YYYY-MM-DD HH:MM<br>· 거래자 대상 거래보고서·영수증 발급 없음 — 회계 계정명·수익 집계는 고객 화면 미노출, 어드민 CSV(ADM-02)에서만(상세 4)<br><span class="basis">근거 L6 설명의무 · notation 수량·비율·일시 표기 · 09 §0 고객 화면 미노출 정보(2026-09-02)</span></div>
+        <div class="itm-desc">· 클릭 요소 없음 · 요청번호 복사 버튼 없음(텍스트 선택만) · 7행 고정 순서: 요청번호 · 교환쌍/방향 · 보낸 자산 · 받은 자산 · 확정 비율 · 스프레드 · 요청 일시 — EXC-03과 <strong>공통 하단 블록</strong>(EXC-03 상세 3 필드 차이)<br>· 받은 자산: <strong>완료 = 실값</strong>(예 899.73 USDT = 900 × 0.9997 절사 · 받는 자산 자릿수) / <strong>거절·만료 = "—"</strong>(집행되지 않았으므로 수량 미표시 · '예상'값도 쓰지 않음) — 목업은 거절 변형<br>· 보낸 자산: 거절·만료 건도 실값(요청 수량 그대로 — 고객 자산은 이동 없음) · 자릿수 ETH 4 / USDC·USDT 2 · 비율 notation 규칙 · 일시 YYYY-MM-DD HH:MM<br>· 거래자 대상 거래보고서·영수증 발급 없음 — 회계 계정명·수익 집계는 고객 화면 미노출, 어드민 CSV(ADM-02)에서만(상세 4)<br><span class="basis">근거 L6 설명의무 · notation 수량·비율·일시 표기 · 09 §0 고객 화면 미노출 정보(2026-09-02)</span></div>
       </div>
     </div>
 
@@ -159,7 +159,7 @@
         <div class="itm-desc">· primary · 나목 flow 종료 동선(공통 UI 규격 '종료 동선': flow 마지막 화면의 [확인] = 대시보드 이동 · EXC-03과 동일 패턴) · 서버 호출 없음(상태 변경 없음)<br>· 재확인은 DASH-01 거래 목록 행 클릭으로 재진입<br><span class="basis">근거 notation 공통 UI 규격 '종료 동선'·'뒤로가기'</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[확인] — 활성 조건</span><span class="nav-act">비활성 조건 없음 — 항상 활성(조회 로딩·실패 중에도 활성)</span><span class="nav-to stay">—</span></div>
-          <div class="nav-row"><span class="nav-el">[확인] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음 · 로딩 없음(서버 호출 없는 화면 이동)</span><span class="nav-to"><strong>대시보드(DASH-01)</strong> — 거래 목록에 이 건 '완료' 또는 '보류' 행 유지 · 토스트 없음</span></div>
+          <div class="nav-row"><span class="nav-el">[확인] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음 · 로딩 없음(서버 호출 없는 화면 이동)</span><span class="nav-to"><strong>대시보드(DASH-01)</strong> — 거래 목록에 이 건 '완료'·'거절'·'만료' 행 유지 · 토스트 없음</span></div>
           <div class="nav-row"><span class="nav-el">[확인] — 실패</span><span class="nav-act">해당 없음(서버 호출 없음)</span><span class="nav-to stay">— · DASH-01 로딩 실패는 DASH-01 규격</span></div>
         </div>
       </div>
@@ -173,16 +173,16 @@
     <div class="note-title">상세내용</div>
     <div class="detail-grid" id="detailCol">
       <div class="dtl" data-idx="0">
-        <div class="detail-label"><span class="dtl-num">1</span>상태 변형 표 — 완료 / 심사 후 보류</div>
-      <div class="dtl-body"><span class="box">· <strong>스텝 3단계</strong>: 완료 = "완료" ✓ 초록 / 보류 = "심사 후 보류" ! 회색<br>· <strong>배너(항목 2)</strong>: 완료 = 없음 / 보류 = 사유 카테고리 문구<br>· <strong>완료 일시</strong>: 완료 = 출고 확정 시각 / 보류 = "— (보류 중)"<br>· <strong>가용 풀 차감</strong>: 완료 = "USDT 899.73 ▼" / 보류 = "보류 중 — 미차감"<br>· <strong>받은 자산</strong>: 완료 = 899.73 USDT / 보류 = "—" · 보낸 자산은 양쪽 900 USDC<br>· DASH-01 목록 상태 칩: 완료(초록) / 보류(회색 — 종결 계열) <span class="red">[확인필요: 고객 화면 상태 enum — states 고객 도메인]</span></span></div>
+        <div class="detail-label"><span class="dtl-num">1</span>상태 변형 표 — 완료 / 거절 / 만료</div>
+      <div class="dtl-body"><span class="box">· <strong>스텝 3단계</strong>: 완료 = "완료" ✓ 초록 / 거절 = "거절" ! 회색 / 만료 = "만료" 회색(1·2단계도 미도달)<br>· <strong>배너(항목 2)</strong>: 완료 = 없음 / DSRV 거절·만료 = 사유 카테고리 문구 / 고객 거절 = 없음<br>· <strong>완료 일시</strong>: 완료 = 출고 확정 시각 / 거절·만료 = "— (거절)" · "— (만료)"<br>· <strong>가용 풀 차감</strong>: 완료 = "USDT 899.73 ▼" / 거절·만료 = "미차감(집행 없음)"<br>· <strong>받은 자산</strong>: 완료 = 899.73 USDT / 거절·만료 = "—" · 보낸 자산은 세 변형 모두 900 USDC<br>· 고객 화면 상태 enum(states A 표): 요청됨 · 비율 제시 · 진행 중 · 완료 · 거절 · 만료 — <strong>'보류' 없음</strong>(2026-09-02 결정) · DASH-01 목록 칩: 완료(초록) / 거절·만료(회색 — 종결 계열)</span></div>
       </div>
       <div class="dtl" data-idx="1">
-        <div class="detail-label"><span class="dtl-num">2</span>보류 사유 카테고리 4종 — 고객 표시 문구(초안 · [로펌게이트])</div>
-      <div class="dtl-body"><span class="box">① <strong>한도 초과</strong>: "1회 교환 한도(1,000 USD 상당)를 초과해 진행할 수 없습니다. 담당자가 별도 안내드립니다."(한도 {정책값} ADM-03 렌더링)<br>② <strong>추가 정보 확인 필요</strong>: "추가 정보 확인이 필요합니다. 담당자가 별도 안내드립니다." — 목업 문구<br>③ <strong>내부 심사 기준 미충족</strong>: "내부 심사 기준에 따라 진행할 수 없습니다. 담당자가 별도 안내드립니다."<br>④ <strong>가용 풀 부족·비율 변동(집행 불가)</strong>: "가용 풀 부족 또는 비율 변동으로 집행할 수 없습니다. 교환하기에서 다시 요청해 주세요."(임계값·소스명 미기재)<br>· <span class="red">의심거래(STR) 관련 여부는 어떤 형태로도 표기 금지</span> — ②로 일반화 · ADM-02 보류·거절 사유(내부 4종+자유입력)와 고객 문구의 매핑은 ADM-02 기준<br>· 문구 4종 확정 <span class="red">[로펌게이트]</span></span></div>
+        <div class="detail-label"><span class="dtl-num">2</span>거절·만료 사유 카테고리 — 고객 표시 문구(초안 · [로펌게이트])</div>
+      <div class="dtl-body"><span class="box"><strong>거절(DSRV)</strong> ① <strong>한도 초과</strong>: "1회 교환 한도(1,000 USD 상당)를 초과해 진행할 수 없습니다. 담당자가 별도 안내드립니다."(한도 {정책값} ADM-03 렌더링)<br>② <strong>추가 정보 확인 필요</strong>: "추가 정보 확인이 필요합니다. 담당자가 별도 안내드립니다." — 목업 문구<br>③ <strong>내부 심사 기준 미충족</strong>: "내부 심사 기준에 따라 진행할 수 없습니다. 담당자가 별도 안내드립니다."<br><strong>만료</strong> ④ <strong>수락 기한 경과</strong>: "수락 기한이 지나 제시된 비율이 무효가 되었습니다. 교환하기에서 다시 요청해 주세요."<br>⑤ <strong>가용 풀 부족·비율 변동</strong>(수락 재검증 실패 · states A10): "가용 풀 부족 또는 비율 변동으로 진행할 수 없습니다. 교환하기에서 다시 요청해 주세요."(임계값·소스명 미기재)<br><strong>고객 거절</strong>(EXC-02 [거절]) — 배너 없음 <span class="red">[확인필요: 구분 표기]</span><br>· <span class="red">의심거래(STR) 관련 여부는 어떤 형태로도 표기 금지</span> — ②로 일반화 · ADM-02 거절 사유(내부 4종+자유입력)와 고객 문구의 매핑은 ADM-02 기준<br>· 문구 4종 확정 <span class="red">[로펌게이트]</span></span></div>
       </div>
       <div class="dtl" data-idx="2">
         <div class="detail-label"><span class="dtl-num">3</span>가용 풀 차감 반영</div>
-      <div class="dtl-body"><span class="box">· 집행 완료분(받는 자산 수량 · 예 899.73 USDT)만큼 운영자산 가용 풀 감소 · 보류 건은 미차감(예약·선차감 없음)<br>· 커스터디 운영자산 잔고·EXC-01(풀 표시)·3면 대사 CSV(ADM-02)에 동시 반영<br>· 차감은 온체인 출고 확정 시점 기준 = 이 화면 '완료 일시'와 동일 시각</span></div>
+      <div class="dtl-body"><span class="box">· 집행 완료분(받는 자산 수량 · 예 899.73 USDT)만큼 운영자산 가용 풀 감소 · 거절·만료 건은 미차감(예약·선차감 없음)<br>· 커스터디 운영자산 잔고·EXC-01(풀 표시)·3면 대사 CSV(ADM-02)에 동시 반영<br>· 차감은 온체인 출고 확정 시점 기준 = 이 화면 '완료 일시'와 동일 시각</span></div>
       </div>
       <div class="dtl" data-idx="3">
         <div class="detail-label"><span class="dtl-num">4</span>구분회계 처리 (고객 화면 미노출)</div>
@@ -198,8 +198,9 @@
     <div class="note-body">
       · 나목 교환 flow 종료 화면. 집행은 <strong>콜드·수동·2인 멀티시그</strong>이며 즉시성이 낮다는 점(약 {영업일}영업일 · EXC-03 고지)을 명시해 "자동체결 거래소 아님"과 정합.<br>
       · <strong>[화이트리스트 미적용]</strong> 교환은 내부 커스터디 지갑 간 이전, 외부 주소 미취급. 외부 반출은 기존 커스터디 출금 절차(화이트리스트)로만.<br>
-      · 2026-09-02 설명 형식 개정 적용(핀 = 조작 요소 단위) — 표시 3 · 조건부 배너 1 · 버튼 1, [확인] 3행 · 프레임에 GNB 추가(EXC-01과 동일) · 스텝바/배너 핀 분리 + 상태 태그 · 보류 건 '받은 자산' "—"로 프레임-텍스트 불일치 해소 · '예상 완료' → '완료 일시' · 요청 일시 행 추가(EXC-03 공통 블록 정합) · 예시 900 USDC → 899.73 USDT(0.9997)로 교체.<br>
-      · <span style="color:#991b1b;">[확인필요]</span> 집행 소요 {영업일} 정책값 · 보류 이후 상태 전이 · 보류 사유 문구 4종([로펌게이트]) · 문의 링크 여부 · 고객 화면 상태 enum · 고객사 회계·감사 제출용 증빙 제공 방식<br>
+      · 2026-09-02 설명 형식 개정 적용(핀 = 조작 요소 단위) — 표시 3 · 조건부 배너 1 · 버튼 1, [확인] 3행 · 프레임에 GNB 추가(EXC-01과 동일) · 스텝바/배너 핀 분리 + 상태 태그 · 거절 건 '받은 자산' "—"로 프레임-텍스트 불일치 해소 · '예상 완료' → '완료 일시' · 요청 일시 행 추가(EXC-03 공통 블록 정합) · 예시 900 USDC → 899.73 USDT(0.9997)로 교체.<br>
+      · <strong>2026-09-02 결정 반영</strong>: 고객 화면 '심사 후 보류' 변형 폐지 — 최종 상태는 완료 / 거절 / 만료. 관리자 보류는 어드민 내부(T1 HOLD)로만 존재하고 고객에게는 EXC-03 '거래 진행중'으로 보인다(states.html v0.4). 고객 거절·만료 건도 이 화면을 재사용한다(무반응 분기 없음).<br>
+      · <span style="color:#991b1b;">[확인필요]</span> 집행 소요 {영업일} 정책값 · 거절·만료 사유 문구([로펌게이트]) · 고객 거절 건의 구분 표기 · 거절·만료 이메일 통지 종류 · 문의 링크 여부 · 고객사 회계·감사 제출용 증빙 제공 방식<br>
       · 나목 flow: EXC-01 요청 → EXC-02 비율 → EXC-03 승인 → <strong>EXC-04 완료</strong>
     </div>
   </div>

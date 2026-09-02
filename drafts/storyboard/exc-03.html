@@ -51,7 +51,7 @@
           <div class="steps" style="flex-wrap:wrap;gap:8px;">
             <span class="step done"><span class="dot">✓</span>비율 수락</span><span class="arrow">→</span>
             <span class="step now"><span class="dot">2</span>DSRV 거래 진행중</span><span class="arrow">→</span>
-            <span class="step"><span class="dot">3</span>완료 / 심사 후 보류</span>
+            <span class="step"><span class="dot">3</span>완료 / 거절</span>
           </div>
           <div style="font-size:9px;color:#94a3b8;padding:4px 0 0;">▼ 이 화면은 2단계 '진행중' 단일 상태만 표시 — 3단계 도달 건은 내역·완료(EXC-04)로 표시</div>
         </div>
@@ -64,7 +64,7 @@
           <div class="pin" data-idx="1" style="top:-4px;right:-4px;">2</div>
           <div style="font-size:12px;color:#334155;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px 12px;">
             거래가 접수되었습니다. <strong>약 2영업일 소요됩니다.</strong><br>
-            <span style="font-size:10.5px;color:#64748b;">최종 상태(완료 / 심사 후 보류)는 대시보드 거래 목록에서 확인할 수 있습니다.</span>
+            <span style="font-size:10.5px;color:#64748b;">최종 상태(완료 / 거절)는 대시보드 거래 목록에서 확인할 수 있습니다.</span>
           </div>
         </div>
       </div>
@@ -107,7 +107,7 @@
       <div class="nav-row"><span class="nav-el">GNB '교환게시판'</span><span class="nav-act">클릭 (확인 없음)</span><span class="nav-to"><strong>교환 게시판(BRK-01)</strong></span></div>
       <div class="nav-row"><span class="nav-el">기관 배지</span><span class="nav-act">클릭 → 메뉴(로그아웃) → 로그아웃 클릭</span><span class="nav-to"><strong>로그인(AUTH-01)</strong> · 세션 즉시 파기 · 확인 없음(공통 UI 규격 '로그아웃') <span style="color:#b45309;">[확인필요: EXC-01 표본은 배지 '무반응'으로 기재 — 규격 통일]</span></span></div>
       <div class="nav-note">· <strong>진입</strong> ① 비율 확인·수락(EXC-02) [수락] 직후(수락 처리 응답과 함께 진입 — 이 화면 로딩 없음) ② 대시보드(DASH-01) 거래 목록에서 상태 '진행중'(나목) 행 클릭 — 재진입 시 kv 영역 "불러오는 중…" → 값(3초 초과 → 상단 배너 오류 규격)<br>
-      · <strong>갱신 방식</strong>: 화면 체류 중 자동 갱신(polling) 없음 — 상태는 재진입 시점에 서버 값으로 다시 그림 · 이 화면에서 건이 종결(완료/보류)되어도 실시간 전환 없음 → 다음 DASH-01 행 클릭 시 <strong>내역·완료(EXC-04)</strong>로 진입<br>
+      · <strong>갱신 방식</strong>: 화면 체류 중 자동 갱신(polling) 없음 — 상태는 재진입 시점에 서버 값으로 다시 그림 · 이 화면에서 건이 종결(완료/거절)되어도 실시간 전환 없음 → 다음 DASH-01 행 클릭 시 <strong>내역·완료(EXC-04)</strong>로 진입<br>
       · 이 화면 내 승인·처리·취소 액션 없음 — DSRV 내부 처리(승인·집행)는 어드민 홈(ADM-02) 처리함에서 · 고객 취소 동선 없음(수락 즉시 확정) · 뒤로가기 미지원(공통 UI 규격)<br>
       · 목업 예시: 900 USDC → 899.73 USDT, 확정 비율 0.9997 USDT/USDC, 스프레드 0.10%, 요청번호 EXC-20260902-0001, 소요 "약 2영업일" · 모두 예시값(정책값은 ADM-03 렌더링)</div>
     </div>
@@ -116,7 +116,7 @@
       <div class="num">1</div>
       <div>
         <div class="itm-title">거래 상태 스텝바 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 — 스텝 클릭 무반응(단계 이동·상세 펼침 없음) · 3단계 고정: <strong>비율 수락</strong>(✓ 완료) → <strong>DSRV 거래 진행중</strong>(현재 · 강조) → <strong>완료 / 심사 후 보류</strong>(미도달 · 회색)<br>· 이 화면은 2단계 '진행중' 단일 상태 스냅숏 — 다른 변형 없음 · 3단계 도달 건은 EXC-04에서 같은 스텝바로 '완료'(✓) 또는 '심사 후 보류'(!)로 표시(EXC-04 항목 1)<br>· DSRV 내부 승인·집행·서명 단계는 '진행중' 하나로만 노출 — 내부 심사 상태·담당자·처리 시각 미표시<br>· 고객사 승인 단계 없음 — 고객사 측 통제는 커스터디 콜드월렛 기존 다중승인 이체로 수행(상세 1)<br><span class="basis">근거 09 §0 승인·통제(2026-08-31) · ISMS 2.2.2 직무분리 · 2.7.2 암호키·서명 관리</span></div>
+        <div class="itm-desc">· 클릭 요소 없음 — 스텝 클릭 무반응(단계 이동·상세 펼침 없음) · 3단계 고정: <strong>비율 수락</strong>(✓ 완료) → <strong>DSRV 거래 진행중</strong>(현재 · 강조) → <strong>완료 / 거절</strong>(미도달 · 회색)<br>· 이 화면은 2단계 '진행중' 단일 상태 스냅숏 — 다른 변형 없음 · 3단계 도달 건은 EXC-04에서 같은 스텝바로 '완료'(✓) 또는 '거절'(!)로 표시(EXC-04 항목 1)<br>· DSRV 내부 승인·집행·서명 단계는 '진행중' 하나로만 노출 — 내부 심사 상태·담당자·처리 시각 미표시 · <strong>관리자 보류(ADM-02 T1 HOLD) 중에도 이 화면은 변화 없음</strong> — 고객 화면에 '보류' 상태 없음(2026-09-02 결정 · states A4)<br>· 고객사 승인 단계 없음 — 고객사 측 통제는 커스터디 콜드월렛 기존 다중승인 이체로 수행(상세 1)<br><span class="basis">근거 09 §0 승인·통제(2026-08-31) · ISMS 2.2.2 직무분리 · 2.7.2 암호키·서명 관리</span></div>
       </div>
     </div>
 
@@ -124,7 +124,7 @@
       <div class="num">2</div>
       <div>
         <div class="itm-title">소요 안내 · 결과 확인 경로 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · 고정 문구 2줄: "거래가 접수되었습니다. 약 <strong>{영업일}영업일</strong> 소요됩니다."(ADM-03 값 렌더링 · 목업 '2'는 예시) / "최종 상태(완료 / 심사 후 보류)는 대시보드 거래 목록에서 확인할 수 있습니다."<br>· 영업일 = KST 기준 평일(공휴일 제외) · 기산점 = 수락 시각 <span style="color:#b45309;">[확인필요: 영업일 정의·기산점 약관 명시]</span><br>· 즉시 체결이 아님(콜드 수동 집행)을 고지 — 자동체결 거래소 아님 담보 · 자동검증(한도·BLF·KYT)·트래블룰 확인 내용은 고객 화면 미표시<br>· 승인되지 않은 건은 EXC-04에 '심사 후 보류' + 일반화 사유로만 표기 — AML 심사 내용·내부 사유 미노출(공통 UI 규격 오류 문구 ③)<br><span class="basis">근거 L6 설명의무 · STR 누설금지(특정금융정보법 제4조 [원문대조필요]) · 09 §0 콜드 출고 2영업일 약관 명시 [확인필요]</span></div>
+        <div class="itm-desc">· 클릭 요소 없음 · 고정 문구 2줄: "거래가 접수되었습니다. 약 <strong>{영업일}영업일</strong> 소요됩니다."(ADM-03 값 렌더링 · 목업 '2'는 예시) / "최종 상태(완료 / 심사 후 보류)는 대시보드 거래 목록에서 확인할 수 있습니다."<br>· 영업일 = KST 기준 평일(공휴일 제외) · 기산점 = 수락 시각 <span style="color:#b45309;">[확인필요: 영업일 정의·기산점 약관 명시]</span><br>· 즉시 체결이 아님(콜드 수동 집행)을 고지 — 자동체결 거래소 아님 담보 · 자동검증(한도·BLF·KYT)·트래블룰 확인 내용은 고객 화면 미표시<br>· 승인되지 않은 건은 EXC-04에 '거절' + 일반화 사유로만 표기 — AML 심사 내용·내부 사유 미노출(공통 UI 규격 오류 문구 ③) · 심사가 길어져 관리자가 보류로 두어도 고객에게는 계속 '진행중'<br><span class="basis">근거 L6 설명의무 · STR 누설금지(특정금융정보법 제4조 [원문대조필요]) · 09 §0 콜드 출고 2영업일 약관 명시 [확인필요]</span></div>
       </div>
     </div>
 
@@ -132,7 +132,7 @@
       <div class="num">3</div>
       <div>
         <div class="itm-title">교환거래 요청 내역 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · 요청번호 복사 버튼 없음(텍스트 선택만) · 7행 고정 순서: 요청번호 · 교환쌍/방향 · 보내는 수량 · 받는 수량(예정) · 확정 비율 · 스프레드 · 요청 일시<br>· 값은 EXC-02 수락 시점에 확정된 값 그대로(체류 중 재계산 없음) · 수량 자릿수 ETH 4 / USDC·USDT 2, 받는 수량은 절사 · 비율 표기 notation(스테이블 페어 {받는}/{주는} 4자리 · ETH 페어 {스테이블}/ETH 2자리) · 일시 YYYY-MM-DD HH:MM(KST · 초 생략)<br>· '받는 수량(예정)' 라벨은 집행 전이므로 '예정' — EXC-04 완료 시 '받은 자산' 실값, 보류 시 "—"<br>· EXC-03·EXC-04 <strong>공통 하단 블록</strong> — 같은 포맷·필드 순서를 마목(BRK-03·04·05)·관리자(ADM-02 처리함 선택 건)에도 적용(마목은 수수료 행 포함·스프레드 없음)<br><span class="basis">근거 L6 설명의무 · notation 수량·비율·일시 표기</span></div>
+        <div class="itm-desc">· 클릭 요소 없음 · 요청번호 복사 버튼 없음(텍스트 선택만) · 7행 고정 순서: 요청번호 · 교환쌍/방향 · 보내는 수량 · 받는 수량(예정) · 확정 비율 · 스프레드 · 요청 일시<br>· 값은 EXC-02 수락 시점에 확정된 값 그대로(체류 중 재계산 없음) · 수량 자릿수 ETH 4 / USDC·USDT 2, 받는 수량은 절사 · 비율 표기 notation(스테이블 페어 {받는}/{주는} 4자리 · ETH 페어 {스테이블}/ETH 2자리) · 일시 YYYY-MM-DD HH:MM(KST · 초 생략)<br>· '받는 수량(예정)' 라벨은 집행 전이므로 '예정' — EXC-04 완료 시 '받은 자산' 실값, 거절 시 "—"<br>· EXC-03·EXC-04 <strong>공통 하단 블록</strong> — 같은 포맷·필드 순서를 마목(BRK-03·04·05)·관리자(ADM-02 처리함 선택 건)에도 적용(마목은 수수료 행 포함·스프레드 없음)<br><span class="basis">근거 L6 설명의무 · notation 수량·비율·일시 표기</span></div>
       </div>
     </div>
 
@@ -158,15 +158,15 @@
     <div class="detail-grid" id="detailCol">
       <div class="dtl" data-idx="0">
         <div class="detail-label"><span class="dtl-num">1</span>고객사 승인을 없앤 근거 · 상태 전이</div>
-      <div class="dtl-body"><span class="box">· 교환 이전은 DSRV 수탁 <strong>콜드월렛의 기존 다중승인 절차</strong>를 그대로 거침 — 화면에서 2인 승인을 또 받으면 <strong>동일 통제의 중복</strong><br>· 직무분리(ISMS 2.2.2)는 커스터디 이체 승인 + DSRV 승인↔집행 서명 분리로 충족 · DSRV 집행: 콜드 <strong>2인 멀티시그(2키/2인)</strong> — 승인권과 서명권 분리 유지<br>· 고객 화면 상태 전이: 수락(확정) → <strong>진행중</strong>(이 화면) → 완료 / 심사 후 보류(EXC-04) — 내부 상태(승인 대기·집행 대기·서명 중)는 ADM-02에서만 · 고객 화면 상태 enum <span class="red">[확인필요: states 고객 도메인]</span></span></div>
+      <div class="dtl-body"><span class="box">· 교환 이전은 DSRV 수탁 <strong>콜드월렛의 기존 다중승인 절차</strong>를 그대로 거침 — 화면에서 2인 승인을 또 받으면 <strong>동일 통제의 중복</strong><br>· 직무분리(ISMS 2.2.2)는 커스터디 이체 승인 + DSRV 승인↔집행 서명 분리로 충족 · DSRV 집행: 콜드 <strong>2인 멀티시그(2키/2인)</strong> — 승인권과 서명권 분리 유지<br>· 고객 화면 상태 전이: 수락(확정) → <strong>진행중</strong>(이 화면) → 완료 / 거절(EXC-04) — 내부 상태(승인 대기·에스컬레이션·<strong>보류</strong>·집행 대기·서명 중)는 ADM-02에서만 · 고객 화면 상태 enum <span class="red">[확인필요: states 고객 도메인]</span></span></div>
       </div>
       <div class="dtl" data-idx="1">
-        <div class="detail-label"><span class="dtl-num">2</span>보류 표기·사유 카테고리</div>
-      <div class="dtl-body"><span class="box">· 최종 상태는 <strong>완료 / 심사 후 보류</strong> 2종 — 보류 표기·사유 문구 4종은 EXC-04 상세 2 기준, 이 화면은 접수 안내까지<br>· 종결 시 이메일 통지: 완료 = 공통 ③(거래 완료) · 보류 통지 종류 <span class="red">[확인필요: 공통 4종 외 추가 여부]</span></span></div>
+        <div class="detail-label"><span class="dtl-num">2</span>거절 표기·사유 카테고리</div>
+      <div class="dtl-body"><span class="box">· 최종 상태는 <strong>완료 / 거절</strong> 2종(2026-09-02 결정 — 고객 화면 '심사 후 보류' 폐지) — 거절 표기·사유 문구 4종은 EXC-04 상세 2 기준, 이 화면은 접수 안내까지<br>· 관리자 보류는 고객 화면에 나타나지 않는다 — 진행중에서 갈 수 있는 곳은 완료·거절 둘뿐<br>· 종결 시 이메일 통지: 완료 = 공통 ③(거래 완료) · 거절 통지 종류 <span class="red">[확인필요: 공통 4종 외 추가 여부]</span></span></div>
       </div>
       <div class="dtl" data-idx="2">
         <div class="detail-label"><span class="dtl-num">3</span>공통 하단 블록 — 화면별 필드 차이</div>
-      <div class="dtl-body"><span class="box">· EXC-03(진행중): 받는 수량<strong>(예정)</strong> · 요청 일시<br>· EXC-04(종결): 보낸 자산 · 받은 자산(완료 실값 / 보류 "—") · 요청 일시 — 집행 정보 블록은 별도<br>· 예시 계산: 900 USDC × 0.9997 = 899.73 USDT(절사 · 소수 2자리)</span></div>
+      <div class="dtl-body"><span class="box">· EXC-03(진행중): 받는 수량<strong>(예정)</strong> · 요청 일시<br>· EXC-04(종결): 보낸 자산 · 받은 자산(완료 실값 / 거절 "—") · 요청 일시 — 집행 정보 블록은 별도<br>· 예시 계산: 900 USDC × 0.9997 = 899.73 USDT(절사 · 소수 2자리)</span></div>
       </div>
     </div>
   </div>
@@ -179,7 +179,7 @@
       · <strong>[방어 핵심]</strong> 자동검증(한도·BLF·KYT)은 <strong>1차 필터일 뿐</strong>, 최종 판단은 사람이 수행 — "자동체결·자동심사 아님" 담보. 주의·불량 건은 어드민 홈(ADM-02) 처리함으로 에스컬레이션.<br>
       · <strong>[승인 ≠ 집행]</strong> DSRV 승인은 단일이지만, 콜드지갑 출고의 <strong>집행 서명은 키 2개·서명자 2인(멀티시그)</strong> — 승인권과 서명권 분리(ISMS 2.7.2).<br>
       · 2026-09-02 설명 형식 개정 적용(핀 = 조작 요소 단위) — 표시 3 · 버튼 1, [확인] 3행 · 프레임에 GNB 추가(EXC-01과 동일) · 요청 내역에 '받는 수량(예정)' 행 추가(EXC-04 공통 블록 정합) · 예시 900 USDC → 899.73 USDT(0.9997)로 교체.<br>
-      · <span style="color:#991b1b;">[확인필요]</span> 소요 {영업일} 정책값·영업일 정의·기산점 · DASH-01 행 진입 시 현재 탭 강조· 고객 화면 상태 enum · 보류 이메일 통지 종류.<br>
+      · <span style="color:#991b1b;">[확인필요]</span> 소요 {영업일} 정책값·영업일 정의·기산점 · DASH-01 행 진입 시 현재 탭 강조· 고객 화면 상태 enum · 거절 이메일 통지 종류.<br>
       · 다음 화면: 내역·완료 (EXC-04)
     </div>
   </div>

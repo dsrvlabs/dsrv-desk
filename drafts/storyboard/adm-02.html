@@ -383,10 +383,10 @@
       <div class="num">4</div>
       <div>
         <div class="itm-title">[보류] — 나목·마목 공통(사유 모달)<span class="req">필수</span></div>
-        <div class="itm-desc">· 나목 교환 승인 행·마목 확정 확인 행에 반복(대표 핀 = 나목 행) · 결과 = 공통 상태 HOLD · 도메인 상태 '보류' · <strong>행 유지</strong>(제거 아님) · 재검토는 같은 행의 [승인]·[거절]로(보류 해제 버튼 없음)<br>· <strong>사유 입력 필수</strong>(모달) — 카테고리 ▾(자동검증 재확인 / 트래블룰 정보 미비 / 서류 보완 요청 / 기타) + 자유입력 10~500자 · 내부 사유는 고객 미노출 — 고객 화면에는 일반화 문구만(나목 EXC-04 '심사 후 보류')<br>· 별도 확인 다이얼로그 없음 — 사유 모달의 [보류]가 확정 클릭(가역 상태)<br><span class="basis">근거 states 공통 상태 HOLD · notation 어드민 처리 버튼(보류·거절 사유 필수 모달) · 오류 문구 ③ 내부 사유 미노출</span></div>
+        <div class="itm-desc">· 나목 교환 승인 행·마목 확정 확인 행에 반복(대표 핀 = 나목 행) · 결과 = 공통 상태 HOLD · 도메인 상태 '보류' · <strong>행 유지</strong>(제거 아님) · 재검토는 같은 행의 [승인]·[거절]로(보류 해제 버튼 없음)<br>· <strong>사유 입력 필수</strong>(모달) — 카테고리 ▾(자동검증 재확인 / 트래블룰 정보 미비 / 서류 보완 요청 / 기타) + 자유입력 10~500자 · 내부 사유는 고객 미노출 — <strong>고객 화면에는 표시 없음</strong>(나목 고객 '보류' 라벨 폐지 2026-09-02 · EXC-03 '거래 진행중' 유지)<br>· 별도 확인 다이얼로그 없음 — 사유 모달의 [보류]가 확정 클릭(가역 상태)<br><span class="basis">근거 states 공통 상태 HOLD · notation 어드민 처리 버튼(보류·거절 사유 필수 모달) · 오류 문구 ③ 내부 사유 미노출</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[보류] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①행 상태 이미 '보류' ②종결·집행 대기·이전 진행 ③다른 관리자 처리 중</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격)</span></div>
-          <div class="nav-row"><span class="nav-el">[보류] — 클릭(활성)</span><span class="nav-act">클릭 → 사유 모달: 제목 "보류 — {요청번호}" / 카테고리 ▾ + 사유 입력(10~500자) / [보류] [돌아가기] · 사유 빈칸·10자 미만이면 [보류] 비활성 + 인라인 ⚠ "보류 사유를 10자 이상 입력해 주세요" → [보류] 클릭 → "처리 중…"</span><span class="nav-to stay">상태 칩 '보류'로 갱신·행 유지 + 토스트 "{요청번호} 보류 처리되었습니다" · 감사로그(사유 포함) · 고객 화면 = 나목 EXC-04 '심사 후 보류'(일반화 사유) / 마목 BRK-05 표시 문구 <span style="color:#b45309;">[확인필요]</span></span></div>
+          <div class="nav-row"><span class="nav-el">[보류] — 클릭(활성)</span><span class="nav-act">클릭 → 사유 모달: 제목 "보류 — {요청번호}" / 카테고리 ▾ + 사유 입력(10~500자) / [보류] [돌아가기] · 사유 빈칸·10자 미만이면 [보류] 비활성 + 인라인 ⚠ "보류 사유를 10자 이상 입력해 주세요" → [보류] 클릭 → "처리 중…"</span><span class="nav-to stay">상태 칩 '보류'로 갱신·행 유지 + 토스트 "{요청번호} 보류 처리되었습니다" · 감사로그(사유 포함) · 고객 화면 = <strong>변화 없음</strong>(나목 EXC-03 '거래 진행중' 유지) / 마목 BRK-05 표시 문구 <span style="color:#b45309;">[확인필요]</span></span></div>
           <div class="nav-row"><span class="nav-el">[보류] — 실패</span><span class="nav-act">경쟁 상태 / 서버 오류</span><span class="nav-to stay">화면 잔류 · 모달 유지·입력값 보존 · 상단 배너(공통 문구) · 버튼 복귀</span></div>
         </div>
       </div>
@@ -666,7 +666,7 @@
       </div>
       <div class="dtl" data-idx="2">
         <div class="detail-label"><span class="dtl-num">3</span>처리 결과 → 고객 화면 반영</div>
-      <div class="dtl-body"><span class="box">· 나목: 승인 대기·에스컬레이션·집행 대기 = EXC-03 '거래 진행중' 단일 표시 · 보류 = EXC-04 '심사 후 보류'(일반화 사유) · 거절 = EXC-04 '거절'(일반화 사유) · 완료 = EXC-04 '완료'<br>· 마목: 확인 대기·에스컬레이션 = BRK-05 '확인 중' <span class="red">[확인필요: 문구]</span> · 이전 진행 = BRK-05 '이전 진행' · 완료 = BRK-05 '완료' · 이전 중지 = BRK-05·07 '이전 중지'<br>· T4~T8·X3 처리 결과는 고객 화면에 <strong>어떤 표시도 없음</strong>(STR 누설 금지) — 개별 거래 상태·KYC 배너로만 간접 반영<br>· 내부 사유·AML 심사 내용·처리자 ID는 고객 콘솔 미노출(09 §0 2026-09-02)</span></div>
+      <div class="dtl-body"><span class="box">· 나목: 승인 대기·에스컬레이션·<strong>보류</strong>·집행 대기 = EXC-03 '거래 진행중' 단일 표시(보류도 고객 화면 변화 없음 — 고객 '보류' 라벨 폐지 2026-09-02) · 거절 = EXC-04 '거절'(일반화 사유) · 완료 = EXC-04 '완료'<br>· 마목: 확인 대기·에스컬레이션 = BRK-05 '확인 중' <span class="red">[확인필요: 문구]</span> · 이전 진행 = BRK-05 '이전 진행' · 완료 = BRK-05 '완료' · 이전 중지 = BRK-05·07 '이전 중지'<br>· T4~T8·X3 처리 결과는 고객 화면에 <strong>어떤 표시도 없음</strong>(STR 누설 금지) — 개별 거래 상태·KYC 배너로만 간접 반영<br>· 내부 사유·AML 심사 내용·처리자 ID는 고객 콘솔 미노출(09 §0 2026-09-02)</span></div>
       </div>
       <div class="dtl" data-idx="3">
         <div class="detail-label"><span class="dtl-num">4</span>사유 모달 공통 규격 · 확인 다이얼로그 원칙</div>
