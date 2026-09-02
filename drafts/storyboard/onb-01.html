@@ -60,20 +60,10 @@
       </div>
 
       <!-- 규칙 안내 + [다음] -->
-      <div class="zone card" data-idx="2,3">
+      <div class="zone card" data-idx="2">
         <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="2" style="position:relative;padding:4px;border-radius:8px;">
-          <div class="pin" data-idx="2" style="top:-6px;right:-6px;">3</div>
-          <div class="rule-box">
-            안전한 비밀번호를 위해 아래를 지켜주세요.<br>
-            · 영문 대·소문자, 숫자, 특수문자 중 3종 이상 조합 8~20자<br>
-            · 이메일과 동일한 문자 사용 불가<br>
-            · 동일 문자 4번 이상 사용 불가<br>
-            · 특수문자는 !@#$%^&amp;*() 만 사용 가능
-          </div>
-        </div>
-        <div class="item-area" data-highlight="3" style="position:relative;padding:4px;border-radius:8px;margin-top:6px;">
-          <div class="pin" data-idx="3" style="top:-8px;right:-6px;">4</div>
+        <div class="item-area" data-highlight="2" style="position:relative;padding:4px;border-radius:8px;margin-top:6px;">
+          <div class="pin" data-idx="2" style="top:-8px;right:-6px;">3</div>
           <div class="btn primary fg">다음</div>
         </div>
       </div>
@@ -105,7 +95,7 @@
         <div class="itm-title">새 비밀번호 입력<span class="req">필수</span></div>
         <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 토큰이 유효하지 않으면 이 화면 자체가 열리지 않는다.<br><strong>허용 문자</strong> 영문 대·소문자 · 숫자 · 특수문자 !@#$%^&amp;*()만 받고 그 외 문자는 입력 시점에 무시한다. 길이는 8~20자로, 20자를 넘는 입력은 받지 않는다.<br><strong>검증</strong> 키 입력마다 입력된 값 전체를 대상으로 규칙 ①~④(항목 3의 안내문 4줄)를 판정한다. 검증은 이 입력창에서만 하고 [다음] 제출 시 서버가 규칙을 다시 검증하지 않는다.<br><strong>실패</strong> 포커스 아웃 시 미충족 규칙이 남으면 인라인 ⚠를 띄우고 [다음]을 비활성으로 둔다.<br><strong>연동</strong> 값이 바뀌면 항목 2의 일치 비교를 다시 수행한다.<br><strong>저장</strong> 단방향 해시와 salt로만 저장한다.<br><span class="basis">근거 ISMS 2.5.3 · 2.5.4</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">새 비밀번호 필드</span><span class="nav-act">키 입력마다 규칙 ①~④ 판정 · 포커스 아웃 시 오류 표시</span><span class="nav-to stay">미충족 시 인라인 ⚠ · [다음] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">새 비밀번호 필드</span><span class="nav-act">[다음] 제출 시 규칙 판정</span><span class="nav-to stay">미충족 시 인라인 ⚠ · [다음] 비활성</span></div>
         </div>
       </div>
     </div>
@@ -123,14 +113,6 @@
 
     <div class="itm" data-idx="2">
       <div class="num">3</div>
-      <div>
-        <div class="itm-title">비밀번호 규칙 안내 (표시 전용 · 실시간 체크)</div>
-        <div class="itm-desc"><strong>표시</strong> 규칙 4항목을 고정 문구로 나열한다. 입력에 따라 바뀌는 표시는 두지 않는다.<br><strong>규칙 ② 판정</strong> 로그인 계정 이메일의 @ 앞부분과 대소문자 무시 전체 일치일 때만 위반으로 본다. 부분 포함은 통과다.<br><span class="basis">근거 ISMS 2.5.4</span></div>
-      </div>
-    </div>
-
-    <div class="itm" data-idx="3">
-      <div class="num">4</div>
       <div>
         <div class="itm-title">[다음] 버튼 (→ 2FA 앱 연결)<span class="req">필수</span></div>
         <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 두 필드가 모두 채워지고 새 비밀번호가 규칙을 통과했을 때 활성이다(일치 여부는 제출 시 판정). Enter 키도 같이 처리한다.<br><strong>확인 사항</strong> 없다. 확인 다이얼로그가 없고 서버가 비밀번호 규칙을 다시 검증하지도 않는다.<br><strong>액션</strong> 비밀번호를 저장하고 계정 상태를 '활성화 진행 중'으로 기록해 재개 지점을 만든 뒤 ONB-02로 넘긴다. 활성화 중 비밀번호를 다시 바꾸는 동선은 만들지 않는다.<br><span class="basis">근거 ISMS 2.5.4 · 32 §2 ONB-01</span></div>

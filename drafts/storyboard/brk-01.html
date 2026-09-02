@@ -46,8 +46,8 @@
         </div>
       </div>
 
-      <!-- 거래의향 리스트: 헤더(목록 규격) + 행 4종 + [더 보기] -->
-      <div class="zone" data-idx="0,1,2,3,4,5">
+      <!-- 거래의향 리스트: 헤더(목록 규격) + 행 4종 -->
+      <div class="zone" data-idx="0,1,2,3,4">
         <div class="zone-highlight"></div>
         <div style="font-size:10px;color:#94a3b8;margin-bottom:4px;">목업 예시: 열람자 = A자산운용 · 게시자 상호는 목록에 표시하지 않음(상세에서 첫 글자만)</div>
 
@@ -86,12 +86,6 @@
           </div>
         </div>
 
-        <div class="item-area" data-highlight="5" style="position:relative;padding:4px;border-radius:8px;margin-top:6px;">
-          <div class="pin" data-idx="5" style="top:-6px;right:-6px;">6</div>
-          <div style="font-size:9px;color:#94a3b8;padding:0 4px 3px;">▼ 100행 초과 시에만 노출 (100행 이하면 버튼 없음)</div>
-          <div class="btn ghost" style="width:100%;text-align:center;">더 보기</div>
-        </div>
-
         <div style="margin-top:10px;">
           <div style="font-size:9px;color:#94a3b8;padding:0 4px 3px;">▼ 게시 0건일 때 표 대신 노출 (핀 1 목록 규격 — 빈 상태)</div>
           <div style="text-align:center;padding:12px 8px;border:1px dashed #d7dbe0;border-radius:8px;font-size:11px;color:#94a3b8;">게시된 거래의향이 없습니다<br><span style="font-size:10px;">[+ 거래의향 등록]으로 첫 거래의향을 올릴 수 있습니다</span></div>
@@ -99,19 +93,19 @@
       </div>
 
       <!-- 안내 (표시 전용) -->
-      <div class="zone" data-idx="6">
+      <div class="zone" data-idx="5">
         <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="6" style="position:relative;padding:4px;border-radius:8px;">
-          <div class="pin" data-idx="6" style="top:-6px;right:-6px;">7</div>
+        <div class="item-area" data-highlight="5" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="5" style="top:-6px;right:-6px;">6</div>
           <div style="padding:6px 8px;background:#f8fafc;border-radius:6px;font-size:10px;color:#64748b;">✓ 이 보드의 모든 거래의향은 <strong>거래 안전성 검증(보유·처분권 확인)</strong> 및 <strong>KYC 완료 법인</strong>만 게시됩니다</div>
         </div>
       </div>
 
       <!-- 등록 -->
-      <div class="zone" data-idx="7">
+      <div class="zone" data-idx="6">
         <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="7" style="position:relative;padding:4px;border-radius:8px;">
-          <div class="pin" data-idx="7" style="top:-8px;right:-6px;">8</div>
+        <div class="item-area" data-highlight="6" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="6" style="top:-8px;right:-6px;">7</div>
           <div class="btn primary">+ 거래의향 등록</div>
         </div>
       </div>
@@ -131,7 +125,7 @@
       <div class="num">1</div>
       <div>
         <div class="itm-title">거래의향 목록 — 컬럼 헤더 · 상태 칩 · 목록 규격 (표시 전용)</div>
-        <div class="itm-desc"><strong>컬럼</strong> 6개 — 교환코인({보내는} → {받는} · 게시자 기준) · 보내는 수량 · 받는 수량 · 비율 · 게시 일시 · 상태. DASH-01 거래 목록과 표기를 통일한다.<br><strong>자릿수</strong> 수량은 자산 자릿수(ETH 4 / USDC·USDT 2 · 뒤 0 생략), 비율은 스테이블 페어 {받는}/{주는} 4자리와 ETH 페어 {스테이블}/ETH 2자리. 사자·팔자 구분 없이 수량 쌍으로만 적는다.<br><strong>상태 칩</strong> 목록에는 게재중(대기·파랑)과 협의중(진행·노랑) 2종만 나온다. 협의중은 신청 1건이 접수되어 추가 신청이 막힌 상태다. 열람자 기관이 게시자·신청자인 행에는 보조 칩 '내 게시' / '내 신청'을 상태 칩 옆에 붙인다.<br><strong>목록 제외</strong> 확정·완료·회수·중지 게시는 타사·내 게시 모두 목록에서 뺀다. 내 종결 건은 DASH-01에서 BRK-06·07로 들어가 본다.<br><strong>정렬</strong> 게시 일시 내림차순 단일. 필터·정렬 변경·페이징은 두지 않고 100행 초과분은 [더 보기]로 이어 붙인다.<br><strong>상태별 문구</strong> 빈 목록은 점선 박스 "게시된 거래의향이 없습니다" + "[+ 거래의향 등록]으로 첫 거래의향을 올릴 수 있습니다". 로딩은 "불러오는 중…"이고 3초 초과 시 오류로 넘긴다. 오류는 상단 배너와 빈 표.<br><strong>조회</strong> 진입 시 1회만 조회한다. 체류 중 자동 갱신하지 않으므로 상태 칩은 조회 시점 값이고 최신 판정은 BRK-03에서 한다.<br><span class="chk">[확인필요: 행 hover 규격 — notation 미정의]</span><br><span class="basis">근거 F-1b · 09 §0 마목 게시 상태 · notation 목록 규격</span></div>
+        <div class="itm-desc"><strong>컬럼</strong> 6개 — 교환코인({보내는} → {받는} · 게시자 기준) · 보내는 수량 · 받는 수량 · 비율 · 게시 일시 · 상태. DASH-01 거래 목록과 표기를 통일한다.<br><strong>자릿수</strong> 수량은 자산 자릿수(ETH 4 / USDC·USDT 2 · 뒤 0 생략), 비율은 스테이블 페어 {받는}/{주는} 4자리와 ETH 페어 {스테이블}/ETH 2자리. 사자·팔자 구분 없이 수량 쌍으로만 적는다.<br><strong>상태 칩</strong> 목록에는 게재중(대기·파랑)과 협의중(진행·노랑) 2종만 나온다. 협의중은 신청 1건이 접수되어 추가 신청이 막힌 상태다. 열람자 기관이 게시자·신청자인 행에는 보조 칩 '내 게시' / '내 신청'을 상태 칩 옆에 붙인다.<br><strong>목록 제외</strong> 확정·완료·회수·중지 게시는 타사·내 게시 모두 목록에서 뺀다. 내 종결 건은 DASH-01에서 BRK-06·07로 들어가 본다.<br><strong>정렬</strong> 게시 일시 내림차순 단일. 필터·정렬 변경·페이징을 두지 않는다.<br><strong>상태별 문구</strong> 빈 목록은 점선 박스 "게시된 거래의향이 없습니다" + "[+ 거래의향 등록]으로 첫 거래의향을 올릴 수 있습니다". 로딩은 "불러오는 중…"이고 3초 초과 시 오류로 넘긴다. 오류는 상단 배너와 빈 표.<br><strong>조회</strong> 진입 시 전체 행을 한 번에 불러와 표시하고 페이지 스크롤로 본다([더 보기]·무한 스크롤 없음). 체류 중 자동 갱신하지 않으므로 상태 칩은 조회 시점 값이고 최신 판정은 BRK-03에서 한다.<br><span class="chk">[확인필요: 행 hover 규격 — notation 미정의]</span><br><span class="basis">근거 F-1b · 09 §0 마목 게시 상태 · notation 목록 규격(100행 분할 폐기 — 2026-09-02 결정)</span></div>
       </div>
     </div>
 
@@ -186,26 +180,13 @@
     <div class="itm" data-idx="5">
       <div class="num">6</div>
       <div>
-        <div class="itm-title">[더 보기] 버튼 (조건부 노출)</div>
-        <div class="itm-desc"><strong>노출</strong> 조회 결과가 100행을 넘을 때만 표 하단에 보인다. 100행 이하면 버튼 자체를 두지 않는다.<br><strong>클릭 가능</strong> 남은 행이 있을 때만 활성이고 로딩 중에는 비활성이다.<br><strong>확인 사항</strong> 없다. 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> 다음 100행을 기존 목록 아래에 이어 붙이고 정렬(게시 일시 내림차순)을 유지한다. 남은 행이 없으면 버튼을 제거한다.<br><span class="basis">근거 notation 목록 규격</span></div>
-        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">[더 보기] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①추가 행 없음(끝) ②로딩 중</span><span class="nav-to stay">하나라도 해당 → ①은 버튼 제거 · ②는 회색 비활성(공통 UI 규격)</span></div>
-          <div class="nav-row"><span class="nav-el">[더 보기] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음 → 라벨 "불러오는 중…"·중복 클릭 차단 → 다음 100행 이어 붙임</span><span class="nav-to stay">화면 잔류 · 스크롤 위치 유지 · 남은 행이 없으면 버튼 제거</span></div>
-          <div class="nav-row"><span class="nav-el">[더 보기] — 실패</span><span class="nav-act">조회 실패(3초 초과·시스템 오류)</span><span class="nav-to stay">화면 잔류 · 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 기존 행 유지 · 버튼 라벨 복귀</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="itm" data-idx="6">
-      <div class="num">7</div>
-      <div>
         <div class="itm-title">거래 안전성 검증·KYC 담보 안내 (표시 전용)</div>
         <div class="itm-desc"><strong>문구</strong> 고정 1줄. 전 게시물 공통 전제이므로 행별 배지 없이 보드 하단에 둔다.<br><strong>내용 범위</strong> 거래 안전성 검증은 게시자 보유·처분 가능분 검증(BRK-02 게이트)과 신청자 보유·처분 가능분 검증(BRK-03 게이트)을 뜻하고, KYC는 양측 KYC 완료 법인만 게시·신청한다는 뜻이다.<br><span class="basis">근거 V2 — 단순 게시판 아님(4요소 ①②) · 상세 7</span></div>
       </div>
     </div>
 
-    <div class="itm" data-idx="7">
-      <div class="num">8</div>
+    <div class="itm" data-idx="6">
+      <div class="num">7</div>
       <div>
         <div class="itm-title">[+ 거래의향 등록] 버튼<span class="req">필수</span></div>
         <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 항상 활성이다.<br><strong>확인 사항</strong> 없다. 게시 가능 여부(KYC·잔고)는 BRK-02에서 판정한다.<br><strong>액션</strong> 거래의향 등록 화면(BRK-02)으로 이동한다.<br><span class="basis">근거 F-1b</span></div>
@@ -240,8 +221,8 @@
         <div class="detail-label"><span class="dtl-num">4</span>내 게시·내 신청 행 구분 표기</div>
       <div class="dtl-body"><span class="box">· 보조 칩 '내 게시' / '내 신청'(회색 chip) + 행 배경 연회색 — 기획 가정 <span class="chk">[확인필요: 디자인 규격 — 칩 vs 좌측 색 바 vs 배경만]</span><br>· 상호는 게시판에 표시하지 않으므로(마스킹 규칙과 무관) 열람자 자신의 건은 보조 칩으로만 식별<br>· 내 게시·내 신청 건도 종결(확정·완료·회수·중지)되면 목록에서 빠짐 — 이후 진입은 DASH-01 거래 내역 → BRK-06/07/05</span></div>
       </div>
-      <div class="dtl" data-idx="6">
-        <div class="detail-label"><span class="dtl-num">7</span>4요소 방어 (단순 게시판 아님)</div>
+      <div class="dtl" data-idx="5">
+        <div class="detail-label"><span class="dtl-num">6</span>4요소 방어 (단순 게시판 아님)</div>
       <div class="dtl-body"><span class="box">① 거래 안전성 검증(보유·처분권 — 게시자 BRK-02 · 신청자 BRK-03, 2026-09-02 신청자 검증 추가)<br>② KYC 담보(양측 완료 법인 · KYC 예외 시 BRK-02/03 배너 + 버튼 비활성)<br>③ 정산 연계(BRK-05 커스터디 이전)<br>④ 수수료(거래액 1% 고정·양측 각자 보내는 자산 기준 — BRK-03/04/07 수락 전 고시)<br>· 필터·정렬·페이징이 없는 단순 나열 구조 자체가 자동 매칭·조건 검색 부재의 담보</span></div>
       </div>
     </div>
@@ -254,7 +235,7 @@
     <div class="note-body">
       · 마목(당사자 간 중개) 진입점. <strong>[방어 핵심]</strong> 거래 안전성 검증·KYC담보·정산연계·수수료 <strong>4요소</strong>를 갖춰 "단순 게시판"이 아님을 소명 — 자동 매칭·자동 체결·시장가 형성은 하지 않음. 필터·정렬·페이징이 없는 단순 나열 구조 자체가 자동 매칭·조건 검색 부재의 담보.<br>
       · 분기: 내 RFQ 올리기 → BRK-02 / 타사 게시(게재중)에 신청 → BRK-03 / 타사 게시(협의중) 열람 → BRK-03(신청 비활성) / 내 게시 열기 → BRK-06(회수는 여기서) / 내 신청 중인 게시 → BRK-07<br>
-      · 2026-09-02 설명 형식 개정 적용(핀 = 조작 요소 단위) — 헤더·행 4종·[더 보기]·안내·등록 버튼 8핀 · 컬럼에 게시 일시(정렬 기준)·상태 칩 추가 · 예시 수량 재조정.<br>
+      · 2026-09-02 설명 형식 개정 적용(핀 = 조작 요소 단위) — 헤더·행 4종·안내·등록 버튼 7핀 · 컬럼에 게시 일시(정렬 기준)·상태 칩 추가 · 예시 수량 재조정.<br>
       · <span class="chk">[확인필요]</span> 내 게시·내 신청 구분 표기 디자인 · 행 hover 규격 · 고객 화면 상태 enum.
     </div>
   </div>
