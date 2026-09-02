@@ -272,7 +272,7 @@
       <div class="num">8</div>
       <div>
         <div class="itm-title">시세(외부지표) 소스 ▾<span class="req">필수</span></div>
-        <div class="itm-desc">· 드롭다운 · 옵션 <strong>업비트 / 빗썸 / 바이낸스</strong> · 단일 선택(복수 조합·가중 없음) · 현재 바이낸스(목업 예시 · 확정값 아님) · 저장형(변경 저장으로 반영 · dirty ●)<br>· 용도: 나목 비율 산정 기준가(EXC-02) · 건별 한도 KRW 환산(EXC-01·BRK-02·BRK-03) · price guard 이탈 판정(BRK 게시) — <strong>소스명은 고객 화면 미노출</strong>(09 §0 2026-09-02)<br>· 업비트·빗썸은 KRW 마켓이라 한도 환산에 직접 사용 · 바이낸스는 USD 마켓 → <strong>USD→KRW 환율 소스 필요</strong> <span style="color:#b45309;">[확인필요]</span> · 소스 수신 장애 시 대체 소스·요청 차단 처리 <span style="color:#b45309;">[확인필요]</span><br><span class="basis">근거 09 §0 나목 외부지표 참조 스프레드 고정·price guard · 고객 화면 미노출 · notation 드롭다운 규격</span></div>
+        <div class="itm-desc">· 드롭다운 · 옵션 <strong>업비트 / 빗썸 / 바이낸스</strong> · 단일 선택(복수 조합·가중 없음) · 현재 바이낸스(목업 예시 · 확정값 아님) · 저장형(변경 저장으로 반영 · dirty ●)<br>· 용도: 나목 비율 산정 기준가(EXC-02) · 건별 한도 KRW 환산(EXC-01·BRK-02·BRK-03) · price guard 이탈 판정(BRK 게시) — <strong>소스명은 고객 화면 미노출</strong>(09 §0 2026-09-02)<br>· 업비트·빗썸은 KRW 마켓이라 한도 환산에 직접 사용 · 바이낸스는 USD 마켓 → USD→KRW 환율 경유 — <strong>환율 소스·갱신 주기는 개발 결정</strong>(기획 미지정 · 2026-09-02(10) 사용자 결정) · 소스 수신 장애 시 대체 소스·요청 차단 처리 <span style="color:#b45309;">[확인필요]</span><br><span class="basis">근거 09 §0 나목 외부지표 참조 스프레드 고정·price guard · 고객 화면 미노출 · notation 드롭다운 규격</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">시세 소스 ▾</span><span class="nav-act">클릭 → 목록 펼침(업비트 / 빗썸 / 바이낸스 · 현재 선택 강조) → 항목 클릭</span><span class="nav-to stay">칩 갱신·목록 닫힘 · 바깥 클릭/ESC = 변경 없이 닫힘 · 셀 dirty ● · 저장 후 신규 요청부터 기준가·환산·판정에 반영</span></div>
         </div>
@@ -413,7 +413,7 @@
       </div>
       <div class="dtl" data-idx="7">
         <div class="detail-label"><span class="dtl-num">8</span>시세 소스 용도 · KRW 환산 경로</div>
-      <div class="dtl-body"><span class="box">· 용도 3종: ① 나목 기준가(EXC-02 산정 = 기준가 ± 스프레드) ② 건별 한도 KRW 환산(ETH·USDC·USDT 모두 소스 KRW 시세 · USD 마켓 소스면 환율 경유) ③ price guard 이탈 판정(게시 시점 기준가 vs 현재)<br>· 소스명은 고객 콘솔 어디에도 미노출(09 §0 2026-09-02) — 고객 화면은 "외부지표 기준" 문구만<br>· <span class="red">[확인필요]</span> 바이낸스(USD 마켓) 선택 시 USD→KRW 환율 소스·갱신 주기 · 소스 장애 시 대체 소스 자동 전환 vs 신규 요청 차단 · 마목은 시세 불관여 원칙 — price guard는 '가드'로만 사용</span></div>
+      <div class="dtl-body"><span class="box">· 용도 3종: ① 나목 기준가(EXC-02 산정 = 기준가 ± 스프레드) ② 건별 한도 KRW 환산(ETH·USDC·USDT 모두 소스 KRW 시세 · USD 마켓 소스면 환율 경유) ③ price guard 이탈 판정(게시 시점 기준가 vs 현재)<br>· 소스명은 고객 콘솔 어디에도 미노출(09 §0 2026-09-02) — 고객 화면은 "외부지표 기준" 문구만<br>· 바이낸스(USD 마켓) 선택 시 USD→KRW 환율 소스·갱신 주기는 <strong>개발 결정</strong>(기획 미지정 · 2026-09-02(10)) · <span class="red">[확인필요]</span> 소스 장애 시 대체 소스 자동 전환 vs 신규 요청 차단 · 마목은 시세 불관여 원칙 — price guard는 '가드'로만 사용</span></div>
       </div>
       <div class="dtl" data-idx="10">
         <div class="detail-label"><span class="dtl-num">11</span>저장·버전·적용 시점</div>
@@ -446,7 +446,7 @@
       · <strong>[화이트리스트 관리 제외]</strong> 화이트리스트 지연발효는 커스터디 출금(외부 반출) 전용 — 기존 커스터디 정책·시스템 그대로 사용, 이 콘솔에서 중복 관리하지 않음. 나·마 교환·중개(내부 지갑 간 이전)에는 미적용.<br>
       · 연결: 초대 발송 → ONB-00 · 정책값 표출 EXC-01/02·BRK-02/03/04/07 · 발생 알람 처리(잠금·재이행 도래·격리 등)는 홈(ADM-02) 처리함 · 기관 KYC 상태 = 전 화면 게이팅(G-3) 단일 출처<br>
       · 2026-09-02 설명 형식 개정 적용(핀 = 조작 요소 단위) — 파라미터는 그룹 단위 핀(입력 규격 명시), '페어별' 스프레드 프레임을 3페어 입력 3개로 수정, 취급자산 상태·정책 버전 라인·dirty 표시 추가, 조치 열 '—' 제거([상태 변경 ▾] 전 행), 저장 = 확인 없음 / 자산 중지·KYC 상태 변경 = 확인 다이얼로그로 통일 · 서비스명 DSRV Admin.<br>
-      · <span style="color:#991b1b;">[확인필요]</span> 입력 범위 상·하한 전부 · ETH 페어 스프레드 요율 · 스프레드 갱신주기 파라미터 · 수수료율 변경 절차 · 영업일 캘린더 · price guard 기본값 vs 고정값 · 일간·월간 누적 한도 · 시세 소스 KRW 환산 경로·장애 대체 · 콜드 80% 고시 원문 · 이력 CSV · 관리자 이탈 경고 예외 · 가입자 열 표시값 · 백업코드 소진 경로 · 재발송 횟수 제한 · 동결 → 활성 복귀 · 동결 시 STR 자동 생성 · KYC 초기값 · 개인 이메일 도메인 · 게재중 게시 자동 중지(자산 중지 시).
+      · <span style="color:#991b1b;">[확인필요]</span> 입력 범위 상·하한 전부 · ETH 페어 스프레드 요율 · 스프레드 갱신주기 파라미터 · 수수료율 변경 절차 · 영업일 캘린더 · price guard 기본값 vs 고정값 · 일간·월간 누적 한도 · 시세 소스 장애 대체 · 콜드 80% 고시 원문 · 이력 CSV · 관리자 이탈 경고 예외 · 가입자 열 표시값 · 백업코드 소진 경로 · 재발송 횟수 제한 · 동결 → 활성 복귀 · 동결 시 STR 자동 생성 · KYC 초기값 · 개인 이메일 도메인 · 게재중 게시 자동 중지(자산 중지 시).
     </div>
   </div>
 </section>
