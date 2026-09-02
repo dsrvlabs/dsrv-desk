@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화면기획 — 신청하기</title>
+<link rel="stylesheet" href="screen.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="crumb"><span>마목 중개</span><span class="s">›</span><span>교환게시판</span><span class="s">›</span><span>신청하기</span></div>
+  <h1 class="title">신청하기</h1>
+  <span class="sid">BRK-03</span>
+  <span class="defense">DSRV 비참여 · 가격 불관여</span>
+</header>
+
+<div class="main">
+  <div class="screen-panel">
+    <div style="position:relative;display:flex;">
+      <div class="labels" id="labels">
+        <div class="lbl"><span class="lbl-text">전역</span></div>
+        <div class="lbl"><span class="lbl-text">요청 내역</span></div>
+        <div class="lbl"><span class="lbl-text">신청</span></div>
+        <div class="lbl"><span class="lbl-text">비참여 고지</span></div>
+      </div>
+      <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
+    </div>
+
+    <div class="frame" id="frame">
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="c-top" style="border-radius:8px;">
+          <span class="brand">DSRV Desk</span>
+          <span class="meta"><span class="c-badge">A자산운용</span></span>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="0">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="0" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="0" style="top:-4px;right:-4px;">1</div>
+          <div class="zone-title">교환거래 요청 내역</div>
+          <div class="kv"><span class="k">요청번호</span><span class="v">BRK-20260830-0027</span></div>
+          <div class="kv"><span class="k">교환쌍 · 방향</span><span class="v">USDT → USDC</span></div>
+          <div class="kv"><span class="k">보내는 수량</span><span class="v">500,000 USDT</span></div>
+          <div class="kv"><span class="k">받는 수량</span><span class="v">499,000 USDC</span></div>
+          <div class="kv"><span class="k">비율</span><span class="v">0.9980 USDC/USDT</span></div>
+          <div class="kv"><span class="k">요청 일시 (게시)</span><span class="v">2026-08-30 14:20</span></div>
+          <div class="kv"><span class="k">상대</span><span class="v">B*** (KYC 완료 · 거래 안전성 검증 ✓)</span></div>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="1">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="1" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="1" style="top:-4px;right:-4px;">2</div>
+          <div class="zone-title">게시 조건으로 신청</div>
+          <div class="kv"><span class="k">신청 시점</span><span class="v">2026-09-01 09:12</span></div>
+          <div class="kv"><span class="k">내 중개 수수료 (거래액 1% 고정)</span><span class="v">4,990 USDC — 수락(확정) 시 발생</span></div>
+          <div style="display:flex;gap:8px;margin-top:8px;"><div class="btn primary" style="flex:1;">이 조건으로 신청</div><div class="btn ghost" style="flex:.5;">취소</div></div>
+          <div style="font-size:10px;color:#64748b;margin-top:6px;">신청은 <strong>영업일 기준 2일간 유지</strong>됩니다 — 게시자가 기한 내 수락하면 <strong>즉시 확정되어 바로 이전(정산)으로 진행</strong>되고, 무응답 시 자동 만료됩니다. 신청 접수는 게시자에게 이메일로 통지되며, 수락·거절 결과도 이메일·거래 내역으로 통지됩니다</div>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="2,3">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="2" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="2" style="top:-4px;right:-4px;">3</div>
+          <div class="pin" data-idx="3" style="top:-4px;right:22px;">4</div>
+          <div class="note-inline reg">DSRV는 가격 협의에 참여하지 않으며 신청·수락 기록만 보존합니다. 게시자 수락 전까지 구속력이 없으며, 수락 시 즉시 확정됩니다.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <svg id="connSvg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;"></svg>
+
+  <div class="items" id="items">
+    <div class="nav-global">
+      <div class="nav-global-title">진입 · 전역 이동</div>
+      <div class="nav-row"><span class="nav-el">상단 GNB(전 화면 공통)</span><span class="nav-act">대시보드/교환하기/교환게시판 메뉴 · 로고 클릭 — 목업에는 상단 요약만 표시</span><span class="nav-to"><strong>DASH-01 / EXC-01 / BRK-01</strong> (규칙: DASH-01 항목 5) · 신청 전 이탈 시 아무 효력 없음</span></div>
+      <div class="nav-note">· <strong>진입</strong>: 교환 게시판(BRK-01)의 거래의향 행(타사 게시) 클릭<br>
+      · 이 화면은 신청자 측 전용 — 수락·거절 버튼 없음(게시자의 BRK-04에서 수행) · 조건 수정 입력란 없음(역제안 없음, 게시 조건 그대로만)<br>
+      · 신청 후 진행 상태 확인 동선: 내 신청 상세(BRK-07, 2026-09-02 신설) — 대시보드(DASH-01) 마목 신청 행에서도 진입</div>
+    </div>
+    <div class="itm" data-idx="0">
+      <div class="num">1</div>
+      <div>
+        <div class="itm-title">교환거래 요청 내역 — 공통 포맷<span class="req">필수</span></div>
+        <div class="itm-desc">· '상대방 요청'과 '신청 조건'은 동일 내용(게시 조건 그대로 신청)이므로 <strong>하나의 폼</strong>으로 표시<br>· 포맷·필드 순서 = EXC-03·04 '교환거래 요청 내역'과 동일(공통 포맷 — 적용 범위는 상세 참조)<br>· 방향·수량은 게시자 기준, 게시 시점 = 요청 일시로 폼에 포함<br>· 상대 상호는 수락(확정) 전 첫 글자만 노출(나머지 마스킹)<br><span class="basis">근거 F-1b · L6 설명의무 · 공통 포맷</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="1">
+      <div class="num">2</div>
+      <div>
+        <div class="itm-title">게시 조건 그대로 신청 (역제안 없음)<span class="req">필수</span></div>
+        <div class="itm-desc">· 게시된 조건을 변경 없이 신청 — 흥정·역제안 없음<br>· <strong>요청 일시(게시)·신청 시점 병기</strong> — 두 시점 사이 시세 변동 판단은 당사자 몫(DSRV 가격 불관여 유지)<br>· 신청 유효기간 <strong>영업일 기준 2일</strong>: 게시자가 기한 내 수락(BRK-04)하면 <strong>즉시 확정 → 이전·완료(BRK-05)</strong>, 무응답 시 자동 만료<br>· 신청 = <strong>가입자 단독 실행</strong>(기관당 가입자 1명, ADM-03) — 수락 시 즉시 구속력이 발생하는 청약임을 신청 전 확인 문구로 고지<br>· 이 화면은 <strong>신청자 측 전용</strong> — 게시자의 수락·거절은 BRK-04(게시자 화면)에서 수행 · 신청 후 진행은 BRK-07(내 신청 상세)<br>· <strong>내 중개 수수료(거래액 1% 고정 · 내가 보내는 499,000 USDC의 1% = 4,990 USDC)</strong>를 신청 전 고지 — 구속력 발생 전 설명의무(4요소④), 상대측 금액 미노출<br><span class="basis">근거 F-1b · V2(통신중개 아님) · F-4 · 1기관 1가입자(ADM-03)</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">[이 조건으로 신청] 버튼</span><span class="nav-act">클릭 — 확인 문구(수락 시 즉시 구속력 발생하는 청약임) 고지 후 접수 · 가입자 단독 실행 · 유효 영업일 2일</span><span class="nav-to">신청 접수 → <strong>내 신청 상세(BRK-07)</strong> 진입(2026-09-02 변경 — 종전 BRK-01 복귀 폐기) · 게시자에게 이메일 알림 ① 발송 · 이후 수락/거절/만료/회수 결과는 이메일·BRK-07·거래 내역으로 통지</span></div>
+          <div class="nav-row"><span class="nav-el">[취소] 버튼</span><span class="nav-act">클릭 — 아무 효력 없음(확인 문구 없음 · 공통 UI 규격)</span><span class="nav-to"><strong>교환 게시판(BRK-01)</strong> 복귀</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="itm" data-idx="2">
+      <div class="num">3</div>
+      <div>
+        <div class="itm-title">"DSRV 비참여·기록만" 고지<span class="req">필수</span></div>
+        <div class="itm-desc">· 가격 불관여·당사자성 방어 문구 상시 노출<br><span class="basis">근거 V2 · PRD 하지않는행위 · [로펌게이트] 비참여 범위</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="3">
+      <div class="num">4</div>
+      <div>
+        <div class="itm-title">신청·수락 기록 보존·자동체결 부재<span class="req">필수</span></div>
+        <div class="itm-desc">· 수락 전 구속력 없음 표시(수락 = 확정)<br>· 신청·수락 기록 15년 보존, 자동 매칭·체결 없음(수락은 게시자의 능동 행위)<br>· 신청 접수 시 게시자 등록 이메일로 알림 발송 — 내용·공통 원칙은 상세 참조<br><span class="basis">근거 L6 §9 · V2(시장개설 아님)</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<section class="footer-note" style="padding-bottom:0;">
+  <div class="note-card">
+    <div class="note-title">상세내용</div>
+    <div class="detail-grid" id="detailCol">
+      <div class="dtl" data-idx="0">
+        <div class="detail-label"><span class="dtl-num">1</span>공통 포맷 적용 범위</div>
+      <div class="dtl-body"><span class="box">· 상세형(kv 폼): EXC-03·EXC-04(나목) · BRK-03·04·05(마목) · ADM-02 처리함 선택 건(관리자) — 모두 같은 필드 순서<br>· 목록형(표): DASH-01·BRK-01 — 교환코인(방향)·보내는 수량·받는 수량·비율 동일 순서<br>· 비율 표기는 <strong>{받는코인}/{주는코인}</strong>(notation 규칙)</span></div>
+      </div>
+      <div class="dtl" data-idx="1">
+        <div class="detail-label"><span class="dtl-num">2</span>신청·수락 흐름</div>
+      <div class="dtl-body"><span class="box">· 이메일 통지 4종: 신청 접수(게시자) / 수락·확정(양측) / 거래 완료(양측) / 게시 회수(대기 중 신청자 — BRK-06 상세)<br>· 게시 자체 유효기간은 기본 30일(BRK-02) — 게시 만료 시 미처리 신청도 함께 종결(기획 가정)<br>· 복수 신청 처리 방식은 BRK-04 참조 [확인필요: 선착순 vs 게시자 선택]<br>· 상대 상호 마스킹(B***)은 수락(확정) 시 해제 — 트래블룰·정산에 상대 확인 필요</span></div>
+      </div>
+      <div class="dtl" data-idx="2">
+        <div class="detail-label"><span class="dtl-num">3</span>비참여 범위 [로펌게이트]</div>
+      <div class="dtl-body"><span class="box">· '기록만' vs '관찰' 범위의 UI 반영 한계 확정 필요(09 §8)<br>· DSRV는 가격 제시·중재·호가 제공 안 함<br>· 채널 내 DSRV 개입 로그는 감사 대상</span></div>
+      </div>
+      <div class="dtl" data-idx="3">
+        <div class="detail-label"><span class="dtl-num">4</span>이메일 알림 ① 신청 접수 (수신: 게시자) · 공통 원칙</div>
+      <div class="dtl-body"><span class="box">· <strong>공통 원칙(4종 메일)</strong>: 발신전용(no-reply) · 본문에 로그인 링크·버튼 미포함(피싱 방지 — 콘솔 직접 접속 안내) · 상호 마스킹은 화면과 동일(수락 전 A***/B***) · 심사·AML 관련 내용 미포함(STR 누설 금지) · 수신 = 법인 담당자 등록 이메일 <span class="red">[확인필요: 수신 범위(담당자 단일/복수)]</span><br>· <strong>제목</strong>: [DSRV] 교환 게시에 새 신청 도착 — BRK-20260830-0027<br>· <strong>본문</strong>: "회원님의 교환 게시에 새로운 신청이 접수되었습니다." + 요청번호 · 교환쌍·방향(USDT → USDC) · 보내는/받는 수량(게시 조건 그대로) · 신청자 A***(KYC 완료·거래 안전성 검증 ✓) · 신청 일시 · <strong>수락 기한 2026-09-03 09:12 (영업일 2일, 경과 시 자동 만료)</strong> + "수락·거절은 DSRV Desk > 교환게시판 > 내 게시 > 받은 신청에서 처리해 주세요."<br>· 수락·확정 메일(②)은 BRK-04, 거래 완료 메일(③)은 BRK-05 상세 참조</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="footer-note">
+  <div class="note-card">
+    <div class="note-title">비고</div>
+    <div class="note-body">
+      · 기존 RFQ에 거래를 거는 단계. <strong>[방어 핵심]</strong> DSRV는 <strong>가격에 관여하지 않고 기록만</strong> 보존(당사자성 방어) — 자유 메시지 채널·역제안 없음(통신중개·개입 논란 차단). "가격 결정 = 당사자, 외부지표 = 중지 판단 기준"을 화면 문구로 일관 유지.<br>
+      · 시세변동 중지 상태 표시 없음 — 중지된 RFQ는 게시판(BRK-01)에서 즉시 제외되어 이 화면 진입 자체가 불가.<br>
+      · 신청은 수락 전까지 구속력 없음 — 구속력·수수료(거래액 1% 고정, 각자 보내는 자산 기준)는 게시자 수락(BRK-04) 완료 시 발생.<br>
+      · 다음: (신청자) 내 신청 상세 (BRK-07) / (게시자) 받은 신청·수락 (BRK-04)
+    </div>
+  </div>
+</section>
+
+<script src="screen.js"></script>
+</body>
+</html>

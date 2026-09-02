@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화면 흐름도 — DSRV 교환·중개</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Noto Sans KR',system-ui,sans-serif;background:#fafafa;color:#222;padding:28px 36px 60px;}
+  h1{font-size:20px;font-weight:800;margin-bottom:6px;}
+  .subtitle{font-size:12px;color:#888;margin-bottom:20px;}
+  .legend{display:flex;gap:22px;margin-bottom:24px;padding:12px 18px;background:#fff;border:1px solid #ddd;border-radius:8px;width:fit-content;}
+  .legend-item{display:flex;align-items:center;gap:8px;font-size:12px;color:#555;}
+  .legend-box{width:46px;height:26px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;}
+  .legend-box.page{border:1.5px solid #2563eb;background:#fff;color:#2563eb;}
+  .legend-box.question{width:26px;height:26px;border:1.5px solid #aaa;background:#fff;transform:rotate(45deg);flex-shrink:0;}
+  .legend-box.internal{background:#64748b;color:#fff;}
+
+  .section{margin-bottom:10px;border-bottom:1px solid #e0e0e0;padding-bottom:12px;overflow:visible;}
+  .section:last-child{border-bottom:none;}
+  .section-header{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;color:#1d4ed8;margin-bottom:14px;padding:6px 12px;background:#eff6ff;border-radius:6px;width:fit-content;}
+  .section-header .tag{font-size:9px;font-weight:700;color:#92400e;background:#fef9ec;border:1px solid #fde68a;padding:1px 7px;border-radius:8px;}
+  .flow-scroll{overflow-x:auto;overflow-y:visible;padding-bottom:10px;}
+  .flow-row{display:flex;align-items:center;gap:0;min-width:max-content;padding:4px 0;}
+
+  .box{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;flex-shrink:0;position:relative;}
+  .box .name{font-size:11px;font-weight:600;line-height:1.3;white-space:nowrap;}
+  .box .pid{font-size:8px;color:#94a3b8;margin-top:2px;font-family:monospace;}
+  .box.page .inner{border:1.5px solid #93c5fd;background:#fff;border-radius:6px;padding:7px 12px 5px;min-height:40px;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .box.page .inner:hover{border-color:#2563eb;box-shadow:0 2px 8px rgba(37,99,235,.15);}
+  .box.question{width:70px;height:70px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;}
+  .box.question .inner{position:absolute;width:50px;height:50px;background:#fff;border:1.5px solid #aaa;border-radius:3px;transform:rotate(45deg);display:flex;align-items:center;justify-content:center;}
+  .box.question .name{transform:rotate(-45deg);font-size:9px;font-weight:600;line-height:1.2;white-space:normal;width:44px;text-align:center;}
+  .box.internal .inner{background:#64748b;color:#fff;border-radius:6px;padding:7px 12px 5px;min-height:40px;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .box.internal .name{color:#fff;}
+  .box.internal .pid{display:none;}
+
+  .arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:30px;flex-shrink:0;position:relative;height:40px;}
+  .arrow .line{width:18px;height:1.5px;background:#94a3b8;position:relative;}
+  .arrow .line::after{content:'';position:absolute;right:-4px;top:50%;transform:translateY(-50%);width:0;height:0;border:3px solid transparent;border-left:4px solid #94a3b8;}
+  .arrow .label{font-size:9px;color:#334155;white-space:nowrap;margin-bottom:1px;font-weight:600;}
+
+  .fork{display:flex;flex-direction:column;gap:6px;flex-shrink:0;overflow:visible;}
+  .fork-row{display:flex;align-items:center;gap:0;min-width:max-content;overflow:visible;}
+  .fork-line{width:18px;flex-shrink:0;align-self:stretch;position:relative;}
+  .fork-line::before{content:'';position:absolute;left:0;width:1.5px;background:#94a3b8;}
+  .fork-line.fork-top::before{top:50%;bottom:0;}
+  .fork-line.fork-bottom::before{top:0;bottom:50%;}
+  .fork-line.fork-mid::before{top:0;bottom:0;}
+  .fork-line::after{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:18px;height:1.5px;background:#94a3b8;}
+  .fork-line .fork-arrow{position:absolute;right:-4px;top:50%;transform:translateY(-50%);width:0;height:0;border:3px solid transparent;border-left:4px solid #94a3b8;}
+
+  .section-note{font-size:11px;color:#777;margin-top:6px;padding-left:8px;font-style:italic;}
+  .flow-scroll::-webkit-scrollbar{height:6px;}
+  .flow-scroll::-webkit-scrollbar-thumb{background:#ccc;border-radius:3px;}
+
+  .box.page-current .inner{border-color:#f59e0b !important;box-shadow:0 0 0 3px rgba(245,158,11,.25);background:#fffbeb;}
+  .box.page-current .pid{color:#d97706;font-weight:700;}
+  .box.page-current .name{color:#92400e;}
+
+  #floating-thumb{display:none;position:fixed;width:240px;height:150px;border:1px solid #ddd;border-radius:8px;overflow:hidden;background:#fff;box-shadow:0 4px 16px rgba(0,0,0,.2);z-index:9999;pointer-events:none;}
+  #floating-thumb iframe{width:500%;height:500%;transform:scale(0.2);transform-origin:top left;border:none;pointer-events:none;}
+</style>
+</head>
+<body>
+
+<h1>화면 흐름도 — DSRV 교환·중개</h1>
+<div class="subtitle">온보딩·로그인 → 대시보드 → 나목 교환(교환하기 탭) · 마목 중개(교환게시판 탭) → 관리자 · 박스 클릭 시 해당 화면으로 이동</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-box page">화면</div><span>기획된 화면(클릭 이동)</span></div>
+  <div class="legend-item"><div class="legend-box question"></div><span>분기</span></div>
+  <div class="legend-item"><div class="legend-box internal">처리</div><span>내부 처리·상태</span></div>
+</div>
+
+<div id="floating-thumb"><iframe id="floating-thumb-iframe" loading="lazy"></iframe></div>
+<div id="diagram"></div>
+
+<script>
+function page(name,pid){return {type:'page',name,pid};}
+function question(name){return {type:'question',name,pid:''};}
+function internal(name){return {type:'internal',name,pid:''};}
+function arrow(label){return {type:'arrow',label:label||''};}
+function fork(paths){return {type:'fork',paths};}
+
+const sections = [
+  {
+    title:'⓪ 진입 — 온보딩·로그인', tag:'최초 1회 활성화 + 매 로그인',
+    note:'* 가입 완료 후 초대 이메일 링크로 계정 활성화(비밀번호 본인설정 + 2FA QR·백업코드) → 로그인 → 홈. 셀프가입 없음(초대 기반). 초기 비밀번호 생성·전달 없음.',
+    rows:[{ type:'flow', items:[
+      internal('가입 완료\n(계정 개설)'), arrow('초대 메일'),
+      page('초대 이메일','ONB-00'), arrow('링크 클릭'),
+      page('계정 활성화','ONB-01'), arrow('완료'),
+      page('로그인','AUTH-01'), arrow('성공'),
+      page('대시보드','DASH-01'),
+      fork([
+        { label:'교환하기', items:[ page('교환하기','EXC-01') ] },
+        { label:'교환게시판', items:[ page('교환 게시판','BRK-01') ] },
+        { label:'계정·보안', items:[ page('비밀번호 수정','DASH-02') ] },
+        { label:'', items:[ page('2차 인증 재설정','DASH-03') ] },
+      ])
+    ]}]
+  },
+  {
+    title:'① 나목 교환 (DSRV가 상대방)', tag:'교환하기 탭',
+    note:'* 자동체결 거래소·MM 아님 — 오더북/상시 양방향 호가 없음, 단건 RFQ, 외부지표+고정 스프레드(가격형성 아님), 비율은 시스템 자동 산정(2026-09-02 확정), 체결은 수락 + 건별 수동 승인·집행. 건별 한도 1,000 USD 상당(USD 환산) · 가용 풀 한도 내에서만 교환.',
+    rows:[{ type:'flow', items:[
+      page('대시보드','DASH-01'), arrow('교환하기'),
+      page('교환하기','EXC-01'), arrow('비율 요청'),
+      page('비율 확인·수락','EXC-02'),
+      fork([
+        { label:'수락', items:[ page('승인 진행','EXC-03'), arrow(), page('내역·완료','EXC-04') ] },
+        { label:'거절', items:[ internal('요청으로 회귀\n(EXC-01)') ] },
+        { label:'만료·이탈·\n풀 부족', items:[ internal('교환 불가\n(집행 안 함)') ] },
+      ])
+    ]}]
+  },
+  {
+    title:'② 마목 중개 — 게시(RFQ 등록)', tag:'교환게시판 탭',
+    note:'* 단순 게시판 아님(4요소: 거래 안전성 검증·KYC담보·정산연계·수수료). 게시 시 보유·처분권 게이트 + 편차 경고 + 시세변동 자동중지(내부 정책)·유효기간 30일 · 건별 한도 1,000 USD 상당(공통). 게시 회수는 BRK-06(게시자 능동 행위). 자동 매칭·자동 체결 없음.',
+    rows:[{ type:'flow', items:[
+      page('대시보드','DASH-01'), arrow('교환게시판'),
+      page('교환 게시판','BRK-01'), arrow('+ 거래의향 등록'),
+      page('거래의향 등록','BRK-02'), arrow('게이트 통과\n게시(단독)'),
+      page('내 게시 상세·회수','BRK-06'),
+      fork([
+        { label:'신청 도착', items:[ page('받은 신청·수락','BRK-04') ] },
+        { label:'게시 내리기', items:[ internal('회수 — 게시판 제외\n자산이동·수수료 없음') ] },
+        { label:'시세변동·\n유효기간 30일', items:[ internal('자동중지(내부 정책) /\n완료(유효기간 만료)') ] },
+      ])
+    ]}]
+  },
+  {
+    title:'③ 마목 중개 — 수락(기존 RFQ 거래)', tag:'교환게시판 탭',
+    note:'* DSRV 비참여·기록만(당사자 간 신청·수락, 역제안 없음). 신청 유효 영업일 2일 — 기한 내 수락(가입자 단독 실행 — 1기관 1가입자, 2026-09-01) 시 즉시 확정·구속력 발생 → 커스터디 콜드 수동 이전(양건 확인 후 순차)·수수료 = 거래액 1% 고정·양측 각자(2026-09-02 확정). 신청·수락·완료·회수 이메일 통지 4종. 신청자 진행 조회 BRK-07 · 게시자 회수 BRK-06(2026-09-02 추가).',
+    rows:[{ type:'flow', items:[
+      page('교환 게시판','BRK-01'), arrow('행 선택·신청'),
+      page('신청하기','BRK-03'), arrow('신청 접수\n(유효 영업일 2일)'),
+      page('내 신청 상세','BRK-07'), arrow('게시자 측\nBRK-06 → 신청 선택'),
+      page('받은 신청·수락','BRK-04'),
+      fork([
+        { label:'수락\n(즉시 확정)', items:[ page('이전·완료','BRK-05') ] },
+        { label:'거절·만료', items:[ internal('자산이동·\n수수료 없음') ] },
+      ])
+    ]}]
+  },
+  {
+    title:'④ 지갑·자산 — 별도 화면 없음 (입금은 대시보드 · 출금/이전은 서면 절차)', tag:'대시보드 → 지갑 잔고',
+    note:'* 고객 화면은 조회·입금까지만 — 출금/이전 요청은 커스터디 수탁 지갑의 서면 절차로 접수(온라인 화면 없음, 2026-09-01 제거). 화이트리스트는 내부 관리(고객·어드민 화면 없음). WAL-01 삭제(2026-09-01) — 입금 전용 주소는 대시보드 지갑 잔고 하단에 전문 표시(QR·말줄임 없음). 집행은 DSRV 어드민 홈(ADM-02) 처리함 승인 + 콜드 2인 멀티시그(커스터디 운영절차).',
+    rows:[{ type:'flow', items:[
+      page('대시보드','DASH-01'), arrow('출금/이전 필요 시'),
+      internal('서면 요청 접수\n(커스터디 절차 · 오프라인)'), arrow(),
+      internal('DSRV 승인(ADM-02 처리함)\n→ 콜드 집행(커스터디 절차)')
+    ]}]
+  },
+  {
+    title:'⑤ 관리자 (DSRV Admin)', tag:'고객사 노출 없음',
+    note:'* 개편 2026-09-01 — 어드민 2화면. 홈(ADM-02)의 알람·워닝 처리함이 EXC-03·BRK-04·출금 건 승인, 격리·동결, 잠금 해제의 처리처이고 조회성 데이터는 CSV 다운로드 6종(기관-가입자·거래 요청·통합 거래·구분회계·3면 대사·열람 기록). 설정(ADM-03)이 EXC-02·BRK-02 등 표출값의 단일 출처 + 기관·가입자 관리(기관당 1명).',
+    rows:[{ type:'flow', items:[
+      page('어드민 홈\n(알람·워닝 + CSV)','ADM-02'), arrow('정책·기관 관리'),
+      page('설정','ADM-03')
+    ]}]
+  },
+];
+
+const FILE_MAP = {
+  'ONB-00':'onb-00.html','ONB-01':'onb-01.html','AUTH-01':'auth-01.html','DASH-01':'dash-01.html','DASH-02':'dash-02.html','DASH-03':'dash-03.html',
+  'EXC-01':'exc-01.html','EXC-02':'exc-02.html','EXC-03':'exc-03.html','EXC-04':'exc-04.html',
+  'BRK-01':'brk-01.html','BRK-02':'brk-02.html','BRK-03':'brk-03.html','BRK-04':'brk-04.html','BRK-05':'brk-05.html','BRK-06':'brk-06.html','BRK-07':'brk-07.html',
+  'ADM-02':'adm-02.html','ADM-03':'adm-03.html',
+};
+
+const diagram = document.getElementById('diagram');
+
+function renderItem(item){
+  if(item.type==='arrow'){
+    const el=document.createElement('div'); el.className='arrow';
+    if(item.label){const lbl=document.createElement('div');lbl.className='label';lbl.innerHTML=item.label.replace(/\n/g,'<br>');el.appendChild(lbl);}
+    const line=document.createElement('div');line.className='line';el.appendChild(line);
+    return el;
+  }
+  const wrapper=document.createElement('div'); wrapper.className='box '+item.type;
+  const inner=document.createElement('div'); inner.className='inner';
+  const nameEl=document.createElement('div'); nameEl.className='name'; nameEl.innerHTML=item.name.replace(/\n/g,'<br>'); inner.appendChild(nameEl);
+  if(item.pid){const pidEl=document.createElement('div');pidEl.className='pid';pidEl.textContent=item.pid;inner.appendChild(pidEl);}
+  if(item.type==='page'&&item.pid){
+    inner.style.cursor='pointer';
+    inner.onclick=()=>{ if(window.parent!==window) window.parent.postMessage({type:'navigate',pageId:item.pid},'*'); };
+  }
+  wrapper.appendChild(inner);
+  if(item.type==='page'&&item.pid&&FILE_MAP[item.pid]){wrapper.dataset.thumbSrc=FILE_MAP[item.pid];wrapper.dataset.thumbPid=item.pid;}
+  return wrapper;
+}
+function renderItems(items,container){ items.forEach(item=>{
+  if(item.type==='fork'){renderFork(item,container);return;}
+  const el=renderItem(item); if(el) container.appendChild(el);
+});}
+function renderFork(forkData,container){
+  const forkDiv=document.createElement('div'); forkDiv.className='fork';
+  const n=forkData.paths.length;
+  forkData.paths.forEach((path,idx)=>{
+    const rowDiv=document.createElement('div'); rowDiv.className='fork-row';
+    const fl=document.createElement('div'); fl.className='fork-line '+(idx===0?'fork-top':idx===n-1?'fork-bottom':'fork-mid');
+    const fa=document.createElement('div'); fa.className='fork-arrow'; fl.appendChild(fa); rowDiv.appendChild(fl);
+    if(path.label){const lbl=document.createElement('span');lbl.style.cssText='font-size:9px;color:#334155;font-weight:700;padding:0 5px;white-space:pre-line;align-self:center;text-align:center;';lbl.textContent=path.label;rowDiv.appendChild(lbl);}
+    renderItems(path.items,rowDiv);
+    if(path.subfork) renderFork(path.subfork,rowDiv);
+    forkDiv.appendChild(rowDiv);
+  });
+  container.appendChild(forkDiv);
+}
+
+sections.forEach(sec=>{
+  const sectionDiv=document.createElement('div'); sectionDiv.className='section';
+  const header=document.createElement('div'); header.className='section-header';
+  const t=document.createElement('span'); t.textContent=sec.title; header.appendChild(t);
+  if(sec.tag){const tg=document.createElement('span');tg.className='tag';tg.textContent=sec.tag;header.appendChild(tg);}
+  sectionDiv.appendChild(header);
+  const scrollDiv=document.createElement('div'); scrollDiv.className='flow-scroll';
+  const flowContainer=document.createElement('div'); flowContainer.className='flow-row';
+  sec.rows.forEach(row=>{ if(row.type==='flow') renderItems(row.items,flowContainer); });
+  scrollDiv.appendChild(flowContainer); sectionDiv.appendChild(scrollDiv);
+  if(sec.note){const nd=document.createElement('div');nd.className='section-note';nd.textContent=sec.note;sectionDiv.appendChild(nd);}
+  diagram.appendChild(sectionDiv);
+});
+
+// 부모에서 현재 화면 하이라이트
+window.addEventListener('message',(e)=>{
+  if(!e.data||e.data.type!=='highlightPage')return;
+  document.querySelectorAll('.box.page-current').forEach(el=>el.classList.remove('page-current'));
+  const pid=e.data.pid; if(!pid)return;
+  document.querySelectorAll(`.box[data-thumb-pid="${pid}"]`).forEach(el=>{
+    el.classList.add('page-current');
+    el.scrollIntoView({behavior:'smooth',block:'center',inline:'center'});
+  });
+});
+
+// floating 섬네일 hover
+const floatThumb=document.getElementById('floating-thumb');
+const floatIframe=document.getElementById('floating-thumb-iframe');
+let currentSrc='';
+document.addEventListener('mouseover',(e)=>{
+  const box=e.target.closest('.box[data-thumb-src]'); if(!box)return;
+  const src=box.dataset.thumbSrc; if(src!==currentSrc){floatIframe.src=src;currentSrc=src;}
+  const r=box.getBoundingClientRect(); const tw=240,th=150;
+  let top=r.top-th-8; if(top<8) top=r.bottom+8;
+  let left=r.left+r.width/2-tw/2; left=Math.max(8,Math.min(left,window.innerWidth-tw-8));
+  floatThumb.style.top=top+'px'; floatThumb.style.left=left+'px'; floatThumb.style.display='block';
+});
+document.addEventListener('mouseout',(e)=>{
+  const box=e.target.closest('.box[data-thumb-src]'); if(!box)return;
+  if(box.contains(e.relatedTarget))return;
+  floatThumb.style.display='none';
+});
+</script>
+</body>
+</html>

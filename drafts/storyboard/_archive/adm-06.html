@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화면기획 — ORG·계정 관리</title>
+<link rel="stylesheet" href="screen.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="crumb"><span>관리자</span><span class="s">›</span><span>ORG·계정 관리</span></div>
+  <h1 class="title">ORG·계정 관리</h1>
+  <span class="sid">ADM-06</span>
+  <span class="defense">계정 상태 전이 · 초대 발송 · 잠금 해제</span>
+</header>
+
+<div class="main">
+  <div class="screen-panel">
+    <div style="position:relative;display:flex;">
+      <div class="labels" id="labels">
+        <div class="lbl"><span class="lbl-text">전역·<br>관리 메뉴</span></div>
+        <div class="lbl"><span class="lbl-text">현황 요약</span></div>
+        <div class="lbl"><span class="lbl-text">ORG·KYC<br>목록</span></div>
+        <div class="lbl"><span class="lbl-text">멤버·계정</span></div>
+        <div class="lbl"><span class="lbl-text">초대 발송</span></div>
+        <div class="lbl"><span class="lbl-text">상태 전이<br>·재이행</span></div>
+      </div>
+      <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
+    </div>
+
+    <div class="frame" id="frame">
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="c-top admin" style="border-radius:8px 8px 0 0;">
+          <span class="brand">DSRV Admin Console</span>
+          <span class="meta"><span class="c-badge adm">Admin</span><span class="c-badge pam">PAM 세션·녹화중</span></span>
+        </div>
+        <div class="c-adminbar" style="margin:0;">
+          <span class="m">대시보드</span><span class="m on">ORG·KYC</span><span class="m">요청·정책</span><span class="m">지갑</span><span class="m">시장감시</span><span class="m">로그</span>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="kpi">
+          <div class="card"><div class="n">12</div><div class="t">활성 ORG</div></div>
+          <div class="card"><div class="n">2</div><div class="t">KYC 심사중</div></div>
+          <div class="card"><div class="n">1</div><div class="t">일시제한(재이행)</div></div>
+          <div class="card"><div class="n">1</div><div class="t">잠금 계정</div></div>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="0">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="0" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="0" style="top:-4px;right:-4px;">1</div>
+          <div class="zone-title">ORG 목록 · KYC 상태</div>
+          <table class="tbl">
+            <thead><tr><th>ORG</th><th>KYC 상태</th><th>재이행 도래</th><th>멤버</th></tr></thead>
+            <tbody>
+              <tr><td>A자산운용</td><td><span class="chip ok">활성</span></td><td class="mono">2027-03 (고위험 1년)</td><td>3</td></tr>
+              <tr><td>B사</td><td><span class="chip info">심사중 (EDD)</span></td><td class="mono">—</td><td>2</td></tr>
+              <tr><td>C사</td><td><span class="sev mid">일시제한</span></td><td class="mono">기한 초과 · 미응답</td><td>2</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="1">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="1" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="1" style="top:-4px;right:-4px;">2</div>
+          <div class="zone-title">멤버·계정 (선택 A자산운용)</div>
+          <table class="tbl">
+            <thead><tr><th>담당자</th><th>역할</th><th>상태</th><th>조치</th></tr></thead>
+            <tbody>
+              <tr><td>담당자 K</td><td>기안</td><td><span class="chip ok">활성</span></td><td class="mono">—</td></tr>
+              <tr><td>담당자 L</td><td>승인</td><td><span class="sev hi">잠금 (5회 오류)</span></td><td><span class="chip">본인확인 → 해제·초대 재발송</span></td></tr>
+              <tr><td>담당자 M</td><td>기안</td><td><span class="chip info">초대 발송됨</span></td><td><span class="chip">초대 재발송</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="2">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="2" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="2" style="top:-4px;right:-4px;">3</div>
+          <div class="zone-title">초대 발송 (온보딩 시작 · ONB-00 트리거)</div>
+          <div class="row" style="gap:8px;">
+            <div class="field" style="flex:2;"><span class="ph">담당자 이메일</span></div>
+            <div class="field sel" style="flex:1;">역할: 기안·승인</div>
+            <div class="btn primary" style="flex:0 0 auto;">초대 발송</div>
+          </div>
+          <div style="font-size:10px;color:#64748b;margin-top:6px;">담당자 2인(기안·승인 분리) 확보가 온보딩 필수 요건 — 1인 법인은 진행 불가 안내</div>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="3">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="3" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="3" style="top:-4px;right:-4px;">4</div>
+          <div class="kv"><span class="k">계정 상태 전이</span><span class="v">심사중 → 활성 → 일시제한 → 동결 → 해지</span></div>
+          <div class="kv"><span class="k">KYC 재이행 주기</span><span class="v">고1년 · 중2년 · 저3년 + 이벤트 트리거</span></div>
+          <div class="kv"><span class="k">해지 처리</span><span class="v">진행 거래 완결 → 전량 출금 → 비활성화</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <svg id="connSvg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;"></svg>
+
+  <div class="items" id="items">
+    <div class="itm" data-idx="0">
+      <div class="num">1</div>
+      <div>
+        <div class="itm-title">ORG 목록·KYC 상태 관리<span class="req">필수</span></div>
+        <div class="itm-desc">· ORG별 KYC 상태(활성·심사중·일시제한·동결·해지)·재이행 도래일 표시<br>· CDD/EDD 탈락 시 가입 거절 + 사유 기록, 거래거절 건 STR 검토 연계(예외 A1)<br>· 재이행 기한 초과·미응답 → 신규 거래 제한(예외 A6)<br><span class="basis">근거: 관리자 콘솔 ORG·KYC 통합 [F-12] · 예외케이스 A1·A2·A6 (28 §A)</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="1">
+      <div class="num">2</div>
+      <div>
+        <div class="itm-title">멤버·계정 조치 (잠금 해제·초대 재발송)<span class="req">필수</span></div>
+        <div class="itm-desc">· 계정 잠금(로그인 5회 오류, AUTH-01) 건을 여기서 처리 — <strong>본인확인 후 해제 또는 초대 재발송</strong><br>· 초대 재발송 = 기존 ONB-00 플로우 재사용(신규 개발 없음), 백업코드 분실·소진 케이스도 동일 버튼<br>· 잠금·해제·재발송 이력은 감사로그 기록<br><span class="basis">근거: 비정상 로그인 통제 · 정보보호 관리체계(ISMS) 인증기준 2.5(인증)·2.6(접근통제)</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="2">
+      <div class="num">3</div>
+      <div>
+        <div class="itm-title">초대 발송 (온보딩 진입점)<span class="req">필수</span></div>
+        <div class="itm-desc">· 고객사 담당자 이메일로 초대 발송 → ONB-00(초대 이메일) → ONB-01(활성화·2FA)<br>· 링크 72시간·1회 유효 — 만료 시 이 화면에서 재발급<br>· 담당자 2인(기안↔승인 분리) 미확보 시 온보딩 진행 불가(예외 A3)<br><span class="basis">근거: 직무분리 2인 요건 · 정보보호 관리체계(ISMS) 인증기준 2.2.2 · 예외케이스 A3</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="3">
+      <div class="num">4</div>
+      <div>
+        <div class="itm-title">계정 상태 전이·재이행 트리거<span class="req">필수</span></div>
+        <div class="itm-desc">· 상태 기계: 심사중 → 활성 → 일시제한(재이행·의심) → 동결(제재) → 해지<br>· 실소유자·지배구조 변경 등 이벤트 트리거 시 수시 CDD 재이행 → 재심사 중 거래 제한(예외 A4)<br>· 해지 시에도 기록은 15년 보존(예외 A5)<br><span class="basis">근거: 고객확인 재이행 [L1 §5의2] · 기록 보존 [L6 §9] · 예외케이스 A4·A5</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-col" id="detailCol">
+    <div class="dtl" data-idx="0">
+      <div class="detail-label">온보딩 예외 귀속</div>
+      <div class="dtl-body"><span class="box">· A1 CDD/EDD 탈락 → 거절 + STR 검토<br>· A2 심사 장기화 → '심사중' 유지(고객 측은 조회만)<br>· A6 재이행 미응답 → 일시제한<br>· <span class="red">[확인필요]</span> 일시제한 중 조회·출금 허용 범위</span></div>
+    </div>
+    <div class="dtl" data-idx="1">
+      <div class="detail-label">계정 잠금 해제 절차</div>
+      <div class="dtl-body"><span class="box">· AUTH-01 잠금 발생 → ADM-02 알람함 알림 → 이 화면에서 조치<br>· 본인확인(유선·등록 이메일) → 해제 or 초대 재발송<br>· 처리자·시각·사유 감사로그 — 운영 프로세스이며 별도 승인 단계 없음</span></div>
+    </div>
+    <div class="dtl" data-idx="2"></div>
+    <div class="dtl" data-idx="3">
+      <div class="detail-label">해지(탈퇴) 흐름</div>
+      <div class="dtl-body"><span class="box">해지 요청 → 진행 중 거래 완결 대기 → 자산 전량 출금 확인 → 비활성화<br>· 신규 거래는 요청 즉시 차단<br>· 거래·AML 기록은 법정 기간 보존(거래 15년·AML 5년)</span></div>
+    </div>
+  </div>
+</div>
+
+<section class="footer-note">
+  <div class="note-card">
+    <div class="note-title">비고</div>
+    <div class="note-body">
+      · DSRV 내부 관리자 화면(고객사 노출 없음). 관리자 메뉴 'ORG·KYC' 탭 — 예외케이스 <strong>A1~A6(온보딩)과 계정 잠금(AUTH-01)의 처리 귀속 화면</strong>.<br>
+      · <strong>[최소 구현]</strong> 초대 발송·재발송은 기존 ONB-00 플로우 재사용(메일 템플릿·활성화 링크 동일), 잠금 해제는 운영 프로세스(본인확인) + 버튼 — 신규 개발은 목록·버튼 수준.<br>
+      · KYC 심사 자체(서류 검토·EDD)는 별도 AML 시스템 영역 — 이 화면은 <strong>상태 조회·전이와 계정 조치만</strong> 담당. <span style="color:#991b1b;">[확인필요]</span> KYC 심사 도구와의 연동 범위.<br>
+      · 연결: 초대 발송 → ONB-00 · 잠금 알림 수신 ← ADM-02 알람함 · 계정 상태는 전 화면 게이팅(G-3)의 단일 출처
+    </div>
+  </div>
+</section>
+
+<script src="screen.js"></script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화면기획 — 로그·대사·회계</title>
+<link rel="stylesheet" href="screen.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="crumb"><span>관리자</span><span class="s">›</span><span>로그·대사·회계</span></div>
+  <h1 class="title">로그·대사·회계</h1>
+  <span class="sid">ADM-04</span>
+  <span class="defense">3면 대사 · 구분회계 · 조회 전용</span>
+</header>
+
+<div class="main">
+  <div class="screen-panel">
+    <div style="position:relative;display:flex;">
+      <div class="labels" id="labels">
+        <div class="lbl"><span class="lbl-text">전역·<br>관리 메뉴</span></div>
+        <div class="lbl"><span class="lbl-text">필터·정렬</span></div>
+        <div class="lbl"><span class="lbl-text">통합 로그</span></div>
+        <div class="lbl"><span class="lbl-text">3면 대사</span></div>
+        <div class="lbl"><span class="lbl-text">구분회계<br>·내보내기</span></div>
+      </div>
+      <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
+    </div>
+
+    <div class="frame" id="frame">
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="c-top admin" style="border-radius:8px 8px 0 0;">
+          <span class="brand">DSRV Admin Console</span>
+          <span class="meta"><span class="c-badge adm">Admin</span><span class="c-badge pam">PAM 세션</span></span>
+        </div>
+        <div class="c-adminbar" style="margin:0;">
+          <span class="m">대시보드</span><span class="m">ORG·KYC</span><span class="m">요청·정책</span><span class="m">지갑</span><span class="m">시장감시</span><span class="m on">로그</span>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="0">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="0" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="0" style="top:-4px;right:-4px;">1</div>
+          <div class="row" style="flex-wrap:wrap;gap:6px;">
+            <div class="field sel" style="flex:0 0 auto;padding:6px 10px;">기간: 08-01~08-31</div>
+            <div class="field sel" style="flex:0 0 auto;padding:6px 10px;">ORG: 전체</div>
+            <div class="field sel" style="flex:0 0 auto;padding:6px 10px;">자산: 전체</div>
+            <div class="field sel" style="flex:0 0 auto;padding:6px 10px;">유형: 교환·중개·이전</div>
+            <div class="field sel" style="flex:0 0 auto;padding:6px 10px;">상태·금액대</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="1">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="1" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="1" style="top:-4px;right:-4px;">2</div>
+          <table class="tbl">
+            <thead><tr><th>시각 ▾</th><th>유형</th><th>주체</th><th>자산·금액</th><th>상태</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">08-31 14:33</td><td>교환(나목)</td><td class="mono">ORG-A</td><td class="mono">USDC 100,000</td><td><span class="sev lo">완료</span></td></tr>
+              <tr><td class="mono">08-31 11:02</td><td>중개(마목)</td><td class="mono">A↔B</td><td class="mono">USDT 500,000</td><td><span class="sev mid">이전중</span></td></tr>
+              <tr><td class="mono">08-31 09:15</td><td>승인</td><td class="mono">ORG-A 담당2</td><td class="mono">—</td><td><span class="sev lo">승인</span></td></tr>
+              <tr><td class="mono">08-31 08:47</td><td>로그인·2FA</td><td class="mono">ORG-C</td><td class="mono">—</td><td><span class="sev lo">성공</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="2">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="2" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="2" style="top:-4px;right:-4px;">3</div>
+          <div class="zone-title">3면 대사</div>
+          <div class="kv"><span class="k">내부 장부</span><span class="v">USDT 12,480,000</span></div>
+          <div class="kv"><span class="k">온체인 잔액</span><span class="v">USDT 12,480,000</span></div>
+          <div class="kv"><span class="k">커스터디 콜드 잔액</span><span class="v">USDT 12,480,000</span></div>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="3">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="3" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="3" style="top:-4px;right:-4px;">4</div>
+          <div class="zone-title">구분회계 집계</div>
+          <div class="kv"><span class="k">고객 수탁자산</span><span class="v">분리 원장</span></div>
+          <div class="kv"><span class="k">운영자산(나목 가용 풀 포함)</span><span class="v">분리 원장</span></div>
+          <div class="kv"><span class="k">스프레드 수익 / 중개 수수료</span><span class="v">계정 분리 집계</span></div>
+          <div class="btn ghost" style="margin-top:10px;color:#2563eb;border-color:#93c5fd;">CSV·증빙 내보내기</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <svg id="connSvg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;"></svg>
+
+  <div class="items" id="items">
+    <div class="itm" data-idx="0">
+      <div class="num">1</div>
+      <div>
+        <div class="itm-title">필터·정렬<span class="req">필수</span></div>
+        <div class="itm-desc">· 기간·ORG·담당자·자산·유형·상태·금액대 필터<br>· 시각·금액·상태·건별 정렬<br><span class="basis">사용자 요구 — 대사·회계 대응</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="1">
+      <div class="num">2</div>
+      <div>
+        <div class="itm-title">통합 로그 뷰 (조회 전용)<span class="req">필수</span></div>
+        <div class="itm-desc">· 사용자 행위·로그인·승인이력·교환·중개·입출금/이전 통합<br>· <strong>조회 전용</strong> — 원장을 직접 고치는 기능 없음 · 지갑주소·잔액·거래내역·고객ID는 표시, 실명·연락처 등 개인식별정보만 가림<br><span class="basis">근거: 대사·회계용 통합 로그 조회 화면 · 정보보호 관리체계(ISMS) 인증기준 2.6.3(꼭 필요한 정보만 표시)</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="2">
+      <div class="num">3</div>
+      <div>
+        <div class="itm-title">3면 대사<span class="req">필수</span></div>
+        <div class="itm-desc">· 내부 장부 ↔ 온체인 ↔ 커스터디 콜드 잔액 일치 확인<br>· 불일치 시 알림·홀드<br><span class="basis">근거 QA · KPI</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="3">
+      <div class="num">4</div>
+      <div>
+        <div class="itm-title">구분회계 집계·내보내기<span class="req">필수</span></div>
+        <div class="itm-desc">· 수탁/운영 분리·스프레드 수익·수수료 수익<br>· CSV·증빙 내보내기<br><span class="basis">근거 V11 · L6 §9</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-col" id="detailCol">
+    <div class="dtl" data-idx="0"></div>
+    <div class="dtl" data-idx="1">
+      <div class="detail-label">로그 소스</div>
+      <div class="dtl-body"><span class="box">· 교환·중개 화면 이벤트·승인·입출금·로그인 기록을 하나의 시간순 목록으로 통합<br>· 원본은 고쳐쓸 수 없는 저장소(WORM)에 보관, 이 화면은 <strong>조회 전용 — 원장을 직접 고치는 기능 없음</strong>(정정이 필요하면 별도로 기록이 남는 수기 절차)<br>· 지갑주소·잔액·거래내역·고객ID는 표시, 실명·연락처 등 개인식별정보만 가림 · 개인키·passphrase·시드는 로그에 절대 기록하지 않음</span></div>
+    </div>
+    <div class="dtl" data-idx="2">
+      <div class="detail-label">불일치 처리</div>
+      <div class="dtl-body"><span class="box">3면 중 하나라도 불일치<br>→ <span class="red">알림 + 관련 거래 홀드</span><br>→ 원인 규명 전 신규 집행 제한</span></div>
+    </div>
+    <div class="dtl" data-idx="3">
+      <div class="detail-label">회계 계정 분리</div>
+      <div class="dtl-body"><span class="box">· 나목 스프레드 수익 ≠ 마목 중개 수수료 수익(계정 분리)<br>· 고객 수탁자산과 운영자산 원장 분리<br>· EXC-04·BRK-05 발생분과 정합</span></div>
+    </div>
+  </div>
+</div>
+
+<section class="footer-note">
+  <div class="note-card">
+    <div class="note-title">비고</div>
+    <div class="note-body">
+      · 사용자 행위 + 거래 전반 로그를 <strong>필터·정렬</strong>로 조회해 <strong>대사(3면)·회계(구분)</strong>에 대응하는 관리자 화면. 사용자 요구사항(대사·회계 대응)의 핵심.<br>
+      · 3면 대사(내부 장부↔온체인↔커스터디)와 구분회계(수탁/운영·스프레드/수수료)가 EXC-04·BRK-05 발생분과 정합.<br>
+      · <strong>[원장 직접변경 화면 없음]</strong> 잔고·거래기록 원본은 이 화면에서 수정 불가(조회 전용). 값은 온체인 잔액 + 커스터디 실잔액과 3면 대사로 검증, 정정은 기록이 남는 수기 절차로만 처리 — 근거: 정보보호 관리체계(ISMS) 인증기준 2.9.1(변경관리).<br>
+      · <strong>[표시통제]</strong> 지갑주소·잔액·거래내역·고객ID는 운영 필요로 표시, 실명·연락처 등 개인식별정보만 마스킹. 검색은 정확 일치 또는 조건 2개 이상만 허용, 조회 행위는 열람 기록으로 보존(열람 기록 조회는 별도 화면 ADM-05) — 근거: 정보보호 관리체계(ISMS) 인증기준 2.6.3(꼭 필요한 정보만 표시).<br>
+      · <strong>[기록 금지]</strong> 개인키·passphrase(비밀문구)·시드(복구용 단어)는 로그에 절대 기록하지 않음 — 근거: 정보보호 관리체계(ISMS) 인증기준 2.9.4(로그·접속기록 관리).<br>
+      · <strong>[보존·열람감사 — 정책만 유지, 화면 미노출]</strong> 로그 원본은 WORM·해시무결성·NTP 기반 보존(거래 15년·AML 5년·개인정보 분리), 로그 열람 감사(누가·무엇 조회)는 별도 화면(ADM-05) — 근거: 정보보호 관리체계(ISMS) 인증기준 2.9.4.
+    </div>
+  </div>
+</section>
+
+<script src="screen.js"></script>
+</body>
+</html>

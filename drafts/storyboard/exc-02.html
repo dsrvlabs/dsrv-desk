@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화면기획 — 비율 확인·수락</title>
+<link rel="stylesheet" href="screen.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="crumb"><span>나목 교환</span><span class="s">›</span><span>교환하기</span><span class="s">›</span><span>비율 확인·수락</span></div>
+  <h1 class="title">비율 확인·수락</h1>
+  <span class="sid">EXC-02</span>
+  <span class="defense">⚠ 가격 고시 화면 · 가격형성 아님 소명</span>
+</header>
+
+<div class="main">
+  <div class="screen-panel">
+    <div style="position:relative;display:flex;">
+      <div class="labels" id="labels">
+        <div class="lbl"><span class="lbl-text">전역</span></div>
+        <div class="lbl"><span class="lbl-text">견적 요약</span></div>
+        <div class="lbl"><span class="lbl-text">비율·근거<br>고시</span></div>
+        <div class="lbl"><span class="lbl-text">수락 기한</span></div>
+        <div class="lbl"><span class="lbl-text">성격 고지</span></div>
+        <div class="lbl"><span class="lbl-text">액션·분기</span></div>
+      </div>
+      <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
+    </div>
+
+    <div class="frame" id="frame">
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="c-top" style="border-radius:8px;">
+          <span class="brand">DSRV Desk</span>
+          <span class="meta"><span class="c-badge">A자산운용</span></span>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="kv"><span class="k">요청 건</span><span class="v">EXC-20260831-0142</span></div>
+        <div class="kv"><span class="k">교환쌍 · 방향</span><span class="v">USDC → USDT</span></div>
+        <div class="kv"><span class="k">보내는 수량</span><span class="v">100,000 USDC</span></div>
+      </div>
+
+      <div class="zone" data-idx="0">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="0" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="0" style="top:-4px;right:-4px;">1</div>
+          <div class="zone-title">DSRV 제시 비율</div>
+          <div style="font-size:22px;font-weight:800;color:#0f172a;font-family:var(--mono);">0.9989 USDT/USDC</div>
+          <div style="font-size:13px;color:#334155;margin:6px 0 10px;">받는 수량(예상) <strong>≈ 99,890 USDT</strong></div>
+          <div class="kv"><span class="k">스프레드</span><span class="v">0.10%</span></div>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="1">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="1" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="1" style="top:-4px;right:-4px;">2</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;color:#334155;font-weight:600;">수락 기한 (만료 시 비율 무효 → 재요청)</span>
+            <span style="font-size:15px;font-weight:800;color:#dc2626;font-family:var(--mono);">02:00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="2">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="2" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="2" style="top:-4px;right:-4px;">3</div>
+          <div class="note-inline reg">이 비율은 DSRV가 형성한 시세가 아니라, 외부지표에 사전 고시된 고정 스프레드를 가산해 건별로 계산한 값입니다. 교환 상대방은 DSRV입니다.</div>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="3,4">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="3" style="position:relative;padding:6px;border-radius:8px;margin-bottom:10px;">
+          <div class="pin" data-idx="3" style="top:-4px;right:-4px;">4</div>
+          <div class="row">
+            <div class="btn primary" style="flex:1;">수락</div>
+            <div class="btn ghost" style="flex:.6;">거절</div>
+          </div>
+        </div>
+        <div class="item-area" data-highlight="4" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="4" style="top:-4px;right:-4px;">5</div>
+          <div class="note-inline">만료·스프레드 이탈·가용 풀 부족 시 이 건은 집행되지 않습니다 (재요청 필요).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <svg id="connSvg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;"></svg>
+
+  <div class="items" id="items">
+    <div class="nav-global">
+      <div class="nav-global-title">진입 · 전역 이동</div>
+      <div class="nav-row"><span class="nav-el">상단 GNB(전 화면 공통)</span><span class="nav-act">대시보드/교환하기/교환게시판 메뉴 · 로고 클릭 — 목업에는 상단 요약만 표시</span><span class="nav-to"><strong>DASH-01 / EXC-01 / BRK-01</strong> (규칙: DASH-01 항목 5) · 미수락 이탈 시 기한 경과로 자동 만료</span></div>
+      <div class="nav-note">· <strong>진입</strong>: 교환하기(EXC-01) [거래 요청] → 시스템 자동 산정 즉시 진입 (이 화면 진입 시점 기준으로 확정 비율 결정 · 대기·담당자 개입 없음)</div>
+    </div>
+    <div class="itm" data-idx="0">
+      <div class="num">1</div>
+      <div>
+        <div class="itm-title">제시 비율·스프레드 고시<span class="req">필수</span></div>
+        <div class="itm-desc">· DSRV 제시 비율 + 스프레드율 고시 — 외부지표 소스 항목은 화면 미노출<br>· 비율은 <strong>시스템 자동 산정</strong>(2026-09-02 확정): 요청 시점 외부지표에 ADM-03 고정 스프레드 가산 — 담당자 수동 입력·재량 없음<br>· <strong>확정 비율은 이 화면 진입(제시) 시점 기준으로 결정</strong> — 그 시점의 외부지표에 고정 스프레드를 가산해 산정, EXC-01의 '교환비율'은 참고 표시일 뿐<br>· 산정 방식은 성격 고지 문구(항목 3)로 설명 · 소스 관리는 ADM-03(내부)<br><span class="basis">근거 V2 · 용어4 · 09 line 51 ①</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="1">
+      <div class="num">2</div>
+      <div>
+        <div class="itm-title">수락 기한(견적 만료)<span class="req">필수</span></div>
+        <div class="itm-desc">· 유효시간 = <strong>수락까지의 기한</strong> — 기한 내 수락 시 비율 고정, 이후 DSRV 거래 진행·집행은 별도 진행(기한과 무관)<br>· 건별 요청에만 산정·제시(상시 자동호가·스트리밍 호가 아님)를 담보 · 만료 시 자동 무효 → 재요청<br><span class="basis">근거 V2 · 유효시간 수치 [확인필요]</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="2">
+      <div class="num">3</div>
+      <div>
+        <div class="itm-title">"자체 시세 아님 · DSRV 상대방" 고지<span class="req">필수</span></div>
+        <div class="itm-desc">· 딜러/거래소 오인 방어 문구 상시 노출<br><span class="basis">근거 V2 · [로펌게이트] 문구 확정</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="3">
+      <div class="num">4</div>
+      <div>
+        <div class="itm-title">수락 / 거절<span class="req">필수</span></div>
+        <div class="itm-desc">· 수락 = <strong>비율 고정 + DSRV 거래 진행</strong>(EXC-03) — 별도 고객사 승인 단계 없음<br>· 고정 후에도 집행 전 스프레드 이탈 시 집행 정지(항목 5) · 자동 확정 없음<br>· 재요청 버튼 없음 — 만료·거절 후 새 비율은 교환 요청(EXC-01)부터 다시<br><span class="basis">근거 F-1a</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">[수락] 버튼</span><span class="nav-act">수락 기한 내 클릭 — 비율 고정, 별도 고객사 승인 없음</span><span class="nav-to"><strong>승인 진행(EXC-03)</strong> — DSRV 거래 진행 시작</span></div>
+          <div class="nav-row"><span class="nav-el">[거절] 버튼</span><span class="nav-act">클릭 — 이 건 종결(재요청 버튼 없음)</span><span class="nav-to"><strong>교환하기(EXC-01)</strong>로 회귀 — 새 요청부터 다시</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="itm" data-idx="4">
+      <div class="num">5</div>
+      <div>
+        <div class="itm-title">이탈·만료·풀 부족 시 교환 불가<span class="req">필수</span></div>
+        <div class="itm-desc">· 스프레드 이탈 또는 가용 풀 부족 시 집행하지 않음<br><span class="basis">근거 09 line 51 ① · F-1a</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">[수락] — 기한 만료 후</span><span class="nav-act">클릭 시 "견적이 만료되었습니다" — 비율 자동 무효</span><span class="nav-to stay">화면 잔류 · 새 비율은 <strong>교환하기(EXC-01)</strong>에서 재요청</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<section class="footer-note" style="padding-bottom:0;">
+  <div class="note-card">
+    <div class="note-title">상세내용</div>
+    <div class="detail-grid" id="detailCol">
+      <div class="dtl" data-idx="0">
+        <div class="detail-label"><span class="dtl-num">1</span>외부지표 소스 — 내부 관리 (화면 미노출)</div>
+      <div class="dtl-body">
+        <span class="box">· 소스: <strong>업비트·빗썸·바이낸스</strong> 시세 — 조합 방식(중앙값·평균·우선순위) [확인필요]<br>· USDC↔USDT: 디페그/1:1 기준(동일통화) — 가격 거의 동일, 지표 1 근접<br>· ETH↔USDC · ETH↔USDT: 거래소 ETH 시세 기준 — 변동성 있음, 견적 유효시간 내 이탈 임계 적용<br>· JPYSC 미취급 — 환율지표 페어 없음<br>· 소스·스프레드율·갱신주기·이탈 임계는 <strong>ADM-03</strong> 단일 출처에서 관리</span>
+        <span style="display:block;margin-top:6px;" class="red">가격형성(시장가) 아님 — 외부지표에 스프레드만 가산</span>
+      </div>
+      </div>
+      <div class="dtl" data-idx="1">
+        <div class="detail-label"><span class="dtl-num">2</span>만료 처리</div>
+      <div class="dtl-body"><span class="box">· 카운트다운 0 → 비율 자동 무효<br>· 만료 후 수락 시도: <span class="red">"견적이 만료되었습니다"</span> → 새 비율은 EXC-01에서 재요청<br>· 수락 기한은 수락 행위에만 적용 — 이후 DSRV 거래 진행(약 2영업일)은 기한과 무관(진행 지연 리스크 분리)</span></div>
+      </div>
+      <div class="dtl" data-idx="2">
+        <div class="detail-label"><span class="dtl-num">3</span>문구 통제 [로펌게이트]</div>
+      <div class="dtl-body"><span class="box">'시세 제시 = 가격형성'으로 오인되지 않도록 문구 확정 필요. G0 사전면담 소명자료와 정합(09 §8).</span></div>
+      </div>
+      <div class="dtl" data-idx="4">
+        <div class="detail-label"><span class="dtl-num">5</span>교환 불가 3분기</div>
+      <div class="dtl-body">
+        <span class="box">① <strong>만료</strong>: 재요청<br>② <strong>스프레드 이탈</strong>: 지표 급변으로 임계 초과 → 집행 정지<br>③ <strong>풀 부족</strong>: 확정 시점 가용 풀 미달 → 집행 불가</span>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="footer-note">
+  <div class="note-card">
+    <div class="note-title">비고</div>
+    <div class="note-body">
+      · <strong>[방어 핵심]</strong> "DSRV가 가격을 만든다"가 아니라 "외부지표 + 사전 고시된 고정 스프레드로 시스템이 <strong>건별 비율을 자동 계산해 고시</strong>한다(사람의 재량 없음 = 가격형성 아님)"를 증빙하는 화면. 스프레드·수락 기한·성격 고지를 화면에 노출.<br>
+      · 비율·스프레드·수락 기한·이탈 임계값의 <strong>단일 출처는 ADM-03</strong> — 이 화면은 그 값을 표출만.<br>
+      · <span style="color:#991b1b;">[확인필요]</span> 수락 기한·스프레드 갱신주기·이탈 임계 수치 미확정(ADM-03의 120s 등은 예시값, 27 서비스flow).<br>
+      · 다음 화면: 승인 진행 (EXC-03)
+    </div>
+  </div>
+</section>
+
+<script src="screen.js"></script>
+</body>
+</html>

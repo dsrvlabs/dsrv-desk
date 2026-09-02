@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSRV 교환·중개 화면기획서 (콘솔)</title>
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Pretendard', system-ui, -apple-system, sans-serif; background: #fafafa; color: #222; }
+
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0; height: 48px;
+    background: #0f172a; color: #fff; display: flex; align-items: center;
+    justify-content: space-between; padding: 0 24px; z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .topbar-title { font-size: 14px; font-weight: 700; letter-spacing:.01em; }
+  .topbar-title .sub { font-size:11px; font-weight:500; color:#94a3b8; margin-left:10px; }
+  .topbar-right { display:flex; align-items:center; gap:16px; }
+  .topbar-meta { font-size: 11px; color:#94a3b8; }
+  .topbar-btn { padding:6px 14px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.25); border-radius:6px; color:#fff; cursor:pointer; font-size:12px; font-weight:600; font-family:inherit; }
+  .topbar-btn:hover { background:rgba(255,255,255,0.2); }
+
+  /* 흐름도 오버레이 */
+  .overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:2000; padding:56px 28px 28px; }
+  .overlay.active { display:flex; flex-direction:column; }
+  .overlay-header { display:flex; justify-content:space-between; align-items:center; padding:9px 16px; background:#0f172a; border-radius:8px 8px 0 0; color:#fff; }
+  .overlay-header-title { font-size:13px; font-weight:700; }
+  .overlay-close { background:none; border:none; color:#fff; font-size:20px; cursor:pointer; padding:4px 8px; line-height:1; }
+  .overlay-close:hover { opacity:0.7; }
+  .overlay iframe { flex:1; width:100%; border:none; background:#fafafa; border-radius:0 0 8px 8px; }
+
+  .sidebar {
+    position: fixed; top: 48px; left: 0; bottom: 0; width: 240px;
+    background: #fff; border-right: 1px solid #e2e8f0; overflow-y: auto;
+    z-index: 900; padding: 16px 0 32px;
+  }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 2px; }
+  .sidebar-group-label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: #94a3b8; padding: 14px 16px 4px;
+  }
+  .sidebar-item {
+    display: flex; align-items: baseline; gap: 8px; padding: 6px 16px;
+    cursor: pointer; border-left: 3px solid transparent; transition: all 0.12s; text-decoration: none;
+  }
+  .sidebar-item:hover { background: #f1f5f9; border-left-color: #94a3b8; }
+  .sidebar-item.active { background: #eff6ff; border-left-color: #3b82f6; }
+  .sidebar-item .item-id { font-size: 9px; font-weight: 700; color: #94a3b8; font-family: monospace; flex-shrink: 0; padding-top: 1px; }
+  .sidebar-item.active .item-id { color: #3b82f6; }
+  .sidebar-item .item-name { font-size: 12px; font-weight: 500; color: #475569; line-height: 1.4; }
+  .sidebar-item.active .item-name { color: #1d4ed8; font-weight: 600; }
+
+  main { padding-top: 48px; margin-left: 240px; }
+  .page-section { border-bottom: 2px solid #e0e0e0; position: relative; }
+  .page-frame { width: 100%; border: none; display: block; overflow: hidden; }
+  .page-section.blurred { pointer-events: none; user-select: none; }
+  .page-section.blurred .page-frame { filter: blur(6px); opacity: 0.5; }
+  .blur-overlay { display: none; position: absolute; inset: 0; z-index: 10; align-items: center; justify-content: center; background: rgba(248, 250, 252, 0.3); }
+  .page-section.blurred .blur-overlay { display: flex; }
+  .blur-label { background: rgba(15,23,42,0.7); color: #fff; font-size: 12px; font-weight: 600; padding: 6px 16px; border-radius: 20px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="topbar-title">DSRV 교환·중개 화면기획서<span class="sub">나목 교환 · 마목 중개 · 데스크톱 콘솔</span></span>
+  <span class="topbar-right">
+    <button class="topbar-btn" onclick="toggleGloss()">표기 규칙 · 공통 UI 규격</button>
+    <button class="topbar-btn" onclick="toggleIA()">IA (정보구조)</button>
+    <button class="topbar-btn" onclick="toggleStates()">상태 전이</button>
+    <button class="topbar-btn" onclick="toggleOverlay()">화면 흐름도</button>
+    <span class="topbar-meta">v0.7 · 2026-09-02 · 근거: 09 정본 / 32 인벤토리 / ISMS 대응정리</span>
+  </span>
+</div>
+
+<nav class="sidebar" id="sidebar"></nav>
+
+<div class="overlay" id="overlay">
+  <div class="overlay-header">
+    <span class="overlay-header-title">화면 흐름도 — DSRV 교환·중개</span>
+    <button class="overlay-close" onclick="toggleOverlay()">&times;</button>
+  </div>
+  <iframe src="process.html"></iframe>
+</div>
+
+<div class="overlay" id="overlayIA">
+  <div class="overlay-header">
+    <span class="overlay-header-title">IA (정보구조) — DSRV 교환·중개</span>
+    <button class="overlay-close" onclick="toggleIA()">&times;</button>
+  </div>
+  <iframe src="ia.html"></iframe>
+</div>
+
+<div class="overlay" id="overlayGloss">
+  <div class="overlay-header">
+    <span class="overlay-header-title">표기 규칙 · 공통 UI 규격 — DSRV 교환·중개</span>
+    <button class="overlay-close" onclick="toggleGloss()">&times;</button>
+  </div>
+  <iframe src="notation.html"></iframe>
+</div>
+
+<div class="overlay" id="overlayStates">
+  <div class="overlay-header">
+    <span class="overlay-header-title">상태 전이 (알람·워닝 처리함) — DSRV 교환·중개</span>
+    <button class="overlay-close" onclick="toggleStates()">&times;</button>
+  </div>
+  <iframe src="states.html"></iframe>
+</div>
+
+<main id="main"></main>
+
+<script>
+const PAGES = [
+  { group: '인증·온보딩', id: 'ONB-00', name: '초대 이메일', file: 'onb-00.html', blur: false },
+  { group: null, id: 'ONB-01', name: '계정 활성화', file: 'onb-01.html', blur: false },
+  { group: null, id: 'AUTH-01', name: '로그인', file: 'auth-01.html', blur: false },
+  { group: '대시보드', id: 'DASH-01', name: '대시보드', file: 'dash-01.html', blur: false },
+  { group: null, id: 'DASH-02', name: '비밀번호 수정', file: 'dash-02.html', blur: false },
+  { group: null, id: 'DASH-03', name: '2차 인증 재설정', file: 'dash-03.html', blur: false },
+  { group: '나목 교환 (DSRV 자산과 교환)', id: 'EXC-01', name: '교환하기', file: 'exc-01.html', blur: false },
+  { group: null, id: 'EXC-02', name: '비율 확인·수락', file: 'exc-02.html', blur: false },
+  { group: null, id: 'EXC-03', name: '승인 진행', file: 'exc-03.html', blur: false },
+  { group: null, id: 'EXC-04', name: '내역·완료', file: 'exc-04.html', blur: false },
+  { group: '마목 중개 — 게시(RFQ 등록)', id: 'BRK-01', name: '교환 게시판', file: 'brk-01.html', blur: false },
+  { group: null, id: 'BRK-02', name: '거래의향 등록', file: 'brk-02.html', blur: false },
+  { group: null, id: 'BRK-06', name: '내 게시 상세·회수', file: 'brk-06.html', blur: false },
+  { group: '마목 중개 — 신청·수락(기존 RFQ 거래)', id: 'BRK-03', name: '신청하기', file: 'brk-03.html', blur: false },
+  { group: null, id: 'BRK-07', name: '내 신청 상세', file: 'brk-07.html', blur: false },
+  { group: null, id: 'BRK-04', name: '받은 신청·수락', file: 'brk-04.html', blur: false },
+  { group: null, id: 'BRK-05', name: '이전·완료', file: 'brk-05.html', blur: false },
+  { group: '관리자 (DSRV Admin)', id: 'ADM-02', name: '어드민 홈', file: 'adm-02.html', blur: false },
+  { group: null, id: 'ADM-03', name: '설정', file: 'adm-03.html', blur: false },
+];
+
+const mainEl = document.getElementById('main');
+const sidebarEl = document.getElementById('sidebar');
+const winToFrame = new WeakMap();
+const sidebarItems = {};
+
+PAGES.forEach(page => {
+  if (page.group !== null) {
+    const label = document.createElement('div');
+    label.className = 'sidebar-group-label';
+    label.textContent = page.group;
+    sidebarEl.appendChild(label);
+  }
+  const item = document.createElement('a');
+  item.className = 'sidebar-item';
+  item.href = '#' + page.id;
+  item.onclick = (e) => { e.preventDefault(); document.getElementById(page.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+  const idEl = document.createElement('span'); idEl.className = 'item-id'; idEl.textContent = page.id;
+  const nameEl = document.createElement('span'); nameEl.className = 'item-name'; nameEl.textContent = page.name;
+  item.appendChild(idEl); item.appendChild(nameEl); sidebarEl.appendChild(item);
+  sidebarItems[page.id] = item;
+});
+
+PAGES.forEach(page => {
+  const section = document.createElement('section');
+  section.className = 'page-section' + (page.blur ? ' blurred' : '');
+  section.id = page.id;
+  const frame = document.createElement('iframe');
+  frame.className = 'page-frame';
+  frame.src = page.file; frame.loading = 'lazy'; frame.setAttribute('scrolling', 'no'); frame.style.height = '120px';
+  frame.addEventListener('load', () => { if (frame.contentWindow) winToFrame.set(frame.contentWindow, frame); });
+  section.appendChild(frame);
+  const blurOverlay = document.createElement('div');
+  blurOverlay.className = 'blur-overlay';
+  const blurLabel = document.createElement('span'); blurLabel.className = 'blur-label'; blurLabel.textContent = '작성 예정 화면입니다';
+  blurOverlay.appendChild(blurLabel); section.appendChild(blurOverlay);
+  mainEl.appendChild(section);
+});
+
+window.addEventListener('message', (e) => {
+  if (!e.data) return;
+  if (e.data.type === 'iframeHeight' && e.data.h > 50) {
+    const frame = winToFrame.get(e.source);
+    if (frame) frame.style.height = e.data.h + 'px';
+  }
+  // 흐름도에서 화면 박스 클릭 → 해당 섹션으로 이동
+  if (e.data.type === 'navigate' && e.data.pageId) {
+    closeAllOverlays();
+    const target = document.getElementById(e.data.pageId);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+});
+
+let currentPageId = null;
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const item = sidebarItems[entry.target.id];
+    if (!item) return;
+    if (entry.isIntersecting) { currentPageId = entry.target.id; item.classList.add('active'); item.scrollIntoView({ block: 'nearest' }); }
+    else { item.classList.remove('active'); }
+  });
+}, { rootMargin: '-48px 0px -60% 0px', threshold: 0 });
+document.querySelectorAll('.page-section').forEach(s => observer.observe(s));
+
+const OVERLAY_IDS = ['overlay', 'overlayIA', 'overlayGloss', 'overlayStates'];
+function closeAllOverlays(exceptId) {
+  OVERLAY_IDS.filter(id => id !== exceptId).forEach(id => document.getElementById(id).classList.remove('active'));
+}
+
+function toggleIA() {
+  closeAllOverlays('overlayIA');
+  document.getElementById('overlayIA').classList.toggle('active');
+}
+
+function toggleGloss() {
+  closeAllOverlays('overlayGloss');
+  document.getElementById('overlayGloss').classList.toggle('active');
+}
+
+function toggleStates() {
+  closeAllOverlays('overlayStates');
+  document.getElementById('overlayStates').classList.toggle('active');
+}
+
+function toggleOverlay() {
+  const overlay = document.getElementById('overlay');
+  closeAllOverlays('overlay');
+  const isOpening = !overlay.classList.contains('active');
+  overlay.classList.toggle('active');
+  if (isOpening && currentPageId) {
+    const diagramFrame = overlay.querySelector('iframe');
+    const sendHighlight = () => { try { diagramFrame.contentWindow.postMessage({ type: 'highlightPage', pid: currentPageId }, '*'); } catch (e) {} };
+    diagramFrame.addEventListener('load', sendHighlight, { once: true });
+    setTimeout(sendHighlight, 120);
+  }
+}
+</script>
+</body>
+</html>

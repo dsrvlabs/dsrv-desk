@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화면기획 — 이전·완료</title>
+<link rel="stylesheet" href="screen.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="crumb"><span>마목 중개</span><span class="s">›</span><span>교환게시판</span><span class="s">›</span><span>이전·완료</span></div>
+  <h1 class="title">이전·완료</h1>
+  <span class="sid">BRK-05</span>
+  <span class="defense">정산 연계 · 완결성 담보</span>
+</header>
+
+<div class="main">
+  <div class="screen-panel">
+    <div style="position:relative;display:flex;">
+      <div class="labels" id="labels">
+        <div class="lbl"><span class="lbl-text">전역</span></div>
+        <div class="lbl"><span class="lbl-text">이전</span></div>
+        <div class="lbl"><span class="lbl-text">수수료 정산</span></div>
+        <div class="lbl"><span class="lbl-text">확인</span></div>
+      </div>
+      <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
+    </div>
+
+    <div class="frame" id="frame">
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="c-top" style="border-radius:8px;">
+          <span class="brand">DSRV Desk</span>
+          <span class="meta"><span class="c-badge">A자산운용 (신청자 · 양측 공용 화면)</span></span>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="0">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="0" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="0" style="top:-4px;right:-4px;">1</div>
+          <div class="zone-title">커스터디 콜드 수동 이전</div>
+          <div class="steps" style="flex-wrap:wrap;gap:8px;margin-bottom:8px;">
+            <span class="step done"><span class="dot">✓</span>양건 확인</span><span class="arrow">→</span>
+            <span class="step now"><span class="dot">2</span>B→A 이전</span><span class="arrow">→</span>
+            <span class="step"><span class="dot">3</span>A→B 이전</span><span class="arrow">→</span>
+            <span class="step"><span class="dot">4</span>완료</span>
+          </div>
+          <div class="kv"><span class="k">이전 완결성</span><span class="v" style="color:#16a34a;">양건 확인 완료</span></div>
+          <div class="kv"><span class="k">트래블룰</span><span class="v" style="color:#16a34a;">양측 송·수신인 정보 확인 완료</span></div>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="1">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="1" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="1" style="top:-4px;right:-4px;">2</div>
+          <div class="zone-title">수수료 정산</div>
+          <div class="kv"><span class="k">요청번호</span><span class="v">BRK-20260830-0027</span></div>
+          <div class="kv"><span class="k">교환쌍 · 방향</span><span class="v">USDT → USDC</span></div>
+          <div class="kv"><span class="k">보내는 수량</span><span class="v">500,000 USDT</span></div>
+          <div class="kv"><span class="k">받는 수량</span><span class="v">499,000 USDC</span></div>
+          <div class="kv"><span class="k">비율</span><span class="v">0.9980 USDC/USDT</span></div>
+          <div class="kv"><span class="k">내 중개 수수료 (거래액 1% 고정)</span><span class="v">4,990 USDC (보내는 499,000 USDC 기준)</span></div>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="2">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="2" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="2" style="top:-8px;right:-4px;">3</div>
+          <div class="btn primary">확인</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <svg id="connSvg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;"></svg>
+
+  <div class="items" id="items">
+    <div class="nav-global">
+      <div class="nav-global-title">진입 · 전역 이동</div>
+      <div class="nav-row"><span class="nav-el">상단 GNB(전 화면 공통)</span><span class="nav-act">대시보드/교환하기/교환게시판 메뉴 · 로고 클릭 — 목업에는 상단 요약만 표시</span><span class="nav-to"><strong>DASH-01 / EXC-01 / BRK-01</strong> (규칙: DASH-01 항목 5)</span></div>
+      <div class="nav-note">· <strong>진입</strong>: (게시자) 받은 신청·수락(BRK-04) 수락(확정) 직후 / (신청자) 내 신청 상세(BRK-07) 확정 링크 / 양측: 대시보드(DASH-01) 거래 목록의 마목 확정·완료 행 클릭 / 완료 이메일 ③ 수신 후 콘솔 직접 접속 · <strong>양측 공용 화면</strong> — 수수료 항목만 자기 측 금액으로 다르게 표시<br>
+      · 이전 단계(양건 확인 → B→A → A→B → 완료)는 조회 전용 — 화면 내 집행 액션 없음(콜드 이전은 커스터디 운영절차 · ADM-02 처리함 승인)</div>
+    </div>
+    <div class="itm" data-idx="0">
+      <div class="num">1</div>
+      <div>
+        <div class="itm-title">커스터디 콜드 수동 이전<span class="req">필수</span></div>
+        <div class="itm-desc">· 양쪽 조건을 함께 확인한 뒤 순서대로 이전(정산과 연계)<br>· 100% 콜드지갑·수동 · <strong>콜드 출고는 2인 서명(멀티시그, 키 2개·서명자 2인)</strong> · 정산 배치 = 1영업일 3회 콜드 이체 운영, 확정 건은 다음 배치에 편입<br>· 완결성(한쪽만 이전 방지)·트래블룰(양측 송·수신인 정보 확인·교환)은 별도 섹션 없이 <strong>이전 상태에 한 줄씩 포함 표시</strong><br><span class="basis">근거: 커스터디 콜드 출고 절차 · 정보보호 관리체계(ISMS) 인증기준 2.7.2(암호키·서명 관리) · L2 §10의10(트래블룰) · KPI·QA(완결성)</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="1">
+      <div class="num">2</div>
+      <div>
+        <div class="itm-title">수수료 정산<span class="req">필수</span></div>
+        <div class="itm-desc">· 수수료 = 거래액의 1% 고정, 양측 각자 부담(2026-09-02 확정) — 기준은 각자 <strong>보내는 자산 수량</strong>(신청자 A 499,000 USDC → 4,990 USDC · 게시자 B 500,000 USDT → 5,000 USDT), 화면에는 자기 측 금액만<br>· 차감 방식 <span style="color:#b45309;">[확인필요: 보내는 수량에서 공제 vs 별도 정산]</span> · 수익 구분회계<br>· 거래자 대상 거래보고서 발급 없음 — 완료 건 확인은 이 화면·대시보드 거래 내역으로<br>· 거래 내역은 '교환거래 요청 내역' 공통 폼과 동일 필드·순서 + 수수료 항목<br><span class="basis">근거 L6 §9 · V11 · 공통 포맷</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="2">
+      <div class="num">3</div>
+      <div>
+        <div class="itm-title">확인 버튼 — 프로세스 종료 이동<span class="req">필수</span></div>
+        <div class="itm-desc">· 마목 flow 종료 화면 — <strong>'확인' 클릭 시 홈(DASH-01)으로 이동</strong>(EXC-03과 동일 패턴)<br>· 뒤로가기 미지원(전역 규칙 — DASH-01)<br>· 완료 건 재확인은 대시보드 거래 현황·거래 내역에서<br>· 거래 완료(양측 이전 완결) 시 양측 등록 이메일로 완료 알림 발송 — 내용은 상세 참조<br><span class="basis">근거: 종료 화면 이탈 동선</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">[확인] 버튼</span><span class="nav-act">클릭 — 마목 flow 종료 동선(EXC-03·04와 동일 패턴)</span><span class="nav-to"><strong>대시보드(DASH-01)</strong> 이동</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<section class="footer-note" style="padding-bottom:0;">
+  <div class="note-card">
+    <div class="note-title">상세내용</div>
+    <div class="detail-grid" id="detailCol">
+      <div class="dtl" data-idx="0">
+        <div class="detail-label"><span class="dtl-num">1</span>정산 연계 운영절차 (4요소③) · 완결성 실패 처리</div>
+      <div class="dtl-body"><span class="box">· 게시판이 커스터디 이전과 연계 = 단순 게시판과의 결정적 차이<br>· 양건 조건 동시 확인 → 순차 콜드 출고 · 각 단계 감사로그·해시 기록<br>· 일방 이전 후 상대방 이전 실패 → <span class="red">거래 홀드</span> + 역이전(원상 복구) → 완결성 KPI·이상징후로 ADM-02 워닝</span></div>
+      </div>
+      <div class="dtl" data-idx="1">
+        <div class="detail-label"><span class="dtl-num">2</span>구분회계 처리</div>
+      <div class="dtl-body"><span class="box">· 중개 수수료 수익 = 중개수익 계정(나목 스프레드 수익과 분리 — 내부 구분회계, 고객 화면 미노출 2026-09-02 확정)<br>· 구분회계 CSV·3면 대사 CSV(ADM-02)에 반영</span></div>
+      </div>
+      <div class="dtl" data-idx="2">
+        <div class="detail-label"><span class="dtl-num">3</span>이메일 알림 ③ 거래 완료 (수신: 양측)</div>
+      <div class="dtl-body"><span class="box">· 발송 시점: 양측 콜드 이전 완결(완결성 확인) 시<br>· 제목: [DSRV] 교환 거래 완료 — BRK-20260830-0027<br>· 본문: "교환 거래의 이전(정산)이 완료되었습니다." + 완료 일시 · 거래 내역(공통 포맷: 요청번호·교환쌍·방향·수량·비율) · 중개 수수료 정산액(자기 측만 표기) + "상세 내역은 DSRV Desk > 대시보드 > 거래 내역에서 확인해 주세요."<br>· 공통 원칙(발신전용·링크 미포함·STR 미포함)은 BRK-03 상세 참조</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="footer-note">
+  <div class="note-card">
+    <div class="note-title">비고</div>
+    <div class="note-body">
+      · 마목 중개 flow 종료 화면. <strong>[방어 핵심]</strong> ③ 정산 연계(커스터디 콜드 이전) + ④ 수수료(거래액 1% 고정·양측 각자)를 실제로 집행해 "단순 게시판이 아닌 중개"임을 완결. 완결성 지표로 한쪽만 이전되는 리스크를 차단.<br>
+      · <strong>[화이트리스트 미적용]</strong> 교환·중개는 내부 커스터디 지갑 사이의 이동이라 외부 주소를 다루지 않으므로 화이트리스트를 적용하지 않음.<br>
+      · <span style="color:#991b1b;">[확인필요]</span> 정산 배치(1영업일 3회) 시각·마감 기준.<br>
+      · 마목 진행 순서: 게시판(BRK-01) → 등록(BRK-02) → 내 게시 상세(BRK-06, 회수 가능) / 신청(BRK-03, 유효 영업일 2일) → 내 신청 상세(BRK-07) → 수락(BRK-04, 즉시 확정) → <strong>완료(BRK-05, 양측 공용)</strong>
+    </div>
+  </div>
+</section>
+
+<script src="screen.js"></script>
+</body>
+</html>

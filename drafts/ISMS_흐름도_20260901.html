@@ -1,0 +1,488 @@
+<title>교환·중개 ISMS 흐름도</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F4F6F7; --surface:#FFFFFF; --ink:#1E2A32; --muted:#5B6B76;
+  --line:#D7DEE3; --soft:#EBEFF2;
+  --exc:#3A5FA8; --exc-soft:#E8EDF7;
+  --brk:#9A5A1C; --brk-soft:#F5EDE2;
+  --pii:#1F6E63; --pii-soft:#E4F1EE;
+  --danger:#B23B2E;
+  --chip:#EDF1F4;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#14191D; --surface:#1C2328; --ink:#E4EAEE; --muted:#96A5AF;
+    --line:#333E46; --soft:#232C33;
+    --exc:#84A7E3; --exc-soft:#22304A;
+    --brk:#D79A55; --brk-soft:#3A2E1E;
+    --pii:#74C3B4; --pii-soft:#1E3833;
+    --danger:#E08074;
+    --chip:#2A343B;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#14191D; --surface:#1C2328; --ink:#E4EAEE; --muted:#96A5AF;
+  --line:#333E46; --soft:#232C33;
+  --exc:#84A7E3; --exc-soft:#22304A;
+  --brk:#D79A55; --brk-soft:#3A2E1E;
+  --pii:#74C3B4; --pii-soft:#1E3833;
+  --danger:#E08074;
+  --chip:#2A343B;
+}
+*{box-sizing:border-box;}
+body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans KR',system-ui,-apple-system,'Malgun Gothic',sans-serif;
+  font-size:14px;line-height:1.65;margin:0;padding:0 20px 80px;}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace;}
+.wrap{max-width:1120px;margin:0 auto;}
+header.doc{padding:44px 0 8px;border-bottom:2px solid var(--ink);margin-bottom:8px;}
+.doc-kicker{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-bottom:10px;}
+h1{font-size:30px;font-weight:700;letter-spacing:-.01em;margin:0 0 6px;text-wrap:balance;}
+.doc-sub{color:var(--muted);font-size:13px;margin:0;}
+.badges{display:flex;flex-wrap:wrap;gap:8px;padding:16px 0 22px;}
+.badge{background:var(--chip);border:1px solid var(--line);border-radius:4px;padding:3px 10px;font-size:12px;font-weight:500;}
+.badge b{font-weight:700;}
+section{margin:34px 0;}
+.sec-head{border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:16px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+h2{font-size:19px;font-weight:700;margin:0;letter-spacing:-.005em;}
+h3{font-size:14.5px;font-weight:700;margin:20px 0 8px;}
+p{margin:8px 0;max-width:72ch;}
+.figscroll{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px 14px 10px;}
+figure{margin:14px 0;}
+figcaption{font-size:12px;color:var(--muted);margin-top:8px;padding-left:2px;}
+svg text{font-family:'IBM Plex Sans KR',sans-serif;}
+.tag-exc,.tag-brk,.tag-pii{display:inline-block;font-size:11px;font-weight:700;padding:1px 8px;border-radius:3px;}
+.tag-exc{color:var(--exc);border:1px solid var(--exc);}
+.tag-brk{color:var(--brk);border:1px solid var(--brk);}
+.tag-pii{color:var(--pii);border:1px solid var(--pii);}
+.steps{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;row-gap:10px;margin:10px 0;}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 12px;font-size:12.5px;max-width:220px;}
+.step .st{font-weight:700;display:block;}
+.step .sd{color:var(--muted);font-size:11.5px;line-height:1.5;display:block;}
+.sarr{align-self:center;padding:0 7px;color:var(--muted);font-size:13px;flex-shrink:0;}
+table{border-collapse:collapse;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden;font-size:13px;}
+.tblwrap{overflow-x:auto;border-radius:8px;}
+th{text-align:left;font-size:11.5px;letter-spacing:.05em;color:var(--muted);font-weight:700;
+  padding:9px 12px;border-bottom:1.5px solid var(--line);background:var(--soft);white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid var(--soft);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+.need{color:var(--danger);font-weight:700;font-size:12px;}
+.basis{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);}
+.note{background:var(--soft);border-left:3px solid var(--muted);border-radius:0 6px 6px 0;padding:10px 14px;font-size:12.5px;color:var(--muted);max-width:none;}
+.chk{padding-left:20px;margin:6px 0;}
+.chk li{margin:4px 0;font-size:13px;}
+.src{font-size:12px;color:var(--muted);border-top:1px solid var(--line);margin-top:44px;padding-top:14px;}
+.src .mono{font-size:11px;}
+@media (max-width:760px){ h1{font-size:24px;} }
+@media (prefers-reduced-motion: reduce){ *{scroll-behavior:auto!important;} }
+</style>
+
+<div class="wrap">
+
+<header class="doc">
+  <div class="doc-kicker">DSRV · ISMS 인증신청서 첨부 초안</div>
+  <h1>서비스 흐름도 · 개인정보 흐름도</h1>
+  <p class="doc-sub">교환(나목)·교환 중개(마목) — 시스템 구성 · 서비스 흐름 · 개인정보 생애주기(주요 식별정보 포함)</p>
+</header>
+
+<div class="badges">
+  <span class="badge">신규 범위 <b>게시판/RFQ 시스템</b> (Portal과 별도 독립)</span>
+  <span class="badge">기존 <b>커스터디 인증범위 재사용</b> (ISMS-KISA-2026-044)</span>
+  <span class="badge">지갑 <b>100% 콜드 · 건별 수동</b> (핫월렛 없음)</span>
+  <span class="badge">정보주체 <b>법인 담당자·실제소유자(RBO)</b> — 개인 고객 없음</span>
+  <span class="badge">보존 <b>거래 15년 · AML 5년</b> · 개인정보 분리 저장</span>
+  <span class="badge"><b>원화 미취급</b> · 국내 법인 전용 · 초대 기반</span>
+</div>
+
+<!-- ============ 1. 서비스 흐름도 ============ -->
+<section>
+  <div class="sec-head"><h2>1. 서비스 흐름도</h2><span class="tag-exc">교환 · 나목</span><span class="tag-brk">중개 · 마목</span></div>
+  <p>신규 인증범위는 <b>게시판/RFQ 웹 시스템</b>(교환 RFQ · 중개 게시판 · 정책승인 · 통합로그)에 한정하고,
+  자산 이동은 전 건 <b>기존 커스터디 인증범위(100% 콜드·수동)</b>를 거친다. 자동 체결·핫월렛·자동 정산엔진은 구현하지 않는다.</p>
+
+  <figure>
+    <div class="figscroll">
+      <svg viewBox="0 0 1140 620" role="img" aria-label="시스템 구성 및 서비스 흐름도: 고객사와 DSRV 운영이 신규 인증범위인 게시판/RFQ 시스템에 접속하고, 승인 완료 건만 기존 커스터디 인증범위의 수동집행 티켓과 콜드월렛으로 넘어가 이더리움 체인에서 전송된다. 외부 연동은 가격지표, KYT·블랙리스트, 트래블룰." style="min-width:1040px;width:100%;height:auto;display:block;color:var(--ink);">
+        <defs>
+          <marker id="sa" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="currentColor"/></marker>
+        </defs>
+
+        <!-- 이용자 / 운영 -->
+        <g text-anchor="middle">
+          <g transform="translate(60,30)">
+            <rect width="280" height="100" rx="8" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <text x="140" y="24" font-size="9.5" fill="var(--muted)" letter-spacing="1">이용자</text>
+            <text x="140" y="48" font-size="13" font-weight="700" fill="currentColor">고객사 담당자 (웹 콘솔·HTTPS)</text>
+            <text x="140" y="68" font-size="10.5" fill="var(--muted)">국내 법인 · 초대 기반 · 개인별 계정</text>
+            <text x="140" y="84" font-size="10.5" fill="var(--muted)">MFA · 계정당 1세션</text>
+          </g>
+          <g transform="translate(500,30)">
+            <rect width="340" height="100" rx="8" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <text x="170" y="24" font-size="9.5" fill="var(--muted)" letter-spacing="1">DSRV 운영 (역할 분리)</text>
+            <text x="170" y="48" font-size="13" font-weight="700" fill="currentColor">관리자 콘솔</text>
+            <text x="170" y="68" font-size="10.5" fill="var(--muted)">교환운영 · 중개운영 · 승인담당 · 컴플라이언스</text>
+            <text x="170" y="84" font-size="10.5" fill="var(--muted)">시장감시(독립) · 특권계정(PAM) 통제</text>
+          </g>
+        </g>
+        <g stroke="currentColor" stroke-width="1.4" fill="none">
+          <line x1="200" y1="130" x2="200" y2="176" marker-end="url(#sa)"/>
+          <line x1="670" y1="130" x2="670" y2="176" marker-end="url(#sa)"/>
+        </g>
+        <g font-size="9.5" fill="var(--muted)">
+          <text x="208" y="158">요청 · 게시 · 승인확인</text>
+          <text x="678" y="158">운영 · 단일 승인</text>
+        </g>
+
+        <!-- 신규 인증범위 -->
+        <rect x="40" y="180" width="800" height="210" rx="8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="7 5"/>
+        <text x="56" y="206" font-size="11.5" font-weight="700" fill="currentColor">신규 인증범위 편입 — 게시판/RFQ 시스템 (DSRV Portal과 별도 독립)</text>
+        <g text-anchor="middle">
+          <g transform="translate(60,230)">
+            <rect width="180" height="110" rx="6" fill="var(--exc-soft)" stroke="var(--exc)" stroke-width="1.5"/>
+            <text x="90" y="24" font-size="12" font-weight="700" fill="currentColor">교환 RFQ (나목)</text>
+            <text x="90" y="44" font-size="10" fill="var(--muted)">「교환하기」</text>
+            <text x="90" y="62" font-size="10" fill="var(--muted)">외부지표 + 고정 스프레드</text>
+            <text x="90" y="78" font-size="10" fill="var(--muted)">단건 RFQ · 오더북 없음</text>
+            <text x="90" y="94" font-size="10" fill="var(--muted)">자동 체결 없음</text>
+          </g>
+          <g transform="translate(254,230)">
+            <rect width="180" height="110" rx="6" fill="var(--brk-soft)" stroke="var(--brk)" stroke-width="1.5"/>
+            <text x="90" y="24" font-size="12" font-weight="700" fill="currentColor">중개 게시판 (마목)</text>
+            <text x="90" y="44" font-size="10" fill="var(--muted)">「거래하기」</text>
+            <text x="90" y="62" font-size="10" fill="var(--muted)">게재검증 · 구조화 신청·수용</text>
+            <text x="90" y="78" font-size="10" fill="var(--muted)">가격 불관여 · DSRV 비당사자</text>
+            <text x="90" y="94" font-size="10" fill="var(--muted)">수수료 1% 양측</text>
+          </g>
+          <g transform="translate(448,230)">
+            <rect width="180" height="110" rx="6" fill="var(--surface)" stroke="currentColor" stroke-width="1.4"/>
+            <text x="90" y="24" font-size="12" font-weight="700" fill="currentColor">정책 · 승인</text>
+            <text x="90" y="44" font-size="10" fill="var(--muted)">자동검증(1차 필터)</text>
+            <text x="90" y="62" font-size="10" fill="var(--muted)">BLF·KYT·한도·화이트리스트</text>
+            <text x="90" y="78" font-size="10" fill="var(--muted)">고객사 1인 + DSRV 단일 승인</text>
+            <text x="90" y="94" font-size="10" fill="var(--muted)">불량 시 수동검증</text>
+          </g>
+          <g transform="translate(642,230)">
+            <rect width="178" height="110" rx="6" fill="var(--surface)" stroke="currentColor" stroke-width="1.4"/>
+            <text x="89" y="24" font-size="12" font-weight="700" fill="currentColor">통합 로그</text>
+            <text x="89" y="44" font-size="10" fill="var(--muted)">WORM · 해시 무결성</text>
+            <text x="89" y="62" font-size="10" fill="var(--muted)">거래 15년 · AML 5년</text>
+            <text x="89" y="78" font-size="10" fill="var(--muted)">개인정보 분리 저장</text>
+            <text x="89" y="94" font-size="10" fill="var(--muted)">열람 감사</text>
+          </g>
+        </g>
+
+        <!-- 신규 → 기존 -->
+        <line x1="440" y1="390" x2="440" y2="436" stroke="currentColor" stroke-width="1.4" fill="none" marker-end="url(#sa)"/>
+        <text x="452" y="418" font-size="9.5" fill="var(--muted)">승인 완료 건만 · 집행 티켓</text>
+
+        <!-- 기존 커스터디 범위 -->
+        <rect x="40" y="440" width="800" height="150" rx="8" fill="none" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="5 4"/>
+        <text x="56" y="466" font-size="11.5" font-weight="700" fill="var(--muted)">기존 커스터디 인증범위 재사용 — ISMS-KISA-2026-044 · 100% 콜드 · 수동 (핫월렛 없음)</text>
+        <g text-anchor="middle">
+          <g transform="translate(60,482)">
+            <rect width="220" height="86" rx="6" fill="var(--surface)" stroke="var(--muted)" stroke-width="1.3"/>
+            <text x="110" y="26" font-size="12" font-weight="700" fill="currentColor">수동집행 티켓</text>
+            <text x="110" y="46" font-size="10" fill="var(--muted)">건별 집행 · 이중확인(4-eyes)</text>
+            <text x="110" y="62" font-size="10" fill="var(--muted)">집행 로그 WORM</text>
+          </g>
+          <g transform="translate(310,482)">
+            <rect width="240" height="86" rx="6" fill="var(--surface)" stroke="var(--muted)" stroke-width="1.3"/>
+            <text x="120" y="26" font-size="12" font-weight="700" fill="currentColor">커스터디 — MPC·HSM 콜드월렛</text>
+            <text x="120" y="46" font-size="10" fill="var(--muted)">수동 서명 · 화이트리스트 대조</text>
+            <text x="120" y="62" font-size="10" fill="var(--muted)">신규 주소 지연 발효</text>
+          </g>
+          <g transform="translate(580,482)">
+            <rect width="230" height="86" rx="6" fill="var(--surface)" stroke="var(--muted)" stroke-width="1.3"/>
+            <text x="115" y="26" font-size="12" font-weight="700" fill="currentColor">사내 노드</text>
+            <text x="115" y="46" font-size="10" fill="var(--muted)">입금 감지 · 고위험 격리</text>
+            <text x="115" y="62" font-size="10" fill="var(--muted)">수동 확인 후 잔고 반영</text>
+          </g>
+        </g>
+
+        <!-- 외부 연동 -->
+        <rect x="880" y="180" width="230" height="260" rx="8" fill="none" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="5 4"/>
+        <text x="896" y="204" font-size="11.5" font-weight="700" fill="var(--muted)">외부 연동 (API · 수탁)</text>
+        <g text-anchor="middle">
+          <g transform="translate(900,218)">
+            <rect width="190" height="56" rx="6" fill="var(--surface)" stroke="var(--muted)" stroke-width="1.2"/>
+            <text x="95" y="24" font-size="11.5" font-weight="700" fill="currentColor">외부 가격지표</text>
+            <text x="95" y="42" font-size="9.5" fill="var(--muted)">참조 전용 · 자동체결 미연동</text>
+          </g>
+          <g transform="translate(900,288)">
+            <rect width="190" height="56" rx="6" fill="var(--surface)" stroke="var(--muted)" stroke-width="1.2"/>
+            <text x="95" y="24" font-size="11.5" font-weight="700" fill="currentColor">KYT · 블랙리스트(BLF)</text>
+            <text x="95" y="42" font-size="9.5" fill="var(--muted)">위험 스코어링 · 제재 대조</text>
+          </g>
+          <g transform="translate(900,358)">
+            <rect width="190" height="56" rx="6" fill="var(--surface)" stroke="var(--muted)" stroke-width="1.2"/>
+            <text x="95" y="24" font-size="11.5" font-weight="700" fill="currentColor">트래블룰</text>
+            <text x="95" y="42" font-size="9.5" fill="var(--muted)">CODE · VerifyVASP</text>
+          </g>
+        </g>
+        <line x1="840" y1="300" x2="880" y2="300" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="3 4"/>
+
+        <!-- 이더리움 -->
+        <g text-anchor="middle" transform="translate(880,490)">
+          <rect width="230" height="80" rx="8" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <text x="115" y="34" font-size="12.5" font-weight="700" fill="currentColor">이더리움 체인</text>
+          <text x="115" y="54" font-size="10.5" fill="var(--muted)">ETH · USDC · USDT</text>
+        </g>
+        <g stroke="currentColor" stroke-width="1.4" fill="none">
+          <line x1="840" y1="512" x2="874" y2="512" marker-end="url(#sa)"/>
+          <line x1="880" y1="548" x2="846" y2="548" marker-end="url(#sa)"/>
+        </g>
+        <g font-size="9.5" fill="var(--muted)" text-anchor="middle">
+          <text x="858" y="504">수동 서명·전송</text>
+          <text x="862" y="566">입금 감지</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption>점선 상자가 인증범위 경계. 자산 이동은 신규 시스템이 직접 수행하지 않고, 승인 완료 건의 집행 티켓만 기존 커스터디 범위로 넘긴다.</figcaption>
+  </figure>
+
+  <h3>교환(나목) 서비스 흐름 <span class="tag-exc">「교환하기」 · DSRV가 상대방</span></h3>
+  <div class="steps">
+    <div class="step"><span class="st">① 교환 요청</span><span class="sd">고객사 1인 · 수량·방향</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">② 비율 제시</span><span class="sd">외부지표 + 고정 스프레드</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">③ 수락</span><span class="sd">유효기한 내 · 1인 확인</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">④ 자동검증 → 단일 승인</span><span class="sd">정책·BLF·KYT · 불량 시 수동검증</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">⑤ 콜드 수동 집행</span><span class="sd">재고 차감 · 트래블룰 · 대사</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">⑥ 완료·보고서</span><span class="sd">스프레드 수익 구분회계</span></div>
+  </div>
+
+  <h3>교환 중개(마목) 서비스 흐름 <span class="tag-brk">「거래하기」 · 게시판 · DSRV 비당사자</span></h3>
+  <div class="steps">
+    <div class="step"><span class="st">① 의향 게시</span><span class="sd">자산·수량·조건</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">② 게재검증 → 게시</span><span class="sd">보유·처분권 확인 · 허위 차단</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">③ 신청·수용</span><span class="sd">구조화 입력만 · 자유 메시지 없음</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">④ 조건 확정</span><span class="sd">양측 각 1인 · 구속력 발생</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">⑤ 검증 → 단일 승인</span><span class="sd">정책·BLF·KYT·트래블룰</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">⑥ 콜드 수동 이전</span><span class="sd">양건 확인 후 순차 집행</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">⑦ 완료·정산</span><span class="sd">수수료 1% 양측</span></div>
+  </div>
+
+  <h3>입금 · 출금 (기존 커스터디 운영 연결)</h3>
+  <div class="steps">
+    <div class="step"><span class="st">전용 주소 입금</span><span class="sd">고객사별 전용 주소</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">사내 노드 감지</span><span class="sd">KYT·BLF 점검 · 고위험 격리</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">콜드 보관 · 잔고 반영</span><span class="sd">수동 확인</span></div>
+  </div>
+  <div class="steps">
+    <div class="step"><span class="st">출금 기안 · 고객사 승인</span><span class="sd">담당자 기안 · 1인 확인</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">자동검증 → DSRV 승인</span><span class="sd">화이트리스트·한도·KYT·트래블룰</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">콜드 수동 서명·전송</span><span class="sd">신규 주소 지연 발효 · 기록·통지</span></div>
+  </div>
+
+  <div class="note"><b>범위 제외(구현하지 않음):</b> 핫월렛·자동 스윕 · 오더북·자동 매칭·자동 체결 · 자체 시세피드 · 자동 정산엔진 · 당사자 자유 메시지 채널 · 원화 취급 · 개인·외국 고객 · 외부 VASP 연동(2차).
+  이 부재가 '자동체결 거래소·MM 아님' 방어 논리의 근거다.</div>
+</section>
+
+<!-- ============ 2. 개인정보 흐름도 ============ -->
+<section>
+  <div class="sec-head"><h2>2. 개인정보 흐름도</h2><span class="tag-pii">주요 식별정보 포함</span></div>
+  <p>개인(자연인) 고객이 없으므로 정보주체는 <b>법인 소속 개인</b> — 고객사 담당자와 대표자·실제소유자(RBO)에 한정된다.
+  수집 → 보유·이용 → 제공·위탁 → 보존·파기의 생애주기와 각 단계의 주요 식별정보는 아래와 같다.</p>
+
+  <figure>
+    <div class="figscroll">
+      <svg viewBox="0 0 1140 600" role="img" aria-label="개인정보 흐름도: 정보주체인 법인 담당자와 실제소유자로부터 온라인 계정 활성화, 오프라인 고객확인, 자동 생성의 세 경로로 수집하고, 계정 DB·AML 기록·통합로그에 분리 보유하며, STR 시 FIU 제공, 이전 시 상대 VASP 트래블룰 제공, KYT 수탁사 위탁으로 이어진다. 하단에 보존·파기 정책." style="min-width:1040px;width:100%;height:auto;display:block;color:var(--ink);">
+        <defs>
+          <marker id="pa" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="currentColor"/></marker>
+          <marker id="pm" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--muted)"/></marker>
+        </defs>
+
+        <!-- 정보주체 -->
+        <g transform="translate(30,170)" text-anchor="middle">
+          <rect width="170" height="150" rx="8" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <text x="85" y="28" font-size="9.5" fill="var(--muted)" letter-spacing="1">정보주체</text>
+          <text x="85" y="54" font-size="12.5" font-weight="700" fill="currentColor">법인 담당자</text>
+          <text x="85" y="76" font-size="12.5" font-weight="700" fill="currentColor">대표자 · RBO</text>
+          <text x="85" y="102" font-size="9.5" fill="var(--muted)">개인 고객 없음</text>
+          <text x="85" y="118" font-size="9.5" fill="var(--muted)">법인 소속 개인에 한정</text>
+        </g>
+
+        <!-- 열 제목 -->
+        <g font-family="'IBM Plex Mono',monospace" font-size="11" font-weight="700" fill="var(--pii)" letter-spacing="2" text-anchor="middle">
+          <text x="340" y="42">수집</text>
+          <text x="625" y="42">보유 · 이용</text>
+          <text x="955" y="42">제공 · 위탁 (외부)</text>
+        </g>
+
+        <!-- 수집 -->
+        <g>
+          <g transform="translate(240,60)">
+            <rect width="200" height="110" rx="6" fill="var(--pii-soft)" stroke="var(--pii)" stroke-width="1.4"/>
+            <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">온라인 — 초대·계정 활성화</text>
+            <text x="14" y="46" font-size="10" fill="var(--muted)">성명 · 회사 이메일 · 연락처</text>
+            <text x="14" y="62" font-size="10" fill="var(--muted)">MFA 등록정보</text>
+            <text x="14" y="84" font-size="9.5" fill="var(--muted)">셀프가입 없음 — 초대만</text>
+          </g>
+          <g transform="translate(240,200)">
+            <rect width="200" height="110" rx="6" fill="var(--pii-soft)" stroke="var(--pii)" stroke-width="1.4"/>
+            <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">오프라인 — CDD/EDD 수기</text>
+            <text x="14" y="46" font-size="10" fill="var(--muted)">대표자·RBO 확인정보(성명 등)</text>
+            <text x="14" y="62" font-size="10" fill="var(--muted)">자금출처 · 제재 스크리닝</text>
+            <text x="14" y="84" font-size="9.5" fill="var(--danger)">세부 항목 [확인필요]</text>
+          </g>
+          <g transform="translate(240,340)">
+            <rect width="200" height="110" rx="6" fill="var(--pii-soft)" stroke="var(--pii)" stroke-width="1.4"/>
+            <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">이용 중 자동 생성</text>
+            <text x="14" y="46" font-size="10" fill="var(--muted)">접속기록(계정 ID·IP 등)</text>
+            <text x="14" y="62" font-size="10" fill="var(--muted)">행위로그 · 거래·승인 이력</text>
+            <text x="14" y="84" font-size="9.5" fill="var(--muted)">담당자 계정 단위 기록</text>
+          </g>
+        </g>
+
+        <!-- 보유·이용 -->
+        <g>
+          <g transform="translate(520,60)">
+            <rect width="210" height="110" rx="6" fill="var(--surface)" stroke="var(--pii)" stroke-width="1.4"/>
+            <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">계정 DB</text>
+            <text x="14" y="46" font-size="10" fill="var(--muted)">계정 · 권한 · MFA · 세션</text>
+            <text x="14" y="62" font-size="10" fill="var(--muted)">이용: 본인확인 · 접근통제</text>
+          </g>
+          <g transform="translate(520,200)">
+            <rect width="210" height="110" rx="6" fill="var(--surface)" stroke="var(--pii)" stroke-width="1.4"/>
+            <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">AML 기록 — 분리 보관</text>
+            <text x="14" y="46" font-size="10" fill="var(--muted)">CDD/EDD · 스크리닝 · STR 기록</text>
+            <text x="14" y="62" font-size="10" fill="var(--muted)">이용: AML 의무 이행</text>
+          </g>
+          <g transform="translate(520,340)">
+            <rect width="210" height="110" rx="6" fill="var(--surface)" stroke="var(--pii)" stroke-width="1.4"/>
+            <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">거래원장 · 통합로그(WORM)</text>
+            <text x="14" y="46" font-size="10" fill="var(--muted)">개인정보 분리 저장 · 열람 감사</text>
+            <text x="14" y="62" font-size="10" fill="var(--muted)">조회화면 개인정보 비노출</text>
+            <text x="14" y="78" font-size="10" fill="var(--muted)">개인키·시드 기록 금지</text>
+          </g>
+        </g>
+
+        <!-- 제공·위탁 -->
+        <g>
+          <g transform="translate(800,60)">
+            <rect width="310" height="110" rx="6" fill="var(--surface)" stroke="currentColor" stroke-width="1.4"/>
+            <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">FIU (금융정보분석원) — 제공</text>
+            <text x="14" y="46" font-size="10" fill="var(--muted)">STR 보고 시 고객·거래 식별정보</text>
+            <text x="14" y="66" font-size="10" font-family="'IBM Plex Mono',monospace" fill="var(--muted)">특정금융정보법 §4</text>
+          </g>
+          <g transform="translate(800,200)">
+            <rect width="310" height="110" rx="6" fill="var(--surface)" stroke="currentColor" stroke-width="1.4"/>
+            <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">상대방 VASP — 트래블룰 제공</text>
+            <text x="14" y="46" font-size="10" fill="var(--muted)">송·수신인 법인명 · 가상자산주소</text>
+            <text x="14" y="62" font-size="10" fill="var(--muted)">CODE·VerifyVASP 경유 · 1백만원 초과</text>
+            <text x="14" y="82" font-size="10" font-family="'IBM Plex Mono',monospace" fill="var(--muted)">특금법 시행령 §10의10</text>
+          </g>
+          <g transform="translate(800,340)">
+            <rect width="310" height="110" rx="6" fill="var(--surface)" stroke="currentColor" stroke-width="1.4"/>
+            <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">수탁사 — KYT·트래블룰 솔루션 위탁</text>
+            <text x="14" y="46" font-size="10" fill="var(--muted)">지갑주소 · 거래정보 (스코어링·전송)</text>
+            <text x="14" y="66" font-size="10" fill="var(--danger)">국외이전 여부·적법근거 [로펌게이트]</text>
+            <text x="14" y="84" font-size="10" fill="var(--muted)">수탁사·소재지 목록 [확인필요]</text>
+          </g>
+        </g>
+
+        <!-- 화살표: 정보주체 → 수집 -->
+        <g stroke="currentColor" stroke-width="1.3" fill="none">
+          <polyline points="200,215 220,215 220,115 234,115" marker-end="url(#pa)"/>
+          <line x1="200" y1="255" x2="234" y2="255" marker-end="url(#pa)"/>
+          <polyline points="200,295 220,295 220,395 234,395" marker-end="url(#pa)"/>
+        </g>
+
+        <!-- 수집 → 보유 -->
+        <g stroke="currentColor" stroke-width="1.3" fill="none">
+          <line x1="440" y1="115" x2="514" y2="115" marker-end="url(#pa)"/>
+          <line x1="440" y1="255" x2="514" y2="255" marker-end="url(#pa)"/>
+          <line x1="440" y1="395" x2="514" y2="395" marker-end="url(#pa)"/>
+        </g>
+
+        <!-- 보유 → 제공·위탁 -->
+        <g stroke="currentColor" stroke-width="1.3" fill="none">
+          <polyline points="730,255 766,255 766,115 794,115" marker-end="url(#pa)"/>
+          <polyline points="730,395 766,395 766,255 794,255" marker-end="url(#pa)"/>
+          <line x1="730" y1="415" x2="794" y2="415" marker-end="url(#pa)"/>
+        </g>
+        <g font-size="9.5" fill="var(--muted)">
+          <text x="740" y="140">STR 시</text>
+          <text x="740" y="288">이전 시</text>
+          <text x="736" y="408">위탁</text>
+        </g>
+
+        <!-- 보존·파기 -->
+        <g stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="3 4" fill="none">
+          <line x1="625" y1="450" x2="625" y2="486" marker-end="url(#pm)"/>
+        </g>
+        <g transform="translate(240,490)">
+          <rect width="870" height="76" rx="8" fill="var(--soft)" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="5 4"/>
+          <text x="18" y="28" font-size="11.5" font-weight="700" fill="currentColor">보존 · 파기</text>
+          <text x="18" y="48" font-size="10.5" fill="var(--muted)">거래기록 15년 · AML 기록 5년(특정금융정보법 §5의4) · WORM 보존 대상과 파기 대상 분리 저장</text>
+          <text x="18" y="64" font-size="10.5" fill="var(--muted)">보존기한 경과 시 파기 — 절차·방법 및 계정정보(계약 종료 시) 보존기한 <tspan fill="var(--danger)">[확인필요]</tspan></text>
+        </g>
+      </svg>
+    </div>
+    <figcaption>초록 상자가 인증범위 내 개인정보 취급 지점, 오른쪽 열이 외부로 나가는 제공·위탁. 화면 조회 단계에서는 개인정보를 노출하지 않는다.</figcaption>
+  </figure>
+
+  <h3>주요 식별정보 총괄표</h3>
+  <div class="tblwrap">
+  <table>
+    <thead><tr><th>구분</th><th>주요 식별정보</th><th>수집 경로</th><th>보관 위치</th><th>외부 제공·위탁</th><th>보존</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>계정·인증정보</b></td>
+        <td>담당자 성명 · 회사 이메일 · 연락처 · MFA 등록정보</td>
+        <td>초대 → 계정 활성화 (온라인)</td>
+        <td>계정 DB</td>
+        <td>—</td>
+        <td>계약 종료 후 파기 <span class="need">[확인필요]</span></td>
+      </tr>
+      <tr>
+        <td><b>고객확인(CDD/EDD)</b></td>
+        <td>대표자·실제소유자(RBO) 확인정보(성명 등 — 세부 항목 <span class="need">[확인필요]</span>) · 자금출처 · 제재 스크리닝 결과</td>
+        <td>오프라인 수기 심사</td>
+        <td>AML 기록 (분리 보관)</td>
+        <td>FIU (STR 보고 시)</td>
+        <td>5년 <span class="basis">특금법 §5의4</span></td>
+      </tr>
+      <tr>
+        <td><b>거래·이전정보</b></td>
+        <td>송·수신인 법인명 · 가상자산주소 · 거래내역</td>
+        <td>서비스 이용 중 생성</td>
+        <td>거래원장 · 통합로그(WORM)</td>
+        <td>상대방 VASP(트래블룰 — CODE·VerifyVASP 경유) · KYT 수탁사</td>
+        <td>15년</td>
+      </tr>
+      <tr>
+        <td><b>접속·행위기록</b></td>
+        <td>계정 ID · 접속기록(IP 등) · 행위로그</td>
+        <td>이용 중 자동 생성</td>
+        <td>통합로그(WORM)</td>
+        <td>—</td>
+        <td><span class="need">[확인필요]</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="note" style="margin-top:14px;"><b>화면·로그 통제(설계 반영 완료):</b> 통합 로그는 조회 전용(원장 직접변경 미구현) · 조회 노출항목에서 개인정보·주소·잔액 제외 · 개인키·passphrase·시드는 기록 금지 필드 · 로그 열람 행위 자체를 별도 감사(누가·무엇 조회).
+  <b>ISMS vs ISMS-P:</b> 개인정보가 법인 담당자·RBO에 한정되는 점이 인증 구분(2호 ISMS vs 1호 ISMS-P) 판단의 핵심 — 32 초안 P1 논점과 연동.</div>
+</section>
+
+<!-- ============ 확인 필요 ============ -->
+<section>
+  <div class="sec-head"><h2>확인 필요 ([확인필요])</h2></div>
+  <ul class="chk">
+    <li>CDD/EDD 수집 항목 상세 (대표자·RBO 확인정보의 세부 필드) — 사내 AML 절차서 대조</li>
+    <li>KYT·트래블룰 수탁사 목록·소재지, 국외이전 해당 여부와 적법근거 — <span class="need">[로펌게이트]</span></li>
+    <li>파기 절차·방법, 계정정보(계약 종료·담당자 변경 시) 보존기한, 접속기록 보존기한</li>
+    <li>접속기록 수집 항목(IP 포함 여부 등) — 시스템 설계 확정치 대조</li>
+    <li>ISMS(2호) vs ISMS-P(1호) 인증 구분 — 예비인증 경로와 연동 (32 초안 P1)</li>
+    <li>시스템 구성도(서버·NW·DB 실측)는 별도 작성 — 본 문서는 서비스·정보 흐름 관점</li>
+  </ul>
+</section>
+
+<div class="src">
+  <b>근거 문서</b> — <span class="mono">32_ISMS신청_서비스현황_초안.md (2026-08-31)</span> · <span class="mono">27_서비스flow_주체_기능.md (v3)</span> ·
+  <span class="mono">29_규제요건_VASP_ISMS_매핑.md</span> · <span class="mono">ISMS_대응정리_및_화면설계반영.md</span><br>
+  ISMS 인증신청서 첨부용 <b>내부 초안</b>입니다. 단독 제출 불가 — [확인필요]·[로펌게이트] 항목 확정과 사실관계·법령 인용의 자체 검증(법무·AML 검토)을 거친 뒤 제출하십시오.
+</div>
+
+</div>

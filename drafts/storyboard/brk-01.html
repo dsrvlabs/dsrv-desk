@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화면기획 — 교환 게시판</title>
+<link rel="stylesheet" href="screen.css">
+<style>
+  .tbl{width:100%;border-collapse:collapse;font-size:11px;}
+  .tbl th{background:#f1f5f9;color:#64748b;font-weight:700;text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);font-size:10px;}
+  .tbl td{padding:8px;border-bottom:1px solid #f1f1ee;color:#334155;vertical-align:middle;}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="crumb"><span>마목 중개</span><span class="s">›</span><span>교환게시판</span></div>
+  <h1 class="title">교환 게시판</h1>
+  <span class="sid">BRK-01</span>
+  <span class="defense">방어: 단순 게시판 아님(4요소)</span>
+</header>
+
+<div class="main">
+  <div class="screen-panel">
+    <div style="position:relative;display:flex;">
+      <div class="labels" id="labels">
+        <div class="lbl"><span class="lbl-text">전역</span></div>
+        <div class="lbl"><span class="lbl-text">거래의향 리스트</span></div>
+        <div class="lbl"><span class="lbl-text">등록</span></div>
+      </div>
+      <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
+    </div>
+
+    <div class="frame" id="frame">
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="c-top" style="border-radius:8px 8px 0 0;">
+          <span class="brand" style="cursor:pointer;">DSRV Desk</span>
+          <span class="meta"><span class="c-badge">A자산운용</span></span>
+        </div>
+        <div class="c-adminbar" style="margin:0;">
+          <span class="m">대시보드</span>
+          <span class="m">교환하기</span>
+          <span class="m on" style="background:#dbeafe;color:#1d4ed8;">교환게시판</span>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="0,1">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="0" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="0" style="top:-6px;left:40%;">1</div>
+          <table class="tbl">
+            <thead><tr><th>교환코인</th><th>보내는 수량</th><th>받는 수량</th><th>비율</th></tr></thead>
+            <tbody>
+              <tr><td>USDT→USDC</td><td>500,000</td><td>499,000</td><td>0.9980 USDC/USDT</td></tr>
+              <tr><td>USDT→USDC</td><td>300,000</td><td>299,500</td><td>0.9983 USDC/USDT</td></tr>
+              <tr><td>USDC→USDT</td><td>250,000</td><td>249,800</td><td>0.9992 USDT/USDC</td></tr>
+              <tr><td>ETH→USDC</td><td>50</td><td>159,200</td><td>3,184.00 USDC/ETH</td></tr>
+              <tr><td colspan="4" style="text-align:center;color:#94a3b8;font-size:10px;">⋮</td></tr>
+            </tbody>
+          </table>
+          <div style="position:relative;margin-top:6px;padding:6px 8px;background:#f8fafc;border-top:1px solid #f1f1ee;font-size:10px;color:#64748b;">
+            <div class="pin" data-idx="1" style="top:-6px;right:-4px;">2</div>
+            ✓ 이 보드의 모든 거래의향은 <strong>거래 안전성 검증(보유·처분권 확인)</strong> 및 <strong>KYC 완료 법인</strong>만 게시됩니다
+          </div>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="2">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="2" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="2" style="top:-8px;right:-4px;">3</div>
+          <div class="btn primary">+ 거래의향 등록</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <svg id="connSvg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;"></svg>
+
+  <div class="items" id="items">
+    <div class="nav-global">
+      <div class="nav-global-title">진입 · 전역 이동</div>
+      <div class="nav-row"><span class="nav-el">GNB '대시보드' · 로고</span><span class="nav-act">클릭</span><span class="nav-to"><strong>대시보드(DASH-01)</strong></span></div>
+      <div class="nav-row"><span class="nav-el">GNB '교환하기'</span><span class="nav-act">클릭</span><span class="nav-to"><strong>교환하기(EXC-01)</strong></span></div>
+      <div class="nav-note">· <strong>진입</strong>: GNB '교환게시판' 클릭(대시보드 등 전 화면에서)<br>
+      · 시세변동 중지·유효기간 만료 게시는 리스트에서 제외 — 행이 없으므로 신청(BRK-03) 진입 자체가 불가 <span style="color:#991b1b;">[확인필요: 내 게시 행 구분 표기(내 게시 배지 등) 방식]</span></div>
+    </div>
+    <div class="itm" data-idx="0">
+      <div class="num">1</div>
+      <div>
+        <div class="itm-title">거래의향 리스트<span class="req">필수</span></div>
+        <div class="itm-desc">· 목록 컬럼: <strong>교환코인 · 보내는 수량 · 받는 수량 · 비율</strong> — DASH-01 거래 목록과 표기 통일, 비율은 {받는코인}/{주는코인}(notation 규칙)<br>· 사자/팔자 구분 없음 — 거래의향은 교환 수량 쌍("A코인 X개 ↔ B코인 Y개")으로 표기<br>· 필터·정렬·페이징 없음 — 전체를 최신순 단일 리스트로 나열<br>· 타사 게시 행 선택 시 신청하기(BRK-03), 내 게시 행 선택 시 내 게시 상세(BRK-06) 진입<br>· <strong>시세변동 중지 RFQ · 유효기간(기본 30일) 만료 게시는 리스트에서 제외</strong> — 중지 상태 배지·표시 없음<br>· 자동 매칭/자동 체결 없음<br><span class="basis">근거 F-1b · 09 §0 line 57(시세변동 중지) · V2 — 시장개설 아님</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">거래의향 행 (타사 게시)</span><span class="nav-act">클릭 — 게시 조건 그대로 신청하는 화면으로 (역제안 없음)</span><span class="nav-to"><strong>신청하기(BRK-03)</strong></span></div>
+          <div class="nav-row"><span class="nav-el">거래의향 행 (내 게시)</span><span class="nav-act">클릭 — 내 게시 상세(조회·회수·받은 신청 목록)</span><span class="nav-to"><strong>내 게시 상세·회수(BRK-06)</strong> → 신청 행 선택 시 BRK-04</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="itm" data-idx="1">
+      <div class="num">2</div>
+      <div>
+        <div class="itm-title">거래 안전성 검증·KYC 담보 안내<span class="req">필수</span></div>
+        <div class="itm-desc">· 거래 안전성 검증 = DSRV 보유·처분권 확인(4요소①)<br>· KYC = 양측 KYC 완료 법인만 게시·거래(4요소②)<br>· 전 게시물 공통 전제이므로 행별 배지 없이 보드 하단 한 줄 안내로 표시<br><span class="basis">근거 V2 — 단순 게시판 아님</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="2">
+      <div class="num">3</div>
+      <div>
+        <div class="itm-title">거래의향 등록 진입<span class="req">필수</span></div>
+        <div class="itm-desc">· 내 RFQ를 새로 게시(BRK-02)<br><span class="basis">근거 F-1b</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">[+ 거래의향 등록] 버튼</span><span class="nav-act">클릭 — 내 RFQ 신규 게시</span><span class="nav-to"><strong>거래의향 등록(BRK-02)</strong></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<section class="footer-note" style="padding-bottom:0;">
+  <div class="note-card">
+    <div class="note-title">상세내용</div>
+    <div class="detail-grid" id="detailCol">
+      <div class="dtl" data-idx="0">
+        <div class="detail-label"><span class="dtl-num">1</span>시세변동 중지 = 보드 제외</div>
+      <div class="dtl-body"><span class="box">· 게시 시점 대비 시세 변동이 중지 기준을 넘으면 RFQ 자동중지 → <strong>보드 리스트에서 즉시 제외</strong> + 게시자 알림<br>· 중지 기준·판정은 <strong>내부 정책으로 운영</strong> — 화면에 중지 상태·기준 미표시<br>· 리스트에서 빠지면 신청(BRK-03) 진입 자체가 차단되므로 이후 화면에 중지 상태 표시 불요<br>· 재개는 게시자 재게시(게시 시점 스냅숏 재산정) · 게시자가 직접 내리는 회수는 BRK-06 [게시 내리기](자동중지와 별도 경로)</span></div>
+      </div>
+      <div class="dtl" data-idx="1">
+        <div class="detail-label"><span class="dtl-num">2</span>4요소 방어 (단순 게시판 아님)</div>
+      <div class="dtl-body"><span class="box">① 거래 안전성 검증(보유·처분권)<br>② KYC 담보(양측 완료 법인)<br>③ 정산 연계(BRK-05 커스터디 이전)<br>④ 수수료(거래액 1% 고정·양측 각자 — BRK-03/04/07 수락 전 고시)</span></div>
+      </div>
+      <div class="dtl" data-idx="2">
+        <div class="detail-label"><span class="dtl-num">3</span>빈 상태 (공통 UI 규격)</div>
+      <div class="dtl-body"><span class="box">· 게시가 0건이면 표 대신 빈 상태 문구: <span class="red">"게시된 거래의향이 없습니다"</span> + 다음 행동 1줄 "[+ 거래의향 등록]으로 첫 거래의향을 올릴 수 있습니다"<br>· 내 게시가 리스트에 있으면 행 우측 '내 게시' 배지 <span class="red">[확인필요: 배지 표기 방식]</span></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="footer-note">
+  <div class="note-card">
+    <div class="note-title">비고</div>
+    <div class="note-body">
+      · 마목(당사자 간 중개) 진입점. <strong>[방어 핵심]</strong> 거래 안전성 검증·KYC담보·정산연계·수수료 <strong>4요소</strong>를 갖춰 "단순 게시판"이 아님을 소명 — 자동 매칭·자동 체결·시장가 형성은 하지 않음. 필터·정렬·페이징이 없는 단순 나열 구조 자체가 자동 매칭·조건 검색 부재의 담보.<br>
+      · 분기: 내 RFQ 올리기 → BRK-02 / 기존 거래의향에 신청 → BRK-03 / 내 게시 열기 → BRK-06(회수는 여기서)
+    </div>
+  </div>
+</section>
+
+<script src="screen.js"></script>
+</body>
+</html>

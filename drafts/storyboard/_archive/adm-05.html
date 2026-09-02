@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화면기획 — 로그 열람감사</title>
+<link rel="stylesheet" href="screen.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="crumb"><span>관리자</span><span class="s">›</span><span>로그 열람감사</span></div>
+  <h1 class="title">로그 열람감사</h1>
+  <span class="sid">ADM-05</span>
+  <span class="defense">누가·무엇 조회 · 열람 자체 감사</span>
+</header>
+
+<div class="main">
+  <div class="screen-panel">
+    <div style="position:relative;display:flex;">
+      <div class="labels" id="labels">
+        <div class="lbl"><span class="lbl-text">전역·<br>관리 메뉴</span></div>
+        <div class="lbl"><span class="lbl-text">필터</span></div>
+        <div class="lbl"><span class="lbl-text">열람 기록</span></div>
+        <div class="lbl"><span class="lbl-text">열람감사<br>정책</span></div>
+      </div>
+      <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
+    </div>
+
+    <div class="frame" id="frame">
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="c-top admin" style="border-radius:8px 8px 0 0;">
+          <span class="brand">DSRV Admin Console</span>
+          <span class="meta"><span class="c-badge adm">Admin</span><span class="c-badge pam">PAM 세션</span></span>
+        </div>
+        <div class="c-adminbar" style="margin:0;">
+          <span class="m">대시보드</span><span class="m">ORG·KYC</span><span class="m">요청·정책</span><span class="m">지갑</span><span class="m">시장감시</span><span class="m on">로그</span>
+        </div>
+      </div>
+
+      <!-- 필터 -->
+      <div class="zone" data-idx="0">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="0" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="0" style="top:-4px;right:-4px;">1</div>
+          <div class="row" style="flex-wrap:wrap;gap:6px;">
+            <div class="field sel" style="flex:0 0 auto;padding:6px 10px;">기간: 08-01~08-31</div>
+            <div class="field sel" style="flex:0 0 auto;padding:6px 10px;">열람자: 전체</div>
+            <div class="field sel" style="flex:0 0 auto;padding:6px 10px;">대상 화면: 통합 로그(ADM-04)</div>
+            <div class="field sel" style="flex:0 0 auto;padding:6px 10px;">조치: 조회·내보내기</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 열람 기록 -->
+      <div class="zone" data-idx="1">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="1" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="1" style="top:-4px;right:-4px;">2</div>
+          <div class="zone-title">누가 · 무엇을 조회했는가</div>
+          <table class="tbl">
+            <thead><tr><th>시각 ▾</th><th>열람자(역할)</th><th>조회 대상</th><th>조회 조건</th><th>결과</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">08-31 15:20</td><td>감사담당 A(감사)</td><td>통합 로그(ADM-04)</td><td class="mono">ORG-A · 08월</td><td>142건 조회</td></tr>
+              <tr><td class="mono">08-31 14:05</td><td>운영 B(운영)</td><td>거래 상세(EXC-0142)</td><td class="mono">거래ID 일치</td><td>1건 조회</td></tr>
+              <tr><td class="mono">08-31 11:38</td><td>회계 C(회계)</td><td>구분회계 집계</td><td class="mono">08월 · 전체</td><td>CSV 내보내기</td></tr>
+              <tr><td class="mono">08-31 09:52</td><td>운영 B(운영)</td><td>고객ID 검색</td><td class="mono">조건 1개 · 부분일치</td><td><span class="sev hi">차단</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 열람감사 정책 -->
+      <div class="zone" data-idx="2">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="2" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="2" style="top:-4px;right:-4px;">3</div>
+          <div class="kv"><span class="k">열람 자체를 기록</span><span class="v">모든 조회·내보내기 감사</span></div>
+          <div class="kv"><span class="k">저장 방식</span><span class="v">WORM·해시무결성·NTP</span></div>
+          <div class="kv"><span class="k">보존</span><span class="v">거래 15년 · AML 5년</span></div>
+          <div class="kv"><span class="k"><strong>기록 금지 필드</strong></span><span class="v" style="color:#991b1b;">개인키·passphrase·시드</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <svg id="connSvg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;"></svg>
+
+  <div class="items" id="items">
+    <div class="itm" data-idx="0">
+      <div class="num">1</div>
+      <div>
+        <div class="itm-title">열람 기록 필터<span class="req">필수</span></div>
+        <div class="itm-desc">· 기간·열람자·대상 화면·조치(조회/내보내기)로 필터<br>· 통합 로그(ADM-04) 등 민감정보 화면의 조회 이력을 추적<br><span class="basis">근거: 접속·열람기록 관리 · 정보보호 관리체계(ISMS) 인증기준 2.9.4</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="1">
+      <div class="num">2</div>
+      <div>
+        <div class="itm-title">누가·무엇을 조회했는가<span class="req">필수</span></div>
+        <div class="itm-desc">· 열람자(역할)·조회 대상·조회 조건·결과를 시간순으로 기록<br>· 검색 조건이 정책 위반(부분일치·단일조건)이면 <strong>차단</strong>도 기록<br>· 조회 전용 — 이 화면에서 원장·로그를 고칠 수 없음<br><span class="basis">근거: 열람 자체를 감사기록 · 정보보호 관리체계(ISMS) 인증기준 2.9.4·2.6.3</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="2">
+      <div class="num">3</div>
+      <div>
+        <div class="itm-title">열람감사 정책·기록금지<span class="req">필수</span></div>
+        <div class="itm-desc">· 모든 조회·내보내기를 감사 · WORM·해시무결성·NTP<br>· 거래 15년·AML 5년 보존<br>· <strong>기록 금지: 개인키·passphrase·시드</strong><br><span class="basis">근거: 정보보호 관리체계(ISMS) 인증기준 2.9.4(로그·접속기록 관리·기록금지)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-col" id="detailCol">
+    <div class="dtl" data-idx="0">
+      <div class="detail-label">왜 별도 화면인가</div>
+      <div class="dtl-body"><span class="box">· 통합 로그(ADM-04)는 '거래·행위 로그'를 조회하는 화면<br>· 이 화면은 <strong>그 조회 행위 자체(누가·무엇을 열람)</strong>를 감사하는 별도 축 — 감사자와 피감사 행위를 분리<br>· ADM-04에서 진입</span></div>
+    </div>
+    <div class="dtl" data-idx="1">
+      <div class="detail-label">기록 항목</div>
+      <div class="dtl-body"><span class="box">· 시각·열람자·역할·조회 대상·조회 조건·결과(건수/내보내기)<br>· 정책 위반 조회 시도(부분일치·단일조건 검색)는 차단 결과로 기록<br>· <span class="red">[확인필요]</span> 열람자 역할 구분(감사·운영·회계) 확정</span></div>
+    </div>
+    <div class="dtl" data-idx="2">
+      <div class="detail-label">무결성·기록금지</div>
+      <div class="dtl-body"><span class="box">· 열람 기록도 고쳐쓸 수 없는 저장(WORM)·해시무결성으로 보관<br>· 개인키·passphrase·시드는 열람 기록에도 남기지 않음</span></div>
+    </div>
+  </div>
+</div>
+
+<section class="footer-note">
+  <div class="note-card">
+    <div class="note-title">비고</div>
+    <div class="note-body">
+      · 통합 로그(ADM-04)에 있던 '로그 열람 감사(누가·무엇 조회)'를 <strong>별도 화면으로 분리</strong>(2026-08-31). ADM-04는 거래·행위 로그 조회, 이 화면(ADM-05)은 그 조회 행위 자체를 감사.<br>
+      · <strong>[열람 자체 감사]</strong> 민감정보 화면의 모든 조회·내보내기를 누가·무엇을·어떤 조건으로 했는지 기록, 정책 위반 조회 시도(부분일치·단일조건)는 차단 결과로 보존 — 근거: 정보보호 관리체계(ISMS) 인증기준 2.9.4(로그·접속기록 관리).<br>
+      · <strong>[기록 금지]</strong> 개인키·passphrase(비밀문구)·시드(복구용 단어)는 열람 기록에도 미기록 — 근거: 정보보호 관리체계(ISMS) 인증기준 2.9.4.<br>
+      · 진입: 통합 로그(ADM-04) → 로그 열람감사(ADM-05)
+    </div>
+  </div>
+</section>
+
+<script src="screen.js"></script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화면기획 — 설정</title>
+<link rel="stylesheet" href="screen.css">
+<style>
+  .tbl{width:100%;border-collapse:collapse;font-size:11px;}
+  .tbl th{background:#f1f5f9;color:#64748b;font-weight:700;text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);font-size:10px;}
+  .tbl td{padding:7px 8px;border-bottom:1px solid #f1f1ee;color:#334155;vertical-align:middle;}
+  .act{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;border:1px solid #93c5fd;color:#2563eb;background:#fff;margin:1px 2px 1px 0;white-space:nowrap;}
+  .inp{display:inline-block;border:1px solid #d7dbe0;border-radius:6px;background:#fff;padding:3px 8px;font-family:ui-monospace,'SF Mono',Consolas,monospace;font-size:10.5px;color:#334155;min-width:72px;}
+  .inp .u{color:#9aa3ad;font-family:'Pretendard',system-ui,sans-serif;font-size:9.5px;margin-left:3px;}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="crumb"><span>관리자</span><span class="s">›</span><span>설정</span></div>
+  <h1 class="title">설정</h1>
+  <span class="sid">ADM-03</span>
+  <span class="defense">정책 파라미터 단일 출처 · 기관·가입자 관리</span>
+</header>
+
+<div class="main">
+  <div class="screen-panel">
+    <div style="position:relative;display:flex;">
+      <div class="labels" id="labels">
+        <div class="lbl"><span class="lbl-text">전역·<br>관리 메뉴</span></div>
+        <div class="lbl"><span class="lbl-text">요율·정책<br>파라미터</span></div>
+        <div class="lbl"><span class="lbl-text">기관·가입자<br>관리</span></div>
+        <div class="lbl"><span class="lbl-text">초대 발송</span></div>
+        <div class="lbl"><span class="lbl-text">상태 전이<br>·재이행</span></div>
+      </div>
+      <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
+    </div>
+
+    <div class="frame" id="frame">
+      <!-- 전역: 관리 메뉴 -->
+      <div class="zone" data-idx="4">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="4" style="position:relative;">
+          <div class="pin" data-idx="4" style="top:-4px;right:-4px;">5</div>
+          <div class="c-top admin" style="border-radius:8px 8px 0 0;">
+            <span class="brand">DSRV Admin Console</span>
+            <span class="meta"></span>
+          </div>
+          <div class="c-adminbar" style="margin:0;">
+            <span class="m">홈</span><span class="m on">설정</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 요율·정책 파라미터 -->
+      <div class="zone" data-idx="0">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="0" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="0" style="top:-4px;right:-4px;">1</div>
+          <div class="zone-title">요율·정책 파라미터</div>
+          <table class="tbl">
+            <thead><tr><th>구분</th><th>파라미터</th><th>현재값 (수정 가능)</th></tr></thead>
+            <tbody>
+              <tr><td>나목</td><td>고정 스프레드 (페어별 · ETH↔USDC · ETH↔USDT · USDC↔USDT)</td><td><span class="inp">0.10<span class="u">%</span></span> <span class="inp">120<span class="u">s 견적유효</span></span> <span style="font-size:9.5px;color:#b45309;">ETH 페어 요율 [확인필요]</span></td></tr>
+              <tr><td>마목</td><td>중개 수수료 (거래액 기준 고정 · 양측 각자)</td><td><span class="inp">1.0<span class="u">%</span></span></td></tr>
+              <tr><td>마목</td><td>게시 유효기간 / 신청 유효기간</td><td><span class="inp">30<span class="u">일</span></span> <span class="inp">2<span class="u">영업일</span></span></td></tr>
+              <tr><td>마목</td><td>시세변동 자동중지 임계 (게시 시점 대비)</td><td><span class="inp">±2.0<span class="u">%</span></span></td></tr>
+              <tr><td>공통</td><td>건별 한도 (나·마 공통 · USD 환산)</td><td><span class="inp">1,000<span class="u">USD 상당</span></span> <span style="font-size:9.5px;color:#64748b;">환산 = 시세 소스 USD 시세 · 요청 시점</span></td></tr>
+              <tr><td>공통</td><td>시세(외부지표) 소스</td><td><span class="inp">업비트</span> <span class="inp">빗썸</span> <span class="inp">바이낸스</span> <span style="font-size:9.5px;color:#b45309;">조합 방식 [확인필요]</span></td></tr>
+              <tr><td>지갑</td><td>핫월렛 비중 임계 (초과 시 스윕 워닝)</td><td><span class="inp">20<span class="u">%</span></span></td></tr>
+            </tbody>
+          </table>
+          <div style="display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-top:8px;">
+            <span style="font-size:9.5px;color:#94a3b8;">저장 시 변경 이력(버전)·변경자 감사로그 기록 · 진행 중 건은 요청 시점 값 유지</span>
+            <div class="btn ghost" style="padding:6px 14px;font-size:11px;">되돌리기</div>
+            <div class="btn primary" style="padding:6px 14px;font-size:11px;">변경 저장</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 기관·가입자 관리 -->
+      <div class="zone" data-idx="1">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="1" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="1" style="top:-4px;right:-4px;">2</div>
+          <div class="zone-title">기관·가입자 관리</div>
+          <table class="tbl">
+            <thead><tr><th>기관</th><th>가입자</th><th>KYC 상태</th><th>계정 상태</th><th>조치</th></tr></thead>
+            <tbody>
+              <tr><td>A자산운용</td><td>가입자 K</td><td><span class="chip ok">활성</span></td><td><span class="chip ok">활성</span></td><td class="mono">—</td></tr>
+              <tr><td>B사</td><td>가입자 M</td><td><span class="chip info">심사중 (EDD)</span></td><td><span class="chip info">초대 발송됨</span></td><td><span class="act">초대 재발송</span></td></tr>
+              <tr><td>C사</td><td>가입자 N</td><td><span class="sev mid">일시제한 (재이행 미응답)</span></td><td><span class="chip ok">활성</span></td><td><span class="act">상태 변경</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 초대 발송 -->
+      <div class="zone" data-idx="2">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="2" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="2" style="top:-4px;right:-4px;">3</div>
+          <div class="zone-title">초대 발송</div>
+          <div class="row" style="gap:8px;">
+            <div class="field" style="flex:1;"><span class="ph">기관명</span></div>
+            <div class="field" style="flex:2;"><span class="ph">가입자 이메일</span></div>
+            <div class="btn primary" style="flex:0 0 auto;">초대 발송</div>
+          </div>
+          <div style="font-size:10px;color:#64748b;margin-top:6px;">기관당 가입자 1명 — 이미 가입자가 있는 기관은 기존 계정 해지 후에만 신규 초대 가능</div>
+        </div>
+      </div>
+
+      <!-- 상태 전이·재이행 -->
+      <div class="zone" data-idx="3">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="3" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="3" style="top:-4px;right:-4px;">4</div>
+          <div class="kv"><span class="k">계정 상태 전이</span><span class="v">심사중 → 활성 → 일시제한 → 동결 → 해지</span></div>
+          <div class="kv"><span class="k">KYC 재이행 주기</span><span class="v">고1년 · 중2년 · 저3년 + 이벤트 트리거</span></div>
+          <div class="kv"><span class="k">해지 처리</span><span class="v">진행 거래 완결 → 전량 출금 → 비활성화</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <svg id="connSvg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;"></svg>
+
+  <div class="items" id="items">
+    <div class="nav-global">
+      <div class="nav-global-title">진입 · 전역 이동</div>
+      <div class="nav-note">· <strong>진입</strong>: 어드민 홈(ADM-02) '설정' 탭 클릭<br>
+      · 발생 알람 처리(잠금 해제·재이행 도래·격리 등)는 이 화면이 아니라 홈(ADM-02) 처리함에서</div>
+    </div>
+    <div class="itm" data-idx="0">
+      <div class="num">1</div>
+      <div>
+        <div class="itm-title">요율·정책 파라미터 (단일 출처)<span class="req">필수</span></div>
+        <div class="itm-desc">· 나목 스프레드·마목 수수료·유효기간·자동중지 임계·건별 한도(USD 환산)·핫 비중 임계·시세 소스를 한 곳에서 설정<br>· 시세 소스는 나목 비율 자동 산정 외에 <strong>건별 한도 USD 환산</strong>(EXC-01·BRK-02)에도 사용<br>· <strong>시세(외부지표) 소스: 업비트·빗썸·바이낸스</strong> — 나목 비율 산정(EXC-02), 마목 편차 경고·시세변동 자동중지 판단(BRK-02)이 모두 이 시세를 참조. 복수 소스 조합 방식(중앙값·평균·우선순위)과 수신 장애 시 처리 <span style="color:#b45309;">[확인필요]</span><br>· 값은 행 내 <strong>인라인 입력</strong>으로 수정 → <strong>'변경 저장' 일괄 반영</strong>(저장 전 '되돌리기'로 원복) — 저장 시 변경 이력(버전)·변경자 감사로그 기록(POLICY_VERSION)<br>· 새 값은 <strong>저장 이후 신규 요청부터 적용</strong> — 진행 중 건(제시된 견적·게재중 게시)은 요청 시점 값 유지<br>· EXC-01/02·BRK-02/03/04는 이 값을 <strong>표출만</strong> — 화면 하드코딩 없음, '가격형성 아님' 소명값의 단일 출처<br><span class="basis">근거 V2 · 09 §0 line 51 · L6 · 정책 변경통제 [스키마 POLICY_VERSION]</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">파라미터 인라인 입력</span><span class="nav-act">행 내 값 수정 — 저장 전까지 미반영</span><span class="nav-to stay">화면 내 (이동 없음)</span></div>
+          <div class="nav-row"><span class="nav-el">[변경 저장] 버튼</span><span class="nav-act">클릭 — 일괄 반영 · 변경 이력(버전)·변경자 감사로그(POLICY_VERSION)</span><span class="nav-to stay">화면 내 — 새 값은 <strong>신규 요청부터</strong> 적용(진행 중 건은 요청 시점 값 유지) · EXC-01/02·BRK-02/03/04 표출값 갱신</span></div>
+          <div class="nav-row"><span class="nav-el">[되돌리기] 버튼</span><span class="nav-act">클릭 — 저장 전 입력값 원복</span><span class="nav-to stay">화면 내 (이동 없음)</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="itm" data-idx="1">
+      <div class="num">2</div>
+      <div>
+        <div class="itm-title">기관·가입자 관리<span class="req">필수</span></div>
+        <div class="itm-desc">· <strong>기관당 가입자 1명</strong> — 고객사 측 기안·승인 2인 분리 요건 없음<br>· 목록은 처리용 최소 표시(기관·가입자·KYC 상태·계정 상태·조치) — 조회용 전체 목록은 홈(ADM-02) CSV, 잠금 해제 등 발생 알람 처리는 홈 처리함<br>· CDD/EDD 탈락 시 가입 거절 + 사유 기록, 거래거절 건 STR 검토 연계(예외 A1) · 재이행 기한 초과·미응답 → 신규 거래 제한(예외 A6)<br><span class="basis">근거: 관리자 콘솔 ORG·KYC 통합 [F-12] · 예외케이스 A1·A2·A6 (28 §A)</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">기관 행 [초대 재발송]</span><span class="nav-act">클릭 — 만료·분실 링크 재발급(백업코드 소진 케이스 동일)</span><span class="nav-to stay">화면 내 — <strong>초대 이메일(ONB-00)</strong> 재발송</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="itm" data-idx="2">
+      <div class="num">3</div>
+      <div>
+        <div class="itm-title">초대 발송 (온보딩 진입점)<span class="req">필수</span></div>
+        <div class="itm-desc">· 기관명·가입자 이메일 입력 → 초대 발송 → ONB-00(초대 이메일) → ONB-01(활성화·2FA)<br>· 링크 72시간·1회 유효 — 만료·분실 시 재발송(백업코드 소진 케이스 동일 버튼)<br>· 기관당 1계정 — 추가 초대는 기존 계정 해지 후에만<br><span class="basis">근거: 본인 이메일 초대·셀프가입 없음(ONB-00) · ISMS 2.5(계정·인증 관리)</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">[초대 발송] 버튼</span><span class="nav-act">기관명·가입자 이메일 입력 후 클릭 — 기관당 1명(기존 가입자 있으면 해지 후에만)</span><span class="nav-to stay">화면 이동 없음 — <strong>초대 이메일(ONB-00)</strong> 발송(온보딩 진입점: ONB-00 → ONB-01 → AUTH-01)</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="itm" data-idx="3">
+      <div class="num">4</div>
+      <div>
+        <div class="itm-title">계정 상태 전이·재이행 트리거<span class="req">필수</span></div>
+        <div class="itm-desc">· 상태 기계: 심사중 → 활성 → 일시제한(재이행·의심) → 동결(제재) → 해지<br>· 실소유자·지배구조 변경 등 이벤트 트리거 시 수시 CDD 재이행 → 재심사 중 거래 제한(예외 A4)<br>· 해지 시에도 기록은 법정 기간 보존(거래 15년·AML 5년, 예외 A5)<br>· 계정 상태는 전 화면 게이팅(G-3)의 단일 출처<br><span class="basis">근거: 고객확인 재이행 [L1 §5의2] · 기록 보존 [L6 §9] · 예외케이스 A4·A5</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">기관 행 [상태 변경]</span><span class="nav-act">클릭 — 계정 상태 전이(심사중→활성→일시제한→동결→해지) 조치</span><span class="nav-to stay">화면 내 상태 전이 · 전 화면 게이팅(G-3)에 반영 · 감사기록</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="itm" data-idx="4">
+      <div class="num">5</div>
+      <div>
+        <div class="itm-title">관리 메뉴 (홈·설정 2탭)<span class="req">필수</span></div>
+        <div class="itm-desc">· 어드민은 홈(ADM-02)·설정(ADM-03) 2화면 — 처리는 홈 처리함, 설정·기관 관리는 이 화면<br>· 정책값·상태 변경도 PAM 전용세션·감사로그 대상 — 내부 정책으로 운영, 화면에는 미표기<br><span class="basis">근거: ISMS 2.6 · PAM</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">관리 메뉴 '홈' 탭</span><span class="nav-act">클릭</span><span class="nav-to"><strong>어드민 홈(ADM-02)</strong></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<section class="footer-note" style="padding-bottom:0;">
+  <div class="note-card">
+    <div class="note-title">상세내용</div>
+    <div class="detail-grid" id="detailCol">
+      <div class="dtl" data-idx="0">
+        <div class="detail-label"><span class="dtl-num">1</span>단일 출처 원칙</div>
+      <div class="dtl-body"><span class="box">· EXC-02(가격 고시)·EXC-01(풀 한도)·BRK-02(편차 경고·자동중지 임계)가 여기 값을 표출<br>· 화면에 하드코딩 없음 → 소명 일관성 확보<br>· 수수료 1% = 거래액 기준 고정·양측 각자(2026-09-02 확정) · 건별 한도 1,000 USD 상당(2026-09-02 확정, 종전 1억 원 상당 폐기)<br>· <span class="red">[확인필요]</span> 스프레드 갱신주기·견적 유효시간 · 1% 요율의 합리성·설명의무 소명 수위(BRK-04 고시 문구 반영, 09 §8) · 한도 환산 시세의 장애 시 처리</span></div>
+      </div>
+      <div class="dtl" data-idx="1">
+        <div class="detail-label"><span class="dtl-num">2</span>1기관 1가입자 파급</div>
+      <div class="dtl-body"><span class="box">· 고객사 내부 기안↔승인 분리 전제가 사라짐 — 고객사 승인 단계 없음(DASH-01)과 정합, 구속력 행위(신청·수락)는 실행 전 확인 문구로 고지<br>· DSRV 측 직무분리(본인 기안 자기승인 차단)는 유지 — 홈(ADM-02) 처리함</span></div>
+      </div>
+      <div class="dtl" data-idx="3">
+        <div class="detail-label"><span class="dtl-num">4</span>해지(탈퇴) 흐름</div>
+      <div class="dtl-body"><span class="box">해지 요청 → 진행 중 거래 완결 대기 → 자산 전량 출금 확인 → 비활성화<br>· 신규 거래는 요청 즉시 차단<br>· <span class="red">[확인필요]</span> 일시제한 중 조회·출금 허용 범위 · KYC 심사 도구와의 연동 범위(심사 자체는 별도 AML 시스템 — 이 화면은 상태 전이·계정 조치만)</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="footer-note">
+  <div class="note-card">
+    <div class="note-title">비고</div>
+    <div class="note-body">
+      · DSRV 내부 관리자 화면(고객사 노출 없음). 어드민은 홈(ADM-02)·설정(ADM-03) 2화면.<br>
+      · <strong>[긴급대응 전용 플래그 없음]</strong> 모든 집행이 사람의 승인·서명을 거치는 구조 — 승인을 멈추면 집행도 멈춤. 별도 '거래정지·긴급출금중단' 버튼 없이 승인 중단 + 사고대응 절차서로 대응 — 근거: ISMS 2.11.1(사고 대응·복구).<br>
+      · <strong>[화이트리스트 관리 제외]</strong> 화이트리스트 지연발효는 커스터디 출금(외부 반출) 전용 — 기존 커스터디 정책·시스템 그대로 사용, 이 콘솔에서 중복 관리하지 않음. 나·마 교환·중개(내부 지갑 간 이전)에는 미적용.<br>
+      · 연결: 초대 발송 → ONB-00 · 정책값 표출 EXC-01/02·BRK-02 · 발생 알람 처리(잠금·재이행 도래·격리 등)는 홈(ADM-02) 처리함 · 계정 상태 = 전 화면 게이팅(G-3) 단일 출처
+    </div>
+  </div>
+</section>
+
+<script src="screen.js"></script>
+</body>
+</html>

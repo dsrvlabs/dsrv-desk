@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화면기획 — 초대 이메일</title>
+<link rel="stylesheet" href="screen.css">
+<style>
+  .mail-subject{font-size:14px;font-weight:800;color:#1a1a1a;margin:2px 0 8px;}
+  .mail-body{font-size:12px;color:#475569;line-height:1.7;background:#fbfbf9;border:1px solid var(--line);
+             border-radius:8px;padding:12px 14px;}
+  .mail-body strong{color:#1a1a1a;}
+  .mail-from{width:26px;height:26px;border-radius:50%;background:#0f172a;color:#fff;font-size:11px;font-weight:700;
+             display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="crumb"><span>인증·온보딩</span><span class="s">›</span><span>초대 이메일</span></div>
+  <h1 class="title">초대 이메일</h1>
+  <span class="sid">ONB-00</span>
+  <span class="defense">본인 이메일 초대 · 셀프가입 없음</span>
+</header>
+
+<div class="main">
+  <div class="screen-panel">
+    <div style="position:relative;display:flex;">
+      <div class="labels" id="labels">
+        <div class="lbl"><span class="lbl-text">메일<br>클라이언트</span></div>
+        <div class="lbl"><span class="lbl-text">발신·수신<br>·제목</span></div>
+        <div class="lbl"><span class="lbl-text">초대 본문</span></div>
+        <div class="lbl"><span class="lbl-text">활성화<br>링크</span></div>
+      </div>
+      <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
+    </div>
+
+    <div class="frame" id="frame">
+      <!-- 전역: 메일 클라이언트 (콘솔 아님 — 아직 로그인 전) -->
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="c-top" style="border-radius:8px 8px 0 0;background:#334155;">
+          <span class="brand">✉ 받은편지함</span>
+          <span class="meta"><span class="c-badge">manager@***.co.kr</span></span>
+        </div>
+      </div>
+
+      <!-- 발신·수신·제목 -->
+      <div class="zone" data-idx="0">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="0" style="position:relative;padding:8px;border-radius:8px;">
+          <div class="pin" data-idx="0" style="top:-4px;right:-4px;">1</div>
+          <div class="row" style="gap:10px;align-items:flex-start;">
+            <div class="mail-from">D</div>
+            <div style="flex:1;">
+              <div class="kv"><span class="k">발신</span><span class="v mono">portal.kyc@dsrvlabs.com</span></div>
+              <div class="kv"><span class="k">수신</span><span class="v mono">manager@***.co.kr</span></div>
+              <div class="kv"><span class="k">제목</span><span class="v" style="font-family:inherit;">[DSRV Desk] 계정 초대 · 활성화 안내</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 초대 본문 -->
+      <div class="zone" data-idx="1">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="1" style="position:relative;padding:8px;border-radius:8px;">
+          <div class="pin" data-idx="1" style="top:-4px;right:-4px;">2</div>
+          <div class="mail-subject">A자산운용 담당자님, DSRV Desk 계정이 개설되었습니다.</div>
+          <div class="mail-body">
+            아래 <strong>계정 활성화</strong> 버튼을 눌러 진입한 뒤,<br>
+            ① <strong>비밀번호</strong>를 직접 설정하고 ② <strong>2차 인증(OTP)</strong>을 등록하면 로그인할 수 있습니다.
+          </div>
+          <div class="mail-body" style="margin-top:8px;background:#fffbeb;border-color:#fcd34d;">
+            이 계정은 <strong>A자산운용에 발급되는 유일한 계정</strong>입니다.
+            한 조직(기관)에서는 <strong>1명만 가입</strong>할 수 있으며, 계정을 다른 사람과 공유할 수 없습니다.<br>
+            담당자가 변경되는 경우 이 계정을 해지한 뒤 새 담당자 앞으로 다시 초대해 드립니다.
+          </div>
+        </div>
+      </div>
+
+      <!-- 활성화 링크 -->
+      <div class="zone" data-idx="2">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="2" style="position:relative;padding:8px;border-radius:8px;">
+          <div class="pin" data-idx="2" style="top:-4px;right:-4px;">3</div>
+          <div class="btn primary">계정 활성화 · 비밀번호 설정 &nbsp;→</div>
+          <div class="mail-body" style="margin-top:8px;color:#94a3b8;font-size:11px;">이 링크는 <strong>72시간</strong> 동안 유효하며 1회만 사용할 수 있습니다. 만료된 경우 관리자에게 재발급을 요청하세요.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <svg id="connSvg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;"></svg>
+
+  <div class="items" id="items">
+    <div class="nav-global">
+      <div class="nav-global-title">진입 · 전역 이동</div>
+      <div class="nav-note">· <strong>진입</strong>: DSRV 관리자가 설정(ADM-03)에서 초대 발송 → 담당자 본인 이메일로 수신 (콘솔 화면 아님 — 메일 클라이언트)<br>
+      · 활성화 링크 외 클릭 요소 없음 — 메일 본문에 로그인 버튼·기타 링크를 두지 않음(피싱 방지 원칙과 동일 맥락)</div>
+    </div>
+    <div class="itm" data-idx="0">
+      <div class="num">1</div>
+      <div>
+        <div class="itm-title">본인 이메일로 초대 수신<span class="req">필수</span></div>
+        <div class="itm-desc">· 계약·고객확인(CDD)을 마친 회사의 담당자 본인 이메일로 발송<br>· 스스로 가입하는 경로는 없고, 계정마다 따로 초대<br><span class="basis">근거: 초대 기반 계정 개설 방식(스스로 가입 불가)</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="1">
+      <div class="num">2</div>
+      <div>
+        <div class="itm-title">초대 본문 안내<span class="req">필수</span></div>
+        <div class="itm-desc">· 무엇을 해야 하는지(비밀번호 설정·2차 인증 등록) 안내<br>· 비밀번호는 메일이 아니라 설정 화면에서 본인이 입력<br>· <strong>1조직 1계정 고지</strong> — 한 조직(기관)에서는 1명만 가입 가능하고 계정 공유 불가, 담당자 변경 시 기존 계정 해지 후 재초대. 초대 메일에서 먼저 알림<br><span class="basis">근거: 정보보호 관리체계(ISMS) 인증기준 2.5(비밀번호·인증정보 관리) · 기관당 가입자 1명(ADM-03 초대 정책)</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="2">
+      <div class="num">3</div>
+      <div>
+        <div class="itm-title">계정 활성화 링크<span class="req">필수</span></div>
+        <div class="itm-desc">· 클릭하면 계정 활성화 화면(ONB-01)으로 이동<br>· 링크는 1회만 쓸 수 있고 72시간 지나면 만료 · 만료 시 재발급<br><span class="basis">근거: 정보보호 관리체계(ISMS) 인증기준 2.5(인증정보 관리) · 1회용 활성화 링크</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">[계정 활성화 · 비밀번호 설정 →] 버튼(링크)</span><span class="nav-act">클릭 — 1회용·72시간 유효 토큰 검증</span><span class="nav-to"><strong>계정 활성화(ONB-01)</strong> 이동 · 만료·재사용 링크는 오류 안내(재발급은 관리자에게 요청 — ADM-03 초대 재발송)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<section class="footer-note" style="padding-bottom:0;">
+  <div class="note-card">
+    <div class="note-title">상세내용</div>
+    <div class="detail-grid" id="detailCol">
+      <div class="dtl" data-idx="0">
+        <div class="detail-label"><span class="dtl-num">1</span>왜 이메일 초대인가</div>
+      <div class="dtl-body"><span class="box">· 본인 이메일 수신·링크 접근 자체가 1차 신원 확인 축<br>· 계정별 개별 초대(공용 계정 금지) → 활동 로그 책임 추적</span></div>
+      </div>
+      <div class="dtl" data-idx="1">
+        <div class="detail-label"><span class="dtl-num">2</span>본문이 담는 것</div>
+      <div class="dtl-body"><span class="box">· 비밀번호를 <strong>메일에 담지 않음</strong>(회사가 생성·전달하지 않음 — 서버·이메일에 평문으로 존재한 적 없음)<br>· <strong>왜 1조직 1계정인가</strong> — 계정과 실제 사용자를 1:1로 묶어 모든 행위의 책임자를 특정(공용 계정 금지·감사 추적). 조직 내 다른 인원의 추가 가입 경로가 없으므로, 이 메일 수신자가 조직의 유일한 사용자임을 초대 시점에 못 박음</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="footer-note">
+  <div class="note-card">
+    <div class="note-title">비고</div>
+    <div class="note-body">
+      · 온보딩 <strong>시작점</strong>. KYC 게이팅 화면은 별도로 없음 — 계정은 <strong>KYC 완료 법인에만 생성·초대</strong>, KYC 예외(보류·재이행)는 EXC-01 배너 + 거래 요청 차단으로 처리(관리자 설정 ADM-03 종속).<br>
+      · 다음 화면: 계정 활성화(ONB-01)
+    </div>
+  </div>
+</section>
+
+<script src="screen.js"></script>
+</body>
+</html>

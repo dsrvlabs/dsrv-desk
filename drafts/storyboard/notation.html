@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>표기 규칙 (교환·중개 콘솔)</title>
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Pretendard', system-ui, -apple-system, sans-serif; background:#fafafa; color:#1e293b;
+         font-size:13px; line-height:1.6; padding:28px 32px 60px; }
+  .doc-head { max-width:1060px; margin:0 auto 18px; }
+  .doc-head h1 { font-size:19px; font-weight:800; letter-spacing:-.01em; }
+  .doc-head .sub { font-size:11.5px; color:#64748b; margin-top:3px; }
+
+  .tbl-wrap { max-width:1060px; margin:0 auto; background:#fff; border:1px solid #e2e8f0; border-radius:10px;
+              overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; min-width:860px; }
+  th { text-align:left; font-size:10.5px; font-weight:700; color:#64748b; background:#f8fafc;
+       padding:9px 14px; border-bottom:1.5px solid #e2e8f0; white-space:nowrap; }
+  td { padding:10px 14px; border-bottom:1px solid #f1f5f9; vertical-align:top; font-size:12.5px; }
+  tr:last-child td { border-bottom:none; }
+  td.grp-cell { font-weight:800; color:#0f172a; white-space:nowrap; background:#fcfcfb; }
+  td.item { font-weight:700; color:#0f172a; white-space:nowrap; }
+  .ex { font-family:ui-monospace, 'SF Mono', Consolas, monospace; font-size:11px; background:#f1f5f9;
+        border:1px solid #e2e8f0; border-radius:4px; padding:0 5px; white-space:nowrap; }
+  b.key { color:#1d4ed8; }
+  .need { display:inline-block; font-size:9.5px; font-weight:700; color:#b45309; background:#fef3c7;
+          border-radius:5px; padding:0 6px; margin-left:4px; vertical-align:1px; }
+
+  .foot { max-width:1060px; margin:16px auto 0; background:#fbfbf9; border:1px solid #e7e5e0; border-radius:10px;
+          padding:12px 16px; font-size:11px; color:#64748b; }
+  .foot b { color:#334155; }
+</style>
+</head>
+<body>
+
+<div class="doc-head">
+  <h1>표기 규칙</h1>
+  <div class="sub">화면·문서·CSV 공통 표기 기준 · 현재 화면 19개에서 실제 사용 중인 표기를 집계해 정리 (2026-09-01 · 09-02 개정 — 한도 USD 표기·공통 UI 규격 추가) · 규칙을 바꾸면 이 표를 먼저 고치고 화면을 일괄 수정</div>
+</div>
+
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr><th>구분</th><th>항목</th><th>규칙</th><th>예시</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="grp-cell" rowspan="4">날짜·시간</td>
+      <td class="item">날짜 (화면)</td>
+      <td><b class="key">YYYY-MM-DD</b> — 하이픈 구분, 연도 4자리</td>
+      <td><span class="ex">2026-09-01</span></td>
+    </tr>
+    <tr>
+      <td class="item">일시 (화면)</td>
+      <td>YYYY-MM-DD HH:MM — <b class="key">24시간제</b>, 분 단위(초 생략)</td>
+      <td><span class="ex">2026-08-31 14:22</span></td>
+    </tr>
+    <tr>
+      <td class="item">일시 (CSV·보고서)</td>
+      <td>ISO 8601 <b class="key">YYYY-MM-DDTHH:MM:SS+09:00</b> — 초 단위, 오프셋 명기</td>
+      <td><span class="ex">2026-08-31T14:22:05+09:00</span></td>
+    </tr>
+    <tr>
+      <td class="item">타임존</td>
+      <td><b class="key">KST(UTC+9) 고정</b> — 화면에는 별도 표기 없음, CSV는 +09:00으로 명기</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td class="grp-cell" rowspan="5">수량·자산</td>
+      <td class="item">수량 (화면)</td>
+      <td>천 단위 쉼표 · 소수점 아래 <b class="key">자산별 최대 자릿수 — ETH 6자리 · USDC·USDT 2자리</b>(2026-09-02 확정 · 종전 "최대 6자리" 폐기) · 불필요한 뒤 0 생략(입력 중에는 입력값 그대로) · 숫자와 티커 사이 공백 1칸 · 통화기호(₩·$) 사용 안 함 · 온체인 decimals(ETH 18 · USDC/USDT 6)와 별개의 UI 규칙</td>
+      <td><span class="ex">900 USDC</span> <span class="ex">899.82 USDT</span> <span class="ex">0.3141 ETH</span></td>
+    </tr>
+    <tr>
+      <td class="item">수량 (CSV)</td>
+      <td>쉼표·통화기호 없음 — 단위는 자산 열이 정함</td>
+      <td><span class="ex">100000.000000</span></td>
+    </tr>
+    <tr>
+      <td class="item">입력 자릿수·절사</td>
+      <td>입력: 숫자·소수점만 허용, 자산별 최대 자릿수 <b class="key">초과 입력은 무시(차단)</b> · 천 단위 쉼표 자동 삽입 · 산정값(받는 수량·수수료·USD 환산액)은 <b class="key">해당 자산 자릿수로 절사(내림)</b> — 반올림 아님 · USD 환산 표시는 소수 2자리 (2026-09-02 확정)</td>
+      <td><span class="ex">333.33 USDC × 0.9998 = 333.26 USDT</span> (333.263334 절사) · <span class="ex">0.3141 ETH × 1% = 0.003141 ETH</span></td>
+    </tr>
+    <tr>
+      <td class="item">자산명</td>
+      <td>티커 <b class="key">대문자</b> · 복수 나열은 가운뎃점(·)</td>
+      <td><span class="ex">ETH · USDC · USDT</span></td>
+    </tr>
+    <tr>
+      <td class="item">한도 (USD 환산)</td>
+      <td>「<b class="key">{금액} USD 상당</b>」 — 건별 한도는 USD 환산액으로 표기(2026-09-02 확정) · 환산 시세 = ADM-03 시세 소스 · 요청 시점 · 종전 원화 환산(억 원 상당)·코인 수량 한도 표기 폐기</td>
+      <td><span class="ex">1,000 USD 상당</span></td>
+    </tr>
+    <tr>
+      <td class="grp-cell" rowspan="2">비율</td>
+      <td class="item">교환비율 (화면)</td>
+      <td>스테이블 페어(USDC↔USDT): 「<b class="key">{비율} {받는코인}/{주는코인}</b>」 소수 4자리 · ETH 페어(ETH↔USDC·ETH↔USDT): <b class="key">방향 무관 「{비율} {스테이블}/ETH」</b>(1 ETH당 스테이블 수량) 소수 2자리 (2026-09-02 개정 — USDC→ETH를 받는/주는으로 쓰면 0.0003…이 되어 4자리 표현 불가) · 스프레드와 항상 별도 항목</td>
+      <td><span class="ex">0.9989 USDT/USDC</span> (USDC → USDT) · <span class="ex">1.0000 USDC/USDT</span> (USDT → USDC) · <span class="ex">3,184.00 USDC/ETH</span> (ETH → USDC와 USDC → ETH 공통)</td>
+    </tr>
+    <tr>
+      <td class="item">교환비율 (CSV)</td>
+      <td>단위 없이 숫자만 · 자릿수는 화면 규칙과 동일(스테이블 페어 4 · ETH 페어 2) · 받는 수량 = 스테이블 페어: 보내는 × 비율 / ETH 페어: ETH→스테이블은 ETH × 비율, 스테이블→ETH는 스테이블 ÷ 비율 — 결과는 받는 자산 자릿수로 절사</td>
+      <td><span class="ex">0.9989</span> · <span class="ex">3184.00</span></td>
+    </tr>
+    <tr>
+      <td class="grp-cell" rowspan="2">스프레드</td>
+      <td class="item">스프레드 (화면)</td>
+      <td>퍼센트 <b class="key">소수 2자리</b> — 비율과 합쳐 쓰지 않고 별도 항목</td>
+      <td><span class="ex">0.10%</span></td>
+    </tr>
+    <tr>
+      <td class="item">스프레드 (CSV)</td>
+      <td>퍼센트가 아닌 <b class="key">소수 4자리 소수</b>로 기재</td>
+      <td><span class="ex">0.0010</span> (= 0.10%)</td>
+    </tr>
+    <tr>
+      <td class="grp-cell" rowspan="5">식별자 (채번)</td>
+      <td class="item">교환 거래</td>
+      <td><b class="key">EXC-YYYYMMDD-NNNN</b> — 요청일 + 당일 일련번호 4자리 · 화면 표기 채번 (2026-09-01 통일, 종전 CSV 정의 EXC-YYYY-NNNNNN 폐기)</td>
+      <td><span class="ex">EXC-20260831-0142</span></td>
+    </tr>
+    <tr>
+      <td class="item">중개 거래(마목)</td>
+      <td><b class="key">BRK-YYYYMMDD-NNNN</b> — 게시일 + 당일 일련번호 4자리 · 게시(RFQ)·신청·이전이 같은 번호를 공유 (2026-09-02 추가 — 화면 BRK-03~05·DASH-01 기존 사용 표기를 규칙화)</td>
+      <td><span class="ex">BRK-20260830-0027</span></td>
+    </tr>
+    <tr>
+      <td class="item">법인(고객사)</td>
+      <td>ORG-<b class="key">NNNN</b> — 예시 서술에서만 ORG-A·B·C 가명 사용</td>
+      <td><span class="ex">ORG-0001</span></td>
+    </tr>
+    <tr>
+      <td class="item">승인자(내부)</td>
+      <td>DSRV-OPS-<b class="key">NN</b> · 복수는 세미콜론(;) 연결(CSV)</td>
+      <td><span class="ex">DSRV-OPS-01;DSRV-OPS-02</span></td>
+    </tr>
+    <tr>
+      <td class="item">화면 ID</td>
+      <td>{영역}-NN — ONB·AUTH·DASH·EXC·BRK·ADM · <b class="key">ADM-01은 결번</b> · WAL 영역은 2026-09-01 삭제(결번) · BRK-06·07은 2026-09-02 추가(번호는 추가 순 — 흐름 순서 아님)</td>
+      <td><span class="ex">EXC-01</span></td>
+    </tr>
+    <tr>
+      <td class="grp-cell" rowspan="2">주소·해시</td>
+      <td class="item">지갑주소·tx 해시 (화면)</td>
+      <td>앞 <b class="key">0x + 4자 … 뒤 4자</b> 마스킹 — 말줄임 문자는 U+2026(…) · 예외: 입금 전용 자체 지갑 주소(DASH-01 지갑 잔고)는 <b class="key">전문 표기</b>(2026-09-01)</td>
+      <td><span class="ex">0x9f3a…d81c</span></td>
+    </tr>
+    <tr>
+      <td class="item">지갑주소·tx 해시 (CSV·감사기록)</td>
+      <td><b class="key">전체 표기</b>(마스킹 없음) — 16진수 소문자</td>
+      <td><span class="ex">0x9f3a…(전체)</span></td>
+    </tr>
+    <tr>
+      <td class="grp-cell" rowspan="2">상태값</td>
+      <td class="item">화면</td>
+      <td><b class="key">한글 라벨</b> 배지</td>
+      <td><span class="ex">완료</span> <span class="ex">승인 대기</span></td>
+    </tr>
+    <tr>
+      <td class="item">CSV·시스템 코드</td>
+      <td>영문 <b class="key">대문자</b> 코드</td>
+      <td><span class="ex">COMPLETED</span> <span class="ex">CANCELED</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="doc-head" style="margin-top:26px;">
+  <h1 style="font-size:16px;">공통 UI 규격</h1>
+  <div class="sub">전 화면 공통 동작·문구 기준 (2026-09-02 확정 — "규격은 공통으로") · 화면별 기획서에는 예외만 적고, 여기 없는 동작은 디자이너·개발자가 이 표를 따른다</div>
+</div>
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr><th>구분</th><th>항목</th><th>규칙</th><th>적용·예시</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="grp-cell" rowspan="3">전역 내비게이션</td>
+      <td class="item">로그아웃</td>
+      <td>상단바 우측 <b class="key">기관 배지 클릭 → 메뉴(로그아웃)</b> — 전 화면 동일 위치, 확인 문구 없음 · 세션 즉시 파기</td>
+      <td>→ AUTH-01 · 어드민 콘솔도 동일(→ 어드민 로그인)</td>
+    </tr>
+    <tr>
+      <td class="item">뒤로가기</td>
+      <td>브라우저 뒤로가기 <b class="key">전 화면 미지원</b> — "접근할 수 없는 화면입니다" 안내 후 대시보드 이동 · 화면 이동은 GNB·화면 내 버튼으로만 (DASH-01 항목 5 규칙)</td>
+      <td>→ DASH-01</td>
+    </tr>
+    <tr>
+      <td class="item">종료 동선</td>
+      <td>flow 마지막 화면의 <b class="key">[확인]</b> = 대시보드 이동 · 입력·행위 화면의 <b class="key">[취소]</b>(ghost) = 입력값 파기 후 직전 목록 화면 복귀, 확인 문구 없음</td>
+      <td>EXC-03·04·BRK-05 [확인] → DASH-01 · BRK-02·03 [취소] → BRK-01 · DASH-02·03 [취소] → DASH-01 (2026-09-02 추가 — 뒤로가기 미지원 규칙은 유지)</td>
+    </tr>
+    <tr>
+      <td class="grp-cell" rowspan="4">버튼·확인</td>
+      <td class="item">비활성(disabled)</td>
+      <td>회색 배경·회색 글자·<b class="key">cursor not-allowed</b>, 클릭 무반응 · 비활성 <b>사유는 툴팁이 아니라 인라인 경고</b>로 버튼 위에 표시(EXC-01 패턴) · 툴팁·hover 설명 사용 안 함</td>
+      <td><span class="ex">.btn.disabled</span> · EXC-01 [거래 요청] — 자산 미선택·수량 미입력·한도·풀 초과·KYC 배너 노출 중 · EXC-01 받는 자산 ▾ — 보내는 자산 선택 전</td>
+    </tr>
+    <tr>
+      <td class="item">드롭다운(선택 목록)</td>
+      <td>클릭 → 목록 펼침(현재 선택 강조) · 항목 클릭 시 선택·닫힘 · 바깥 클릭/ESC 닫힘 · 미선택 상태는 회색 안내 문구("자산 선택") · <b class="key">자산 쌍은 보내는 자산 먼저</b> — 받는 자산 ▾는 보내는 자산 선택 전 비활성, 목록에서 보내는 자산 제외(동일 자산 구조적 불가) · 보내는 자산 변경 시 받는 자산·수량 초기화 (2026-09-02 확정)</td>
+      <td>EXC-01 · BRK-02 자산 선택 · ADM-03 시세 소스·상태 변경</td>
+    </tr>
+    <tr>
+      <td class="item">확인 다이얼로그</td>
+      <td><b class="key">구속력·비가역 행위 직전에만</b> 모달 확인 — 제목(행위명) + 결과 1~2문장 + [실행]/[돌아가기] · 그 외(취소·거절·저장)는 확인 없음</td>
+      <td>BRK-03 신청 · BRK-04 수락 · BRK-06 게시 내리기 · EXC-02 수락 · ADM-02 승인/거절/이전 중지</td>
+    </tr>
+    <tr>
+      <td class="item">단독 실행 표기</td>
+      <td>가입자 1인 단독 실행 화면은 버튼 아래 <b class="key">결과 고지 1문장</b>(즉시 확정·구속력·수수료) 상시 노출 — 승인자 지정·2단계 승인 UI 없음(1기관 1가입자)</td>
+      <td>BRK-03·04 하단 문구</td>
+    </tr>
+    <tr>
+      <td class="grp-cell" rowspan="4">상태 표시</td>
+      <td class="item">빈 상태</td>
+      <td>목록·표 대신 점선 박스 + <b class="key">"…이(가) 없습니다"</b> 문구 1줄 + 다음 행동 안내 1줄 · 일러스트·아이콘 없음</td>
+      <td>BRK-01 "게시된 거래의향이 없습니다" · BRK-06 "받은 신청이 없습니다" · DASH-01 "거래 내역이 없습니다"</td>
+    </tr>
+    <tr>
+      <td class="item">로딩</td>
+      <td>영역 단위 <b class="key">"불러오는 중…"</b> 텍스트(스피너 없음, 스켈레톤 없음) · 3초 초과 시 오류 규격으로 전환</td>
+      <td>목록·잔고·시세 영역</td>
+    </tr>
+    <tr>
+      <td class="item">오류 문구</td>
+      <td>① 입력 오류 = 필드 아래 <b class="key">빨간 인라인 박스</b>(⚠ + 원인 + 해결 행동) ② 시스템 오류 = 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" ③ 권한·상태 게이팅 = 상단 배너(G-3 KYC 패턴) · <b>내부 사유·AML 심사 내용 미노출</b></td>
+      <td>EXC-01 한도·풀 초과 · EXC-01 KYC 배너 · EXC-04 '심사 후 보류' 일반화 사유</td>
+    </tr>
+    <tr>
+      <td class="item">상태 칩</td>
+      <td>한글 라벨 배지(표기 규칙) · 색 3계열만 — 진행(노랑)·대기(파랑)·완료(초록), 종결·거절은 회색 <span class="need">[확인필요: 고객 화면 상태 enum 확정 — states 고객 도메인 섹션]</span></td>
+      <td>DASH-01 진행중 / 승인 대기 / 완료 · 마목 게시 상태: 게재중 / <b>협의중</b>(신청 1건 접수·추가 신청 차단) / 확정 / 완료 / 회수 / <b>중지</b>(price guard — 대기 신청 전부 종결) (2026-09-02 확정)</td>
+    </tr>
+    <tr>
+      <td class="grp-cell" rowspan="2">목록</td>
+      <td class="item">정렬·필터·페이징</td>
+      <td><b class="key">없음</b> — 최신순 단일 리스트, 전체 나열(자동 매칭·조건 검색 부재 담보, BRK-01 결정) · 100행 초과 시 "더 보기" 버튼으로 이어 붙임</td>
+      <td>BRK-01 · DASH-01 · BRK-06 받은 신청</td>
+    </tr>
+    <tr>
+      <td class="item">행 클릭</td>
+      <td>행 전체가 클릭 영역 · 이동 목적지는 각 화면 「화면 이동·인터랙션」 표에 명시 · 선택 불가 행(만료 · 타사 게시 '협의중' 등)은 회색 처리·클릭 무반응</td>
+      <td>BRK-01 → BRK-03/06 · DASH-01 → EXC-03/04·BRK-05/06/07</td>
+    </tr>
+    <tr>
+      <td class="grp-cell" rowspan="3">어드민</td>
+      <td class="item">로그인</td>
+      <td>별도 화면 <b class="key">없음(ADM-01 결번 유지)</b> — AUTH-01과 동일 규격(ID/PW + Google Authenticator) + PAM 전용세션에서만 접속 · 유휴 10분(관리자) <span class="need">[확인필요]</span></td>
+      <td>AUTH-01 규격 공용</td>
+    </tr>
+    <tr>
+      <td class="item">역할·노출</td>
+      <td>어드민 역할 <b class="key">1종(운영 관리자)</b> — 화면·버튼 노출 차이 없음 · 통제는 본인 기안 자기승인 차단(행 단위) + 감사로그 + PAM · 콜드 2인 서명자는 콘솔 밖 커스터디 절차</td>
+      <td>ADM-02·03 전 기능 동일 노출</td>
+    </tr>
+    <tr>
+      <td class="item">처리 버튼</td>
+      <td>처리함 행 내 인라인 버튼(승인·보류·거절·이전 중지 등)만 — 별도 상세 화면 없음 · 보류·거절은 사유 입력 필수(모달) · 상태명·버튼명은 states.html 도메인 상태와 동일</td>
+      <td>ADM-02 처리함</td>
+    </tr>
+    <tr>
+      <td class="grp-cell" rowspan="1">정보 노출</td>
+      <td class="item">고객 화면 미노출</td>
+      <td>내부 회계 계정명(운영손익·중개수익) · 내부 사유·AML 심사 내용 · 시세 소스명 — 고객 콘솔 어디에도 표시하지 않음, 구분회계는 어드민 CSV(ADM-02)에서만 (2026-09-02 확정)</td>
+      <td>EXC-04·BRK-05 결과 화면에서 계정명 행 제거</td>
+    </tr>
+    <tr>
+      <td class="grp-cell" rowspan="1">이메일 통지</td>
+      <td class="item">공통 원칙</td>
+      <td>발신전용(no-reply) · 본문에 링크·버튼 없음(콘솔 직접 접속 안내) · 상호 마스킹은 화면과 동일 · 심사·AML 내용 미포함 · 4종(신청 접수 ① / 수락·확정 ② / 거래 완료 ③ / 게시 회수 ④)</td>
+      <td>BRK-03 상세(①·공통 원칙) · BRK-04(②) · BRK-05(③) · BRK-06(④)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="foot">
+  <b>기준·비고</b> — 화면 19개에서 실제 사용 중인 표기를 집계(2026-09-01 · 09-02 BRK-06·07 추가)해 다수 표기를 표준으로 채택.
+  비율 표기({비율} 받는코인/주는코인 · 스프레드 분리)와 거래 채번(EXC-YYYYMMDD-NNNN)은 2026-09-01 확정 규칙.
+  날짜는 현재 전 화면이 YYYY-MM-DD로 통일돼 있어 그대로 표준화 — 다른 형식(예: YY.MM.DD)으로 바꾸려면 이 표 개정 후 화면 일괄 수정.
+</div>
+</body>
+</html>

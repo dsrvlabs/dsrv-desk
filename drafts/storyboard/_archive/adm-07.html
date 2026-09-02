@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화면기획 — 심사 큐</title>
+<link rel="stylesheet" href="screen.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="crumb"><span>관리자</span><span class="s">›</span><span>심사 큐</span></div>
+  <h1 class="title">심사 큐</h1>
+  <span class="sid">ADM-07</span>
+  <span class="defense">자동검증 = 1차 필터 · 최종 판단은 사람</span>
+</header>
+
+<div class="main">
+  <div class="screen-panel">
+    <div style="position:relative;display:flex;">
+      <div class="labels" id="labels">
+        <div class="lbl"><span class="lbl-text">전역·<br>관리 메뉴</span></div>
+        <div class="lbl"><span class="lbl-text">큐 요약</span></div>
+        <div class="lbl"><span class="lbl-text">심사 대기<br>큐</span></div>
+        <div class="lbl"><span class="lbl-text">자동검증<br>결과</span></div>
+        <div class="lbl"><span class="lbl-text">처리<br>(승인·보류·거절)</span></div>
+        <div class="lbl"><span class="lbl-text">처리 이력</span></div>
+      </div>
+      <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
+    </div>
+
+    <div class="frame" id="frame">
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="c-top admin" style="border-radius:8px 8px 0 0;">
+          <span class="brand">DSRV Admin Console</span>
+          <span class="meta"><span class="c-badge adm">Admin</span><span class="c-badge pam">PAM 세션·녹화중</span></span>
+        </div>
+        <div class="c-adminbar" style="margin:0;">
+          <span class="m">대시보드</span><span class="m">ORG·KYC</span><span class="m on">요청·정책</span><span class="m">지갑</span><span class="m">시장감시</span><span class="m">로그</span>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="kpi">
+          <div class="card"><div class="n">3</div><div class="t">심사 대기</div></div>
+          <div class="card"><div class="n">1</div><div class="t">에스컬레이션(주의·불량)</div></div>
+          <div class="card"><div class="n">1</div><div class="t">지연발효 대기</div></div>
+          <div class="card"><div class="n">12</div><div class="t">오늘 처리</div></div>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="0">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="0" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="0" style="top:-4px;right:-4px;">1</div>
+          <div class="zone-title">심사 대기 큐</div>
+          <table class="tbl">
+            <thead><tr><th>유형</th><th>ORG</th><th>내용</th><th>자동검증</th><th>상태</th></tr></thead>
+            <tbody>
+              <tr><td>나목 교환</td><td>A자산운용</td><td class="mono">USDT→USDC 100,000,000원 상당</td><td><span class="chip ok">정상</span></td><td>승인 대기</td></tr>
+              <tr><td>마목 수락</td><td>A자산운용 ↔ B사</td><td class="mono">USDT 500,000 → USDC 499,000</td><td><span class="sev mid">주의 (KYT)</span></td><td>에스컬레이션</td></tr>
+              <tr><td>출금·이전</td><td>A자산운용</td><td class="mono">신규 주소 · USDC 80,000</td><td><span class="chip info">지연발효 중</span></td><td>대기</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="1">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="1" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="1" style="top:-4px;right:-4px;">2</div>
+          <div class="zone-title">선택 건 · 교환거래 요청 내역</div>
+          <div class="kv"><span class="k">요청번호</span><span class="v">BRK-20260830-0027</span></div>
+          <div class="kv"><span class="k">교환쌍 · 방향</span><span class="v">USDT → USDC</span></div>
+          <div class="kv"><span class="k">보내는 수량</span><span class="v">500,000 USDT</span></div>
+          <div class="kv"><span class="k">받는 수량</span><span class="v">499,000 USDC</span></div>
+          <div class="kv"><span class="k">비율</span><span class="v">1.00 USDC/USDT</span></div>
+          <div class="kv"><span class="k">요청 일시</span><span class="v">2026-08-30 14:20 (KST)</span></div>
+          <div class="zone-title" style="margin-top:10px;">자동검증 결과 (고객 화면 미노출)</div>
+          <div class="kv"><span class="k">건별 한도 (≤ 1억 상당)</span><span class="v" style="color:#16a34a;">통과</span></div>
+          <div class="kv"><span class="k">화이트리스트</span><span class="v" style="color:#16a34a;">통과</span></div>
+          <div class="kv"><span class="k">KYT (자금 경로)</span><span class="v" style="color:#b45309;">주의 — 수동검증 필요</span></div>
+          <div class="kv"><span class="k">BLF (제재 주소)</span><span class="v" style="color:#16a34a;">해당 없음</span></div>
+          <div class="kv"><span class="k">트래블룰 정보</span><span class="v" style="color:#16a34a;">충족</span></div>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="2">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="2" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="2" style="top:-4px;right:-4px;">3</div>
+          <div class="row" style="gap:8px;align-items:center;">
+            <div class="btn primary" style="flex:1;">승인</div>
+            <div class="btn" style="flex:1;">보류 (사유 입력)</div>
+            <div class="btn ghost" style="flex:1;">거절 (사유 입력)</div>
+          </div>
+          <div style="font-size:10px;color:#64748b;margin-top:6px;">본인이 기안한 건은 승인 버튼 비활성(자기승인 차단) · 고액·신규주소 건은 지연발효 경과 후 집행</div>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="3">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="3" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="3" style="top:-4px;right:-4px;">4</div>
+          <div class="zone-title">처리 이력</div>
+          <table class="tbl">
+            <thead><tr><th>시각</th><th>건</th><th>처리자</th><th>결과</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">09-01 10:12</td><td class="mono">EXC-0142</td><td>담당자 P</td><td><span class="chip ok">승인</span></td></tr>
+              <tr><td class="mono">09-01 09:40</td><td class="mono">BRK-0311</td><td>담당자 Q</td><td><span class="sev hi">거절 (KYT 불량)</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <svg id="connSvg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;"></svg>
+
+  <div class="items" id="items">
+    <div class="itm" data-idx="0">
+      <div class="num">1</div>
+      <div>
+        <div class="itm-title">심사 대기 큐 (나목·마목·출금 통합)<span class="req">필수</span></div>
+        <div class="itm-desc">· 나목 교환 집행 승인 · 마목 수락(확정) 승인 · 출금/이전 승인을 한 큐에서 처리<br>· EXC-03·BRK-04에서 "관리자 심사 큐"로 지칭한 화면 — 고객에게는 상태만, 상세는 여기만<br><span class="basis">근거: 승인 대기함 [32 §6 APR-01] · DSRV 단일 승인 [09 §0 line 68]</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="1">
+      <div class="num">2</div>
+      <div>
+        <div class="itm-title">자동검증 결과 첨부·에스컬레이션<span class="req">필수</span></div>
+        <div class="itm-desc">· <strong>[공통 포맷 2026-09-01]</strong> 선택 건 상단에 <strong>'교환거래 요청 내역'</strong>을 고객 화면(EXC-03·04 / BRK-03·04·05)과 동일 필드·순서로 표시: 요청번호 → 교환쌍·방향 → 보내는 수량 → 받는 수량 → 비율 → 요청 일시<br>· 한도(건별 1억)·화이트리스트·KYT·BLF·트래블룰 결과를 건별 첨부<br>· 주의·불량 = <strong>자동 거절이 아니라 수동검증 에스컬레이션</strong> — 자동 확정·자동 거절 모두 없음<br>· AML 심사 상세는 고객 화면 미노출(STR 누설 금지)<br><span class="basis">근거: 자동검증 1차 필터 [09 §0 line 70·F-4] · STR 누설 금지 [L1 §4 [원문대조필요]]</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="2">
+      <div class="num">3</div>
+      <div>
+        <div class="itm-title">승인·보류·거절 (직무분리)<span class="req">필수</span></div>
+        <div class="itm-desc">· DSRV 단일 승인 — 단, <strong>본인 기안 건 자기승인 차단</strong>(기안↔승인 분리)<br>· 고액·신규주소 건은 시간지연 승인(지연발효 경과 후 집행)<br>· 거절·보류 시 사유 필수 입력, 고객에게는 일반화된 사유만 통지<br><span class="basis">근거: 직무분리 [ISMS 2.2.2·F-4] · 지연발효 [F-3] · 예외케이스 E3·E4·E7</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="3">
+      <div class="num">4</div>
+      <div>
+        <div class="itm-title">처리 이력·감사추적<span class="req">필수</span></div>
+        <div class="itm-desc">· 처리자·시각·결과·사유 기록 — 위변조 방지·보존(거래 15년/AML 5년)<br>· 반려·차단 건 중 AML 사유는 STR 파이프라인(ADM-02) 연계<br><span class="basis">근거: 감사 로그 [L6 §9 · ISMS 2.9]</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-col" id="detailCol">
+    <div class="dtl" data-idx="0">
+      <div class="detail-label">큐 유입 경로</div>
+      <div class="dtl-body"><span class="box">· 나목: EXC-03 (비율 수락 완료 건 — 고객사 승인 단계 없음, 2026-09-01)<br>· 마목: BRK-04 (게시자 수락 완료 건 — 신청 시 신청자 측·수락 시 게시자 측 각 2인 승인)<br>· 출금/이전: 서면 접수 건 — 고객 온라인 화면 없음(커스터디 서면 요청 절차, 2026-09-01)<br>· 자동검증 주의·불량 → 이 큐로 에스컬레이션</span></div>
+    </div>
+    <div class="dtl" data-idx="1">
+      <div class="detail-label">고객 화면과의 분리</div>
+      <div class="dtl-body"><span class="box">· 고객(EXC-03)에게는 "승인 심사 중" 상태와 예상 소요만<br>· 한도·KYT·BLF·트래블룰 상세는 이 화면에서만 표시(2026-08-31 표시 분리 결정)<br>· 거절 통지는 일반화된 사유 — 구체적 AML 심사 내용 노출 금지</span></div>
+    </div>
+    <div class="dtl" data-idx="2">
+      <div class="detail-label">판단 원칙 (방어)</div>
+      <div class="dtl-body"><span class="box">· 자동검증은 1차 필터 — <span class="red">자동 체결·자동 승인·자동 거절 없음</span>, 최종 판단은 사람<br>· "자동체결 거래소 아님" 소명의 핵심 증적 화면<br>· <span class="red">[확인필요 G4]</span> DSRV 내부 직무분리 최소선(기안↔승인 2인 운영 방식)</span></div>
+    </div>
+    <div class="dtl" data-idx="3"></div>
+  </div>
+</div>
+
+<section class="footer-note">
+  <div class="note-card">
+    <div class="note-title">비고</div>
+    <div class="note-body">
+      · DSRV 내부 관리자 화면(고객사 노출 없음). 관리자 메뉴 '요청·정책' 탭의 <strong>요청(심사 큐)</strong> — 정책은 ADM-03.<br>
+      · <strong>[정정 2026-09-01]</strong> 기존 EXC-03 비고의 "관리자 콘솔 심사 큐(별도 승인 큐 화면 신규 개발 없음)"를 정정 — 심사 상세를 고객 화면에서 제거(2026-08-31)한 이상 <strong>관리자 측 심사 화면은 필요</strong>하므로 ADM-07로 명시화. ADM-02(시장감시)와 분리해 감시와 승인을 별도 화면으로 유지.<br>
+      · <strong>[방어 핵심]</strong> 자동검증(한도·화이트리스트·KYT·BLF·트래블룰)은 1차 필터일 뿐, 승인·보류·거절은 전부 사람의 판단 — "자동체결·자동심사 아님" 소명. 본인 기안 자기승인 차단으로 직무분리 담보.<br>
+      · <strong>[공통 포맷 2026-09-01]</strong> 선택 건의 거래 내역 표시는 고객 화면과 동일한 <strong>'교환거래 요청 내역' 포맷·필드 순서</strong>를 그대로 사용 — 심사자가 고객 화면과 같은 순서로 대조 가능.<br>
+      · 예외케이스 귀속: E3(자동검증 차단)·E4(maker-checker 반려)·E7(트래블룰 보류) — 처리 결과는 고객 화면(EXC-03·BRK-04)에 상태로만 반영.<br>
+      · 연결: 유입 EXC-03 · BRK-04 / 정책값 ADM-03 / AML 연계 ADM-02 / 이력 ADM-04
+    </div>
+  </div>
+</section>
+
+<script src="screen.js"></script>
+</body>
+</html>

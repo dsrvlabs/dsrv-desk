@@ -1,0 +1,449 @@
+<title>나목·마목 거래구조</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #F5F7F9;
+    --surface: #FFFFFF;
+    --ink: #1F2A37;
+    --muted: #5B6B7B;
+    --line: #D7DEE6;
+    --line-soft: #E6EBF0;
+    --na: #0E7490;        /* 나목 교환 */
+    --na-soft: #E3F1F5;
+    --ma: #B45309;        /* 마목 중개 */
+    --ma-soft: #F7EDE0;
+    --warn: #B3403A;
+    --warn-soft: #F7E9E8;
+    --chip: #EDF1F5;
+    --code-bg: #F0F3F6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #13181D;
+      --surface: #1B2129;
+      --ink: #E3E9EF;
+      --muted: #97A4B2;
+      --line: #333E4A;
+      --line-soft: #2A3440;
+      --na: #58C4DB;
+      --na-soft: #16333C;
+      --ma: #E2A45B;
+      --ma-soft: #3B2C18;
+      --warn: #E28B84;
+      --warn-soft: #402323;
+      --chip: #242D37;
+      --code-bg: #232B34;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #13181D;
+    --surface: #1B2129;
+    --ink: #E3E9EF;
+    --muted: #97A4B2;
+    --line: #333E4A;
+    --line-soft: #2A3440;
+    --na: #58C4DB;
+    --na-soft: #16333C;
+    --ma: #E2A45B;
+    --ma-soft: #3B2C18;
+    --warn: #E28B84;
+    --warn-soft: #402323;
+    --chip: #242D37;
+    --code-bg: #232B34;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 40px 24px 72px; }
+
+  header.masthead { border-bottom: 2px solid var(--ink); padding-bottom: 20px; margin-bottom: 8px; }
+  .eyebrow {
+    font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px 14px; margin-bottom: 10px;
+  }
+  h1 { font-size: 30px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.01em; text-wrap: balance; }
+  .lede { color: var(--muted); max-width: 66ch; margin: 0; }
+  .premise { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .premise span {
+    background: var(--chip); border: 1px solid var(--line); border-radius: 4px;
+    padding: 3px 10px; font-size: 12.5px; font-weight: 500; color: var(--ink);
+  }
+
+  section { margin-top: 44px; }
+  .sec-head { display: flex; align-items: baseline; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 18px; }
+  .sec-no { font-family: "IBM Plex Mono", monospace; font-size: 13px; font-weight: 600; color: var(--muted); }
+  h2 { font-size: 20px; font-weight: 700; margin: 0; letter-spacing: -0.01em; }
+  h2 .tag-na, h2 .tag-ma { font-size: 12.5px; font-weight: 600; padding: 2px 8px; border-radius: 4px; vertical-align: 2px; margin-left: 8px; }
+  .tag-na { color: var(--na); background: var(--na-soft); }
+  .tag-ma { color: var(--ma); background: var(--ma-soft); }
+
+  figure { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 20px 16px 12px; }
+  .fig-scroll { overflow-x: auto; }
+  .fig-scroll svg { min-width: 780px; display: block; max-width: 100%; height: auto; }
+  figcaption { font-size: 13px; color: var(--muted); padding: 10px 6px 2px; border-top: 1px solid var(--line-soft); margin-top: 12px; }
+
+  p.note { color: var(--muted); font-size: 13.5px; max-width: 72ch; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 760px) { .grid2 { grid-template-columns: 1fr; } }
+
+  .fee-card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; border-top: 3px solid var(--line); }
+  .fee-card.na { border-top-color: var(--na); }
+  .fee-card.ma { border-top-color: var(--ma); }
+  .fee-card h3 { margin: 0 0 4px; font-size: 15.5px; font-weight: 700; }
+  .fee-card h3 small { font-weight: 500; color: var(--muted); font-size: 12.5px; margin-left: 6px; }
+  .formula {
+    font-family: "IBM Plex Mono", monospace; font-size: 13.5px; background: var(--code-bg);
+    border: 1px solid var(--line-soft); border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+    overflow-x: auto; white-space: nowrap;
+  }
+  .stack { display: flex; flex-direction: column; gap: 6px; margin: 12px 0; }
+  .stack .row { display: flex; align-items: center; gap: 10px; font-size: 13.5px; }
+  .stack .row .st { font-size: 11.5px; font-weight: 600; padding: 1px 8px; border-radius: 10px; flex-shrink: 0; }
+  .st.ok { background: var(--na-soft); color: var(--na); }
+  .st.later { background: var(--chip); color: var(--muted); border: 1px dashed var(--line); }
+  .st.tbd { background: var(--warn-soft); color: var(--warn); }
+  .fee-card ul { margin: 10px 0 0; padding-left: 18px; font-size: 13.5px; color: var(--muted); }
+  .fee-card ul li { margin: 3px 0; }
+  .fee-card ul li b { color: var(--ink); font-weight: 600; }
+
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; background: var(--surface); }
+  .tbl-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+  th { text-align: left; font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--muted); background: var(--chip); padding: 9px 14px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  td { padding: 9px 14px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  td.mono, .mono { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; font-size: 13px; }
+  .pill { display: inline-block; font-size: 11.5px; font-weight: 600; padding: 1px 8px; border-radius: 10px; white-space: nowrap; }
+  .pill.fix { background: var(--na-soft); color: var(--na); }
+  .pill.tbd { background: var(--warn-soft); color: var(--warn); }
+  .pill.plan { background: var(--chip); color: var(--muted); border: 1px solid var(--line); }
+
+  .open-list { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 4px 20px; }
+  .open-list ol { margin: 12px 0; padding-left: 20px; font-size: 13.5px; }
+  .open-list li { margin: 8px 0; color: var(--muted); }
+  .open-list li b { color: var(--ink); font-weight: 600; }
+
+  footer { margin-top: 56px; border-top: 1px solid var(--line); padding-top: 14px; font-size: 12.5px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 18px; }
+
+  /* SVG shared */
+  .d-box { fill: var(--surface); stroke: currentColor; stroke-width: 1.2; }
+  .d-title { font-family: "IBM Plex Sans KR", sans-serif; font-size: 13px; font-weight: 600; fill: currentColor; }
+  .d-sub { font-family: "IBM Plex Sans KR", sans-serif; font-size: 11px; fill: var(--muted); }
+  .d-lab { font-family: "IBM Plex Sans KR", sans-serif; font-size: 11.5px; fill: var(--muted); }
+  .d-line { stroke: currentColor; stroke-width: 1.2; fill: none; }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <div class="eyebrow">
+      <span>VASP 변경신고 기획</span><span>내부 검토용 초안 · drafts(근거 아님)</span><span>2026-09-01</span>
+    </div>
+    <h1>교환(나목) · 교환 중개(마목) — 풀 구조와 수수료 구조</h1>
+    <p class="lede">거래에 쓰이는 자산 풀(월렛 묶음), 두 서비스의 체결 플로우, 수수료·스프레드 구조를 한 장으로 정리한 검토안입니다. 요율 등 수치는 미확정이며 예시로 표기했습니다.</p>
+    <div class="premise">
+      <span>100% 콜드 · 수동 집행</span>
+      <span>취급자산 3종 (ETH·USDC·USDT)</span>
+      <span>국내 법인 · 자사 커스터디 고객</span>
+      <span>원화 미취급</span>
+      <span>건별 신청 상한 1억(원화 환산) · 초과분 추가 신청</span>
+      <span>스프레드·수수료 고정률 · 변경 시 사전 고지</span>
+    </div>
+  </header>
+
+  <!-- ① 자산 풀 구조 -->
+  <section>
+    <div class="sec-head"><span class="sec-no">01</span><h2>자산 풀 구조 — 콜드월렛 4개 묶음</h2></div>
+    <figure>
+      <div class="fig-scroll">
+      <svg viewBox="0 0 960 442" role="img" aria-label="커스터디 콜드월렛 내부의 4개 자산 풀(고객 수탁, 운영, 나목 교환재고, 마목 에스크로)과 풀 사이의 자산 이동 경로">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+          </marker>
+          <marker id="ar-na" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--na)"/>
+          </marker>
+          <marker id="ar-ma" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--ma)"/>
+          </marker>
+        </defs>
+
+        <!-- 자기자본 충당원 (경계 밖) -->
+        <rect x="480" y="10" width="230" height="42" rx="4" class="d-box" stroke-dasharray="4 3"/>
+        <text x="595" y="28" text-anchor="middle" class="d-title">밸리데이터 · 노드 운영 보상</text>
+        <text x="595" y="43" text-anchor="middle" class="d-sub">수취 가상자산 = 교환재고 재원</text>
+        <line x1="595" y1="52" x2="595" y2="136" class="d-line" marker-end="url(#ar)"/>
+        <text x="604" y="86" class="d-lab">자기자본 충당</text>
+
+        <!-- 커스터디 경계 -->
+        <rect x="20" y="96" width="920" height="330" rx="8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="7 5"/>
+        <text x="40" y="122" class="d-title">커스터디 콜드월렛 <tspan class="d-sub">— MPC · 에어갭 · 다중승인 · 수동 집행 (분리보관)</tspan></text>
+
+        <!-- 풀 4개 -->
+        <rect x="40"  y="140" width="190" height="96" rx="6" class="d-box"/>
+        <text x="135" y="166" text-anchor="middle" class="d-title">① 고객 수탁 풀</text>
+        <text x="135" y="186" text-anchor="middle" class="d-sub">법인 고객 예치 자산</text>
+        <text x="135" y="202" text-anchor="middle" class="d-sub">ETH · USDC · USDT</text>
+
+        <rect x="270" y="140" width="190" height="96" rx="6" class="d-box"/>
+        <text x="365" y="166" text-anchor="middle" class="d-title">② 운영 풀</text>
+        <text x="365" y="186" text-anchor="middle" class="d-sub">자사 운영 자산</text>
+        <text x="365" y="202" text-anchor="middle" class="d-sub">수수료 수익 귀속</text>
+
+        <rect x="500" y="140" width="190" height="96" rx="6" class="d-box" stroke="var(--na)" stroke-width="1.8"/>
+        <text x="595" y="166" text-anchor="middle" class="d-title" fill="var(--na)">③ 교환재고 풀 (나목)</text>
+        <text x="595" y="186" text-anchor="middle" class="d-sub">자기자본 · 자사 소유</text>
+        <text x="595" y="202" text-anchor="middle" class="d-sub">재고 한도 · 위험한도 관리</text>
+
+        <rect x="730" y="140" width="190" height="96" rx="6" class="d-box" stroke="var(--ma)" stroke-width="1.8"/>
+        <text x="825" y="166" text-anchor="middle" class="d-title" fill="var(--ma)">④ 에스크로 전용 풀 (마목)</text>
+        <text x="825" y="186" text-anchor="middle" class="d-sub">블록딜 예치 · 고객 소유 유지</text>
+        <text x="825" y="202" text-anchor="middle" class="d-sub">법적 지위 [확인필요]</text>
+
+        <!-- 나목 스왑: ① <-> ③ -->
+        <line x1="135" y1="236" x2="135" y2="288" class="d-line" stroke="var(--na)"/>
+        <line x1="595" y1="236" x2="595" y2="288" class="d-line" stroke="var(--na)"/>
+        <line x1="141" y1="288" x2="589" y2="288" class="d-line" stroke="var(--na)" marker-start="url(#ar-na)" marker-end="url(#ar-na)"/>
+        <text x="365" y="280" text-anchor="middle" class="d-lab" fill="var(--na)">나목 교환 — 재고 ↔ 고객 자산 스왑 (회차별 수동 집행)</text>
+
+        <!-- 마목 에스크로: ① -> ④ (예치), ④ -> ① (이전/반환) -->
+        <line x1="205" y1="236" x2="205" y2="340" class="d-line" stroke="var(--ma)"/>
+        <line x1="205" y1="340" x2="814" y2="340" class="d-line" stroke="var(--ma)"/>
+        <line x1="820" y1="340" x2="820" y2="242" class="d-line" stroke="var(--ma)" marker-end="url(#ar-ma)"/>
+        <text x="512" y="332" text-anchor="middle" class="d-lab" fill="var(--ma)">마목 블록딜 — 매도·매수 양측 자산 예치</text>
+
+        <line x1="852" y1="236" x2="852" y2="384" class="d-line" stroke="var(--ma)" stroke-dasharray="5 4"/>
+        <line x1="852" y1="384" x2="176" y2="384" class="d-line" stroke="var(--ma)" stroke-dasharray="5 4"/>
+        <line x1="170" y1="384" x2="170" y2="242" class="d-line" stroke="var(--ma)" stroke-dasharray="5 4" marker-end="url(#ar-ma)"/>
+        <text x="512" y="404" text-anchor="middle" class="d-lab" fill="var(--ma)">조건 충족 → 상대방 앞 이전 · 수수료 차감 ｜ 무산 → 원소유자 반환</text>
+      </svg>
+      </div>
+      <figcaption>4개 풀 전부 커스터디 콜드월렛 안에서 분리보관. 기존 3개 묶음(고객 수탁·운영·교환재고)에 마목 블록딜용 <b>에스크로 전용 풀이 추가</b>되는 구조 — "탈취 가능성 없는 지갑 보관" 소명은 기존 커스터디 콜드 요건 논리를 재사용.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ② 나목 플로우 -->
+  <section>
+    <div class="sec-head"><span class="sec-no">02</span><h2>교환 체결 플로우 <span class="tag-na">나목 · RFQ</span></h2></div>
+    <figure>
+      <div class="fig-scroll">
+      <svg viewBox="0 0 960 330" role="img" aria-label="나목 RFQ 교환 플로우: 고객 요청, 시세 기반 견적, 검증·승인, 콜드 수동 집행의 4단계와 서킷브레이커·분할 체결 통제">
+        <defs>
+          <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+          </marker>
+        </defs>
+
+        <!-- 시세 제공사 -->
+        <rect x="250" y="16" width="170" height="42" rx="4" class="d-box" stroke-dasharray="4 3"/>
+        <text x="335" y="34" text-anchor="middle" class="d-title">시세 제공사</text>
+        <text x="335" y="49" text-anchor="middle" class="d-sub">외부 지표 · 실시간</text>
+        <line x1="335" y1="58" x2="335" y2="128" class="d-line" marker-end="url(#ar2)"/>
+        <text x="344" y="96" class="d-lab">기준가 수신</text>
+
+        <!-- 메인 4단계 -->
+        <rect x="30" y="130" width="140" height="72" rx="6" class="d-box"/>
+        <text x="100" y="160" text-anchor="middle" class="d-title">고객 법인</text>
+        <text x="100" y="178" text-anchor="middle" class="d-sub">수량 · 방향 요청</text>
+
+        <rect x="250" y="130" width="170" height="72" rx="6" class="d-box" stroke="var(--na)" stroke-width="1.8"/>
+        <text x="335" y="156" text-anchor="middle" class="d-title" fill="var(--na)">견적 산출 (RFQ)</text>
+        <text x="335" y="174" text-anchor="middle" class="d-sub">기준가 ± 스프레드</text>
+        <text x="335" y="190" text-anchor="middle" class="d-sub">단건 견적 · 오더북 없음</text>
+
+        <rect x="500" y="130" width="170" height="72" rx="6" class="d-box"/>
+        <text x="585" y="156" text-anchor="middle" class="d-title">검증 · 승인</text>
+        <text x="585" y="174" text-anchor="middle" class="d-sub">BLF·KYT 자동검증 (1차)</text>
+        <text x="585" y="190" text-anchor="middle" class="d-sub">불량 시 수동검증 → DSRV 승인</text>
+
+        <rect x="750" y="130" width="180" height="72" rx="6" class="d-box"/>
+        <text x="840" y="156" text-anchor="middle" class="d-title">콜드 수동 집행</text>
+        <text x="840" y="174" text-anchor="middle" class="d-sub">③ 교환재고 풀 차감</text>
+        <text x="840" y="190" text-anchor="middle" class="d-sub">트래블룰 · 3면 대사</text>
+
+        <line x1="170" y1="166" x2="242" y2="166" class="d-line" marker-end="url(#ar2)"/>
+        <text x="206" y="156" text-anchor="middle" class="d-lab">요청</text>
+        <text x="206" y="184" text-anchor="middle" class="d-lab" fill="var(--warn)">건별 ≤ 1억</text>
+        <line x1="420" y1="166" x2="492" y2="166" class="d-line" marker-end="url(#ar2)"/>
+        <text x="456" y="156" text-anchor="middle" class="d-lab">고객 수락</text>
+        <line x1="670" y1="166" x2="742" y2="166" class="d-line" marker-end="url(#ar2)"/>
+        <text x="706" y="156" text-anchor="middle" class="d-lab">승인 완료</text>
+
+        <!-- 통제 노트 -->
+        <line x1="335" y1="202" x2="335" y2="240" class="d-line" stroke-dasharray="3 3"/>
+        <rect x="216" y="240" width="238" height="58" rx="6" fill="var(--warn-soft)" stroke="var(--warn)" stroke-width="1"/>
+        <text x="335" y="262" text-anchor="middle" class="d-title" fill="var(--warn)">서킷브레이커</text>
+        <text x="335" y="280" text-anchor="middle" class="d-sub">위험한도 초과·시세 이상·피드 장애 시</text>
+        <text x="335" y="294" text-anchor="middle" class="d-sub">신규 견적 자동 중단 · 해제는 검수 조직 승인</text>
+
+        <line x1="100" y1="202" x2="100" y2="240" class="d-line" stroke-dasharray="3 3"/>
+        <rect x="20" y="240" width="160" height="58" rx="6" class="d-box" stroke-dasharray="4 3"/>
+        <text x="100" y="262" text-anchor="middle" class="d-title">초과 수량</text>
+        <text x="100" y="280" text-anchor="middle" class="d-sub">추가 신청 = 분할 체결</text>
+        <text x="100" y="294" text-anchor="middle" class="d-sub">회차별 견적 재산정</text>
+
+        <line x1="840" y1="202" x2="840" y2="240" class="d-line" stroke-dasharray="3 3"/>
+        <rect x="716" y="240" width="228" height="58" rx="6" class="d-box" stroke-dasharray="4 3"/>
+        <text x="830" y="262" text-anchor="middle" class="d-title">집행 통제</text>
+        <text x="830" y="280" text-anchor="middle" class="d-sub">회차 간 집행 간격 · 일일 누적 한도 [미정]</text>
+        <text x="830" y="294" text-anchor="middle" class="d-sub">재고 부족·스프레드 이탈 시 보류</text>
+      </svg>
+      </div>
+      <figcaption>DSRV가 교환 상대방이 되는 RFQ 단건 견적. 자동 체결 엔진 없이 <b>건별 상한(1억) + 회차별 재견적 + 수동 집행</b>으로 대량 거래를 시간 분산 체결 — 자문의 TWAP 요구 취지를 충족하는 설계이며, 산출물에는 "대량주문 분할 체결 기준"으로 기술.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ③ 마목 플로우 -->
+  <section>
+    <div class="sec-head"><span class="sec-no">03</span><h2>중개 체결 플로우 <span class="tag-ma">마목 · 블록딜 + 에스크로</span></h2></div>
+    <figure>
+      <div class="fig-scroll">
+      <svg viewBox="0 0 960 356" role="img" aria-label="마목 블록딜 중개 플로우: 매도·매수 법인의 가격 협의, 확정·승인, 에스크로 예치, 정산·상호 이전. 무산 시 예치 반환">
+        <defs>
+          <marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+          </marker>
+          <marker id="ar3-ma" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--ma)"/>
+          </marker>
+        </defs>
+
+        <rect x="30" y="52" width="122" height="56" rx="6" class="d-box"/>
+        <text x="91" y="76" text-anchor="middle" class="d-title">매도 법인</text>
+        <text x="91" y="94" text-anchor="middle" class="d-sub">KYC · 처분권 확인</text>
+        <rect x="30" y="204" width="122" height="56" rx="6" class="d-box"/>
+        <text x="91" y="228" text-anchor="middle" class="d-title">매수 법인</text>
+        <text x="91" y="246" text-anchor="middle" class="d-sub">KYC · 잔고 확인</text>
+
+        <rect x="216" y="124" width="146" height="66" rx="6" class="d-box"/>
+        <text x="289" y="150" text-anchor="middle" class="d-title">가격 · 조건 협의</text>
+        <text x="289" y="168" text-anchor="middle" class="d-sub">당사자 합의 원칙</text>
+        <text x="289" y="182" text-anchor="middle" class="d-sub">DSRV 가격 비관여</text>
+
+        <rect x="416" y="124" width="146" height="66" rx="6" class="d-box"/>
+        <text x="489" y="150" text-anchor="middle" class="d-title">확정 · 검증 · 승인</text>
+        <text x="489" y="168" text-anchor="middle" class="d-sub">BLF·KYT·트래블룰 (1차)</text>
+        <text x="489" y="182" text-anchor="middle" class="d-sub">DSRV 승인 · 건별 ≤ 1억</text>
+
+        <rect x="616" y="124" width="146" height="66" rx="6" class="d-box" stroke="var(--ma)" stroke-width="1.8"/>
+        <text x="689" y="150" text-anchor="middle" class="d-title" fill="var(--ma)">에스크로 예치</text>
+        <text x="689" y="168" text-anchor="middle" class="d-sub">양측 자산 → ④ 전용 풀</text>
+        <text x="689" y="182" text-anchor="middle" class="d-sub">콜드 · 탈취 불가 소명</text>
+
+        <rect x="812" y="124" width="128" height="66" rx="6" class="d-box"/>
+        <text x="876" y="150" text-anchor="middle" class="d-title">정산 · 이전</text>
+        <text x="876" y="168" text-anchor="middle" class="d-sub">상호 이전 (수동)</text>
+        <text x="876" y="182" text-anchor="middle" class="d-sub">수수료 양측 수취</text>
+
+        <line x1="152" y1="80" x2="210" y2="140" class="d-line" marker-end="url(#ar3)"/>
+        <line x1="152" y1="232" x2="210" y2="176" class="d-line" marker-end="url(#ar3)"/>
+        <text x="170" y="158" text-anchor="middle" class="d-lab">의향 · 조건</text>
+        <line x1="362" y1="157" x2="408" y2="157" class="d-line" marker-end="url(#ar3)"/>
+        <line x1="562" y1="157" x2="608" y2="157" class="d-line" marker-end="url(#ar3)"/>
+        <line x1="762" y1="157" x2="804" y2="157" class="d-line" marker-end="url(#ar3)"/>
+
+        <!-- 시세 괴리 가드 -->
+        <line x1="289" y1="190" x2="289" y2="228" class="d-line" stroke-dasharray="3 3"/>
+        <rect x="196" y="228" width="186" height="52" rx="6" fill="var(--warn-soft)" stroke="var(--warn)" stroke-width="1"/>
+        <text x="289" y="250" text-anchor="middle" class="d-title" fill="var(--warn)">시세 괴리 통제 (가드)</text>
+        <text x="289" y="268" text-anchor="middle" class="d-sub">외부지표 대비 임계 초과 시 중단</text>
+
+        <!-- 시장감시 -->
+        <line x1="489" y1="190" x2="489" y2="228" class="d-line" stroke-dasharray="3 3"/>
+        <rect x="400" y="228" width="178" height="52" rx="6" class="d-box" stroke-dasharray="4 3"/>
+        <text x="489" y="250" text-anchor="middle" class="d-title">시장감시 (독립)</text>
+        <text x="489" y="268" text-anchor="middle" class="d-sub">통정 · 자전 · 위장 거래 탐지</text>
+
+        <!-- 무산 반환 -->
+        <line x1="689" y1="190" x2="689" y2="318" class="d-line" stroke="var(--ma)" stroke-dasharray="5 4"/>
+        <line x1="689" y1="318" x2="91" y2="318" class="d-line" stroke="var(--ma)" stroke-dasharray="5 4"/>
+        <line x1="91" y1="318" x2="91" y2="268" class="d-line" stroke="var(--ma)" stroke-dasharray="5 4" marker-end="url(#ar3-ma)"/>
+        <text x="390" y="336" text-anchor="middle" class="d-lab" fill="var(--ma)">거래 무산 시 — 예치 자산 원소유자 반환 (수수료 없음)</text>
+      </svg>
+      </div>
+      <figcaption>DSRV는 비당사자 중개인. 외부 지표는 가격 결정이 아닌 <b>괴리 감지 가드</b>로만 사용해 가격 비관여를 유지하고, 체결 확실성·탈취 방지는 <b>에스크로 전용 콜드 풀</b>이 담보. 블록딜에도 건별 상한 1억을 적용(블록딜 성격과의 정합은 §05 참조).</figcaption>
+    </figure>
+  </section>
+
+  <!-- ④ 수수료 구조 -->
+  <section>
+    <div class="sec-head"><span class="sec-no">04</span><h2>수수료 구조</h2></div>
+    <div class="grid2">
+      <div class="fee-card na">
+        <h3>나목 — 스프레드 내재 <small>별도 수수료 없음</small></h3>
+        <div class="formula">체결 비율 = 외부지표 기준가 × (1 ± 고정 스프레드)</div>
+        <div class="stack">
+          <div class="row"><span class="st ok">확정</span><span>고정 스프레드 — 자산쌍별 단일률, 수량·변동성 가산 없음</span></div>
+          <div class="row"><span class="st ok">확정</span><span>변경 시 사전 고지 후 적용 (설명·공시 절차 연계)</span></div>
+        </div>
+        <ul>
+          <li>수익 인식: <b>스프레드 차익</b> (견적가에 내재) · <b>구분회계</b> 분리 계상</li>
+          <li>회차별 재견적(기준가만 갱신·스프레드율 불변) → 분할 체결 시 시간가중 평균 체결</li>
+          <li>전 고객 동일률 — 관계자 특혜 배제·이해상충 통제 소명과 정합</li>
+          <li>스프레드율 수치: <b>[확인필요]</b> 합리성 소명 자료 필요</li>
+        </ul>
+      </div>
+      <div class="fee-card ma">
+        <h3>마목 — 중개수수료 <small>매도·매수 양측 각각 부과</small></h3>
+        <div class="formula">수수료 = 체결금액 × 고정 요율 (양측)</div>
+        <div class="stack">
+          <div class="row"><span class="st ok">확정</span><span>고정 단일 요율 — 금액 구간별 차등 없음</span></div>
+          <div class="row"><span class="st ok">확정</span><span>변경 시 사전 고지 후 적용 (설명·공시 절차 연계)</span></div>
+        </div>
+        <ul>
+          <li>요율 수치: 현행 안(골격 v3) <b>1% 양측</b> — 확정치 <b>[확인필요]</b> 합리성 소명 필요</li>
+          <li>수취 시점: <b>정산 완료 시</b> 에스크로에서 차감 → ② 운영 풀 귀속</li>
+          <li>고정 단일률이라 분할 정산(건별 1억)과 무관하게 총 수수료 동일 — 쪼개기에 따른 유불리 없음</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note">두 수익원(스프레드 · 중개수수료)은 구분회계로 분리하고, DSRV 연계 거래는 시장감시에 별도 플래그 — 단일 법인의 나·마목 겸업 이해상충 통제와 연결됩니다.</p>
+  </section>
+
+  <!-- ⑤ 분할 체결 · 통제 파라미터 -->
+  <section>
+    <div class="sec-head"><span class="sec-no">05</span><h2>분할 체결 · 통제 파라미터</h2></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>파라미터</th><th>내용</th><th>상태</th></tr></thead>
+        <tbody>
+          <tr><td><b>건별 신청 상한</b></td><td>나목·마목 공통 <span class="mono">1억</span> (원화 환산) · 초과 수량은 추가 신청</td><td><span class="pill fix">방향 확정</span></td></tr>
+          <tr><td>환산 기준</td><td>원화 환산 시점·참조 시세 정의 (신청 시점 vs 집행 시점, 참조 지표)</td><td><span class="pill tbd">미정</span></td></tr>
+          <tr><td>시간 분산</td><td>동일 고객·동일 방향 회차 간 <b>집행 간격</b> 또는 <b>일일 누적 한도</b> — 형식적 쪼개기 방어의 핵심</td><td><span class="pill tbd">미정</span></td></tr>
+          <tr><td>회차별 재견적</td><td>각 회차를 그 시점 외부지표로 재산정 → 시간가중 평균 체결 효과</td><td><span class="pill plan">설계 원칙</span></td></tr>
+          <tr><td>서킷브레이커</td><td>발동 조건(시세 급변동·피드 장애·재고/위험한도 소진·일일 누적 초과) · 해제 권한 · 발동 기록</td><td><span class="pill plan">설계 원칙</span></td></tr>
+          <tr><td>거래조건 검수 조직</td><td>기존 "DSRV 승인 + 불량 시 수동검증 + 독립 시장감시"를 검수 기능으로 명명해 조직도 명시</td><td><span class="pill plan">설계 원칙</span></td></tr>
+          <tr><td>Structuring 구분</td><td>제도 유도 분할(상한 초과분)과 회피성 분할거래를 시장감시·STR 룰에서 구분</td><td><span class="pill plan">설계 필요</span></td></tr>
+          <tr><td>마목 상한 정합</td><td>블록딜(대량 일괄 협의)에 건별 1억 상한 적용 시 총액 협의 → 분할 정산 구조로 재기술 필요</td><td><span class="pill tbd">쟁점</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ⑥ 미확정 -->
+  <section>
+    <div class="sec-head"><span class="sec-no">06</span><h2>미확정 · [확인필요]</h2></div>
+    <div class="open-list">
+      <ol>
+        <li><b>법률 자문 답변 원문의 knowledge/ 등재</b> — 등재 전까지 TWAP·서킷브레이커·에스크로 요구는 근거 인용 불가(전언 상태)</li>
+        <li><b>수수료 요율·스프레드율 수치</b> 및 합리성 소명 자료</li>
+        <li><b>에스크로 예치 자산의 법적 지위</b> — 고객 소유 유지·분리보관 구성, 약관 반영</li>
+        <li><b>1억 환산 기준</b>과 <b>회차 간 시간 분산 규칙</b>(집행 간격 / 일일 누적 한도)</li>
+        <li><b>ETH 재편입(2026-09-02)</b> — ETH 1회 한도 단위·ETH 페어 스프레드 요율·'변동성 자산 편입' 후 소명 논리 재정리 (JPYSC 미취급)</li>
+        <li>전제(⓪, knowledge/09 §0) 개정 — 본 구조는 골격 v3 대비 변경(에스크로 도입·실시간 견적·블록딜)으로 <b>⓪ 회귀 후 골격 v4 반영</b> 필요</li>
+      </ol>
+    </div>
+  </section>
+
+  <footer>
+    <span>내부 검토용 초안 — 규제 근거 아님 · 제출 문서 아님</span>
+    <span>수치·구간은 예시이며 확정 전</span>
+    <span>drafts / 2026-09-01</span>
+  </footer>
+</div>

@@ -1,0 +1,317 @@
+<title>교환·중개 예외 플로우</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --bg:#faf9f7; --panel:#ffffff; --ink:#1f2937; --sub:#6b7280; --line:#e5e1d8;
+  --na:#0f766e; --na-bg:#f0faf8; --ma:#b45309; --ma-bg:#fdf8f0;
+  --adm:#6d28d9; --adm-bg:#f5f0fe;
+  --miss:#b91c1c; --miss-bg:#fef2f2;
+  --pol:#64748b; --pol-bg:#f4f6f8;
+  --hi:#b91c1c; --hi-bg:#fee2e2; --mid:#92400e; --mid-bg:#fef3c7; --lo:#166534; --lo-bg:#dcfce7;
+  --code:#475569;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#171614; --panel:#201f1c; --ink:#e7e5e0; --sub:#9b978f; --line:#3a3833;
+    --na:#2dd4bf; --na-bg:#12312d; --ma:#f0a04b; --ma-bg:#332616;
+    --adm:#b79df7; --adm-bg:#2a2240;
+    --miss:#f87171; --miss-bg:#3a1d1d;
+    --pol:#a8b3c0; --pol-bg:#26292e;
+    --hi:#f87171; --hi-bg:#3a1d1d; --mid:#fbbf24; --mid-bg:#33290f; --lo:#4ade80; --lo-bg:#14301c;
+    --code:#a8b3c0;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#171614; --panel:#201f1c; --ink:#e7e5e0; --sub:#9b978f; --line:#3a3833;
+  --na:#2dd4bf; --na-bg:#12312d; --ma:#f0a04b; --ma-bg:#332616;
+  --adm:#b79df7; --adm-bg:#2a2240;
+  --miss:#f87171; --miss-bg:#3a1d1d;
+  --pol:#a8b3c0; --pol-bg:#26292e;
+  --hi:#f87171; --hi-bg:#3a1d1d; --mid:#fbbf24; --mid-bg:#33290f; --lo:#4ade80; --lo-bg:#14301c;
+  --code:#a8b3c0;
+}
+*{box-sizing:border-box;}
+body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans KR',system-ui,-apple-system,sans-serif;font-size:14px;line-height:1.65;margin:0;padding:36px 20px 80px;}
+.wrap{max-width:1080px;margin:0 auto;}
+header.hero{margin-bottom:26px;}
+.hero h1{font-size:24px;font-weight:700;margin:0 0 6px;letter-spacing:-.01em;text-wrap:balance;}
+.hero .meta{font-size:12px;color:var(--sub);font-family:'IBM Plex Mono',monospace;}
+.hero .chips{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;}
+.hchip{font-size:11px;font-weight:500;padding:3px 10px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--sub);}
+
+section.stage{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:18px;overflow:hidden;}
+.stage h2{font-size:15px;font-weight:700;margin:0 0 4px;display:flex;align-items:center;gap:8px;}
+.stage h2 .no{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--sub);}
+.stage .sub{font-size:12px;color:var(--sub);margin:0 0 14px;}
+.stage.na h2 .no{color:var(--na);} .stage.ma h2 .no{color:var(--ma);}
+
+/* 메인 플로우 레일 */
+.rail-scroll{overflow-x:auto;padding-bottom:4px;}
+.rail{display:flex;align-items:center;gap:0;min-width:max-content;margin-bottom:16px;}
+.node{border:1.5px solid var(--line);background:var(--bg);border-radius:8px;padding:7px 12px;font-size:12px;font-weight:500;text-align:center;line-height:1.4;flex:0 0 auto;}
+.node .nid{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:var(--sub);}
+.node.na{border-color:var(--na);background:var(--na-bg);} .node.na .nid{color:var(--na);}
+.node.ma{border-color:var(--ma);background:var(--ma-bg);} .node.ma .nid{color:var(--ma);}
+.node.adm{border-color:var(--adm);background:var(--adm-bg);} .node.adm .nid{color:var(--adm);}
+.node.miss{border:1.5px dashed var(--miss);background:var(--miss-bg);} .node.miss .nid{color:var(--miss);}
+.arr{flex:0 0 auto;padding:0 7px;color:var(--sub);font-size:13px;}
+.arr small{display:block;font-size:9.5px;text-align:center;line-height:1.1;}
+
+/* 노드별 예외 분기 */
+.branches{display:flex;flex-direction:column;gap:12px;}
+.bgroup{border-top:1px dashed var(--line);padding-top:10px;}
+.bgroup .bnode{font-size:12px;font-weight:700;margin-bottom:6px;}
+.bgroup .bnode .at{color:var(--sub);font-weight:400;font-size:11px;}
+.br{display:flex;gap:8px;align-items:baseline;padding:4px 0 4px 6px;font-size:12.5px;}
+.br .elbow{color:var(--sub);flex:0 0 auto;font-family:'IBM Plex Mono',monospace;}
+.br .body{flex:1;min-width:0;}
+.case{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;color:var(--code);margin-right:4px;}
+.sev{display:inline-block;font-size:10px;font-weight:700;padding:0 7px;border-radius:9px;margin-right:4px;vertical-align:1px;}
+.sev.hi{background:var(--hi-bg);color:var(--hi);} .sev.mid{background:var(--mid-bg);color:var(--mid);} .sev.lo{background:var(--lo-bg);color:var(--lo);}
+.to{color:var(--sub);padding:0 3px;}
+.scr{display:inline-block;font-size:10.5px;font-weight:600;padding:1px 8px;border-radius:10px;border:1px solid var(--line);background:var(--bg);white-space:nowrap;margin-left:2px;}
+.scr.adm{border-color:var(--adm);color:var(--adm);background:var(--adm-bg);}
+.scr.miss{border:1px dashed var(--miss);color:var(--miss);background:var(--miss-bg);}
+.scr.pol{border:1px dashed var(--pol);color:var(--pol);background:var(--pol-bg);}
+.flag{font-size:10.5px;font-weight:700;color:var(--miss);}
+.note{font-size:11.5px;color:var(--sub);border-left:3px solid var(--line);padding:2px 0 2px 10px;margin-top:12px;}
+
+/* 표 */
+table{width:100%;border-collapse:collapse;font-size:12.5px;}
+th{font-size:11px;color:var(--sub);text-align:left;font-weight:700;padding:7px 10px;border-bottom:1.5px solid var(--line);letter-spacing:.03em;}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+.tbl-scroll{overflow-x:auto;}
+.mono{font-family:'IBM Plex Mono',monospace;font-size:11.5px;}
+</style>
+
+<div class="wrap">
+<header class="hero">
+  <h1>교환·중개 예외 플로우 — 단계별 분기와 처리 화면</h1>
+  <div class="meta">2026-09-01 · 입력: 28 예외케이스(2026-07-07) + 이후 구조 변경 반영 · 화면 매핑: storyboard v0.5</div>
+  <div class="chips">
+    <span class="hchip">🟣 신규 어드민 화면 (2026-09-01 작성: ADM-06·07·08)</span>
+    
+    <span class="hchip">⚙ 점선 회색 = 화면 없음 · 내부 정책/운영 처리</span>
+    <span class="hchip">심각도: <span class="sev hi">자주·치명</span><span class="sev mid">가끔</span><span class="sev lo">드묾</span></span>
+  </div>
+</header>
+
+<!-- ① 온보딩·계정 -->
+<section class="stage">
+  <h2><span class="no">①</span>온보딩 · 계정</h2>
+  <p class="sub">초대 발송(관리자) → 활성화 → 로그인 → KYC 게이팅. 계정 상태가 전 화면 접근의 전제.</p>
+  <div class="rail-scroll"><div class="rail">
+    <div class="node adm">초대 발송<span class="nid">ADM-06</span></div><div class="arr">→</div>
+    <div class="node">초대 이메일<span class="nid">ONB-00</span></div><div class="arr">→</div>
+    <div class="node">활성화·2FA<span class="nid">ONB-01</span></div><div class="arr">→</div>
+    <div class="node">로그인<span class="nid">AUTH-01</span></div><div class="arr">→</div>
+    <div class="node">KYC 게이팅<span class="nid">ONB-02</span></div><div class="arr">→</div>
+    <div class="node">홈<span class="nid">DASH-01</span></div>
+  </div></div>
+  <div class="branches">
+    <div class="bgroup">
+      <div class="bnode">KYC 심사·계정 상태 <span class="at">— 예외 발생 지점: 온보딩 전 과정</span></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">A1</span><span class="sev hi">자주·치명</span>CDD/EDD 탈락(실소유자 불가·제재 적중)<span class="to">→</span>가입 거절 + 사유 기록, 거래거절 STR 검토<span class="scr adm">ADM-06</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">A2</span><span class="sev mid">가끔</span>서류 미비·심사 장기화<span class="to">→</span>'심사중' 유지, 고객 측 조회만 허용<span class="scr">ONB-02</span><span class="scr adm">ADM-06</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">A3</span><span class="sev mid">가끔</span>담당자 2인(기안↔승인) 확보 실패<span class="to">→</span>온보딩 진행 불가 안내<span class="scr adm">ADM-06</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">A4</span><span class="sev lo">드묾</span>실소유자·지배구조 변경<span class="to">→</span>이벤트 트리거 재이행 → 재심사 중 거래 제한<span class="scr adm">ADM-06</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">A5</span><span class="sev lo">드묾</span>해지·탈퇴 요청<span class="to">→</span>진행 거래 완결 → 전량 출금 → 비활성화(기록 15년 보존)<span class="scr adm">ADM-06</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">A6</span><span class="sev mid">가끔</span>재이행 주기(고1/중2/저3년) 미응답<span class="to">→</span>신규 거래 제한 <span class="flag">[확인필요] 제한 중 조회·출금 범위</span><span class="scr adm">ADM-06</span></div></div>
+    </div>
+    <div class="bgroup">
+      <div class="bnode">로그인 (AUTH-01)</div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">신규</span><span class="sev mid">가끔</span>비밀번호 5회 오류<span class="to">→</span>계정 잠금·차단 + 하단 안내(portal.kyc@dsrvlabs.com) → 알림<span class="scr">ADM-02 알람함</span><span class="to">→</span>본인확인 후 해제·초대 재발송<span class="scr adm">ADM-06</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">H5</span><span class="sev hi">자주·치명</span>계정 탈취 의심(비정상 로그인 후 출금 시도)<span class="to">→</span>세션 차단·MFA 재인증·거래 동결·고객 통지<span class="scr">AUTH-01</span><span class="scr adm">ADM-06</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ② 입금 -->
+<section class="stage">
+  <h2><span class="no">②</span>입금</h2>
+  <p class="sub">입금 → 컨펌 대기 → 잔고 반영 → 콜드 스윕. 고객 측 잔고·상태 표시는 WAL-01.</p>
+  <div class="rail-scroll"><div class="rail">
+    <div class="node">입금 수신<span class="nid">온체인</span></div><div class="arr">→<small>N블록 컨펌</small></div>
+    <div class="node">잔고 반영<span class="nid">WAL-01</span></div><div class="arr">→<small>임계 80/20</small></div>
+    <div class="node adm">콜드 스윕<span class="nid">ADM-08</span></div>
+  </div></div>
+  <div class="branches">
+    <div class="bgroup">
+      <div class="bnode">입금 수신 시점</div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">B1</span><span class="sev hi">자주·치명</span>KYT 고위험(믹서·도난·해킹 연루)<span class="to">→</span>격리 지갑 분리 → 심사 → 소명 불가 시 STR + 반환/동결<span class="scr adm">ADM-08</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">B2</span><span class="sev hi">자주·치명</span>BLF(제재 주소) 적중<span class="to">→</span>즉시 격리·동결, STR, §11② 통지·보고<span class="scr adm">ADM-08</span><span class="scr">ADM-02 STR</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">B3</span><span class="sev mid">가끔</span>미지원 자산·타 체인 오입금<span class="to">→</span>잔고 미반영·통지·반환(가스비 부담 약관 명시)<span class="scr adm">ADM-08</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">B4</span><span class="sev mid">가끔</span>컨펌 부족·체인 재구성<span class="to">→</span>'확인 중' 표시 후 대기<span class="scr">WAL-01</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">B5</span><span class="sev lo">드묾</span>더스트·스팸 토큰<span class="to">→</span>무시 목록·잔고 미표시<span class="scr pol">내부 정책</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">B6</span><span class="sev mid">가끔</span>콜드 스윕 실패·지연(서명자 부재)<span class="to">→</span>임계 알림 → 수동 개입<span class="scr">ADM-02 알람함</span><span class="scr adm">ADM-08</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ③ 나목 교환 -->
+<section class="stage na">
+  <h2><span class="no">③</span>나목 교환 (DSRV가 상대방)</h2>
+  <p class="sub">건별 ≤ 1억 · 대량은 건별 재신청(분할) · 회차별 시세 재산정(고정 스프레드율 불변).</p>
+  <div class="rail-scroll"><div class="rail">
+    <div class="node na">교환 요청<span class="nid">EXC-01</span></div><div class="arr">→</div>
+    <div class="node na">비율 확인·수락<span class="nid">EXC-02</span></div><div class="arr">→<small>고객사 2인</small></div>
+    <div class="node na">승인 진행<span class="nid">EXC-03</span></div><div class="arr">→<small>DSRV 단일</small></div>
+    <div class="node adm">심사 큐<span class="nid">ADM-07</span></div><div class="arr">→<small>콜드 2인 서명</small></div>
+    <div class="node na">완료·내역<span class="nid">EXC-04</span></div><div class="arr">→</div>
+    <div class="node na">보고서<span class="nid">EXC-05</span></div>
+  </div></div>
+  <div class="branches">
+    <div class="bgroup">
+      <div class="bnode">요청·견적 (EXC-01·02)</div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">신규</span><span class="sev mid">가끔</span>건별 한도(1억 상당) 초과 요청<span class="to">→</span>요청 차단 + 건별 재신청(분할) 안내<span class="scr">EXC-01</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">신규</span><span class="sev mid">가끔</span>시세 급변(서킷브레이커 임계 초과)<span class="to">→</span>견적 제시 중지·기존 견적 실효<span class="scr">EXC-02</span><span class="scr pol">임계값 = 내부 정책(ADM-03)</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">신규</span><span class="sev mid">가끔</span>가용 풀 부족<span class="to">→</span>집행 불가 — 일반화 사유 ④로 통지<span class="scr">EXC-03</span></div></div>
+    </div>
+    <div class="bgroup">
+      <div class="bnode">DSRV 심사 (ADM-07)</div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">E3</span><span class="sev hi">자주·치명</span>자동검증 차단(한도·화이트리스트·KYT/BLF)<span class="to">→</span>사유 기록·일반화 통지, AML 건 STR 연계<span class="scr adm">ADM-07</span><span class="scr">ADM-02 STR</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">E4</span><span class="sev hi">자주·치명</span>DSRV 반려<span class="to">→</span>사유 기록 → 고객 통지<span class="scr adm">ADM-07</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">E7</span><span class="sev lo">드묾</span>트래블룰 정보 불충족<span class="to">→</span>보류 → 보완 후 재진행<span class="scr adm">ADM-07</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">신규</span><span class="sev mid">가끔</span>회피성 분할(structuring) 의심 패턴<span class="to">→</span>정상 분할과 구분 감시 → STR 검토<span class="scr">ADM-02</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ④ 마목 중개 -->
+<section class="stage ma">
+  <h2><span class="no">④</span>마목 중개 (당사자 간 · 게시판형)</h2>
+  <p class="sub">역제안 없음(게시 조건 그대로 신청) · 시세변동 중지는 내부 정책 — 중지 시 보드에서 제외(상태 미표시, 2026-09-01).</p>
+  <div class="rail-scroll"><div class="rail">
+    <div class="node ma">의향 보드<span class="nid">BRK-01</span></div><div class="arr">→<small>등록 BRK-02</small></div>
+    <div class="node ma">신청·수용<span class="nid">BRK-03</span></div><div class="arr">→<small>양측 각 2인</small></div>
+    <div class="node ma">조건 확정<span class="nid">BRK-04</span></div><div class="arr">→<small>DSRV 단일</small></div>
+    <div class="node adm">심사 큐<span class="nid">ADM-07</span></div><div class="arr">→</div>
+    <div class="node ma">이전·정산<span class="nid">BRK-05</span></div>
+  </div></div>
+  <div class="branches">
+    <div class="bgroup">
+      <div class="bnode">게시 (BRK-01·02)</div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">C1</span><span class="sev hi">자주·치명</span>잔고 부족 게시 시도(보유·처분권 미달)<span class="to">→</span>게재 거절(게시 시점 잔고 검증)<span class="scr">BRK-02</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">C2</span><span class="sev hi">자주·치명</span>게시 후 잔고가 타 거래·출금으로 소진<span class="to">→</span><span class="flag">[결정필요] 게시 수량 잠금 vs 확정 시 재검증</span> — C·D·E 전반을 좌우하는 선결 결정<span class="scr pol">내부 정책</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">C3</span><span class="sev mid">가끔</span>게시 유효기간 만료<span class="to">→</span>자동 만료 → 재게시 시 잔고 재확인<span class="scr pol">내부 정책</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">C5</span><span class="sev hi">자주·치명</span>게시·취소 반복(위장 호가 패턴)<span class="to">→</span>이상행위 룰 → 감시·반복 시 게시 제한<span class="scr">ADM-02</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">신규</span><span class="sev mid">가끔</span>시세변동이 중지 기준 초과<span class="to">→</span>RFQ 자동중지 → <b>보드에서 즉시 제외</b>(상태 미표시) + 게시자 알림 · BRK-03 진입 자체 차단<span class="scr">BRK-01</span><span class="scr pol">판정 = 내부 정책</span></div></div>
+    </div>
+    <div class="bgroup">
+      <div class="bnode">신청·수용 (BRK-03) <span class="at">— 게시 시점·신청 시점 병기(시세 변동 판단은 당사자 몫)</span></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">D2</span><span class="sev mid">가끔</span>게시자 무응답<span class="to">→</span>신청 7일 경과 시 자동 만료<span class="scr">BRK-03</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">D3</span><span class="sev mid">가끔</span>복수 신청 동시 접수(1:N)<span class="to">→</span><span class="flag">[결정필요] 선착순 vs 게시자 선택(비재량 규칙)</span><span class="scr pol">내부 정책</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">D4</span><span class="sev hi">자주·치명</span>연관 당사자 매칭(동일 실소유자·계열사)<span class="to">→</span>자전·통정 의심 룰 → 차단 또는 감시 플래그<span class="scr">ADM-02</span></div></div>
+    </div>
+    <div class="bgroup">
+      <div class="bnode">확정·승인 (BRK-04 → ADM-07)</div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">E1</span><span class="sev hi">자주·치명</span>고객사 승인자 반려<span class="to">→</span>확정 불성립 → 무산(자산이동·수수료 없음)<span class="scr">BRK-04</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">E2</span><span class="sev hi">자주·치명</span>일방만 승인·유효기한 초과<span class="to">→</span>확정 실효 + 상대방 통지<span class="scr">BRK-04</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">E5</span><span class="sev mid">가끔</span>확정 후 이전 직전 일방 취소 요청<span class="to">→</span>구속력 발생 후 — 원칙 불가, <span class="flag">[결정필요] 위약 처리·취소 허용 범위</span><span class="scr pol">약관</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">E6</span><span class="sev mid">가끔</span>확정 시점 잔고 재검증 실패(C2 후속)<span class="to">→</span>확정 불성립 + 반복 시 페널티<span class="scr adm">ADM-07</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">G1</span><span class="sev mid">가끔</span>사후 가격 분쟁("불공정 가격")<span class="to">→</span>가격 불관여 명시 + 기록 제공, 민원 절차(14일)<span class="scr pol">운영·약관</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">G2</span><span class="sev mid">가끔</span>체결 후 통정·자전 사후 적발<span class="to">→</span>시장감시 → STR·이용 제한<span class="scr">ADM-02</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑤ 이전·정산 -->
+<section class="stage">
+  <h2><span class="no">⑤</span>이전·정산 (나목 집행 + 마목 정산 공통)</h2>
+  <p class="sub">정산 배치(1영업일 3회) 편입 → 콜드 2인 멀티시그 서명 → 온체인 → 완결 확인(3면 대사).</p>
+  <div class="rail-scroll"><div class="rail">
+    <div class="node adm">승인 완료<span class="nid">ADM-07</span></div><div class="arr">→<small>배치 편입</small></div>
+    <div class="node">콜드 2인 서명<span class="nid">멀티시그</span></div><div class="arr">→</div>
+    <div class="node">온체인 이전<span class="nid">leg 1 · leg 2</span></div><div class="arr">→<small>대사</small></div>
+    <div class="node">완결<span class="nid">EXC-04 · BRK-05</span></div>
+  </div></div>
+  <div class="branches">
+    <div class="bgroup">
+      <div class="bnode">이전 집행</div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">F1</span><span class="sev hi">자주·치명</span><b>한쪽 leg만 성공</b> — 완결성의 핵심<span class="to">→</span>현행: 거래 홀드 + 역이전(원상 복구) · 에스크로 구조 전환 시 원천 차단 <span class="flag">[로펌게이트·⓪ 개정 반영 전]</span><span class="scr">BRK-05</span><span class="scr adm">ADM-08</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">F2</span><span class="sev hi">자주·치명</span>온체인 전송 실패(가스·혼잡·노드 장애)<span class="to">→</span>재시도 큐 → 한도 초과 시 운영 이관·고객 통지<span class="scr adm">ADM-08</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">F3</span><span class="sev mid">가끔</span>콜드→핫 보충 지연으로 정산 지연<span class="to">→</span>SLA 초과 알림·지연 사유 통지<span class="scr adm">ADM-08</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">F4</span><span class="sev hi">자주·치명</span>이전 직전 당사자 동결 발생(제재 적중 후속)<span class="to">→</span>이전 중지 → §11② 통지·보고 → 해제 시까지 보류<span class="scr adm">ADM-08</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">F5</span><span class="sev lo">드묾</span>체인 재구성으로 트랜잭션 무효화<span class="to">→</span>컨펌 기준 미달 시 재전송·원장 대사<span class="scr">ADM-04</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">F6</span><span class="sev lo">드묾</span>서명 시스템(MPC·HSM) 장애<span class="to">→</span>BCP/DR·정산 일시 중지 공지<span class="scr pol">운영 절차</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">F7</span><span class="sev mid">가끔</span>수수료 차감 실패(잔고 부족)<span class="to">→</span><span class="flag">[결정필요] 수수료 선확보 vs 후정산(징수 시점)</span><span class="scr pol">내부 정책</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">G3</span><span class="sev lo">드묾</span>명백한 오류 체결(자릿수 실수)<span class="to">→</span>취소·정정 사유 약관 한정 열거 <span class="flag">[결정필요]</span><span class="scr pol">약관</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ 출금 -->
+<section class="stage">
+  <h2><span class="no">⑥</span>출금</h2>
+  <p class="sub">화이트리스트 원천 통제 + 지연발효 + 출금 시점 재검증. 고객 측 화면은 출금 요청(WAL-02)·화이트리스트 관리(WAL-03).</p>
+  <div class="rail-scroll"><div class="rail">
+    <div class="node">출금 요청<span class="nid">WAL-02</span></div><div class="arr">→<small>등록 주소만</small></div>
+    <div class="node">화이트리스트<span class="nid">WAL-03</span></div><div class="arr">→<small>DSRV 승인</small></div>
+    <div class="node adm">심사 큐<span class="nid">ADM-07</span></div><div class="arr">→<small>콜드 2인 서명</small></div>
+    <div class="node">집행·완료<span class="nid">온체인</span></div>
+  </div></div>
+  <div class="branches">
+    <div class="bgroup">
+      <div class="bnode">출금 요청·검증</div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">H1</span><span class="sev hi">자주·치명</span>미등록 주소 출금 시도<span class="to">→</span>화이트리스트 차단(원천 불가)<span class="scr">WAL-02</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">H2</span><span class="sev mid">가끔</span>신규 주소 등록 직후 출금(탈취 패턴)<span class="to">→</span>지연발효(cooling) 중 출금 불가<span class="scr">WAL-03</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">H3</span><span class="sev hi">자주·치명</span>출금 주소 사후 BLF 적중<span class="to">→</span>출금 시점 재검증 → 차단·STR<span class="scr adm">ADM-08</span><span class="scr">ADM-02 STR</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">H4</span><span class="sev mid">가끔</span>대량 출금 러시(핫 잔고 부족)<span class="to">→</span>콜드→핫 보충(2인 승인) · 처리 순서 공정성 유지<span class="scr adm">ADM-08</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">H6</span><span class="sev lo">드묾</span>미신고 VASP 지갑으로 출금 시도<span class="to">→</span>상대 지갑 식별(KYW) → 차단(감독규정 §28)<span class="scr adm">ADM-07</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑦ 시스템 공통 -->
+<section class="stage">
+  <h2><span class="no">⑦</span>시스템·운영 공통 (모든 단계)</h2>
+  <div class="branches" style="margin-top:8px;">
+    <div class="bgroup" style="border-top:none;padding-top:0;">
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">X1</span><span class="sev hi">자주·치명</span>해킹·침해사고<span class="to">→</span>핫월렛 동결·키 교체·사고대응(탐지→보고→복구)·§11② 보고<span class="scr pol">사고대응 절차</span><span class="scr adm">ADM-08</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">X2</span><span class="sev mid">가끔</span>시스템 점검·장애<span class="to">→</span>사전 공지·거래 일시 중지 — <b>입출금은 정당 사유 없이 차단 금지(§11)</b><span class="scr pol">운영 공지</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">X3</span><span class="sev mid">가끔</span>원장 ↔ 온체인 잔고 불일치(3면 대사 실패)<span class="to">→</span>해당 지갑 출금 자동 동결 → 원인 규명 전 재개 금지<span class="scr adm">ADM-08</span><span class="scr">ADM-04</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">X4</span><span class="sev lo">드묾</span>규제 변경(거래지원 종료 등)<span class="to">→</span>사전 공시 → 출고 유예 → 신규 중단<span class="scr pol">운영 공지</span></div></div>
+      <div class="br"><span class="elbow">↳</span><div class="body"><span class="case">X5</span><span class="sev lo">드묾</span>법원·수사기관 협조 요청<span class="to">→</span>법적 근거 확인 → 동결 + §11② 통지·보고<span class="scr adm">ADM-08</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑧ 화면 커버리지 점검 -->
+<section class="stage">
+  <h2><span class="no">⑧</span>화면 커버리지 점검 — 이 정리에서 확인된 것</h2>
+  <p class="sub">예외 매핑 과정에서 처리 화면이 없던 곳과, 화면 없이 정책·운영으로 남기는 곳의 구분.</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th style="width:150px;">구분</th><th style="width:230px;">화면</th><th>비고</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>신규 작성</b> (2026-09-01)</td>
+        <td class="mono">ADM-06 · ADM-07 · ADM-08 · ONB-02 · WAL-01 · WAL-02 · WAL-03</td>
+        <td>ORG·KYC·계정 관리(A1~A6·계정 잠금 해제) / 심사 큐·승인 처리(E3·E4·E7) / 지갑 운영·격리/동결(B1·B2·B6·F2~F4·H3·H4·X3·X5) / KYC 상태·게이팅(A2) / 지갑·자산 목록(B3·B4) / 출금 요청(H1·H3~H5·F7) / 화이트리스트 관리(H2·H3) — 고객 측 지갑 트랙 공백 해소</td>
+      </tr>
+      <tr>
+        <td><b>미작성 (부분 대체)</b></td>
+        <td class="mono">RPT-01 · 어드민 '대시보드' 탭</td>
+        <td>리포트·증명서는 EXC-05(거래보고서 CSV)가 일부 커버 — 잔고증명 미커버. 어드민 대시보드 탭은 별도 화면 없이 심사 큐(ADM-07) 진입으로 갈음할지 <span class="flag">[확인필요]</span></td>
+      </tr>
+      <tr>
+        <td><b>화면 불요</b> (정책·운영)</td>
+        <td class="mono">B5 · C3 · F6 · X2 · X4 · 시세변동 중지 판정</td>
+        <td>내부 정책·운영 매뉴얼로 처리, UI 미노출. 특히 시세변동 중지는 보드 제외 방식이라 상태 화면 자체가 불요(2026-09-01 결정)</td>
+      </tr>
+      <tr>
+        <td><b>[결정필요] 잔여 4건</b></td>
+        <td class="mono">C2 · D3 · E5 · F7</td>
+        <td>잔고 잠금 vs 재검증 / 1:N 신청 처리 규칙 / 확정 후 취소 허용 범위 / 수수료 징수 시점 — C2가 게시~확정 전 구간의 선결 결정</td>
+      </tr>
+      <tr>
+        <td><b>[로펌게이트] 연동</b></td>
+        <td class="mono">F1 에스크로 · G3 정정 사유</td>
+        <td>에스크로 전환(한쪽 leg 실패 원천 차단)은 ⓪ 전제 개정·법적 지위 확정 후 BRK-05·ADM-08 반영. 오류 체결 정정 사유는 약관 열거 필요</td>
+      </tr>
+    </tbody>
+  </table></div>
+  <p class="note">근거: 28_예외케이스_아이디에이션(2026-07-07)을 현행 구조로 갱신 — 협의 채널·역제안 제거(D1·D5·D6 소멸, 2026-08-31), 시세변동 중지 = 보드 제외(2026-09-01), 건별 1억·분할(2026-09-01), 에스크로는 ⓪ 개정 반영 전. 이 문서는 내부 작업용 초안이며 감독당국 제출용 아님.</p>
+</section>
+
+</div>

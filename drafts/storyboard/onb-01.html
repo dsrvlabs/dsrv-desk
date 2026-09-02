@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화면기획 — 계정 활성화</title>
+<link rel="stylesheet" href="screen.css">
+<style>
+  .qr{width:104px;height:104px;border-radius:8px;border:1px solid var(--line);
+      background:
+        repeating-linear-gradient(0deg,#111 0 6px,#fff 6px 12px),
+        repeating-linear-gradient(90deg,#111 0 6px,#fff 6px 12px);
+      background-blend-mode:multiply;flex-shrink:0;}
+  .qr-wrap{display:flex;gap:12px;align-items:center;}
+  .bkcode{font-family:monospace;font-size:11px;color:#334155;background:#f8fafc;border:1px dashed var(--line);
+          border-radius:6px;padding:8px 10px;letter-spacing:.05em;line-height:1.8;}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="crumb"><span>인증·온보딩</span><span class="s">›</span><span>계정 활성화</span></div>
+  <h1 class="title">계정 활성화</h1>
+  <span class="sid">ONB-01</span>
+  <span class="defense">초대 기반 · 비번 본인설정 · MFA 등록</span>
+</header>
+
+<div class="main">
+  <div class="screen-panel">
+    <div style="position:relative;display:flex;">
+      <div class="labels" id="labels">
+        <div class="lbl"><span class="lbl-text">전역 상단</span></div>
+        <div class="lbl"><span class="lbl-text">초대·계정<br>확인</span></div>
+        <div class="lbl"><span class="lbl-text">비밀번호<br>설정</span></div>
+        <div class="lbl"><span class="lbl-text">2차 인증<br>(QR)</span></div>
+        <div class="lbl"><span class="lbl-text">완료·<br>백업코드</span></div>
+      </div>
+      <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
+    </div>
+
+    <div class="frame" id="frame">
+      <!-- 전역: 활성화 진입 (로그인 전 — ORG 미표시) -->
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="c-top" style="border-radius:8px;">
+          <span class="brand">DSRV Desk</span>
+          <span class="meta"><span class="c-badge">계정 활성화</span><span>보안 설정</span></span>
+        </div>
+      </div>
+
+      <!-- 초대·계정 확인 -->
+      <div class="zone" data-idx="0">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="0" style="position:relative;padding:8px;border-radius:8px;">
+          <div class="pin" data-idx="0" style="top:-4px;right:-4px;">1</div>
+          <div class="kv"><span class="k">초대 대상 ORG</span><span class="v">A자산운용</span></div>
+          <div class="kv"><span class="k">담당자 이메일</span><span class="v mono">manager@***.co.kr</span></div>
+        </div>
+      </div>
+
+      <!-- 비밀번호 설정 -->
+      <div class="zone" data-idx="1">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="1" style="position:relative;padding:8px;border-radius:8px;">
+          <div class="pin" data-idx="1" style="top:-4px;right:-4px;">2</div>
+          <div style="font-size:11px;color:#94a3b8;font-weight:600;margin-bottom:6px;">비밀번호 설정</div>
+          <div class="field" style="margin-bottom:8px;"><span class="ph">새 비밀번호</span></div>
+          <div class="field"><span class="ph">새 비밀번호 확인</span></div>
+          <div class="pw-guide" style="margin-top:8px;line-height:1.75;font-size:11px;color:#475569;background:#fbfbf9;border:1px solid var(--line);border-radius:8px;padding:10px 12px;">
+            <strong style="color:#1a1a1a;">안전한 비밀번호를 위해 아래를 지켜주세요.</strong><br>
+            ① 영문 대·소문자, 숫자, 특수문자 중 3종 이상 조합 8자 이상<br>
+            ② 이메일과 동일한 문자 사용 불가<br>
+            ③ 동일 문자 4번 이상 사용 불가<br>
+            ④ 특수문자는 !@#$%^&amp;*() 만 사용 가능
+          </div>
+        </div>
+      </div>
+
+      <!-- 2FA QR -->
+      <div class="zone" data-idx="2">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="2" style="position:relative;padding:8px;border-radius:8px;">
+          <div class="pin" data-idx="2" style="top:-4px;right:-4px;">3</div>
+          <div style="font-size:11px;color:#94a3b8;font-weight:600;margin-bottom:6px;">2차 인증 등록 (Google Authenticator)</div>
+          <div class="qr-wrap">
+            <div class="qr"></div>
+            <div style="flex:1;">
+              <div style="margin-top:0;font-size:11px;color:#64748b;">Google Authenticator 앱으로 QR을 스캔한 뒤, 표시되는 6자리 코드를 입력하세요.</div>
+              <div class="field" style="margin-top:8px;text-align:center;letter-spacing:.3em;"><span class="ph">· · · · · ·</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 완료·백업코드 -->
+      <div class="zone" data-idx="3">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="3" style="position:relative;padding:8px;border-radius:8px;">
+          <div class="pin" data-idx="3" style="top:-6px;right:-4px;">4</div>
+          <div style="font-size:11px;color:#94a3b8;font-weight:600;margin-bottom:6px;">백업코드 저장 (기기 분실 대비)</div>
+          <div class="bkcode">4F2A-9C11 · 7B0E-3D5A · A18C-62F4<br>D904-1EB7 · 2C6F-88AB · 55E3-0A9D</div>
+          <div class="btn primary" style="margin-top:10px;">활성화 완료 → 로그인</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <svg id="connSvg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;"></svg>
+
+  <div class="items" id="items">
+    <div class="nav-global">
+      <div class="nav-global-title">진입 · 전역 이동</div>
+      <div class="nav-note">· <strong>진입</strong>: 초대 이메일(ONB-00) 링크 클릭(1회용·72시간) — 콘솔 GNB 밖(로그인 전) · 2차 인증 재설정(DASH-03) 재발송 링크도 이 화면 재수행<br>
+      · 중도 이탈·링크 만료 시 재진입은 초대 재발급(ADM-03)으로만 <span style="color:#991b1b;">[확인필요: 중도 이탈 시 기존 링크 재사용 허용 여부]</span></div>
+    </div>
+    <div class="itm" data-idx="0">
+      <div class="num">1</div>
+      <div>
+        <div class="itm-title">초대 토큰 검증<span class="req">필수</span></div>
+        <div class="itm-desc">· 초대 이메일 링크의 일회성·유효기간 토큰 검증<br>· 셀프가입 없음(초대 기반 ORG) · 만료 시 재발급<br><span class="basis">근거 32 §2 ONB-01 · 초대 기반</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="1">
+      <div class="num">2</div>
+      <div>
+        <div class="itm-title">비밀번호 본인 설정<span class="req">필수</span></div>
+        <div class="itm-desc">· 담당자가 직접 설정(회사가 초기 비밀번호를 만들어 전달하지 않음)<br>· 비밀번호 규칙 4개 항목 안내 노출 · 원문 저장·전송 없음 · <strong>같은 안내문구를 비밀번호 수정(DASH-02)에서도 재사용</strong><br><span class="basis">근거: 계정 활성화·비밀번호 설정 화면 · 정보보호 관리체계(ISMS) 인증기준 2.5.3·2.5.4(비밀번호 관리)</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">새 비밀번호 · 확인 입력</span><span class="nav-act">비밀번호 규칙(4항목) 검증 — 위반 시 다음 진행 불가</span><span class="nav-to stay">화면 내 (이동 없음)</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="itm" data-idx="2">
+      <div class="num">3</div>
+      <div>
+        <div class="itm-title">2FA(Google Authenticator) QR 등록<span class="req">필수</span></div>
+        <div class="itm-desc">· Google Authenticator로 QR 스캔 → 6자리 코드로 등록 확인<br>· 전 권한자 MFA 의무<br><span class="basis">근거 ISMS 2.5 · F-5</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">QR 스캔 + 6자리 코드 입력</span><span class="nav-act">Google Authenticator 등록 확인 — 실패·우회 시도는 감사로그</span><span class="nav-to stay">화면 내 (이동 없음)</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="itm" data-idx="3">
+      <div class="num">4</div>
+      <div>
+        <div class="itm-title">백업코드·활성화 완료<span class="req">필수</span></div>
+        <div class="itm-desc">· 백업코드 발급(기기 분실 대비) · 저장 안내<br>· 활성화 완료 → 로그인 이동<br><span class="basis">근거 ISMS 2.5 세션·인증 복구</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">[활성화 완료 → 로그인] 버튼</span><span class="nav-act">클릭 — 비밀번호 설정·2FA 등록 완료가 전제 · 백업코드 발급 후 활성화 확정</span><span class="nav-to"><strong>로그인(AUTH-01)</strong> 이동</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<section class="footer-note" style="padding-bottom:0;">
+  <div class="note-card">
+    <div class="note-title">상세내용</div>
+    <div class="detail-grid" id="detailCol">
+      <div class="dtl" data-idx="1">
+        <div class="detail-label"><span class="dtl-num">2</span>비번 방식 근거</div>
+      <div class="dtl-body"><span class="box">· '초기 비밀번호 생성·전달' 대신 <strong>활성화 링크 → 본인 설정</strong><br>· 비밀번호가 서버·이메일에 평문으로 존재한 적 없음<br>· 심사기관 설명·감사 대응 용이</span></div>
+      </div>
+      <div class="dtl" data-idx="2">
+        <div class="detail-label"><span class="dtl-num">3</span>2FA 등록·복구</div>
+      <div class="dtl-body"><span class="box">· Google Authenticator 사용 — 시간 기반 일회용 비밀번호(TOTP, RFC 6238) 표준 · 로그인·민감행위 재인증에 사용<br>· 등록 실패·우회 시도는 감사로그 기록</span></div>
+      </div>
+      <div class="dtl" data-idx="3">
+        <div class="detail-label"><span class="dtl-num">4</span>백업코드 취급</div>
+      <div class="dtl-body"><span class="box">· 기기 분실 시 로그인 2FA 입력칸에 그대로 입력(AUTH-01 · 별도 화면 없음)<br>· 1회용 — 사용 즉시 폐기 · 사용 이력 로그<br>· 재발급은 2FA 재설정(초대 재발송→ONB-01 재수행) 완료 시 자동 — 이전 코드 전량 폐기</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="footer-note">
+  <div class="note-card">
+    <div class="note-title">비고</div>
+    <div class="note-body">
+      · 가입 완료 직후 <strong>1회성 계정 활성화</strong> 화면. 초대 이메일 링크 → 비밀번호 본인 설정 + 2FA(QR) 등록 → 백업코드 → 로그인.<br>
+      · 이전: 초대 이메일(ONB-00) · 다음 화면: 로그인(AUTH-01)
+    </div>
+  </div>
+</section>
+
+<script src="screen.js"></script>
+</body>
+</html>

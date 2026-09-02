@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화면기획 — 지갑 운영</title>
+<link rel="stylesheet" href="screen.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="crumb"><span>관리자</span><span class="s">›</span><span>지갑 운영</span></div>
+  <h1 class="title">지갑 운영</h1>
+  <span class="sid">ADM-08</span>
+  <span class="defense">풀 현황 조회 · 격리/동결 처리 · 에스크로 운영</span>
+</header>
+
+<div class="main">
+  <div class="screen-panel">
+    <div style="position:relative;display:flex;">
+      <div class="labels" id="labels">
+        <div class="lbl"><span class="lbl-text">전역·<br>관리 메뉴</span></div>
+        <div class="lbl"><span class="lbl-text">지갑 요약</span></div>
+        <div class="lbl"><span class="lbl-text">자산 풀<br>현황</span></div>
+        <div class="lbl"><span class="lbl-text">격리·동결</span></div>
+        <div class="lbl"><span class="lbl-text">콜드↔핫<br>운영</span></div>
+        <div class="lbl"><span class="lbl-text">에스크로<br>예치·반환</span></div>
+      </div>
+      <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
+    </div>
+
+    <div class="frame" id="frame">
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="c-top admin" style="border-radius:8px 8px 0 0;">
+          <span class="brand">DSRV Admin Console</span>
+          <span class="meta"><span class="c-badge adm">Admin</span><span class="c-badge pam">PAM 세션·녹화중</span></span>
+        </div>
+        <div class="c-adminbar" style="margin:0;">
+          <span class="m">대시보드</span><span class="m">ORG·KYC</span><span class="m">요청·정책</span><span class="m on">지갑</span><span class="m">시장감시</span><span class="m">로그</span>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="kpi">
+          <div class="card"><div class="n">1</div><div class="t">격리 중</div></div>
+          <div class="card"><div class="n">0</div><div class="t">동결 중</div></div>
+          <div class="card"><div class="n">18%</div><div class="t">핫 비중 (임계 20%)</div></div>
+          <div class="card"><div class="n">일치</div><div class="t">3면 대사 (최근)</div></div>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="0">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="0" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="0" style="top:-4px;right:-4px;">1</div>
+          <div class="zone-title">자산 풀 현황 (조회 전용)</div>
+          <table class="tbl">
+            <thead><tr><th>풀</th><th>성격</th><th>보관</th><th>상태</th></tr></thead>
+            <tbody>
+              <tr><td>① 고객 수탁</td><td>고객 소유</td><td class="mono">콜드 (2인 멀티시그)</td><td><span class="chip ok">정상</span></td></tr>
+              <tr><td>② 운영</td><td>DSRV 자산</td><td class="mono">핫/콜드 (80/20)</td><td><span class="chip ok">정상</span></td></tr>
+              <tr><td>③ 나목 교환재고</td><td>자기자본 (밸리데이터·노드 보상)</td><td class="mono">콜드</td><td><span class="chip ok">정상</span></td></tr>
+              <tr><td>④ 에스크로 전용</td><td>고객 소유 유지</td><td class="mono">전용지갑</td><td><span class="chip info">예치 1건</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="1">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="1" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="1" style="top:-4px;right:-4px;">2</div>
+          <div class="zone-title">격리·동결 관리</div>
+          <table class="tbl">
+            <thead><tr><th>사유</th><th>대상</th><th>상태</th><th>후속</th></tr></thead>
+            <tbody>
+              <tr><td>입금 KYT 고위험</td><td class="mono">ORG-B 입금 0x3f…</td><td><span class="sev mid">격리</span></td><td>심사 중 → 소명 불가 시 STR·반환/동결</td></tr>
+              <tr><td>BLF(제재 주소) 적중</td><td class="mono">—</td><td><span class="chip">해당 없음</span></td><td>즉시 동결·STR·§11② 통지</td></tr>
+              <tr><td>3면 대사 불일치</td><td class="mono">—</td><td><span class="chip">해당 없음</span></td><td>해당 지갑 출금 자동 동결</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="2">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="2" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="2" style="top:-4px;right:-4px;">3</div>
+          <div class="kv"><span class="k">콜드 → 핫 보충</span><span class="v">요청 → 승인(2인 멀티시그) → 집행</span></div>
+          <div class="kv"><span class="k">핫 → 콜드 스윕</span><span class="v">임계 초과분 자동 알림 → 수동 집행</span></div>
+          <div class="kv"><span class="k">스윕 실패·지연</span><span class="v" style="color:#b45309;">알람함(ADM-02) 통지 → 수동 개입</span></div>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="3">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="3" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="3" style="top:-4px;right:-4px;">4</div>
+          <div class="zone-title">에스크로 예치·반환 현황 (마목)</div>
+          <table class="tbl">
+            <thead><tr><th>건</th><th>예치 (① → ④)</th><th>상태</th><th>귀결</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">BRK-0311</td><td class="mono">USDT 500,000 (양측)</td><td><span class="chip info">예치 완료</span></td><td>정산 대기 (BRK-05)</td></tr>
+              <tr><td class="mono">BRK-0299</td><td class="mono">USDC 120,000</td><td><span class="chip">무산</span></td><td>원소유자 전액 반환 (④ → ①)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <svg id="connSvg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;"></svg>
+
+  <div class="items" id="items">
+    <div class="itm" data-idx="0">
+      <div class="num">1</div>
+      <div>
+        <div class="itm-title">자산 풀 현황 (조회 전용)<span class="req">필수</span></div>
+        <div class="itm-desc">· 4개 풀(①수탁 ②운영 ③나목 교환재고 ④에스크로)의 잔액·보관형태·상태 조회<br>· <strong>조회 전용</strong> — 원장 직접 변경 기능 미구현(ADM-04와 동일 원칙)<br>· 구 ADM-01(나목 재고관리)의 부활 아님 — 사전 최소재고 미보유 유지, ③은 현황 표출만<br><span class="basis">근거: 수탁/자기자산 구분 관리 [L6 §8] · 구분회계 [V11] · 거래구조(풀 4개) 2026-09-01</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="1">
+      <div class="num">2</div>
+      <div>
+        <div class="itm-title">격리·동결 관리<span class="req">필수</span></div>
+        <div class="itm-desc">· 입금 KYT 고위험 → 격리 지갑 분리 → 심사(예외 B1) · BLF 적중 → 즉시 동결·STR(예외 B2)<br>· 출금 주소 사후 BLF 적중 → 차단·STR(예외 H3) · 3면 대사 불일치 → 해당 지갑 출금 자동 동결(예외 X3)<br>· 동결·차단 시 §11② 통지·보고 절차 연계<br><span class="basis">근거: 예외케이스 B1·B2·H3·X3 (28) · 이용자 보호 [L8 §11②] · 정보보호 관리체계(ISMS) 인증기준 2.11</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="2">
+      <div class="num">3</div>
+      <div>
+        <div class="itm-title">콜드↔핫 운영<span class="req">필수</span></div>
+        <div class="itm-desc">· 콜드→핫 보충: 요청 → 2인 멀티시그 승인 → 집행(대량 출금 러시 대응, 예외 H4)<br>· 핫 비중 임계(80/20) 초과 시 알림 → 스윕(예외 B6)<br>· 서명 시스템 장애 시 BCP/DR — 정산 일시 중지 공지(예외 F6)<br><span class="basis">근거: 콜드월렛 중심 보관 [L4 §26] · 멀티시그 [ISMS 2.7.2] · 예외케이스 B6·F6·H4</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="3">
+      <div class="num">4</div>
+      <div>
+        <div class="itm-title">에스크로 예치·반환 현황 (마목)<span class="req">필수</span></div>
+        <div class="itm-desc">· 마목 확정 건별 에스크로 예치(① → ④)·정산 집행·무산 반환(④ → ①) 추적<br>· 에스크로 자산은 <strong>고객 소유 유지</strong> — DSRV 자산과 분리 보관<br>· 한쪽 leg만 이동하는 미완결 상태를 만들지 않는 완결성 통제(예외 F1 대응)<br><span class="basis">근거: 거래구조(에스크로 전용 풀) 2026-09-01 · <span class="red">[로펌게이트]</span> 에스크로 법적 지위·⓪ 전제 개정 반영 전</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-col" id="detailCol">
+    <div class="dtl" data-idx="0">
+      <div class="detail-label">조회 전용 원칙</div>
+      <div class="dtl-body"><span class="box">· 잔액·상태는 표시하되 이체·정정 버튼 없음 — 집행은 심사 큐(ADM-07) 승인 + 콜드 2인 멀티시그 서명으로만<br>· 개인키·passphrase·시드 관련 정보 일절 미표시(기록 금지)</span></div>
+    </div>
+    <div class="dtl" data-idx="1">
+      <div class="detail-label">격리 → 귀결 분기</div>
+      <div class="dtl-body"><span class="box">격리(심사) → ⓐ 소명 인정 → 잔고 반영<br>→ ⓑ 소명 불가 → STR + 반환/동결 판단<br>→ ⓒ 제재 적중 → 동결 유지 + §11② 통지·보고<br>· 처리 전 과정 감사로그 · 격리·동결 중 고객 통지 문구는 일반화된 사유만</span></div>
+    </div>
+    <div class="dtl" data-idx="2"></div>
+    <div class="dtl" data-idx="3">
+      <div class="detail-label">에스크로 상태 흐름</div>
+      <div class="dtl-body"><span class="box">수락·확정(BRK-04) → 양측 예치(① → ④) → 상호 이전·정산(BRK-05) → 완결<br>· 무산·실효 시: 예치분 전액 원소유자 반환(④ → ①), 수수료 없음<br>· 예치·반환·정산 전 건 온체인 대사(ADM-04)와 정합</span></div>
+    </div>
+  </div>
+</div>
+
+<section class="footer-note">
+  <div class="note-card">
+    <div class="note-title">비고</div>
+    <div class="note-body">
+      · DSRV 내부 관리자 화면(고객사 노출 없음). 관리자 메뉴 '지갑' 탭 — 예외케이스 <strong>B1·B2·B6(입금) · F1·F4·F6(정산) · H3·H4(출금) · X3(대사)의 처리 귀속 화면</strong>.<br>
+      · <strong>[구 ADM-01과 구분]</strong> 삭제된 ADM-01(나목 재고관리)의 부활이 아님 — 사전 최소재고 미보유 결정(2026-08-31)은 유지. 이 화면은 <strong>격리·동결·콜드/핫·에스크로 운영</strong>이 목적이고, 풀 잔액은 조회 전용.<br>
+      · <strong>[에스크로 — ⓪ 게이트]</strong> ④ 에스크로 전용 풀은 현재 구조(2026-09-01) 기준 — 09 정본 ⓪ 전제 개정·<span style="color:#991b1b;">[로펌게이트]</span> 에스크로 법적 지위 확정 전이므로 골격 반영 시 재검토.<br>
+      · <strong>[조회 전용]</strong> 원장·잔액 직접 변경 기능 미구현(ADM-04와 동일 원칙) — 자산 이동은 심사 큐(ADM-07) 승인 + 콜드 2인 멀티시그 경로로만.<br>
+      · 연결: 격리·동결 → STR(ADM-02) / 이동 승인 → ADM-07 / 대사 → ADM-04 / 에스크로 → BRK-04·BRK-05
+    </div>
+  </div>
+</section>
+
+<script src="screen.js"></script>
+</body>
+</html>

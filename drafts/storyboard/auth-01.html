@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화면기획 — 로그인</title>
+<link rel="stylesheet" href="screen.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="crumb"><span>인증</span><span class="s">›</span><span>로그인</span></div>
+  <h1 class="title">로그인</h1>
+  <span class="sid">AUTH-01</span>
+  <span class="defense">MFA 의무 · 비정상 로그인 통제</span>
+</header>
+
+<div class="main">
+  <div class="screen-panel">
+    <div style="position:relative;display:flex;">
+      <div class="labels" id="labels">
+        <div class="lbl"><span class="lbl-text">전역 상단</span></div>
+        <div class="lbl"><span class="lbl-text">계정 입력</span></div>
+        <div class="lbl"><span class="lbl-text">2차 인증<br>(MFA)</span></div>
+        <div class="lbl"><span class="lbl-text">세션·<br>로그인</span></div>
+        <div class="lbl"><span class="lbl-text">계정 잠금<br>안내</span></div>
+      </div>
+      <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
+    </div>
+
+    <div class="frame" id="frame">
+      <!-- 전역: 콘솔 상단 (로그인 전 — ORG 미표시) -->
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="c-top" style="border-radius:8px 8px 0 0;">
+          <span class="brand">DSRV Desk</span>
+          <span class="meta"><span>로그인</span></span>
+        </div>
+      </div>
+
+      <!-- ID/PW -->
+      <div class="zone" data-idx="0">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="0" style="position:relative;padding:8px;border-radius:8px;">
+          <div class="pin" data-idx="0" style="top:-4px;right:-4px;">1</div>
+          <div style="font-size:11px;color:#94a3b8;font-weight:600;margin-bottom:6px;">로그인</div>
+          <div class="field" style="margin-bottom:8px;"><span class="ph">이메일(담당자 계정)</span></div>
+          <div class="field"><span class="ph">비밀번호</span></div>
+        </div>
+      </div>
+
+      <!-- 2FA -->
+      <div class="zone" data-idx="1">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="1" style="position:relative;padding:8px;border-radius:8px;">
+          <div class="pin" data-idx="1" style="top:-4px;right:-4px;">2</div>
+          <div style="font-size:11px;color:#94a3b8;font-weight:600;margin-bottom:6px;">2차 인증 (Google Authenticator)</div>
+          <div class="field" style="text-align:center;letter-spacing:.3em;"><span class="ph">· · · · · ·</span></div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:6px;">기기 분실 시 백업코드(예: 4F2A-9C11)를 위 칸에 입력</div>
+        </div>
+      </div>
+
+      <!-- 세션·로그인 -->
+      <div class="zone" data-idx="2">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="2" style="position:relative;padding:8px;border-radius:8px;">
+          <div class="pin" data-idx="2" style="top:-6px;right:-4px;">3</div>
+          <div class="btn primary">로그인</div>
+        </div>
+      </div>
+
+      <!-- 계정 잠금 안내 (잠금 상태에서만 노출) -->
+      <div class="zone" data-idx="3">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="3" style="position:relative;padding:8px;border-radius:8px;">
+          <div class="pin" data-idx="3" style="top:-4px;right:-4px;">4</div>
+          <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:6px;padding:10px 12px;font-size:11.5px;color:#991b1b;line-height:1.55;">
+            비밀번호를 5회 이상 잘못 입력해 계정이 잠겼습니다.<br>
+            잠금 해제는 담당자에게 문의해 주세요 — <strong>portal.kyc@dsrvlabs.com</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <svg id="connSvg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;"></svg>
+
+  <div class="items" id="items">
+    <div class="nav-global">
+      <div class="nav-global-title">진입 · 전역 이동</div>
+      <div class="nav-note">· <strong>진입</strong>: 계정 활성화(ONB-01) 완료 직후 / 로그아웃·세션 만료(유휴 15분·최대 8시간) 후 재접속<br>
+      · 비밀번호 찾기·아이디 찾기 링크 없음 — 분실 시 2차 인증 재설정(DASH-03)·초대 재발송(ADM-03) 운영 절차로 처리</div>
+    </div>
+    <div class="itm" data-idx="0">
+      <div class="num">1</div>
+      <div>
+        <div class="itm-title">ID/PW 입력<span class="req">필수</span></div>
+        <div class="itm-desc">· 담당자 계정(이메일)·비밀번호<br>· 스스로 가입할 수 없고 초대받은 회사 담당자만 로그인 · 5회 실패 시 계정 잠금(항목 4) · 비밀번호 규칙 적용(설정은 ONB-01 · 수정은 DASH-02)<br><span class="basis">근거: 로그인 인증 화면 · 정보보호 관리체계(ISMS) 인증기준 2.5.3·2.5.4(비밀번호 관리)</span></div>
+      </div>
+    </div>
+    <div class="itm" data-idx="1">
+      <div class="num">2</div>
+      <div>
+        <div class="itm-title">2FA/MFA 인증<span class="req">필수</span></div>
+        <div class="itm-desc">· Google Authenticator 2차 인증 — ONB-01에서 등록한 앱의 6자리 코드 입력<br>· 기기 분실 시 <strong>같은 입력칸에 백업코드 입력</strong>(별도 화면·모달 없음) — 6자리 숫자는 인증코드, 8자리 영숫자는 백업코드로 자동 구분<br>· 백업코드는 1회용 — 사용 즉시 폐기 · 사용 시 홈(DASH-01)에 2차 인증 재설정 권고 배너 노출<br>· 전 권한자 MFA 의무 · 민감행위 재인증<br><span class="basis">근거 ISMS 2.5 · F-5</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">2차 인증 칸에 백업코드 입력</span><span class="nav-act">8자리 영숫자 → 백업코드로 자동 구분 · 1회용, 사용 즉시 폐기</span><span class="nav-to">성공 → <strong>DASH-01</strong> + 홈 상단에 2차 인증 재설정 권고 배너 노출</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="itm" data-idx="2">
+      <div class="num">3</div>
+      <div>
+        <div class="itm-title">세션 정책·로그인<span class="req">필수</span></div>
+        <div class="itm-desc">· 유휴 타임아웃: 무조작 <strong>15분</strong> 후 자동 로그아웃(<span style="color:#b45309;">[확인필요]</span> 관리자·특권 계정은 10분 별도 적용)<br>· 세션 최대 지속: 재인증 없이 최대 <strong>8시간</strong> 후 재로그인<br>· 동시세션: <strong>계정당 1세션 원칙</strong> — 새 기기 로그인 시 기존 세션 종료(<span style="color:#b45309;">[확인필요]</span> 예외 허용 여부)<br>· 로그아웃·브라우저 종료 시 세션 즉시 파기<br><span class="basis">근거: 세션·인증 관리 · 정보보호 관리체계(ISMS) 인증기준 2.5(인증)·2.6(접근통제)</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">[로그인] 버튼</span><span class="nav-act">클릭 — ID/PW + 2차 인증(6자리) 검증</span><span class="nav-to">성공 → <strong>대시보드(DASH-01)</strong> / 실패 → 오류 표시·화면 잔류(연속 5회 실패 시 계정 잠금)</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="itm" data-idx="3">
+      <div class="num">4</div>
+      <div>
+        <div class="itm-title">계정 잠금·알림<span class="req">필수</span></div>
+        <div class="itm-desc">· 비밀번호 연속 5회 오류 → <strong>계정 잠금 · 로그인 차단</strong>(해제 전 재시도 불가)<br>· 잠금 발생 즉시 <strong>어드민 콘솔(ADM-02 알람함) 알림</strong> — DSRV 담당자 인지·조치<br>· 화면 하단에 잠금 안내 문구 + 문의 이메일 <strong>portal.kyc@dsrvlabs.com</strong> 노출(잠금 상태에서만)<br><span class="basis">근거: 비정상 로그인 통제 · 정보보호 관리체계(ISMS) 인증기준 2.5(인증)·2.6(접근통제)</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">계정 잠금 상태에서 로그인 시도</span><span class="nav-act">차단 — 해제 전 재시도 불가</span><span class="nav-to stay">화면 잔류 · 잠금 안내(문의 이메일) 노출 — 해제는 어드민 홈(ADM-02) 처리함의 '계정 잠금' 알람 처리</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<section class="footer-note" style="padding-bottom:0;">
+  <div class="note-card">
+    <div class="note-title">상세내용</div>
+    <div class="detail-grid" id="detailCol">
+      <div class="dtl" data-idx="0">
+        <div class="detail-label"><span class="dtl-num">1</span>접근 전제</div>
+      <div class="dtl-body"><span class="box">· 초대받은 ORG 담당자만 계정 보유(셀프가입 없음)<br>· KYC·계약 완료 전에는 로그인 후에도 기능 게이팅(G-3 배너)</span></div>
+      </div>
+      <div class="dtl" data-idx="1">
+        <div class="detail-label"><span class="dtl-num">2</span>MFA 적용 범위</div>
+      <div class="dtl-body"><span class="box">· 로그인 시 1회 + 승인·정책변경 등 <strong>민감행위를 할 때 다시 인증</strong><br>· <strong>정보변경 시 다시 인증하는 대상 = 계정정보</strong>(비밀번호·2차 인증·세션·기기, DASH-01) — 화이트리스트 등록은 교환·중개에 없으므로 대상에서 제외<br>· 인증 실패·우회 시도는 감사기록에 남김 <span style="color:#94a3b8;">— 근거: 정보보호 관리체계(ISMS) 인증기준 2.10.4(중요정보 변경 시 재인증)</span></span></div>
+      </div>
+      <div class="dtl" data-idx="2">
+        <div class="detail-label"><span class="dtl-num">3</span>세션 이후 흐름</div>
+      <div class="dtl-body"><span class="box">· 로그인 성공 → 대시보드 → 교환하기(나목)·교환게시판(마목) 탭 진입<br>· 유휴 타임아웃 시 자동 로그아웃·재인증</span></div>
+      </div>
+      <div class="dtl" data-idx="3">
+        <div class="detail-label"><span class="dtl-num">4</span>잠금 해제·알림 처리</div>
+      <div class="dtl-body"><span class="box">· 잠금 해제: DSRV 관리자가 본인확인 후 해제 또는 초대 재발송 — 처리는 <strong>어드민 홈(ADM-02) 처리함의 '계정 잠금' 알람</strong>, 백업코드 분실과 동일한 운영 프로세스<br>· 잠금·해제·알림 이력은 감사로그 기록<br>· 허용 IP 화이트리스트·디바이스/위치 이상 탐지는 적용하지 않음(제외)</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="footer-note">
+  <div class="note-card">
+    <div class="note-title">비고</div>
+    <div class="note-body">
+      · 모든 화면의 <strong>진입점(로그인)</strong>. 인증 후 콘솔 상단(G-2/G-4)·KYC 배너(G-3)가 전역으로 유지.<br>
+      · <strong>[비밀번호 규칙]</strong> ① 영문 대·소문자·숫자·특수문자 중 3종 이상 8자 이상 ② 이메일과 동일한 문자 사용 금지 ③ 동일 문자 4번 이상 사용 금지 ④ 특수문자는 !@#$%^&amp;*()만 허용 ⑤ 연속 5회 실패 시 계정 잠금 ⑥ 단방향 해시+salt 저장(원문 미보관 — 초대·본인설정 방식이라 임시 비밀번호 없음) ⑦ <strong>변경주기는 강제하지 않고 권고</strong>(유출 정황 시 즉시 변경 원칙). 실제 입력·안내문구는 ONB-01·DASH-02 화면에 노출 — 근거: 정보보호 관리체계(ISMS) 인증기준 2.5.4(비밀번호 관리).<br>
+      · <strong>[최소 구현]</strong> 잠금 알림은 어드민 알람함 재사용(외부 메신저·webhook 없음) · 백업코드는 비밀번호와 동일한 해시 방식으로 저장, 사용·실패 감사로그 기록 · 재설정·재발급은 기존 초대 재발송(ONB-00→ONB-01) 재사용(신규 화면 없음).<br>
+      · <span style="color:#991b1b;">[확인필요]</span> 유휴 타임아웃 값·특권계정 별도 정책·동시세션 예외.<br>
+      · 다음 화면: 대시보드 DASH-01 (GNB에서 교환하기 EXC-01 / 교환게시판 BRK-01 진입)
+    </div>
+  </div>
+</section>
+
+<script src="screen.js"></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IA — 정보구조 (교환·중개 콘솔)</title>
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Pretendard', system-ui, -apple-system, sans-serif; background:#fafafa; color:#1e293b;
+         font-size:13px; line-height:1.6; padding:28px 32px 60px; }
+  .doc-head { max-width:1060px; margin:0 auto 22px; }
+  .doc-head h1 { font-size:19px; font-weight:800; letter-spacing:-.01em; }
+  .doc-head .sub { font-size:11.5px; color:#64748b; margin-top:3px; }
+  .cols { max-width:1060px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:start; }
+  @media (max-width:900px){ .cols { grid-template-columns:1fr; } }
+  .panel { background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:18px 20px 20px; }
+  .panel-title { font-size:13.5px; font-weight:800; display:flex; align-items:baseline; gap:8px; margin-bottom:4px; }
+  .panel-title .scope { font-size:10px; font-weight:600; color:#64748b; }
+  .panel-note { font-size:10.5px; color:#94a3b8; margin-bottom:12px; }
+
+  ul.tree { list-style:none; }
+  ul.tree ul { list-style:none; margin-left:14px; padding-left:14px; border-left:1.5px solid #e2e8f0; }
+  ul.tree li { margin:7px 0; }
+  .node { font-weight:700; font-size:12.5px; color:#0f172a; }
+  .node .lv { display:inline-block; font-size:9px; font-weight:700; color:#64748b; background:#f1f5f9;
+              border:1px solid #e2e8f0; border-radius:4px; padding:0 6px; margin-right:6px; vertical-align:1px; }
+  .node .lv.gnb { color:#1d4ed8; background:#eff6ff; border-color:#bfdbfe; }
+  .node .lv.tab { color:#7c2d12; background:#fff7ed; border-color:#fed7aa; }
+  .desc { display:block; font-size:10.5px; font-weight:400; color:#94a3b8; margin-top:1px; }
+
+  .scr { display:inline-flex; align-items:baseline; gap:5px; background:#fff; border:1px solid #cbd5e1;
+         border-radius:6px; padding:2px 8px; margin:2px 4px 2px 0; cursor:pointer; font-size:11px; color:#334155;
+         transition:all .12s; text-decoration:none; }
+  .scr:hover { border-color:#3b82f6; background:#eff6ff; color:#1d4ed8; }
+  .scr .sid { font-family:ui-monospace, Consolas, monospace; font-size:9px; font-weight:700; color:#94a3b8; }
+  .scr:hover .sid { color:#3b82f6; }
+  .arr { color:#94a3b8; font-size:11px; padding:0 2px; }
+  .need { display:inline-block; font-size:9.5px; font-weight:700; color:#b45309; background:#fef3c7;
+          border-radius:5px; padding:0 6px; margin-left:4px; vertical-align:1px; }
+  .flowline { margin-top:4px; display:flex; flex-wrap:wrap; align-items:center; row-gap:3px; }
+
+  .foot { max-width:1060px; margin:20px auto 0; background:#fbfbf9; border:1px solid #e7e5e0; border-radius:10px;
+          padding:12px 16px; font-size:11px; color:#64748b; }
+  .foot b { color:#334155; }
+</style>
+</head>
+<body>
+
+<div class="doc-head">
+  <h1>IA — 정보구조</h1>
+  <div class="sub">교환(나목)·교환 중개(마목) 콘솔 · GNB 확정 2026-09-01 (대시보드 · 교환하기 · 교환게시판) · 2026-09-02 BRK-06·07 추가 · 화면 박스 클릭 시 해당 화면기획으로 이동</div>
+</div>
+
+<div class="cols">
+
+  <!-- 고객 콘솔 -->
+  <div class="panel">
+    <div class="panel-title">고객 콘솔 — DSRV Desk <span class="scope">초대 기반 · 국내 법인 전용</span></div>
+    <div class="panel-note">로그인 전 진입은 GNB 밖(초대 링크·로그인). 로그인 후 GNB 3개 메뉴.</div>
+    <ul class="tree">
+      <li>
+        <span class="node"><span class="lv">진입</span>인증·온보딩 <span class="desc">GNB 밖 · 셀프가입 없음(초대만)</span></span>
+        <div class="flowline">
+          <span class="scr" data-pid="ONB-00"><span class="sid">ONB-00</span>초대 이메일</span><span class="arr">→</span>
+          <span class="scr" data-pid="ONB-01"><span class="sid">ONB-01</span>계정 활성화</span><span class="arr">→</span>
+          <span class="scr" data-pid="AUTH-01"><span class="sid">AUTH-01</span>로그인</span>
+        </div>
+      </li>
+      <li>
+        <span class="node"><span class="lv gnb">GNB 1</span>대시보드</span>
+        <div class="flowline"><span class="scr" data-pid="DASH-01"><span class="sid">DASH-01</span>거래현황·계정·활동로그</span></div>
+        <ul>
+          <li>
+            <span class="node">계정·보안 <span class="desc">대시보드 내 계정 영역에서 진입</span></span>
+            <div class="flowline">
+              <span class="scr" data-pid="DASH-02"><span class="sid">DASH-02</span>비밀번호 수정</span>
+              <span class="scr" data-pid="DASH-03"><span class="sid">DASH-03</span>2차 인증 재설정</span>
+            </div>
+          </li>
+          <li>
+            <span class="node">지갑·자산 <span class="desc">별도 화면 없음 — 입금 주소는 대시보드 지갑 잔고 하단(WAL-01 삭제), 출금/이전은 서면 절차, 화이트리스트는 내부 관리</span></span>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <span class="node"><span class="lv gnb">GNB 2</span>교환하기 <span class="desc">나목 — DSRV가 상대방 · 단건 RFQ</span></span>
+        <div class="flowline">
+          <span class="scr" data-pid="EXC-01"><span class="sid">EXC-01</span>교환하기</span><span class="arr">→</span>
+          <span class="scr" data-pid="EXC-02"><span class="sid">EXC-02</span>비율 확인·수락</span><span class="arr">→</span>
+          <span class="scr" data-pid="EXC-03"><span class="sid">EXC-03</span>승인 진행</span><span class="arr">→</span>
+          <span class="scr" data-pid="EXC-04"><span class="sid">EXC-04</span>내역·완료</span>
+        </div>
+      </li>
+      <li>
+        <span class="node"><span class="lv gnb">GNB 3</span>교환게시판 <span class="desc">마목 — 법인 간 중개 · DSRV 비당사자</span></span>
+        <div class="flowline"><span class="scr" data-pid="BRK-01"><span class="sid">BRK-01</span>교환 게시판</span></div>
+        <ul>
+          <li>
+            <span class="node">게시 (RFQ 등록)</span>
+            <div class="flowline"><span class="scr" data-pid="BRK-02"><span class="sid">BRK-02</span>거래의향 등록</span><span class="arr">→</span><span class="scr" data-pid="BRK-06"><span class="sid">BRK-06</span>내 게시 상세·회수</span></div>
+          </li>
+          <li>
+            <span class="node">신청·수락 (기존 RFQ 거래)</span>
+            <div class="flowline">
+              <span class="scr" data-pid="BRK-03"><span class="sid">BRK-03</span>신청하기</span><span class="arr">→</span>
+              <span class="scr" data-pid="BRK-07"><span class="sid">BRK-07</span>내 신청 상세</span><span class="arr">→</span>
+              <span class="scr" data-pid="BRK-04"><span class="sid">BRK-04</span>받은 신청·수락</span><span class="arr">→</span>
+              <span class="scr" data-pid="BRK-05"><span class="sid">BRK-05</span>이전·완료</span>
+            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 관리자 콘솔 -->
+  <div class="panel">
+    <div class="panel-title">관리자 콘솔 — DSRV Admin <span class="scope">내부 전용 · PAM 세션·녹화</span></div>
+    <div class="panel-note">관리 메뉴 탭 2개 — 처리할 일만 홈 알람·워닝, 조회는 CSV 다운로드 6종, 설정·기관 관리는 설정 (개편 2026-09-01).</div>
+    <ul class="tree">
+      <li>
+        <span class="node"><span class="lv tab">탭 1</span>홈</span>
+        <div class="flowline"><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>어드민 홈</span></div>
+      </li>
+      <li>
+        <span class="node"><span class="lv tab">탭 2</span>설정</span>
+        <div class="flowline"><span class="scr" data-pid="ADM-03"><span class="sid">ADM-03</span>설정</span></div>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="foot">
+  <b>기준·비고</b> — GNB 메뉴명 확정 2026-09-01 (대시보드 · 교환하기 · 교환게시판) · 화면 ID·명칭은 index.html 목록과 동일 ·
+  ADM 탭 구성은 홈·설정 2탭(개편 2026-09-01 — 구 ADM-04~08 삭제, 조회는 CSV 다운로드).
+  ADM-01은 존재하지 않음(결번). 흐름(화살표)은 대표 경로만 표기 — 상세 분기는 화면 흐름도(process) 참조.
+</div>
+
+<script>
+document.querySelectorAll('.scr[data-pid]').forEach(el => {
+  el.addEventListener('click', () => {
+    window.parent.postMessage({ type: 'navigate', pageId: el.dataset.pid }, '*');
+  });
+});
+</script>
+</body>
+</html>

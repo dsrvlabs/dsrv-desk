@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DB 스키마 한글판 (교환·중개 콘솔)</title>
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Pretendard', system-ui, -apple-system, sans-serif; background:#fafafa; color:#1e293b;
+         font-size:13px; line-height:1.55; padding:28px 32px 60px; }
+  .doc-head { max-width:1240px; margin:0 auto 20px; }
+  .doc-head h1 { font-size:19px; font-weight:800; letter-spacing:-.01em; }
+  .doc-head .sub { font-size:11.5px; color:#64748b; margin-top:3px; }
+
+  .intro { max-width:1240px; margin:0 auto 26px; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  @media (max-width:900px){ .intro { grid-template-columns:1fr; } }
+  .ipanel { background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:14px 16px; }
+  .ipanel h3 { font-size:12.5px; font-weight:800; color:#0f172a; margin-bottom:6px; }
+  .ipanel p, .ipanel li { font-size:11.5px; color:#475569; }
+  .ipanel p + p { margin-top:6px; }
+  .ipanel b { color:#0f172a; }
+  .ipanel ul { margin-left:16px; }
+  .ipanel li + li { margin-top:3px; }
+  .flowline { font-size:11.5px; color:#334155; padding:4px 0; }
+  .flowline .lab { display:inline-block; width:110px; font-weight:700; color:#0f172a; }
+  .flowline .arr { color:#94a3b8; padding:0 4px; }
+  .flowline .tref { font-size:9.5px; font-weight:700; color:#3b82f6; background:#eff6ff; border:1px solid #bfdbfe;
+                    border-radius:4px; padding:0 5px; }
+
+  .section { max-width:1240px; margin:0 auto 26px; }
+  .sec-head { display:flex; align-items:baseline; gap:8px; margin-bottom:10px; padding-left:10px;
+              border-left:3px solid var(--sc, #94a3b8); }
+  .sec-head h2 { font-size:14px; font-weight:800; color:#0f172a; }
+  .sec-head .cnt { font-size:10.5px; color:#94a3b8; }
+  .sec-note { max-width:1240px; margin:-4px 0 10px; padding-left:13px; font-size:11px; color:#64748b; }
+
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(360px, 1fr)); gap:12px; }
+
+  .tbl { background:#fff; border:1px solid #e2e8f0; border-radius:10px; overflow:hidden; }
+  .tbl-head { padding:9px 13px 8px; border-bottom:1.5px solid #e2e8f0; background:#fcfcfb;
+              border-top:3px solid var(--sc, #94a3b8); }
+  .tbl-head .kn { font-size:13px; font-weight:800; color:#0f172a; }
+  .tbl-head .en { font-family:ui-monospace, 'SF Mono', Consolas, monospace; font-size:10px; color:#64748b;
+                  background:#f1f5f9; border:1px solid #e2e8f0; border-radius:4px; padding:0 5px; margin-left:6px;
+                  vertical-align:1px; }
+  .tbl-head .scr { float:right; font-size:10px; font-weight:700; color:#94a3b8; margin-top:2px; }
+
+  .f { display:flex; align-items:baseline; gap:7px; padding:5px 13px; border-bottom:1px solid #f6f7f8;
+       font-size:12px; }
+  .f:last-child { border-bottom:none; }
+  .m { flex-shrink:0; width:26px; text-align:center; font-size:9px; font-weight:800; border-radius:4px; padding:1px 0; }
+  .m.pk { color:#b45309; background:#fef3c7; }
+  .m.fk { color:#1d4ed8; background:#dbeafe; }
+  .m.n  { color:#cbd5e1; background:transparent; }
+  .f .name { font-weight:700; color:#0f172a; white-space:nowrap; }
+  .f .col { font-family:ui-monospace, 'SF Mono', Consolas, monospace; font-size:10px; color:#94a3b8; white-space:nowrap; }
+  .f .desc { color:#64748b; font-size:11.5px; margin-left:auto; text-align:right; }
+  .f .desc .ref { color:#1d4ed8; font-weight:700; }
+  .f .desc .ev { color:#0f766e; font-weight:700; }
+
+  .s-auth { --sc:#64748b; } .s-wal { --sc:#d97706; } .s-exc { --sc:#2563eb; }
+  .s-brk { --sc:#7c3aed; } .s-aml { --sc:#dc2626; } .s-adm { --sc:#0d9488; }
+
+  .enums { max-width:1240px; margin:0 auto 26px; }
+  .enums .card { background:#fff; border:1px solid #e2e8f0; border-radius:10px; overflow:hidden; margin-bottom:12px; }
+  .enums .card-h { padding:9px 14px 8px; border-bottom:1.5px solid #e2e8f0; background:#fcfcfb;
+                   font-size:13px; font-weight:800; color:#0f172a; }
+  .enums table { width:100%; border-collapse:collapse; font-size:11.5px; }
+  .enums th { background:#f8fafc; color:#64748b; font-weight:700; text-align:left; padding:6px 14px;
+              border-bottom:1px solid #e2e8f0; font-size:10px; }
+  .enums td { padding:6px 14px; border-bottom:1px solid #f6f7f8; color:#334155; vertical-align:top; }
+  .enums td.fld { font-weight:700; color:#0f172a; white-space:nowrap; }
+  .enums td.fld .col { font-family:ui-monospace, Consolas, monospace; font-size:10px; color:#94a3b8; font-weight:400; display:block; }
+  .enums td .v { display:inline-block; font-size:10.5px; font-weight:700; color:#334155; background:#f1f5f9;
+                 border:1px solid #e2e8f0; border-radius:10px; padding:0 8px; margin:1px 3px 1px 0; white-space:nowrap; }
+  .enums td .v.ok { color:#15803d; background:#f0fdf4; border-color:#bbf7d0; }
+  .enums td .v.bad { color:#b91c1c; background:#fef2f2; border-color:#fecaca; }
+  .enums td .v.mid { color:#b45309; background:#fffbeb; border-color:#fde68a; }
+  .enums td .src { font-size:10px; color:#94a3b8; }
+  .enums td .warn2 { color:#b45309; font-weight:700; font-size:10.5px; }
+
+  .foot { max-width:1240px; margin:8px auto 0; background:#fbfbf9; border:1px solid #e7e5e0; border-radius:10px;
+          padding:12px 16px; font-size:11px; color:#64748b; line-height:1.7; }
+  .foot b { color:#334155; }
+  .foot .warn { color:#b45309; font-weight:700; }
+</style>
+</head>
+<body>
+
+<div class="doc-head">
+  <h1>DB 스키마 — 한글판 <span style="font-size:12px;color:#64748b;font-weight:700;">v0.6 · 2026-09-02</span></h1>
+  <div class="sub">
+    교환·중개 콘솔의 데이터 구조를 기획 관점에서 한글로 정리한 문서 · 6개 영역 · 총 29개 테이블 ·
+    취급자산 <b>ETH·USDC·USDT</b> · 체인 <b>Ethereum 단일</b> · <b>PK</b>=기본키(그 테이블의 대표 식별자) · <b>FK</b>=외래키(→ 다른 테이블 참조)
+  </div>
+</div>
+
+<!-- 읽기 안내 -->
+<div class="intro">
+  <div class="ipanel">
+    <h3>이 문서가 다루는 것</h3>
+    <p>기관 고객이 스테이블코인을 <b>DSRV와 직접 교환(나목)</b>하거나, <b>고객 간 교환을 DSRV가 게시판 방식으로 중개(마목)</b>하는 콘솔의 데이터 구조다. 카드 하나가 테이블 하나이고, 카드 제목은 한글명 + 영문 테이블명 + 주로 쓰이는 화면(우측 회색)이다.</p>
+    <p>여섯 영역으로 나뉜다: ① <b>신원·인증</b> 누가 쓰는가 · ② <b>지갑·자산</b> 무엇을 보관·이동하는가 · ③ <b>나목 교환</b> · ④ <b>마목 중개</b> · ⑤ <b>컴플라이언스·감시</b> 승인·알람의 처리함 · ⑥ <b>정책·로그·회계</b> 정책값과 증적.</p>
+    <p>본문의 <b>T1~T8·X3</b>은 관리자 처리함의 아이템 유형 번호로, 상태 전이 문서(states.html)와 같은 번호다. <span style="color:#b45309;font-weight:700;">[확인필요]</span>·<span style="color:#b45309;font-weight:700;">[결정필요]</span>는 아직 정하지 않은 사항의 표시다.</p>
+  </div>
+  <div class="ipanel">
+    <h3>데이터 흐름 한눈에</h3>
+    <div class="flowline"><span class="lab">나목 (직접 교환)</span>교환 요청 <span class="arr">→</span> 스프레드 견적 <span class="arr">→</span> 교환 승인 <span class="tref">T1</span> <span class="arr">→</span> 교환 집행·완료</div>
+    <div class="flowline"><span class="lab">마목 (중개)</span>거래의향(RFQ) <span class="arr">→</span> 신청 <span class="arr">→</span> 조건 확정(딜) <span class="tref">T2</span> <span class="arr">→</span> 이전·정산</div>
+    <div class="flowline"><span class="lab">입출금</span>입금 트랜잭션(자동 감시 <span class="tref">T4</span>) · 출금·이전 요청(서면 접수 <span class="tref">T3</span>)</div>
+    <div class="flowline"><span class="lab">승인·알람</span>모든 승인 대기·워닝은 <b>처리함 아이템</b> 한 테이블로 모여 관리자가 종결</div>
+    <h3 style="margin-top:12px;">이 DB에 없는 것 (경계)</h3>
+    <ul>
+      <li><b>STR(의심거래보고) 작성·보고</b> — 별도 AML 시스템에서 수행. 콘솔에는 처리함 결과코드 'STR 이관'까지만 기록</li>
+      <li><b>KYC 심사 도구</b> — 심사는 별도 시스템, 콘솔은 상태·기록만 보관</li>
+      <li><b>고객 대상 거래보고서</b> — 발급하지 않음. 조회·집계는 관리자 CSV로 대체</li>
+      <li><b>출금 화이트리스트 관리</b> — 기존 커스터디 정책·시스템 그대로 사용</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ① 신원·인증 -->
+<div class="section s-auth">
+  <div class="sec-head"><h2>① 신원·인증 (AUTH)</h2><span class="cnt">테이블 7</span></div>
+  <div class="sec-note">누가 서비스를 쓰는가 — 고객사(기관)와 그 담당자 계정, 초대·로그인·고객확인(KYC) 기록.</div>
+  <div class="grid">
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">ONB·ADM-03</span><span class="kn">기관 (고객사)</span><span class="en">ORG</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">기관 ID</span><span class="col">org_id</span><span class="desc">채번 ORG-NNNN</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">상호</span><span class="col">name</span><span class="desc">국내 법인 전용 · 확정 전 첫 글자만 노출(마스킹)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">기관 상태</span><span class="col">status</span><span class="desc"><span class="ev">심사중 / 활성 / 일시제한 / 동결 / 해지</span> — ADM-03 상태 기계 · 전 화면 게이팅(G-3) 단일 출처</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">KYC 상태</span><span class="col">kyc_status</span><span class="desc"><span class="ev">승인 / 심사중(CDD·EDD) / 거절</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">실제소유자 확인</span><span class="col">rbo_verified</span><span class="desc">확인 여부</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">계약 상태</span><span class="col">contract_status</span><span class="desc">서비스 계약</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">한도등급</span><span class="col">grade</span><span class="desc">거래·출금 한도 산정</span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">AUTH-01·ADM-03</span><span class="kn">가입자 계정</span><span class="en">USER</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">계정 ID</span><span class="col">user_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">소속 기관</span><span class="col">org_id</span><span class="desc"><span class="ref">→ 기관</span> · <b>기관당 1명</b></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">이메일</span><span class="col">email</span><span class="desc">로그인 ID · CSV 표시는 마스킹</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">역할</span><span class="col">role</span><span class="desc"><span class="ev">가입자 / DSRV 관리자</span> — 기관당 가입자 1명</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">계정 상태</span><span class="col">status</span><span class="desc"><span class="ev">초대 발송됨 / 활성 / 잠금 / 해지</span> — 잠금은 5회 실패·T8</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">MFA 사용</span><span class="col">mfa_enabled</span><span class="desc">Google Authenticator(TOTP) · 전 권한자 의무</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">비밀번호 변경일</span><span class="col">pw_changed_at</span><span class="desc">주기 강제 없음(권고) · 해시+salt</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">로그인 실패 횟수</span><span class="col">failed_count</span><span class="desc">연속 5회 → 잠금 + 처리함(T8)</span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">ONB-00·ADM-03</span><span class="kn">초대</span><span class="en">INVITE</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">초대 ID</span><span class="col">invite_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">기관</span><span class="col">org_id</span><span class="desc"><span class="ref">→ 기관</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">수신 이메일</span><span class="col">email</span><span class="desc">담당자 본인 이메일 — 셀프가입 없음</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">활성화 토큰</span><span class="col">token</span><span class="desc">1회용 · 해시 저장</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">만료 시각</span><span class="col">expires_at</span><span class="desc">발송 후 <b>72시간</b></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">상태</span><span class="col">status</span><span class="desc"><span class="ev">발송 / 사용(활성화) / 만료</span> — 만료 시 재발송(신규 행)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">용도</span><span class="col">purpose</span><span class="desc"><span class="ev">최초 초대 / 2FA 재설정</span> — DASH-03 재설정도 동일 경로 재사용</span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">AUTH-01</span><span class="kn">로그인 세션</span><span class="en">SESSION</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">세션 ID</span><span class="col">session_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">계정</span><span class="col">user_id</span><span class="desc"><span class="ref">→ 가입자 계정</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">유휴 만료 시각</span><span class="col">idle_expires_at</span><span class="desc">무조작 <b>15분</b> (특권계정 10분 [확인필요])</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">최대 만료 시각</span><span class="col">hard_expires_at</span><span class="desc">최대 지속 <b>8시간</b> 후 재로그인</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">동시세션</span><span class="col">concurrent</span><span class="desc"><b>계정당 1세션</b> — 새 로그인 시 기존 종료 · 비번 변경 시 전체 파기</span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="kn">로그인 이력</span><span class="en">LOGIN_EVENT</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">이벤트 ID</span><span class="col">event_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">계정</span><span class="col">user_id</span><span class="desc"><span class="ref">→ 가입자 계정</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">유형</span><span class="col">type</span><span class="desc"><span class="ev">성공 / 실패 / 잠금 / 백업코드 사용</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">발생 시각</span><span class="col">created_at</span><span class="desc">디바이스·위치 이상탐지는 미적용(AUTH-01)</span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">ADM-03</span><span class="kn">고객확인 기록</span><span class="en">KYC_RECORD</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">KYC ID</span><span class="col">kyc_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">기관</span><span class="col">org_id</span><span class="desc"><span class="ref">→ 기관</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">확인 수준</span><span class="col">level</span><span class="desc"><span class="ev">CDD / EDD</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">위험등급</span><span class="col">risk_rating</span><span class="desc"><span class="ev">고 / 중 / 저</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">PEP 여부</span><span class="col">pep_flag</span><span class="desc">정치적 주요인물</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">확인일</span><span class="col">verified_at</span><span class="desc"></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">재이행 도래일</span><span class="col">next_review_at</span><span class="desc">위험등급별 <b>고1·중2·저3년</b> + 이벤트 트리거 수시</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">재이행 상태</span><span class="col">review_status</span><span class="desc"><span class="ev">정상 / 도래 / 기한 초과·미응답</span> — 초과 시 처리함(T7)</span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">ONB-01·AUTH-01</span><span class="kn">MFA 백업코드</span><span class="en">BACKUP_CODE</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">코드 ID</span><span class="col">code_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">계정</span><span class="col">user_id</span><span class="desc"><span class="ref">→ 가입자 계정</span> · 활성화 시 6개 발급</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">코드 해시</span><span class="col">code_hash</span><span class="desc">8자리 영숫자 · 비밀번호와 동일 해시 방식</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">상태</span><span class="col">status</span><span class="desc"><span class="ev">유효 / 사용(1회용·즉시 폐기) / 폐기(재발급 시 전량)</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">사용 시각</span><span class="col">used_at</span><span class="desc">사용 시 DASH-01 재설정 권고 배너</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ② 지갑·자산 -->
+<div class="section s-wal">
+  <div class="sec-head"><h2>② 지갑·자산 (WAL)</h2><span class="cnt">테이블 5</span></div>
+  <div class="sec-note">무엇을 보관·이동하는가 — 취급자산과 지갑, 교환에 쓰는 재고 풀, 입금·출금 트랜잭션.</div>
+  <div class="grid">
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="kn">취급자산</span><span class="en">ASSET</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">자산 ID</span><span class="col">asset_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">티커</span><span class="col">symbol</span><span class="desc"><span class="ev">ETH / USDC / USDT</span> 3종 — 2026-09-02 ETH 재편입 · JPYSC 미취급</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">체인</span><span class="col">chain</span><span class="desc"><span class="ev">Ethereum</span> — 단일 체인 (ETH 네이티브 + ERC-20 2종)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">발행사</span><span class="col">issuer</span><span class="desc">— (ETH 네이티브) / Circle / Tether</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">페그 통화</span><span class="col">peg</span><span class="desc"><span class="ev">USD</span>(USDC·USDT) / <span class="ev">없음</span>(ETH) — USDC↔USDT는 디페그 감시, ETH 페어는 시세 기준</span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">DASH-01</span><span class="kn">지갑</span><span class="en">WALLET</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">지갑 ID</span><span class="col">wallet_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">지갑 구분</span><span class="col">type</span><span class="desc"><span class="ev">수탁 콜드 / 운영 / 교환재고(풀) / 격리</span> — 격리 = 위험 입금을 잔고 미반영 상태로 분리 보관(T4)</span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">자산</span><span class="col">asset_id</span><span class="desc"><span class="ref">→ 취급자산</span></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">기관</span><span class="col">org_id</span><span class="desc"><span class="ref">→ 기관</span> (수탁분만)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">주소</span><span class="col">address</span><span class="desc">DASH-01 잔고 하단 전문 표시(자산·체인별)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">콜드 여부</span><span class="col">is_cold</span><span class="desc">수탁자산 100% 콜드 · 핫 비중 임계 20%(T6 워닝)</span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">EXC-01</span><span class="kn">가용 풀</span><span class="en">POOL</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">풀 ID</span><span class="col">pool_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">페어</span><span class="col">pair</span><span class="desc"><span class="ev">ETH↔USDC · ETH↔USDT · USDC↔USDT</span> 3페어 (방향 6)</span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">자산</span><span class="col">asset_id</span><span class="desc"><span class="ref">→ 취급자산</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">가용 잔량</span><span class="col">available_qty</span><span class="desc">0이면 교환 불가 · 집행 완료 시 차감(온체인 확정 기준)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">페어 한도</span><span class="col">limit</span><span class="desc">출처: 커스터디 운영자산 + ADM-03 정책 · 풀 정의 [확인필요]</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">반영 시각</span><span class="col">updated_at</span><span class="desc"></span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">ADM-02 (T4)</span><span class="kn">입금 트랜잭션</span><span class="en">DEPOSIT_TX</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">입금 ID</span><span class="col">deposit_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">기관</span><span class="col">org_id</span><span class="desc"><span class="ref">→ 기관</span></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">자산</span><span class="col">asset_id</span><span class="desc"><span class="ref">→ 취급자산</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">온체인 txhash</span><span class="col">txhash</span><span class="desc"></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">수량</span><span class="col">amount</span><span class="desc"></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">KYT 점수 · BLF 결과</span><span class="col">kyt_score · blf_result</span><span class="desc">입금 자동 감시 — 적중 시 격리·동결 자동 개시</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">상태</span><span class="col">status</span><span class="desc"><span class="ev">컨펌 중 / 반영 완료 / 격리 중 / 소명 대기 / 해제·반영 / 동결 / 오입금 / 스팸</span> ※T4</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">입금 시각</span><span class="col">created_at</span><span class="desc">격리·동결 건은 잔고 미반영</span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">ADM-02 (T3)</span><span class="kn">출금·이전 요청</span><span class="en">WITHDRAWAL_REQUEST</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">요청 ID</span><span class="col">wd_id</span><span class="desc">서면 접수 — 관리자 등록</span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">기관</span><span class="col">org_id</span><span class="desc"><span class="ref">→ 기관</span></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">자산</span><span class="col">asset_id</span><span class="desc"><span class="ref">→ 취급자산</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">수량</span><span class="col">qty</span><span class="desc"></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">수신 주소</span><span class="col">to_address</span><span class="desc">외부 반출 — 화이트리스트는 기존 커스터디 정책</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">신규 주소 여부</span><span class="col">is_new_address</span><span class="desc">신규면 지연발효 타이머 자동 시작(24h)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">지연발효 만료 시각</span><span class="col">delay_until</span><span class="desc">만료 = 승인 버튼 활성화만(자동 승인 아님)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">상태</span><span class="col">status</span><span class="desc"><span class="ev">대기(지연발효 중) / 대기(승인 가능) / 집행 대기 / 완료 / 거절 / 차단</span> ※T3 · 차단 = 출금 시점 BLF 적중</span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">승인자</span><span class="col">approver_id</span><span class="desc"><span class="ref">→ 가입자 계정</span> (DSRV 관리자)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">온체인 txhash</span><span class="col">txhash</span><span class="desc">콜드 집행 후 입력 → 명세 대사 일치 시 완료</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ③ 나목 교환 -->
+<div class="section s-exc">
+  <div class="sec-head"><h2>③ 나목 교환 (EXC)</h2><span class="cnt">테이블 4</span></div>
+  <div class="sec-note">고객이 DSRV를 상대방으로 교환하는 흐름 — 요청 → 견적 → 관리자 승인(T1) → 집행·완료 순으로 테이블이 이어진다.</div>
+  <div class="grid">
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">EXC-01~04</span><span class="kn">교환 요청</span><span class="en">EXCHANGE_REQUEST</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">교환거래 번호</span><span class="col">exc_id</span><span class="desc">채번 EXC-YYYYMMDD-NNNN</span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">기관</span><span class="col">org_id</span><span class="desc"><span class="ref">→ 기관</span></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">기안자</span><span class="col">drafter_id</span><span class="desc"><span class="ref">→ 가입자 계정</span> — 단독 실행(요청 단계 구속력 없음)</span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">보내는 자산</span><span class="col">from_asset_id</span><span class="desc"><span class="ref">→ 취급자산</span></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">받는 자산</span><span class="col">to_asset_id</span><span class="desc"><span class="ref">→ 취급자산</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">보내는 수량</span><span class="col">from_qty</span><span class="desc">1회 최대 100,000 · min(한도, 가용 풀)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">상태 (고객 표출)</span><span class="col">status</span><span class="desc"><span class="ev">요청 / 비율 제시 / DSRV 거래 진행중 / 완료 / 심사 후 보류 / 미진행(만료·거절)</span> — 내부 단계는 처리함(T1)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">요청 일시</span><span class="col">requested_at</span><span class="desc">공통 폼 표기 항목</span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">EXC-02</span><span class="kn">스프레드 견적</span><span class="en">QUOTE</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">견적 ID</span><span class="col">quote_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">교환 요청</span><span class="col">exc_id</span><span class="desc"><span class="ref">→ 교환 요청</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">제시 비율</span><span class="col">rate</span><span class="desc">제시 시점 확정 · 표기 {비율} 받는코인/주는코인</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">외부지표 소스</span><span class="col">index_source</span><span class="desc">업비트·빗썸·바이낸스 — 화면 미노출(ADM-03 단일 출처)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">기준지표</span><span class="col">index_rate</span><span class="desc">제시 시점 스냅숏</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">고정 스프레드</span><span class="col">spread_pct</span><span class="desc">0.10% (예시 — ADM-03 정책값 [확인필요])</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">수락 기한</span><span class="col">valid_until</span><span class="desc">견적유효 120s (예시 [확인필요]) · 만료 시 EXC-01 재요청</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">상태</span><span class="col">status</span><span class="desc"><span class="ev">제시 / 수락 / 거절 / 만료 / 이탈</span> — 만료·이탈은 미집행 → 재요청</span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">ADM-02 (T1)</span><span class="kn">교환 승인</span><span class="en">EXCHANGE_APPROVAL</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">승인 ID</span><span class="col">appr_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">교환 요청</span><span class="col">exc_id</span><span class="desc"><span class="ref">→ 교환 요청</span> — 전건 유입(자동 통과 없음)</span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">DSRV 승인자</span><span class="col">dsrv_approver_id</span><span class="desc"><span class="ref">→ 가입자 계정</span> 단일 승인 · 본인 기안 자기승인 차단 · 고객사 측 승인 단계 없음</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">KYT 점수</span><span class="col">kyt_score</span><span class="desc">자동검증 1차 필터(한도·잔고·BLF·KYT)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">BLF 결과</span><span class="col">blf_result</span><span class="desc"></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">트래블룰</span><span class="col">travel_rule_id</span><span class="desc"><span class="ref">→ 트래블룰 기록</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">판정</span><span class="col">decision</span><span class="desc"><span class="ev">승인 / 보류 / 거절</span> — AML 사유 거절은 STR 검토 연계</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">사유 (내부)</span><span class="col">reason</span><span class="desc">보류·거절 시 필수</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">고객 표출 사유</span><span class="col">public_reason</span><span class="desc"><span class="ev">한도 초과 / 추가 정보 확인 필요 / 내부 심사 기준 미충족 / 가용 풀 부족·시세 이탈</span> — STR 관련 표기 금지</span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">EXC-04·ADM-02</span><span class="kn">교환 집행·완료</span><span class="en">EXCHANGE_EXECUTION</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">집행 ID</span><span class="col">exec_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">교환 요청</span><span class="col">exc_id</span><span class="desc"><span class="ref">→ 교환 요청</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">상태</span><span class="col">status</span><span class="desc"><span class="ev">집행 대기 / 완료</span> — 완료 확정은 txhash 대사 일치 시만</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">적용 비율</span><span class="col">applied_rate</span><span class="desc">받는 수량 = 보내는 수량 × 비율</span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">차감 풀</span><span class="col">pool_id</span><span class="desc"><span class="ref">→ 가용 풀</span> · 차감은 온체인 확정 시점</span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">서명자 1·2</span><span class="col">signer1_id · signer2_id</span><span class="desc"><span class="ref">→ 가입자 계정</span> 2인 멀티시그(화면 밖 커스터디 절차)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">온체인 txhash</span><span class="col">txhash</span><span class="desc">콜드 집행 후 입력</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">명세 대사 일치</span><span class="col">recon_ok</span><span class="desc">주소·자산·수량 일치 — 불일치 시 완료 불가·처리함 워닝</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">스프레드 수익</span><span class="col">spread_revenue</span><span class="desc">구분회계 — 운영손익(스프레드수익) 계정</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">집행 시각</span><span class="col">executed_at</span><span class="desc">약 2영업일 (예시 [확인필요])</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ④ 마목 중개 -->
+<div class="section s-brk">
+  <div class="sec-head"><h2>④ 마목 중개 (BRK)</h2><span class="cnt">테이블 4</span></div>
+  <div class="sec-note">고객 간 교환을 게시판 방식으로 중개하는 흐름 — 게시(거래의향) → 신청 → 수락 즉시 확정(딜, T2) → 이전·정산. 역제안·흥정·자동 매칭은 없다.</div>
+  <div class="grid">
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">BRK-01·02</span><span class="kn">거래의향 (RFQ)</span><span class="en">RFQ_INTENT</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">요청번호</span><span class="col">rfq_id</span><span class="desc">채번 BRK-YYYYMMDD-NNNN (화면 확인)</span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">게시 기관</span><span class="col">org_id</span><span class="desc"><span class="ref">→ 기관</span></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">게시자</span><span class="col">drafter_id</span><span class="desc"><span class="ref">→ 가입자 계정</span> — 단독 게시(별도 승인 없음)</span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">보내는 자산 / 받는 자산</span><span class="col">from_asset_id · to_asset_id</span><span class="desc"><span class="ref">→ 취급자산</span> — 사자/팔자 구분 없음(수량 쌍 표기)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">보내는 수량 / 받는 수량</span><span class="col">from_qty · to_qty</span><span class="desc">환산 비율 = 받는÷보내는 (파생)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">게시 시점 지표 스냅숏</span><span class="col">index_snapshot</span><span class="desc">편차 경고·자동중지 판정 기준</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">보유·처분권 확인</span><span class="col">holding_verified</span><span class="desc">거래 안전성 검증(4요소①) · 기게시 중복분 차감</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">게시 유효기한</span><span class="col">expires_at</span><span class="desc">게시일 + <b>30일</b> — 경과 시 완료(유효기간 만료)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">상태</span><span class="col">status</span><span class="desc"><span class="ev">게재중 / 신청접수 / 확정 / 완료 / 완료(유효기간 만료) / 중지(시세변동) / 회수</span> — 중지·만료는 보드 즉시 제외</span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">BRK-03·04</span><span class="kn">신청</span><span class="en">RFQ_APPLICATION</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">신청 ID</span><span class="col">app_id</span><span class="desc">게시 조건 그대로 신청 — 역제안·흥정 없음</span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">거래의향</span><span class="col">rfq_id</span><span class="desc"><span class="ref">→ 거래의향 (RFQ)</span> — 조건 필드 없음(게시 조건이 원본)</span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">신청 기관</span><span class="col">applicant_org</span><span class="desc"><span class="ref">→ 기관</span> · 수락 전 상호 마스킹(첫 글자만)</span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">신청자</span><span class="col">applicant_id</span><span class="desc"><span class="ref">→ 가입자 계정</span> — 단독 실행 · 수락 전 구속력 없음</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">신청 시점</span><span class="col">applied_at</span><span class="desc">게시 시점과 병기(시세 변동 판단은 당사자 몫)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">신청 유효기한</span><span class="col">expires_at</span><span class="desc">신청 + <b>영업일 2일</b> — 무응답 시 자동 만료</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">상태</span><span class="col">status</span><span class="desc"><span class="ev">신청 / 수락(확정) / 거절 / 만료 / 종결(게시 만료)</span> — 거절 사유 입력 없음 · 복수 신청 처리 [확인필요: 선착순 vs 게시자 선택]</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">이메일 통지</span><span class="col">notified_at</span><span class="desc">3종: 신청 접수(게시자) / 수락·확정(양측) / 완료(양측) — 발신전용·링크 미포함</span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">BRK-04</span><span class="kn">조건 확정</span><span class="en">DEAL</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">딜 ID</span><span class="col">deal_id</span><span class="desc">수락 = 즉시 확정·구속력·수수료 발생(별도 확정 화면 없음)</span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">신청</span><span class="col">app_id</span><span class="desc"><span class="ref">→ 신청</span></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">거래의향</span><span class="col">rfq_id</span><span class="desc"><span class="ref">→ 거래의향 (RFQ)</span> 조건 원본</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">확정 비율 · 수량</span><span class="col">agreed_rate · qty</span><span class="desc">게시 조건 그대로 — 당사자 간 성립(DSRV 가격 불관여)</span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">게시 기관 / 신청 기관</span><span class="col">poster_org · applicant_org</span><span class="desc"><span class="ref">→ 기관</span> — 확정 시 마스킹 해제</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">수수료율</span><span class="col">fee_pct</span><span class="desc">1.0% 양측 — 수락 전 고시(설명의무 4요소④)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">확정(수락) 시각</span><span class="col">confirmed_at</span><span class="desc">수락 행위자·시각 = 유일 증적(AUDIT_LOG)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">상태</span><span class="col">status</span><span class="desc"><span class="ev">확정 / 이전 진행 / 완료 / 이전 중지</span> ※T2 — 중지 건 계약상 귀결 [결정필요①]</span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">BRK-05</span><span class="kn">이전·정산</span><span class="en">BROKER_SETTLEMENT</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">정산 ID</span><span class="col">settle_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">딜</span><span class="col">deal_id</span><span class="desc"><span class="ref">→ 조건 확정</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">상태</span><span class="col">status</span><span class="desc"><span class="ev">양건 확인 / B→A 이전 / A→B 이전 / 완료 / 홀드(완결성 실패)</span> — 홀드 시 역이전(원상 복구) + 처리함 워닝</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">이전 완결성</span><span class="col">completeness_ok</span><span class="desc">한쪽만 이전 방지 — KPI·QA</span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">트래블룰</span><span class="col">travel_rule_id</span><span class="desc"><span class="ref">→ 트래블룰 기록</span> 양측 송·수신인 확인</span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">서명자 1·2</span><span class="col">signer1_id · signer2_id</span><span class="desc"><span class="ref">→ 가입자 계정</span> 2인 멀티시그</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">온체인 txhash</span><span class="col">txhash</span><span class="desc">건별 이전 — 명세 대사 후 완료 처리</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">중개 수수료 수익</span><span class="col">fee_revenue</span><span class="desc">구분회계 — 중개수수료 계정(스프레드 수익과 분리)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">정산 시각</span><span class="col">settled_at</span><span class="desc">정산 배치 1영업일 3회 — 배치 시각·마감 [확인필요]</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ⑤ 컴플라이언스·감시 -->
+<div class="section s-aml">
+  <div class="sec-head"><h2>⑤ 컴플라이언스·감시 (AML)</h2><span class="cnt">테이블 2</span></div>
+  <div class="sec-note">모든 승인 대기·알람·워닝은 '처리함 아이템' 한 테이블로 모인다(유형 T1~T8·X3, 상세는 states.html). STR 작성·보고는 별도 AML 시스템 — 여기에는 결과코드 'STR 이관'까지만 남는다.</div>
+  <div class="grid">
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">ADM-02</span><span class="kn">알람·워닝 처리함 아이템</span><span class="en">INBOX_ITEM</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">아이템 ID</span><span class="col">item_id</span><span class="desc">승인·확인·조사가 필요한 건을 유형 불문 한 테이블로 관리</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">유형</span><span class="col">type</span><span class="desc"><span class="ev">T1 나목 승인 / T2 마목 확인 / T3 출금·이전 / T4 입금 격리 / T5 이상거래 / T6 월렛·키 / T7 KYC 재이행 / T8 계정 잠금 / X3 3면 대사</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">대상 유형 · 대상 ID</span><span class="col">ref_type · ref_id</span><span class="desc">도메인 FK — 교환 요청 / 딜 / 출금 요청 / 입금 tx / 계정 / 지갑 / 대사</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">자동검증·등급</span><span class="col">grade</span><span class="desc"><span class="ev">정상 / 주의(Mid) / High / 지연발효 중 / —</span> · 주의 이상 → ESCALATED 생성</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">아이템 상태</span><span class="col">item_status</span><span class="desc"><span class="ev">OPEN / ESCALATED / IN_PROGRESS / HOLD / RESOLVED</span> — KPI 집계용 공통 5종</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">결과 코드</span><span class="col">result_code</span><span class="desc"><span class="ev">승인 / 거절 / 소명 인정 / 동결 / STR 이관 / 무혐의 / 조치완료 / 해제 / 제한 적용 / 자동 종결(T7)</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">발생원·세부유형</span><span class="col">source</span><span class="desc">콜드 watch / 룰 ID / 대사 배치 등 — T5·T6·X3 상세</span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">담당자</span><span class="col">assignee_id</span><span class="desc"><span class="ref">→ 가입자 계정</span> (DSRV 관리자) · 본인 기안 자기승인 차단</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">사유</span><span class="col">reason</span><span class="desc">보류·거절 시 필수 — 고객 통지는 일반화 사유만(STR 누설 금지)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">생성 · 종결 시각</span><span class="col">created_at · resolved_at</span><span class="desc">종결은 사람(예외: T7 자동 종결 [결정필요③]) · 전 전이 AUDIT_LOG</span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="kn">트래블룰 기록</span><span class="en">TRAVEL_RULE</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">트래블룰 ID</span><span class="col">tr_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">대상 유형</span><span class="col">ref_type</span><span class="desc"><span class="ev">교환(EXC) / 중개(BRK) / 출금·이전(WD)</span> — 출금 포함 여부 [확인필요: 커스터디 기존 체계와 분담]</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">송신인 정보</span><span class="col">originator</span><span class="desc"></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">수신인 정보</span><span class="col">beneficiary</span><span class="desc">불충족 시 T2 보류 → 보완·재진행</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">교환·집행 시각</span><span class="col">exchanged_at</span><span class="desc"></span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ⑥ 정책·로그·회계 -->
+<div class="section s-adm">
+  <div class="sec-head"><h2>⑥ 정책·로그·회계 (ADM)</h2><span class="cnt">테이블 7</span></div>
+  <div class="sec-note">정책값(스프레드·수수료·한도)의 단일 출처와 변경통제, 감사로그, 3면 대사, 구분회계. 화면은 이 값을 표출만 하고 하드코딩하지 않는다.</div>
+  <div class="grid">
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">ADM-03</span><span class="kn">스프레드 정책 (나목)</span><span class="en">SPREAD_POLICY</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">페어</span><span class="col">pair</span><span class="desc">3페어(ETH↔USDC · ETH↔USDT · USDC↔USDT) — 페어 단위 정책</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">외부지표 소스</span><span class="col">index_source</span><span class="desc">업비트·빗썸·바이낸스 — 화면 미노출 · 조합 방식 [확인필요]</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">고정 스프레드</span><span class="col">spread_pct</span><span class="desc">0.10% (예시 [확인필요])</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">이탈 임계</span><span class="col">deviation_thr</span><span class="desc">시세 이탈 시 집행 정지 [확인필요]</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">견적 유효시간</span><span class="col">quote_ttl</span><span class="desc">120s (예시 [확인필요])</span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">정책 버전</span><span class="col">version</span><span class="desc"><span class="ref">→ 정책 변경통제</span> · 진행 중 건은 요청 시점 값 유지</span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">ADM-03</span><span class="kn">수수료·게시 정책 (마목)</span><span class="en">FEE_POLICY</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">수수료 정책 ID</span><span class="col">fee_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">요율</span><span class="col">fee_pct</span><span class="desc">1.0% · 근거 수치 [확인필요]</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">부과 대상</span><span class="col">charge_target</span><span class="desc">양측 (각자 자기 측 예상액만 표기)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">면제 조건</span><span class="col">exemption</span><span class="desc">거절·만료·무산 = 자산이동·수수료 없음</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">게시 유효기간</span><span class="col">post_ttl</span><span class="desc"><b>30일</b></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">신청 유효기간</span><span class="col">apply_ttl</span><span class="desc"><b>영업일 2일</b></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">시세변동 자동중지 임계</span><span class="col">halt_thr</span><span class="desc"><b>±2.0%</b> (게시 시점 대비) — 편차 경고·게시 차단과 동일 기준</span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">정책 버전</span><span class="col">version</span><span class="desc"><span class="ref">→ 정책 변경통제</span></span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">ADM-03</span><span class="kn">한도·룰셋 (공통·지갑)</span><span class="en">LIMIT_RULESET</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">룰 ID</span><span class="col">rule_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">적용 범위</span><span class="col">scope</span><span class="desc"><span class="ev">공통 / 기관 / 등급</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">건별 한도</span><span class="col">tx_limit</span><span class="desc">1억 원 상당 · 1회 최대 교환 수량 100,000 — 일간·월간 누적 한도 [확인필요]</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">신규주소 지연발효</span><span class="col">wl_delay</span><span class="desc">24h — 커스터디 출금(외부 반출) 전용, 교환·중개 미적용</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">KYT·BLF 임계</span><span class="col">kyt_blf_thr</span><span class="desc">자동검증 1차 필터·에스컬레이션 기준</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">핫월렛 비중 임계</span><span class="col">hot_ratio_thr</span><span class="desc"><b>20%</b> — 초과 시 스윕 워닝(T6)</span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">정책 버전</span><span class="col">version</span><span class="desc"><span class="ref">→ 정책 변경통제</span></span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">ADM-03</span><span class="kn">정책 변경통제</span><span class="en">POLICY_VERSION</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">버전 ID</span><span class="col">version_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">분류</span><span class="col">category</span><span class="desc"><span class="ev">스프레드 / 수수료·게시 / 룰셋</span></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">기안자 · 승인자</span><span class="col">maker_id · approver_id</span><span class="desc"><span class="ref">→ 가입자 계정</span> (DSRV 관리자) · PAM 세션·감사 대상</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">발효일</span><span class="col">effective_at</span><span class="desc">저장 이후 신규 요청부터 적용</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">변경 내역</span><span class="col">diff</span><span class="desc">변경 전/후 · 변경자 감사로그</span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">ADM-02 CSV⑥</span><span class="kn">통합 감사로그</span><span class="en">AUDIT_LOG</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">로그 ID</span><span class="col">log_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">발생원</span><span class="col">source</span><span class="desc"><span class="ev">AUTH / EXC / BRK / WAL / 처리함(INBOX) / 정책(ADM-03) / 열람·다운로드</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">대상 ID</span><span class="col">ref_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">행위자</span><span class="col">actor_id</span><span class="desc"><span class="ref">→ 가입자 계정</span> — 어드민 포함</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">행위</span><span class="col">action</span><span class="desc">조회·CSV 다운로드 포함(열람 기록 CSV⑥의 원천) · 명세 다운로드·txhash 입력·처리함 전 전이</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">해시</span><span class="col">hash</span><span class="desc">WORM · 해시 무결성</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">기록 시각</span><span class="col">created_at</span><span class="desc">NTP 동기화</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">보존 기간</span><span class="col">retention</span><span class="desc"><span class="ev">거래 15년 / AML 5년</span></span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">ADM-02 CSV⑤</span><span class="kn">3면 대사</span><span class="en">RECONCILIATION</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">대사 ID</span><span class="col">recon_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">자산</span><span class="col">asset_id</span><span class="desc"><span class="ref">→ 취급자산</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">내부장부 · 온체인 · 콜드 잔액</span><span class="col">internal_bal · onchain_bal · custody_bal</span><span class="desc">3면 스냅숏</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">일치 여부</span><span class="col">matched</span><span class="desc"><span class="ev">일치 / 불일치(홀드)</span> — 불일치 시 X3 워닝 + 해당 지갑 출금 자동 동결·규명 전 재개 금지</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">대사 시각</span><span class="col">snapshot_at</span><span class="desc">정기 배치 스냅숏</span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">ADM-02 CSV④</span><span class="kn">구분회계 계정</span><span class="en">LEDGER_ACCOUNT</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">계정 ID</span><span class="col">account_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">계정 구분</span><span class="col">type</span><span class="desc"><span class="ev">수탁 / 운영 / 스프레드수익(운영손익) / 중개수수료</span></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">자산</span><span class="col">asset_id</span><span class="desc"><span class="ref">→ 취급자산</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">잔액</span><span class="col">balance</span><span class="desc">원장 직접 변경 기능 없음(조회 전용)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">집계 기준 시각</span><span class="col">snapshot_at</span><span class="desc">CSV 집계 기준</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 부록: enum 총정리 -->
+<div class="enums">
+  <div class="sec-head" style="--sc:#0f172a;"><h2 style="font-size:14px;font-weight:800;">부록 — 코드값(enum)·확정 파라미터 총정리</h2><span class="cnt">필드별 허용값 · 2026-09-01 기준</span></div>
+
+  <div class="card">
+    <div class="card-h">A. 확정값 (결정 완료)</div>
+    <table>
+      <thead><tr><th style="width:220px;">필드</th><th>허용값</th><th style="width:260px;">비고</th></tr></thead>
+      <tbody>
+        <tr><td class="fld">취급자산 · 티커<span class="col">ASSET.symbol</span></td><td><span class="v ok">ETH</span><span class="v ok">USDC</span><span class="v ok">USDT</span></td><td class="src">지원 코인 3종 — 2026-09-02 ETH 재편입 · JPYSC 미취급</td></tr>
+        <tr><td class="fld">취급자산 · 체인<span class="col">ASSET.chain</span></td><td><span class="v ok">Ethereum</span></td><td class="src">단일 체인 — DASH-01 주소 표기와 정합</td></tr>
+        <tr><td class="fld">취급자산 · 페그<span class="col">ASSET.peg</span></td><td><span class="v ok">USD</span><span class="v">없음(ETH)</span></td><td class="src">USDC↔USDT 동일통화 — 디페그 감시 · ETH 페어는 시세 기준</td></tr>
+        <tr><td class="fld">교환 페어<span class="col">POOL.pair · SPREAD_POLICY.pair</span></td><td><span class="v ok">ETH↔USDC</span><span class="v ok">ETH↔USDT</span><span class="v ok">USDC↔USDT</span></td><td class="src">3페어(방향 6) — EXC-01</td></tr>
+        <tr><td class="fld">지갑 구분<span class="col">WALLET.type</span></td><td><span class="v">수탁 콜드</span><span class="v">운영</span><span class="v">교환재고(풀)</span><span class="v bad">격리</span></td><td class="src">격리 = 위험 입금 자동 분리(T4)</td></tr>
+        <tr><td class="fld">기관 상태<span class="col">ORG.status</span></td><td><span class="v mid">심사중</span><span class="v ok">활성</span><span class="v mid">일시제한</span><span class="v bad">동결</span><span class="v">해지</span></td><td class="src">ADM-03 상태 기계 — 전 화면 게이팅(G-3) 단일 출처 · 해지 = 진행 거래 완결 → 전량 출금 → 비활성화</td></tr>
+        <tr><td class="fld">KYC 상태<span class="col">ORG.kyc_status</span></td><td><span class="v ok">승인</span><span class="v mid">심사중(CDD·EDD)</span><span class="v bad">거절</span></td><td class="src">거절 시 가입 거절 + 사유 기록·STR 검토 연계</td></tr>
+        <tr><td class="fld">확인 수준 / 위험등급<span class="col">KYC_RECORD.level · risk_rating</span></td><td><span class="v">CDD</span><span class="v">EDD</span> ｜ <span class="v bad">고</span><span class="v mid">중</span><span class="v ok">저</span></td><td class="src">재이행 주기: 고 1년 · 중 2년 · 저 3년 + 이벤트 트리거 수시</td></tr>
+        <tr><td class="fld">계정 역할<span class="col">USER.role</span></td><td><span class="v">가입자</span><span class="v">DSRV 관리자</span></td><td class="src">기관당 가입자 1명(ADM-03)</td></tr>
+        <tr><td class="fld">계정 상태<span class="col">USER.status</span></td><td><span class="v mid">초대 발송됨</span><span class="v ok">활성</span><span class="v bad">잠금</span><span class="v">해지</span></td><td class="src">잠금 = 5회 실패·탈취 의심(T8) · 추가 초대는 기존 계정 해지 후만</td></tr>
+        <tr><td class="fld">초대 상태<span class="col">INVITE.status</span></td><td><span class="v">발송</span><span class="v ok">사용</span><span class="v">만료</span></td><td class="src">72시간 · 1회 유효 — 만료·분실 시 재발송</td></tr>
+        <tr><td class="fld">로그인 이력 유형<span class="col">LOGIN_EVENT.type</span></td><td><span class="v ok">성공</span><span class="v bad">실패</span><span class="v bad">잠금</span><span class="v mid">백업코드 사용</span></td><td class="src">IP·디바이스/위치 이상탐지 미적용(AUTH-01)</td></tr>
+        <tr><td class="fld">구분회계 계정 구분<span class="col">LEDGER_ACCOUNT.type</span></td><td><span class="v">수탁</span><span class="v">운영</span><span class="v">스프레드수익(운영손익)</span><span class="v">중개수수료</span></td><td class="src">EXC-04 = 운영손익 · BRK-05 = 중개수익 계정</td></tr>
+        <tr><td class="fld">보존 기간<span class="col">AUDIT_LOG.retention</span></td><td><span class="v">거래 15년</span><span class="v">AML 5년</span></td><td class="src">법정 보존 기간 — WORM·해시·NTP</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-h">B. 거래 상태값</div>
+    <table>
+      <thead><tr><th style="width:220px;">필드</th><th>허용값</th><th style="width:260px;">비고</th></tr></thead>
+      <tbody>
+        <tr><td class="fld">교환 요청 상태 (고객 표출)<span class="col">EXCHANGE_REQUEST.status</span></td><td><span class="v">요청</span><span class="v">비율 제시</span><span class="v mid">DSRV 거래 진행중</span><span class="v ok">완료</span><span class="v bad">심사 후 보류</span><span class="v">미진행(만료·거절)</span></td><td class="src">내부 승인 대기~집행 대기는 'DSRV 거래 진행중' 단일 표기(EXC-03) — 내부 단계는 처리함 T1</td></tr>
+        <tr><td class="fld">견적 상태<span class="col">QUOTE.status</span></td><td><span class="v">제시</span><span class="v ok">수락</span><span class="v">거절</span><span class="v">만료</span><span class="v bad">이탈</span></td><td class="src">만료·이탈·풀 부족 = 미집행 → EXC-01 재요청</td></tr>
+        <tr><td class="fld">거래의향 상태<span class="col">RFQ_INTENT.status</span></td><td><span class="v ok">게재중</span><span class="v mid">신청접수</span><span class="v">확정</span><span class="v ok">완료</span><span class="v">완료(유효기간 만료)</span><span class="v bad">중지(시세변동)</span><span class="v">회수</span></td><td class="src">중지·만료는 보드(BRK-01) 즉시 제외 — 중지 배지 없음 · 거절/만료된 신청은 '게재중' 복귀</td></tr>
+        <tr><td class="fld">신청 상태<span class="col">RFQ_APPLICATION.status</span></td><td><span class="v">신청</span><span class="v ok">수락(확정)</span><span class="v">거절</span><span class="v">만료</span><span class="v">종결(게시 만료)</span></td><td class="src">수락 = 즉시 확정·구속력·수수료 발생 · 거절 사유 입력 없음</td></tr>
+        <tr><td class="fld">딜 상태<span class="col">DEAL.status</span></td><td><span class="v">확정</span><span class="v mid">이전 진행</span><span class="v ok">완료</span><span class="v bad">이전 중지</span></td><td class="src">T2 — 거절은 거래 취소가 아니라 이전 중지 · 계약상 귀결 [결정필요①]</td></tr>
+        <tr><td class="fld">이전·정산 상태<span class="col">BROKER_SETTLEMENT.status</span></td><td><span class="v">양건 확인</span><span class="v">B→A 이전</span><span class="v">A→B 이전</span><span class="v ok">완료</span><span class="v bad">홀드(완결성 실패)</span></td><td class="src">홀드 시 역이전(원상 복구) + 처리함 워닝 · 정산 배치 1영업일 3회</td></tr>
+        <tr><td class="fld">출금·이전 상태<span class="col">WITHDRAWAL_REQUEST.status</span></td><td><span class="v mid">대기(지연발효 중)</span><span class="v">대기(승인 가능)</span><span class="v mid">집행 대기</span><span class="v ok">완료</span><span class="v bad">거절</span><span class="v bad">차단</span></td><td class="src">T3 — 지연발효 만료 = 승인 버튼 활성화만 · 차단 = 출금 시점 BLF 적중</td></tr>
+        <tr><td class="fld">입금 상태<span class="col">DEPOSIT_TX.status</span></td><td><span class="v">컨펌 중</span><span class="v ok">반영 완료</span><span class="v bad">격리 중</span><span class="v mid">소명 대기</span><span class="v ok">해제·반영</span><span class="v bad">동결</span><span class="v">오입금</span><span class="v">스팸</span></td><td class="src">T4 — 격리~동결은 잔고 미반영 · 제재 적중은 즉시 동결 유입 · 소명 시한 [결정필요②]</td></tr>
+        <tr><td class="fld">교환 집행 상태<span class="col">EXCHANGE_EXECUTION.status</span></td><td><span class="v mid">집행 대기</span><span class="v ok">완료</span></td><td class="src">완료 확정은 txhash 온체인 대사(주소·자산·수량) 일치 시만</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-h">C. 처리함(INBOX_ITEM) 상태값</div>
+    <table>
+      <thead><tr><th style="width:220px;">필드</th><th>허용값</th><th style="width:260px;">비고</th></tr></thead>
+      <tbody>
+        <tr><td class="fld">유형<span class="col">INBOX_ITEM.type</span></td><td><span class="v">T1 나목 승인</span><span class="v">T2 마목 확인</span><span class="v">T3 출금·이전</span><span class="v">T4 입금 격리</span><span class="v">T5 이상거래</span><span class="v">T6 월렛·키</span><span class="v">T7 KYC 재이행</span><span class="v">T8 계정 잠금</span><span class="v">X3 3면 대사</span></td><td class="src">제재·다크코인 적중은 독립 유형 아님 — 입금은 T4 · 출금은 T3로 귀속(기획 가정)</td></tr>
+        <tr><td class="fld">아이템 상태 (공통 5종)<span class="col">INBOX_ITEM.item_status</span></td><td><span class="v">OPEN 미처리</span><span class="v mid">ESCALATED 에스컬레이션</span><span class="v">IN_PROGRESS 처리중</span><span class="v mid">HOLD 보류</span><span class="v ok">RESOLVED 종결</span></td><td class="src">KPI(처리 대기 등) 집계용 · 자동검증 주의 이상 → ESCALATED로 생성</td></tr>
+        <tr><td class="fld">결과 코드 (RESOLVED 동반)<span class="col">INBOX_ITEM.result_code</span></td><td><span class="v ok">승인</span><span class="v bad">거절</span><span class="v ok">소명 인정</span><span class="v bad">동결</span><span class="v bad">STR 이관</span><span class="v ok">무혐의</span><span class="v ok">조치완료</span><span class="v ok">해제</span><span class="v mid">제한 적용</span><span class="v">자동 종결(T7)</span></td><td class="src">종결은 사람 — 자동 종결은 T7 재이행 완료가 유일 예외(기획 가정 [결정필요③])</td></tr>
+        <tr><td class="fld">자동검증·등급<span class="col">INBOX_ITEM.grade</span></td><td><span class="v ok">정상</span><span class="v mid">주의(Mid)</span><span class="v bad">High</span><span class="v">지연발효 중</span><span class="v">—</span></td><td class="src">자동검증 = 1차 필터 — 자동 체결·승인·거절 없음</td></tr>
+        <tr><td class="fld">도메인 상태 (화면 '상태' 컬럼)<span class="col">유형별</span></td><td colspan="2" class="src">T1: 승인 대기·에스컬레이션 → 보류·집행 대기 → 완료·거절 ｜ T2: 확인 대기 → 보류·이전 진행 → 완료·이전 중지 ｜ T3~T8·X3은 위 B표·해당 테이블 status 참조 — 아이템 상태와 2계층 분리(states.html 상태 모델)</td></tr>
+        <tr><td class="fld">고객 표출 사유 (보류·거절)<span class="col">EXCHANGE_APPROVAL.public_reason 등</span></td><td><span class="v">한도 초과</span><span class="v">추가 정보 확인 필요</span><span class="v">내부 심사 기준 미충족</span><span class="v">가용 풀 부족·시세 이탈</span></td><td class="src">STR 관련 여부는 어떤 형태로도 표기 금지(EXC-04) · 문구 확정 [로펌게이트]</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-h">D. 정책 파라미터 현재값 (ADM-03 단일 출처 — 화면은 표출만)</div>
+    <table>
+      <thead><tr><th style="width:220px;">파라미터</th><th>값</th><th style="width:260px;">확정 여부</th></tr></thead>
+      <tbody>
+        <tr><td class="fld">시세(외부지표) 소스</td><td><span class="v">업비트</span> <span class="v">빗썸</span> <span class="v">바이낸스</span></td><td class="src warn2">복수 소스 조합 방식·수신 장애 시 처리 [확인필요]</td></tr>
+        <tr><td class="fld">고정 스프레드 (나목)</td><td><span class="v">0.10%</span> (USDC↔USDT) · ETH 페어 미정</td><td class="src warn2">예시값 [확인필요] — ETH 페어 요율 포함 내부 수수료 정책 문서에서 확정 예정</td></tr>
+        <tr><td class="fld">견적 유효시간 (나목)</td><td><span class="v">120s</span></td><td class="src warn2">예시값 [확인필요]</td></tr>
+        <tr><td class="fld">중개 수수료 (마목)</td><td><span class="v">1.0%</span> 양측</td><td class="src warn2">요율 근거 수치 [확인필요] · 설명의무 소명 수위 [로펌게이트]</td></tr>
+        <tr><td class="fld">게시 / 신청 유효기간 (마목)</td><td><span class="v">30일</span> / <span class="v">영업일 2일</span></td><td class="src">화면 확정 표기 (BRK-02·03)</td></tr>
+        <tr><td class="fld">시세변동 자동중지 임계 (마목)</td><td><span class="v">±2.0%</span> (게시 시점 대비)</td><td class="src warn2">ADM-03 연동 [확인필요]</td></tr>
+        <tr><td class="fld">건별 한도 (공통)</td><td><span class="v">1억 원 상당</span> · 1회 최대 교환 수량 <span class="v">100,000</span></td><td class="src warn2">일간·월간 누적 한도 [확인필요]</td></tr>
+        <tr><td class="fld">핫월렛 비중 임계 (지갑)</td><td><span class="v">20%</span> 초과 시 스윕 워닝</td><td class="src">ADM-03 표기</td></tr>
+        <tr><td class="fld">신규주소 지연발효</td><td><span class="v">24h</span></td><td class="src">커스터디 출금 전용 — 교환·중개 미적용</td></tr>
+        <tr><td class="fld">인증·세션</td><td>초대 링크 <span class="v">72h·1회</span> · 로그인 실패 <span class="v">5회 잠금</span> · 유휴 <span class="v">15분</span> · 세션 최대 <span class="v">8시간</span> · <span class="v">계정당 1세션</span> · 백업코드 <span class="v">6개·8자리·1회용</span></td><td class="src warn2">유휴값·특권계정 별도 정책·동시세션 예외 [확인필요]</td></tr>
+        <tr><td class="fld">집행·정산 소요</td><td>나목 <span class="v">약 2영업일</span> · 마목 정산 배치 <span class="v">1영업일 3회</span></td><td class="src warn2">예시 — ADM-03 정책값으로 확정 예정 · 배치 시각·마감 [확인필요]</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="foot">
+  <b>비고</b><br>
+  · 상태값은 상태 전이 문서(states.html)와, 정책값은 관리자 설정 화면(ADM-03)과 같은 값을 쓴다. 예시값은 부록 D에 [확인필요]로 표기.<br>
+  · 별도 ERD(svg)는 구버전 — 테이블 구성은 이 문서가 기준이며 ERD는 개정 예정.<br>
+  · <span class="warn">[결정필요]</span> ① T2 이전 중지 건의 계약상 귀결(약관·법무) ② T4 소명 시한·초과 시 귀결 ③ T7 자동 종결 허용 여부 ④ High 워닝 방치 시 상위 에스컬레이션 룰 ⑤ 복수 신청 처리(선착순 vs 게시자 선택 — BRK-04).<br>
+  · <span class="warn">[확인필요]</span> 트래블룰 대상에 출금·이전 포함 여부(커스터디 기존 체계와 분담) · 이메일 알림 수신 범위(담당자 단일/복수) · 시세 소스 조합 방식 · 부록 D의 예시값 전반.<br>
+  · 개발 확정 스키마가 아닌 <b>기획 참고용 초안</b> — 실제 데이터 모델·타입은 개발 설계 시 확정.
+</div>
+
+</body>
+</html>

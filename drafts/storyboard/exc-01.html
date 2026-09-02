@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화면기획 — 교환하기</title>
+<link rel="stylesheet" href="screen.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="crumb"><span>나목 교환</span><span class="s">›</span><span>교환하기</span></div>
+  <h1 class="title">교환하기</h1>
+  <span class="sid">EXC-01</span>
+  <span class="defense">방어: 자동체결 거래소·MM 아님</span>
+</header>
+
+<div class="main">
+  <div class="screen-panel">
+    <div style="position:relative;display:flex;">
+      <div class="labels" id="labels">
+        <div class="lbl"><span class="lbl-text">전역<br>상단·배너</span></div>
+        <div class="lbl"><span class="lbl-text">타이틀</span></div>
+        <div class="lbl"><span class="lbl-text">교환 입력</span></div>
+        <div class="lbl"><span class="lbl-text">성격 고지</span></div>
+        <div class="lbl"><span class="lbl-text">액션</span></div>
+      </div>
+      <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
+    </div>
+
+    <div class="frame" id="frame">
+      <!-- 전역: 콘솔 상단 + KYC 배너(조건부) -->
+      <div class="zone" data-idx="6">
+        <div class="zone-highlight"></div>
+        <div class="c-top" style="border-radius:8px 8px 0 0;">
+          <span class="brand" style="cursor:pointer;">DSRV Desk</span>
+          <span class="meta"><span class="c-badge">A자산운용</span></span>
+        </div>
+        <div class="c-adminbar" style="margin:0;">
+          <span class="m">대시보드</span>
+          <span class="m on" style="background:#dbeafe;color:#1d4ed8;">교환하기</span>
+          <span class="m">교환게시판</span>
+        </div>
+        <div class="item-area" data-highlight="6" style="position:relative;">
+          <div class="pin" data-idx="6" style="top:-4px;right:-6px;">7</div>
+          <div style="font-size:9px;color:#94a3b8;padding:3px 8px 0;">▼ KYC 예외 상태에서만 노출 (정상 시 배너 없음)</div>
+          <div class="c-banner warn" style="border-radius:0;">⚠ 현재 거래가 불가합니다 — 고객확인(KYC)에 확인이 필요한 사항이 있습니다. 이메일로 문의해 주세요.</div>
+        </div>
+      </div>
+
+      <!-- 타이틀 -->
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="zone-title" style="margin-bottom:0;">교환하기</div>
+      </div>
+
+      <!-- 교환 입력 -->
+      <div class="zone" data-idx="0,1,2,3">
+        <div class="zone-highlight"></div>
+
+        <div style="font-size:11px;color:#94a3b8;font-weight:600;margin-bottom:6px;">교환쌍 · 방향</div>
+        <div class="row" style="margin-bottom:14px;">
+          <div class="item-area" data-highlight="0" style="position:relative;flex:1;padding:4px;border-radius:8px;">
+            <div class="pin" data-idx="0" style="top:-6px;right:-6px;">1</div>
+            <div class="field sel">보내는 자산 <span class="chip asset">USDC</span></div>
+          </div>
+          <div style="display:flex;align-items:center;color:#94a3b8;font-weight:700;">→</div>
+          <div class="item-area" data-highlight="1" style="position:relative;flex:1;padding:4px;border-radius:8px;">
+            <div class="pin" data-idx="1" style="top:-6px;right:-6px;">2</div>
+            <div class="field sel">받는 자산 <span class="chip asset">USDT</span></div>
+          </div>
+        </div>
+
+        <div class="item-area" data-highlight="2" style="position:relative;padding:4px;border-radius:8px;margin-bottom:6px;">
+          <div class="pin" data-idx="2" style="top:-6px;right:-6px;">3</div>
+          <div style="font-size:11px;color:#94a3b8;font-weight:600;margin-bottom:6px;">보내는 수량 <span style="float:right;color:#64748b;">1회 최대 1,000 USD 상당</span></div>
+          <div class="field"><span>900</span><span class="chip asset">USDC</span></div>
+          <div style="font-size:10px;color:#64748b;margin-top:4px;">≈ 900.00 USD</div>
+        </div>
+
+        <div class="item-area" data-highlight="3" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="3" style="top:-6px;right:-6px;">4</div>
+          <div style="display:flex;justify-content:flex-end;margin-bottom:6px;">
+            <span class="pooltag">현재 교환 가능 풀 &nbsp;USDT 1,820,000</span>
+          </div>
+          <div class="kv"><span class="k">교환비율 (참고)</span><span class="v">0.9998 USDT/USDC</span></div>
+          <div class="kv"><span class="k">예상 받는 수량</span><span class="v">899.82 USDT</span></div>
+          <div class="kv"><span class="k">스프레드</span><span class="v">0.10% 고정</span></div>
+          <div style="font-size:10px;color:#94a3b8;margin:2px 0 4px;">확정 비율은 요청 후 제시됩니다</div>
+        </div>
+      </div>
+
+      <!-- 성격 고지 -->
+      <div class="zone" data-idx="4">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="4" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="4" style="top:-6px;right:-6px;">5</div>
+          <div class="note-inline reg">이 교환의 상대방은 DSRV입니다. 건별 비율 제시·수동 집행으로 처리됩니다.</div>
+        </div>
+      </div>
+
+      <!-- 액션 -->
+      <div class="zone" data-idx="5">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="5" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="5" style="top:-8px;right:-6px;">6</div>
+          <div class="btn primary">거래 요청</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <svg id="connSvg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;"></svg>
+
+  <div class="items" id="items">
+    <div class="nav-global">
+      <div class="nav-global-title">진입 · 전역 이동</div>
+      <div class="nav-row"><span class="nav-el">GNB '대시보드' · 로고</span><span class="nav-act">클릭</span><span class="nav-to"><strong>대시보드(DASH-01)</strong> · 입력 중 값은 파기(확인 없음)</span></div>
+      <div class="nav-row"><span class="nav-el">GNB '교환게시판'</span><span class="nav-act">클릭</span><span class="nav-to"><strong>교환 게시판(BRK-01)</strong> · 입력 중 값은 파기(확인 없음)</span></div>
+      <div class="nav-row"><span class="nav-el">GNB '교환하기'(현재) · 기관 배지</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응 (표시 전용 — 공통 UI 규격)</span></div>
+      <div class="nav-note">· <strong>진입</strong>: GNB '교환하기' 클릭(전 화면에서) · 진입 시 초기 상태 = 자산 미선택·수량 빈칸·[거래 요청] 비활성 (목업은 입력 완료 상태)<br>
+      · 목업 예시: 900 USDC → 899.82 USDT (한도 1,000 USD 상당 이내 · 2026-09-02 예시 재조정)</div>
+    </div>
+
+    <div class="itm" data-idx="0">
+      <div class="num">1</div>
+      <div>
+        <div class="itm-title">보내는 자산 ▾<span class="req">필수</span></div>
+        <div class="itm-desc">· 드롭다운 · 옵션 <strong>ETH / USDC / USDT</strong> 3종(ADM-03 취급자산) · 기본값 없음 — 미선택 시 회색 안내 "자산 선택"<br>· <strong>먼저 선택해야 하는 필드</strong> — 이 필드가 비어 있으면 받는 자산 ▾·수량 입력이 비활성<br>· 선택 결과: 칩에 티커 표시, 수량 필드 단위 칩·허용 소수 자릿수(ETH 6 / USDC·USDT 2, notation) 갱신<br><span class="basis">근거 F-1a · 09 §0 취급자산·자산 선택 UX(2026-09-02)</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">보내는 자산 ▾</span><span class="nav-act">클릭 → 목록 펼침(ETH / USDC / USDT · 현재 선택 강조) → 항목 클릭</span><span class="nav-to stay">칩 갱신·목록 닫힘 · 받는 자산 ▾ 활성화 · 바깥 클릭/ESC = 변경 없이 닫힘</span></div>
+          <div class="nav-row"><span class="nav-el">보내는 자산 ▾ (재선택)</span><span class="nav-act">이미 선택된 상태에서 다른 자산 선택</span><span class="nav-to stay">받는 자산 초기화(미선택) · 수량 초기화(빈칸) · 풀·비율 표시 "—" · [거래 요청] 비활성</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="1">
+      <div class="num">2</div>
+      <div>
+        <div class="itm-title">받는 자산 ▾<span class="req">필수</span></div>
+        <div class="itm-desc">· 드롭다운 · 옵션 = 3종 중 <strong>보내는 자산을 제외한 2종</strong> → 동일 자산 쌍은 구조적으로 선택 불가(별도 오류 검증 없음)<br>· 보내는 자산 선택 전 <strong>비활성</strong>(회색 · 공통 UI 규격 disabled) · 미선택 시 회색 안내 "자산 선택"<br>· 선택 결과: 교환 가능 풀·참고 비율·스프레드 조회 → 항목 4 표시 갱신 · 예상 받는 수량 계산<br><span class="basis">근거 09 §0 자산 선택 UX(2026-09-02) · 페어 3종(ETH↔USDC · ETH↔USDT · USDC↔USDT)</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">받는 자산 ▾</span><span class="nav-act">클릭(보내는 자산 선택 후에만) → 목록 2종 펼침 → 항목 클릭</span><span class="nav-to stay">칩 갱신·목록 닫힘 · 풀·비율·스프레드 조회("불러오는 중…" → 값) · 수량이 있으면 예상 받는 수량·한도·풀 재검증</span></div>
+          <div class="nav-row"><span class="nav-el">받는 자산 ▾ (비활성 상태)</span><span class="nav-act">보내는 자산 미선택 상태에서 클릭</span><span class="nav-to stay">무반응 · 필드 위 인라인 안내 "보내는 자산을 먼저 선택해 주세요"</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="2">
+      <div class="num">3</div>
+      <div>
+        <div class="itm-title">보내는 수량 입력<span class="req">필수</span></div>
+        <div class="itm-desc">· 숫자·소수점만 입력 가능 · 소수 자릿수 상한 = 보내는 자산 기준(ETH 6 / USDC·USDT 2) — 초과 입력은 무시 · 천 단위 쉼표 자동 삽입 · 빈칸 안내 "0"<br>· 입력 중 실시간 갱신: 필드 아래 <strong>USD 환산액</strong>(소수 2자리 · ADM-03 시세 소스 · 스테이블 1:1) · 항목 4의 예상 받는 수량 · 한도·풀 검증<br>· 유효 상한 = min(1회 한도 <strong>1,000 USD 상당</strong>의 해당 자산 환산 수량, 현재 교환 가능 풀) — 상세 2<br>· <strong>상태</strong> ① 빈칸(기본) ② 정상 ③ 한도 초과 — 빨간 테두리 + 필드 아래 인라인 ⚠ "1회 최대 교환 한도(1,000 USD 상당)를 초과했습니다 — 수량을 줄여 다시 입력해 주세요" ④ 풀 초과 — 인라인 ⚠ "현재 교환 가능 풀을 초과해 요청할 수 없습니다 — 수량을 줄여 다시 입력해 주세요" ⑤ 풀 0 — 입력 비활성 + "현재 교환 불가" · ③④ 동시 해당 시 ③만 노출<br>· 라벨 우측 "1회 최대 1,000 USD 상당" 상시 표기(ADM-03 정책값 렌더링)<br><span class="basis">근거 09 §0 건별 한도·표기 자릿수(2026-09-02) · notation 입력 자릿수</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">수량 필드</span><span class="nav-act">키 입력마다 검증(포커스 아웃 대기 없음)</span><span class="nav-to stay">정상 → 경고 제거·[거래 요청] 활성 / 초과 → 인라인 경고 ③ 또는 ④ 노출·[거래 요청] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">수량 필드 (자산 미선택)</span><span class="nav-act">보내는·받는 자산 중 하나라도 미선택</span><span class="nav-to stay">필드 비활성 · 클릭 시 인라인 안내 "자산을 먼저 선택해 주세요"</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="3">
+      <div class="num">4</div>
+      <div>
+        <div class="itm-title">교환 가능 풀 · 참고 비율 · 예상 받는 수량 · 스프레드 (표시 전용)</div>
+        <div class="itm-desc">· 클릭 요소 없음 · 4개 값은 받는 자산 선택 시 조회, 이후 화면 체류 중 <strong>주기 갱신</strong> — 주기 <span style="color:#b45309;">[확인필요: ADM-03 반영주기]</span><br>· 교환 가능 풀: 「{수량} {받는자산}」 · 0이면 항목 3 ⑤ 상태<br>· 교환비율(참고): notation 비율 규칙 — 스테이블 페어 {받는}/{주는} 4자리 · ETH 페어 {스테이블}/ETH 2자리 · 확정 비율은 EXC-02 제시 시점 값(이 값과 다를 수 있음 — 안내 문구 상시)<br>· 예상 받는 수량 = 보내는 수량 × 참고 비율(ETH 페어 방향에 따라 ÷) → 받는 자산 자릿수로 절사 · 수량 빈칸이면 "—"<br>· 스프레드: ADM-03 고정값 % 소수 2자리 — 별도 수수료 없음(비용 구조 사전 고지, 상세 3)<br>· 로딩 "불러오는 중…"(3초 초과 → 오류) · 조회 실패 시 값 "—" + 상단 배너 "일시적인 오류입니다…" + [거래 요청] 비활성<br><span class="basis">근거 L6 이용자보호(설명의무) · [확인필요] 풀 정의 — 09 §8</span></div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="4">
+      <div class="num">5</div>
+      <div>
+        <div class="itm-title">성격 고지 (표시 전용)</div>
+        <div class="itm-desc">· 고정 문구 · 클릭 없음 · 문구 변경은 법무 확인 후(상세 4 금지 표현)<br><span class="basis">근거 09 §0 line 51 ②⑤ · V2</span></div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="5">
+      <div class="num">6</div>
+      <div>
+        <div class="itm-title">[거래 요청] 버튼<span class="req">필수</span></div>
+        <div class="itm-desc">· primary · 기안자(가입자) 단독 실행 — 구속력 없음(요청 접수 단계), 별도 승인 없음, <strong>확인 다이얼로그 없음</strong><br>· 클릭 즉시 시스템이 비율을 자동 산정(요청 시점 외부지표 + ADM-03 고정 스프레드 · 2026-09-02 확정)해 EXC-02 진입 · 자동인 것은 산정까지, 체결은 수락·승인·수동 집행으로 분리<br><span class="basis">근거 F-4 · 09 §0 나목 견적 산정(2026-09-02)</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">[거래 요청] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①보내는·받는 자산 미선택 ②수량 빈칸·0 ③한도 초과 경고 노출 중 ④풀 초과 경고 노출 중 ⑤풀 0 ⑥KYC 예외 배너 노출 중 ⑦풀·비율 조회 실패</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격) · 사유는 툴팁이 아니라 해당 위치 인라인 경고로 이미 노출</span></div>
+          <div class="nav-row"><span class="nav-el">[거래 요청] — 클릭(활성)</span><span class="nav-act">클릭 → 버튼 라벨 "산정 중…"·비활성(중복 클릭 차단) → 요청번호 EXC-YYYYMMDD-NNNN 채번</span><span class="nav-to"><strong>비율 확인·수락(EXC-02)</strong> — 자동 산정 즉시 진입(대기·담당자 개입 없음)</span></div>
+          <div class="nav-row"><span class="nav-el">[거래 요청] — 실패</span><span class="nav-act">산정 실패(시세 소스 장애) / 요청 시점 풀 재검증 실패</span><span class="nav-to stay">화면 잔류 · 장애 → 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" / 풀 부족 → 항목 3 ④ 경고 재노출 · 버튼 라벨 복귀</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="6">
+      <div class="num">7</div>
+      <div>
+        <div class="itm-title">KYC 예외 배너 (조건부 노출)</div>
+        <div class="itm-desc">· 노출 조건: 기관 KYC 상태가 '활성'이 아닐 때(ADM-03 KYC 상태 — 심사중(EDD)·일시제한·동결) · 정상 시 배너 없음<br>· 노출 중: [거래 요청] 비활성(항목 6 ⑥) · 자산·수량 입력은 가능(조회만) · 내부 사유·AML 심사 내용 미노출(공통 UI 규격 오류 문구 ③)<br>· 문구 고정 · 닫기(×) 없음 · '이메일로 문의' — 링크(mailto) 여부·주소 <span style="color:#b45309;">[확인필요]</span><br><span class="basis">근거 G-3 · 공통 UI 규격 권한·상태 게이팅</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">배너</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용) · 상태가 '활성'으로 바뀌면 다음 진입 시 배너 제거·버튼 활성</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<section class="footer-note" style="padding-bottom:0;">
+  <div class="note-card">
+    <div class="note-title">상세내용</div>
+    <div class="detail-grid" id="detailCol">
+      <div class="dtl" data-idx="0">
+        <div class="detail-label"><span class="dtl-num">1</span>페어 성격</div>
+      <div class="dtl-body"><span class="box">· USDC ↔ USDT : <strong>동일통화(USD연동)</strong> = 디페그/1:1 기준, 가격 거의 동일<br>· ETH ↔ USDC / ETH ↔ USDT : <strong>코인↔스테이블</strong> = 외부지표 시세 기준(변동성) — 견적 유효시간·이탈 임계 민감 <span class="red">[확인필요]</span><br>· <span class="red">[전제 변경 2026-09-02]</span> ETH 재편입 — '전부 스테이블코인' 소명 논거 소멸, 구조 통제(자기재고·수동집행·외부지표 스프레드·비MM)로 소명 · JPYSC 미취급 유지</span></div>
+      </div>
+      <div class="dtl" data-idx="1">
+        <div class="detail-label"><span class="dtl-num">2</span>자산 선택 순서 강제 이유</div>
+      <div class="dtl-body"><span class="box">· 동일 자산 쌍을 검증·오류 문구로 막는 대신 <strong>목록에서 제외</strong> — 오류 상태 1종 감소, 개발·디자인 단순화(2026-09-02 결정)<br>· 보내는 자산이 수량 단위·자릿수·한도 환산의 기준이므로 먼저 확정<br>· 같은 규칙을 BRK-02(거래의향 등록)에 적용</span></div>
+      </div>
+      <div class="dtl" data-idx="2">
+        <div class="detail-label"><span class="dtl-num">3</span>한도·풀 초과 처리</div>
+      <div class="dtl-body"><span class="box">· 유효 상한 = min(1회 한도 1,000 USD 상당의 해당 자산 환산 수량, 가용 풀) — 두 조건 모두 충족해야 요청 가능 · 환산 시세·시점 = ADM-03 시세 소스 · 요청 시점(입력 중 실시간 재계산)<br>· 풀 = 0 : 수량 입력 비활성, <span class="red">"현재 교환 불가"</span> 표기<br>· 풀 값 출처 = 커스터디 운영자산 잔고(기존 시스템) + ADM-03 정책 한도 — 별도 지갑 화면 신규 개발 없음<br>· 일간·월간 누적 한도 미정 <span class="red">[확인필요]</span></span></div>
+      </div>
+      <div class="dtl" data-idx="3">
+        <div class="detail-label"><span class="dtl-num">4</span>비용 구조 고지 · 계산 규칙</div>
+      <div class="dtl-body"><span class="box">· 나목 교환은 <strong>별도 수수료 없음</strong> — 비용은 스프레드(% 고정)로 비율에 내재, 적용 비율은 EXC-02에서 고시 후 수락<br>· 예상 받는 수량은 참고값 — 900 USDC × 0.9998 = 899.82 USDT(절사) · ETH 페어 예: 0.3 ETH × 3,184.00 = 955.20 USDC / 955.20 USDC ÷ 3,184.00 = 0.3 ETH<br>· 마목 중개 수수료(거래액 1% 고정 · BRK-03/04/07 사전 고시)와 혼동 방지 문구</span></div>
+      </div>
+      <div class="dtl" data-idx="4">
+        <div class="detail-label"><span class="dtl-num">5</span>라벨 금지 · UI 문구 통제</div>
+      <div class="dtl-body"><span class="box">금지 표현: '공식 LP', '마켓메이커', '플랫폼 보증', '최저가 보장' 등<br>허용: 'DSRV가 상대방인 교환', '외부지표 기준 스프레드'<br><span class="red">평판 뱃지 미사용(2026-08-31 결정)</span></span></div>
+      </div>
+      <div class="dtl" data-idx="5">
+        <div class="detail-label"><span class="dtl-num">6</span>요청 이후 상태</div>
+      <div class="dtl-body"><span class="box">· 상태: 요청됨 → 비율 제시(EXC-02, 시스템 자동 산정) → 수락 시 <strong>DSRV 거래 진행(EXC-03, 약 2영업일)</strong><br>· 진행 중 건은 홈(DASH-01) 거래현황에서 진입 — 별도 승인 큐 화면 없음<br>· 수락(EXC-02) 이후 별도 고객사 승인 단계 없음 — 고객사 측 통제는 DSRV 수탁 콜드월렛의 기존 다중승인 이체로 수행(ISMS 2.2.2)</span></div>
+      </div>
+      <div class="dtl" data-idx="6">
+        <div class="detail-label"><span class="dtl-num">7</span>KYC 상태 → 배너 매핑</div>
+      <div class="dtl-body"><span class="box">· ADM-03 기관 KYC 상태: 활성(배너 없음) / 심사중(EDD)·일시제한·동결(배너 노출·요청 차단) — 상태 라벨은 states.html 도메인 상태와 동일 <span class="red">[확인필요: 상태별 문구 차등 여부]</span><br>· 배너는 EXC-01·BRK-02·BRK-03(행위 화면)에 동일 규격으로 노출, DASH-01에는 요약 배너 <span class="red">[확인필요]</span></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="footer-note">
+  <div class="note-card">
+    <div class="note-title">비고</div>
+    <div class="note-body">
+      · <strong>나목(DSRV가 상대방인 교환)</strong> 진입점. 가격은 여기서 확정되지 않고, 시스템이 EXC-02에서 외부지표+고정 스프레드로 <strong>건별 비율을 자동 산정해 고시</strong>(2026-09-02 확정).<br>
+      · <strong>[방어 핵심]</strong> 이 화면은 "요청서 접수"까지만 수행 — 자동체결·오더북·상시 양방향 호가·API 자동집행 없음. 직무분리는 커스터디 이체 승인으로 충족.<br>
+      · 2026-09-02 설명 형식 개정 표본: 핀 = 조작 요소 단위(드롭다운 2·입력 1·버튼 1·표시 2·배너 1), 버튼 행 = 활성 조건 / 클릭 후 / 실패 3행.<br>
+      · <span style="color:#991b1b;">[확인필요]</span> 풀 정의·반영주기(09 §8) · 일간·월간 누적 한도 · KYC 예외 배너 문의 주소·mailto 여부 · 상태별 배너 문구 차등.<br>
+      · 다음 화면: 비율 확인·수락 (EXC-02)
+    </div>
+  </div>
+</section>
+
+<script src="screen.js"></script>
+</body>
+</html>
