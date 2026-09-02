@@ -85,6 +85,7 @@
           <div class="kv"><span class="k">교환비율 (참고)</span><span class="v">0.9998 USDT/USDC</span></div>
           <div class="kv"><span class="k">예상 받는 수량</span><span class="v">899.82 USDT</span></div>
           <div class="kv"><span class="k">스프레드</span><span class="v">0.10% 고정</span></div>
+          <div class="kv"><span class="k">예상 가스비</span><span class="v">0.0021 ETH ≈ 8,900원</span></div>
           <div style="font-size:10px;color:#94a3b8;margin:2px 0 4px;">확정 비율은 요청 후 제시됩니다</div>
         </div>
       </div>
@@ -157,8 +158,8 @@
     <div class="itm" data-idx="3">
       <div class="num">4</div>
       <div>
-        <div class="itm-title">교환 가능 풀 · 참고 비율 · 예상 받는 수량 · 스프레드 (표시 전용)</div>
-        <div class="itm-desc"><strong>조회</strong> 받는 자산을 고를 때 1회 조회한다. 화면에 머무는 동안 자동으로 다시 조회하지 않는다.<br><strong>값</strong> 교환 가능 풀은 「{수량} {받는자산}」. 비율은 스테이블 페어 {받는}/{주는} 4자리, ETH 페어 {스테이블}/ETH 2자리. 예상 받는 수량은 보내는 수량 × 참고 비율(ETH 페어는 방향에 따라 ÷)을 받는 자산 자릿수로 절사하고, 수량이 비면 "—". 스프레드는 ADM-03 고정값 {정책값 0.10%} 소수 2자리.<br><strong>상태</strong> 로딩 "불러오는 중…"이고 3초를 넘기면 오류로 넘긴다. 조회 실패면 값을 "—"로 두고 상단 배너를 띄우며 [거래 요청]을 비활성으로 둔다.<br><strong>안내</strong> 확정 비율은 EXC-02 제시 시점 값이라 이 값과 다를 수 있다는 문구를 상시 노출한다.<br><span class="basis">근거 L6 이용자보호(설명의무) · <span class="chk">[확인필요: 풀 정의]</span></span></div>
+        <div class="itm-title">교환 가능 풀 · 참고 비율 · 예상 받는 수량 · 스프레드 · 예상 가스비 (표시 전용)</div>
+        <div class="itm-desc"><strong>조회</strong> 받는 자산을 고를 때 1회 조회한다. 화면에 머무는 동안 자동으로 다시 조회하지 않는다.<br><strong>예상 가스비</strong> 조회 시점 가스 가격으로 산정해 ETH 4자리와 원화 환산을 병기한다(예 0.0021 ETH ≈ 8,900원). 고객 부담이며 받는 수량에서 차감한다 — 확정 금액은 EXC-02에서 고시한다. 건별 한도 {정책값 1,500,000원 상당} 판정에는 넣지 않는다.<br><strong>값</strong> 교환 가능 풀은 「{수량} {받는자산}」. 비율은 스테이블 페어 {받는}/{주는} 4자리, ETH 페어 {스테이블}/ETH 2자리. 예상 받는 수량은 보내는 수량 × 참고 비율(ETH 페어는 방향에 따라 ÷)을 받는 자산 자릿수로 절사하고, 수량이 비면 "—". 스프레드는 ADM-03 고정값 {정책값 0.10%} 소수 2자리.<br><strong>상태</strong> 로딩 "불러오는 중…"이고 3초를 넘기면 오류로 넘긴다. 조회 실패면 값을 "—"로 두고 상단 배너를 띄우며 [거래 요청]을 비활성으로 둔다.<br><strong>안내</strong> 확정 비율은 EXC-02 제시 시점 값이라 이 값과 다를 수 있다는 문구를 상시 노출한다.<br><span class="basis">근거 L6 이용자보호(설명의무) · <span class="chk">[확인필요: 풀 정의]</span></span></div>
       </div>
     </div>
 

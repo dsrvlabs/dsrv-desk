@@ -87,6 +87,7 @@
           <div class="kv"><span class="k">환산 비율 (자동 계산)</span><span class="v">0.9980 USDC/USDT</span></div>
           <div class="kv"><span class="k">현 시세 (참고)</span><span class="v">1.0000 USDC/USDT</span></div>
           <div class="kv"><span class="k">현 시세 대비 편차</span><span class="v">-0.20% <span style="color:#16a34a;font-family:inherit;font-weight:600;">(허용 ±2.0% 이내)</span></span></div>
+          <div class="kv"><span class="k">예상 가스비 (내 부담)</span><span class="v">0.0021 ETH ≈ 8,900원 — 이전 시 차감</span></div>
         </div>
 
         <div class="item-area" data-highlight="6" style="position:relative;padding:4px;border-radius:8px;margin-top:4px;">
@@ -196,7 +197,7 @@
       <div class="num">6</div>
       <div>
         <div class="itm-title">환산 비율 · 현 시세 · 편차 (표시 전용)</div>
-        <div class="itm-desc"><strong>구성</strong> 3행 kv. 어느 한 수량이 비면 환산 비율과 편차를 "—"로 둔다.<br><strong>환산 비율</strong> 스테이블 페어는 받는 ÷ 보내는을 소수 4자리로, ETH 페어는 스테이블 ÷ ETH를 소수 2자리로 쓴다(방향 무관). 자릿수 초과분은 절사한다.<br><strong>현 시세</strong> 받는 자산을 고를 때 1회 조회하고 자동으로 다시 조회하지 않는다. 외부지표 기준이며 소스명은 노출하지 않는다. 조회 실패면 "—"와 상단 배너를 띄우고 [게시]를 비활성으로 둔다.<br><strong>편차</strong> (환산 비율 − 현 시세) ÷ 현 시세 × 100을 소수 2자리 부호와 함께 쓰고 옆에 "(허용 ±{정책값 2.0%} 이내)"를 붙인다. 허용 이내는 초록, 초과는 빨강으로 두고 항목 7 경고를 띄운다.<br><strong>용도</strong> 현 시세는 가격 결정이 아니라 편차 판정과 중지 판단 기준이다. 가격은 당사자 합의로 정한다.<br><span class="basis">근거 09 §0 비율 표기 · notation 교환비율 · L6 설명의무</span></div>
+        <div class="itm-desc"><strong>구성</strong> 3행 kv. 어느 한 수량이 비면 환산 비율과 편차를 "—"로 둔다.<br><strong>환산 비율</strong> 스테이블 페어는 받는 ÷ 보내는을 소수 4자리로, ETH 페어는 스테이블 ÷ ETH를 소수 2자리로 쓴다(방향 무관). 자릿수 초과분은 절사한다.<br><strong>현 시세</strong> 받는 자산을 고를 때 1회 조회하고 자동으로 다시 조회하지 않는다. 외부지표 기준이며 소스명은 노출하지 않는다. 조회 실패면 "—"와 상단 배너를 띄우고 [게시]를 비활성으로 둔다.<br><strong>편차</strong> (환산 비율 − 현 시세) ÷ 현 시세 × 100을 소수 2자리 부호와 함께 쓰고 옆에 "(허용 ±{정책값 2.0%} 이내)"를 붙인다. 허용 이내는 초록, 초과는 빨강으로 두고 항목 7 경고를 띄운다.<br><strong>용도</strong> 현 시세는 가격 결정이 아니라 편차 판정과 중지 판단 기준이다. 가격은 당사자 합의로 정한다.<br><strong>예상 가스비</strong> 게시자가 부담할 이전 가스비를 조회 시점 가스 가격으로 산정해 ETH 4자리와 원화 환산으로 적는다(예 0.0021 ETH ≈ 8,900원). 확정 후 이전 시 보내는 자산에서 차감하지 않고 받는 자산에서 차감한다 — 확정 금액은 BRK-05에 표시한다. 건별 한도 {정책값 1,500,000원 상당} 판정에는 넣지 않는다.<br><span class="basis">근거 09 §0 비율 표기 · notation 교환비율 · L6 설명의무</span></div>
       </div>
     </div>
 
