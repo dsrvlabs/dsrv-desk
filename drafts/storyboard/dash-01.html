@@ -78,7 +78,7 @@
               <tr><td>교환</td><td class="mono">2026-09-02 14:12</td><td>900 USDC → 899.73 USDT</td><td>0.9997 USDT/USDC</td><td><div class="item-area" data-highlight="3" style="position:relative;display:inline-block;padding:2px 4px;border-radius:6px;"><div class="pin" data-idx="3" style="top:-10px;right:-10px;">4</div><span class="st ing">진행 중</span></div></td></tr>
               <tr><td>교환게시판</td><td class="mono">2026-09-02 10:35</td><td>800 USDT ↔ 798.40 USDC</td><td>0.9980 USDC/USDT</td><td><span class="st wait">협의중</span></td></tr>
               <tr><td>교환</td><td class="mono">2026-09-01 16:48</td><td>0.3 ETH → 955.20 USDC</td><td>3,184.00 USDC/ETH</td><td><span class="st done">완료</span></td></tr>
-              <tr><td>교환게시판 신청</td><td class="mono">2026-08-30 11:07</td><td>650 USDC ↔ 649.87 USDT</td><td>0.9998 USDT/USDC</td><td><span class="st done">완료</span></td></tr>
+              <tr><td>교환게시판</td><td class="mono">2026-08-30 11:07</td><td>650 USDC ↔ 649.87 USDT</td><td>0.9998 USDT/USDC</td><td><span class="st done">완료</span></td></tr>
               <tr style="color:#94a3b8;"><td>교환</td><td class="mono">2026-08-29 09:52</td><td>500 USDT → 499.85 USDC</td><td>0.9997 USDC/USDT</td><td><span class="st" style="background:#f1f5f9;color:#64748b;">만료</span></td></tr>
               <tr style="color:#94a3b8;"><td>교환게시판</td><td class="mono">2026-08-28 15:20</td><td>0.2 ETH ↔ 636.80 USDT</td><td>3,184.00 USDT/ETH</td><td><span class="st" style="background:#f1f5f9;color:#64748b;">회수</span></td></tr>
             </tbody>
@@ -87,7 +87,7 @@
       </div>
 
       <!-- 지갑 잔고 (구 WAL-01 이관) -->
-      <d<div class="zone" data-idx="4,5">
+      <div class="zone" data-idx="4,5">
         <div class="zone-highlight"></div>
         <div class="zone-title">지갑 잔고</div>
         <div class="item-area" data-highlight="4" style="position:relative;padding:4px;border-radius:8px;">
@@ -105,8 +105,10 @@
           <div class="pin" data-idx="5" style="top:-6px;right:-6px;">6</div>
           <div class="kv"><span class="k">지갑주소(이더리움)</span><span class="v" style="font-family:var(--mono);font-size:10px;">0x9C4d2E7f1B6a3D8c5E0f4A7b2C9d6E1f8A3b5C7e</span></div>
         </div>
-      </div>      <!-- 계정·보안 -->
-      <d<div class="zone" data-idx="6,7">
+      </div>
+
+      <!-- 계정·보안 -->
+      <div class="zone" data-idx="6,7">
         <div class="zone-highlight"></div>
         <div class="zone-title">계정 · 보안</div>
         <div class="actrow">
@@ -119,15 +121,18 @@
             <div class="action"><div class="at">2차 인증 재설정</div></div>
           </div>
         </div>
-      </div>      <!-- 활동 로그 -->
-      <d<div class="zone" data-idx="8">
+      </div>
+
+      <!-- 활동 로그 -->
+      <div class="zone" data-idx="8">
         <div class="zone-highlight"></div>
         <div class="zone-title">활동 로그</div>
         <div class="item-area" data-highlight="8" style="position:relative;padding:4px;border-radius:8px;">
           <div class="pin" data-idx="8" style="top:-6px;right:-6px;">9</div>
           <div class="btn ghost" style="color:#2563eb;border-color:#93c5fd;">활동 로그 다운로드 (CSV)</div>
         </div>
-      </div>    </div>
+      </div>
+    </div>
   </div>
 
   <svg id="connSvg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;"></svg>
@@ -171,14 +176,14 @@
       <div class="num">3</div>
       <div>
         <div class="itm-title">거래 목록 행 (클릭)<span class="req">필수</span></div>
-        <div class="itm-desc">· <strong>컬럼</strong> 구분 · 요청시점 · 교환(보내는 → 받는) · 비율 · 상태.<br>· <strong>구분</strong> 교환 · 교환게시판 · 교환게시판 신청. 행 클릭 시 이동 화면을 이 값으로 분기한다.<br>· <strong>요청시점</strong> 교환은 요청, 게시는 게시, 신청은 신청 시각. 형식 YYYY-MM-DD HH:MM.<br>· <strong>비율</strong> 스테이블 페어 소수 4자리, ETH 페어 {스테이블}/ETH 소수 2자리. 대기 건도 채운다.<br>· <strong>정렬</strong> 요청시점 내림차순 고정.<br>· <strong>조회</strong> 진입 시 전체 행을 한 번에 불러와 표시한다. 페이지네이션·[더 보기]·무한 스크롤을 두지 않고 페이지 스크롤로 본다.<br>· <strong>상태별 문구</strong> 빈 목록 "거래 내역이 없습니다" · 로딩 "불러오는 중…" · 실패 시 상단 배너.<br>· 종결 행은 회색 처리하되 클릭은 막지 않는다.<br><span class="basis">근거 32 §3 DASH-01 · 공통 UI 규격 '목록'(이 화면은 100행 분할 예외 — 2026-09-02 결정)</span></div>
+        <div class="itm-desc">· <strong>컬럼</strong> 구분 · 요청시점 · 교환(보내는 → 받는) · 비율 · 상태.<br>· <strong>구분</strong> 교환 · 교환게시판. 게시자든 신청자든 '교환게시판'으로 같이 표기한다. 행 클릭 시 이동 화면은 구분 + 내 역할(게시자 / 신청자 · 화면에 표기하지 않는 내부 속성)로 분기한다.<br>· <strong>요청시점</strong> 교환은 요청, 게시는 게시, 신청은 신청 시각. 형식 YYYY-MM-DD HH:MM.<br>· <strong>비율</strong> 스테이블 페어 소수 4자리, ETH 페어 {스테이블}/ETH 소수 2자리. 대기 건도 채운다.<br>· <strong>정렬</strong> 요청시점 내림차순 고정.<br>· <strong>조회</strong> 진입 시 전체 행을 한 번에 불러와 표시한다. 페이지네이션·[더 보기]·무한 스크롤을 두지 않고 페이지 스크롤로 본다.<br>· <strong>상태별 문구</strong> 빈 목록 "거래 내역이 없습니다" · 로딩 "불러오는 중…" · 실패 시 상단 배너.<br>· 종결 행은 회색 처리하되 클릭은 막지 않는다.<br><span class="basis">근거 32 §3 DASH-01 · 공통 UI 규격 '목록'(이 화면은 100행 분할 예외 — 2026-09-02 결정)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">행 전체 — 교환 '요청됨'·'비율 제시'</span><span class="nav-act">클릭</span><span class="nav-to"><strong>비율 확인·수락(EXC-02)</strong></span></div>
           <div class="nav-row"><span class="nav-el">행 전체 — 교환 '진행 중'</span><span class="nav-act">클릭</span><span class="nav-to"><strong>승인 진행(EXC-03)</strong></span></div>
           <div class="nav-row"><span class="nav-el">행 전체 — 교환 '완료'·'거절'·'만료'</span><span class="nav-act">클릭</span><span class="nav-to"><strong>내역·완료(EXC-04)</strong> — 거절·만료도 동일 화면 재사용 · 분기 없음</span></div>
-          <div class="nav-row"><span class="nav-el">행 전체 — 교환게시판 '게재중'·'협의중'·'회수'·'중지'</span><span class="nav-act">클릭</span><span class="nav-to"><strong>내 게시 상세·회수(BRK-06)</strong> — '협의중'도 BRK-06 · BRK-04 직행 없음 · 수락은 BRK-06 내 받은 신청</span></div>
-          <div class="nav-row"><span class="nav-el">행 전체 — 교환게시판 신청 '협의중'·'거절됨'·'만료'·'종결(게시 회수·중지·게시 만료)'</span><span class="nav-act">클릭</span><span class="nav-to"><strong>내 신청 상세(BRK-07)</strong></span></div>
-          <div class="nav-row"><span class="nav-el">행 전체 — 교환게시판(게시·신청) '확정'·'완료'</span><span class="nav-act">클릭(양측 공용)</span><span class="nav-to"><strong>이전·완료(BRK-05)</strong></span></div>
+          <div class="nav-row"><span class="nav-el">행 전체 — 교환게시판(내 게시) '게재중'·'협의중'·'회수'·'중지'</span><span class="nav-act">클릭</span><span class="nav-to"><strong>내 게시 상세·회수(BRK-06)</strong> — '협의중'도 BRK-06 · BRK-04 직행 없음 · 수락은 BRK-06 내 받은 신청</span></div>
+          <div class="nav-row"><span class="nav-el">행 전체 — 교환게시판(내 신청) '협의중'·'거절됨'·'만료'·'종결(게시 회수·중지·게시 만료)'</span><span class="nav-act">클릭</span><span class="nav-to"><strong>내 신청 상세(BRK-07)</strong></span></div>
+          <div class="nav-row"><span class="nav-el">행 전체 — 교환게시판(내 게시·내 신청) '확정'·'완료'</span><span class="nav-act">클릭(양측 공용)</span><span class="nav-to"><strong>이전·완료(BRK-05)</strong></span></div>
           <div class="nav-row"><span class="nav-el">표 헤더</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(정렬 변경 없음)</span></div>
         </div>
       </div>
@@ -281,7 +286,7 @@
 <section class="footer-note">
   <div class="note-card">
     <div class="note-title">비고</div>
-    <div class="note-body">· 거래 요약 카드 제거(2026-09-02 사용자 결정) — 대시보드는 목록·잔고·계정 카드만 두고 집계 표시를 하지 않는다.<br>· 로그인 후 첫 화면 · 지갑 별도 화면 없음(구 WAL-01~03 삭제) — 잔고·주소는 이 화면, 출금·이전은 서면 요청, 화이트리스트는 내부 관리.<br>· <strong>규제 구분</strong> — 목록 '교환' = 나목(교환) / '교환게시판'·'교환게시판 신청' = 마목(교환의 중개) · 화면 라벨에 규제 용어 미노출.<br>· <strong>2026-09-02 설명 개정</strong> — 항목설명을 구현 지시문(명사형 종결)으로 재작성 · 화면에 보이는 요소(컬럼·라벨·문구)는 재기술하지 않음 · 편의기능 미도입(카드 필터·주기 갱신·정렬·기간 선택·주소 복사·QR·배너 닫기 없음) · 미결은 구현 단순한 쪽으로 확정(기관 배지 = 로그아웃 메뉴 / 거절·만료도 EXC-04 재사용 / 협의중 행은 BRK-06 / 신청 행은 신청 상태 표시).<br>· <strong>화면 변경</strong> — 계정·보안 카드 부제 삭제 · 잔고 하단 고지 문구 삭제 · 지갑주소 1행(이더리움 공통 주소) · 구분 라벨 교환/교환게시판/교환게시판 신청 · 목록 '번호' 열 → '요청시점'.<br>· 고객 화면 '보류' 라벨 폐지 반영(2026-09-02 결정 · states.html v0.4) — 진행 중 이후는 완료 또는 거절뿐.<br>· <strong>상태 라벨 정본 = states.html v0.4</strong> — 신청 상태는 C표 기준(협의중부터 · 종결(사유) 형태) · 임시로 썼던 '신청됨'·'게시 회수' 단독 라벨 폐기.<br>· <strong>확정(2026-09-02)</strong> — 거래 목록은 [더 보기] 없이 전량 표시하고 페이지 스크롤로 본다. notation 목록 규격의 "100행 초과 시 [더 보기]"에 대한 이 화면 예외다 <span class="chk">[확인필요: notation 규격 개정 vs 화면 예외 유지 · 다른 목록(BRK-01·06 · ADM-02·03) 적용 여부]</span>.<br>· 남은 <span class="chk">[확인필요]</span> — KYC 배너 안내 이메일 주소 · CSV 파일명·컬럼 정의 · 상태 코드 표 확정(states 결정필요 ⑨) · '이전 중지' 칩 신설(⑧) · 게시 유효기간 만료 라벨(⑥) · 오입금 반환 가스비 부담.<br>· ISMS 2.10.4는 현재 비밀번호 확인으로 충족한다는 전제 · 심사 시 해석 <span class="chk">[확인필요]</span>.<br>· 이전 = AUTH-01 / 다음 = EXC-01 · BRK-01</div>
+    <div class="note-body">· <strong>구분 라벨 '교환게시판 신청' 폐지(2026-09-02 사용자 결정)</strong> — 게시·신청 모두 '교환게시판'으로 표기하고 행 클릭 분기는 내 역할(게시자 / 신청자)로 한다.<br>· 거래 요약 카드 제거(2026-09-02 사용자 결정) — 대시보드는 목록·잔고·계정 카드만 두고 집계 표시를 하지 않는다.<br>· 로그인 후 첫 화면 · 지갑 별도 화면 없음(구 WAL-01~03 삭제) — 잔고·주소는 이 화면, 출금·이전은 서면 요청, 화이트리스트는 내부 관리.<br>· <strong>규제 구분</strong> — 목록 '교환' = 나목(교환) / '교환게시판'(내 게시·내 신청 공통 표기) = 마목(교환의 중개) · 화면 라벨에 규제 용어 미노출.<br>· <strong>2026-09-02 설명 개정</strong> — 항목설명을 구현 지시문(명사형 종결)으로 재작성 · 화면에 보이는 요소(컬럼·라벨·문구)는 재기술하지 않음 · 편의기능 미도입(카드 필터·주기 갱신·정렬·기간 선택·주소 복사·QR·배너 닫기 없음) · 미결은 구현 단순한 쪽으로 확정(기관 배지 = 로그아웃 메뉴 / 거절·만료도 EXC-04 재사용 / 협의중 행은 BRK-06 / 신청 행은 신청 상태 표시).<br>· <strong>화면 변경</strong> — 계정·보안 카드 부제 삭제 · 잔고 하단 고지 문구 삭제 · 지갑주소 1행(이더리움 공통 주소) · 구분 라벨 교환/교환게시판/교환게시판 신청 · 목록 '번호' 열 → '요청시점'.<br>· 고객 화면 '보류' 라벨 폐지 반영(2026-09-02 결정 · states.html v0.4) — 진행 중 이후는 완료 또는 거절뿐.<br>· <strong>상태 라벨 정본 = states.html v0.4</strong> — 신청 상태는 C표 기준(협의중부터 · 종결(사유) 형태) · 임시로 썼던 '신청됨'·'게시 회수' 단독 라벨 폐기.<br>· <strong>확정(2026-09-02)</strong> — 거래 목록은 [더 보기] 없이 전량 표시하고 페이지 스크롤로 본다. notation 목록 규격의 "100행 초과 시 [더 보기]"에 대한 이 화면 예외다 <span class="chk">[확인필요: notation 규격 개정 vs 화면 예외 유지 · 다른 목록(BRK-01·06 · ADM-02·03) 적용 여부]</span>.<br>· 남은 <span class="chk">[확인필요]</span> — KYC 배너 안내 이메일 주소 · CSV 파일명·컬럼 정의 · 상태 코드 표 확정(states 결정필요 ⑨) · '이전 중지' 칩 신설(⑧) · 게시 유효기간 만료 라벨(⑥) · 오입금 반환 가스비 부담.<br>· ISMS 2.10.4는 현재 비밀번호 확인으로 충족한다는 전제 · 심사 시 해석 <span class="chk">[확인필요]</span>.<br>· 이전 = AUTH-01 / 다음 = EXC-01 · BRK-01</div>
   </div>
 </section>
 
