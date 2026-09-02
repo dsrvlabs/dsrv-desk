@@ -82,10 +82,16 @@ body{font-family:'Noto Sans KR',system-ui,sans-serif;background:var(--bg);color:
 .nav.active .nid{color:var(--accent);}
 .nav.proc{font-weight:700;padding:9px 16px;}
 .nav.proc .nid{width:auto;}
-.main{flex:1;height:100vh;overflow-y:auto;position:relative;}
-.main.proc-mode{overflow:hidden;}
-#frame{display:block;width:100%;border:0;background:#fafafa;min-height:200px;}
-.main.proc-mode #frame{height:100vh;}
+.main{flex:1;height:100vh;overflow-y:auto;position:relative;background:#fafafa;}
+.sec{border-bottom:2px solid #e0e0e0;position:relative;}
+.sec iframe{display:block;width:100%;border:0;background:#fafafa;height:480px;}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:2000;padding:28px;}
+.overlay.active{display:flex;flex-direction:column;}
+.ov-head{display:flex;justify-content:space-between;align-items:center;padding:9px 16px;background:#0f172a;border-radius:8px 8px 0 0;color:#fff;}
+.ov-title{font-size:13px;font-weight:700;}
+.ov-close{background:none;border:0;color:#fff;font-size:20px;cursor:pointer;padding:4px 8px;line-height:1;}
+.ov-close:hover{opacity:.7;}
+.overlay iframe{flex:1;width:100%;border:0;background:#fafafa;border-radius:0 0 8px 8px;}
 </style>
 <div class="sidebar">
   <div class="sb-head">
@@ -94,22 +100,23 @@ body{font-family:'Noto Sans KR',system-ui,sans-serif;background:var(--bg);color:
     <span class="tag">내부 검토용 초안 — 제출용 아님</span>
   </div>
   <div class="sb-list" id="sbList">
-    <button class="nav proc" data-ia="1"><span class="nid">◫</span><span>IA (정보구조)</span></button>
-    <button class="nav proc" data-gloss="1"><span class="nid">≡</span><span>표기 규칙 · 공통 UI 규격</span></button>
-    <button class="nav proc" data-states="1"><span class="nid">⇄</span><span>케이스분기</span></button>
-    <button class="nav proc" data-proc="1"><span class="nid">◈</span><span>화면 흐름도 (프로세스맵)</span></button>
+    <button class="nav proc" data-doc="ia"><span class="nid">◫</span><span>IA (정보구조)</span></button>
+    <button class="nav proc" data-doc="gloss"><span class="nid">≡</span><span>표기 규칙 · 공통 UI 규격</span></button>
+    <button class="nav proc" data-doc="states"><span class="nid">⇄</span><span>케이스분기</span></button>
+    <button class="nav proc" data-doc="proc"><span class="nid">◈</span><span>화면 흐름도 (프로세스맵)</span></button>
   </div>
 </div>
-<div class="main" id="main"><iframe id="frame" title="화면 미리보기"></iframe></div>
+<div class="main" id="main"></div>
+<div class="overlay" id="overlay">
+  <div class="ov-head"><span class="ov-title" id="ovTitle"></span><button class="ov-close" id="ovClose" title="닫기">&times;</button></div>
+  <iframe id="ovFrame" title="문서"></iframe>
+</div>
 <script>
 const NAV=__NAV__;
 const FILES=__FILES__;
 const CSS=__CSS__;
 const JS=__JS__;
-const PROC=__PROC__;
-const IA=__IA__;
-const GLOSS=__GLOSS__;
-const STATES=__STATES__;
+const DOCS_EXTRA={proc:{title:'화면 흐름도 — DSRV 교환·중개',html:__PROC__},ia:{title:'IA (정보구조) — DSRV 교환·중개',html:__IA__},gloss:{title:'표기 규칙 · 공통 UI 규격 — DSRV 교환·중개',html:__GLOSS__},states:{title:'케이스분기 — 거래·계정 상태 분기와 화면 반영 · DSRV 교환·중개',html:__STATES__}};
 function inlineDoc(name){
   let d=FILES[name];if(!d)return '';
   d=d.replace('\\u003clink rel="stylesheet" href="screen.css">','\\u003cstyle>'+CSS+'\\u003c/style>');
@@ -117,56 +124,61 @@ function inlineDoc(name){
   return d;
 }
 const DOCS={};for(const k in FILES)DOCS[k]=inlineDoc(k);
-const frame=document.getElementById('frame');
 const main=document.getElementById('main');
 const list=document.getElementById('sbList');
-let currentPid=null,procMode=false;
+const overlay=document.getElementById('overlay');
+const ovFrame=document.getElementById('ovFrame');
+const ovTitle=document.getElementById('ovTitle');
+const winToFrame=new WeakMap();
+const navBtn={};
+let currentPid=null,openDoc=null;
 NAV.forEach(it=>{
   if(it.group){const g=document.createElement('div');g.className='grp';g.textContent=it.group;list.appendChild(g);}
   const b=document.createElement('button');b.className='nav';b.dataset.pid=it.id;
   const nid=document.createElement('span');nid.className='nid';nid.textContent=it.id;
   const nm=document.createElement('span');nm.textContent=it.name;
   b.append(nid,nm);
-  b.onclick=()=>showScreen(it.id);
-  list.appendChild(b);
+  b.onclick=()=>goTo(it.id);
+  list.appendChild(b);navBtn[it.id]=b;
+  const sec=document.createElement('section');sec.className='sec';sec.id='sec-'+it.id;
+  const f=document.createElement('iframe');f.title=it.id+' '+it.name;f.setAttribute('scrolling','no');
+  f.addEventListener('load',()=>{if(f.contentWindow)winToFrame.set(f.contentWindow,f);});
+  f.srcdoc=DOCS[it.file];
+  sec.appendChild(f);main.appendChild(sec);
 });
-function setActive(sel){
-  list.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));
-  if(sel)sel.classList.add('active');
+function goTo(pid){
+  closeDoc();
+  const sec=document.getElementById('sec-'+pid);
+  if(sec)sec.scrollIntoView({behavior:'smooth',block:'start'});
 }
-function showScreen(pid){
-  const it=NAV.find(x=>x.id===pid);if(!it)return;
-  currentPid=pid;procMode=false;
-  main.classList.remove('proc-mode');frame.style.height='200px';
-  frame.srcdoc=DOCS[it.file];
-  setActive(list.querySelector('.nav[data-pid="'+pid+'"]'));
-  main.scrollTop=0;
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    const pid=en.target.id.slice(4);const b=navBtn[pid];if(!b)return;
+    if(en.isIntersecting){currentPid=pid;b.classList.add('active');b.scrollIntoView({block:'nearest'});}
+    else b.classList.remove('active');
+  });
+},{root:main,rootMargin:'0px 0px -60% 0px',threshold:0});
+main.querySelectorAll('.sec').forEach(s=>obs.observe(s));
+function showDoc(key){
+  const d=DOCS_EXTRA[key];if(!d)return;
+  openDoc=key;ovTitle.textContent=d.title;ovFrame.srcdoc=d.html;overlay.classList.add('active');
 }
-function showDoc(doc,btn){
-  procMode=true;main.classList.add('proc-mode');frame.style.height='';
-  frame.srcdoc=doc;
-  setActive(btn);
-}
-const procBtn=list.querySelector('.nav[data-proc]');
-const iaBtn=list.querySelector('.nav[data-ia]');
-const glossBtn=list.querySelector('.nav[data-gloss]');
-const statesBtn=list.querySelector('.nav[data-states]');
-procBtn.onclick=()=>showDoc(PROC,procBtn);
-iaBtn.onclick=()=>showDoc(IA,iaBtn);
-glossBtn.onclick=()=>showDoc(GLOSS,glossBtn);
-statesBtn.onclick=()=>showDoc(STATES,statesBtn);
-frame.addEventListener('load',()=>{
-  if(procMode&&frame.contentWindow){
-    frame.contentWindow.postMessage({type:'screenDocs',docs:DOCS},'*');
-    if(currentPid)frame.contentWindow.postMessage({type:'highlightPage',pid:currentPid},'*');
+function closeDoc(){openDoc=null;overlay.classList.remove('active');ovFrame.removeAttribute('srcdoc');}
+list.querySelectorAll('.nav[data-doc]').forEach(b=>{b.onclick=()=>showDoc(b.dataset.doc);});
+document.getElementById('ovClose').onclick=closeDoc;
+overlay.addEventListener('click',e=>{if(e.target===overlay)closeDoc();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDoc();});
+ovFrame.addEventListener('load',()=>{
+  if(openDoc==='proc'&&ovFrame.contentWindow){
+    ovFrame.contentWindow.postMessage({type:'screenDocs',docs:DOCS},'*');
+    if(currentPid)ovFrame.contentWindow.postMessage({type:'highlightPage',pid:currentPid},'*');
   }
 });
 window.addEventListener('message',e=>{
   if(!e.data)return;
-  if(e.data.type==='iframeHeight'&&!procMode&&e.data.h>50){frame.style.height=e.data.h+'px';}
-  if(e.data.type==='navigate'&&e.data.pageId){showScreen(e.data.pageId);}
+  if(e.data.type==='iframeHeight'&&e.data.h>50){const f=winToFrame.get(e.source);if(f)f.style.height=e.data.h+'px';}
+  if(e.data.type==='navigate'&&e.data.pageId){goTo(e.data.pageId);}
 });
-showScreen('ONB-00');
 </script>
 """
 
