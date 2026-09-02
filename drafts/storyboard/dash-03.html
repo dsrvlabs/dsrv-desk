@@ -102,7 +102,7 @@
       <div class="num">1</div>
       <div>
         <div class="itm-title">재설정 안내문 (표시 전용)</div>
-        <div class="itm-desc"><strong>값</strong> 발송 대상으로 {담당자 이메일(마스킹)}을 표시한다. 이메일 변경 화면은 만들지 않는다.<br><strong>무효화</strong> 기존 OTP와 복구 코드는 재등록 완료 시 무효화한다(발송 시점 아님).<br><strong>[디자인 요청]</strong> 시안 '백업코드'를 '복구 코드'로 통일한다.<br><span class="basis">근거 ISMS 2.5 · ONB-03 상세 1</span></div>
+        <div class="itm-desc"><strong>값</strong> 발송 대상으로 {담당자 이메일(마스킹)}을 표시한다. 이메일 변경 화면은 만들지 않는다.<br><strong>무효화</strong> 기존 OTP와 복구 코드는 재등록 완료 시 무효화한다(발송 시점 아님).<br><span class="chk">[디자인 요청]</span> 시안 '백업코드'를 '복구 코드'로 통일한다.<br><span class="basis">근거 ISMS 2.5 · ONB-03 상세 1</span></div>
       </div>
     </div>
 
@@ -110,7 +110,7 @@
       <div class="num">2</div>
       <div>
         <div class="itm-title">[재설정 메일 발송] 버튼<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>발송</strong> ONB-00 초대 재발송 양식을 재사용한다. 링크는 1회용이고 유효기간은 초대 링크와 같다.<br><strong>재발송</strong> 이전 미사용 링크를 즉시 무효화해 최신 1개만 유효하게 둔다. 쿨다운 {정책값}.<br><strong>기록</strong> 발송 이력을 감사기록에 남긴다. 발송 후 세션은 유지하고 로그아웃은 재등록 완료 시점(ONB-03 [확인])이다.<br><span class="chk">[확인필요: 쿨다운 값]</span><br><span class="basis">근거 ISMS 2.5 · 2.9.4 · ONB-00 재사용</span></div>
+        <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 쿨다운 {정책값} 이내이거나 발송 처리 중이면 비활성이다.<br><strong>확인 사항</strong> 없다. 기존 인증수단이 재등록 완료까지 유효하므로 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> ONB-00 초대 재발송 양식으로 1회용 링크를 보낸다(유효기간은 초대 링크와 같다). 이전 미사용 링크를 즉시 무효화해 최신 1개만 유효하게 두고, 발송 이력을 감사기록에 남긴다. 세션은 유지하고 로그아웃은 재등록 완료 시점(ONB-03 [확인])이다.<br><span class="chk">[확인필요: 쿨다운 값]</span><br><span class="basis">근거 ISMS 2.5 · 2.9.4 · ONB-00 재사용</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[재설정 메일 발송] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①발송 처리 중 ②쿨다운 중(직전 발송 후 {정책값} 이내)</span><span class="nav-to stay">처리 중 → 회색 비활성 · 라벨 "발송 중…" / 쿨다운 → 회색 비활성 · 라벨 "재발송 ({남은 초}초 후)" 카운트다운 → 0이면 "재설정 메일 재발송"으로 활성 복귀</span></div>
           <div class="nav-row"><span class="nav-el">[재설정 메일 발송] — 클릭(활성)</span><span class="nav-act">확인 없음 → 라벨 "발송 중…"·비활성(중복 클릭 차단) → 토큰 생성 · 이메일 발송(ONB-00 양식) · 감사로그</span><span class="nav-to stay">화면 잔류 · 항목 4 발송 결과 배너 노출 · 버튼 → 쿨다운 상태 · 이후 흐름: 이메일 링크 → <strong>계정 활성화(ONB-01 → 02 → 03)</strong> 재수행(비밀번호 재설정 → 2FA 재등록 → 새 복구 코드) → [확인] 시 이전 코드 폐기 · 기존 세션 전체 로그아웃 → <strong>로그인(AUTH-01)</strong></span></div>
@@ -135,7 +135,7 @@
       <div class="num">4</div>
       <div>
         <div class="itm-title">발송 결과 배너 (조건부 노출 · 시안 없음)</div>
-        <div class="itm-desc"><strong>노출</strong> 발송 성공 응답 직후에만 띄운다. 실패 시와 재진입 시에는 띄우지 않고 쿨다운은 버튼 라벨로만 알린다.<br><strong>[디자인 요청]</strong> 시안에 없는 요소다.<br><span class="basis">근거 공통 UI 규격 상태 표시 · ONB-00</span></div>
+        <div class="itm-desc"><strong>노출</strong> 발송 성공 응답 직후에만 띄운다. 실패 시와 재진입 시에는 띄우지 않고 쿨다운은 버튼 라벨로만 알린다.<br><span class="chk">[디자인 요청]</span> 시안에 없는 요소다.<br><span class="basis">근거 공통 UI 규격 상태 표시 · ONB-00</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">배너</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용) · 이후 행동은 이메일 링크(콘솔 밖) → ONB-01</span></div>
         </div>
@@ -164,7 +164,7 @@
 <section class="footer-note">
   <div class="note-card">
     <div class="note-title">비고</div>
-    <div class="note-body">· DASH-01 계정·보안 '2차 인증 재설정' 진입 화면 — 안내문 + 발송 버튼 + 발송 결과 배너 + 이전으로 · 독립 페이지(콘솔 GNB 없음).<br>· <strong>[백엔드 통제]</strong> 발송·재등록·폐기 이력은 화면 표시 없이 감사기록 보존 — 근거 ISMS 2.9.4.<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 'Reset Credentials' 적용 · 발송 결과 배너·마스킹 이메일 명시·'복구 코드' 용어는 기획 유지 <strong>디자인 요청</strong> · [취소] 버튼은 '이전으로'로 대체 · 원본 <span class="mono">reference/figma/_crops/F8_row2_c4.png</span>.<br>· <strong>확정(구현 단순 우선)</strong> — 링크 유효기간은 초대 링크와 동일 규격 재사용 · 재발송 시 이전 링크 즉시 무효화(최신 1개만 유효) · 확인 다이얼로그 없음.<br>· 남은 <span style="color:#991b1b;">[확인필요]</span> — 재발송 쿨다운 값 · 이메일 마스킹 규칙 · 로고 클릭 동작.<br>· 이전 = DASH-01 / 관련 = DASH-02 / 재등록 절차 = ONB-01~03</div>
+    <div class="note-body">· DASH-01 계정·보안 '2차 인증 재설정' 진입 화면 — 안내문 + 발송 버튼 + 발송 결과 배너 + 이전으로 · 독립 페이지(콘솔 GNB 없음).<br>· <strong>[백엔드 통제]</strong> 발송·재등록·폐기 이력은 화면 표시 없이 감사기록 보존 — 근거 ISMS 2.9.4.<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 'Reset Credentials' 적용 · 발송 결과 배너·마스킹 이메일 명시·'복구 코드' 용어는 기획 유지 <span class="chk">[디자인 요청]</span> · [취소] 버튼은 '이전으로'로 대체 · 원본 <span class="mono">reference/figma/_crops/F8_row2_c4.png</span>.<br>· <strong>확정(구현 단순 우선)</strong> — 링크 유효기간은 초대 링크와 동일 규격 재사용 · 재발송 시 이전 링크 즉시 무효화(최신 1개만 유효) · 확인 다이얼로그 없음.<br>· 남은 <span class="chk">[확인필요]</span> — 재발송 쿨다운 값 · 이메일 마스킹 규칙 · 로고 클릭 동작.<br>· 이전 = DASH-01 / 관련 = DASH-02 / 재등록 절차 = ONB-01~03</div>
   </div>
 </section>
 

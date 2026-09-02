@@ -48,18 +48,12 @@
           <div class="warn-chip">아래 코드를 안전한 곳에 보관하세요. 재발급이 불가합니다.</div>
           <div class="rc-code">3G56 - SYN5 - YVT9 - DT68 - 5DDR - 14QD</div>
         </div>
-        <div class="row" style="gap:8px;margin-top:6px;">
-          <div class="item-area" data-highlight="1" style="position:relative;flex:1;padding:4px;border-radius:8px;">
-            <div class="pin" data-idx="1" style="top:-8px;right:-6px;">2</div>
-            <div class="btn outline">⧉ 복사하기</div>
-          </div>
-          <div class="item-area" data-highlight="2" style="position:relative;flex:1;padding:4px;border-radius:8px;">
-            <div class="pin" data-idx="2" style="top:-8px;right:-6px;">3</div>
-            <div class="btn outline">⇩ 다운로드</div>
-          </div>
+        <div class="item-area" data-highlight="1" style="position:relative;padding:4px;border-radius:8px;margin-top:6px;">
+          <div class="pin" data-idx="1" style="top:-8px;right:-6px;">2</div>
+          <div class="btn outline">⧉ 복사하기</div>
         </div>
-        <div class="item-area" data-highlight="3" style="position:relative;padding:4px;border-radius:8px;margin-top:2px;">
-          <div class="pin" data-idx="3" style="top:-8px;right:-6px;">4</div>
+        <div class="item-area" data-highlight="2" style="position:relative;padding:4px;border-radius:8px;margin-top:2px;">
+          <div class="pin" data-idx="2" style="top:-8px;right:-6px;">3</div>
           <div class="btn primary fg">확인</div>
         </div>
       </div>
@@ -67,13 +61,13 @@
       <!-- 보조 링크 -->
       <div class="zone card" data-idx="4,5">
         <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="4" style="position:relative;padding:4px;border-radius:8px;">
-          <div class="pin" data-idx="4" style="top:-6px;right:-6px;">5</div>
+        <div class="item-area" data-highlight="3" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="3" style="top:-6px;right:-6px;">4</div>
           <div class="aux-link">인증이 정상적으로 작동하지 않나요? <strong>문의하기</strong></div>
         </div>
         <div class="hr-line"></div>
-        <div class="item-area" data-highlight="5" style="position:relative;padding:4px;border-radius:8px;">
-          <div class="pin" data-idx="5" style="top:-6px;right:-6px;">6</div>
+        <div class="item-area" data-highlight="4" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="4" style="top:-6px;right:-6px;">5</div>
           <div class="aux-back">‹ &nbsp;이전으로</div>
         </div>
       </div>
@@ -104,7 +98,7 @@
       <div class="num">2</div>
       <div>
         <div class="itm-title">[복사하기] 버튼</div>
-        <div class="itm-desc">· 클릭 시 구분자를 포함한 표시 형식 그대로 클립보드에 복사하고 토스트를 2초 띄운다.<br>· 클립보드 권한이 거부되면 직접 선택해 복사하라는 토스트를 띄운다.<br><span class="basis">근거 시안 'Save Code'</span></div>
+        <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 항상 활성이다.<br><strong>확인 사항</strong> 클립보드 권한을 확인한다.<br><strong>액션</strong> 구분자를 포함한 표시 형식 그대로 클립보드에 복사하고 토스트를 2초 띄운다. 권한이 거부되면 직접 선택해 복사하라는 토스트를 띄운다.<br><span class="basis">근거 시안 'Save Code'</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[복사하기]</span><span class="nav-act">클릭</span><span class="nav-to stay">클립보드 복사 · 토스트 · 화면 잔류</span></div>
         </div>
@@ -114,29 +108,18 @@
     <div class="itm" data-idx="2">
       <div class="num">3</div>
       <div>
-        <div class="itm-title">[다운로드] 버튼</div>
-        <div class="itm-desc"><strong>파일</strong> 파일명은 dsrv-desk-recovery-code.txt이고 내용은 서비스명 · 계정 이메일(마스킹) · 코드 · 발급일시 · 보관 안내 5줄이다.<br>· 다운로드 이력을 감사로그에 남긴다.<br><span class="basis">근거 시안 'Save Code'</span></div>
-        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">[다운로드]</span><span class="nav-act">클릭</span><span class="nav-to stay">브라우저 파일 저장 · 화면 잔류</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="itm" data-idx="3">
-      <div class="num">4</div>
-      <div>
         <div class="itm-title">[확인] 버튼 (활성화 완료)<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>동작</strong> 계정 활성화를 확정하고 계정 상태를 활성으로 바꾸며 토큰을 소멸시킨다.<br><strong>확인 다이얼로그</strong> 복구 코드 재열람이 불가한 비가역 행위이므로 다이얼로그를 띄운다.<br>· 자동 로그인은 하지 않는다. 완료 후 AUTH-01에서 새 비밀번호와 6자리 코드로 로그인한다.<br><span style="color:#b45309;">[확인필요: ADM-03 계정 상태 라벨]</span> <strong>[디자인 요청]</strong> 다이얼로그는 시안에 없다.<br><span class="basis">근거 ISMS 2.5 · 32 §2 ONB-01</span></div>
+        <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 항상 활성이다. 복사는 필수 조건이 아니다. 클릭 후 저장 요청이 끝나기 전까지만 중복 클릭을 막는다.<br><strong>확인 사항</strong> 복구 코드를 다시 볼 수 없는 비가역 행위이므로 확인 다이얼로그를 띄운다.<br><strong>액션</strong> 계정 활성화를 확정해 계정 상태를 활성으로 바꾸고 토큰을 소멸시킨다. 자동 로그인은 하지 않고 AUTH-01에서 새 비밀번호와 6자리 코드로 로그인한다.<br><span class="chk">[확인필요: ADM-03 계정 상태 라벨]</span> <span class="chk">[디자인 요청]</span> 다이얼로그는 시안에 없다.<br><span class="basis">근거 ISMS 2.5 · 32 §2 ONB-01</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">[확인] — 활성 조건</span><span class="nav-act">다음이 아님: ①처리 중</span><span class="nav-to stay">항상 활성(복사·다운로드는 필수 아님) · 처리 중 → 회색</span></div>
+          <div class="nav-row"><span class="nav-el">[확인] — 활성 조건</span><span class="nav-act">다음이 아님: ①처리 중</span><span class="nav-to stay">항상 활성(복사는 필수 아님) · 처리 중 → 회색</span></div>
           <div class="nav-row"><span class="nav-el">[확인] — 클릭(활성)</span><span class="nav-act">다이얼로그: 제목 "복구 코드를 저장했습니까?" / 본문 "이 화면을 벗어나면 복구 코드를 다시 볼 수 없습니다. 인증 앱 분실 시 로그인에 필요합니다." / [활성화 완료] [돌아가기] → [활성화 완료] → 라벨 "처리 중…" → 계정 활성 · 토큰 소멸 · 감사로그</span><span class="nav-to"><strong>로그인(AUTH-01)</strong> — 상단 안내 "계정이 활성화되었습니다. 로그인해 주세요" <span class="chk">[확인필요: AUTH-01 안내 노출 여부 — 시안 없음]</span></span></div>
           <div class="nav-row"><span class="nav-el">[확인] — 실패</span><span class="nav-act">토큰 만료 / 서버 오류</span><span class="nav-to stay">화면 잔류 · 만료 → 상단 배너 "초대 링크가 만료되었습니다. 관리자에게 재발급을 요청해 주세요" / 서버 오류 → 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 라벨 복귀</span></div>
         </div>
       </div>
     </div>
 
-    <div class="itm" data-idx="4">
-      <div class="num">5</div>
+    <div class="itm" data-idx="3">
+      <div class="num">4</div>
       <div>
         <div class="itm-title">'인증이 정상적으로 작동하지 않나요? 문의하기' 링크</div>
         <div class="itm-desc"><span class="basis">근거 ONB-02 항목 4</span></div>
@@ -146,11 +129,11 @@
       </div>
     </div>
 
-    <div class="itm" data-idx="5">
-      <div class="num">6</div>
+    <div class="itm" data-idx="4">
+      <div class="num">5</div>
       <div>
         <div class="itm-title">'‹ 이전으로' 링크 (→ 2FA 앱 연결)</div>
-        <div class="itm-desc">· ONB-02는 2FA 확정 상태라 6칸이 비활성이어서 이 화면으로 돌아올 수단이 없다. 링크 삭제를 권한다.<br><span style="color:#b45309;">[확인필요: 유지 시 ONB-02에 [다음] 추가 필요]</span><br><span class="basis">근거 공통 UI 규격 종료 동선</span></div>
+        <div class="itm-desc">· ONB-02는 2FA 확정 상태라 6칸이 비활성이어서 이 화면으로 돌아올 수단이 없다. 링크 삭제를 권한다.<br><span class="chk">[확인필요: 유지 시 ONB-02에 [다음] 추가 필요]</span><br><span class="basis">근거 공통 UI 규격 종료 동선</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">'이전으로'</span><span class="nav-act">클릭 · 확인 없음</span><span class="nav-to"><strong>2FA 앱 연결(ONB-02)</strong> 등록 완료 상태</span></div>
         </div>
@@ -168,8 +151,8 @@
         <div class="detail-label"><span class="dtl-num">1</span>복구 코드 취급</div>
       <div class="dtl-body"><span class="box"><strong>형식</strong> 단일 코드 24자(4×6), 1회용, 해시 저장. 인증 앱 분실 시 AUTH-01 2단계에 입력한다.<br><strong>사용 후</strong> 사용 즉시 폐기하고 DASH-01 권고 배너로 DASH-03 재설정을 유도해 새 코드를 발급한다.<br><strong>이탈</strong> [확인] 전 이탈이면 재개 시 같은 코드를 다시 보여준다.</span></div>
       </div>
-      <div class="dtl" data-idx="3">
-        <div class="detail-label"><span class="dtl-num">4</span>완료 이후 상태</div>
+      <div class="dtl" data-idx="2">
+        <div class="detail-label"><span class="dtl-num">3</span>완료 이후 상태</div>
       <div class="dtl-body"><span class="box"><strong>상태 전이</strong> 계정 상태를 ADM-03 기관·가입자 관리에 반영하고 토큰을 소멸시킨다.<br><strong>로그인</strong> 자동 로그인 없이 AUTH-01 정상 로그인 1회로 등록을 검증한다.<br><strong>DASH-03 재수행</strong> [확인] 시점에 기존 세션을 전체 로그아웃하고 이전 복구 코드를 폐기하며 비밀번호도 새로 설정한다.</span></div>
       </div>
     </div>
@@ -179,7 +162,7 @@
 <section class="footer-note">
   <div class="note-card">
     <div class="note-title">비고</div>
-    <div class="note-body">· 계정 활성화 <strong>3/3 — 복구 코드 저장·활성화 완료</strong> · ONB-02 검증 성공 → 이 화면(코드 1회 노출 · 복사·다운로드) → [확인] → AUTH-01.<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 'Save Code' 적용 · [확인] 확인 다이얼로그는 시안 없음 → <strong>디자인 요청</strong> · 원본 <span class="mono">reference/figma/_crops/F4_row1_c4.png</span>.<br>· <strong>확정(구현 단순 우선)</strong> — 복사 토스트 2초 · 다운로드 파일명 dsrv-desk-recovery-code.txt · 파일 내용 5줄 고정 · 문의는 주소 텍스트(mailto 없음).<br>· 남은 <span style="color:#991b1b;">[확인필요]</span> — ADM-03 계정 상태 라벨 · '이전으로' 링크 처리(삭제 권장 · 유지 시 ONB-02에 [다음] 필요).<br>· 이전 = ONB-02 / 다음 = AUTH-01</div>
+    <div class="note-body">· 계정 활성화 <strong>3/3 — 복구 코드 저장·활성화 완료</strong> · ONB-02 검증 성공 → 이 화면(코드 1회 노출 · 복사) → [확인] → AUTH-01.<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 'Save Code' 적용 · [확인] 확인 다이얼로그는 시안 없음 → <span class="chk">[디자인 요청]</span> · 원본 <span class="mono">reference/figma/_crops/F4_row1_c4.png</span>.<br>· <strong>확정(구현 단순 우선)</strong> — 복사 토스트 2초 · <strong>[다운로드] 버튼 삭제(2026-09-02 편의기능 제거)</strong> — 파일 생성·파일명·내용 규격·다운로드 감사로그가 함께 빠짐 · 문의는 주소 텍스트.<br>· 남은 <span class="chk">[확인필요]</span> — ADM-03 계정 상태 라벨 · '이전으로' 링크 처리(삭제 권장 · 유지 시 ONB-02에 [다음] 필요).<br>· 이전 = ONB-02 / 다음 = AUTH-01</div>
   </div>
 </section>
 

@@ -134,7 +134,7 @@
       <div class="num">2</div>
       <div>
         <div class="itm-title">초대 본문 (표시 전용)</div>
-        <div class="itm-desc"><strong>값</strong> {ORG명}과 {담당자 이메일}을 렌더한다.<br>· 비밀번호는 메일에 담지 않는다. 본인이 ONB-01에서 설정한다.<br><strong>[디자인 요청]</strong> 1조직 1계정 고지는 시안에 없다.<br><span class="basis">근거 ISMS 2.5 · ADM-03 초대 정책</span></div>
+        <div class="itm-desc"><strong>값</strong> {ORG명}과 {담당자 이메일}을 보인다.<br>· 비밀번호는 메일에 담지 않는다. 본인이 ONB-01에서 설정한다.<br><span class="chk">[디자인 요청]</span> 1조직 1계정 고지는 시안에 없다.<br><span class="basis">근거 ISMS 2.5 · ADM-03 초대 정책</span></div>
       </div>
     </div>
 
@@ -142,7 +142,7 @@
       <div class="num">3</div>
       <div>
         <div class="itm-title">[계정 활성화 · 비밀번호 설정] 링크 버튼<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>링크</strong> 1회용 토큰이 포함된 활성화 URL을 담고 새 탭으로 연다. 토큰 검증은 ONB-01 진입 시 1회 수행한다.<br>· 재발급 링크는 메일에 두지 않는다. 재발급은 ADM-03 초대 재발송으로만 처리한다.<br><span class="basis">근거 ISMS 2.5 · 1회용 활성화 링크</span></div>
+        <div class="itm-desc"><strong>노출</strong> 초대 메일에 항상 들어간다. 메일 안의 유일한 클릭 요소다.<br><strong>클릭 가능</strong> 메일에서는 항상 클릭된다. 토큰 유효성은 이동한 뒤에 판정한다.<br><strong>확인 사항</strong> ONB-01 진입 시 서버가 토큰을 1회 검증한다(정상 / 만료 / 사용됨 / 재개).<br><strong>액션</strong> 1회용 토큰이 붙은 활성화 URL을 새 탭으로 연다. 재발급 링크는 메일에 두지 않고 ADM-03 초대 재발송으로만 처리한다.<br><span class="basis">근거 ISMS 2.5 · 1회용 활성화 링크</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">링크 — 유효(미사용 · {정책값} 이내)</span><span class="nav-act">클릭 → 토큰 검증 통과</span><span class="nav-to"><strong>계정 활성화(ONB-01)</strong> 정상 상태 — 비밀번호 설정부터 · 중도 이탈 후 재클릭이면 진행 중 화면(ONB-02/03)으로 라우팅(ONB-01 상세 1)</span></div>
           <div class="nav-row"><span class="nav-el">링크 — 만료(발송 후 {정책값} 초과)</span><span class="nav-act">클릭 → 토큰 검증 실패(만료)</span><span class="nav-to"><strong>계정 활성화(ONB-01)</strong> 토큰 오류 상태 A — 배너 "초대 링크가 만료되었습니다. 관리자에게 재발급을 요청해 주세요" · 입력 구역 전부 비활성</span></div>
@@ -194,7 +194,7 @@
 <section class="footer-note">
   <div class="note-card">
     <div class="note-title">비고</div>
-    <div class="note-body">· 온보딩 시작점 · KYC 게이팅 화면 없음 — 계정은 KYC 완료 법인에만 생성·초대 · KYC 예외는 EXC-01 배너 + 거래 요청 차단으로 처리(ADM-03 종속).<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 메일 프레임 적용 · 1조직 1계정 고지는 시안 없음 → 기획 유지 <strong>디자인 요청</strong> · 원본 <span class="mono">reference/figma/_crops/F0_mail.png</span>.<br>· <strong>확정(구현 단순 우선)</strong> — 발신·문의 주소 단일 · 유효시간 72시간 고정값(파라미터화 없음) · 연락처·연도 고정 텍스트 · 중도 이탈 재클릭은 재개.<br>· 남은 <span style="color:#991b1b;">[확인필요]</span> — 활성화 URL 도메인 · 대표 연락처 확정값.<br>· 다음 = ONB-01 → ONB-02 → ONB-03</div>
+    <div class="note-body">· 온보딩 시작점 · KYC 게이팅 화면 없음 — 계정은 KYC 완료 법인에만 생성·초대 · KYC 예외는 EXC-01 배너 + 거래 요청 차단으로 처리(ADM-03 종속).<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 메일 프레임 적용 · 1조직 1계정 고지는 시안 없음 → 기획 유지 <span class="chk">[디자인 요청]</span> · 원본 <span class="mono">reference/figma/_crops/F0_mail.png</span>.<br>· <strong>확정(구현 단순 우선)</strong> — 발신·문의 주소 단일 · 유효시간 72시간 고정값(파라미터화 없음) · 연락처·연도 고정 텍스트 · 중도 이탈 재클릭은 재개.<br>· 남은 <span class="chk">[확인필요]</span> — 활성화 URL 도메인 · 대표 연락처 확정값.<br>· 다음 = ONB-01 → ONB-02 → ONB-03</div>
   </div>
 </section>
 

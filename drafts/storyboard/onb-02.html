@@ -92,7 +92,7 @@
       <div class="num">1</div>
       <div>
         <div class="itm-title">2FA QR (표시 전용)</div>
-        <div class="itm-desc"><strong>값</strong> 계정별 TOTP 시크릿으로 QR을 만든다. 재생성은 연속 실패 {정책값} 도달 시에만 한다.<br><strong>등록 완료 상태</strong> QR과 설정 키를 흐리게 하고 "등록됨" 배지를 붙이며 6칸을 비활성으로 둔다.<br><strong>[디자인 요청]</strong> 등록 완료 상태 표시는 시안에 없다.<br><span class="basis">근거 ISMS 2.5 · F-5</span></div>
+        <div class="itm-desc"><strong>값</strong> 계정별 TOTP 시크릿으로 QR을 만든다. 재생성은 연속 실패 {정책값} 도달 시에만 한다.<br><strong>등록 완료 상태</strong> QR과 설정 키를 흐리게 하고 "등록됨" 배지를 붙이며 6칸을 비활성으로 둔다.<br><span class="chk">[디자인 요청]</span> 등록 완료 상태 표시는 시안에 없다.<br><span class="basis">근거 ISMS 2.5 · F-5</span></div>
       </div>
     </div>
 
@@ -111,7 +111,7 @@
       <div class="num">3</div>
       <div>
         <div class="itm-title">6자리 인증 코드 입력 (6칸 · 자동 검증)<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력</strong> 숫자만 받고 한 칸에 1자를 넣으며 입력 시 다음 칸으로 포커스를 옮긴다. 6자리 붙여넣기는 칸별로 분배한다.<br><strong>검증</strong> 6번째 자리 입력 즉시 자동 검증한다.<br><strong>실패</strong> 6칸을 초기화하고 첫 칸에 포커스를 주며 오류 칩에 {남은 횟수}를 표기한다.<br><strong>연속 실패</strong> {정책값}회 도달 시 시크릿을 재생성하고 QR·설정 키를 갱신하며 재등록 안내 칩을 띄운다. 토큰은 무효화하지 않는다. 실패는 감사로그에 남긴다.<br><span style="color:#b45309;">[확인필요: {정책값} 값]</span><br><span class="basis">근거 ISMS 2.5 · F-5</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 2FA 등록 확정 전에만 가능하다. 등록 완료 상태(ONB-03에서 복귀)면 비활성이고, 검증 중에는 읽기 전용이다.<br><strong>허용 문자</strong> 숫자만 받고 한 칸에 1자를 넣는다. 입력하면 다음 칸으로 포커스를 옮긴다.<br><strong>검증</strong> 6번째 자리를 채우는 즉시 서버에 검증을 요청한다. 확인 버튼과 Enter는 두지 않는다.<br><strong>실패</strong> 6칸을 초기화하고 첫 칸에 포커스를 주며 오류 칩에 {남은 횟수}를 표기한다. 실패는 감사로그에 남긴다. <span class="chk">[확인필요: {정책값} 값]</span><br><strong>연동</strong> 성공하면 2FA를 확정하고 복구 코드를 생성해 ONB-03으로 넘긴다. 연속 실패가 {정책값}회에 도달하면 시크릿을 재생성해 항목 1·2의 QR과 설정 키 값을 교체하고 재등록 안내 칩을 띄운다(토큰은 무효화하지 않는다).<br><span class="basis">근거 ISMS 2.5 · F-5</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">6칸 코드 — 6자리 완성</span><span class="nav-act">자동 검증("확인 중…" · 중복 검증 차단) → 성공 시 2FA 확정 · 복구 코드 생성 · ONB-02 완료 기록 · 감사로그</span><span class="nav-to">성공 → <strong>복구 코드 저장(ONB-03)</strong> / 실패 → 칩 · 6칸 초기화 / {정책값}회 도달 → 시크릿·QR 재생성 · 칩 안내</span></div>
         </div>
@@ -158,7 +158,7 @@
 <section class="footer-note">
   <div class="note-card">
     <div class="note-title">비고</div>
-    <div class="note-body">· 계정 활성화 <strong>2/3 — 2FA 앱 연결</strong> · ONB-01 [다음] → 이 화면(QR·설정 키·6자리 검증) → 성공 시 ONB-03.<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 'Set 2FA Code'·'Invalid Credentials' 적용(남은 횟수 노출 포함) · 등록 완료 상태 표시는 시안 없음 → <strong>디자인 요청</strong> · 원본 <span class="mono">reference/figma/_crops/F2_row1_c2.png · F3_row1_c3.png</span>.<br>· <strong>확정(구현 단순 우선)</strong> — 설정 키 복사 버튼 없음 · 연속 실패 도달 시 시크릿 재생성(토큰 무효화 없음) · 미완료 계정 로그인 안내는 기존 실패 칩 문구 재사용 · 문의는 주소 텍스트(mailto 없음).<br>· 남은 <span style="color:#991b1b;">[확인필요]</span> — 연속 실패 {정책값} 값 · 등록 완료 상태 디자인.<br>· 이전 = ONB-01 / 다음 = ONB-03</div>
+    <div class="note-body">· 계정 활성화 <strong>2/3 — 2FA 앱 연결</strong> · ONB-01 [다음] → 이 화면(QR·설정 키·6자리 검증) → 성공 시 ONB-03.<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 'Set 2FA Code'·'Invalid Credentials' 적용(남은 횟수 노출 포함) · 등록 완료 상태 표시는 시안 없음 → <span class="chk">[디자인 요청]</span> · 원본 <span class="mono">reference/figma/_crops/F2_row1_c2.png · F3_row1_c3.png</span>.<br>· <strong>확정(구현 단순 우선)</strong> — 6자리 붙여넣기 칸별 분배 삭제(2026-09-02 편의기능 제거 · paste 가로채기 없음) · 설정 키 복사 버튼 없음 · 연속 실패 도달 시 시크릿 재생성(토큰 무효화 없음) · 미완료 계정 로그인 안내는 기존 실패 칩 문구 재사용.<br>· 남은 <span class="chk">[확인필요]</span> — 연속 실패 {정책값} 값 · 등록 완료 상태 디자인.<br>· 이전 = ONB-01 / 다음 = ONB-03</div>
   </div>
 </section>
 
