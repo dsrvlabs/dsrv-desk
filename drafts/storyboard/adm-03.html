@@ -205,9 +205,11 @@
       <div class="num">2</div>
       <div>
         <div class="itm-title">나목 고정 스프레드 — 페어별 입력 3개<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 페어별로 입력 3개(ETH↔USDC · ETH↔USDT · USDC↔USDT)이고 단위는 %다.<br><strong>허용 문자</strong> 숫자와 소수점만 받는다. 소수 2자리를 넘는 입력은 무시한다.<br><strong>검증</strong> 문자·자릿수는 키 입력마다, 빈칸·범위는 포커스 아웃 시 클라이언트가 본다. 범위는 0.01~5.00이다(상세 2 — 기획 가정). [변경 저장] 클릭 시 서버가 다시 본다.<br><strong>실패</strong> 빈칸이면 빨간 테두리와 인라인 ⚠ "값을 입력해 주세요", 범위를 벗어나면 ⚠ "0.01~5.00 사이 값을 입력해 주세요"를 띄우고 [변경 저장]을 비활성으로 둔다.<br><strong>연동</strong> 값이 바뀐 셀은 ●와 노란 배경으로 표시하고 상단 "저장되지 않은 변경 {N}건"에 반영한다. 저장한 뒤 신규 요청부터 EXC-01 스프레드 표시와 EXC-02 비율 산정에 쓴다. 이미 제시한 견적은 요청 시점 값을 유지한다. 화면 표기는 소수 2자리, CSV는 소수 4자리다.<br><span class="chk">[확인필요]</span> ETH 페어 요율(목업 0.10은 예시 · 09 §0 미정) · 스프레드 갱신주기 파라미터가 따로 필요한지.<br><span class="basis">근거 09 §0 나목 견적 산정(2026-09-02) · V2 · notation 스프레드 표기</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 페어별로 입력 3개(ETH↔USDC · ETH↔USDT · USDC↔USDT)이고 단위는 %다.<br><strong>허용 문자</strong> 숫자와 소수점만 받는다. 소수 2자리를 넘는 입력은 무시한다.<br><strong>검증</strong> ① 빈칸이 아닐 것 ② 0.01~5.00 범위 안일 것(상세 2). 문자·자릿수는 키 입력마다, ①②는 포커스 아웃 시 클라이언트가 본다. [변경 저장] 클릭 시 서버가 ②를 다시 본다.<br><strong>실패 처리</strong> ① 위반 → 빨간 테두리 + ⚠ "값을 입력해 주세요". ② 위반 → ⚠ "0.01~5.00 사이 값을 입력해 주세요". 어느 쪽이든 [변경 저장] 비활성.<br><strong>연동</strong> 값이 바뀐 셀은 ●와 노란 배경으로 표시하고 상단 "저장되지 않은 변경 {N}건"에 반영한다. 저장한 뒤 신규 요청부터 EXC-01 스프레드 표시와 EXC-02 비율 산정에 쓴다. 이미 제시한 견적은 요청 시점 값을 유지한다. 화면 표기는 소수 2자리, CSV는 소수 4자리다.<br><span class="chk">[확인필요]</span> ETH 페어 요율(목업 0.10은 예시 · 09 §0 미정) · 스프레드 갱신주기 파라미터가 따로 필요한지.<br><span class="basis">근거 09 §0 나목 견적 산정(2026-09-02) · V2 · notation 스프레드 표기</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">스프레드 필드(각각)</span><span class="nav-act">키 입력마다 문자·자릿수 검증 / 포커스 아웃 시 빈칸·범위 검증</span><span class="nav-to stay">정상 → 셀 dirty ● · [변경 저장] 활성 조건 재검사 / 오류 → 인라인 ⚠ ②·③ · [변경 저장] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">스프레드 필드(각각) — 정상 입력</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">경고 제거 · 셀 dirty ● · [변경 저장] 활성 조건 재검사</span></div>
+          <div class="nav-row"><span class="nav-el">스프레드 필드(각각) — 규칙 ① 위반(빈칸)</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "값을 입력해 주세요" · [변경 저장] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">스프레드 필드(각각) — 규칙 ② 위반(범위)</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "0.01~5.00 사이 값을 입력해 주세요" · [변경 저장] 비활성</span></div></div>
         </div>
       </div>
     </div>
@@ -216,9 +218,11 @@
       <div class="num">3</div>
       <div>
         <div class="itm-title">나목 견적 유효시간 입력<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 단위는 초(s)이고 현재 값은 120이다.<br><strong>허용 문자</strong> 정수만 받는다. 소수점 입력은 무시하고 최대 3자리까지 받는다.<br><strong>검증</strong> 문자는 키 입력마다, 빈칸·범위는 포커스 아웃 시 본다. 범위는 30~600이다(상세 2).<br><strong>실패</strong> 빈칸이면 ⚠ "값을 입력해 주세요", 범위를 벗어나면 ⚠ "30~600 사이 정수를 입력해 주세요"를 띄우고 [변경 저장]을 비활성으로 둔다.<br><strong>연동</strong> 바뀐 셀은 ●로 표시한다. 저장한 뒤 신규 요청부터 EXC-02 수락 제한 카운트다운에 쓴다(EXC-02가 이 값을 표시한다). 진행 중 견적은 요청 시점 값을 유지한다.<br><span class="basis">근거 09 §0 나목 견적(건별 RFQ · 상시 호가 없음) · F-4</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 단위는 초(s)이고 현재 값은 120이다.<br><strong>허용 문자</strong> 정수만 받는다. 소수점 입력은 무시하고 최대 3자리까지 받는다.<br><strong>검증</strong> ① 빈칸이 아닐 것 ② 30~600 범위 안일 것(상세 2). 문자는 키 입력마다, ①②는 포커스 아웃 시 클라이언트가 본다. [변경 저장] 클릭 시 서버가 ②를 다시 본다.<br><strong>실패 처리</strong> ① 위반 → 빨간 테두리 + ⚠ "값을 입력해 주세요". ② 위반 → ⚠ "30~600 사이 정수를 입력해 주세요". 어느 쪽이든 [변경 저장] 비활성.<br><strong>연동</strong> 바뀐 셀은 ●로 표시한다. 저장한 뒤 신규 요청부터 EXC-02 수락 제한 카운트다운에 쓴다(EXC-02가 이 값을 표시한다). 진행 중 견적은 요청 시점 값을 유지한다.<br><span class="basis">근거 09 §0 나목 견적(건별 RFQ · 상시 호가 없음) · F-4</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">견적 유효시간 필드</span><span class="nav-act">키 입력마다 / 포커스 아웃 검증</span><span class="nav-to stay">정상 → dirty ● / 오류 → 인라인 ⚠ · [변경 저장] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">견적 유효시간 필드 — 정상 입력</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">경고 제거 · 셀 dirty ● · [변경 저장] 활성 조건 재검사</span></div>
+          <div class="nav-row"><span class="nav-el">견적 유효시간 필드 — 규칙 ① 위반(빈칸)</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "값을 입력해 주세요" · [변경 저장] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">견적 유효시간 필드 — 규칙 ② 위반(범위)</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "30~600 사이 정수를 입력해 주세요" · [변경 저장] 비활성</span></div></div>
         </div>
       </div>
     </div>
@@ -227,9 +231,11 @@
       <div class="num">4</div>
       <div>
         <div class="itm-title">마목 중개 수수료율 입력<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 단위는 %이고 현재 값은 <strong>1.00</strong>이다(2026-09-02 확정 — 거래액 1% 고정 · 양측 각자 · 기준은 각자 보내는 자산 수량).<br><strong>허용 문자</strong> 숫자와 소수점만 받는다. 소수 2자리를 넘는 입력은 무시한다.<br><strong>검증</strong> 문자·자릿수는 키 입력마다, 빈칸·범위는 포커스 아웃 시 본다. 범위는 0.00~5.00이다(상세 2).<br><strong>실패</strong> 빈칸이면 ⚠ "값을 입력해 주세요", 범위를 벗어나면 ⚠ "0.00~5.00 사이 값을 입력해 주세요"를 띄우고 [변경 저장]을 비활성으로 둔다.<br><strong>연동</strong> 바뀐 셀은 ●로 표시한다. 저장한 뒤 신규 게시·신청부터 BRK-03·04·07의 수수료 고시와 계산에 쓴다(보내는 수량 × 요율 → 해당 자산 자릿수로 절사 — 예 800 USDT × 1% = 8.00 USDT · 798.40 USDC × 1% = 7.98 USDC).<br><span class="chk">[확인필요]</span> 요율을 바꾸면 약관·고시 문구도 함께 바꿔야 하는데 그 절차.<br><span class="basis">근거 09 §0 수수료(2026-09-02) · notation 입력 자릿수·절사</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 단위는 %이고 현재 값은 <strong>1.00</strong>이다(2026-09-02 확정 — 거래액 1% 고정 · 양측 각자 · 기준은 각자 보내는 자산 수량).<br><strong>허용 문자</strong> 숫자와 소수점만 받는다. 소수 2자리를 넘는 입력은 무시한다.<br><strong>검증</strong> ① 빈칸이 아닐 것 ② 0.00~5.00 범위 안일 것(상세 2). 문자·자릿수는 키 입력마다, ①②는 포커스 아웃 시 클라이언트가 본다. [변경 저장] 클릭 시 서버가 ②를 다시 본다.<br><strong>실패 처리</strong> ① 위반 → 빨간 테두리 + ⚠ "값을 입력해 주세요". ② 위반 → ⚠ "0.00~5.00 사이 값을 입력해 주세요". 어느 쪽이든 [변경 저장] 비활성.<br><strong>연동</strong> 바뀐 셀은 ●로 표시한다. 저장한 뒤 신규 게시·신청부터 BRK-03·04·07의 수수료 고시와 계산에 쓴다(보내는 수량 × 요율 → 해당 자산 자릿수로 절사 — 예 800 USDT × 1% = 8.00 USDT · 798.40 USDC × 1% = 7.98 USDC).<br><span class="chk">[확인필요]</span> 요율을 바꾸면 약관·고시 문구도 함께 바꿔야 하는데 그 절차.<br><span class="basis">근거 09 §0 수수료(2026-09-02) · notation 입력 자릿수·절사</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">수수료율 필드</span><span class="nav-act">키 입력마다 / 포커스 아웃 검증</span><span class="nav-to stay">정상 → dirty ● / 오류 → 인라인 ⚠ · [변경 저장] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">수수료율 필드 — 정상 입력</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">경고 제거 · 셀 dirty ● · [변경 저장] 활성 조건 재검사</span></div>
+          <div class="nav-row"><span class="nav-el">수수료율 필드 — 규칙 ① 위반(빈칸)</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "값을 입력해 주세요" · [변경 저장] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">수수료율 필드 — 규칙 ② 위반(범위)</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "0.00~5.00 사이 값을 입력해 주세요" · [변경 저장] 비활성</span></div></div>
         </div>
       </div>
     </div>
@@ -238,9 +244,11 @@
       <div class="num">5</div>
       <div>
         <div class="itm-title">마목 유효기간 입력 2개 — 게시(일) · 신청(영업일)<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 입력 2개다 — 게시 유효기간(일 · 현재 30) · 신청 유효기간(영업일 · 현재 2).<br><strong>허용 문자</strong> 정수만 받고 각각 최대 2자리다.<br><strong>검증</strong> 문자는 키 입력마다, 빈칸·범위는 포커스 아웃 시 본다. 범위는 게시 1~90, 신청 1~10이다(상세 2). 영업일은 KST 평일로 센다.<br><strong>실패</strong> 빈칸이면 ⚠ "값을 입력해 주세요", 범위를 벗어나면 ⚠ "1~90 사이 정수를 입력해 주세요" 또는 "1~10 사이 정수를 입력해 주세요"를 띄우고 [변경 저장]을 비활성으로 둔다.<br><strong>연동</strong> 바뀐 셀은 ●로 표시한다. 저장한 뒤 신규 게시·신청부터 적용한다(BRK-02 게시 시·BRK-03 신청 시 이 값을 표시한다). 게재중인 게시와 대기 중인 신청은 생성 시점 값을 유지한다. 게시 만료 시 게시 상태는 '완료'가 되고, 신청 만료 시 신청은 종결되며 게시는 '게재중'으로 돌아간다.<br><span class="chk">[확인필요]</span> 영업일 판정에 쓸 공휴일 캘린더 출처.<br><span class="basis">근거 09 §0 마목 게시 상태 개정(2026-09-02) · states 고객 도메인 초안</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 입력 2개다 — 게시 유효기간(일 · 현재 30) · 신청 유효기간(영업일 · 현재 2).<br><strong>허용 문자</strong> 정수만 받고 각각 최대 2자리다.<br><strong>검증</strong> ① 빈칸이 아닐 것 ② 범위 안일 것 — 게시 1~90, 신청 1~10(상세 2). 문자는 키 입력마다, ①②는 포커스 아웃 시 클라이언트가 본다. 영업일은 KST 평일로 센다. [변경 저장] 클릭 시 서버가 ②를 다시 본다.<br><strong>실패 처리</strong> ① 위반 → 빨간 테두리 + ⚠ "값을 입력해 주세요". ② 위반 → 게시 ⚠ "1~90 사이 정수를 입력해 주세요" · 신청 ⚠ "1~10 사이 정수를 입력해 주세요". 어느 쪽이든 [변경 저장] 비활성.<br><strong>연동</strong> 바뀐 셀은 ●로 표시한다. 저장한 뒤 신규 게시·신청부터 적용한다(BRK-02 게시 시·BRK-03 신청 시 이 값을 표시한다). 게재중인 게시와 대기 중인 신청은 생성 시점 값을 유지한다. 게시 만료 시 게시 상태는 '완료'가 되고, 신청 만료 시 신청은 종결되며 게시는 '게재중'으로 돌아간다.<br><span class="chk">[확인필요]</span> 영업일 판정에 쓸 공휴일 캘린더 출처.<br><span class="basis">근거 09 §0 마목 게시 상태 개정(2026-09-02) · states 고객 도메인 초안</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">게시·신청 유효기간 필드(각각)</span><span class="nav-act">키 입력마다 / 포커스 아웃 검증</span><span class="nav-to stay">정상 → dirty ● / 오류 → 인라인 ⚠ · [변경 저장] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">게시·신청 유효기간 필드(각각) — 정상 입력</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">경고 제거 · 셀 dirty ● · [변경 저장] 활성 조건 재검사</span></div>
+          <div class="nav-row"><span class="nav-el">게시·신청 유효기간 필드 — 규칙 ① 위반(빈칸)</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "값을 입력해 주세요" · [변경 저장] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">게시·신청 유효기간 필드 — 규칙 ② 위반(범위)</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">게시 ⚠ "1~90 사이 정수를 입력해 주세요" · 신청 ⚠ "1~10 사이 정수를 입력해 주세요" · [변경 저장] 비활성</span></div></div>
         </div>
       </div>
     </div>
@@ -249,9 +257,11 @@
       <div class="num">6</div>
       <div>
         <div class="itm-title">price guard 자동중지 임계 입력<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 단위는 ±%이고 저장값은 2.0이다. 목업은 2.5로 고쳐 놓은 상태라 ●와 노란 배경, 상단 "저장되지 않은 변경 1건"이 함께 보인다.<br><strong>허용 문자</strong> 숫자와 소수점만 받는다. 소수 1자리를 넘는 입력은 무시한다.<br><strong>검증</strong> 문자·자릿수는 키 입력마다, 빈칸·범위는 포커스 아웃 시 본다. 범위는 0.1~10.0이다(상세 2).<br><strong>실패</strong> 빈칸이면 ⚠ "값을 입력해 주세요", 범위를 벗어나면 ⚠ "0.1~10.0 사이 값을 입력해 주세요"를 띄우고 [변경 저장]을 비활성으로 둔다.<br><strong>연동</strong> 저장한 뒤 게시 시점 기준가 대비 이탈이 이 값을 넘으면 게시를 자동으로 '중지'하고 대기 신청을 전부 종결하며 양측에 이메일을 보낸다. 재개는 재게시로만 한다. 판정에 쓰는 시세는 항목 8의 소스다.<br><span class="chk">[확인필요]</span> 이 값이 BRK-02 게시자 설정값의 기본값인지 고정값인지.<br><span class="basis">근거 09 §0 price guard(외부지표 = 이탈 감지 가드 · 가격 결정 아님) · 마목 게시 상태 '중지'(2026-09-02)</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 단위는 ±%이고 저장값은 2.0이다. 목업은 2.5로 고쳐 놓은 상태라 ●와 노란 배경, 상단 "저장되지 않은 변경 1건"이 함께 보인다.<br><strong>허용 문자</strong> 숫자와 소수점만 받는다. 소수 1자리를 넘는 입력은 무시한다.<br><strong>검증</strong> ① 빈칸이 아닐 것 ② 0.1~10.0 범위 안일 것(상세 2). 문자·자릿수는 키 입력마다, ①②는 포커스 아웃 시 클라이언트가 본다. [변경 저장] 클릭 시 서버가 ②를 다시 본다.<br><strong>실패 처리</strong> ① 위반 → 빨간 테두리 + ⚠ "값을 입력해 주세요". ② 위반 → ⚠ "0.1~10.0 사이 값을 입력해 주세요". 어느 쪽이든 [변경 저장] 비활성.<br><strong>연동</strong> 저장한 뒤 게시 시점 기준가 대비 이탈이 이 값을 넘으면 게시를 자동으로 '중지'하고 대기 신청을 전부 종결하며 양측에 이메일을 보낸다. 재개는 재게시로만 한다. 판정에 쓰는 시세는 항목 8의 소스다.<br><span class="chk">[확인필요]</span> 이 값이 BRK-02 게시자 설정값의 기본값인지 고정값인지.<br><span class="basis">근거 09 §0 price guard(외부지표 = 이탈 감지 가드 · 가격 결정 아님) · 마목 게시 상태 '중지'(2026-09-02)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">임계 필드</span><span class="nav-act">키 입력마다 / 포커스 아웃 검증</span><span class="nav-to stay">정상 → dirty ● / 오류 → 인라인 ⚠ · [변경 저장] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">price guard 임계 필드 — 정상 입력</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">경고 제거 · 셀 dirty ● · [변경 저장] 활성 조건 재검사</span></div>
+          <div class="nav-row"><span class="nav-el">price guard 임계 필드 — 규칙 ① 위반(빈칸)</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "값을 입력해 주세요" · [변경 저장] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">price guard 임계 필드 — 규칙 ② 위반(범위)</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "0.1~10.0 사이 값을 입력해 주세요" · [변경 저장] 비활성</span></div></div>
         </div>
       </div>
     </div>
@@ -260,9 +270,11 @@
       <div class="num">7</div>
       <div>
         <div class="itm-title">건별 한도 입력 (원 상당)<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 단위는 <strong>원 상당</strong>이고 현재 값은 <strong>1,500,000</strong>이다(2026-09-02(9) 원화 기준 · 나목·마목 공통 1회 한도).<br><strong>허용 문자</strong> 정수만 받고 최대 10자리다. 천 단위 쉼표는 입력하는 동안 자동으로 넣는다.<br><strong>검증</strong> 문자는 키 입력마다, 빈칸·범위는 포커스 아웃 시 본다. 범위는 10,000~1,000,000,000이다(상세 2).<br><strong>실패</strong> 빈칸이면 ⚠ "값을 입력해 주세요", 범위를 벗어나면 ⚠ "10,000~1,000,000,000 사이 정수를 입력해 주세요"를 띄우고 [변경 저장]을 비활성으로 둔다.<br><strong>연동</strong> 저장한 뒤 신규 요청부터 EXC-01 수량 한도 검증과 "1회 최대 {정책값 1,500,000원 상당}" 표기, BRK-02 게시 게이트, BRK-03 신청자 검증에 쓴다. 환산은 항목 8 시세 소스의 <strong>KRW 시세</strong>로 요청 시점에 한다(ETH·USDC·USDT 모두 KRW 시세로 환산한다).<br><span class="chk">[확인필요]</span> 일간·월간 누적 한도 파라미터는 두지 않았다(09 §0).<br><span class="basis">근거 09 §0 건별 한도(2026-09-02) · notation 한도 표기</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 단위는 <strong>원 상당</strong>이고 현재 값은 <strong>1,500,000</strong>이다(2026-09-02(9) 원화 기준 · 나목·마목 공통 1회 한도).<br><strong>허용 문자</strong> 정수만 받고 최대 10자리다. 천 단위 쉼표는 입력하는 동안 자동으로 넣는다.<br><strong>검증</strong> ① 빈칸이 아닐 것 ② 10,000~1,000,000,000 범위 안일 것(상세 2). 문자는 키 입력마다, ①②는 포커스 아웃 시 클라이언트가 본다. 입력하는 동안 천 단위 쉼표를 자동으로 넣는다. [변경 저장] 클릭 시 서버가 ②를 다시 본다.<br><strong>실패 처리</strong> ① 위반 → 빨간 테두리 + ⚠ "값을 입력해 주세요". ② 위반 → ⚠ "10,000~1,000,000,000 사이 정수를 입력해 주세요". 어느 쪽이든 [변경 저장] 비활성.<br><strong>연동</strong> 저장한 뒤 신규 요청부터 EXC-01 수량 한도 검증과 "1회 최대 {정책값 1,500,000원 상당}" 표기, BRK-02 게시 게이트, BRK-03 신청자 검증에 쓴다. 환산은 항목 8 시세 소스의 <strong>KRW 시세</strong>로 요청 시점에 한다(ETH·USDC·USDT 모두 KRW 시세로 환산한다).<br><span class="chk">[확인필요]</span> 일간·월간 누적 한도 파라미터는 두지 않았다(09 §0).<br><span class="basis">근거 09 §0 건별 한도(2026-09-02) · notation 한도 표기</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">건별 한도 필드</span><span class="nav-act">키 입력마다 / 포커스 아웃 검증 · 쉼표 자동 포맷</span><span class="nav-to stay">정상 → dirty ● / 오류 → 인라인 ⚠ · [변경 저장] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">건별 한도 필드 — 정상 입력</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">경고 제거 · 셀 dirty ● · [변경 저장] 활성 조건 재검사</span></div>
+          <div class="nav-row"><span class="nav-el">건별 한도 필드 — 규칙 ① 위반(빈칸)</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "값을 입력해 주세요" · [변경 저장] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">건별 한도 필드 — 규칙 ② 위반(범위)</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "10,000~1,000,000,000 사이 정수를 입력해 주세요" · [변경 저장] 비활성</span></div></div>
         </div>
       </div>
     </div>
@@ -282,9 +294,11 @@
       <div class="num">9</div>
       <div>
         <div class="itm-title">핫월렛 비중 임계 입력<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 단위는 %이고 현재 값은 20이다.<br><strong>허용 문자</strong> 정수만 받고 최대 2자리다.<br><strong>검증</strong> 문자는 키 입력마다, 빈칸·범위는 포커스 아웃 시 본다. 범위는 0~20이다(콜드 80% 요건의 상한).<br><strong>실패</strong> 빈칸이면 ⚠ "값을 입력해 주세요", 범위를 벗어나면 ⚠ "0~20 사이 정수를 입력해 주세요"를 띄우고 [변경 저장]을 비활성으로 둔다.<br><strong>연동</strong> 저장한 뒤 다음 감시 주기부터, 핫월렛 보유 비중이 이 값을 넘으면 ADM-02 처리함에 월렛·키 알람(T6 스윕 워닝)을 만든다. 현행 운영은 100% 콜드라 실질 0%다.<br><span class="chk">[확인필요]</span> 콜드 80% 요건의 고시 원문.<br><span class="basis">근거 states T6 · 09 §0 지갑(콜드 100% 수동 운영) · §11 콜드 80%</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 단위는 %이고 현재 값은 20이다.<br><strong>허용 문자</strong> 정수만 받고 최대 2자리다.<br><strong>검증</strong> ① 빈칸이 아닐 것 ② 0~20 범위 안일 것(콜드 80% 요건의 상한). 문자는 키 입력마다, ①②는 포커스 아웃 시 클라이언트가 본다. [변경 저장] 클릭 시 서버가 ②를 다시 본다.<br><strong>실패 처리</strong> ① 위반 → 빨간 테두리 + ⚠ "값을 입력해 주세요". ② 위반 → ⚠ "0~20 사이 정수를 입력해 주세요". 어느 쪽이든 [변경 저장] 비활성.<br><strong>연동</strong> 저장한 뒤 다음 감시 주기부터, 핫월렛 보유 비중이 이 값을 넘으면 ADM-02 처리함에 월렛·키 알람(T6 스윕 워닝)을 만든다. 현행 운영은 100% 콜드라 실질 0%다.<br><span class="chk">[확인필요]</span> 콜드 80% 요건의 고시 원문.<br><span class="basis">근거 states T6 · 09 §0 지갑(콜드 100% 수동 운영) · §11 콜드 80%</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">핫월렛 비중 필드</span><span class="nav-act">키 입력마다 / 포커스 아웃 검증</span><span class="nav-to stay">정상 → dirty ● / 오류 → 인라인 ⚠ · [변경 저장] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">핫월렛 비중 필드 — 정상 입력</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">경고 제거 · 셀 dirty ● · [변경 저장] 활성 조건 재검사</span></div>
+          <div class="nav-row"><span class="nav-el">핫월렛 비중 필드 — 규칙 ① 위반(빈칸)</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "값을 입력해 주세요" · [변경 저장] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">핫월렛 비중 필드 — 규칙 ② 위반(범위)</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "0~20 사이 정수를 입력해 주세요" · [변경 저장] 비활성</span></div></div>
         </div>
       </div>
     </div>
@@ -356,9 +370,11 @@
       <div class="num">15</div>
       <div>
         <div class="itm-title">기관명 입력<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 선택 목록이 아니라 자유 입력이다(신규 기관 등록). 플레이스홀더는 "기관명"이다.<br><strong>허용 문자</strong> 한글·영문·숫자·공백·괄호·마침표만 받고 2~50자다. 초과 입력은 무시하고 앞뒤 공백은 자동으로 지운다.<br><strong>검증</strong> 문자·길이는 포커스 아웃 시 클라이언트가 보고, 중복은 [초대 발송] 클릭 시 서버가 본다.<br><strong>실패</strong> 문자·길이가 어긋나면 빨간 테두리와 인라인 ⚠ "기관명은 2~50자 한글·영문·숫자로 입력해 주세요"를 띄운다. 중복이면 ⚠ "이미 등록된 기관입니다 — 기존 계정 해지 후에만 새 가입자를 초대할 수 있습니다"를 띄운다. 오류가 있으면 [초대 발송]을 비활성으로 둔다. 다시 입력하면 기존 오류를 해제한다.<br><strong>연동</strong> 값이 정상이면 [초대 발송] 활성 조건을 다시 본다.<br><strong>저장</strong> ORG.name으로 저장한다. 고객사 ID(ORG-NNNN)는 발송 시 자동으로 채번한다.<br><span class="basis">근거 notation 식별자(ORG-NNNN) · 1기관 1가입자(09 §0 승인·통제)</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 선택 목록이 아니라 자유 입력이다(신규 기관 등록). 플레이스홀더는 "기관명"이다.<br><strong>허용 문자</strong> 한글·영문·숫자·공백·괄호·마침표만 받고 2~50자다. 초과 입력은 무시하고 앞뒤 공백은 자동으로 지운다.<br><strong>검증</strong> ① 허용 문자로 2~50자일 것 ② 이미 등록된 기관명이 아닐 것. ①은 포커스 아웃 시 클라이언트가, ②는 [초대 발송] 클릭 시 서버가 본다.<br><strong>실패 처리</strong> ① 위반 → 빨간 테두리 + ⚠ "기관명은 2~50자 한글·영문·숫자로 입력해 주세요". ② 위반 → ⚠ "이미 등록된 기관입니다 — 기존 계정 해지 후에만 새 가입자를 초대할 수 있습니다". 어느 쪽이든 [초대 발송] 비활성. 다시 입력하면 기존 경고를 지운다.<br><strong>연동</strong> 값이 정상이면 [초대 발송] 활성 조건을 다시 본다.<br><strong>저장</strong> ORG.name으로 저장한다. 고객사 ID(ORG-NNNN)는 발송 시 자동으로 채번한다.<br><span class="basis">근거 notation 식별자(ORG-NNNN) · 1기관 1가입자(09 §0 승인·통제)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">기관명 필드</span><span class="nav-act">포커스 아웃 시 검증 · 키 입력 시 기존 오류 해제</span><span class="nav-to stay">정상 → [초대 발송] 활성 조건 재검사 / 오류 → 인라인 ⚠ ③ · [초대 발송] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">기관명 필드 — 정상 입력</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">경고 제거 · [초대 발송] 활성 조건 재검사</span></div>
+          <div class="nav-row"><span class="nav-el">기관명 필드 — 규칙 ① 위반(문자·길이)</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "기관명은 2~50자 한글·영문·숫자로 입력해 주세요" · [초대 발송] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">기관명 필드 — 규칙 ② 위반(중복)</span><span class="nav-act">[초대 발송] 클릭 시 서버 검증</span><span class="nav-to stay">⚠ "이미 등록된 기관입니다 — 기존 계정 해지 후에만 새 가입자를 초대할 수 있습니다" · 입력값 유지</span></div></div>
         </div>
       </div>
     </div>
@@ -367,9 +383,11 @@
       <div class="num">16</div>
       <div>
         <div class="itm-title">가입자 이메일 입력<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 플레이스홀더는 "가입자 이메일"이다.<br><strong>허용 문자</strong> 로컬@도메인.TLD 형식으로 최대 254자다. 대문자는 소문자로 자동 정규화하고 공백은 지운다.<br><strong>검증</strong> 형식은 포커스 아웃 시 클라이언트가 보고, 중복은 [초대 발송] 클릭 시 서버가 본다.<br><strong>실패</strong> 형식이 어긋나면 빨간 테두리와 인라인 ⚠ "이메일 형식이 올바르지 않습니다", 중복이면 ⚠ "이미 초대·가입된 이메일입니다"를 띄우고 [초대 발송]을 비활성으로 둔다. 다시 입력하면 기존 오류를 해제한다.<br><strong>연동</strong> 값이 정상이면 [초대 발송] 활성 조건을 다시 본다.<br><strong>저장</strong> USER.email로 저장한다. CSV와 화면 표시는 마스킹한다.<br><span class="chk">[확인필요]</span> 개인 이메일 도메인을 허용할지(법인 도메인 제한).<br><span class="basis">근거 ONB-00 본인 이메일 초대(셀프가입 없음) · ISMS 2.5</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 플레이스홀더는 "가입자 이메일"이다.<br><strong>허용 문자</strong> 로컬@도메인.TLD 형식으로 최대 254자다. 대문자는 소문자로 자동 정규화하고 공백은 지운다.<br><strong>검증</strong> ① 이메일 형식일 것 ② 이미 초대·가입된 이메일이 아닐 것. ①은 포커스 아웃 시 클라이언트가, ②는 [초대 발송] 클릭 시 서버가 본다.<br><strong>실패 처리</strong> ① 위반 → 빨간 테두리 + ⚠ "이메일 형식이 올바르지 않습니다". ② 위반 → ⚠ "이미 초대·가입된 이메일입니다". 어느 쪽이든 [초대 발송] 비활성. 다시 입력하면 기존 경고를 지운다.<br><strong>연동</strong> 값이 정상이면 [초대 발송] 활성 조건을 다시 본다.<br><strong>저장</strong> USER.email로 저장한다. CSV와 화면 표시는 마스킹한다.<br><span class="chk">[확인필요]</span> 개인 이메일 도메인을 허용할지(법인 도메인 제한).<br><span class="basis">근거 ONB-00 본인 이메일 초대(셀프가입 없음) · ISMS 2.5</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">이메일 필드</span><span class="nav-act">포커스 아웃 시 검증 · 키 입력 시 기존 오류 해제</span><span class="nav-to stay">정상 → [초대 발송] 활성 조건 재검사 / 오류 → 인라인 ⚠ ③ · [초대 발송] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">이메일 필드 — 정상 입력</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">경고 제거 · [초대 발송] 활성 조건 재검사</span></div>
+          <div class="nav-row"><span class="nav-el">이메일 필드 — 규칙 ① 위반(형식)</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "이메일 형식이 올바르지 않습니다" · [초대 발송] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">이메일 필드 — 규칙 ② 위반(중복)</span><span class="nav-act">[초대 발송] 클릭 시 서버 검증</span><span class="nav-to stay">⚠ "이미 초대·가입된 이메일입니다" · 입력값 유지</span></div></div>
         </div>
       </div>
     </div>
