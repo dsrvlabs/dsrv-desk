@@ -185,7 +185,7 @@
       · <strong>진입</strong>: 어드민 홈(ADM-02) '설정' 탭 클릭 · 진입 시 초기 상태 = 저장값 표시 · dirty 0 · [되돌리기]·[변경 저장] 비활성 (목업은 price guard 1건 수정 상태)<br>
       · 발생 알람 처리(잠금 해제·재이행 도래·격리 등)는 이 화면이 아니라 홈(ADM-02) 처리함에서 · 어드민 역할 1종 — 전 기능 동일 노출<br>
       · <strong>적용 원칙</strong>: 수치·선택 파라미터(항목 2~9) = [변경 저장] 일괄 반영 · 확인 없음 · <strong>신규 요청부터 적용</strong>(진행 중 건은 요청 시점 값 유지) / 즉시 적용형 2종(취급자산 상태 ▾ · 기관 KYC 상태 변경 ▾) = 저장 버튼과 무관 · 차단 방향은 확인 다이얼로그<br>
-      · 토스트 규격(어드민 공통): 우측 상단 · 3초 자동 닫힘 · 클릭 시 즉시 닫힘 · 정책값 현재 예시: 건별 한도 1,500,000원 상당 · 마목 수수료 1% 고정 · 나목 스프레드 0.10% · price guard ±{정책값}% · 자릿수 ETH 4 / USDC·USDT 2(notation)</div>
+      · 토스트 규격(어드민 공통): 우측 상단 · 3초 자동 닫힘 · 클릭 시 즉시 닫힘 · 정책값 현재 예시: 건별 한도 1,500,000원 상당 · 마목 수수료 1% 고정 · 나목 스프레드 0.10% · price guard ±{정책값 2.0}% · 자릿수 ETH 4 / USDC·USDT 2(notation)</div>
     </div>
 
     <div class="itm" data-idx="0">
@@ -260,7 +260,7 @@
       <div class="num">7</div>
       <div>
         <div class="itm-title">건별 한도 입력 (원 상당)<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 단위는 <strong>원 상당</strong>이고 현재 값은 <strong>1,500,000</strong>이다(2026-09-02(9) 원화 기준 · 나목·마목 공통 1회 한도).<br><strong>허용 문자</strong> 정수만 받고 최대 10자리다. 천 단위 쉼표는 입력하는 동안 자동으로 넣는다.<br><strong>검증</strong> 문자는 키 입력마다, 빈칸·범위는 포커스 아웃 시 본다. 범위는 10,000~1,000,000,000이다(상세 2).<br><strong>실패</strong> 빈칸이면 ⚠ "값을 입력해 주세요", 범위를 벗어나면 ⚠ "10,000~1,000,000,000 사이 정수를 입력해 주세요"를 띄우고 [변경 저장]을 비활성으로 둔다.<br><strong>연동</strong> 저장한 뒤 신규 요청부터 EXC-01 수량 한도 검증과 "1회 최대 {정책값}원 상당" 표기, BRK-02 게시 게이트, BRK-03 신청자 검증에 쓴다. 환산은 항목 8 시세 소스의 <strong>KRW 시세</strong>로 요청 시점에 한다(ETH·USDC·USDT 모두 KRW 시세로 환산한다).<br><span class="chk">[확인필요]</span> 일간·월간 누적 한도 파라미터는 두지 않았다(09 §0).<br><span class="basis">근거 09 §0 건별 한도(2026-09-02) · notation 한도 표기</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 단위는 <strong>원 상당</strong>이고 현재 값은 <strong>1,500,000</strong>이다(2026-09-02(9) 원화 기준 · 나목·마목 공통 1회 한도).<br><strong>허용 문자</strong> 정수만 받고 최대 10자리다. 천 단위 쉼표는 입력하는 동안 자동으로 넣는다.<br><strong>검증</strong> 문자는 키 입력마다, 빈칸·범위는 포커스 아웃 시 본다. 범위는 10,000~1,000,000,000이다(상세 2).<br><strong>실패</strong> 빈칸이면 ⚠ "값을 입력해 주세요", 범위를 벗어나면 ⚠ "10,000~1,000,000,000 사이 정수를 입력해 주세요"를 띄우고 [변경 저장]을 비활성으로 둔다.<br><strong>연동</strong> 저장한 뒤 신규 요청부터 EXC-01 수량 한도 검증과 "1회 최대 {정책값 1,500,000원 상당}" 표기, BRK-02 게시 게이트, BRK-03 신청자 검증에 쓴다. 환산은 항목 8 시세 소스의 <strong>KRW 시세</strong>로 요청 시점에 한다(ETH·USDC·USDT 모두 KRW 시세로 환산한다).<br><span class="chk">[확인필요]</span> 일간·월간 누적 한도 파라미터는 두지 않았다(09 §0).<br><span class="basis">근거 09 §0 건별 한도(2026-09-02) · notation 한도 표기</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">건별 한도 필드</span><span class="nav-act">키 입력마다 / 포커스 아웃 검증 · 쉼표 자동 포맷</span><span class="nav-to stay">정상 → dirty ● / 오류 → 인라인 ⚠ · [변경 저장] 비활성</span></div>
         </div>
@@ -356,7 +356,7 @@
       <div class="num">15</div>
       <div>
         <div class="itm-title">기관명 입력<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 선택 목록이 아니라 자유 입력이다(신규 기관 등록). 플레이스홀더는 "기관명"이다.<br><strong>허용 문자</strong> 한글·영문·숫자·공백·괄호·마침표만 받고 2~50자다. 초과 입력은 무시하고 앞뒤 공백은 자동으로 지운다.<br><strong>검증</strong> 문자·길이는 포커스 아웃 시 클라이언트가 보고, 중복은 [초대 발송] 클릭 시 서버가 본다.<br><strong>실패</strong> 문자·길이가 어긋나면 빨간 테두리와 인라인 ⚠ "기관명은 2~50자 한글·영문·숫자로 입력해 주세요"를 띄운다. 중복이면 ⚠ "이미 등록된 기관입니다 — 기존 계정 해지 후에만 새 가입자를 초대할 수 있습니다"를 띄운다. 오류가 있으면 [초대 발송]을 비활성으로 둔다. 다시 입력하면 기존 오류를 해제한다.<br><strong>연동</strong> 값이 정상이면 [초대 발송] 활성 조건을 다시 본다. 저장 시 ORG.name이 되고 고객사 ID(ORG-NNNN)는 발송 시 자동으로 채번한다.<br><span class="basis">근거 notation 식별자(ORG-NNNN) · 1기관 1가입자(09 §0 승인·통제)</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 선택 목록이 아니라 자유 입력이다(신규 기관 등록). 플레이스홀더는 "기관명"이다.<br><strong>허용 문자</strong> 한글·영문·숫자·공백·괄호·마침표만 받고 2~50자다. 초과 입력은 무시하고 앞뒤 공백은 자동으로 지운다.<br><strong>검증</strong> 문자·길이는 포커스 아웃 시 클라이언트가 보고, 중복은 [초대 발송] 클릭 시 서버가 본다.<br><strong>실패</strong> 문자·길이가 어긋나면 빨간 테두리와 인라인 ⚠ "기관명은 2~50자 한글·영문·숫자로 입력해 주세요"를 띄운다. 중복이면 ⚠ "이미 등록된 기관입니다 — 기존 계정 해지 후에만 새 가입자를 초대할 수 있습니다"를 띄운다. 오류가 있으면 [초대 발송]을 비활성으로 둔다. 다시 입력하면 기존 오류를 해제한다.<br><strong>연동</strong> 값이 정상이면 [초대 발송] 활성 조건을 다시 본다.<br><strong>저장</strong> ORG.name으로 저장한다. 고객사 ID(ORG-NNNN)는 발송 시 자동으로 채번한다.<br><span class="basis">근거 notation 식별자(ORG-NNNN) · 1기관 1가입자(09 §0 승인·통제)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">기관명 필드</span><span class="nav-act">포커스 아웃 시 검증 · 키 입력 시 기존 오류 해제</span><span class="nav-to stay">정상 → [초대 발송] 활성 조건 재검사 / 오류 → 인라인 ⚠ ③ · [초대 발송] 비활성</span></div>
         </div>
@@ -367,7 +367,7 @@
       <div class="num">16</div>
       <div>
         <div class="itm-title">가입자 이메일 입력<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 플레이스홀더는 "가입자 이메일"이다.<br><strong>허용 문자</strong> 로컬@도메인.TLD 형식으로 최대 254자다. 대문자는 소문자로 자동 정규화하고 공백은 지운다.<br><strong>검증</strong> 형식은 포커스 아웃 시 클라이언트가 보고, 중복은 [초대 발송] 클릭 시 서버가 본다.<br><strong>실패</strong> 형식이 어긋나면 빨간 테두리와 인라인 ⚠ "이메일 형식이 올바르지 않습니다", 중복이면 ⚠ "이미 초대·가입된 이메일입니다"를 띄우고 [초대 발송]을 비활성으로 둔다. 다시 입력하면 기존 오류를 해제한다.<br><strong>연동</strong> 값이 정상이면 [초대 발송] 활성 조건을 다시 본다. 저장 시 USER.email이 되고 CSV와 화면 표시는 마스킹한다.<br><span class="chk">[확인필요]</span> 개인 이메일 도메인을 허용할지(법인 도메인 제한).<br><span class="basis">근거 ONB-00 본인 이메일 초대(셀프가입 없음) · ISMS 2.5</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 플레이스홀더는 "가입자 이메일"이다.<br><strong>허용 문자</strong> 로컬@도메인.TLD 형식으로 최대 254자다. 대문자는 소문자로 자동 정규화하고 공백은 지운다.<br><strong>검증</strong> 형식은 포커스 아웃 시 클라이언트가 보고, 중복은 [초대 발송] 클릭 시 서버가 본다.<br><strong>실패</strong> 형식이 어긋나면 빨간 테두리와 인라인 ⚠ "이메일 형식이 올바르지 않습니다", 중복이면 ⚠ "이미 초대·가입된 이메일입니다"를 띄우고 [초대 발송]을 비활성으로 둔다. 다시 입력하면 기존 오류를 해제한다.<br><strong>연동</strong> 값이 정상이면 [초대 발송] 활성 조건을 다시 본다.<br><strong>저장</strong> USER.email로 저장한다. CSV와 화면 표시는 마스킹한다.<br><span class="chk">[확인필요]</span> 개인 이메일 도메인을 허용할지(법인 도메인 제한).<br><span class="basis">근거 ONB-00 본인 이메일 초대(셀프가입 없음) · ISMS 2.5</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">이메일 필드</span><span class="nav-act">포커스 아웃 시 검증 · 키 입력 시 기존 오류 해제</span><span class="nav-to stay">정상 → [초대 발송] 활성 조건 재검사 / 오류 → 인라인 ⚠ ③ · [초대 발송] 비활성</span></div>
         </div>
