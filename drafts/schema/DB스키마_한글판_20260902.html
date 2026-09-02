@@ -411,7 +411,7 @@
       <div class="f"><span class="m fk">FK</span><span class="name">보내는 자산</span><span class="col">from_asset_id</span><span class="desc">→ 취급자산(ASSET)</span></div>
       <div class="f"><span class="m fk">FK</span><span class="name">받는 자산</span><span class="col">to_asset_id</span><span class="desc">→ 취급자산(ASSET)</span></div>
       <div class="f"><span class="m n">·</span><span class="name">보내는 수량</span><span class="col">from_qty</span><span class="desc">상한 = min(건별 한도 1,000 USD 상당, 가용 풀 잔량). 한도는 LIMIT_RULESET 참조</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">상태 (고객 표출)</span><span class="col">status</span><span class="desc"><span class="ev">요청 / 비율 제시 / DSRV 거래 진행중 / 완료 / 심사 후 보류 / 미진행(만료·거절)</span><br>내부 단계(승인 대기~집행 대기)는 고객에게 'DSRV 거래 진행중' 하나로만 보이고, 실제 단계는 처리함 <span class="ref">T1</span>에 있다</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">상태 (고객 표출)</span><span class="col">status</span><span class="desc"><span class="ev">요청됨 / 비율 제시 / 진행 중 / 완료 / 거절 / 만료</span><br>내부 단계(승인 대기·에스컬레이션·보류·집행 대기)는 고객에게 '진행 중' 하나로만 보이고, 실제 단계는 처리함 <span class="ref">T1</span>에 있다. 고객 표출에 '보류'는 없다(2026-09-02 결정 — 진행 중 → 완료/거절만) · 거절 = 고객 거절(EXC-02)·관리자 거절 공통 라벨, 만료 = 수락 기한 경과·재검증 실패(풀 부족·비율 이탈) · 라벨은 케이스분기 문서(states.html) A표 기준</span></div>
       <div class="f"><span class="m n">·</span><span class="name">요청 일시</span><span class="col">requested_at</span><span class="desc"></span></div>
     </div>
 
@@ -674,7 +674,7 @@
     <div class="card-h">B. 거래 상태값</div>
     <table>
       <tr><th style="width:230px;">필드</th><th>허용값</th><th style="width:36%;">비고</th></tr>
-      <tr><td class="fld">교환 요청 상태 (고객 표출)<span class="col">EXCHANGE_REQUEST.status</span></td><td><span class="v">요청</span><span class="v">비율 제시</span><span class="v mid">DSRV 거래 진행중</span><span class="v ok">완료</span><span class="v mid">심사 후 보류</span><span class="v">미진행(만료·거절)</span></td><td>내부 승인 대기~집행 대기는 'DSRV 거래 진행중' 단일 표기(EXC-03) — 내부 단계는 처리함 T1</td></tr>
+      <tr><td class="fld">교환 요청 상태 (고객 표출)<span class="col">EXCHANGE_REQUEST.status</span></td><td><span class="v">요청됨</span><span class="v">비율 제시</span><span class="v mid">진행 중</span><span class="v ok">완료</span><span class="v bad">거절</span><span class="v">만료</span></td><td>내부 승인 대기·에스컬레이션·보류·집행 대기는 '진행 중' 단일 표기(EXC-03) — 고객 표출 '보류' 없음(2026-09-02) · 종전 '심사 후 보류'·'미진행(만료·거절)' 폐기 · 케이스분기(states.html) 기준</td></tr>
       <tr><td class="fld">견적 상태<span class="col">QUOTE.status</span></td><td><span class="v">제시</span><span class="v ok">수락</span><span class="v">거절</span><span class="v">만료</span><span class="v">이탈</span></td><td>만료·이탈·풀 부족 = 미집행 → EXC-01 재요청</td></tr>
       <tr><td class="fld">거래의향 상태<span class="col">RFQ_INTENT.status</span></td><td><span class="v ok">게재중</span><span class="v mid">신청접수</span><span class="v">확정</span><span class="v">완료</span><span class="v">완료(유효기간 만료)</span><span class="v bad">중지(시세변동)</span><span class="v">회수</span></td><td>중지·만료·회수는 게시판(BRK-01)에서 즉시 제외 · 거절/만료된 신청은 '게재중' 복귀 · 회수는 BRK-06</td></tr>
       <tr><td class="fld">신청 상태<span class="col">RFQ_APPLICATION.status</span></td><td><span class="v">신청</span><span class="v ok">수락(확정)</span><span class="v">거절</span><span class="v">만료</span><span class="v">종결(게시 만료)</span></td><td>수락 = 즉시 확정·구속력·수수료 발생 · 거절 사유 입력 없음</td></tr>
@@ -695,7 +695,7 @@
       <tr><td class="fld">결과 코드 (RESOLVED 동반)<span class="col">INBOX_ITEM.result_code</span></td><td><span class="v ok">승인</span><span class="v bad">거절</span><span class="v ok">소명 인정</span><span class="v bad">동결</span><span class="v bad">STR 이관</span><span class="v ok">무혐의</span><span class="v ok">조치완료</span><span class="v ok">해제</span><span class="v mid">제한 적용</span><span class="v">자동 종결(T7)</span></td><td>종결은 사람 — 자동 종결은 T7 재이행 완료가 유일 예외(기획 가정 [결정필요 ③])</td></tr>
       <tr><td class="fld">자동검증·등급<span class="col">INBOX_ITEM.grade</span></td><td><span class="v ok">정상</span><span class="v mid">주의(Mid)</span><span class="v bad">High</span><span class="v">지연발효 중</span><span class="v">—</span></td><td>자동검증 = 1차 필터 — 자동 체결·승인·거절 없음</td></tr>
       <tr><td class="fld">업무 상태 (화면 '상태' 컬럼)<span class="col">유형별 대상 테이블.status</span></td><td colspan="2">T1: 승인 대기·에스컬레이션 → 보류·집행 대기 → 완료·거절 ｜ T2: 확인 대기 → 보류·이전 진행 → 완료·이전 중지 ｜ T3~T8·X3은 위 B표·해당 테이블 status 참조 — 아이템 상태와 2계층 분리(states.html 상태 모델)</td></tr>
-      <tr><td class="fld">고객 표출 사유 (보류·거절)<span class="col">EXCHANGE_APPROVAL.public_reason 등</span></td><td><span class="v">한도 초과</span><span class="v">추가 정보 확인 필요</span><span class="v">내부 심사 기준 미충족</span><span class="v">가용 풀 부족·시세 이탈</span></td><td>STR 관련 여부는 어떤 형태로도 표기 금지(EXC-04) · 문구 확정 [로펌게이트]</td></tr>
+      <tr><td class="fld">고객 표출 사유 (거절·만료)<span class="col">EXCHANGE_APPROVAL.public_reason 등</span></td><td><span class="v">거절: 한도 초과</span><span class="v">거절: 추가 정보 확인 필요</span><span class="v">거절: 내부 심사 기준 미충족</span><span class="v">만료: 수락 기한 경과</span><span class="v">만료: 가용 풀 부족·비율 변동</span></td><td>보류는 고객 표출 없음(사유 미노출) · STR 관련 여부는 어떤 형태로도 표기 금지(EXC-04) · 문구 확정 [로펌게이트]</td></tr>
     </table>
   </div>
 
@@ -723,6 +723,7 @@
   <b>비고</b><br>
   · 상태값은 상태 전이 문서(states.html)와, 정책값은 관리자 설정 화면(ADM-03)과 같은 값을 쓴다. 예시값은 부록 D에 [확인필요]로 표기.<br>
   · v0.7(2026-09-02)은 v0.6의 테이블·컬럼 구성을 유지하면서 ① §0 참조 안내(용어·처리함 유형·화면 코드·기호) 추가 ② 카드마다 테이블 역할 한 줄 추가 ③ 본문 설명의 약어를 풀어 쓰고 ④ knowledge/09 §0 2026-09-02 확정치(건별 한도 1,000 USD 상당 · 중개 수수료 1% 고정 · 견적 자동 산정 · BRK-06/07 화면)를 반영한 개정본. 컬럼 추가·삭제는 없음.<br>
+  · 2026-09-02 보류 폐지 반영: EXCHANGE_REQUEST.status 고객 표출값을 요청됨·비율 제시·진행 중·완료·거절·만료 6종으로 정리('심사 후 보류' 삭제, '미진행'을 거절·만료로 분리) · 고객 표출 사유를 거절·만료로 재분류. 어드민 내부 보류(EXCHANGE_APPROVAL.decision·INBOX_ITEM HOLD)는 유지.<br>
   · 별도 ERD(db-schema-erd.svg)는 구버전 — 테이블 구성은 이 문서가 기준이며 ERD는 개정 예정.<br>
   · <span class="warn">[결정필요]</span> ① T2 이전 중지 건의 계약상 귀결(약관·법무) ② T4 소명 시한·초과 시 귀결 ③ T7 자동 종결 허용 여부 ④ High 등급 경고 방치 시 상위 에스컬레이션 룰 ⑤ 복수 신청 처리(선착순 vs 게시자 선택 — BRK-04).<br>
   · <span class="warn">[확인필요]</span> 트래블룰 대상에 출금·이전 포함 여부(커스터디 기존 체계와 분담) · 이메일 알림 수신 범위(담당자 단일/복수) · 시세 소스 조합 방식 · 중개 수수료 차감 방식 · 부록 D의 예시값 전반.<br>
