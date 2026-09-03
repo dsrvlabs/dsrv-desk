@@ -23,6 +23,18 @@
   .appx .src{font-family:ui-monospace,Consolas,monospace;font-size:9.5px;color:#475569;}
   .appx .gap{color:#888;font-weight:700;}
   .appx .drv{color:#7c3aed;font-weight:700;}
+  /* 처리함 확장 패널 — 라벨·값 2열 + 자동검증 칩 (2026-09-03 가독성 개선) */
+  .mk-panel .kv{display:grid;grid-template-columns:70px 1fr;gap:3px 10px;font-family:var(--font);font-size:10px;color:#1e293b;line-height:1.55;margin-top:2px;}
+  .mk-panel .kv .k{color:#64748b;font-weight:700;white-space:nowrap;padding-top:1px;}
+  .mk-panel .kv .v{min-width:0;}
+  .mk-panel .kv b{font-weight:700;color:#0f172a;font-family:ui-monospace,Consolas,monospace;}
+  .mk-panel .kv .id{font-family:ui-monospace,Consolas,monospace;color:#0f172a;}
+  .mk-panel .kv .sub{color:#64748b;font-size:9.5px;}
+  .mk-panel .ck{display:inline-block;font-size:9px;font-weight:700;padding:0 6px;border-radius:8px;border:1px solid;margin:1px 4px 1px 0;line-height:15px;white-space:nowrap;}
+  .mk-panel .ck.ok{color:#166534;background:#f0fdf4;border-color:#bbf7d0;}
+  .mk-panel .ck.warn{color:#92400e;background:#fffbeb;border-color:#fde68a;}
+  .mk-panel .ck.bad{color:#991b1b;background:#fef2f2;border-color:#fecaca;}
+  .mk-panel .ck.na{color:#475569;background:#f8fafc;border-color:#e2e8f0;}
 </style>
 </head>
 <body>
@@ -86,7 +98,12 @@
               <td colspan="5">
                 <div class="mk-panel">
                   <div class="ph2">▼ 확장 패널 — 나목 교환 승인 (T1)</div>
-                  EXC-20260902-0001 · ORG-A(가입자 K) · 보내는 900 USDC → 받는 899.73 USDT · 확정 비율 0.9997 USDT/USDC · 스프레드 0.10% · 예상 가스비 0.0021 ETH ≈ 8,900원 → 6.59 USDT(참고 안내 · 받는 수량에서 차감 · 예상 기준 실수령 893.14 USDT · 실제 차감액은 이전 후 확정) · 수락 2026-09-02 10:12<br>자동검증 — BLF 정상 · KYT 정상 · 건별 한도 1,215,000원 ≤ 1,500,000(가스비 미포함) · 기관 KYC 활성 · 교환 재고 USDT 충족
+                  <div class="kv">
+                    <span class="k">건</span><span class="v"><span class="id">EXC-20260902-0001</span> · ORG-A(가입자 K) · 수락 2026-09-02 10:12</span>
+                    <span class="k">교환</span><span class="v">보내는 <b>900 USDC</b> → 받는 <b>899.73 USDT</b> · 확정 비율 0.9997 USDT/USDC · 스프레드 0.10%</span>
+                    <span class="k">예상 가스비</span><span class="v"><b>0.0021 ETH</b> ≈ 8,900원 → 6.59 USDT → 예상 기준 실수령 <b>893.14 USDT</b><br><span class="sub">참고 안내 · 받는 수량에서 차감 · 실제 차감액은 이전 후 확정</span></span>
+                    <span class="k">자동검증</span><span class="v"><span class="ck ok">BLF 정상</span><span class="ck ok">KYT 정상</span><span class="ck ok">건별 한도 1,215,000원 ≤ 1,500,000</span><span class="ck ok">기관 KYC 활성</span><span class="ck ok">교환 재고 USDT 충족</span><br><span class="sub">건별 한도는 가스비 미포함</span></span>
+                  </div>
                   <div class="hist">처리 이력 — 없음(최초 접수 2026-09-02 10:12)</div>
                 </div>
               </td>
@@ -106,7 +123,14 @@
               <td colspan="5">
                 <div class="mk-panel">
                   <div class="ph2">▼ 확장 패널 — 마목 확정 확인 (T2)</div>
-                  BRK-20260902-0001 · 게시자 ORG-A(가입자 K) ↔ 신청자 ORG-B(가입자 M) · 게시자 보내는 800 USDT / 신청자 보내는 798.40 USDC · 비율 0.9980 USDC/USDT<br>수수료 — 게시자 8.00 USDT · 신청자 7.98 USDC (각자 거래액의 1%) · 수락 2026-09-02 10:31<br>예상 가스비 — 게시자 0.0021 ETH ≈ 8,900원 → 6.59 USDC · 신청자 0.0021 ETH ≈ 8,900원 → 6.59 USDT (참고 안내 · 각자 받는 수량에서 차감 · 실제 차감액은 이전 후 확정)<br>자동검증 — 게시자 BLF·KYT 정상 / 신청자 BLF 정상 · <span>KYT 주의</span>(에스컬레이션 사유) · 양측 건별 한도 1,080,000원 / 1,077,840원 ≤ 1,500,000 · 양측 KYC 활성 · 잔고(수수료 포함) 확보<br>트래블룰 — 양측 필요정보 수집 완료 · 검증 대기 <span class="chk">[확인필요: 적용 범위]</span>
+                  <div class="kv">
+                    <span class="k">건</span><span class="v"><span class="id">BRK-20260902-0001</span> · 게시자 ORG-A(가입자 K) ↔ 신청자 ORG-B(가입자 M) · 수락 2026-09-02 10:31</span>
+                    <span class="k">교환</span><span class="v">게시자 보내는 <b>800 USDT</b> / 신청자 보내는 <b>798.40 USDC</b> · 비율 0.9980 USDC/USDT</span>
+                    <span class="k">수수료</span><span class="v">게시자 8.00 USDT · 신청자 7.98 USDC <span class="sub">(각자 거래액의 1%)</span></span>
+                    <span class="k">예상 가스비</span><span class="v">게시자 <b>0.0021 ETH</b> ≈ 8,900원 → 6.59 USDC · 신청자 <b>0.0021 ETH</b> ≈ 8,900원 → 6.59 USDT<br><span class="sub">참고 안내 · 각자 받는 수량에서 차감 · 실제 차감액은 이전 후 확정</span></span>
+                    <span class="k">자동검증</span><span class="v"><span class="ck ok">게시자 BLF·KYT 정상</span><span class="ck ok">신청자 BLF 정상</span><span class="ck warn">신청자 KYT 주의 — 에스컬레이션 사유</span><span class="ck ok">건별 한도 1,080,000원 / 1,077,840원 ≤ 1,500,000</span><span class="ck ok">양측 KYC 활성</span><span class="ck ok">잔고(수수료 포함) 확보</span></span>
+                    <span class="k">트래블룰</span><span class="v">양측 필요정보 수집 완료 · 검증 대기 <span class="chk">[확인필요: 적용 범위]</span></span>
+                  </div>
                   <div class="hist">처리 이력 — 없음(최초 접수 2026-09-02 10:31)</div>
                 </div>
               </td>
@@ -125,7 +149,12 @@
               <td colspan="5">
                 <div class="mk-panel">
                   <div class="ph2">▼ 확장 패널 — 출금·이전 서면 접수 (T3)</div>
-                  접수번호 WDR-20260902-0007 · ORG-A(가입자 K) · 자산 USDC · 수량 80,000<br>수신 주소 0x9f3a1c77b0e4d5a2f8c31b9e6d0a4c72e58bd81c · 화이트리스트 등록 2026-09-02 09:15 · 등록 관리자 DSRV-OPS-02 · 지연발효 만료 2026-09-02 11:15 (잔여 05:20)<br>자동검증 — BLF 정상 · 주소 전문이 서면 접수본과 일치 · 자기승인 차단 대상 아님(등록 DSRV-OPS-02 ≠ 승인 DSRV-OPS-01) · 출금은 교환·중개 건별 한도 대상 아님
+                  <div class="kv">
+                    <span class="k">건</span><span class="v"><span class="id">WDR-20260902-0007</span> · ORG-A(가입자 K) · 자산 USDC · 수량 <b>80,000</b></span>
+                    <span class="k">수신 주소</span><span class="v"><span class="id">0x9f3a1c77b0e4d5a2f8c31b9e6d0a4c72e58bd81c</span><br><span class="sub">화이트리스트 등록 2026-09-02 09:15 · 등록 관리자 DSRV-OPS-02</span></span>
+                    <span class="k">지연발효</span><span class="v">만료 2026-09-02 11:15 <b>(잔여 05:20)</b></span>
+                    <span class="k">자동검증</span><span class="v"><span class="ck ok">BLF 정상</span><span class="ck ok">주소 전문 = 서면 접수본</span><span class="ck ok">자기승인 차단 대상 아님 (등록 OPS-02 ≠ 승인 OPS-01)</span><span class="ck na">건별 한도 대상 아님(출금)</span></span>
+                  </div>
                   <div class="hist">처리 이력 — 09-02 09:15 화이트리스트 등록(DSRV-OPS-02)</div>
                 </div>
               </td>
@@ -144,7 +173,12 @@
               <td colspan="5">
                 <div class="mk-panel">
                   <div class="ph2">▼ 확장 패널 — 입금 격리 (T4)</div>
-                  txhash 0x3f9a…c41d · from 0x5c81…9ab3 · 자산 USDT · 수량 2,500 · KYT 점수 88 (High)<br>격리 지갑 QRT-USDT-01 이동 완료 2026-09-02 08:02 · 대상 기관 ORG-B(가입자 M)<br>소명 — 요청 없음(미발송) · 고객 화면에는 어떤 표시도 없음(STR 누설 금지)
+                  <div class="kv">
+                    <span class="k">입금</span><span class="v">txhash <span class="id">0x3f9a…c41d</span> · from <span class="id">0x5c81…9ab3</span> · 자산 USDT · 수량 <b>2,500</b></span>
+                    <span class="k">KYT</span><span class="v"><span class="ck bad">점수 88 · High</span></span>
+                    <span class="k">격리</span><span class="v">격리 지갑 QRT-USDT-01 이동 완료 2026-09-02 08:02 · 대상 기관 ORG-B(가입자 M)</span>
+                    <span class="k">소명</span><span class="v">요청 없음(미발송) · <span class="sub">고객 화면에는 어떤 표시도 없음(STR 누설 금지)</span></span>
+                  </div>
                   <div class="hist">처리 이력 — 09-02 08:02 시스템 자동 격리</div>
                 </div>
               </td>
@@ -164,7 +198,11 @@
               <td colspan="5">
                 <div class="mk-panel">
                   <div class="ph2">▼ 확장 패널 — 이상거래 워닝 (T5)</div>
-                  룰 R-07 자전거래 의심(동일 기관 단기 반복 왕복) · 등급 High · 기관 ORG-A(가입자 K) · 연관 거래 EXC-20260902-0001<br>타임라인 — 10:12 교환 수락(900 USDC → 899.73 USDT) · 10:18 반대방향 요청 접수 · 10:20 룰 적중
+                  <div class="kv">
+                    <span class="k">룰</span><span class="v">R-07 자전거래 의심(동일 기관 단기 반복 왕복) · <span class="ck bad">High</span></span>
+                    <span class="k">대상</span><span class="v">기관 ORG-A(가입자 K) · 연관 거래 <span class="id">EXC-20260902-0001</span></span>
+                    <span class="k">타임라인</span><span class="v">10:12 교환 수락(900 USDC → 899.73 USDT) · 10:18 반대방향 요청 접수 · 10:20 룰 적중</span>
+                  </div>
                   <div class="hist">처리 이력 — 없음(최초 생성 2026-09-02 10:20)</div>
                 </div>
               </td>
@@ -183,7 +221,10 @@
               <td colspan="5">
                 <div class="mk-panel">
                   <div class="ph2">▼ 확장 패널 — 월렛·키 알람 (T6)</div>
-                  이벤트 시각 2026-09-02 03:41 · 시스템 커스터디 콜드 watch · 대상 콜드 지갑 CW-02<br>내용 — 비인가 서명 시도 1회 감지 · 서명 미완료 · 자금 이동 없음 · 핫월렛 비중 임계(ADM-03 20%) 초과 아님
+                  <div class="kv">
+                    <span class="k">이벤트</span><span class="v">2026-09-02 03:41 · 시스템 커스터디 콜드 watch · 대상 콜드 지갑 <span class="id">CW-02</span></span>
+                    <span class="k">내용</span><span class="v"><span class="ck bad">비인가 서명 시도 1회 감지</span><span class="ck ok">서명 미완료</span><span class="ck ok">자금 이동 없음</span><span class="ck ok">핫월렛 비중 임계(ADM-03 20%) 이내</span></span>
+                  </div>
                   <div class="hist">처리 이력 — 없음(최초 감지 2026-09-02 03:41)</div>
                 </div>
               </td>
@@ -201,7 +242,11 @@
               <td colspan="5">
                 <div class="mk-panel">
                   <div class="ph2">▼ 확장 패널 — KYC 재이행 기한 초과 (T7)</div>
-                  ORG-C(가입자 N) · 재이행 도래일 2026-08-20 · 경과 13일 · 위험등급 중(2년 주기)<br>통지 이력 — 08-06 사전 안내 · 08-20 도래 안내 · 08-27 미응답 재안내 (총 3회 · 응답 없음)
+                  <div class="kv">
+                    <span class="k">대상</span><span class="v">ORG-C(가입자 N) · 위험등급 중(2년 주기)</span>
+                    <span class="k">기한</span><span class="v">재이행 도래일 2026-08-20 · <b>경과 13일</b></span>
+                    <span class="k">통지 이력</span><span class="v">08-06 사전 안내 · 08-20 도래 안내 · 08-27 미응답 재안내 <span class="sub">(총 3회 · 응답 없음)</span></span>
+                  </div>
                   <div class="hist">처리 이력 — 없음 · [신규 거래 제한] 실행 시 기관 KYC 상태 일시제한(ADM-03 연동)</div>
                 </div>
               </td>
@@ -219,7 +264,11 @@
               <td colspan="5">
                 <div class="mk-panel">
                   <div class="ph2">▼ 확장 패널 — 계정 잠금 (T8)</div>
-                  ORG-A · 가입자 K · 로그인 실패 5회 누적(마지막 2026-09-02 09:58) · 접속 IP 203.0.113.*** (마스킹) · 계정 상태 잠금<br>본인확인 체크 — ☐ 등록 연락처 확인 · ☐ 초대 이메일 소유 확인 · 확인 기록(관리자·시각) 필수
+                  <div class="kv">
+                    <span class="k">대상</span><span class="v">ORG-A · 가입자 K · 계정 상태 <b>잠금</b></span>
+                    <span class="k">사유</span><span class="v">로그인 실패 5회 누적(마지막 2026-09-02 09:58) · 접속 IP <span class="id">203.0.113.***</span> <span class="sub">(마스킹)</span></span>
+                    <span class="k">본인확인</span><span class="v">☐ 등록 연락처 확인 · ☐ 초대 이메일 소유 확인 · <span class="sub">확인 기록(관리자·시각) 필수</span></span>
+                  </div>
                   <div class="hist">처리 이력 — 09-02 09:58 시스템 자동 잠금(AUTH-01 실패 합산 5회)</div>
                 </div>
               </td>
@@ -238,7 +287,12 @@
               <td colspan="5">
                 <div class="mk-panel">
                   <div class="ph2">▼ 확장 패널 — 3면 대사 불일치 (X3)</div>
-                  ORG-B 수탁 지갑 · 내부장부 USDC 41,200 / 온체인 USDC 40,000 / 커스터디 콜드 USDC 40,000<br>차이 USDC 1,200 (내부장부 초과) · 스냅숏 2026-09-02 06:00 대사 배치 · 해당 기관 출금 자동 동결 중<br>원인 규명 전에는 [해제·종결] 비활성 — 집행 대기 건에도 완료 처리 불가
+                  <div class="kv">
+                    <span class="k">대상</span><span class="v">ORG-B 수탁 지갑 · 스냅숏 2026-09-02 06:00 대사 배치</span>
+                    <span class="k">3면</span><span class="v">내부장부 USDC <b>41,200</b> / 온체인 USDC <b>40,000</b> / 커스터디 콜드 USDC <b>40,000</b></span>
+                    <span class="k">차이</span><span class="v"><span class="ck bad">USDC 1,200 · 내부장부 초과</span><span class="ck warn">해당 기관 출금 자동 동결 중</span></span>
+                    <span class="k">제한</span><span class="v">원인 규명 전에는 [해제·종결] 비활성 · 집행 대기 건에도 완료 처리 불가</span>
+                  </div>
                   <div class="hist">처리 이력 — 09-02 06:00 배치 적중 · 06:00 출금 자동 동결</div>
                 </div>
               </td>
@@ -332,7 +386,7 @@
       <div class="num">1</div>
       <div>
         <div class="itm-title">처리함 목록 · 행 클릭(확장)<span class="req">필수</span></div>
-        <div class="itm-desc">· 열: 유형 · 대상·내용 · 자동검증·등급 · 상태 · 처리 — 유형 9종(T1 나목 교환 승인 · T2 마목 확정 확인 · T3 출금·이전 · T4 입금 격리 · T5 이상거래 워닝 · T6 월렛·키 알람 · T7 KYC 재이행 · T8 계정 잠금 · X3 3면 대사 불일치) · '상태' 열 값 = states 도메인 상태(상세 1 표) · 자동검증·등급 = 1차 필터 표시(정상 / KYT 주의 / High / Mid / 지연발효 중) — 판단은 사람(자동 승인·거절 없음)<br>· <strong>목록 규격</strong>: 미종결 건만 표시(종결 즉시 행 제거) · 최신 생성순 단일 리스트 · 필터·검색 없음(공통 UI 규격) — 에스컬레이션·High 상단 고정 여부 <span class="chk">[확인필요]</span> · 전량 표시 · 페이지 스크롤([더 보기]·페이지네이션·무한 스크롤 없음) · 빈 상태 점선 박스 "처리할 건이 없습니다" · 로딩 "불러오는 중…"(3초 초과 → 오류 배너)<br>· <strong>갱신</strong>: 화면 진입 시와 브라우저 새로고침 시에만 조회한다. 처리 버튼을 누른 결과는 즉시 반영한다. 자동 주기 갱신·푸시 알림·토스트는 없다.<br>· 다른 관리자가 처리 중인 행은 상태 옆 "처리 중 · DSRV-OPS-02" 표시 + 처리 버튼 전부 비활성(행 잠금 · 경쟁 방지)<br>· 처리 이력(처리자·사유·시각)은 확장 패널 하단에 누적 표시 · 고객 화면으로 이동하는 링크 없음<br><span class="basis">근거 states 처리함 정의 v0.2 · notation 어드민 처리 버튼(별도 상세 화면 없음) · 목록 규격</span></div>
+        <div class="itm-desc">· 열: 유형 · 대상·내용 · 자동검증·등급 · 상태 · 처리 — 유형 9종(T1 나목 교환 승인 · T2 마목 확정 확인 · T3 출금·이전 · T4 입금 격리 · T5 이상거래 워닝 · T6 월렛·키 알람 · T7 KYC 재이행 · T8 계정 잠금 · X3 3면 대사 불일치) · '상태' 열 값 = states 도메인 상태(상세 1 표) · 자동검증·등급 = 1차 필터 표시(정상 / KYT 주의 / High / Mid / 지연발효 중) — 판단은 사람(자동 승인·거절 없음)<br>· <strong>목록 규격</strong>: 미종결 건만 표시(종결 즉시 행 제거) · 최신 생성순 단일 리스트 · 필터·검색 없음(공통 UI 규격) — 에스컬레이션·High 상단 고정 여부 <span class="chk">[확인필요]</span> · 전량 표시 · 페이지 스크롤([더 보기]·페이지네이션·무한 스크롤 없음) · 빈 상태 점선 박스 "처리할 건이 없습니다" · 로딩 "불러오는 중…"(3초 초과 → 오류 배너)<br>· <strong>갱신</strong>: 화면 진입 시와 브라우저 새로고침 시에만 조회한다. 처리 버튼을 누른 결과는 즉시 반영한다. 자동 주기 갱신·푸시 알림·토스트는 없다.<br>· 다른 관리자가 처리 중인 행은 상태 옆 "처리 중 · DSRV-OPS-02" 표시 + 처리 버튼 전부 비활성(행 잠금 · 경쟁 방지)<br>· <strong>확장 패널 구성</strong>: 라벨·값 2열(건 · 수량·비율 · 수수료 · 예상 가스비 · 자동검증 · 유형별 항목) · 자동검증은 항목별 결과 칩(정상 녹색 · 주의 황색 · 위험 적색 · 해당 없음 회색)으로 나열해 통과·미통과가 한눈에 보이게 한다 · 거래번호·주소·txhash는 고정폭 · 설명은 회색 보조 문구(2026-09-03 가독성 개선)<br>· 처리 이력(처리자·사유·시각)은 확장 패널 하단에 누적 표시 · 고객 화면으로 이동하는 링크 없음<br><span class="basis">근거 states 처리함 정의 v0.2 · notation 어드민 처리 버튼(별도 상세 화면 없음) · 목록 규격</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">처리함 행(처리 버튼 제외 셀 전체)</span><span class="nav-act">클릭 → 행 아래 확장 패널 열림(동시 1개 · 다른 행 클릭 시 교체 · 같은 행 재클릭 = 접기)</span><span class="nav-to stay">유형별 확장 내용(상세 1) · 확장 중에도 처리 버튼은 행 내 위치 그대로 · 이동 없음(별도 상세 화면 없음)</span></div>
           <div class="nav-row"><span class="nav-el">대상·내용의 요청번호(EXC-/BRK-)</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(링크 아님 — 행 클릭과 동일하게 확장)</span></div>
