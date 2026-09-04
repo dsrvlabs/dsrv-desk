@@ -11,9 +11,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 os.chdir(HERE)
 REL = 'drafts/storyboard/'          # 레포 루트 기준 이 폴더 경로
 SHARE = 'storyboard_share.html'
-DOC_FILES = {'ia': 'ia.html', 'gloss': 'notation.html', 'states': 'states.html', 'proc': 'process.html'}
+DOC_FILES = {'ia': 'ia.html', 'gloss': 'notation.html', 'states': 'states.html'}   # process.html 폐기 2026-09-04(18)
 BUDGET = 13_000_000                  # 내장 데이터(JSON) 바이트 상한 — 아티팩트 한도 16MB 대비 여유
-# 현재 화면 목록(정본) — 화면 추가 시 index.html PAGES·ia.html·process.html FILE_MAP·notation 화면 ID 표와 함께 갱신
+# 현재 화면 목록(정본) — 화면 추가 시 index.html PAGES·overview.html 흐름·목록·ia.html·notation 화면 ID 표와 함께 갱신
 SCREENS = [
     ('시작', 'OVW', '한눈에 보기 — 서비스 · 흐름 · 읽는 법', 'overview.html'),
     ('인증·온보딩', 'ONB-00', '초대 이메일', 'onb-00.html'),
@@ -64,20 +64,6 @@ def clean_subject(s):
     return s
 
 
-def patch_proc(proc):
-    # process.html: 호버 섬네일을 srcdoc 방식으로, 부모가 넘긴 문서맵 수신 (훅이 없는 옛 버전은 그대로 둠)
-    old_thumb = 'if(src!==currentSrc){floatIframe.src=src;currentSrc=src;}'
-    if old_thumb in proc:
-        proc = proc.replace(
-            old_thumb,
-            "if(src!==currentSrc){floatIframe.removeAttribute('src');"
-            "floatIframe.srcdoc=(window.SCREEN_DOCS&&window.SCREEN_DOCS[src])||'';currentSrc=src;}")
-        proc = proc.replace(
-            '</body>',
-            "<script>window.addEventListener('message',function(e){"
-            "if(e.data&&e.data.type==='screenDocs')window.SCREEN_DOCS=e.data.docs;});</script>\n</body>", 1)
-    return proc
-
 
 BLOBS = {}        # sha → 내용
 
@@ -105,8 +91,6 @@ def make_version(screens, read, date, subject):
             c = read(f)
         except Exception:
             continue
-        if k == 'proc':
-            c = patch_proc(c)
         docs[k] = put(sha_of(c), c)
     return {
         'date': date, 'subject': subject,
@@ -130,19 +114,33 @@ for h, date, subj in commits:
     v['commit'] = h[:7]
     versions.append(v)
 
-# ── 2) 작업 트리(현재 파일) — HEAD와 내용이 다르면 미커밋 버전으로 맨 위에 ─────
+# ── 2) 최신 버전 한 개 더 — 기본은 작업 트리, --head-only면 HEAD 커밋 내용 ─────
+#     versions[0]은 storyboard_share.html을 건드린 마지막 커밋이라, 그 뒤에 화면만 바꾼
+#     커밋이 있으면 그 내용이 빠진다. 그래서 여기서 맨 앞에 한 버전을 더 얹는다.
+HEAD_ONLY = '--head-only' in sys.argv   # 타 세션의 미커밋 편집을 공유본에 섞지 않을 때
+
 def read_wt(f):
     return open(f, encoding='utf-8').read()
 
-cur_screens = SCREENS
-cur = make_version(cur_screens, read_wt,
-                   datetime.datetime.now().strftime('%Y-%m-%d %H:%M'),
-                   CUR_LABEL or '작업 중 (미커밋)')
+def read_head(f):
+    return git('show', f'HEAD:{REL}{f}')
+
+if HEAD_ONLY:
+    head_h = git('rev-parse', 'HEAD').strip()
+    head_date = git('log', '-1', '--format=%ci', 'HEAD').strip()[:16]
+    head_subj = clean_subject(git('log', '-1', '--format=%s', 'HEAD').strip())
+    cur = make_version(parse_screens(read_head('build_share.py')), read_head,
+                       head_date, CUR_LABEL or head_subj)
+    cur['commit'] = head_h[:7]
+else:
+    cur = make_version(SCREENS, read_wt,
+                       datetime.datetime.now().strftime('%Y-%m-%d %H:%M'),
+                       CUR_LABEL or '작업 중 (미커밋)')
+    cur['commit'] = None
+
 same_as_head = bool(versions) and all(
     versions[0][k] == cur[k] for k in ('files', 'css', 'js', 'docs', 'nav'))
-HEAD_ONLY = '--head-only' in sys.argv   # 타 세션의 미커밋 편집을 공유본에 섞지 않을 때
-if not same_as_head and not HEAD_ONLY:
-    cur['commit'] = None
+if not same_as_head:
     versions.insert(0, cur)
 
 # ── 3) 번호 부여(오래된 것 = v1) · 용량 예산 ─────────────────────────
@@ -241,8 +239,8 @@ body{font-family:'Noto Sans KR',system-ui,sans-serif;background:var(--bg);color:
 const VERSIONS=__VERSIONS__;   // 최신순
 const BLOBS=__BLOBS__;
 const DROPPED=__DROPPED__;
-const DOC_TITLES={proc:'화면 흐름도 — DSRV 교환·중개',ia:'IA (정보구조) — DSRV 교환·중개',gloss:'표기 규칙 · 공통 UI 규격 — DSRV 교환·중개',states:'케이스분기 — 거래·계정 상태 분기와 화면 반영 · DSRV 교환·중개'};
-const DOC_NAV=[['ia','◫','IA (정보구조)'],['gloss','≡','표기 규칙 · 공통 UI 규격'],['states','⇄','케이스분기'],['proc','◈','화면 흐름도 (프로세스맵)']];
+const DOC_TITLES={ia:'IA (정보구조) — DSRV 교환·중개',gloss:'표기 규칙 · 공통 UI 규격 — DSRV 교환·중개',states:'케이스분기 — 거래·계정 상태 분기와 화면 반영 · DSRV 교환·중개'};
+const DOC_NAV=[['ia','◫','IA (정보구조)'],['gloss','≡','표기 규칙 · 공통 UI 규격'],['states','⇄','케이스분기']];
 function inlineDoc(v,name){
   let d=BLOBS[v.files[name]];if(!d)return '';
   d=d.replace('\\u003clink rel="stylesheet" href="screen.css">','\\u003cstyle>'+BLOBS[v.css]+'\\u003c/style>');
@@ -263,7 +261,7 @@ function render(vi){
   if(obs)obs.disconnect();
   VI=vi;V=VERSIONS[vi];navBtn={};DOCS={};currentPid=null;
   V.nav.forEach(it=>{DOCS[it.file]=inlineDoc(V,it.file);});
-  document.getElementById('sbSub').textContent='화면 '+V.nav.filter(x=>x.id!=='OVW').length+'개 + IA·표기 규칙(공통 UI 규격)·프로세스맵·케이스분기 · '+V.date.slice(0,10)+' 기준';
+  document.getElementById('sbSub').textContent='화면 '+V.nav.filter(x=>x.id!=='OVW').length+'개 + 한눈에 보기 · IA · 표기 규칙 · 케이스분기 · '+V.date.slice(0,10)+' 기준';
   document.getElementById('verN').textContent=verLabel(V);
   document.getElementById('verD').textContent=V.date+(vi===0?' · 최신':'');
   list.innerHTML='';main.innerHTML='';
@@ -335,12 +333,6 @@ function closeDoc(){openDoc=null;overlay.classList.remove('active');ovFrame.remo
 document.getElementById('ovClose').onclick=closeDoc;
 overlay.addEventListener('click',e=>{if(e.target===overlay)closeDoc();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDoc();verMenu.classList.remove('open');}});
-ovFrame.addEventListener('load',()=>{
-  if(openDoc==='proc'&&ovFrame.contentWindow){
-    ovFrame.contentWindow.postMessage({type:'screenDocs',docs:DOCS},'*');
-    if(currentPid)ovFrame.contentWindow.postMessage({type:'highlightPage',pid:currentPid},'*');
-  }
-});
 window.addEventListener('message',e=>{
   if(!e.data)return;
   if(e.data.type==='iframeHeight'&&e.data.h>50){const f=winToFrame.get(e.source);if(f){f.style.height=e.data.h+'px';scheduleVP();}}
@@ -382,6 +374,6 @@ assert '<!--' not in body, '주석 시퀀스 잔존'
 inner = body[body.index('<script>') + 8: body.index('</script>')]
 assert '<script' not in inner and '</' not in inner.replace('\\u003c/', ''), '스크립트 내부 위험 시퀀스'
 print(f'OK {os.path.getsize(SHARE)} bytes · versions {len(kept)}/{total} (dropped {dropped}) · blobs {len(BLOBS)}'
-      + ('' if same_as_head else ' · 작업 트리 미커밋 버전 포함'))
+      + ('' if same_as_head else (' · HEAD 버전 얹음' if HEAD_ONLY else ' · 작업 트리 미커밋 버전 포함')))
 for v in kept[:5]:
     print(f"  v{v['n']} {v['date']} {v['commit'] or '(wt)'} {v['subject'][:60]}")

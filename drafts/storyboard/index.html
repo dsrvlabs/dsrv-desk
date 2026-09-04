@@ -71,20 +71,11 @@
     <button class="topbar-btn" onclick="toggleGloss()">표기 규칙 · 공통 UI 규격</button>
     <button class="topbar-btn" onclick="toggleIA()">IA (정보구조)</button>
     <button class="topbar-btn" onclick="toggleStates()">케이스분기</button>
-    <button class="topbar-btn" onclick="toggleOverlay()">화면 흐름도</button>
     <span class="topbar-meta">v0.7 · 2026-09-02 · 근거: 09 정본 / 32 인벤토리 / ISMS 대응정리</span>
   </span>
 </div>
 
 <nav class="sidebar" id="sidebar"></nav>
-
-<div class="overlay" id="overlay">
-  <div class="overlay-header">
-    <span class="overlay-header-title">화면 흐름도 — DSRV 교환·중개</span>
-    <button class="overlay-close" onclick="toggleOverlay()">&times;</button>
-  </div>
-  <iframe src="process.html"></iframe>
-</div>
 
 <div class="overlay" id="overlayIA">
   <div class="overlay-header">
@@ -219,7 +210,7 @@ const observer = new IntersectionObserver((entries) => {
 }, { rootMargin: '-48px 0px -60% 0px', threshold: 0 });
 document.querySelectorAll('.page-section').forEach(s => observer.observe(s));
 
-const OVERLAY_IDS = ['overlay', 'overlayIA', 'overlayGloss', 'overlayStates'];
+const OVERLAY_IDS = ['overlayIA', 'overlayGloss', 'overlayStates'];
 function closeAllOverlays(exceptId) {
   OVERLAY_IDS.filter(id => id !== exceptId).forEach(id => document.getElementById(id).classList.remove('active'));
 }
@@ -239,18 +230,6 @@ function toggleStates() {
   document.getElementById('overlayStates').classList.toggle('active');
 }
 
-function toggleOverlay() {
-  const overlay = document.getElementById('overlay');
-  closeAllOverlays('overlay');
-  const isOpening = !overlay.classList.contains('active');
-  overlay.classList.toggle('active');
-  if (isOpening && currentPageId) {
-    const diagramFrame = overlay.querySelector('iframe');
-    const sendHighlight = () => { try { diagramFrame.contentWindow.postMessage({ type: 'highlightPage', pid: currentPageId }, '*'); } catch (e) {} };
-    diagramFrame.addEventListener('load', sendHighlight, { once: true });
-    setTimeout(sendHighlight, 120);
-  }
-}
 </script>
 </body>
 </html>

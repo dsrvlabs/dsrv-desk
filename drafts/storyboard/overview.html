@@ -27,6 +27,8 @@
 .card svg{width:100%;height:auto;display:block;background:#f8fafc;border-radius:8px;}
 .card ul{margin:12px 0 0;padding:0;list-style:none;font-size:12px;line-height:1.7;color:#333;}
 .card ul li{padding-left:14px;position:relative;}
+.card ul li.isnot{color:#7a7a7a;border-top:1px dashed #e2e2e2;margin-top:6px;padding-top:7px;}
+.card ul li.isnot b{color:#555;background:#f4f4f4;border-radius:4px;padding:0 5px;margin-right:4px;font-size:10.5px;}
 .card ul li::before{content:'·';position:absolute;left:3px;font-weight:800;}
 .card ul li .chk{color:#888;}
 /* 흐름도 */
@@ -108,6 +110,7 @@
       <b>건별 한도</b> 1,500,000원 상당 (교환·중개 공통)<br>
       <b>중개 수수료</b> 거래액 1% · 양 당사자 각자 · 별도 정산<br>
       <b>가스비</b> 고객 부담 · 받는 수량에서 차감<br>
+      <b>자산 이동</b> 전부 DSRV 관리 지갑 사이의 내부 콜드 이전 · 외부 입금·출금은 이 시스템 밖<br>
       <span class="chk">※ 정책값은 관리자 설정(ADM-03)으로 바뀔 수 있음</span>
     </div>
   </div>
@@ -136,6 +139,7 @@
         <li>고객이 <b>교환하기</b>에서 수량을 넣으면 시스템이 비율을 제시하고, 고객이 <b>수락</b>하면 요청이 확정됩니다.</li>
         <li>DSRV 담당자가 어드민에서 건별로 <b>승인</b>하고, 커스터디팀이 콜드 지갑에서 <b>수동 집행</b>합니다. 자동 체결은 없습니다.</li>
         <li>별도 수수료 없이 스프레드에 비용이 들어 있고, 가스비는 받는 수량에서 차감합니다.</li>
+        <li class="isnot"><b>아닌 것</b> 자동체결 거래소도 마켓메이커도 아닙니다. 오더북·상시 양방향 호가가 없고, 건마다 따로 비율을 냅니다.</li>
       </ul>
     </div>
     <div class="card">
@@ -179,6 +183,7 @@
         <li>게시자가 신청을 <b>수락</b>하면 즉시 확정됩니다. 역제안·협상 기능은 없고, 게시 1건에 동시 신청은 1건입니다.</li>
         <li>확정 후 양측이 보내는 자산을 <b>에스크로 전용지갑에 예치</b> → 양건 확인 → 각 상대방에게 <b>인도</b>합니다. 한쪽만 이전되는 일이 구조적으로 없습니다.</li>
         <li>중개 수수료는 거래액 1%를 양측이 각자 부담하고, 자산 수량에서 빼지 않고 별도 정산합니다.</li>
+        <li class="isnot"><b>아닌 것</b> 단순 게시판이 아닙니다. DSRV가 거래 안전성 검증 · KYC 담보 · 정산 연계 · 수수료 네 가지를 맡습니다. 자동 매칭·자동 체결은 없습니다.</li>
       </ul>
     </div>
   </div>
@@ -253,7 +258,7 @@
       <div class="ar"><i>·</i></div>
       <div class="pg" data-go="ONB-04"><span class="pid">ONB-04</span><span class="pn">초대 링크 오류</span></div>
     </div>
-    <div class="fnote">점선 상자는 고객이 보지 않는 내부 단계입니다. 마지막 줄은 정상 흐름 밖의 화면(비밀번호·2차 인증 재설정 · 인증 앱 분실 시 복구 코드 · 초대 링크 만료)입니다. 상태 전이의 전체 표는 사이드바 상단 <b>케이스분기</b>, 더 자세한 흐름도는 <b>화면 흐름도</b> 문서에 있습니다.</div>
+    <div class="fnote"><b>이 흐름도는 정상 경로만 그립니다.</b> 거절 · 만료 · 보류 · 게시 중단처럼 갈라지는 경우와 그때 화면이 어떻게 보이는지는 사이드바 <b>케이스분기</b> 문서에 전부 있습니다. 점선 상자는 고객이 보지 않는 내부 단계입니다. 마지막 줄은 정상 흐름 밖의 화면(비밀번호·2차 인증 재설정 · 인증 앱 분실 시 복구 코드 · 초대 링크 만료)입니다.</div>
   </div>
 
   <h2><span class="n">3</span>화면 페이지 읽는 법</h2>
@@ -275,7 +280,7 @@
         <tr><td><span class="ex-chk">[확인필요]</span> · <span class="ex-chk">근거 …</span></td><td>회색 글자는 아직 확정되지 않은 사항이거나 근거 표시. 검정 글자만 확정 사양</td></tr>
         <tr><td><span class="ex-chk">[디자인 요청]</span></td><td>Figma 시안에 없어 기획으로 그린 요소. 디자이너 작업 필요</td></tr>
         <tr><td>화면 ID</td><td>ONB 온보딩 · AUTH 로그인 · DASH 대시보드·계정 · EXC 나목 교환 · BRK 마목 중개 · ADM 관리자. 번호는 추가 순이라 흐름 순서와 다를 수 있음</td></tr>
-        <tr><td>공통 문서 4종</td><td><span class="ex-doc">IA</span>메뉴 구조 <span class="ex-doc">표기 규칙</span>숫자·날짜·상태 라벨·공통 UI 규격 <span class="ex-doc">케이스분기</span>거래·계정 상태표 <span class="ex-doc">화면 흐름도</span>전체 프로세스맵 — 사이드바 맨 위 버튼으로 열림</td></tr>
+        <tr><td>공통 문서 3종</td><td><span class="ex-doc">IA</span>메뉴 구조 <span class="ex-doc">표기 규칙</span>숫자·날짜·상태 라벨·공통 UI 규격 <span class="ex-doc">케이스분기</span>거래·계정 상태가 갈리는 경우 전부 — 사이드바 맨 위 버튼으로 열림</td></tr>
       </table>
     </div>
   </div>
