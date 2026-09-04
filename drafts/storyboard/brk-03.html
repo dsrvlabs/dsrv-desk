@@ -53,14 +53,14 @@
           <div class="pin" data-idx="0" style="top:-6px;right:-6px;">1</div>
           <div class="zone-title">교환거래 요청 내역 (게시 조건)</div>
           <div class="kv"><span class="k">요청번호</span><span class="v">BRK-20260830-0027</span></div>
-          <div class="kv"><span class="k">교환쌍 · 방향 (게시자 기준)</span><span class="v">USDT → USDC</span></div>
-          <div class="kv"><span class="k">게시자가 보내는 수량</span><span class="v">800 USDT</span></div>
-          <div class="kv"><span class="k">게시자가 받는 수량</span><span class="v">798.40 USDC</span></div>
+          <div class="kv"><span class="k">교환쌍 · 방향</span><span class="v">USDC → USDT</span></div>
+          <div class="kv"><span class="k">보내는 수량</span><span class="v">798.40 USDC</span></div>
+          <div class="kv"><span class="k">받는 수량</span><span class="v">800 USDT</span></div>
           <div class="kv"><span class="k">비율</span><span class="v">0.9980 USDC/USDT</span></div>
           <div class="kv"><span class="k">게시 일시</span><span class="v">2026-08-30 14:20</span></div>
           <div class="kv"><span class="k">게시 유효기한</span><span class="v">2026-09-29 14:20까지</span></div>
           <div class="kv"><span class="k">게시 상태</span><span class="v"><span class="chip info">게재중</span></span></div>
-          <div class="kv"><span class="k">게시자</span><span class="v">B*** (KYC 완료 · 거래 안전성 검증 ✓)</span></div>
+          <div class="kv"><span class="k">거래 상대방</span><span class="v">B*** (KYC 완료 · 거래 안전성 검증 ✓)</span></div>
         </div>
       </div>
 
@@ -71,8 +71,6 @@
 
         <div class="item-area" data-highlight="1" style="position:relative;padding:4px;border-radius:8px;">
           <div class="pin" data-idx="1" style="top:-6px;right:-6px;">2</div>
-          <div class="kv"><span class="k">내가 보내는 수량</span><span class="v">798.40 USDC</span></div>
-          <div class="kv"><span class="k">내가 받는 수량</span><span class="v">800 USDT</span></div>
           <div class="kv"><span class="k">신청 유효기간</span><span class="v">접수 시점부터 영업일 2일</span></div>
           <div class="kv"><span class="k">내 중개 수수료 (거래액 1%)</span><span class="v">7.98 USDC — 확정 시 발생</span></div>
           <div class="kv"><span class="k">예상 가스비 (내 부담)</span><span class="v">0.0042 ETH (예치·인도 2회분) — 인도 시 차감</span></div>
@@ -99,7 +97,7 @@
 
         <div class="item-area" data-highlight="5" style="position:relative;padding:4px;border-radius:8px;margin-top:4px;">
           <div class="pin" data-idx="5" style="top:-6px;right:-6px;">6</div>
-          <div style="font-size:10px;color:#64748b;">게시자가 기한 내 수락하면 <strong>즉시 확정되어 구속력과 수수료 7.98 USDC · 가스비(예치·인도)가 발생</strong>하고 에스크로 전용지갑 예치 → 인도(정산)로 진행됩니다. 무응답 시 자동 만료되며, 신청 후 취소 기능은 없습니다.</div>
+          <div style="font-size:10px;color:#64748b;">기한 내 수락되면 <strong>즉시 확정되어 구속력과 수수료 7.98 USDC · 가스비(예치·인도)가 발생</strong>하고 에스크로 전용지갑 예치 → 인도(정산)로 진행됩니다. 무응답 시 자동 만료되며, 신청 후 취소 기능은 없습니다.</div>
         </div>
       </div>
 
@@ -108,7 +106,7 @@
         <div class="zone-highlight"></div>
         <div class="item-area" data-highlight="6" style="position:relative;padding:4px;border-radius:8px;">
           <div class="pin" data-idx="6" style="top:-6px;right:-6px;">7</div>
-          <div class="note-inline reg">DSRV는 가격 협의에 참여하지 않으며 신청·수락 기록만 보존합니다. 게시자 수락 전까지 구속력이 없으며, 수락 시 즉시 확정됩니다.</div>
+          <div class="note-inline reg">DSRV는 가격 협의에 참여하지 않으며 신청·수락 기록만 보존합니다. 수락 전까지 구속력이 없으며, 수락 시 즉시 확정됩니다.</div>
         </div>
       </div>
     </div>
@@ -127,7 +125,7 @@
       <div class="num">1</div>
       <div>
         <div class="itm-title">교환거래 요청 내역 — 게시 조건 (표시 전용)</div>
-        <div class="itm-desc"><strong>구성</strong> kv 9행. 포맷과 필드 순서는 '교환거래 요청 내역' 공통 폼(EXC-03·04 · BRK-04·05·06·07)을 따른다.<br><strong>기준</strong> 방향과 수량은 게시자 기준으로 적고 라벨에 "게시자가 보내는/받는"을 명시한다. 신청자 기준 수량은 항목 2에 둔다.<br><strong>값</strong> 비율은 notation 규칙(스테이블 페어 {받는}/{주는} 4자리 · ETH 페어 {스테이블}/ETH 2자리). 게시 일시와 게시 유효기한을 함께 적는다.<br><strong>상태 칩</strong> 진입 시 최신 값을 표시한다(게재중 / 협의중 / 회수 / 완료 / 중지). 게재중이 아니면 항목 3 경고를 띄우고 항목 4를 비활성으로 둔다.<br><strong>마스킹</strong> 게시자 상호는 확정 전까지 첫 글자만 노출하고(B***) 확정 후 BRK-05·07에서 해제한다. KYC 완료와 거래 안전성 검증은 ✓로 표기한다.<br><strong>상태별 문구</strong> 로딩은 "불러오는 중…"이고 3초 초과 시 오류로 넘긴다. 조회 실패면 상단 배너를 띄우고 버튼을 비활성으로 둔다.<br><span class="basis">근거 F-1b · L6 설명의무 · 공통 포맷</span></div>
+        <div class="itm-desc"><strong>구성</strong> kv 9행. 포맷과 필드 순서는 '교환거래 요청 내역' 공통 폼(EXC-03·04 · BRK-04·05·06·07)을 따른다.<br><strong>기준</strong> 교환쌍·방향과 보내는 수량·받는 수량은 <strong>화면을 보는 고객(신청자) 기준</strong>으로 적는다(2026-09-04 변경 · 종전 "게시자가 보내는/받는" 라벨 폐기 · BRK-05와 같은 원칙). 게시 조건(상대방 기준 방향)을 뒤집은 값이 들어가고, 화면 어디에도 "게시자"라는 말을 쓰지 않는다 — 상대 식별 행 라벨은 '거래 상대방'. 비율은 게시 조건의 값을 그대로 쓴다.<br><strong>값</strong> 비율은 notation 규칙(스테이블 페어 {받는}/{주는} 4자리 · ETH 페어 {스테이블}/ETH 2자리). 게시 일시와 게시 유효기한을 함께 적는다.<br><strong>상태 칩</strong> 진입 시 최신 값을 표시한다(게재중 / 협의중 / 회수 / 완료 / 중지). 게재중이 아니면 항목 3 경고를 띄우고 항목 4를 비활성으로 둔다.<br><strong>마스킹</strong> 거래 상대방 상호는 확정 전까지 첫 글자만 노출하고(B***) 확정 후 BRK-05·07에서 해제한다. KYC 완료와 거래 안전성 검증은 ✓로 표기한다.<br><strong>상태별 문구</strong> 로딩은 "불러오는 중…"이고 3초 초과 시 오류로 넘긴다. 조회 실패면 상단 배너를 띄우고 버튼을 비활성으로 둔다.<br><span class="basis">근거 F-1b · L6 설명의무 · 공통 포맷</span></div>
       </div>
     </div>
 
@@ -135,7 +133,7 @@
       <div class="num">2</div>
       <div>
         <div class="itm-title">신청 조건 · 내 수수료 (표시 전용)</div>
-        <div class="itm-desc"><strong>구성</strong> kv 4행. 게시 조건을 신청자 기준으로 뒤집어 표시한다(내가 보내는 = 게시자가 받는 798.40 USDC · 내가 받는 = 게시자가 보내는 800 USDT). 입력 필드는 두지 않는다(역제안 없음).<br><strong>신청 유효기간</strong> "접수 시점부터 영업일 {정책값 2영업일}"(ADM-03). 접수 시점은 진입 시각이 아니라 [이 조건으로 신청] 접수 시 서버 시각으로 확정하고 BRK-07에 표시한다.<br><strong>예상 가스비</strong> 내가 부담할 가스비(에스크로 전용지갑 예치 1건 + 인도 1건 2회분 · 2026-09-03(15))를 신청 시점 가스 가격으로 산정해 ETH 4자리로 적는다(예 0.0042 ETH). 참고 안내이며 실제 차감액은 인도 후 확정되어 BRK-05에 표시한다. 확정 후 인도 시 받는 자산에서 차감하고 한도 판정에는 넣지 않는다.<br><strong>내 수수료</strong> 내가 보내는 수량 × {정책값 1.00%}(ADM-03)를 보내는 자산 자릿수로 절사한다(798.40 × 1% = 7.984 → 7.98 USDC). 자기 측 금액만 표시하고 상대측 금액은 노출하지 않으며 "확정 시 발생"을 병기한다.<br><span class="basis">근거 09 §0 마목 수수료 · L6 설명의무(4요소④) · notation 산정값 절사</span></div>
+        <div class="itm-desc"><strong>구성</strong> kv 3행 — 신청 유효기간 · 내 중개 수수료 · 예상 가스비. 보내는·받는 수량은 항목 1에 고객 기준으로 이미 있으므로 여기서 반복하지 않는다(2026-09-04 '내가 보내는/받는 수량' 2행 삭제). 입력 필드는 두지 않는다(역제안 없음).<br><strong>신청 유효기간</strong> "접수 시점부터 영업일 {정책값 2영업일}"(ADM-03). 접수 시점은 진입 시각이 아니라 [이 조건으로 신청] 접수 시 서버 시각으로 확정하고 BRK-07에 표시한다.<br><strong>예상 가스비</strong> 내가 부담할 가스비(에스크로 전용지갑 예치 1건 + 인도 1건 2회분 · 2026-09-03(15))를 신청 시점 가스 가격으로 산정해 ETH 4자리로 적는다(예 0.0042 ETH). 참고 안내이며 실제 차감액은 인도 후 확정되어 BRK-05에 표시한다. 확정 후 인도 시 받는 자산에서 차감하고 한도 판정에는 넣지 않는다.<br><strong>내 수수료</strong> 내가 보내는 수량 × {정책값 1.00%}(ADM-03)를 보내는 자산 자릿수로 절사한다(798.40 × 1% = 7.984 → 7.98 USDC). 자기 측 금액만 표시하고 상대측 금액은 노출하지 않으며 "확정 시 발생"을 병기한다.<br><span class="basis">근거 09 §0 마목 수수료 · L6 설명의무(4요소④) · notation 산정값 절사</span></div>
       </div>
     </div>
 
@@ -157,7 +155,7 @@
         <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 게시 상태가 게재중이고, 처분 가능분과 건별 한도를 통과하고, KYC 예외가 아니고 잔고 조회가 성공했을 때만 활성이다.<br><strong>확인 사항</strong> 확인 다이얼로그를 띄운다. 수락되면 즉시 구속력이 생기는 청약이기 때문이다(신청 자체는 수락 전까지 구속력 없음). 클릭 시 서버가 게시 상태·잔고·한도를 다시 판정한다.<br><strong>액션</strong> 신청을 접수해 게시 상태를 '게재중'에서 '협의중'으로 바꾸고 게시당 동시 신청 1건 규칙으로 다른 기관의 추가 신청을 막는다. 게시자에게 이메일 ①을 보내고 신청 유효기간을 서버 시각으로 확정한다.<br><span class="basis">근거 F-1b · V2(통신중개 아님) · F-4 · 09 §0 마목 게시 상태</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[이 조건으로 신청] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①게시 상태가 게재중 아님(협의중·회수·완료·중지) ②내가 보내는 수량 &gt; 처분 가능분 ③건별 한도 {정책값 1,500,000원 상당} 초과 ④KYC 예외 배너 노출 중 ⑤게시·잔고 조회 실패 ⑥내 게시(구조적 불가 — BRK-01에서 BRK-06으로 분기)</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격) · 사유는 항목 3 인라인 경고로 노출(툴팁 없음)</span></div>
-          <div class="nav-row"><span class="nav-el">[이 조건으로 신청] — 클릭(활성)</span><span class="nav-act">클릭 → <strong>다이얼로그: 제목 "이 조건으로 신청" / 본문 "게시자가 수락하면 즉시 확정되어 구속력이 발생합니다. 중개 수수료 7.98 USDC(거래액 1%)는 확정 시 발생합니다." / [신청] [돌아가기]</strong> → [신청] 클릭 → 버튼 라벨 "신청 중…"·비활성(중복 클릭 차단) → 게시 상태·잔고·한도 서버 재검증 → 접수(신청 시점 확정 · 유효기한 = 접수 + 영업일 {정책값 2영업일}) · 게시 상태 협의중 · 게시자 이메일 ① 발송</span><span class="nav-to"><strong>내 신청 상세(BRK-07)</strong> — 단계 '수락 대기'(2026-09-02 변경 — 종전 BRK-01 복귀 폐기) · [돌아가기] = 다이얼로그 닫힘·화면 잔류·변경 없음</span></div>
+          <div class="nav-row"><span class="nav-el">[이 조건으로 신청] — 클릭(활성)</span><span class="nav-act">클릭 → <strong>다이얼로그: 제목 "이 조건으로 신청" / 본문 "수락되면 즉시 확정되어 구속력이 발생합니다. 중개 수수료 7.98 USDC(거래액 1%)는 확정 시 발생합니다." / [신청] [돌아가기]</strong> → [신청] 클릭 → 버튼 라벨 "신청 중…"·비활성(중복 클릭 차단) → 게시 상태·잔고·한도 서버 재검증 → 접수(신청 시점 확정 · 유효기한 = 접수 + 영업일 {정책값 2영업일}) · 게시 상태 협의중 · 게시자 이메일 ① 발송</span><span class="nav-to"><strong>내 신청 상세(BRK-07)</strong> — 단계 '수락 대기'(2026-09-02 변경 — 종전 BRK-01 복귀 폐기) · [돌아가기] = 다이얼로그 닫힘·화면 잔류·변경 없음</span></div>
           <div class="nav-row"><span class="nav-el">[이 조건으로 신청] — 실패</span><span class="nav-act">재검증 실패: 클릭 사이 타 기관 신청 접수(협의중) · 회수 · 만료 · 중지 / 잔고·한도 미충족 / 시스템 오류</span><span class="nav-to stay">화면 잔류 · 상태 변경 → 게시 상태 칩 갱신 + 항목 3 해당 경고 노출 + 버튼 비활성 / 잔고·한도 → 항목 3 경고 + 비활성 / 오류 → 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 버튼 라벨 복귀</span></div>
         </div>
       </div>
