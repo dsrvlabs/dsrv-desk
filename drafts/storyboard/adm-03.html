@@ -10,7 +10,8 @@
   .tbl td{padding:7px 8px;border-bottom:1px solid #f1f1ee;color:#334155;vertical-align:middle;}
   .act{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;border:1px solid #93c5fd;color:#2563eb;background:#fff;margin:1px 2px 1px 0;white-space:nowrap;}
   .inp{display:inline-block;border:1px solid #d7dbe0;border-radius:6px;background:#fff;padding:3px 8px;font-family:ui-monospace,'SF Mono',Consolas,monospace;font-size:10.5px;color:#334155;min-width:72px;}
-  .inp .u{color:#9aa3ad;font-family:'Pretendard',system-ui,sans-serif;font-size:9.5px;margin-left:3px;}
+  .u{color:#64748b;font-family:'Pretendard',system-ui,sans-serif;font-size:9.5px;margin-left:4px;}
+  .ro{display:inline-block;border:1px dashed #cbd5e1;border-radius:6px;background:#f8fafc;padding:3px 8px;font-family:ui-monospace,'SF Mono',Consolas,monospace;font-size:10.5px;color:#475569;min-width:72px;text-align:right;}
 </style>
 </head>
 <body>
@@ -28,9 +29,9 @@
       <div class="labels" id="labels">
         <div class="lbl"><span class="lbl-text">전역·<br>관리 메뉴</span></div>
         <div class="lbl"><span class="lbl-text">요율·정책<br>파라미터</span></div>
+        <div class="lbl"><span class="lbl-text">교환 자산풀</span></div>
         <div class="lbl"><span class="lbl-text">기관·가입자<br>관리</span></div>
         <div class="lbl"><span class="lbl-text">초대 발송</span></div>
-        <div class="lbl"><span class="lbl-text">상태 전이<br>·재이행</span></div>
       </div>
       <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
     </div>
@@ -49,7 +50,7 @@
       </div>
 
       <!-- 요율·정책 파라미터 -->
-      <div class="zone" data-idx="0,1,2,3,4,5,6,7,8,9,10">
+      <div class="zone" data-idx="0,1,2,3,4,5,6,7">
         <div class="zone-highlight"></div>
         <div class="zone-title" style="margin-bottom:4px;">요율·정책 파라미터</div>
         <div style="font-size:9.5px;color:#94a3b8;margin-bottom:6px;">수치·선택값은 [변경 저장]으로 일괄 반영(신규 요청부터 적용) · 취급자산 상태는 즉시 적용 · 변경된 셀은 ● 노란 배경</div>
@@ -70,9 +71,9 @@
               <td>고정 스프레드 (페어별)</td>
               <td>
                 <div class="item-area" data-highlight="1" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="1" style="top:-10px;right:-10px;">2</div>
-                  <span style="white-space:nowrap;display:inline-block;margin:1px 6px 1px 0;"><span style="font-size:9.5px;color:#64748b;">ETH↔USDC</span> <span class="inp">0.10<span class="u">%</span></span></span> &nbsp;
-                  <span style="white-space:nowrap;display:inline-block;margin:1px 6px 1px 0;"><span style="font-size:9.5px;color:#64748b;">ETH↔USDT</span> <span class="inp">0.10<span class="u">%</span></span></span> &nbsp;
-                  <span style="white-space:nowrap;display:inline-block;margin:1px 6px 1px 0;"><span style="font-size:9.5px;color:#64748b;">USDC↔USDT</span> <span class="inp">0.10<span class="u">%</span></span></span>
+                  <span style="white-space:nowrap;display:inline-block;margin:1px 6px 1px 0;"><span style="font-size:9.5px;color:#64748b;">ETH↔USDC</span> <span class="inp">0.10</span><span class="u">%</span></span> &nbsp;
+                  <span style="white-space:nowrap;display:inline-block;margin:1px 6px 1px 0;"><span style="font-size:9.5px;color:#64748b;">ETH↔USDT</span> <span class="inp">0.10</span><span class="u">%</span></span> &nbsp;
+                  <span style="white-space:nowrap;display:inline-block;margin:1px 6px 1px 0;"><span style="font-size:9.5px;color:#64748b;">USDC↔USDT</span> <span class="inp">0.10</span><span class="u">%</span></span>
                 </div>
                 <div style="font-size:9.5px;color:#888;margin-top:2px;">ETH 페어 값은 목업 예시 — 요율 미정 [확인필요]</div>
               </td>
@@ -80,52 +81,59 @@
             <tr>
               <td>나목</td>
               <td>견적 유효시간 (EXC-02 수락 제한)</td>
-              <td><div class="item-area" data-highlight="2" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="2" style="top:-10px;right:-10px;">3</div><span class="inp">120<span class="u">s</span></span></div></td>
+              <td><div class="item-area" data-highlight="2" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="2" style="top:-10px;right:-10px;">3</div><span class="inp">120</span><span class="u">s</span></div></td>
             </tr>
             <tr>
               <td>마목</td>
               <td>중개 수수료율 (거래액 기준 고정 · 양측 각자)</td>
-              <td><div class="item-area" data-highlight="3" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="3" style="top:-10px;right:-10px;">4</div><span class="inp">1.00<span class="u">%</span></span></div></td>
+              <td><div class="item-area" data-highlight="3" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="3" style="top:-10px;right:-10px;">4</div><span class="inp">1.00</span><span class="u">%</span></div></td>
             </tr>
             <tr>
               <td>마목</td>
               <td>게시 유효기간 / 신청 유효기간</td>
-              <td><div class="item-area" data-highlight="4" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="4" style="top:-10px;right:-10px;">5</div><span class="inp">30<span class="u">일</span></span> <span class="inp">2<span class="u">영업일</span></span></div></td>
+              <td><div class="item-area" data-highlight="4" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="4" style="top:-10px;right:-10px;">5</div><span class="inp">30</span><span class="u">일</span> <span class="inp">2</span><span class="u">영업일</span></div></td>
             </tr>
             <tr>
               <td>마목</td>
               <td>price guard 자동중지 임계 (게시 시점 기준가 대비)</td>
-              <td><div class="item-area" data-highlight="5" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="5" style="top:-10px;right:-10px;">6</div><span class="inp" style="background:#fef9c3;border-color:#fde047;">● ±2.5<span class="u">%</span></span></div> <span style="font-size:9.5px;color:#92400e;">저장 전 변경(저장값 ±2.0)</span></td>
+              <td><div class="item-area" data-highlight="5" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="5" style="top:-10px;right:-10px;">6</div><span class="inp" style="background:#fef9c3;border-color:#fde047;">● ±2.5</span><span class="u">%</span></div> <span style="font-size:9.5px;color:#92400e;">저장 전 변경(저장값 ±2.0)</span></td>
             </tr>
             <tr>
               <td>공통</td>
               <td>건별 한도 (나·마 공통 · 원화 환산)</td>
-              <td><div class="item-area" data-highlight="6" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="6" style="top:-10px;right:-10px;">7</div><span class="inp">1,500,000<span class="u">원 상당</span></span></div> <span style="font-size:9.5px;color:#64748b;">환산 = 시세 소스 KRW 시세 · 요청 시점</span></td>
-            </tr>
-            <tr>
-              <td>공통</td>
-              <td>시세(외부지표) 소스 — 단일 선택</td>
-              <td><div class="item-area" data-highlight="7" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="7" style="top:-10px;right:-10px;">8</div><span class="mk-dd"><span class="inp"><span class="mk-lab">바이낸스</span> ▾</span><div class="mk-menu" hidden><div class="op" data-set="업비트" data-dirty data-hint="저장 전 변경 ● — [변경 저장] 후 신규 요청부터 기준가·KRW 환산·price guard 판정에 반영">업비트</div><div class="op" data-set="빗썸" data-dirty data-hint="저장 전 변경 ● — [변경 저장] 후 신규 요청부터 기준가·KRW 환산·price guard 판정에 반영">빗썸</div><div class="op cur" data-set="바이낸스">바이낸스</div></div></span></div> <span style="font-size:9.5px;color:#b45309;">조합 없음 · 장애 시 대체 [확인필요]</span></td>
-            </tr>
-            <tr>
-              <td>지갑</td>
-              <td>핫월렛 비중 임계 (초과 시 스윕 워닝 · ADM-02 T6)</td>
-              <td><div class="item-area" data-highlight="8" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="8" style="top:-10px;right:-10px;">9</div><span class="inp">20<span class="u">%</span></span></div></td>
+              <td><div class="item-area" data-highlight="6" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="6" style="top:-10px;right:-10px;">7</div><span class="inp">1,500,000</span><span class="u">원 상당</span></div> <span style="font-size:9.5px;color:#64748b;">환산 = 시세 소스 KRW 시세 · 요청 시점</span></td>
             </tr>
           </tbody>
         </table>
         <div style="display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-top:8px;">
           <span style="font-size:9.5px;color:#94a3b8;">현재 정책 버전 v12 · 최종 변경 2026-09-02 09:30 · DSRV-OPS-01 · <strong style="color:#92400e;">저장되지 않은 변경 1건</strong></span>
-          <div class="item-area" data-highlight="9" style="position:relative;padding:3px;border-radius:8px;"><div class="pin" data-idx="9" style="top:-10px;right:-10px;">10</div><div class="btn ghost" style="padding:6px 14px;font-size:11px;">되돌리기</div></div>
-          <div class="item-area" data-highlight="10" style="position:relative;padding:3px;border-radius:8px;"><div class="pin" data-idx="10" style="top:-10px;right:-10px;">11</div><div class="btn primary" style="padding:6px 14px;font-size:11px;">변경 저장</div></div>
+          <div class="item-area" data-highlight="7" style="position:relative;padding:3px;border-radius:8px;"><div class="pin" data-idx="7" style="top:-10px;right:-10px;">8</div><div class="btn primary" style="padding:6px 14px;font-size:11px;">변경 저장</div></div>
+        </div>
+      </div>
+
+      <!-- 나목 교환 자산풀 (표시 전용) -->
+      <div class="zone" data-idx="8">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="8" style="position:relative;padding:5px 6px;border-radius:8px;">
+          <div class="pin" data-idx="8" style="top:-6px;right:-6px;">9</div>
+          <div class="zone-title" style="margin-bottom:2px;">나목 교환 자산풀 — 현재 교환 가능 수량</div>
+          <div style="font-size:9.5px;color:#94a3b8;margin-bottom:6px;">표시 전용 — 이 화면에서 수정하지 않는다. 담당자가 교환 재고 지갑에 입금하면 인덱서가 노드에서 읽어 자동 반영한다.</div>
+          <table class="tbl">
+            <thead><tr><th>자산</th><th>교환 가능 수량</th><th>기준 시각</th></tr></thead>
+            <tbody>
+              <tr><td><span class="chip asset">ETH</span></td><td><span class="ro">12.4820</span><span class="u">ETH</span></td><td>2026-09-04 18:12</td></tr>
+              <tr><td><span class="chip asset">USDC</span></td><td><span class="ro">48,210.55</span><span class="u">USDC</span></td><td>2026-09-04 18:12</td></tr>
+              <tr><td><span class="chip asset">USDT</span></td><td><span class="ro">31,905.20</span><span class="u">USDT</span></td><td>2026-09-04 18:12</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
       <!-- 기관·가입자 관리 -->
-      <div class="zone" data-idx="11,12,13">
+      <div class="zone" data-idx="9,10,11">
         <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="11" style="position:relative;padding:4px 6px;border-radius:8px;margin-bottom:4px;">
-          <div class="pin" data-idx="11" style="top:-6px;right:-6px;">12</div>
+        <div class="item-area" data-highlight="9" style="position:relative;padding:4px 6px;border-radius:8px;margin-bottom:4px;">
+          <div class="pin" data-idx="9" style="top:-6px;right:-6px;">10</div>
           <div class="zone-title" style="margin-bottom:2px;">기관·가입자 관리</div>
           <div style="font-size:9.5px;color:#94a3b8;">기관당 가입자 1명 · 최신 등록순 · 검색·필터 없음(조회는 홈 CSV ①) · 행 클릭 없음</div>
         </div>
@@ -134,11 +142,11 @@
           <tbody>
             <tr>
               <td>A자산운용</td><td>가입자 K</td><td><span class="chip ok">활성</span></td><td><span class="chip ok">활성</span></td>
-              <td><div class="item-area" data-highlight="13" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="13" style="top:-10px;right:-10px;">14</div><span class="mk-dd"><span class="act"><span class="mk-lab">상태 변경</span> ▾</span><div class="mk-menu" hidden><div class="op warn" data-hint="확인 다이얼로그 + 사유 필수 → 신규 교환·게시·신청 차단(진행 중 건 유지)">일시제한</div><div class="op warn" data-hint="확인 다이얼로그 + 사유 필수 → 거래·출금 전면 차단 · 홈 처리함 STR 검토 생성">동결</div><div class="op warn" data-hint="확인 다이얼로그 + 사유 필수 → 진행 거래 완결·전량 출금 후 비활성화(되돌릴 수 없음)">해지</div></div></span></div></td>
+              <td><div class="item-area" data-highlight="11" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="11" style="top:-10px;right:-10px;">12</div><span class="mk-dd"><span class="act"><span class="mk-lab">상태 변경</span> ▾</span><div class="mk-menu" hidden><div class="op warn" data-hint="확인 다이얼로그 + 사유 필수 → 신규 교환·게시·신청 차단(진행 중 건 유지)">일시제한</div><div class="op warn" data-hint="확인 다이얼로그 + 사유 필수 → 거래·출금 전면 차단 · 홈 처리함 STR 검토 생성">동결</div><div class="op warn" data-hint="확인 다이얼로그 + 사유 필수 → 진행 거래 완결·전량 출금 후 비활성화(되돌릴 수 없음)">해지</div></div></span></div></td>
             </tr>
             <tr>
               <td>B사</td><td>가입자 M</td><td><span class="chip info">심사중 (EDD)</span></td><td><span class="chip info">초대 발송됨</span></td>
-              <td><div class="item-area" data-highlight="12" style="position:relative;display:inline-block;padding:3px;border-radius:8px;margin-right:8px;"><div class="pin" data-idx="12" style="top:-10px;right:-10px;">13</div><span class="act">초대 재발송</span></div><span class="mk-dd"><span class="act"><span class="mk-lab">상태 변경</span> ▾</span><div class="mk-menu" hidden><div class="op" data-hint="확인 다이얼로그 + 사유 필수 → 배너 제거·거래 재개(즉시 적용)">활성</div><div class="op warn" data-hint="확인 다이얼로그 + 사유 필수 → 진행 거래 완결·전량 출금 후 비활성화(되돌릴 수 없음)">해지</div></div></span></td>
+              <td><div class="item-area" data-highlight="10" style="position:relative;display:inline-block;padding:3px;border-radius:8px;margin-right:8px;"><div class="pin" data-idx="10" style="top:-10px;right:-10px;">11</div><span class="act">초대 재발송</span></div><span class="mk-dd"><span class="act"><span class="mk-lab">상태 변경</span> ▾</span><div class="mk-menu" hidden><div class="op" data-hint="확인 다이얼로그 + 사유 필수 → 배너 제거·거래 재개(즉시 적용)">활성</div><div class="op warn" data-hint="확인 다이얼로그 + 사유 필수 → 진행 거래 완결·전량 출금 후 비활성화(되돌릴 수 없음)">해지</div></div></span></td>
             </tr>
             <tr>
               <td>C사</td><td>가입자 N</td><td><span class="sev mid">일시제한 (재이행 미응답)</span></td><td><span class="chip ok">활성</span></td>
@@ -149,28 +157,17 @@
       </div>
 
       <!-- 초대 발송 -->
-      <div class="zone" data-idx="14,15,16">
+      <div class="zone" data-idx="12,13,14">
         <div class="zone-highlight"></div>
         <div class="zone-title">초대 발송</div>
         <div class="row" style="gap:8px;">
-          <div class="item-area" data-highlight="14" style="position:relative;flex:1;padding:4px;border-radius:8px;"><div class="pin" data-idx="14" style="top:-6px;right:-6px;">15</div><div class="field"><span class="ph">기관명</span></div></div>
-          <div class="item-area" data-highlight="15" style="position:relative;flex:2;padding:4px;border-radius:8px;"><div class="pin" data-idx="15" style="top:-6px;right:-6px;">16</div><div class="field"><span class="ph">가입자 이메일</span></div></div>
-          <div class="item-area" data-highlight="16" style="position:relative;flex:0 0 auto;padding:4px;border-radius:8px;"><div class="pin" data-idx="16" style="top:-6px;right:-6px;">17</div><div class="btn primary disabled">초대 발송</div></div>
+          <div class="item-area" data-highlight="12" style="position:relative;flex:1;padding:4px;border-radius:8px;"><div class="pin" data-idx="12" style="top:-6px;right:-6px;">13</div><div class="field"><span class="ph">기관명</span></div></div>
+          <div class="item-area" data-highlight="13" style="position:relative;flex:2;padding:4px;border-radius:8px;"><div class="pin" data-idx="13" style="top:-6px;right:-6px;">14</div><div class="field"><span class="ph">가입자 이메일</span></div></div>
+          <div class="item-area" data-highlight="14" style="position:relative;flex:0 0 auto;padding:4px;border-radius:8px;"><div class="pin" data-idx="14" style="top:-6px;right:-6px;">15</div><div class="btn primary disabled">초대 발송</div></div>
         </div>
         <div style="font-size:10px;color:#64748b;margin-top:6px;">기관당 가입자 1명 — 이미 가입자가 있는 기관은 기존 계정 해지 후에만 신규 초대 가능 · 링크 72시간·1회 유효</div>
       </div>
 
-      <!-- 상태 전이·재이행 (표시 전용) -->
-      <div class="zone" data-idx="17">
-        <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="17" style="position:relative;padding:6px;border-radius:8px;">
-          <div class="pin" data-idx="17" style="top:-4px;right:-4px;">18</div>
-          <div class="kv"><span class="k">기관 KYC 상태 전이</span><span class="v">심사중(EDD) → 활성 ⇄ 일시제한 → 동결 → 해지</span></div>
-          <div class="kv"><span class="k">가입자 계정 상태</span><span class="v">초대 발송됨 → 활성 ⇄ 잠금 → 해지 (시스템·홈 처리함이 전이)</span></div>
-          <div class="kv"><span class="k">KYC 재이행 주기</span><span class="v">고1년 · 중2년 · 저3년 + 이벤트 트리거</span></div>
-          <div class="kv"><span class="k">해지 처리</span><span class="v">진행 거래 완결 → 전량 출금 → 비활성화</span></div>
-        </div>
-      </div>
 
     </div>
   </div>
@@ -275,45 +272,11 @@
       </div>
     </div>
 
+
+
+
     <div class="itm" data-idx="7">
       <div class="num">8</div>
-      <div>
-        <div class="itm-title">시세(외부지표) 소스 ▾<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>노출</strong> 항상 보인다. 현재 값은 바이낸스이고 목업 예시라 확정값이 아니다.<br><strong>클릭 가능</strong> 항상 활성이다.<br><strong>옵션</strong> 업비트 · 빗썸 · 바이낸스 3개다. 하나만 고른다(복수 조합·가중은 없다).<br><strong>확인 사항</strong> 없다. 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> 칩을 갱신하고 목록을 닫으며 셀을 ●로 표시한다. 즉시 적용하지 않고 [변경 저장]으로 반영한다. 저장 뒤에는 나목 비율 산정 기준가(EXC-02), 건별 한도 KRW 환산(EXC-01·BRK-02·BRK-03), price guard 이탈 판정에 쓴다. 소스명은 고객 화면에 보이지 않는다. 업비트·빗썸은 KRW 마켓이라 환산에 바로 쓰고, 바이낸스는 USD 마켓이라 USD→KRW 환율을 거친다 — 환율 소스와 갱신 주기는 개발이 정한다(2026-09-02(10) 사용자 결정).<br><span class="chk">[확인필요]</span> 소스 수신이 끊겼을 때 대체 소스를 쓸지 요청을 차단할지.<br><span class="basis">근거 09 §0 나목 외부지표 참조 스프레드 고정·price guard · 고객 화면 미노출 · notation 드롭다운 규격</span></div>
-        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">시세 소스 ▾</span><span class="nav-act">클릭 → 목록 펼침(업비트 / 빗썸 / 바이낸스 · 현재 선택 강조) → 항목 클릭</span><span class="nav-to stay">칩 갱신·목록 닫힘 · 바깥 클릭/ESC = 변경 없이 닫힘 · 셀 dirty ● · 저장 후 신규 요청부터 기준가·환산·판정에 반영</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="itm" data-idx="8">
-      <div class="num">9</div>
-      <div>
-        <div class="itm-title">핫월렛 비중 임계 입력<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 단위는 %이고 현재 값은 20이다.<br><strong>허용 문자</strong> 정수만 받고 최대 2자리다.<br><strong>검증</strong> ① 빈칸이 아닐 것 ② 0~20 범위 안일 것(콜드 80% 요건의 상한). 문자는 키 입력마다, ①②는 포커스 아웃 시 클라이언트가 본다. [변경 저장] 클릭 시 서버가 ②를 다시 본다.<br><strong>실패 처리</strong> ① 위반 → 빨간 테두리 + ⚠ "값을 입력해 주세요". ② 위반 → ⚠ "0~20 사이 정수를 입력해 주세요". 어느 쪽이든 [변경 저장] 비활성.<br><strong>연동</strong> 저장한 뒤 다음 감시 주기부터, 핫월렛 보유 비중이 이 값을 넘으면 ADM-02 처리함에 월렛·키 알람(T6 스윕 워닝)을 만든다. 현행 운영은 100% 콜드라 실질 0%다.<br><span class="chk">[확인필요]</span> 콜드 80% 요건의 고시 원문.<br><span class="basis">근거 states T6 · 09 §0 지갑(콜드 100% 수동 운영) · §11 콜드 80%</span></div>
-        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">핫월렛 비중 필드 — 정상 입력</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">경고 제거 · 셀 dirty ● · [변경 저장] 활성 조건 재검사</span></div>
-          <div class="nav-row"><span class="nav-el">핫월렛 비중 필드 — 규칙 ① 위반(빈칸)</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "값을 입력해 주세요" · [변경 저장] 비활성</span></div>
-          <div class="nav-row"><span class="nav-el">핫월렛 비중 필드 — 규칙 ② 위반(범위)</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "0~20 사이 정수를 입력해 주세요" · [변경 저장] 비활성</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="itm" data-idx="9">
-      <div class="num">10</div>
-      <div>
-        <div class="itm-title">[되돌리기] 버튼</div>
-        <div class="itm-desc"><strong>노출</strong> 항상 보인다(ghost).<br><strong>클릭 가능</strong> 바뀐 셀이 1개 이상일 때만 활성이다(오류 상태 셀도 센다).<br><strong>확인 사항</strong> 없다. 확인 다이얼로그도 서버 호출도 없다.<br><strong>액션</strong> 항목 2~9 입력값을 마지막 저장값으로 되돌리고 인라인 ⚠와 ● 표시를 지운다. "저장되지 않은 변경 0건"이 되고 두 버튼은 비활성으로 돌아간다. 토스트는 띄우지 않는다. 즉시 적용형인 취급자산 상태와 KYC 상태는 되돌리기 대상이 아니다.<br><span class="basis">근거 notation 종료 동선([취소]·되돌리기 = 확인 없음)</span></div>
-        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">[되돌리기] — 활성 조건</span><span class="nav-act">dirty 셀 1개 이상(오류 상태 셀 포함)</span><span class="nav-to stay">dirty 0 → 회색 비활성(공통 UI 규격)</span></div>
-          <div class="nav-row"><span class="nav-el">[되돌리기] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음</span><span class="nav-to stay">전 필드 마지막 저장값 복원 · 인라인 ⚠ 제거 · dirty 표시 제거 · "저장되지 않은 변경 0건" · [되돌리기]·[변경 저장] 비활성 · 토스트 없음</span></div>
-          <div class="nav-row"><span class="nav-el">[되돌리기] — 실패</span><span class="nav-act">해당 없음(서버 호출 없음)</span><span class="nav-to stay">—</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="itm" data-idx="10">
-      <div class="num">11</div>
       <div>
         <div class="itm-title">[변경 저장] 버튼<span class="req">필수</span></div>
         <div class="itm-desc"><strong>노출</strong> 항상 보인다(primary).<br><strong>클릭 가능</strong> 바뀐 셀이 1개 이상이고 인라인 오류가 0이며 저장 중이 아닐 때만 활성이다. 비활성 사유는 해당 셀 인라인 ⚠로 이미 보인다.<br><strong>확인 사항</strong> 확인 다이얼로그를 띄우지 않는다(구속력 없는 설정 저장). 2인 승인도 없다. 클릭하면 서버가 범위·자릿수를 다시 검증하고 정책 버전이 어긋나지 않았는지 본다.<br><strong>액션</strong> 라벨을 "저장 중…"으로 바꾸고 입력 필드를 비활성으로 두어 중복 클릭을 막는다. 항목 2~9 값을 한 번에 저장하고 POLICY_VERSION을 1 올리며 변경자·전후값·시각을 감사로그에 남긴다. 토스트 "정책값이 저장되었습니다 (v13) — 신규 요청부터 적용"을 띄우고 상단 "현재 정책 버전 v{N} · 최종 변경 {일시} · {관리자 ID}"를 갱신한다. ● 표시를 지우고 두 버튼을 비활성으로 되돌린다. 새 값은 저장 이후 신규 요청·게시·신청부터 쓰고, 진행 중 건은 생성 시점 값을 유지한다. 변경 이력을 보는 화면은 없다 — 감사로그(DB)로만 본다.<br><span class="chk">[확인필요]</span> 정책 변경 이력 CSV를 추가할지.<br><span class="basis">근거 V2 · 09 §0 line 51 · 정책 변경통제 [스키마 POLICY_VERSION] · notation 확인 다이얼로그 규격</span></div>
@@ -325,8 +288,19 @@
       </div>
     </div>
 
-    <div class="itm" data-idx="11">
-      <div class="num">12</div>
+    <div class="itm" data-idx="8">
+      <div class="num">9</div>
+      <div>
+        <div class="itm-title">나목 교환 자산풀 — 교환 가능 수량 (표시 전용)</div>
+        <div class="itm-desc"><strong>노출</strong> 항상 보인다. 취급자산 3종을 각각 한 행으로 보여준다. 중지 자산도 수량은 계속 보인다.<br><strong>클릭 가능</strong> 없다. 입력칸이 아니고 이 화면에서 값을 고칠 수 없다.<br><strong>값의 출처</strong> 담당자가 교환 재고 지갑에 자산을 넣으면 인덱서가 노드에서 잔액을 읽어 반영한다. 어드민이 수량을 직접 입력하거나 보정하는 기능은 두지 않는다.<br><strong>표기</strong> 수량 자릿수는 ETH 4자리 · USDC·USDT 2자리다. 단위는 칸 밖에 쓴다. 기준 시각은 인덱서가 마지막으로 반영한 시각이다.<br><strong>조회 시점</strong> 화면 진입·새로고침 때 1회 조회한다. 자동 주기 갱신을 두지 않는다.</div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">자산풀 수량</span><span class="nav-act">클릭 요소 없음</span><span class="nav-to stay">이동 없음</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="9">
+      <div class="num">10</div>
       <div>
         <div class="itm-title">기관·가입자 목록 (표시 전용)</div>
         <div class="itm-desc">· 행 클릭 없음 · 열: 기관 · 가입자 · KYC 상태 · 계정 상태 · 조치 — 조치 열은 모든 행 [상태 변경 ▾], 계정 상태 '초대 발송됨' 행에만 [초대 재발송] 추가<br>· <strong>KYC 상태 칩</strong>(기관 · G-3 게이팅 단일 출처): 활성(초록) / 심사중(EDD)(파랑) / 일시제한(노랑 · 부가 사유 "재이행 미응답" 등) / 동결(빨강) / 해지(회색) · <strong>계정 상태 칩</strong>(가입자): 초대 발송됨(파랑) / 활성(초록) / 잠금(노랑) / 해지(회색) — 계정 상태는 시스템·홈 처리함이 전이(ONB-01~03 활성화 · AUTH-01 잠금 · ADM-02 T8 해제), 이 화면에서 직접 변경 없음<br>· 가입자 열 표시값(이름 vs 이메일 마스킹) <span class="chk">[확인필요]</span> · 기관당 가입자 1명 — 고객사 기안·승인 2인 분리 없음<br>· <strong>목록 규격</strong>: 최신 등록순 단일 리스트 · 검색·필터·정렬 없음(전체 조회는 ADM-02 CSV ①) · 빈 상태 "등록된 기관이 없습니다" + "아래 초대 발송으로 첫 기관을 초대하세요" · 로딩 "불러오는 중…" · 전량 표시 · 페이지 스크롤([더 보기]·페이지네이션·무한 스크롤 없음) · 갱신: 초대 발송·상태 변경·ADM-02 처리(잠금 해제·신규 거래 제한) 즉시<br><span class="basis">근거 F-12 관리자 콘솔 ORG·KYC 통합 · 예외 A1·A2·A6 · notation 상태 칩·목록 규격</span></div>
@@ -336,8 +310,8 @@
       </div>
     </div>
 
-    <div class="itm" data-idx="12">
-      <div class="num">13</div>
+    <div class="itm" data-idx="10">
+      <div class="num">11</div>
       <div>
         <div class="itm-title">[초대 재발송] 버튼</div>
         <div class="itm-desc"><strong>노출</strong> 계정 상태가 '초대 발송됨'인 행에만 보인다(링크 만료 72h · 미수신 · 분실). 활성 계정 행에는 보이지 않는다.<br><strong>클릭 가능</strong> 발송 중이 아니면 활성이다.<br><strong>확인 사항</strong> 없다. 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> 라벨을 "발송 중…"으로 바꿔 중복 클릭을 막고, 기존 링크를 즉시 무효로 만든 뒤 72시간·1회 유효한 새 링크로 초대 이메일(ONB-00)을 다시 보낸다. 토스트 "초대 이메일을 다시 발송했습니다 — 72시간 유효"를 띄우고 감사로그에 남긴다. 화면 이동은 없다.<br><span class="chk">[확인필요]</span> 재발송 횟수 제한 · 백업코드를 다 쓴 경우 가입자 자체 재설정(DASH-03)과 재초대 중 어느 경로인지.<br><span class="basis">근거 ONB-00 초대(72h·1회) · ISMS 2.5</span></div>
@@ -349,8 +323,8 @@
       </div>
     </div>
 
-    <div class="itm" data-idx="13">
-      <div class="num">14</div>
+    <div class="itm" data-idx="11">
+      <div class="num">12</div>
       <div>
         <div class="itm-title">[상태 변경 ▾] — 기관 KYC 상태<span class="req">필수</span></div>
         <div class="itm-desc"><strong>노출</strong> 목록의 모든 행에 보인다(대표 핀 = A행).<br><strong>클릭 가능</strong> 현재 KYC 상태가 '해지'가 아니고 다른 관리자가 그 기관을 바꾸는 중이 아닐 때 활성이다. 해지 행은 비활성이고 인라인 "해지된 기관입니다"를 둔다.<br><strong>옵션</strong> 현재 상태에서 허용된 전이만 보여준다 — 심사중(EDD) → 활성·해지 / 활성 → 일시제한·동결·해지 / 일시제한 → 활성·동결·해지 / 동결 → 일시제한·해지 / 해지 → 없음.<br><strong>확인 사항</strong> 모든 전이에 확인 다이얼로그를 띄우고 사유를 필수로 받는다(10~500자). 본문은 상태마다 다르다 — 활성 "고객 화면 안내 배너가 제거되고 거래가 재개됩니다." · 일시제한 "신규 교환 요청·게시·신청이 즉시 차단되고 고객 화면에 안내 배너가 표시됩니다. 진행 중 건은 유지됩니다." · 동결 "모든 거래·출금이 차단됩니다. 홈 처리함에 STR 검토 건이 생성됩니다." · 해지 "진행 중 거래 완결·전량 출금 확인 후 계정이 비활성화됩니다. 되돌릴 수 없습니다." 해지는 진행 중 거래와 잔고가 없어야 통과한다.<br><strong>액션</strong> [변경 저장]과 무관하게 즉시 적용한다. 칩을 갱신하고 토스트 "{기관} KYC 상태를 {상태}로 변경했습니다"를 띄우며 사유를 감사로그에 남긴다. 이 값이 전 화면 게이팅 G-3의 단일 출처라 고객의 다음 요청·진입부터 EXC-01·BRK-02·BRK-03 KYC 배너에 반영된다. '해지'는 가입자 계정 상태도 '해지'로 연동한다(상세 14). 심사 자체는 별도 AML 시스템에서 하고 이 화면은 결과만 반영한다.<br><span class="chk">[확인필요]</span> 동결에서 활성으로 바로 돌아갈 수 있는지 · 동결 시 ADM-02 처리함에 'STR 검토' 행을 만들지.<br><span class="basis">근거 L1 §5의2 고객확인 재이행 · 예외 A1·A4·A6 · G-3 · notation 드롭다운·확인 다이얼로그(ADM-03 상태 변경)</span></div>
@@ -362,8 +336,8 @@
       </div>
     </div>
 
-    <div class="itm" data-idx="14">
-      <div class="num">15</div>
+    <div class="itm" data-idx="12">
+      <div class="num">13</div>
       <div>
         <div class="itm-title">기관명 입력<span class="req">필수</span></div>
         <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 선택 목록이 아니라 자유 입력이다(신규 기관 등록). 플레이스홀더는 "기관명"이다.<br><strong>허용 문자</strong> 한글·영문·숫자·공백·괄호·마침표만 받고 2~50자다. 초과 입력은 무시하고 앞뒤 공백은 자동으로 지운다.<br><strong>검증</strong> ① 허용 문자로 2~50자일 것 ② 이미 등록된 기관명이 아닐 것. ①은 포커스 아웃 시 클라이언트가, ②는 [초대 발송] 클릭 시 서버가 본다.<br><strong>실패 처리</strong> ① 위반 → 빨간 테두리 + ⚠ "기관명은 2~50자 한글·영문·숫자로 입력해 주세요". ② 위반 → ⚠ "이미 등록된 기관입니다 — 기존 계정 해지 후에만 새 가입자를 초대할 수 있습니다". 어느 쪽이든 [초대 발송] 비활성. 다시 입력하면 기존 경고를 지운다.<br><strong>연동</strong> 값이 정상이면 [초대 발송] 활성 조건을 다시 본다.<br><strong>저장</strong> ORG.name으로 저장한다. 고객사 ID(ORG-NNNN)는 발송 시 자동으로 채번한다.<br><span class="basis">근거 notation 식별자(ORG-NNNN) · 1기관 1가입자(09 §0 승인·통제)</span></div>
@@ -375,8 +349,8 @@
       </div>
     </div>
 
-    <div class="itm" data-idx="15">
-      <div class="num">16</div>
+    <div class="itm" data-idx="13">
+      <div class="num">14</div>
       <div>
         <div class="itm-title">가입자 이메일 입력<span class="req">필수</span></div>
         <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 플레이스홀더는 "가입자 이메일"이다.<br><strong>허용 문자</strong> 로컬@도메인.TLD 형식으로 최대 254자다. 대문자는 소문자로 자동 정규화하고 공백은 지운다.<br><strong>검증</strong> ① 이메일 형식일 것 ② 이미 초대·가입된 이메일이 아닐 것. ①은 포커스 아웃 시 클라이언트가, ②는 [초대 발송] 클릭 시 서버가 본다.<br><strong>실패 처리</strong> ① 위반 → 빨간 테두리 + ⚠ "이메일 형식이 올바르지 않습니다". ② 위반 → ⚠ "이미 초대·가입된 이메일입니다". 어느 쪽이든 [초대 발송] 비활성. 다시 입력하면 기존 경고를 지운다.<br><strong>연동</strong> 값이 정상이면 [초대 발송] 활성 조건을 다시 본다.<br><strong>저장</strong> USER.email로 저장한다. CSV와 화면 표시는 마스킹한다.<br><span class="chk">[확인필요]</span> 개인 이메일 도메인을 허용할지(법인 도메인 제한).<br><span class="basis">근거 ONB-00 본인 이메일 초대(셀프가입 없음) · ISMS 2.5</span></div>
@@ -388,8 +362,8 @@
       </div>
     </div>
 
-    <div class="itm" data-idx="16">
-      <div class="num">17</div>
+    <div class="itm" data-idx="14">
+      <div class="num">15</div>
       <div>
         <div class="itm-title">[초대 발송] 버튼<span class="req">필수</span></div>
         <div class="itm-desc"><strong>노출</strong> 항상 보인다(primary).<br><strong>클릭 가능</strong> 기관명과 이메일이 모두 정상이고 인라인 오류가 0이며 발송 중이 아닐 때만 활성이다. 목업은 빈칸이라 비활성이다.<br><strong>확인 사항</strong> 확인 다이얼로그를 띄우지 않는다. 클릭하면 서버가 기관명·이메일 중복을 검증한다.<br><strong>액션</strong> 라벨을 "발송 중…"으로 바꾸고 필드를 비활성으로 두어 중복 클릭을 막는다. ORG를 만들고(ORG-NNNN 채번) USER를 만든 뒤(계정 상태 '초대 발송됨') 초대 이메일(ONB-00)을 72시간·1회 유효로 보낸다. 생성과 발송은 원자적으로 처리하고 발송이 실패하면 생성을 되돌린다. 목록 최상단에 행을 추가하고 폼을 비우며 토스트 "초대 이메일을 발송했습니다 — {이메일 마스킹} · 72시간 유효"를 띄운다. 화면 이동은 없다. 이후 가입자는 ONB-01~03에서 계정을 활성화하고 AUTH-01로 들어온다. KYC 상태 초기값은 '심사중(EDD)'로 만들고 활성 전환은 [상태 변경 ▾]로 한다. 기관당 1계정이라 기존 가입자가 있으면 해지 후에만 초대할 수 있다.<br><span class="chk">[확인필요]</span> KYC 초기값 — CDD를 오프라인에서 마쳤다는 전제라면 '활성'이어야 한다.<br><span class="basis">근거 ONB-00 · ISMS 2.5(계정·인증 관리) · 09 §0 고객(CDD 완료 법인)</span></div>
@@ -401,13 +375,6 @@
       </div>
     </div>
 
-    <div class="itm" data-idx="17">
-      <div class="num">18</div>
-      <div>
-        <div class="itm-title">상태 전이·재이행 요약 (표시 전용)</div>
-        <div class="itm-desc">· 클릭 요소 없음 · 기관 KYC 상태 기계(심사중(EDD) → 활성 ⇄ 일시제한 → 동결 → 해지) · 가입자 계정 상태(초대 발송됨 → 활성 ⇄ 잠금 → 해지) · 재이행 주기(고1년·중2년·저3년 + 실소유자·지배구조 변경 등 이벤트 트리거 → 재심사 중 거래 제한, 예외 A4) · 해지 흐름(상세 18)<br>· 고정 문구 · 값은 이 화면의 수정 가능 파라미터가 아니라 규칙 요약<br><span class="basis">근거 L1 §5의2 · L6 §9 기록 보존 · 예외 A4·A5</span></div>
-      </div>
-    </div>
   </div>
 
 </div>
@@ -422,27 +389,23 @@
       </div>
       <div class="dtl" data-idx="1">
         <div class="detail-label"><span class="dtl-num">2</span>입력 범위 표 · 단일 출처 원칙</div>
-      <div class="dtl-body"><span class="box">· <strong>범위(기획 가정 — 상·하한 전부 <span class="chk">[확인필요]</span>)</strong>: 스프레드 0.01~5.00% 2자리 · 견적 유효시간 30~600 s 정수 · 수수료율 0.00~5.00% 2자리 · 게시 유효기간 1~90일 정수 · 신청 유효기간 1~10영업일 정수 · price guard 0.1~10.0% 1자리 · 건별 한도 10,000~1,000,000,000원 정수 · 핫월렛 비중 0~20% 정수<br>· 공통 입력 규격: 숫자·소수점만 · 자릿수 초과 입력 무시 · 오류 = 빨간 테두리 + 셀 아래 인라인 ⚠(원인 + 해결 행동) · dirty = ● + 노란 배경<br>· EXC-01/02·BRK-02/03/04/07은 이 값을 표출만 — 화면 하드코딩 없음, '가격형성 아님' 소명값의 단일 출처<br>· 수수료 1% = 거래액 기준 고정·양측 각자(2026-09-02 확정) · 건별 한도 1,500,000원 상당(2026-09-02(9) 원화 기준 · 종전 표기(1,000 USD 상당 · 그 이전 원화 억 단위 · 코인 수량) 모두 폐기)<br>· <span class="chk">[확인필요]</span> 1% 요율 합리성·설명의무 소명 수위 · 한도 환산 시세 장애 시 처리</span></div>
+      <div class="dtl-body"><span class="box">· <strong>범위(기획 가정 — 상·하한 전부 <span class="chk">[확인필요]</span>)</strong>: 스프레드 0.01~5.00% 2자리 · 견적 유효시간 30~600 s 정수 · 수수료율 0.00~5.00% 2자리 · 게시 유효기간 1~90일 정수 · 신청 유효기간 1~10영업일 정수 · price guard 0.1~10.0% 1자리 · 건별 한도 10,000~1,000,000,000원 정수<br>· 공통 입력 규격: 숫자·소수점만 · 자릿수 초과 입력 무시 · 오류 = 빨간 테두리 + 셀 아래 인라인 ⚠(원인 + 해결 행동) · dirty = ● + 노란 배경<br>· EXC-01/02·BRK-02/03/04/07은 이 값을 표출만 — 화면 하드코딩 없음, '가격형성 아님' 소명값의 단일 출처<br>· 수수료 1% = 거래액 기준 고정·양측 각자(2026-09-02 확정) · 건별 한도 1,500,000원 상당(2026-09-02(9) 원화 기준 · 종전 표기(1,000 USD 상당 · 그 이전 원화 억 단위 · 코인 수량) 모두 폐기)<br>· <span class="chk">[확인필요]</span> 1% 요율 합리성·설명의무 소명 수위 · 한도 환산 시세 장애 시 처리</span></div>
+      </div>
+      <div class="dtl" data-idx="6">
+        <div class="detail-label"><span class="dtl-num">7</span>KRW 환산 경로 · 시세 소스</div>
+      <div class="dtl-body"><span class="box">· 용도 3종: ① 나목 기준가(EXC-02 산정 = 기준가 ± 스프레드) ② 건별 한도 KRW 환산(ETH·USDC·USDT 모두 소스 KRW 시세 · USD 마켓 소스면 환율 경유) ③ price guard 이탈 판정(게시 시점 기준가 vs 현재)<br>· 소스명은 고객 콘솔 어디에도 미노출 — 고객 화면은 "외부지표 기준" 문구만<br>· 바이낸스(USD 마켓) 선택 시 USD→KRW 환율 소스·갱신 주기는 <strong>개발 결정</strong>(기획 미지정 · 2026-09-02(10)) · <span class="chk">[확인필요]</span> 소스 장애 시 <strong>대체 소스로 넘기지 않고 신규 요청·게시·신청을 차단한다</strong>(2026-09-04 사용자 결정 · 무수신 임계값 <span class="chk">[확인필요]</span> · 차단 사실은 ADM-02 ④ 운영 알림 N1으로 뜬다) · 마목은 시세 불관여 원칙 — price guard는 '가드'로만 사용</span></div>
       </div>
       <div class="dtl" data-idx="7">
-        <div class="detail-label"><span class="dtl-num">8</span>시세 소스 용도 · KRW 환산 경로</div>
-      <div class="dtl-body"><span class="box">· 용도 3종: ① 나목 기준가(EXC-02 산정 = 기준가 ± 스프레드) ② 건별 한도 KRW 환산(ETH·USDC·USDT 모두 소스 KRW 시세 · USD 마켓 소스면 환율 경유) ③ price guard 이탈 판정(게시 시점 기준가 vs 현재)<br>· 소스명은 고객 콘솔 어디에도 미노출 — 고객 화면은 "외부지표 기준" 문구만<br>· 바이낸스(USD 마켓) 선택 시 USD→KRW 환율 소스·갱신 주기는 <strong>개발 결정</strong>(기획 미지정 · 2026-09-02(10)) · <span class="chk">[확인필요]</span> 소스 장애 시 대체 소스 자동 전환 vs 신규 요청 차단 · 마목은 시세 불관여 원칙 — price guard는 '가드'로만 사용</span></div>
-      </div>
-      <div class="dtl" data-idx="10">
-        <div class="detail-label"><span class="dtl-num">11</span>저장·버전·적용 시점</div>
+        <div class="detail-label"><span class="dtl-num">8</span>저장·버전·적용 시점</div>
       <div class="dtl-body"><span class="box">· 저장 1회 = POLICY_VERSION 1건(전후값·변경자·시각) — 진행 중 건은 자기 생성 시점의 버전을 참조(견적·게시·신청 레코드에 version 기록)<br>· 확인 다이얼로그 없음 = 저장 자체는 구속력 없음(고객 거래는 신규 요청부터) · 즉시 적용형 2종(자산 상태·KYC 상태)만 확인<br>· 동시 수정 = 낙관적 잠금(버전 불일치 → 리로드) · 2인 승인 없음(DSRV 단일 처리)<br>· dirty 상태 이탈('홈' 탭·로그아웃) = 파기·확인 없음(공통) — 관리자 화면 예외(이탈 경고) 여부 <span class="chk">[확인필요]</span> · 변경 이력 조회 UI 없음 — 이력 CSV 추가 여부 <span class="chk">[확인필요]</span></span></div>
       </div>
-      <div class="dtl" data-idx="13">
-        <div class="detail-label"><span class="dtl-num">14</span>KYC 상태 기계 → 게이팅·연동</div>
-      <div class="dtl-body"><span class="box">· 활성 = 배너 없음·전 기능 / 심사중(EDD)·일시제한·동결 = EXC-01·BRK-02·BRK-03 KYC 예외 배너 + 요청 차단(내부 사유 미노출) / 해지 = 로그인 불가<br>· 전이 주체: 활성 → 일시제한은 ADM-02 T7 [신규 거래 제한]·T5 [STR 검토] 체크박스에서도 발생 · 동결 전환은 ADM-02 T8(탈취 의심)에서도 · 일시제한 → 활성 복귀는 이 화면에서만(사람)<br>· 해지 = 기관 KYC '해지' + 가입자 계정 '해지' 연동 · 전제: 진행 중 거래 0·잔고 0(전량 출금) — 미충족 시 다이얼로그 내 차단<br>· 1기관 1가입자: 고객사 내부 기안↔승인 분리 전제 없음 — 구속력 행위는 고객 화면 결과 고지 1문장으로 대체 · DSRV 측 직무분리(자기승인 차단)는 ADM-02 유지<br>· <span class="chk">[확인필요]</span> 동결 → 활성 직접 복귀 허용 여부 · 동결 시 STR 검토 자동 생성 여부 · 일시제한 중 조회·출금 허용 범위</span></div>
+      <div class="dtl" data-idx="11">
+        <div class="detail-label"><span class="dtl-num">12</span>KYC 상태 기계 → 게이팅·연동</div>
+      <div class="dtl-body"><span class="box">· 활성 = 배너 없음·전 기능 / 심사중(EDD)·일시제한·동결 = EXC-01·BRK-02·BRK-03 KYC 예외 배너 + 요청 차단(내부 사유 미노출) / 해지 = 로그인 불가<br>· 전이 주체: 활성 → 일시제한은 ADM-02 T7 [신규 거래 제한]·T5 [STR 검토] 체크박스에서도 발생 · 동결 전환은 ADM-02 T8(탈취 의심)에서도 · 일시제한 → 활성 복귀는 이 화면에서만(사람)<br>· 해지 = 기관 KYC '해지' + 가입자 계정 '해지' 연동 · 전제: 진행 중 거래 0·잔고 0(전량 출금) — 미충족 시 다이얼로그 내 차단<br>· 1기관 1가입자: 고객사 내부 기안↔승인 분리 전제 없음 — 구속력 행위는 고객 화면 결과 고지 1문장으로 대체 · DSRV 측 직무분리(자기승인 차단)는 ADM-02 유지<br>· <span class="chk">[확인필요]</span> 동결 → 활성 직접 복귀 허용 여부 · 동결 시 STR 검토 자동 생성 여부 · 일시제한 중 조회·출금 허용 범위<br>· <strong>해지(탈퇴) 흐름</strong> 해지 요청 → 진행 중 거래 완결 대기(신규 거래는 요청 즉시 차단) → 자산 전량 출금 확인 → 비활성화(기관·가입자 '해지')<br>· 해지 후에도 기록은 법정 기간 보존 — 거래 15년·AML 5년(L6 §9 · 예외 A5) · CSV ①에 '해지' 상태로 잔존<br>· <span class="chk">[확인필요]</span> 일시제한 중 조회·출금 허용 범위 · KYC 심사 도구 연동 범위(심사 자체는 별도 AML 시스템 — 이 화면은 상태 전이·계정 조치만)</span></div>
       </div>
-      <div class="dtl" data-idx="16">
-        <div class="detail-label"><span class="dtl-num">17</span>온보딩 연결</div>
+      <div class="dtl" data-idx="14">
+        <div class="detail-label"><span class="dtl-num">15</span>온보딩 연결</div>
       <div class="dtl-body"><span class="box">· [초대 발송] → 초대 이메일(ONB-00 · 72h·1회 링크 — 이메일 링크 없음 원칙의 유일한 예외) → 계정 활성화(ONB-01~03 · 비밀번호·Google Authenticator·복구 코드) → 로그인(AUTH-01) · 활성화 완료 시 계정 상태 '초대 발송됨' → '활성'(시스템)<br>· 초대 발송·재발송·상태 변경은 전부 감사로그(ISMS 2.5) · 셀프가입·소셜 로그인 없음<br>· <span class="chk">[확인필요]</span> 초대 시 KYC 초기값(심사중 vs 활성) · 재발송 횟수 제한 · 개인 이메일 도메인 허용</span></div>
-      </div>
-      <div class="dtl" data-idx="17">
-        <div class="detail-label"><span class="dtl-num">18</span>해지(탈퇴) 흐름 · 기록 보존</div>
-      <div class="dtl-body"><span class="box">해지 요청 → 진행 중 거래 완결 대기(신규 거래는 요청 즉시 차단) → 자산 전량 출금 확인 → 비활성화(기관·가입자 '해지')<br>· 해지 후에도 기록은 법정 기간 보존 — 거래 15년·AML 5년(L6 §9 · 예외 A5) · CSV ①에 '해지' 상태로 잔존<br>· <span class="chk">[확인필요]</span> 일시제한 중 조회·출금 허용 범위 · KYC 심사 도구 연동 범위(심사 자체는 별도 AML 시스템 — 이 화면은 상태 전이·계정 조치만)</span></div>
       </div>
     </div>
   </div>
@@ -453,12 +416,13 @@
     <div class="note-title">비고</div>
     <div class="note-body">
       · DSRV 내부 관리자 화면(고객사 노출 없음). 어드민은 홈(ADM-02)·설정(ADM-03) 2화면.<br>
-      · <strong>목업 인터랙션(2026-09-02)</strong>: 어드민 프레임 폭을 다른 화면의 <strong>1.5배(810px)</strong>로 넓히고, 드롭다운 3종(취급자산 상태 ▾ · 시세 소스 ▾ · 상태 변경 ▾)을 목업에서 실제로 펼칠 수 있게 함(바깥 클릭·ESC = 변경 없이 닫힘). 확인 다이얼로그가 필요한 선택(중지·일시제한·동결·해지)은 값을 바꾸지 않고 다음 단계를 노란 배지로 표시 — 다이얼로그·사유 모달 자체는 항목 설명 기준. 관리 메뉴 '홈' 클릭 시 ADM-02로 이동.<br>
+      · <strong>목업 인터랙션(2026-09-02)</strong>: 어드민 프레임 폭을 다른 화면의 <strong>1.5배(810px)</strong>로 넓히고, 드롭다운 2종(취급자산 상태 ▾ · 상태 변경 ▾)을 목업에서 실제로 펼칠 수 있게 함(바깥 클릭·ESC = 변경 없이 닫힘). 확인 다이얼로그가 필요한 선택(중지·일시제한·동결·해지)은 값을 바꾸지 않고 다음 단계를 노란 배지로 표시 — 다이얼로그·사유 모달 자체는 항목 설명 기준. 관리 메뉴 '홈' 클릭 시 ADM-02로 이동.<br>
 
       · <strong>[긴급대응 전용 플래그 없음]</strong> 모든 집행이 사람의 승인·서명을 거치는 구조 — 승인을 멈추면 집행도 멈춤. 별도 '거래정지·긴급출금중단' 버튼 없이 승인 중단 + 사고대응 절차서로 대응 — 근거: ISMS 2.11.1(사고 대응·복구). 취급자산 '중지'는 자산 단위 신규 요청 차단이며 긴급정지 플래그가 아님.<br>
-      · <strong>[화이트리스트 관리 제외]</strong> 화이트리스트 지연발효는 커스터디 출금(외부 반출) 전용 — 기존 커스터디 정책·시스템 그대로 사용, 이 콘솔에서 중복 관리하지 않음. 나·마 교환·중개(내부 지갑 간 이전)에는 미적용.<br>
-      · 연결: 초대 발송 → ONB-00 · 정책값 표출 EXC-01/02·BRK-02/03/04/07 · 발생 알람 처리(잠금·재이행 도래·격리 등)는 홈(ADM-02) 처리함 · 기관 KYC 상태 = 전 화면 게이팅(G-3) 단일 출처<br>
+      · <strong>[화이트리스트 미사용]</strong> 교환·중개는 내부 지갑 간 이전이라 외부 주소를 다루지 않는다. 화이트리스트는 <strong>이 시스템 전체에서 쓰지 않는다</strong>(2026-09-04 사용자 결정) — 이 콘솔에 설정 항목도 두지 않는다.<br>· <strong>[핫월렛 비중 임계 삭제]</strong> 핫월렛이 없어(09 §0) 항목이 성립하지 않는다. 콜드 서명 장애도 커스터디가 집행 성공까지 책임지는 영역이라 어드민 알림 유형에 두지 않는다(2026-09-04 결정 · 종전 T6 삭제).<br>
+      · 연결: 초대 발송 → ONB-00 · 정책값 표출 EXC-01/02·BRK-02/03/04/07 · 발생 알림 처리(계정 잠금·시세 중단·재고 부족·대사 불일치)는 홈(ADM-02) ④ 운영 알림 · 기관 KYC 상태 = 전 화면 게이팅(G-3) 단일 출처<br>· <strong>KYC 재이행</strong>은 오프라인(커스터디) 업무이고 이 콘솔은 <strong>결과만</strong> 기관 상태로 받는다 — 재이행 도래일 알림·처리함 행을 두지 않는다(2026-09-04 결정 · 종전 T7 삭제). 아래 재이행 주기 표기는 커스터디 정책을 참고로 적은 것이다.<br>
       · 2026-09-02 설명 형식 개정 적용(핀 = 조작 요소 단위) — 파라미터는 그룹 단위 핀(입력 규격 명시), '페어별' 스프레드 프레임을 3페어 입력 3개로 수정, 취급자산 상태·정책 버전 라인·dirty 표시 추가, 조치 열 '—' 제거([상태 변경 ▾] 전 행), 저장 = 확인 없음 / 자산 중지·KYC 상태 변경 = 확인 다이얼로그로 통일 · 서비스명 DSRV Admin.<br>
+      · <strong>2026-09-04(19) 설정 화면 정리(사용자 결정)</strong>: ① 입력칸에는 값만 넣고 <strong>단위는 칸 밖</strong>에 둔다 ② <strong>나목 교환 자산풀 수량 표시</strong> 신설 — 표시 전용이고, 담당자가 교환 재고 지갑에 넣으면 인덱서가 노드에서 읽어 자동 반영한다(어드민 입력·보정 기능 없음) ③ <strong>시세(외부지표) 소스 선택 칸 삭제</strong> — 소스 자체는 계속 쓰지만 이 화면에서 고르지 않는다(용도·환산 경로는 상세내용 7) ④ <strong>핫월렛 비중 임계 삭제</strong>(핫월렛이 없어 항목이 성립하지 않는다) ⑤ <strong>[되돌리기] 삭제</strong> — 저장 버튼은 [변경 저장] 하나다 ⑥ <strong>상태 전이·재이행 영역 삭제</strong> — 상태 기계는 케이스분기 문서가 정본이고, 게이팅·해지 흐름은 상세내용 12로 옮겼다.<br>
       · <span class="chk">[확인필요]</span> 입력 범위 상·하한 전부 · ETH 페어 스프레드 요율 · 스프레드 갱신주기 파라미터 · 수수료율 변경 절차 · 영업일 캘린더 · price guard 기본값 vs 고정값 · 일간·월간 누적 한도 · 시세 소스 장애 대체 · 콜드 80% 고시 원문 · 이력 CSV · 관리자 이탈 경고 예외 · 가입자 열 표시값 · 백업코드 소진 경로 · 재발송 횟수 제한 · 동결 → 활성 복귀 · 동결 시 STR 자동 생성 · KYC 초기값 · 개인 이메일 도메인 · 게재중 게시 자동 중지(자산 중지 시).
     </div>
   </div>
