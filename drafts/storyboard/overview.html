@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화면기획 — 한눈에 보기</title>
+<link rel="stylesheet" href="screen.css">
+<style>
+.ov{max-width:1240px;margin:0 auto;padding:26px 28px 40px;}
+.ov h2{font-size:15px;font-weight:800;margin:34px 0 12px;display:flex;align-items:center;gap:10px;}
+.ov h2 .n{display:inline-flex;width:22px;height:22px;border-radius:50%;background:#0f172a;color:#fff;font-size:11.5px;align-items:center;justify-content:center;font-family:var(--mono);}
+.ov p.lead{font-size:13px;line-height:1.7;color:#333;max-width:900px;}
+.hero{background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px 26px;display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap;}
+.hero .l{flex:1;min-width:360px;}
+.hero h1{font-size:22px;font-weight:800;line-height:1.3;margin-bottom:8px;}
+.hero .tagline{font-size:12.5px;color:#555;line-height:1.7;}
+.steps{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.step-chip{font-size:11.5px;font-weight:700;background:#f1f5f9;border:1px solid var(--line);border-radius:20px;padding:5px 12px;color:#0f172a;display:flex;gap:6px;align-items:center;}
+.step-chip b{color:var(--accent);font-family:var(--mono);font-size:10.5px;}
+.hero .r{width:300px;flex-shrink:0;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:10px;padding:12px 14px;font-size:11.5px;line-height:1.6;color:#475569;}
+.hero .r b{color:#0f172a;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px;}
+.card .ct{font-size:14px;font-weight:800;display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+.card .ct .lg{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:4px;font-family:var(--mono);}
+.lg.na{background:#e8eefb;color:#1d4ed8;} .lg.ma{background:#dcfce7;color:#166534;}
+.card .cs{font-size:12px;color:#555;margin-bottom:12px;line-height:1.6;}
+.card svg{width:100%;height:auto;display:block;background:#f8fafc;border-radius:8px;}
+.card ul{margin:12px 0 0;padding:0;list-style:none;font-size:12px;line-height:1.7;color:#333;}
+.card ul li{padding-left:14px;position:relative;}
+.card ul li::before{content:'·';position:absolute;left:3px;font-weight:800;}
+.card ul li .chk{color:#888;}
+/* 흐름도 */
+.flow{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 20px 8px;}
+.frow{display:flex;align-items:center;gap:0;flex-wrap:wrap;padding:10px 0;border-bottom:1px dashed var(--line);}
+.frow:last-child{border-bottom:0;}
+.frow .rl{width:150px;flex-shrink:0;font-size:11.5px;font-weight:800;color:#0f172a;line-height:1.4;}
+.frow .rl small{display:block;font-weight:500;color:#888;font-size:10.5px;}
+.frow .rl.na{border-left:3px solid #2563eb;padding-left:8px;} .frow .rl.ma{border-left:3px solid #16a34a;padding-left:8px;} .frow .rl.ad{border-left:3px solid #64748b;padding-left:8px;} .frow .rl.on{border-left:3px solid #0f172a;padding-left:8px;}
+.pg{display:inline-flex;flex-direction:column;align-items:flex-start;gap:1px;border:1px solid #cbd5e1;background:#fff;border-radius:8px;padding:6px 10px;min-width:96px;cursor:pointer;transition:all .12s;}
+.pg:hover{border-color:var(--accent);box-shadow:0 2px 8px rgba(37,99,235,.15);transform:translateY(-1px);}
+.pg .pid{font-family:var(--mono);font-size:9.5px;color:var(--accent);font-weight:700;}
+.pg .pn{font-size:11.5px;font-weight:700;color:#0f172a;white-space:nowrap;}
+.pg.int{border-style:dashed;background:#f8fafc;cursor:default;} .pg.int:hover{transform:none;box-shadow:none;border-color:#cbd5e1;}
+.pg.int .pid{color:#64748b;} .pg.int .pn{color:#475569;font-weight:600;}
+.ar{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;padding:0 6px;min-width:44px;}
+.ar i{font-style:normal;color:#94a3b8;font-size:14px;line-height:1;}
+.ar span{font-size:9.5px;color:#64748b;white-space:nowrap;margin-top:1px;}
+.br{display:flex;flex-direction:column;gap:6px;}
+.brl{display:flex;align-items:center;}
+.brl .lbl2{font-size:9.5px;color:#64748b;width:64px;text-align:right;padding-right:6px;}
+.fnote{font-size:11px;color:#666;margin-top:8px;line-height:1.6;}
+/* 읽는 법 */
+.how{display:grid;grid-template-columns:420px 1fr;gap:18px;}
+.schem{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px;}
+.schem .sh{font-size:11px;color:#888;font-weight:700;margin-bottom:8px;}
+.sgrid{display:grid;grid-template-columns:150px 1fr;gap:8px;}
+.sbox{border:1.5px solid #cbd5e1;border-radius:8px;padding:8px 10px;font-size:11px;line-height:1.5;color:#334155;background:#f8fafc;position:relative;}
+.sbox b{display:block;color:#0f172a;font-size:11.5px;margin-bottom:2px;}
+.sbox .mk{position:absolute;top:-8px;left:-8px;width:18px;height:18px;border-radius:50%;background:var(--accent);color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;font-family:var(--mono);}
+.sbox.full{grid-column:1/3;}
+.legend{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 18px;}
+.legend table{width:100%;border-collapse:collapse;font-size:12px;}
+.legend td{padding:7px 8px;border-bottom:1px solid #eee;vertical-align:top;line-height:1.55;}
+.legend td:first-child{width:170px;font-weight:700;color:#0f172a;white-space:nowrap;}
+.legend tr:last-child td{border-bottom:0;}
+.ex-pin{display:inline-flex;width:16px;height:16px;border-radius:50%;background:var(--accent);color:#fff;font-size:9.5px;font-weight:800;align-items:center;justify-content:center;font-family:var(--mono);vertical-align:middle;}
+.ex-chk{color:#888;} .ex-pol{font-family:var(--mono);font-size:11px;background:#f1f5f9;padding:0 4px;border-radius:3px;}
+.ex-doc{display:inline-block;font-size:11px;font-weight:700;background:#f8fafc;border:1px solid var(--line);border-radius:4px;padding:1px 7px;margin-right:4px;}
+/* 화면 목록 */
+.map{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.mg{background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px 14px;}
+.mg .gt{font-size:11.5px;font-weight:800;color:#0f172a;margin-bottom:8px;display:flex;justify-content:space-between;align-items:baseline;}
+.mg .gt small{font-weight:500;color:#888;font-size:10.5px;}
+.mg .pg{display:flex;flex-direction:row;align-items:center;gap:8px;width:100%;margin-bottom:5px;padding:5px 9px;}
+.mg .pg .pid{width:56px;flex-shrink:0;}
+.mg .pg .pn{white-space:normal;font-weight:600;font-size:11.5px;}
+.mg .pg .who{margin-left:auto;font-size:9.5px;color:#94a3b8;white-space:nowrap;}
+@media (max-width:1000px){.two,.how,.map{grid-template-columns:1fr;} .hero .r{width:100%;}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="crumb"><span>시작</span><span class="s">›</span><span>한눈에 보기</span></div>
+  <h1 class="title">한눈에 보기</h1>
+  <span class="sid">개요</span>
+  <span class="defense">먼저 읽는 페이지 · 화면 상세는 아래로 이어짐</span>
+</header>
+
+<div class="ov">
+
+  <div class="hero">
+    <div class="l">
+      <h1>DSRV 교환·중개 서비스 — 화면기획 스토리보드</h1>
+      <div class="tagline">
+        법인 고객이 <b>DSRV Desk</b>(고객 콘솔)에서 가상자산을 <b>교환</b>하거나, 다른 고객과의 교환을 <b>게시판에서 중개</b>받는 서비스의 화면 24개를 정리한 문서입니다.
+        DSRV Admin(관리자 도구) 2개 화면도 포함합니다. 자동 체결·오더북은 없고, 모든 자산 이전은 담당자 승인 후 콜드 지갑에서 사람이 집행합니다.
+      </div>
+      <div class="steps">
+        <span class="step-chip"><b>1</b> 아래 두 그림으로 서비스 구조를 본다</span>
+        <span class="step-chip"><b>2</b> 흐름도에서 화면 순서를 따라간다 (상자 클릭 = 그 화면으로 이동)</span>
+        <span class="step-chip"><b>3</b> 화면별 상세(목업 · 항목 설명 · 상세내용 · 비고)를 읽는다</span>
+      </div>
+    </div>
+    <div class="r">
+      <b>취급 자산</b> ETH · USDC · USDT (Ethereum 단일 체인)<br>
+      <b>고객</b> 국내 법인 · DSRV 커스터디 가입·KYC 완료 법인만<br>
+      <b>건별 한도</b> 1,500,000원 상당 (교환·중개 공통)<br>
+      <b>중개 수수료</b> 거래액 1% · 양 당사자 각자 · 별도 정산<br>
+      <b>가스비</b> 고객 부담 · 받는 수량에서 차감<br>
+      <span class="chk">※ 정책값은 관리자 설정(ADM-03)으로 바뀔 수 있음</span>
+    </div>
+  </div>
+
+  <h2><span class="n">1</span>서비스 두 가지 — 무엇이 다른가</h2>
+  <div class="two">
+    <div class="card">
+      <div class="ct"><span class="lg na">나목 · 교환</span>고객 ↔ DSRV 직접 교환</div>
+      <div class="cs">고객이 가진 자산을 <b>DSRV의 교환 재고</b>와 바꿉니다. 상대방은 항상 DSRV입니다.</div>
+      <svg viewBox="0 0 560 190" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans KR',sans-serif">
+        <rect x="24" y="52" width="150" height="76" rx="10" fill="#fff" stroke="#2563eb" stroke-width="1.5"/>
+        <text x="99" y="82" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">고객 (A사)</text>
+        <text x="99" y="102" text-anchor="middle" font-size="10.5" fill="#64748b">수탁 지갑</text>
+        <rect x="386" y="52" width="150" height="76" rx="10" fill="#0f172a"/>
+        <text x="461" y="82" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">DSRV</text>
+        <text x="461" y="102" text-anchor="middle" font-size="10.5" fill="#cbd5e1">교환 재고 (콜드 지갑)</text>
+        <path d="M180 72 H370" stroke="#2563eb" stroke-width="2" marker-end="url(#a1)"/>
+        <text x="275" y="64" text-anchor="middle" font-size="10.5" fill="#1d4ed8" font-weight="700">보내는 자산 · 예 900 USDC</text>
+        <path d="M380 108 H190" stroke="#2563eb" stroke-width="2" marker-end="url(#a1)"/>
+        <text x="285" y="124" text-anchor="middle" font-size="10.5" fill="#1d4ed8" font-weight="700">받는 자산 · 예 899.73 USDT</text>
+        <rect x="150" y="146" width="260" height="30" rx="6" fill="#eff6ff" stroke="#bfdbfe"/>
+        <text x="280" y="165" text-anchor="middle" font-size="10.5" fill="#1e3a8a">비율 = 외부 시세 + 고정 스프레드 (DSRV가 제시 · 고객이 수락)</text>
+        <defs><marker id="a1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#2563eb"/></marker></defs>
+      </svg>
+      <ul>
+        <li>고객이 <b>교환하기</b>에서 수량을 넣으면 시스템이 비율을 제시하고, 고객이 <b>수락</b>하면 요청이 확정됩니다.</li>
+        <li>DSRV 담당자가 어드민에서 건별로 <b>승인</b>하고, 커스터디팀이 콜드 지갑에서 <b>수동 집행</b>합니다. 자동 체결은 없습니다.</li>
+        <li>별도 수수료 없이 스프레드에 비용이 들어 있고, 가스비는 받는 수량에서 차감합니다.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="ct"><span class="lg ma">마목 · 중개</span>고객 ↔ 고객 교환을 게시판으로 중개</div>
+      <div class="cs">한 고객이 조건을 <b>게시</b>하고 다른 고객이 <b>신청</b>합니다. DSRV는 가격을 정하지 않고 검증·예치·인도·기록만 합니다.</div>
+      <svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans KR',sans-serif">
+        <rect x="16" y="14" width="130" height="60" rx="10" fill="#fff" stroke="#16a34a" stroke-width="1.5"/>
+        <text x="81" y="39" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">게시자 (B사)</text>
+        <text x="81" y="57" text-anchor="middle" font-size="10" fill="#64748b">800 USDT 보냄</text>
+        <rect x="414" y="14" width="130" height="60" rx="10" fill="#fff" stroke="#16a34a" stroke-width="1.5"/>
+        <text x="479" y="39" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">신청자 (A사)</text>
+        <text x="479" y="57" text-anchor="middle" font-size="10" fill="#64748b">798.40 USDC 보냄</text>
+        <rect x="200" y="10" width="160" height="68" rx="10" fill="#f0fdf4" stroke="#86efac"/>
+        <text x="280" y="34" text-anchor="middle" font-size="12" font-weight="700" fill="#166534">교환 게시판</text>
+        <text x="280" y="51" text-anchor="middle" font-size="10" fill="#15803d">게시 → 신청 → 수락(확정)</text>
+        <text x="280" y="66" text-anchor="middle" font-size="9.5" fill="#64748b">DSRV Desk</text>
+        <path d="M150 36 H194" stroke="#16a34a" stroke-width="1.6" marker-end="url(#a2)"/>
+        <text x="172" y="29" text-anchor="middle" font-size="9.5" fill="#166534">게시</text>
+        <path d="M410 36 H366" stroke="#16a34a" stroke-width="1.6" marker-end="url(#a2)"/>
+        <text x="388" y="29" text-anchor="middle" font-size="9.5" fill="#166534">신청</text>
+        <rect x="180" y="104" width="200" height="50" rx="10" fill="#0f172a"/>
+        <text x="280" y="125" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">에스크로 전용지갑 (DSRV)</text>
+        <text x="280" y="142" text-anchor="middle" font-size="9.5" fill="#cbd5e1">콜드 · 고객 자산 · 회사 재산과 분리</text>
+        <path d="M81 78 V118 H172" stroke="#16a34a" stroke-width="1.6" fill="none" marker-end="url(#a2)"/>
+        <text x="126" y="112" text-anchor="middle" font-size="9.5" fill="#166534">① 예치 800 USDT</text>
+        <path d="M479 78 V118 H388" stroke="#16a34a" stroke-width="1.6" fill="none" marker-end="url(#a2)"/>
+        <text x="434" y="112" text-anchor="middle" font-size="9.5" fill="#166534">① 예치 798.40 USDC</text>
+        <path d="M180 142 H108" stroke="#64748b" stroke-width="1.6" fill="none" stroke-dasharray="4 3" marker-end="url(#a3)"/>
+        <text x="100" y="172" text-anchor="middle" font-size="9.5" fill="#475569">② 양건 확인 후 인도</text>
+        <text x="100" y="186" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0f172a">B사 ← 798.40 USDC</text>
+        <path d="M380 142 H452" stroke="#64748b" stroke-width="1.6" fill="none" stroke-dasharray="4 3" marker-end="url(#a3)"/>
+        <text x="460" y="172" text-anchor="middle" font-size="9.5" fill="#475569">② 양건 확인 후 인도</text>
+        <text x="460" y="186" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0f172a">A사 ← 800 USDT</text>
+        <text x="280" y="180" text-anchor="middle" font-size="9.5" fill="#64748b">예치·인도 모두 콜드 2인 서명 · 정산 배치로 집행</text>
+        <defs>
+          <marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#16a34a"/></marker>
+          <marker id="a3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#64748b"/></marker>
+        </defs>
+      </svg>
+      <ul>
+        <li>게시자가 신청을 <b>수락</b>하면 즉시 확정됩니다. 역제안·협상 기능은 없고, 게시 1건에 동시 신청은 1건입니다.</li>
+        <li>확정 후 양측이 보내는 자산을 <b>에스크로 전용지갑에 예치</b> → 양건 확인 → 각 상대방에게 <b>인도</b>합니다. 한쪽만 이전되는 일이 구조적으로 없습니다.</li>
+        <li>중개 수수료는 거래액 1%를 양측이 각자 부담하고, 자산 수량에서 빼지 않고 별도 정산합니다.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2><span class="n">2</span>화면 흐름 — 고객이 밟는 순서 <span style="font-size:11px;font-weight:500;color:#888;">(상자를 클릭하면 그 화면으로 이동)</span></h2>
+  <div class="flow">
+    <div class="frow">
+      <div class="rl on">시작<small>최초 1회 활성화 · 매 로그인</small></div>
+      <div class="pg" data-go="ONB-00"><span class="pid">ONB-00</span><span class="pn">초대 이메일</span></div>
+      <div class="ar"><i>→</i></div>
+      <div class="pg" data-go="ONB-01"><span class="pid">ONB-01</span><span class="pn">비밀번호 설정</span></div>
+      <div class="ar"><i>→</i></div>
+      <div class="pg" data-go="ONB-02"><span class="pid">ONB-02</span><span class="pn">2FA 앱 연결</span></div>
+      <div class="ar"><i>→</i></div>
+      <div class="pg" data-go="ONB-03"><span class="pid">ONB-03</span><span class="pn">복구 코드 저장</span></div>
+      <div class="ar"><i>→</i></div>
+      <div class="pg" data-go="AUTH-01"><span class="pid">AUTH-01</span><span class="pn">로그인</span></div>
+      <div class="ar"><i>→</i></div>
+      <div class="pg" data-go="AUTH-02"><span class="pid">AUTH-02</span><span class="pn">2차 인증</span></div>
+      <div class="ar"><i>→</i></div>
+      <div class="pg" data-go="DASH-01"><span class="pid">DASH-01</span><span class="pn">대시보드</span></div>
+    </div>
+    <div class="frow">
+      <div class="rl na">나목 교환<small>DSRV와 교환 · '교환하기' 탭</small></div>
+      <div class="pg" data-go="EXC-01"><span class="pid">EXC-01</span><span class="pn">교환하기</span></div>
+      <div class="ar"><i>→</i><span>수량 입력</span></div>
+      <div class="pg" data-go="EXC-02"><span class="pid">EXC-02</span><span class="pn">비율 확인·수락</span></div>
+      <div class="ar"><i>→</i><span>[수락] = 확정</span></div>
+      <div class="pg" data-go="EXC-03"><span class="pid">EXC-03</span><span class="pn">승인 진행</span></div>
+      <div class="ar"><i>→</i><span>DSRV 승인·집행</span></div>
+      <div class="pg int" data-go="ADM-02"><span class="pid">ADM-02</span><span class="pn">어드민 승인 → 콜드 수동 집행</span></div>
+      <div class="ar"><i>→</i></div>
+      <div class="pg" data-go="EXC-04"><span class="pid">EXC-04</span><span class="pn">내역·완료</span></div>
+    </div>
+    <div class="frow">
+      <div class="rl ma">마목 중개 — 게시자<small>내 조건을 올리는 쪽</small></div>
+      <div class="pg" data-go="BRK-01"><span class="pid">BRK-01</span><span class="pn">교환 게시판</span></div>
+      <div class="ar"><i>→</i></div>
+      <div class="pg" data-go="BRK-02"><span class="pid">BRK-02</span><span class="pn">거래의향 등록</span></div>
+      <div class="ar"><i>→</i><span>게시 (30일)</span></div>
+      <div class="pg" data-go="BRK-06"><span class="pid">BRK-06</span><span class="pn">내 게시 상세</span></div>
+      <div class="ar"><i>→</i><span>신청 들어오면</span></div>
+      <div class="pg" data-go="BRK-04"><span class="pid">BRK-04</span><span class="pn">받은 신청·수락</span></div>
+      <div class="ar"><i>→</i><span>[수락] = 확정</span></div>
+      <div class="pg" data-go="BRK-05"><span class="pid">BRK-05</span><span class="pn">이전·완료</span></div>
+    </div>
+    <div class="frow">
+      <div class="rl ma">마목 중개 — 신청자<small>올라온 조건에 응하는 쪽</small></div>
+      <div class="pg" data-go="BRK-01"><span class="pid">BRK-01</span><span class="pn">교환 게시판</span></div>
+      <div class="ar"><i>→</i><span>게시 행 클릭</span></div>
+      <div class="pg" data-go="BRK-03"><span class="pid">BRK-03</span><span class="pn">신청하기</span></div>
+      <div class="ar"><i>→</i><span>신청 (2영업일)</span></div>
+      <div class="pg" data-go="BRK-07"><span class="pid">BRK-07</span><span class="pn">내 신청 상세</span></div>
+      <div class="ar"><i>→</i><span>게시자가 수락하면</span></div>
+      <div class="pg" data-go="BRK-05"><span class="pid">BRK-05</span><span class="pn">이전·완료</span></div>
+      <div class="ar"><i>·</i></div>
+      <div class="pg int" data-go="ADM-02"><span class="pid">ADM-02</span><span class="pn">어드민 승인 → 예치 → 인도</span></div>
+    </div>
+    <div class="frow">
+      <div class="rl ad">관리자<small>DSRV 내부 · 고객에게 안 보임</small></div>
+      <div class="pg" data-go="ADM-02"><span class="pid">ADM-02</span><span class="pn">어드민 홈 · 처리함(승인/거절/중지) · CSV</span></div>
+      <div class="ar"><i>·</i></div>
+      <div class="pg" data-go="ADM-03"><span class="pid">ADM-03</span><span class="pn">설정 · 한도·수수료·시세 소스·초대</span></div>
+    </div>
+    <div class="frow">
+      <div class="rl on">예외 · 계정 관리<small>필요할 때만 가는 화면</small></div>
+      <div class="pg" data-go="DASH-02"><span class="pid">DASH-02</span><span class="pn">비밀번호 수정</span></div>
+      <div class="ar"><i>·</i></div>
+      <div class="pg" data-go="DASH-03"><span class="pid">DASH-03</span><span class="pn">2차 인증 재설정</span></div>
+      <div class="ar"><i>·</i></div>
+      <div class="pg" data-go="AUTH-03"><span class="pid">AUTH-03</span><span class="pn">복구 코드로 인증</span></div>
+      <div class="ar"><i>·</i></div>
+      <div class="pg" data-go="ONB-04"><span class="pid">ONB-04</span><span class="pn">초대 링크 오류</span></div>
+    </div>
+    <div class="fnote">점선 상자는 고객이 보지 않는 내부 단계입니다. 마지막 줄은 정상 흐름 밖의 화면(비밀번호·2차 인증 재설정 · 인증 앱 분실 시 복구 코드 · 초대 링크 만료)입니다. 상태 전이의 전체 표는 사이드바 상단 <b>케이스분기</b>, 더 자세한 흐름도는 <b>화면 흐름도</b> 문서에 있습니다.</div>
+  </div>
+
+  <h2><span class="n">3</span>화면 페이지 읽는 법</h2>
+  <div class="how">
+    <div class="schem">
+      <div class="sh">화면 1개의 구성 (모든 화면 동일)</div>
+      <div class="sgrid">
+        <div class="sbox"><span class="mk">A</span><b>목업 (왼쪽)</b>실제 화면 모양. 파란 번호 핀 <span class="ex-pin">1</span>이 조작 요소마다 붙어 있음</div>
+        <div class="sbox"><span class="mk">B</span><b>항목 설명 (오른쪽)</b>핀 번호와 1:1 대응. 맨 위 '진입 · 전역 이동' = 이 화면에 오는 길과 나가는 길. 각 항목 아래 '화면 이동 · 인터랙션' 표 = 누르면 어디로 가는지</div>
+        <div class="sbox full"><span class="mk">C</span><b>상세내용 (아래)</b>정책·산식·이메일 문구·상태 변형처럼 목업에 다 못 적은 규칙</div>
+        <div class="sbox full"><span class="mk">D</span><b>비고 (맨 아래)</b>결정 이력 · 시안과 다른 점 · 이전/다음 화면</div>
+      </div>
+    </div>
+    <div class="legend">
+      <table>
+        <tr><td>입력창 설명 순서</td><td><b>입력 가능</b> → <b>허용 문자</b> → <b>검증</b> → <b>실패 처리</b> → <b>연동</b>. 해당 없는 단계는 비워 둠</td></tr>
+        <tr><td>버튼·드롭다운 설명 순서</td><td><b>노출</b>(언제 보이나) → <b>클릭 가능</b>(언제 눌리나) → <b>확인 사항</b>(다이얼로그 여부) → <b>액션</b>(누르면 무슨 일)</td></tr>
+        <tr><td><span class="ex-pol">{정책값 1,500,000원 상당}</span></td><td>관리자 설정(ADM-03)으로 바뀔 수 있는 값. 중괄호 안이 현재 기준값</td></tr>
+        <tr><td><span class="ex-chk">[확인필요]</span> · <span class="ex-chk">근거 …</span></td><td>회색 글자는 아직 확정되지 않은 사항이거나 근거 표시. 검정 글자만 확정 사양</td></tr>
+        <tr><td><span class="ex-chk">[디자인 요청]</span></td><td>Figma 시안에 없어 기획으로 그린 요소. 디자이너 작업 필요</td></tr>
+        <tr><td>화면 ID</td><td>ONB 온보딩 · AUTH 로그인 · DASH 대시보드·계정 · EXC 나목 교환 · BRK 마목 중개 · ADM 관리자. 번호는 추가 순이라 흐름 순서와 다를 수 있음</td></tr>
+        <tr><td>공통 문서 4종</td><td><span class="ex-doc">IA</span>메뉴 구조 <span class="ex-doc">표기 규칙</span>숫자·날짜·상태 라벨·공통 UI 규격 <span class="ex-doc">케이스분기</span>거래·계정 상태표 <span class="ex-doc">화면 흐름도</span>전체 프로세스맵 — 사이드바 맨 위 버튼으로 열림</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h2><span class="n">4</span>화면 목록 (24개) <span style="font-size:11px;font-weight:500;color:#888;">클릭 = 이동</span></h2>
+  <div class="map">
+    <div class="mg"><div class="gt">인증·온보딩 <small>8</small></div>
+      <div class="pg" data-go="ONB-00"><span class="pid">ONB-00</span><span class="pn">초대 이메일</span></div>
+      <div class="pg" data-go="ONB-01"><span class="pid">ONB-01</span><span class="pn">활성화 · 비밀번호 설정</span></div>
+      <div class="pg" data-go="ONB-02"><span class="pid">ONB-02</span><span class="pn">활성화 · 2FA 앱 연결</span></div>
+      <div class="pg" data-go="ONB-03"><span class="pid">ONB-03</span><span class="pn">활성화 · 복구 코드 저장</span></div>
+      <div class="pg" data-go="ONB-04"><span class="pid">ONB-04</span><span class="pn">초대 링크 오류</span><span class="who">예외</span></div>
+      <div class="pg" data-go="AUTH-01"><span class="pid">AUTH-01</span><span class="pn">로그인</span></div>
+      <div class="pg" data-go="AUTH-02"><span class="pid">AUTH-02</span><span class="pn">2차 인증</span></div>
+      <div class="pg" data-go="AUTH-03"><span class="pid">AUTH-03</span><span class="pn">복구 코드로 인증</span><span class="who">인증 앱 분실</span></div>
+    </div>
+    <div class="mg"><div class="gt">대시보드 · 계정 <small>3</small></div>
+      <div class="pg" data-go="DASH-01"><span class="pid">DASH-01</span><span class="pn">대시보드 · 잔고 · 거래 목록</span></div>
+      <div class="pg" data-go="DASH-02"><span class="pid">DASH-02</span><span class="pn">비밀번호 수정</span></div>
+      <div class="pg" data-go="DASH-03"><span class="pid">DASH-03</span><span class="pn">2차 인증 재설정</span></div>
+      <div class="gt" style="margin-top:12px;">나목 교환 <small>4</small></div>
+      <div class="pg" data-go="EXC-01"><span class="pid">EXC-01</span><span class="pn">교환하기</span></div>
+      <div class="pg" data-go="EXC-02"><span class="pid">EXC-02</span><span class="pn">비율 확인·수락</span></div>
+      <div class="pg" data-go="EXC-03"><span class="pid">EXC-03</span><span class="pn">승인 진행</span></div>
+      <div class="pg" data-go="EXC-04"><span class="pid">EXC-04</span><span class="pn">내역·완료</span></div>
+    </div>
+    <div class="mg"><div class="gt">마목 중개 <small>7</small></div>
+      <div class="pg" data-go="BRK-01"><span class="pid">BRK-01</span><span class="pn">교환 게시판</span><span class="who">양측</span></div>
+      <div class="pg" data-go="BRK-02"><span class="pid">BRK-02</span><span class="pn">거래의향 등록</span><span class="who">게시자</span></div>
+      <div class="pg" data-go="BRK-06"><span class="pid">BRK-06</span><span class="pn">내 게시 상세 · 게시 중단</span><span class="who">게시자</span></div>
+      <div class="pg" data-go="BRK-04"><span class="pid">BRK-04</span><span class="pn">받은 신청 · 수락</span><span class="who">게시자</span></div>
+      <div class="pg" data-go="BRK-03"><span class="pid">BRK-03</span><span class="pn">신청하기</span><span class="who">신청자</span></div>
+      <div class="pg" data-go="BRK-07"><span class="pid">BRK-07</span><span class="pn">내 신청 상세</span><span class="who">신청자</span></div>
+      <div class="pg" data-go="BRK-05"><span class="pid">BRK-05</span><span class="pn">이전·완료 (예치 → 인도)</span><span class="who">양측</span></div>
+      <div class="gt" style="margin-top:12px;">관리자 (DSRV Admin) <small>2</small></div>
+      <div class="pg" data-go="ADM-02"><span class="pid">ADM-02</span><span class="pn">어드민 홈 · 처리함</span></div>
+      <div class="pg" data-go="ADM-03"><span class="pid">ADM-03</span><span class="pn">설정</span></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  function reportH(){var h=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight);window.parent&&window.parent!==window&&window.parent.postMessage({type:'iframeHeight',h:h},'*');}
+  window.addEventListener('load',reportH);window.addEventListener('resize',reportH);setTimeout(reportH,300);setTimeout(reportH,1200);
+  document.addEventListener('click',function(e){
+    var go=e.target.closest('[data-go]');if(!go)return;
+    if(window.parent&&window.parent!==window){window.parent.postMessage({type:'navigate',pageId:go.dataset.go},'*');}
+    else{var m={'ONB-00':'onb-00','ONB-01':'onb-01','ONB-02':'onb-02','ONB-03':'onb-03','ONB-04':'onb-04','AUTH-01':'auth-01','AUTH-02':'auth-02','AUTH-03':'auth-03','DASH-01':'dash-01','DASH-02':'dash-02','DASH-03':'dash-03','EXC-01':'exc-01','EXC-02':'exc-02','EXC-03':'exc-03','EXC-04':'exc-04','BRK-01':'brk-01','BRK-02':'brk-02','BRK-03':'brk-03','BRK-04':'brk-04','BRK-05':'brk-05','BRK-06':'brk-06','BRK-07':'brk-07','ADM-02':'adm-02','ADM-03':'adm-03'};if(m[go.dataset.go])location.href=m[go.dataset.go]+'.html';}
+  });
+})();
+</script>
+</body>
+</html>

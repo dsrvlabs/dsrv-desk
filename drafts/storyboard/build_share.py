@@ -15,6 +15,7 @@ DOC_FILES = {'ia': 'ia.html', 'gloss': 'notation.html', 'states': 'states.html',
 BUDGET = 13_000_000                  # 내장 데이터(JSON) 바이트 상한 — 아티팩트 한도 16MB 대비 여유
 # 현재 화면 목록(정본) — 화면 추가 시 index.html PAGES·ia.html·process.html FILE_MAP·notation 화면 ID 표와 함께 갱신
 SCREENS = [
+    ('시작', 'OVW', '한눈에 보기 — 서비스 · 흐름 · 읽는 법', 'overview.html'),
     ('인증·온보딩', 'ONB-00', '초대 이메일', 'onb-00.html'),
     (None, 'ONB-01', '활성화 · 비밀번호 설정', 'onb-01.html'),
     (None, 'ONB-02', '활성화 · 2FA 앱 연결', 'onb-02.html'),
@@ -139,7 +140,8 @@ cur = make_version(cur_screens, read_wt,
                    CUR_LABEL or '작업 중 (미커밋)')
 same_as_head = bool(versions) and all(
     versions[0][k] == cur[k] for k in ('files', 'css', 'js', 'docs', 'nav'))
-if not same_as_head:
+HEAD_ONLY = '--head-only' in sys.argv   # 타 세션의 미커밋 편집을 공유본에 섞지 않을 때
+if not same_as_head and not HEAD_ONLY:
     cur['commit'] = None
     versions.insert(0, cur)
 
@@ -261,7 +263,7 @@ function render(vi){
   if(obs)obs.disconnect();
   VI=vi;V=VERSIONS[vi];navBtn={};DOCS={};currentPid=null;
   V.nav.forEach(it=>{DOCS[it.file]=inlineDoc(V,it.file);});
-  document.getElementById('sbSub').textContent='화면 '+V.nav.length+'개 + IA·표기 규칙(공통 UI 규격)·프로세스맵·케이스분기 · '+V.date.slice(0,10)+' 기준';
+  document.getElementById('sbSub').textContent='화면 '+V.nav.filter(x=>x.id!=='OVW').length+'개 + IA·표기 규칙(공통 UI 규격)·프로세스맵·케이스분기 · '+V.date.slice(0,10)+' 기준';
   document.getElementById('verN').textContent=verLabel(V);
   document.getElementById('verD').textContent=V.date+(vi===0?' · 최신':'');
   list.innerHTML='';main.innerHTML='';
