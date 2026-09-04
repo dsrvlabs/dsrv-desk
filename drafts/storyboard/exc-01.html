@@ -74,7 +74,6 @@
           <div class="pin" data-idx="2" style="top:-6px;right:-6px;">3</div>
           <div style="font-size:11px;color:#94a3b8;font-weight:600;margin-bottom:6px;">보내는 수량 <span style="float:right;color:#64748b;">1회 최대 1,500,000원 상당</span></div>
           <div class="field"><span>900</span><span class="chip asset">USDC</span></div>
-          <div style="font-size:10px;color:#64748b;margin-top:4px;">≈ 1,215,000원</div>
         </div>
 
         <div class="item-area" data-highlight="3" style="position:relative;padding:4px;border-radius:8px;">
@@ -85,7 +84,7 @@
           <div class="kv"><span class="k">교환비율 (참고)</span><span class="v">0.9998 USDT/USDC</span></div>
           <div class="kv"><span class="k">예상 받는 수량</span><span class="v">899.82 USDT</span></div>
           <div class="kv"><span class="k">스프레드</span><span class="v">0.10% 고정</span></div>
-          <div class="kv"><span class="k">예상 가스비</span><span class="v">0.0021 ETH ≈ 8,900원</span></div>
+          <div class="kv"><span class="k">예상 가스비</span><span class="v">0.0021 ETH</span></div>
           <div style="font-size:10px;color:#94a3b8;margin:2px 0 4px;">확정 비율은 요청 후 제시됩니다</div>
         </div>
       </div>
@@ -147,7 +146,7 @@
       <div class="num">3</div>
       <div>
         <div class="itm-title">보내는 수량 입력<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 보내는 자산을 고른 뒤에만 가능하다. 교환 가능 풀이 0이면 비활성으로 두고 "현재 교환 불가"를 표시한다.<br><strong>허용 문자</strong> 숫자와 소수점만 받는다. 소수 자릿수 상한은 보내는 자산 기준(ETH 4 / USDC·USDT 2)이고 초과 입력은 무시한다. 천 단위 쉼표는 자동으로 넣는다.<br><strong>검증</strong> 입력 중 한도와 풀을 함께 판정한다. 유효 상한은 1회 한도 {정책값 1,500,000원 상당}의 환산 수량과 현재 교환 가능 풀 중 작은 값이다.<br><strong>실패 처리</strong> 한도 초과와 풀 초과에 각각 인라인 ⚠를 띄우고 [거래 요청]을 비활성으로 둔다. 둘 다 해당하면 한도 초과만 보여준다.<br><strong>연동</strong> 입력 중 필드 아래 KRW 환산액(소수 2자리 · ADM-03 시세 소스 · 스테이블코인도 KRW 시세로 환산)과 항목 4의 예상 받는 수량을 갱신한다. 라벨 우측에 "1회 최대 1,500,000원 상당"을 상시 표기한다.<br><span class="basis">근거 09 §0 건별 한도·표기 자릿수 · notation 입력 자릿수</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 보내는 자산을 고른 뒤에만 가능하다. 교환 가능 풀이 0이면 비활성으로 두고 "현재 교환 불가"를 표시한다.<br><strong>허용 문자</strong> 숫자와 소수점만 받는다. 소수 자릿수 상한은 보내는 자산 기준(ETH 4 / USDC·USDT 2)이고 초과 입력은 무시한다. 천 단위 쉼표는 자동으로 넣는다.<br><strong>검증</strong> 입력 중 한도와 풀을 함께 판정한다. 유효 상한은 1회 한도 {정책값 1,500,000원 상당}의 환산 수량과 현재 교환 가능 풀 중 작은 값이다.<br><strong>실패 처리</strong> 한도 초과와 풀 초과에 각각 인라인 ⚠를 띄우고 [거래 요청]을 비활성으로 둔다. 둘 다 해당하면 한도 초과만 보여준다.<br><strong>연동</strong> 입력 중 항목 4의 예상 받는 수량을 갱신한다. 필드 아래 KRW 환산액은 표시하지 않는다(한도 판정용 환산은 내부에서만 한다). 라벨 우측에 "1회 최대 1,500,000원 상당"을 상시 표기한다.<br><span class="basis">근거 09 §0 건별 한도·표기 자릿수 · notation 입력 자릿수</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">수량 필드</span><span class="nav-act">키 입력마다 검증(포커스 아웃 대기 없음)</span><span class="nav-to stay">정상 → 경고 제거·[거래 요청] 활성 / 초과 → 인라인 경고 ③ 또는 ④ 노출·[거래 요청] 비활성</span></div>
           <div class="nav-row"><span class="nav-el">수량 필드 (자산 미선택)</span><span class="nav-act">보내는·받는 자산 중 하나라도 미선택</span><span class="nav-to stay">필드 비활성 · 클릭 시 인라인 안내 "자산을 먼저 선택해 주세요"</span></div>
@@ -159,7 +158,7 @@
       <div class="num">4</div>
       <div>
         <div class="itm-title">교환 가능 풀 · 참고 비율 · 예상 받는 수량 · 스프레드 · 예상 가스비 (표시 전용)</div>
-        <div class="itm-desc"><strong>조회</strong> 받는 자산을 고를 때 1회 조회한다. 화면에 머무는 동안 자동으로 다시 조회하지 않는다.<br><strong>예상 가스비</strong> 조회 시점 가스 가격으로 산정해 ETH 4자리와 원화 환산을 병기한다(예 0.0021 ETH ≈ 8,900원). 고객 부담이며 받는 수량에서 차감한다. 이 값은 조회 시점 가스 가격으로 계산한 <strong>참고 안내</strong>이고, 실제 차감액은 이전 시 블록 상태에 따라 정해진다. 건별 한도 {정책값 1,500,000원 상당} 판정에는 넣지 않는다.<br><strong>값</strong> 교환 가능 풀은 「{수량} {받는자산}」. 비율은 스테이블 페어 {받는}/{주는} 4자리, ETH 페어 {스테이블}/ETH 2자리. 예상 받는 수량은 보내는 수량 × 참고 비율(ETH 페어는 방향에 따라 ÷)을 받는 자산 자릿수로 절사하고, 수량이 비면 "—". 스프레드는 ADM-03 고정값 {정책값 0.10%} 소수 2자리.<br><strong>상태</strong> 로딩 "불러오는 중…"이고 3초를 넘기면 오류로 넘긴다. 조회 실패면 값을 "—"로 두고 상단 배너를 띄우며 [거래 요청]을 비활성으로 둔다.<br><strong>안내</strong> 확정 비율은 EXC-02 제시 시점 값이라 이 값과 다를 수 있다는 문구를 상시 노출한다.<br><span class="basis">근거 L6 이용자보호(설명의무) · <span class="chk">[확인필요: 풀 정의]</span></span></div>
+        <div class="itm-desc"><strong>조회</strong> 받는 자산을 고를 때 1회 조회한다. 화면에 머무는 동안 자동으로 다시 조회하지 않는다.<br><strong>예상 가스비</strong> 조회 시점 가스 가격으로 산정해 ETH 4자리로 적는다(예 0.0021 ETH). 고객 부담이며 받는 수량에서 차감한다. 이 값은 조회 시점 가스 가격으로 계산한 <strong>참고 안내</strong>이고, 실제 차감액은 이전 시 블록 상태에 따라 정해진다. 건별 한도 {정책값 1,500,000원 상당} 판정에는 넣지 않는다.<br><strong>값</strong> 교환 가능 풀은 「{수량} {받는자산}」. 비율은 스테이블 페어 {받는}/{주는} 4자리, ETH 페어 {스테이블}/ETH 2자리. 예상 받는 수량은 보내는 수량 × 참고 비율(ETH 페어는 방향에 따라 ÷)을 받는 자산 자릿수로 절사하고, 수량이 비면 "—". 스프레드는 ADM-03 고정값 {정책값 0.10%} 소수 2자리.<br><strong>상태</strong> 로딩 "불러오는 중…"이고 3초를 넘기면 오류로 넘긴다. 조회 실패면 값을 "—"로 두고 상단 배너를 띄우며 [거래 요청]을 비활성으로 둔다.<br><strong>안내</strong> 확정 비율은 EXC-02 제시 시점 값이라 이 값과 다를 수 있다는 문구를 상시 노출한다.<br><span class="basis">근거 L6 이용자보호(설명의무) · <span class="chk">[확인필요: 풀 정의]</span></span></div>
       </div>
     </div>
 

@@ -45,11 +45,9 @@
           <div style="font-size:9px;color:#94a3b8;padding:6px 4px 3px;">▼ 검증 실패 직후에만 노출</div>
           <div class="err-chip" style="display:block;width:fit-content;margin:0 auto;">인증 코드가 올바르지 않습니다 <strong>2회 남음</strong></div>
         </div>
-        <div class="item-area" data-highlight="1" style="position:relative;padding:4px;border-radius:8px;margin-top:6px;">
+        <div class="item-area" data-highlight="1" style="position:relative;padding:4px;border-radius:8px;margin-top:10px;">
           <div class="pin" data-idx="1" style="top:-6px;right:-6px;">2</div>
-          <div style="font-size:10.5px;color:#2f3747;font-weight:700;text-align:center;">복구 코드로 인증</div>
-          <div style="font-size:9px;color:#888;padding:6px 4px 3px;">▼ 링크 클릭 시 6칸 대신 노출 <span class="chk">[디자인 요청]</span></div>
-          <div class="field fg" style="border-style:dashed;"><span class="ph">복구 코드 입력 (예: 3G56 - SYN5 - YVT9 - DT68 - 5DDR - 14QD)</span></div>
+          <div class="btn outline fg">복구 코드로 인증</div>
         </div>
       </div>
 
@@ -66,14 +64,14 @@
     <div class="nav-global">
       <div class="nav-global-title">진입 · 전역 이동</div>
       <div class="nav-note">· <strong>전역 이동</strong> 프레임(브랜드 패널 · 푸터 · 뒤로가기)의 동작은 계정 활성화 1/3 비밀번호 설정(ONB-01)의 표와 같다. 다른 점 없음<span class="chk">[확인필요]</span>. 이 화면에서 1단계로 돌아가는 버튼은 없다. 되돌아가려면 다시 접속한다(뒤로가기 안내 후에도 로그인(AUTH-01) 1단계로 간다).<br>
-      · <strong>진입</strong> 로그인(AUTH-01) [로그인] 성공 직후. 1단계 성공 상태(사전 인증)는 {정책값 120초} 이내에만 유효하고, 지나면 로그인(AUTH-01) 1단계로 되돌린다 <span class="chk">[확인필요: 사전 인증 유효시간]</span>. 이 화면을 건너뛰고 세션이 생기는 경로는 없다.</div>
+      · <strong>진입</strong> ① 로그인(AUTH-01) [로그인] 성공 직후 ② 복구 코드로 인증(AUTH-03)에서 '‹ 이전으로' 클릭. 1단계 성공 상태(사전 인증)는 {정책값 120초} 이내에만 유효하고, 지나면 로그인(AUTH-01) 1단계로 되돌린다 <span class="chk">[확인필요: 사전 인증 유효시간]</span>. 이 화면(또는 AUTH-03)을 건너뛰고 세션이 생기는 경로는 없다.</div>
     </div>
 
     <div class="itm" data-idx="0">
       <div class="num">1</div>
       <div>
         <div class="itm-title">2차 인증 코드 입력 (6칸 · 자동 검증)<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 검증 중에는 읽기 전용이다.<br><strong>허용 문자</strong> 숫자만 받고 한 칸에 1자를 넣는다. 입력하면 다음 칸으로 포커스를 옮긴다.<br><strong>검증</strong> 6번째 자리를 채우는 즉시 서버에 검증을 요청한다. 확인 버튼은 두지 않는다.<br><strong>실패 처리</strong> 6칸을 초기화하고 첫 칸에 포커스를 주며 오류 칩에 {남은 횟수}를 표기한다. 통합 카운터가 1 오르고 {정책값 5회} 도달 시 계정을 잠그고 <strong>로그인(AUTH-01)</strong>으로 되돌린 뒤 잠금 배너를 띄운다.<br><strong>연동</strong> 성공하면 세션을 만들고, 계정당 1세션 원칙에 따라 다른 기기의 기존 세션을 즉시 종료한다(기존 기기는 다음 요청 때 AUTH-01로 온다). 복구 코드는 이 칸에 넣지 않고 항목 2 링크로 전환해 받는다.<br><span class="chk">[확인필요: 기존 세션 종료 안내 문구]</span><br><span class="basis">근거 ISMS 2.5 · F-5 · 전 권한자 MFA 의무</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 검증 중에는 읽기 전용이다.<br><strong>허용 문자</strong> 숫자만 받고 한 칸에 1자를 넣는다. 입력하면 다음 칸으로 포커스를 옮긴다.<br><strong>검증</strong> 6번째 자리를 채우는 즉시 서버에 검증을 요청한다. 확인 버튼은 두지 않는다.<br><strong>실패 처리</strong> 6칸을 초기화하고 첫 칸에 포커스를 주며 오류 칩에 {남은 횟수}를 표기한다. 통합 카운터가 1 오르고 {정책값 5회} 도달 시 계정을 잠그고 <strong>로그인(AUTH-01)</strong>으로 되돌린 뒤 잠금 배너를 띄운다.<br><strong>연동</strong> 성공하면 세션을 만들고, 계정당 1세션 원칙에 따라 다른 기기의 기존 세션을 즉시 종료한다(기존 기기는 다음 요청 때 AUTH-01로 온다). 복구 코드는 이 칸에 넣지 않는다. 항목 2 버튼으로 복구 코드로 인증(AUTH-03)에 가서 받는다.<br><span class="chk">[확인필요: 기존 세션 종료 안내 문구]</span><br><span class="basis">근거 ISMS 2.5 · F-5 · 전 권한자 MFA 의무</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">6칸 코드 — 6자리 완성</span><span class="nav-act">자동 검증("확인 중…" · 중복 검증 차단)</span><span class="nav-to">성공 → 세션 생성 → <strong>대시보드(DASH-01)</strong> / 실패 → 칩 · 6칸 초기화 · 화면 잔류 / {정책값 5회} 도달 → <strong>로그인(AUTH-01)</strong> + 잠금 배너</span></div>
         </div>
@@ -83,11 +81,10 @@
     <div class="itm" data-idx="1">
       <div class="num">2</div>
       <div>
-        <div class="itm-title">'복구 코드로 인증' 링크 → 복구 코드 입력</div>
-        <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 항상 활성이다.<br><strong>확인 사항</strong> 없다. 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> 6칸 대신 복구 코드 텍스트 필드 1개로 바꾸고 링크 문구를 '인증 앱 코드로 인증'으로 토글한다.<br><strong>입력 가능</strong> 링크로 전환한 뒤에만 가능하다. 6칸과 동시에 쓰이지 않는다.<br><strong>허용 문자</strong> 전환된 필드는 영숫자 24자를 받는다. 하이픈과 공백은 받아서 무시하고 소문자는 대문자로 바꾼다.<br><strong>검증</strong> 24자를 채우는 즉시 자동 검증한다.<br><strong>실패 처리</strong> 오류 칩에 {남은 횟수}를 표기하고 통합 카운터를 1 올린다.<br><strong>연동</strong> 성공하면 코드를 즉시 폐기한다. 코드가 1개뿐이라 인증 앱을 복구하지 않으면 로그인 수단이 없으므로 DASH-01 상단에 재설정 권고 배너를 띄운다. 재발급은 DASH-03 재설정 완료 시에만 한다.<br><strong>저장</strong> 비밀번호와 같은 방식으로 해시 저장하고 사용·실패를 감사로그에 남긴다.<br><span class="chk">[디자인 요청]</span> 복구 코드 필드는 시안에 없다(6칸 컴포넌트에 24자를 넣을 수 없어 기획으로 추가).<br><span class="basis">근거 ISMS 2.5 세션·인증 복구 · ONB-03 항목 1</span></div>
+        <div class="itm-title">[복구 코드로 인증] 버튼</div>
+        <div class="itm-desc"><strong>노출</strong> 항상 보인다. 6칸 아래 보조(외곽선) 버튼이다.<br><strong>클릭 가능</strong> 항상 활성이다. 6칸 검증이 진행 중일 때만 비활성으로 둔다.<br><strong>확인 사항</strong> 없다. 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> 복구 코드로 인증(AUTH-03)으로 이동한다. 6칸에 입력 중이던 값은 버리고, 사전 인증 상태와 통합 카운터는 그대로 이어진다.<br><span class="basis">근거 ISMS 2.5 세션·인증 복구 · 2026-09-04 사용자 결정(복구 코드 인증을 별도 화면으로 분리)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">'복구 코드로 인증' 링크</span><span class="nav-act">클릭</span><span class="nav-to stay">6칸 → 복구 코드 필드로 전환(입력값 초기화) · 링크 문구 토글 · 다시 클릭 시 6칸으로 복귀</span></div>
-          <div class="nav-row"><span class="nav-el">복구 코드 필드 — 24자 완성</span><span class="nav-act">자동 검증</span><span class="nav-to">성공 → 코드 폐기 · 세션 생성 → <strong>대시보드(DASH-01)</strong>(재설정 권고 배너) / 실패 → 칩 · 화면 잔류</span></div>
+          <div class="nav-row"><span class="nav-el">[복구 코드로 인증]</span><span class="nav-act">클릭</span><span class="nav-to">→ <strong>복구 코드로 인증(AUTH-03)</strong>(6칸 입력값 폐기 · 사전 인증 상태 유지)</span></div>
         </div>
       </div>
     </div>
@@ -101,11 +98,11 @@
     <div class="detail-grid" id="detailCol">
       <div class="dtl" data-idx="0">
         <div class="detail-label"><span class="dtl-num">1</span>2단계 인증 · 세션</div>
-        <div class="dtl-body"><span class="box"><strong>흐름</strong> AUTH-01 1단계 성공 → 사전 인증 상태({정책값 120초}) → 이 화면에서 TOTP 또는 복구 코드 → 세션 생성. 이 화면을 건너뛰고 세션이 생기는 경로는 없다.<br><strong>MFA 범위</strong> 로그인 시 1회, 그리고 승인·정책변경 같은 민감행위와 계정정보 변경(DASH-02·03)에서 다시 인증한다.<br><strong>동시세션</strong> 1개만 둔다. 새 로그인이 기존 세션을 끊고 기존 기기는 다음 요청에서 AUTH-01로 온다.<br><strong>세션 값</strong> 유휴 {정책값 15분} · 최대 {정책값 8시간} 고정 설정이다(2026-09-02 확정 · ADM-03 파라미터 아님). <span class="chk">[확인필요: 기존 세션 종료 안내 문구]</span></span></div>
+        <div class="dtl-body"><span class="box"><strong>흐름</strong> AUTH-01 1단계 성공 → 사전 인증 상태({정책값 120초}) → 이 화면에서 TOTP 6자리, 또는 AUTH-03에서 복구 코드 → 세션 생성. 두 화면을 건너뛰고 세션이 생기는 경로는 없다.<br><strong>MFA 범위</strong> 로그인 시 1회, 그리고 승인·정책변경 같은 민감행위와 계정정보 변경(DASH-02·03)에서 다시 인증한다.<br><strong>동시세션</strong> 1개만 둔다. 새 로그인이 기존 세션을 끊고 기존 기기는 다음 요청에서 AUTH-01로 온다.<br><strong>세션 값</strong> 유휴 {정책값 15분} · 최대 {정책값 8시간} 고정 설정이다. <span class="chk">[확인필요: 기존 세션 종료 안내 문구]</span></span></div>
       </div>
       <div class="dtl" data-idx="1">
-        <div class="detail-label"><span class="dtl-num">2</span>복구 코드 규격</div>
-        <div class="dtl-body"><span class="box"><strong>형식</strong> 단일 코드 1개, 영숫자 24자(4자×6그룹, 표시 시 " - " 구분), 1회용, 해시 저장. 사용·실패를 감사로그에 남긴다.<br><strong>사용 후</strong> 복구 수단이 없어지므로 DASH-01 권고 배너로 DASH-03 재설정을 유도해 새 코드를 발급하고 이전 코드를 폐기한다.<br><strong>전면 분실</strong> 복구 코드까지 없으면 관리자 본인확인 후 초대 재발송으로 처리한다.<br><strong>입력 UI</strong> 6칸이 아니라 텍스트 필드를 쓴다(항목 2). <span class="chk">[디자인 요청]</span></span></div>
+        <div class="detail-label"><span class="dtl-num">2</span>복구 코드 인증 분리</div>
+        <div class="dtl-body"><span class="box"><strong>화면</strong> 복구 코드 입력·검증·규격은 복구 코드로 인증(AUTH-03)에 있다. 이 화면은 6칸만 둔다(같은 카드 안에서 6칸 ↔ 텍스트 필드로 바꾸는 방식은 폐기).<br><strong>이어지는 것</strong> AUTH-02 ↔ AUTH-03을 오가도 사전 인증 상태와 통합 카운터는 하나로 이어진다. 두 화면 실패를 합산해 {정책값 5회}에서 잠근다.</span></div>
       </div>
     </div>
   </div>
@@ -114,7 +111,7 @@
 <section class="footer-note">
   <div class="note-card">
     <div class="note-title">비고</div>
-    <div class="note-body">· 로그인 <strong>2/2 — 2차 인증</strong>. 2026-09-02 사용자 결정으로 AUTH-01에서 분리했다(종전 '같은 카드가 2단계로 전환' 폐기 · 계정 활성화 3화면 분리와 같은 방식).<br>· <strong>실패 카운트</strong> 계정 단위 통합 카운터 — 비밀번호·인증 코드·복구 코드 실패를 합산하고 로그인 성공 시 0으로 되돌린다. {정책값 5회} 도달 시 계정 잠금이며 잠금 배너는 AUTH-01에 띄운다. <span class="chk">[확인필요: 합산 카운터 vs 단계별 개별 카운터]</span><br>· <strong>확정(2026-09-02)</strong> — 보조 링크 없음(문의하기·1단계 복귀 삭제) · 확인 버튼·Enter 없음 · 복구 코드 진입은 이 화면 링크로만.<br>· <span class="chk">[디자인 요청]</span> Figma에 로그인용 2단계 프레임이 없어 'Set 2FA Code'의 6칸·오류 칩 컴포넌트를 차용했다.<br>· 이전 = AUTH-01 로그인 / 다음 = DASH-01 대시보드</div>
+    <div class="note-body">· 로그인 <strong>2/2 — 2차 인증</strong>. 2026-09-02 사용자 결정으로 AUTH-01에서 분리했다(종전 '같은 카드가 2단계로 전환' 폐기 · 계정 활성화 3화면 분리와 같은 방식).<br>· <strong>2026-09-04</strong> 복구 코드 인증을 <strong>별도 화면(AUTH-03)</strong>으로 분리했다(Figma 2차 시안 기준 · 사용자 결정). 이 화면의 '복구 코드로 인증' 링크 → 텍스트 필드 토글은 폐기하고 [복구 코드로 인증] 버튼 이동으로 바꿨다.<br>· <strong>실패 카운트</strong> 계정 단위 통합 카운터 — 비밀번호·인증 코드·복구 코드 실패를 합산하고 로그인 성공 시 0으로 되돌린다. {정책값 5회} 도달 시 계정 잠금이며 잠금 배너는 AUTH-01에 띄운다. <span class="chk">[확인필요: 합산 카운터 vs 단계별 개별 카운터]</span><br>· <strong>확정(2026-09-02)</strong> — 보조 링크 없음(문의하기·1단계 복귀 삭제) · 확인 버튼·Enter 없음. <span class="chk">[확인필요]</span> 2차 시안에는 이메일 배지 · "문의하기" · "‹ 로그인으로 돌아가기" · 제목 '2단계 인증(2FA)'가 있다. 기획은 삭제 결정과 용어('2차 인증')를 유지하고 반영하지 않았다.<br>· <span class="chk">[디자인 요청]</span> 시도 초과 시 시안은 이 화면에 "로그인 시도 횟수를 초과하였습니다" 칩을 두지만 기획은 로그인(AUTH-01)으로 되돌려 잠금 배너를 띄운다.<br>· 이전 = AUTH-01 로그인 / 다음 = DASH-01 대시보드 · 복구 코드 = AUTH-03</div>
   </div>
 </section>
 

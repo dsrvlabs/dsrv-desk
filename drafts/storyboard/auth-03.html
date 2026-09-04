@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화면기획 — 복구 코드로 인증</title>
+<link rel="stylesheet" href="screen.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="crumb"><span>인증</span><span class="s">›</span><span>로그인</span><span class="s">›</span><span>2차 인증</span><span class="s">›</span><span>복구 코드로 인증</span></div>
+  <h1 class="title">복구 코드로 인증</h1>
+  <span class="sid">AUTH-03</span>
+  <span class="defense">MFA 의무 · 인증 앱 분실 시 로그인 경로</span>
+</header>
+
+<div class="main">
+  <div class="screen-panel">
+    <div style="position:relative;display:flex;">
+      <div class="labels" id="labels">
+        <div class="lbl"><span class="lbl-text">전역<br>브랜드 패널</span></div>
+        <div class="lbl"><span class="lbl-text">복구 코드 입력</span></div>
+        <div class="lbl"><span class="lbl-text">이전으로</span></div>
+        <div class="lbl"><span class="lbl-text">푸터</span></div>
+      </div>
+      <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
+    </div>
+
+    <div class="frame" id="frame" style="background:linear-gradient(135deg,#e3eafc 0%,#f1f4fa 55%,#edf3fb 100%);">
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="brand-panel">
+          <div class="bp-logo">DSRV<span>&reg;</span></div>
+          <div class="bp-tag">한 번의 연동으로 완성하는<br><strong>쉽고 강력한 온체인 금융 OS</strong></div>
+          <div class="bp-sub">자산의 발행·결제·운용·보관을 위한 엔터프라이즈급 블록체인 인프라.</div>
+        </div>
+      </div>
+
+      <div class="zone card" data-idx="0,1">
+        <div class="zone-highlight"></div>
+        <div class="zone-title" style="margin-bottom:2px;">복구 코드로 인증</div>
+        <div style="font-size:10px;color:#788297;margin-bottom:10px;">계정 활성화 때 저장한 복구 코드를 입력하세요.</div>
+        <div class="item-area" data-highlight="0" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="0" style="top:-6px;right:-6px;">1</div>
+          <div class="flabel">복구 코드<span class="star">*</span></div>
+          <div class="field fg"><span class="ph">XXXX - XXXX - XXXX - XXXX - XXXX - XXXX</span></div>
+          <div style="font-size:9px;color:#94a3b8;padding:6px 4px 3px;">▼ 검증 실패 직후에만 노출</div>
+          <div class="err-chip" style="display:block;width:fit-content;margin:0 auto;">복구 코드가 올바르지 않습니다 <strong>2회 남음</strong></div>
+        </div>
+        <div class="item-area" data-highlight="1" style="position:relative;padding:4px;border-radius:8px;margin-top:10px;">
+          <div class="pin" data-idx="1" style="top:-6px;right:-6px;">2</div>
+          <div class="btn primary fg">인증</div>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="2">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="2" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="2" style="top:-6px;right:-6px;">3</div>
+          <div class="aux-back">‹ &nbsp;이전으로</div>
+        </div>
+      </div>
+
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="pg-footer"><span>&copy; dsrv labs Co., Ltd. All Rights Reserved</span><span class="lnk">공지사항</span><span class="lnk">개인정보처리방침</span><span class="lnk">이용약관</span></div>
+      </div>
+    </div>
+  </div>
+
+  <svg id="connSvg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;"></svg>
+
+  <div class="items" id="items">
+    <div class="nav-global">
+      <div class="nav-global-title">진입 · 전역 이동</div>
+      <div class="nav-note">· <strong>전역 이동</strong> 프레임(브랜드 패널 · 푸터 · 뒤로가기)의 동작은 계정 활성화 1/3 비밀번호 설정(ONB-01)의 표와 같다. 다른 점 = 항목 3 '‹ 이전으로'로 2차 인증(AUTH-02)에 되돌아갈 수 있다.<br>
+      · <strong>진입</strong> 2차 인증(AUTH-02) [복구 코드로 인증] 클릭. 로그인(AUTH-01) 1단계 성공 상태(사전 인증)가 {정책값 120초} 이내여야 하고, 지나면 로그인(AUTH-01) 1단계로 되돌린다 <span class="chk">[확인필요: 사전 인증 유효시간]</span>. 주소 직접 입력 등 AUTH-02를 거치지 않은 진입은 로그인(AUTH-01)으로 보낸다.</div>
+    </div>
+
+    <div class="itm" data-idx="0">
+      <div class="num">1</div>
+      <div>
+        <div class="itm-title">복구 코드 입력 (텍스트 필드 1개)<span class="req">필수</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 검증 중에는 읽기 전용이다.<br><strong>허용 문자</strong> 영문 대·소문자와 숫자를 받는다. 하이픈과 공백은 받아서 무시하고 소문자는 대문자로 바꾼다. 영숫자 24자를 넘는 입력은 무시한다. 붙여넣기는 허용한다.<br><strong>검증</strong> [인증] 클릭 시 클라이언트가 빈칸·24자 여부를 판정하고, 통과하면 서버에 검증을 요청한다. 입력 중·포커스 아웃 시에는 판정하지 않고 자동 검증도 없다.<br><strong>실패 처리</strong> ① 형식 오류(빈칸·24자 미만) = 인라인 ⚠ "복구 코드 24자를 입력해 주세요"(통합 카운터 미증가) ② 서버 불일치 = 오류 칩 "복구 코드가 올바르지 않습니다 {남은 횟수}", 필드 초기화 · 포커스, 통합 카운터 1 증가. {정책값 5회} 도달 시 계정을 잠그고 <strong>로그인(AUTH-01)</strong>으로 되돌린 뒤 잠금 배너를 띄운다.<br><strong>연동</strong> 성공하면 코드를 즉시 폐기하고 세션을 만든다(계정당 1세션 · 다른 기기 기존 세션 종료). 코드가 1개뿐이라 인증 앱을 복구하지 않으면 다음 로그인 수단이 없으므로 대시보드(DASH-01) 상단에 2차 인증 재설정 권고 배너를 띄운다. 재발급은 2차 인증 재설정(DASH-03) 완료 시에만 한다.<br><strong>저장</strong> 비밀번호와 같은 방식으로 해시 저장하고 사용·실패를 감사로그에 남긴다.<br><span class="basis">근거 ISMS 2.5 세션·인증 복구 · ONB-03 항목 1</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">복구 코드 필드</span><span class="nav-act">[인증] 클릭 시 빈칸·24자 판정</span><span class="nav-to stay">형식 오류 → 인라인 ⚠ · 화면 잔류(카운터 미증가)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="1">
+      <div class="num">2</div>
+      <div>
+        <div class="itm-title">[인증] 버튼</div>
+        <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 항상 활성이다. 처리 중에만 비활성으로 두어 중복 클릭을 막는다.<br><strong>확인 사항</strong> 없다. 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> 항목 1을 판정하고 통과하면 서버에 검증을 요청한다("확인 중…"). 성공 → 코드 폐기 · 세션 생성 → 대시보드(DASH-01)(재설정 권고 배너) / 실패 → 항목 1 실패 처리.<br><span class="basis">근거 ISMS 2.5 · 2026-09-04 사용자 결정(복구 코드 인증 별도 화면 · 버튼 클릭 시 검증)</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">[인증] — 활성 조건</span><span class="nav-act">항상 활성 · 처리 중에만 비활성(중복 클릭 차단)</span><span class="nav-to stay">—</span></div>
+          <div class="nav-row"><span class="nav-el">[인증] — 클릭(활성)</span><span class="nav-act">형식 판정 → 서버 검증</span><span class="nav-to">성공 → 코드 폐기 · 세션 생성 → <strong>대시보드(DASH-01)</strong>(재설정 권고 배너) / 실패 → 칩 · 필드 초기화 · 화면 잔류 / {정책값 5회} 도달 → <strong>로그인(AUTH-01)</strong> + 잠금 배너</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="itm" data-idx="2">
+      <div class="num">3</div>
+      <div>
+        <div class="itm-title">'‹ 이전으로' 링크</div>
+        <div class="itm-desc"><strong>노출</strong> 항상 보인다. 카드 아래 텍스트 링크다.<br><strong>클릭 가능</strong> 항상 활성이다. 검증 처리 중에도 활성이다.<br><strong>확인 사항</strong> 없다.<br><strong>액션</strong> 2차 인증(AUTH-02)으로 되돌아간다. 입력 중이던 복구 코드는 버리고, 사전 인증 상태와 통합 카운터는 그대로 이어진다. 사전 인증이 만료되어 있으면 로그인(AUTH-01)으로 간다.</div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">'‹ 이전으로'</span><span class="nav-act">클릭</span><span class="nav-to">→ <strong>2차 인증(AUTH-02)</strong>(입력값 폐기 · 사전 인증 유지) / 사전 인증 만료 → <strong>로그인(AUTH-01)</strong></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<section class="footer-note" style="padding-bottom:0;">
+  <div class="note-card">
+    <div class="note-title">상세내용</div>
+    <div class="detail-grid" id="detailCol">
+      <div class="dtl" data-idx="0">
+        <div class="detail-label"><span class="dtl-num">1</span>복구 코드 규격</div>
+        <div class="dtl-body"><span class="box"><strong>형식</strong> 단일 코드 1개, 영숫자 24자(4자×6그룹, 표시 시 " - " 구분), 1회용, 해시 저장. 사용·실패를 감사로그에 남긴다.<br><strong>발급</strong> 계정 활성화 3/3 복구 코드 저장(ONB-03)에서 1회 표시·복사. 재발급은 2차 인증 재설정(DASH-03) 완료 시(이전 코드 폐기).<br><strong>입력 UI</strong> 6칸이 아니라 텍스트 필드 1개를 쓴다(항목 1). 구분자 " - "는 자동 삽입하지 않고 입력값에서 무시만 한다. <span class="chk">[디자인 요청: 입력 중 4자 단위 구분 표시 여부]</span></span></div>
+      </div>
+      <div class="dtl" data-idx="1">
+        <div class="detail-label"><span class="dtl-num">2</span>인증 성공 후 처리</div>
+        <div class="dtl-body"><span class="box"><strong>세션</strong> 6자리 코드 인증과 같은 세션을 만든다(유휴 {정책값 15분} · 최대 {정책값 8시간} · 계정당 1세션). 인증 앱 등록은 그대로 유지한다.<br><strong>권고 배너</strong> 대시보드(DASH-01) 상단에 "복구 코드로 로그인했습니다. 인증 앱을 다시 등록하려면 2차 인증 재설정으로 이동하세요" 배너를 이 세션 동안 띄운다(닫기 없음).<br><strong>전면 분실</strong> 복구 코드까지 없으면 관리자 본인확인 후 초대 재발송으로 처리한다(화면 밖 운영 절차).<br><span class="chk">[확인필요]</span> 2차 시안은 "확인 후 2FA가 초기화됩니다. 다시 로그인하고 2FA를 설정해야 합니다"로 되어 있다(인증 즉시 2FA 해제 → 재로그인 → 재설정). 기획은 세션 생성 + 재설정 권고 배너를 유지했다. 채택하면 이 항목·DASH-01 배너·DASH-03 흐름을 함께 바꾼다.</span></div>
+      </div>
+      <div class="dtl" data-idx="2">
+        <div class="detail-label"><span class="dtl-num">3</span>사전 인증 · 되돌아가기</div>
+        <div class="dtl-body"><span class="box"><strong>상태</strong> AUTH-02와 같은 사전 인증 상태({정책값 120초})를 쓴다. AUTH-02 ↔ AUTH-03 이동으로 연장·초기화하지 않는다.<br><strong>카운터</strong> 통합 카운터(비밀번호·인증 코드·복구 코드 실패 합산)를 두 화면이 공유한다. <span class="chk">[확인필요: 합산 카운터 vs 단계별 개별 카운터]</span><br><strong>이전으로</strong> 이 화면에서 로그인(AUTH-01) 1단계로 바로 가는 링크는 두지 않는다(2026-09-02 확정 · 보조 링크 없음).</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="footer-note">
+  <div class="note-card">
+    <div class="note-title">비고</div>
+    <div class="note-body">· <strong>2026-09-04 신설</strong> — 2차 인증(AUTH-02)의 '복구 코드로 인증' 링크 → 텍스트 필드 토글을 폐기하고 <strong>별도 화면</strong>으로 분리했다(Figma 2차 시안 '복구 코드로 인증' 프레임 기준 · 사용자 결정). 화면 구성 = 제목·부제 · 복구 코드 필드 · [인증] · '‹ 이전으로'.<br>· <strong>검증 시점</strong> 텍스트 입력이므로 [인증] 클릭 시 검증한다(비밀번호 입력과 같은 원칙). 6자리 코드의 입력 완료 시 자동 검증과 구분.<br>· <strong>시안 대비 미반영</strong> — 필드명 '복구 키' → 용어 통일로 '복구 코드' · 부제 "가입 시 발급된 복구 키를 입력하세요" → "계정 활성화 때 저장한 복구 코드를 입력하세요"(셀프가입 없음) · "인증이 정상적으로 작동하지 않나요? 문의하기" 보조 링크 없음(2026-09-02 확정) · '2FA 초기화' 안내 칩은 상세 2 <span class="chk">[확인필요]</span>.<br>· <span class="chk">[디자인 요청]</span> 오류 칩(복구 코드 불일치 · 남은 횟수)은 시안에 없어 AUTH-02 6칸 오류 칩 규격을 차용했다.<br>· 이전 = AUTH-02 2차 인증 / 다음 = DASH-01 대시보드(재설정 권고 배너)</div>
+  </div>
+</section>
+
+<script src="screen.js"></script>
+</body>
+</html>

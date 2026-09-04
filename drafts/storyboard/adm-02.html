@@ -127,7 +127,7 @@
                     <span class="k">건</span><span class="v"><span class="id">BRK-20260902-0001</span> · 게시자 ORG-A(가입자 K) ↔ 신청자 ORG-B(가입자 M) · 수락 2026-09-02 10:31</span>
                     <span class="k">교환</span><span class="v">게시자 보내는 <b>800 USDT</b> / 신청자 보내는 <b>798.40 USDC</b> · 비율 0.9980 USDC/USDT</span>
                     <span class="k">수수료</span><span class="v">게시자 8.00 USDT · 신청자 7.98 USDC <span class="sub">(각자 거래액의 1%)</span></span>
-                    <span class="k">예상 가스비</span><span class="v">게시자 <b>0.0021 ETH</b> ≈ 8,900원 → 6.59 USDC · 신청자 <b>0.0021 ETH</b> ≈ 8,900원 → 6.59 USDT<br><span class="sub">참고 안내 · 각자 받는 수량에서 차감 · 실제 차감액은 이전 후 확정</span></span>
+                    <span class="k">예상 가스비</span><span class="v">게시자 <b>0.0042 ETH</b> ≈ 17,800원 → 13.18 USDC · 신청자 <b>0.0042 ETH</b> ≈ 17,800원 → 13.18 USDT<br><span class="sub">참고 안내 · 예치 1건 + 인도 1건 2회분 · 각자 받는 수량(인도)에서 차감 · 실제 차감액은 인도 후 확정</span></span>
                     <span class="k">자동검증</span><span class="v"><span class="ck ok">게시자 BLF·KYT 정상</span><span class="ck ok">신청자 BLF 정상</span><span class="ck warn">신청자 KYT 주의 — 에스컬레이션 사유</span><span class="ck ok">건별 한도 1,080,000원 / 1,077,840원 ≤ 1,500,000</span><span class="ck ok">양측 KYC 활성</span><span class="ck ok">잔고(수수료 포함) 확보</span></span>
                     <span class="k">트래블룰</span><span class="v">양측 필요정보 수집 완료 · 검증 대기 <span class="chk">[확인필요: 적용 범위]</span></span>
                   </div>
@@ -326,15 +326,15 @@
               </td>
             </tr>
             <tr>
-              <td class="mono">마목 · BRK-20260902-0001 · ORG-A → ORG-B 800 USDT − 예상 가스비 6.59 = 예상 실수령 793.41 USDT (게시자분)</td>
-              <td style="font-weight:700;">이전 진행</td>
+              <td class="mono">마목 예치 · BRK-20260902-0001 · ORG-A → 에스크로 전용지갑 800 USDT (게시자 예치분 · 인도 시 실수령 800 − 13.18 = 786.82 USDT는 신청자 앞)</td>
+              <td style="font-weight:700;">예치 진행</td>
               <td><span class="act">집행 명세 다운로드 (Excel)</span></td>
               <td><div class="field" style="padding:5px 8px;font-size:10px;"><span class="ph">txhash 입력 (0x…)</span></div></td>
               <td><span class="act" style="color:#94a3b8;border-color:#e2e8f0;background:#f1f5f9;">완료 처리</span></td>
             </tr>
             <tr>
-              <td class="mono">마목 · BRK-20260902-0001 · ORG-B → ORG-A 798.40 USDC − 예상 가스비 6.59 = 예상 실수령 791.81 USDC (신청자분)</td>
-              <td style="font-weight:700;">이전 진행</td>
+              <td class="mono">마목 예치 · BRK-20260902-0001 · ORG-B → 에스크로 전용지갑 798.40 USDC (신청자 예치분 · 인도 시 실수령 798.40 − 13.18 = 785.22 USDC는 게시자 앞)</td>
+              <td style="font-weight:700;">예치 진행</td>
               <td><span class="act">집행 명세 다운로드 (Excel)</span></td>
               <td><div class="field" style="padding:5px 8px;font-size:10px;"><span>0x7c1e…</span><span style="color:#166534;font-weight:700;">✓ 명세 일치</span></div></td>
               <td><span class="act">완료 처리</span></td>
@@ -436,11 +436,11 @@
     <div class="itm" data-idx="4">
       <div class="num">5</div>
       <div>
-        <div class="itm-title">[승인] — 마목 확정 확인(T2 → 이전 진행)<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>노출</strong> 유형 '마목 확정 확인' 행에만 보인다.<br><strong>클릭 가능</strong> 행 상태가 확인 대기·에스컬레이션·보류 중 하나이고, 다른 관리자가 처리 중이 아니며, 트래블룰 정보가 갖춰졌고, 양측 기관 KYC 상태가 '활성'이며, 양측 잔고가 충분할 때만 활성이다.<br><strong>확인 사항</strong> 확인 다이얼로그를 띄운다. 판단 재료는 양측 자동검증(BLF·KYT) · 트래블룰 정보 구비 · 양측 보내는 자산 처분 가능분 · 양측 예상 가스비(참고값 · 각자 받는 수량에서 차감 · BRK-04·07 고지값과 같아야 한다) · 양 기관 KYC 상태 · 게시 시점 대비 시세 이탈(price guard 참고)이다.<br><strong>액션</strong> 확정된 거래(BRK-20260902-0001 · ORG-A 800 USDT ↔ ORG-B 798.40 USDC · 수수료 8.00 USDT / 7.98 USDC)의 <strong>자산 이전을 진행</strong>시킨다. 거래 성립 승인이 아니다 — 수락 시점에 이미 확정되고 구속력이 생겼다. 도메인 상태를 '이전 진행'으로 바꾸고 집행 대기 표에 양측 이전 <strong>2행</strong>을 만든다(항목 19).<br><span class="basis">근거 states T2 · 09 §0 정산(콜드 수동 이전·양건 지시 확인 후 순차 집행) · 수수료 1%(2026-09-02)</span></div>
+        <div class="itm-title">[승인] — 마목 확정 확인(T2 → 예치 진행)<span class="req">필수</span></div>
+        <div class="itm-desc"><strong>노출</strong> 유형 '마목 확정 확인' 행에만 보인다.<br><strong>클릭 가능</strong> 행 상태가 확인 대기·에스컬레이션·보류 중 하나이고, 다른 관리자가 처리 중이 아니며, 트래블룰 정보가 갖춰졌고, 양측 기관 KYC 상태가 '활성'이며, 양측 잔고가 충분할 때만 활성이다.<br><strong>확인 사항</strong> 확인 다이얼로그를 띄운다. 판단 재료는 양측 자동검증(BLF·KYT) · 트래블룰 정보 구비 · 양측 보내는 자산 처분 가능분 · 양측 예상 가스비(참고값 · 각자 받는 수량에서 차감 · BRK-04·07 고지값과 같아야 한다) · 양 기관 KYC 상태 · 게시 시점 대비 시세 이탈(price guard 참고)이다.<br><strong>액션</strong> 확정된 거래(BRK-20260902-0001 · ORG-A 800 USDT ↔ ORG-B 798.40 USDC · 수수료 8.00 USDT / 7.98 USDC)의 <strong>에스크로 전용지갑 예치를 진행</strong>시킨다. 거래 성립 승인이 아니다 — 수락 시점에 이미 확정되고 구속력이 생겼다. 도메인 상태를 '예치 진행'으로 바꾸고 집행 대기 표에 양측 예치 <strong>2행</strong>(각 고객 수탁 지갑 → 에스크로 전용지갑)을 만든다(항목 19). 양건 예치가 모두 [완료 처리]되면 시스템이 인도 2행(에스크로 전용지갑 → 각 상대방 수탁 지갑)을 자동 생성하고 상태를 '인도 진행'으로 바꾼다 — 인도에 별도 승인 클릭은 없다(콜드 2인 서명이 사람 게이트).<br><span class="basis">근거 states T2 · 09 §0 정산(2026-09-03(15) 에스크로 전용지갑 예치 → 인도 · 콜드 수동 집행) · 약관 제10조 · 수수료 1%(2026-09-02)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[승인] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①행 상태가 확인 대기·에스컬레이션·보류 이외 ②다른 관리자 처리 중 ③트래블룰 정보 미비(확장 패널 "트래블룰 미비" — 보류 후 보완) ④양측 중 KYC 상태 '활성' 아님 ⑤양측 중 잔고 부족</span><span class="nav-to stay">하나라도 해당 → 회색 비활성 · 사유는 확장 패널 인라인 ⚠(예 "트래블룰 정보가 갖춰지지 않았습니다 — 보류 후 보완해 주세요")</span></div>
-          <div class="nav-row"><span class="nav-el">[승인] — 클릭(활성)</span><span class="nav-act">클릭 → 다이얼로그: 제목 "마목 이전 진행 승인" / 본문 "BRK-20260902-0001 · ORG-A 800 USDT ↔ ORG-B 798.40 USDC의 자산 이전을 진행합니다. 양측 이전 건이 집행 대기에 생성되며 콜드월렛 수동 절차로 집행됩니다." / [승인] [돌아가기] → "처리 중…"·행 버튼 비활성</span><span class="nav-to stay">행 제거 + 토스트 "BRK-20260902-0001 이전 진행 — 집행 대기 2건 생성" · 집행 대기 표에 게시자분·신청자분 2행 · 고객 화면 BRK-05 '이전 진행' · 감사로그</span></div>
+          <div class="nav-row"><span class="nav-el">[승인] — 클릭(활성)</span><span class="nav-act">클릭 → 다이얼로그: 제목 "마목 예치 진행 승인" / 본문 "BRK-20260902-0001 · ORG-A 800 USDT ↔ ORG-B 798.40 USDC의 에스크로 전용지갑 예치를 진행합니다. 양측 예치 건이 집행 대기에 생성되며 콜드월렛 수동 절차로 집행됩니다. 양건 예치 확인 후 인도 건이 자동 생성됩니다." / [승인] [돌아가기] → "처리 중…"·행 버튼 비활성</span><span class="nav-to stay">행 제거 + 토스트 "BRK-20260902-0001 예치 진행 — 집행 대기 2건 생성" · 집행 대기 표에 게시자 예치분·신청자 예치분 2행 · 고객 화면 BRK-05 스텝 '예치' 진행 · 감사로그</span></div>
           <div class="nav-row"><span class="nav-el">[승인] — 실패</span><span class="nav-act">경쟁 상태 / 잔고 재검증 실패 / 서버 오류</span><span class="nav-to stay">화면 잔류 · 잔고 → 상단 배너 "당사자 잔고가 부족해 이전을 진행할 수 없습니다 — 보류 후 확인해 주세요" / 경쟁·오류 → 공통 배너 · 버튼 복귀</span></div>
         </div>
       </div>
@@ -450,10 +450,10 @@
       <div class="num">6</div>
       <div>
         <div class="itm-title">[이전 중지] — 마목(T2)<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>노출</strong> 유형 '마목 확정 확인' 행에만 보인다.<br><strong>클릭 가능</strong> 행 상태가 확인 대기·에스컬레이션·보류 중 하나이고 다른 관리자가 처리 중이 아닐 때 활성이다.<br><strong>확인 사항</strong> 사유 모달이 확인 다이얼로그를 겸한다(비가역). 구조는 [거절]과 같다.<br><strong>액션</strong> 확정된 마목 거래의 이전을 중지한다. 거래 취소가 아니다. 상태를 RESOLVED(이전 중지)로 바꾸고 행을 제거하며, 양측 고객 화면 BRK-05·BRK-07에 '이전 중지'를 표시한다. 계약상 귀결(무산·위약)은 약관·법무 판단이 필요하다(states 결정필요 ①).<br><span class="chk">[확인필요]</span> 이전 중지 시 양측에 이메일을 보낼지(현행 통지 6종에 없다).<br><span class="basis">근거 states T2 이전 중지 · notation 확인 다이얼로그(ADM-02 이전 중지)</span></div>
+        <div class="itm-desc"><strong>노출</strong> 유형 '마목 확정 확인' 행에만 보인다.<br><strong>클릭 가능</strong> 행 상태가 확인 대기·에스컬레이션·보류 중 하나이고 다른 관리자가 처리 중이 아닐 때 활성이다.<br><strong>확인 사항</strong> 사유 모달이 확인 다이얼로그를 겸한다(비가역). 구조는 [거절]과 같다.<br><strong>액션</strong> 확정된 마목 거래의 정산(예치·인도)을 중지한다. 거래 취소가 아니다. 예치 전이면 자산 이동이 없고, 예치 후면 예치분을 에스크로 전용지갑에서 예치자에게 반환하는 건이 집행 대기에 생긴다(약관 제10조②). 상태를 RESOLVED(이전 중지)로 바꾸고 행을 제거하며, 양측 고객 화면 BRK-05·BRK-07에 '이전 중지'를 표시한다. 계약상 귀결(무산·위약)은 약관·법무 판단이 필요하다(states 결정필요 ①).<br><span class="chk">[확인필요]</span> 이전 중지 시 양측에 이메일을 보낼지(현행 통지 6종에 없다).<br><span class="basis">근거 states T2 이전 중지 · notation 확인 다이얼로그(ADM-02 이전 중지)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[이전 중지] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①행 상태가 확인 대기·에스컬레이션·보류 이외 ②다른 관리자 처리 중</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격)</span></div>
-          <div class="nav-row"><span class="nav-el">[이전 중지] — 클릭(활성)</span><span class="nav-act">클릭 → 다이얼로그: 제목 "이전 중지 — BRK-20260902-0001" / 본문 "확정된 거래의 자산 이전을 중지합니다. 되돌릴 수 없으며 양 당사자에게 중지 상태가 표시됩니다." / 카테고리 ▾ + 사유 입력(필수) / [이전 중지] [돌아가기] → "처리 중…"</span><span class="nav-to stay">행 제거 + 토스트 "BRK-20260902-0001 이전 중지 처리되었습니다" · 양측 BRK-05·07 상태 갱신 · 감사로그</span></div>
+          <div class="nav-row"><span class="nav-el">[이전 중지] — 클릭(활성)</span><span class="nav-act">클릭 → 다이얼로그: 제목 "이전 중지 — BRK-20260902-0001" / 본문 "확정된 거래의 정산(예치·인도)을 중지합니다. 이미 예치된 자산은 예치한 회원에게 반환됩니다. 되돌릴 수 없으며 양 당사자에게 중지 상태가 표시됩니다." / 카테고리 ▾ + 사유 입력(필수) / [이전 중지] [돌아가기] → "처리 중…"</span><span class="nav-to stay">행 제거 + 토스트 "BRK-20260902-0001 이전 중지 처리되었습니다" · 양측 BRK-05·07 상태 갱신 · 감사로그</span></div>
           <div class="nav-row"><span class="nav-el">[이전 중지] — 실패</span><span class="nav-act">경쟁 상태 / 서버 오류</span><span class="nav-to stay">화면 잔류 · 모달 유지·입력값 보존 · 공통 배너 · 버튼 복귀</span></div>
         </div>
       </div>
@@ -619,7 +619,7 @@
       <div class="num">19</div>
       <div>
         <div class="itm-title">집행 대기 목록 (표시 전용)</div>
-        <div class="itm-desc">· 행 클릭 없음(확장 없음 — 상세는 집행 명세 Excel) · 열: 건 · 상태 · 집행 명세 · 콜드 집행 결과(txhash) · 처리<br>· <strong>유입</strong>: T1 나목 승인(1건 1행 — 고객→DSRV 900 USDC·DSRV→고객 899.73 USDT 양방향을 한 행으로, 2행 분리 여부 <span class="chk">[확인필요]</span>) · T2 마목 이전 진행(양측 각 1행 = 2행) · T3 출금 승인 · 콜드→핫 보충·스윕(운영 지갑 이동 — 온라인 집행 버튼 없음)<br>· 상태 값: 집행 대기 / 이전 진행 / 조회 중 / 대사 불일치(회송) — 완료 시 행 제거(이후 조회는 CSV ③ 통합 거래)<br>· <strong>가스비</strong>: 건 열의 수량은 예상 가스비 기준 실수령 수량까지 적는다(예상값 · 고객 화면 EXC-02·BRK-04·07 고지값과 같은 값). 예상·실발생 가스비는 표에 열을 두지 않고 집행 명세(Excel)와 CSV ③에서 본다. 가스비는 고객 부담·받는 수량에서 차감이고, 예상액은 참고 안내·실제 차감액은 실발생 가스비다(2026-09-02(13) ④ 정정).<br>· <strong>목록 규격</strong>: 승인 시각 오름차순(오래된 건 위) · 빈 상태 "집행 대기 건이 없습니다" + "처리함에서 승인한 건이 여기에 표시됩니다" · 로딩 "불러오는 중…" · 전량 표시 · 페이지 스크롤([더 보기]·페이지네이션·무한 스크롤 없음) · 갱신: 처리함 승인 즉시·완료 처리 즉시<br>· 마목 '이전 진행' 건을 states T2 '정산 배치(1영업일 3회)'가 아니라 이 표의 건별 수동 집행으로 처리하는 정합 <span class="chk">[확인필요: BRK-05 정산 배치 서술과 통일]</span><br><span class="basis">근거 states T1·T2·T3 집행 대기 · 09 §0 정산(콜드 수동) · L4 §26 · ISMS 2.7.2</span></div>
+        <div class="itm-desc">· 행 클릭 없음(확장 없음 — 상세는 집행 명세 Excel) · 열: 건 · 상태 · 집행 명세 · 콜드 집행 결과(txhash) · 처리<br>· <strong>유입</strong>: T1 나목 승인(1건 1행 — 고객→DSRV 900 USDC·DSRV→고객 899.73 USDT 양방향을 한 행으로, 2행 분리 여부 <span class="chk">[확인필요]</span>) · T2 마목 예치 진행(양측 예치 각 1행 = 2행 · 고객 수탁 지갑 → 에스크로 전용지갑) → 양건 완료 처리 시 인도 2행 자동 생성(인도 진행 · 에스크로 전용지갑 → 각 상대방 수탁 지갑) · T3 출금 승인 · 콜드→핫 보충·스윕(운영 지갑 이동 — 온라인 집행 버튼 없음)<br>· 상태 값: 집행 대기 / 예치 진행 / 인도 진행 / 조회 중 / 대사 불일치(회송) — 완료 시 행 제거(이후 조회는 CSV ③ 통합 거래)<br>· <strong>가스비</strong>: 건 열의 수량은 나목 행과 마목 인도 행에서 예상 가스비 기준 실수령 수량까지 적고(예상값 · 고객 화면 EXC-02·BRK-04·07 고지값과 같은 값), 마목 예치 행은 예치 수량 그대로 적는다(가스비 차감은 인도에서 · 2회분). 예상·실발생 가스비는 표에 열을 두지 않고 집행 명세(Excel)와 CSV ③에서 본다. 가스비는 고객 부담·받는 수량에서 차감이고, 예상액은 참고 안내·실제 차감액은 실발생 가스비다(2026-09-02(13) ④ 정정).<br>· <strong>목록 규격</strong>: 승인 시각 오름차순(오래된 건 위) · 빈 상태 "집행 대기 건이 없습니다" + "처리함에서 승인한 건이 여기에 표시됩니다" · 로딩 "불러오는 중…" · 전량 표시 · 페이지 스크롤([더 보기]·페이지네이션·무한 스크롤 없음) · 갱신: 처리함 승인 즉시·완료 처리 즉시<br>· 마목 '예치 진행'·'인도 진행' 건을 states T2 '정산 배치(1영업일 3회)'가 아니라 이 표의 건별 수동 집행으로 처리하는 정합 <span class="chk">[확인필요: BRK-05 정산 배치 서술과 통일]</span><br><span class="basis">근거 states T1·T2·T3 집행 대기 · 09 §0 정산(콜드 수동) · L4 §26 · ISMS 2.7.2</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">집행 대기 행(버튼·입력 제외 셀)</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용)</span></div>
         </div>
@@ -690,11 +690,11 @@
     <div class="detail-grid" id="detailCol">
       <div class="dtl" data-idx="0">
         <div class="detail-label"><span class="dtl-num">1</span>도메인 상태값 · 행 확장 내용(유형별)</div>
-      <div class="dtl-body"><span class="box">· <strong>상태 열 값</strong>(states 총목록): T1 승인 대기 → 에스컬레이션·보류 → 집행 대기 → 완료 / 거절 · T2 확인 대기 → 에스컬레이션·보류 → 이전 진행 → 완료 / 이전 중지 · T3 대기(지연발효 중) → 대기(승인 가능) → 집행 대기 → 완료 / 거절 / 차단 · T4 격리 중 → 소명 대기 → 해제 / 동결 · T5 미처리 → 검토중 → STR 이관 / 무혐의 · T6 미확인 → 확인 → 조치완료 · T7 일시제한 예정 → 제한 적용 / 자동 종결 · T8 잠금 → 해제 / 동결 전환 · X3 미처리 → 원인 규명 중 → 해제·종결<br>· <strong>확장 패널 내용</strong>: T1 요청번호·기관·보내는/받는 수량·확정 비율·스프레드·수락 시각·자동검증(BLF·KYT·한도·KYC·재고) / T2 BRK 번호·양 당사자·양측 수량·비율·수수료·트래블룰 상태·양측 자동검증 / T3 접수번호·수신 주소 전문·자산·수량·화이트리스트 등록일·지연발효 만료 시각·등록 관리자 / T4 txhash·from 주소·자산·수량·KYT 점수·격리 지갑·소명 요청/응답 이력 / T5 룰 ID·연관 거래·기관·타임라인 / T6 이벤트 시각·시스템·내용 / T7 도래일·경과일·통지 이력 / T8 실패 시각·접속 IP(마스킹)·본인확인 체크 / X3 내부·온체인·콜드 3값·차이·스냅숏 시각 — 공통 하단: 처리 이력(처리자·행위·사유·시각)<br>· 구 화면 귀속: 심사 큐(구 ADM-07) → 승인 행 · 시장감시·알람함(구 ADM-02) → 이상거래·월렛/키 · 격리·동결(구 ADM-08) → 입금 격리 · 잠금·재이행(구 ADM-06) → T7·T8(초대·상태 전이는 ADM-03)<br>· 상태명·버튼명은 states.html 도메인 상태와 동일(notation 어드민 처리 버튼)</span></div>
+      <div class="dtl-body"><span class="box">· <strong>상태 열 값</strong>(states 총목록): T1 승인 대기 → 에스컬레이션·보류 → 집행 대기 → 완료 / 거절 · T2 확인 대기 → 에스컬레이션·보류 → 예치 진행 → 인도 진행 → 완료 / 이전 중지 · T3 대기(지연발효 중) → 대기(승인 가능) → 집행 대기 → 완료 / 거절 / 차단 · T4 격리 중 → 소명 대기 → 해제 / 동결 · T5 미처리 → 검토중 → STR 이관 / 무혐의 · T6 미확인 → 확인 → 조치완료 · T7 일시제한 예정 → 제한 적용 / 자동 종결 · T8 잠금 → 해제 / 동결 전환 · X3 미처리 → 원인 규명 중 → 해제·종결<br>· <strong>확장 패널 내용</strong>: T1 요청번호·기관·보내는/받는 수량·확정 비율·스프레드·수락 시각·자동검증(BLF·KYT·한도·KYC·재고) / T2 BRK 번호·양 당사자·양측 수량·비율·수수료·트래블룰 상태·양측 자동검증 / T3 접수번호·수신 주소 전문·자산·수량·화이트리스트 등록일·지연발효 만료 시각·등록 관리자 / T4 txhash·from 주소·자산·수량·KYT 점수·격리 지갑·소명 요청/응답 이력 / T5 룰 ID·연관 거래·기관·타임라인 / T6 이벤트 시각·시스템·내용 / T7 도래일·경과일·통지 이력 / T8 실패 시각·접속 IP(마스킹)·본인확인 체크 / X3 내부·온체인·콜드 3값·차이·스냅숏 시각 — 공통 하단: 처리 이력(처리자·행위·사유·시각)<br>· 구 화면 귀속: 심사 큐(구 ADM-07) → 승인 행 · 시장감시·알람함(구 ADM-02) → 이상거래·월렛/키 · 격리·동결(구 ADM-08) → 입금 격리 · 잠금·재이행(구 ADM-06) → T7·T8(초대·상태 전이는 ADM-03)<br>· 상태명·버튼명은 states.html 도메인 상태와 동일(notation 어드민 처리 버튼)</span></div>
       </div>
       <div class="dtl" data-idx="1">
         <div class="detail-label"><span class="dtl-num">2</span>처리 결과 → 고객 화면 반영</div>
-      <div class="dtl-body"><span class="box">· 나목: 승인 대기·에스컬레이션·<strong>보류</strong>·집행 대기 = EXC-03 '거래 진행중' 단일 표시(보류도 고객 화면 변화 없음 — 고객 '보류' 라벨 폐지 2026-09-02) · 거절 = EXC-04 '거절'(일반화 사유) · 완료 = EXC-04 '완료'<br>· 마목: 확인 대기·에스컬레이션 = BRK-05 '확인 중' <span class="chk">[확인필요: 문구]</span> · 이전 진행 = BRK-05 '이전 진행' · 완료 = BRK-05 '완료' · 이전 중지 = BRK-05·07 '이전 중지'<br>· T4~T8·X3 처리 결과는 고객 화면에 <strong>어떤 표시도 없음</strong>(STR 누설 금지) — 개별 거래 상태·KYC 배너로만 간접 반영<br>· 내부 사유·AML 심사 내용·처리자 ID는 고객 콘솔 미노출</span></div>
+      <div class="dtl-body"><span class="box">· 나목: 승인 대기·에스컬레이션·<strong>보류</strong>·집행 대기 = EXC-03 '거래 진행중' 단일 표시(보류도 고객 화면 변화 없음 — 고객 '보류' 라벨 폐지 2026-09-02) · 거절 = EXC-04 '거절'(일반화 사유) · 완료 = EXC-04 '완료'<br>· 마목: 확인 대기·에스컬레이션 = BRK-05 '확인 중' <span class="chk">[확인필요: 문구]</span> · 예치 진행 = BRK-05 스텝 '예치'(예치 행 상태) · 인도 진행 = BRK-05 스텝 '인도'(인도 행 상태) · 완료 = BRK-05 '완료' · 이전 중지 = BRK-05·07 '이전 중지'<br>· T4~T8·X3 처리 결과는 고객 화면에 <strong>어떤 표시도 없음</strong>(STR 누설 금지) — 개별 거래 상태·KYC 배너로만 간접 반영<br>· 내부 사유·AML 심사 내용·처리자 ID는 고객 콘솔 미노출</span></div>
       </div>
       <div class="dtl" data-idx="2">
         <div class="detail-label"><span class="dtl-num">3</span>사유 모달 공통 규격 · 확인 다이얼로그 원칙</div>
@@ -702,7 +702,7 @@
       </div>
       <div class="dtl" data-idx="5">
         <div class="detail-label"><span class="dtl-num">6</span>이전 중지의 계약상 귀결</div>
-      <div class="dtl-body"><span class="box">· 마목은 수락 시점에 구속력 발생 — DSRV가 이전을 중지했을 때 무산 처리·위약 여부는 약관·법무 확인(states 결정필요 ①)<br>· 트래블룰 미비 건은 중지가 아니라 보류 → 보완 후 재진행<br>· <span class="chk">[확인필요]</span> 양측 이메일 통지 추가 여부(현행 4종에 없음) · 수수료 8.00 USDT / 7.98 USDC 미수취 처리</span></div>
+      <div class="dtl-body"><span class="box">· 마목은 수락 시점에 구속력 발생 — DSRV가 이전을 중지했을 때 무산 처리·위약 여부는 약관·법무 확인(states 결정필요 ①)<br>· 예치 후 중지 시 예치분은 에스크로 전용지갑에서 예치자에게 반환(약관 제10조② · 2026-09-03(15)) — 반환 건도 집행 대기·콜드 2인 서명<br>· 트래블룰 미비 건은 중지가 아니라 보류 → 보완 후 재진행<br>· <span class="chk">[확인필요]</span> 양측 이메일 통지 추가 여부(현행 4종에 없음) · 수수료 8.00 USDT / 7.98 USDC 미수취 처리</span></div>
       </div>
       <div class="dtl" data-idx="6">
         <div class="detail-label"><span class="dtl-num">7</span>지연발효 · 자기승인 차단</div>
@@ -710,7 +710,7 @@
       </div>
       <div class="dtl" data-idx="18">
         <div class="detail-label"><span class="dtl-num">19</span>집행 대기 상태 흐름</div>
-      <div class="dtl-body"><span class="box">승인(처리함) → 집행 대기 → 집행 명세(Excel) 다운로드 → 콜드 2인 서명·집행(커스터디 절차 · 화면 밖) → txhash 입력 → 온체인 대사 일치 → [완료 처리] 확정 → 완료 반영·행 제거<br>· 불일치·미확인 시 완료 불가 — 처리함 워닝으로 회송<br>· 서명 시스템 장애 시 BCP/DR — 정산 일시 중지 공지(예외 F6) · 긴급 시 승인을 멈추면 집행도 멈춤 — 별도 긴급정지 버튼 없음(ISMS 2.11.1)<br>· 마목 2행은 각자 독립 집행(순차) — 한쪽만 완료된 상태의 고객 표시 <span class="chk">[확인필요]</span></span></div>
+      <div class="dtl-body"><span class="box">승인(처리함) → 집행 대기 → 집행 명세(Excel) 다운로드 → 콜드 2인 서명·집행(커스터디 절차 · 화면 밖) → txhash 입력 → 온체인 대사 일치 → [완료 처리] 확정 → 완료 반영·행 제거<br>· 불일치·미확인 시 완료 불가 — 처리함 워닝으로 회송<br>· 서명 시스템 장애 시 BCP/DR — 정산 일시 중지 공지(예외 F6) · 긴급 시 승인을 멈추면 집행도 멈춤 — 별도 긴급정지 버튼 없음(ISMS 2.11.1)<br>· <strong>마목 2단계(2026-09-03(15))</strong>: 예치 2행(고객 수탁 지갑 → 에스크로 전용지갑)이 모두 [완료 처리]되면 시스템이 인도 2행(에스크로 전용지갑 → 각 상대방 수탁 지갑 · 가스비 2회분 차감 후 실수령 수량)을 자동 생성 → 같은 절차로 집행 → 인도 2행 완료 처리 시 T2 완료 · 고객 BRK-05 완료 · 이메일 ③<br>· 예치 2행은 각자 독립 집행(순차 가능 — 한쪽만 예치된 상태는 BRK-05 예치 행별로 표시) · 인도 2행은 양건 예치 완료 후에만 생성되므로 일방 인도 불가(종전 역이전 절차 폐기) · 3면 대사(X3)에 에스크로 전용지갑 잔고 포함 <span class="chk">[확인필요]</span></span></div>
       </div>
       <div class="dtl" data-idx="20">
         <div class="detail-label"><span class="dtl-num">21</span>txhash 대사 규칙</div>

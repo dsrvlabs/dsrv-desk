@@ -93,7 +93,8 @@ const sections = [
       page('비밀번호 설정','ONB-01'), arrow('다음'),
       page('2FA 앱 연결','ONB-02'), arrow('검증'),
       page('복구 코드 저장','ONB-03'), arrow('완료'),
-      page('로그인','AUTH-01'), arrow('성공'),
+      page('로그인','AUTH-01'), arrow('1단계 성공'),
+      page('2차 인증','AUTH-02'), arrow('6자리 검증 성공 (인증 앱 분실 시 AUTH-03 복구 코드)'),
       page('대시보드','DASH-01'),
       fork([
         { label:'교환하기', items:[ page('교환하기','EXC-01') ] },
@@ -127,14 +128,14 @@ const sections = [
       page('내 게시 상세·회수','BRK-06'),
       fork([
         { label:'신청 도착', items:[ page('받은 신청·수락','BRK-04') ] },
-        { label:'게시 내리기', items:[ internal('회수 — 게시판 제외\n자산이동·수수료 없음') ] },
+        { label:'게시 중단', items:[ internal('회수 — 게시판 제외\n자산이동·수수료 없음') ] },
         { label:'시세변동·\n유효기간 30일', items:[ internal('자동중지(내부 정책) /\n완료(유효기간 만료)') ] },
       ])
     ]}]
   },
   {
     title:'③ 마목 중개 — 수락(기존 RFQ 거래)', tag:'교환게시판 탭',
-    note:'* DSRV 비참여·기록만(당사자 간 신청·수락, 역제안 없음). 신청 유효 영업일 2일 — 기한 내 수락(가입자 단독 실행 — 1기관 1가입자, 2026-09-01) 시 즉시 확정·구속력 발생 → 커스터디 콜드 수동 이전(양건 확인 후 순차)·수수료 = 거래액 1% 고정·양측 각자(2026-09-02 확정). 이메일 통지 6종(신청 접수 ① · 수락·확정 ② · 거래 완료 ③ · 게시 회수 ④ · 거래 거절 ⑤ · 거래 만료 ⑥ — ⑤⑥은 2026-09-02(10) 신설, 나목 교환 대상 · 마목 신청 거절·만료 메일은 [확인필요]). 신청자 진행 조회 BRK-07 · 게시자 회수 BRK-06(2026-09-02 추가).',
+    note:'* DSRV 비참여·기록만(당사자 간 신청·수락, 역제안 없음). 신청 유효 영업일 2일 — 기한 내 수락(가입자 단독 실행 — 1기관 1가입자, 2026-09-01) 시 즉시 확정·구속력 발생 → 에스크로 전용지갑 예치 → 양건 예치 확인 → 인도(커스터디 콜드 수동 집행 · 2026-09-03(15) · 약관 제3조 8호·제10조 명칭 일치)·수수료 = 거래액 1% 고정·양측 각자(2026-09-02 확정). 이메일 통지 6종(신청 접수 ① · 수락·확정 ② · 거래 완료 ③ · 게시 회수 ④ · 거래 거절 ⑤ · 거래 만료 ⑥ — ⑤⑥은 2026-09-02(10) 신설, 나목 교환 대상 · 마목 신청 거절·만료 메일은 [확인필요]). 신청자 진행 조회 BRK-07 · 게시자 회수 BRK-06(2026-09-02 추가).',
     rows:[{ type:'flow', items:[
       page('교환 게시판','BRK-01'), arrow('행 선택·신청'),
       page('신청하기','BRK-03'), arrow('신청 접수\n(유효 영업일 2일)'),
@@ -166,7 +167,7 @@ const sections = [
 ];
 
 const FILE_MAP = {
-  'ONB-00':'onb-00.html','ONB-01':'onb-01.html','ONB-02':'onb-02.html','ONB-03':'onb-03.html','ONB-04':'onb-04.html','AUTH-01':'auth-01.html','AUTH-02':'auth-02.html','DASH-01':'dash-01.html','DASH-02':'dash-02.html','DASH-03':'dash-03.html',
+  'ONB-00':'onb-00.html','ONB-01':'onb-01.html','ONB-02':'onb-02.html','ONB-03':'onb-03.html','ONB-04':'onb-04.html','AUTH-01':'auth-01.html','AUTH-02':'auth-02.html','AUTH-03':'auth-03.html','DASH-01':'dash-01.html','DASH-02':'dash-02.html','DASH-03':'dash-03.html',
   'EXC-01':'exc-01.html','EXC-02':'exc-02.html','EXC-03':'exc-03.html','EXC-04':'exc-04.html',
   'BRK-01':'brk-01.html','BRK-02':'brk-02.html','BRK-03':'brk-03.html','BRK-04':'brk-04.html','BRK-05':'brk-05.html','BRK-06':'brk-06.html','BRK-07':'brk-07.html',
   'ADM-02':'adm-02.html','ADM-03':'adm-03.html',

@@ -75,12 +75,12 @@
           <div class="kv"><span class="k">내가 받는 수량</span><span class="v">800 USDT</span></div>
           <div class="kv"><span class="k">신청 유효기간</span><span class="v">접수 시점부터 영업일 2일</span></div>
           <div class="kv"><span class="k">내 중개 수수료 (거래액 1%)</span><span class="v">7.98 USDC — 확정 시 발생</span></div>
-          <div class="kv"><span class="k">예상 가스비 (내 부담)</span><span class="v">0.0021 ETH ≈ 8,900원 — 이전 시 차감</span></div>
+          <div class="kv"><span class="k">예상 가스비 (내 부담)</span><span class="v">0.0042 ETH (예치·인도 2회분) — 인도 시 차감</span></div>
         </div>
 
         <div class="item-area" data-highlight="2" style="position:relative;padding:4px;border-radius:8px;margin-top:6px;">
           <div class="pin" data-idx="2" style="top:-6px;right:-6px;">3</div>
-          <div style="font-size:10px;color:#16a34a;padding:0 2px;">보유 9,300.00 USDC · 처분 가능 <strong>9,300.00 USDC</strong> ✓ (필요 798.40 USDC · ≈ 1,077,840원 상당, 1회 한도 {정책값 1,500,000원 상당} 이내)</div>
+          <div style="font-size:10px;color:#16a34a;padding:0 2px;">보유 9,300.00 USDC · 처분 가능 <strong>9,300.00 USDC</strong> ✓ (필요 798.40 USDC, 1회 한도 {정책값 1,500,000원 상당} 이내)</div>
           <div style="font-size:9px;color:#94a3b8;padding:6px 4px 3px;">▼ 게시 상태가 게재중이 아니거나 게이트 미충족 시에만 노출 (아래는 문구 예시 — 실제로는 해당 1건만)</div>
           <div style="font-size:10px;color:#b45309;background:#fef3c7;border:1px solid #fde68a;border-radius:6px;padding:5px 8px;">⚠ 협의 중인 게시입니다 — 다른 신청이 처리되면 다시 신청할 수 있습니다</div>
           <div style="font-size:10px;color:#b91c1c;background:#fef2f2;border:1px solid #fecaca;border-radius:6px;padding:5px 8px;margin-top:4px;">⚠ 보유·처분 가능 수량이 부족합니다 — 798.40 USDC가 필요합니다 (처분 가능 {수량} USDC)</div>
@@ -99,7 +99,7 @@
 
         <div class="item-area" data-highlight="5" style="position:relative;padding:4px;border-radius:8px;margin-top:4px;">
           <div class="pin" data-idx="5" style="top:-6px;right:-6px;">6</div>
-          <div style="font-size:10px;color:#64748b;">게시자가 기한 내 수락하면 <strong>즉시 확정되어 구속력과 수수료 7.98 USDC · 이전 가스비가 발생</strong>하고 바로 이전(정산)으로 진행됩니다. 무응답 시 자동 만료되며, 신청 후 취소 기능은 없습니다.</div>
+          <div style="font-size:10px;color:#64748b;">게시자가 기한 내 수락하면 <strong>즉시 확정되어 구속력과 수수료 7.98 USDC · 가스비(예치·인도)가 발생</strong>하고 에스크로 전용지갑 예치 → 인도(정산)로 진행됩니다. 무응답 시 자동 만료되며, 신청 후 취소 기능은 없습니다.</div>
         </div>
       </div>
 
@@ -135,7 +135,7 @@
       <div class="num">2</div>
       <div>
         <div class="itm-title">신청 조건 · 내 수수료 (표시 전용)</div>
-        <div class="itm-desc"><strong>구성</strong> kv 4행. 게시 조건을 신청자 기준으로 뒤집어 표시한다(내가 보내는 = 게시자가 받는 798.40 USDC · 내가 받는 = 게시자가 보내는 800 USDT). 입력 필드는 두지 않는다(역제안 없음).<br><strong>신청 유효기간</strong> "접수 시점부터 영업일 {정책값 2영업일}"(ADM-03). 접수 시점은 진입 시각이 아니라 [이 조건으로 신청] 접수 시 서버 시각으로 확정하고 BRK-07에 표시한다.<br><strong>예상 가스비</strong> 내가 부담할 이전 가스비를 신청 시점 가스 가격으로 산정해 ETH 4자리와 원화 환산으로 적는다(예 0.0021 ETH ≈ 8,900원). 참고 안내이며 실제 차감액은 이전 후 확정되어 BRK-05에 표시한다. 확정 후 이전 시 받는 자산에서 차감하고 한도 판정에는 넣지 않는다.<br><strong>내 수수료</strong> 내가 보내는 수량 × {정책값 1.00%}(ADM-03)를 보내는 자산 자릿수로 절사한다(798.40 × 1% = 7.984 → 7.98 USDC). 자기 측 금액만 표시하고 상대측 금액은 노출하지 않으며 "확정 시 발생"을 병기한다.<br><span class="basis">근거 09 §0 마목 수수료 · L6 설명의무(4요소④) · notation 산정값 절사</span></div>
+        <div class="itm-desc"><strong>구성</strong> kv 4행. 게시 조건을 신청자 기준으로 뒤집어 표시한다(내가 보내는 = 게시자가 받는 798.40 USDC · 내가 받는 = 게시자가 보내는 800 USDT). 입력 필드는 두지 않는다(역제안 없음).<br><strong>신청 유효기간</strong> "접수 시점부터 영업일 {정책값 2영업일}"(ADM-03). 접수 시점은 진입 시각이 아니라 [이 조건으로 신청] 접수 시 서버 시각으로 확정하고 BRK-07에 표시한다.<br><strong>예상 가스비</strong> 내가 부담할 가스비(에스크로 전용지갑 예치 1건 + 인도 1건 2회분 · 2026-09-03(15))를 신청 시점 가스 가격으로 산정해 ETH 4자리로 적는다(예 0.0042 ETH). 참고 안내이며 실제 차감액은 인도 후 확정되어 BRK-05에 표시한다. 확정 후 인도 시 받는 자산에서 차감하고 한도 판정에는 넣지 않는다.<br><strong>내 수수료</strong> 내가 보내는 수량 × {정책값 1.00%}(ADM-03)를 보내는 자산 자릿수로 절사한다(798.40 × 1% = 7.984 → 7.98 USDC). 자기 측 금액만 표시하고 상대측 금액은 노출하지 않으며 "확정 시 발생"을 병기한다.<br><span class="basis">근거 09 §0 마목 수수료 · L6 설명의무(4요소④) · notation 산정값 절사</span></div>
       </div>
     </div>
 
@@ -143,7 +143,7 @@
       <div class="num">3</div>
       <div>
         <div class="itm-title">신청 가능 여부 게이트 — 잔고·한도 표시 + 상태·게이트 경고 (표시 · 조건부 노출)</div>
-        <div class="itm-desc"><strong>검증 시점</strong> 진입 시 1회, 그리고 [이 조건으로 신청] 클릭 시 서버가 다시 판정한다.<br><strong>상시 표시</strong> 「보유 {수량} {자산} · 처분 가능 {수량} {자산} ✓ (필요 {내가 보내는 수량} · ≈ {원화 환산액}원 상당, 1회 한도 {정책값 1,500,000원 상당} 이내)」 1줄. 처분 가능 = 실보유 − 기게시·기신청 중복분. 충족은 초록 ✓, 미충족은 빨강.<br><strong>인라인 경고</strong> 해당 1건만 버튼 바로 위에 띄운다. 게시 상태 경고는 협의중·중지·회수·완료 4종, 게이트 경고는 잔고 부족과 한도 초과 2종이다. 우선순위는 게시 상태 → 한도 → 잔고.<br><strong>한도 환산</strong> 내가 보내는 수량 × ADM-03 시세(요청 시점)로 계산한다. 게시 시점에는 한도 이내였어도 시세 변동으로 초과될 수 있어 신청자 측에서도 판정한다.<br><strong>조회 실패</strong> "—"와 상단 배너를 띄우고 버튼을 비활성으로 둔다.<br><span class="basis">근거 09 §0 신청자 거래 안전성 검증·건별 한도 · V2(4요소①)</span></div>
+        <div class="itm-desc"><strong>검증 시점</strong> 진입 시 1회, 그리고 [이 조건으로 신청] 클릭 시 서버가 다시 판정한다.<br><strong>상시 표시</strong> 「보유 {수량} {자산} · 처분 가능 {수량} {자산} ✓ (필요 {내가 보내는 수량}, 1회 한도 {정책값 1,500,000원 상당} 이내)」 1줄. 처분 가능 = 실보유 − 기게시·기신청 중복분. 충족은 초록 ✓, 미충족은 빨강.<br><strong>인라인 경고</strong> 해당 1건만 버튼 바로 위에 띄운다. 게시 상태 경고는 협의중·중지·회수·완료 4종, 게이트 경고는 잔고 부족과 한도 초과 2종이다. 우선순위는 게시 상태 → 한도 → 잔고.<br><strong>한도 환산</strong> 내가 보내는 수량 × ADM-03 시세(요청 시점)로 계산한다. 게시 시점에는 한도 이내였어도 시세 변동으로 초과될 수 있어 신청자 측에서도 판정한다.<br><strong>조회 실패</strong> "—"와 상단 배너를 띄우고 버튼을 비활성으로 둔다.<br><span class="basis">근거 09 §0 신청자 거래 안전성 검증·건별 한도 · V2(4요소①)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">경고 블록</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용) · 닫기(×) 없음 · 재진입 시 재판정</span></div>
         </div>

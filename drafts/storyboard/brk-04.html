@@ -80,12 +80,12 @@
       </div>
 
       <!-- 수락·거절 -->
-      <div class="zone" data-idx="3,4,5,6,7">
+      <div class="zone" data-idx="3,4,5,6">
         <div class="zone-highlight"></div>
         <div class="item-area" data-highlight="3" style="position:relative;padding:4px;border-radius:8px;margin-bottom:6px;">
           <div class="pin" data-idx="3" style="top:-6px;right:-6px;">4</div>
           <div class="kv"><span class="k">내 중개 수수료 (거래액 1%)</span><span class="v">8.00 USDT — 수락(확정) 시 발생</span></div>
-          <div class="kv"><span class="k">예상 가스비 (내 부담)</span><span class="v">0.0021 ETH ≈ 8,900원 — 이전 시 차감</span></div>
+          <div class="kv"><span class="k">예상 가스비 (내 부담)</span><span class="v">0.0042 ETH (예치·인도 2회분) — 인도 시 차감</span></div>
         </div>
         <div style="display:flex;gap:8px;">
           <div class="item-area" data-highlight="4" style="position:relative;flex:1;padding:4px;border-radius:8px;">
@@ -96,22 +96,18 @@
             <div class="pin" data-idx="5" style="top:-8px;right:-6px;">6</div>
             <div class="btn danger">거절</div>
           </div>
-          <div class="item-area" data-highlight="6" style="position:relative;flex:.6;padding:4px;border-radius:8px;">
-            <div class="pin" data-idx="6" style="top:-8px;right:-6px;">7</div>
-            <div class="btn ghost">취소</div>
-          </div>
         </div>
-        <div class="item-area" data-highlight="7" style="position:relative;padding:4px;border-radius:8px;margin-top:4px;">
-          <div class="pin" data-idx="7" style="top:-6px;right:-6px;">8</div>
-          <div style="font-size:10px;color:#64748b;">수락하면 <strong>거래가 즉시 확정되어 구속력과 수수료 8.00 USDT가 발생</strong>하고, 별도 확정 절차 없이 이전(정산)으로 진행됩니다. 거절·무응답(기한 경과) 시 자산 이동·수수료 없이 게시는 게재중으로 돌아갑니다.</div>
+        <div class="item-area" data-highlight="6" style="position:relative;padding:4px;border-radius:8px;margin-top:4px;">
+          <div class="pin" data-idx="6" style="top:-6px;right:-6px;">7</div>
+          <div style="font-size:10px;color:#64748b;">수락하면 <strong>거래가 즉시 확정되어 구속력과 수수료 8.00 USDT가 발생</strong>하고, 별도 확정 절차 없이 에스크로 전용지갑 예치 → 인도(정산)로 진행됩니다. 거절·무응답(기한 경과) 시 자산 이동·수수료 없이 게시는 게재중으로 돌아갑니다.</div>
         </div>
       </div>
 
       <!-- 비참여 고지 -->
-      <div class="zone" data-idx="8">
+      <div class="zone" data-idx="7">
         <div class="zone-highlight"></div>
-        <div class="item-area" data-highlight="8" style="position:relative;padding:4px;border-radius:8px;">
-          <div class="pin" data-idx="8" style="top:-6px;right:-6px;">9</div>
+        <div class="item-area" data-highlight="7" style="position:relative;padding:4px;border-radius:8px;">
+          <div class="pin" data-idx="7" style="top:-6px;right:-6px;">8</div>
           <div class="note-inline reg">DSRV는 가격 협의에 참여하지 않으며 신청·수락 기록만 보존합니다. 수락 전까지 구속력이 없으며, 수락 시 즉시 확정됩니다.</div>
         </div>
       </div>
@@ -123,7 +119,7 @@
   <div class="items" id="items">
     <div class="nav-global">
       <div class="nav-global-title">진입 · 전역 이동</div>
-      <div class="nav-note">· <strong>전역 이동</strong> 상단 메뉴(GNB) · 기관 배지 · 뒤로가기의 동작은 대시보드(DASH-01)의 표와 같다. 다른 점 = 현재 탭 '교환게시판'을 다시 클릭하면 교환 게시판(BRK-01) 목록으로 간다. 처리하지 않고 나가도 신청은 수락 대기 상태로 남는다.<br>
+      <div class="nav-note">· <strong>전역 이동</strong> 상단 메뉴(GNB) · 기관 배지 · 뒤로가기의 동작은 대시보드(DASH-01)의 표와 같다. 다른 점 = 현재 탭 '교환게시판'을 다시 클릭하면 교환 게시판(BRK-01) 목록으로 간다. 처리하지 않고 나가도 신청은 수락 대기 상태로 남는다. 이 화면에는 [취소] 같은 이탈 버튼을 두지 않는다(2026-09-04 삭제) — 나가기는 GNB로만 한다.<br>
       · <strong>진입</strong> 내 게시 상세(BRK-06)의 받은 신청 행 클릭. 이것이 유일한 진입 경로다. 교환 게시판(BRK-01) · 대시보드(DASH-01) · 메일에서 바로 오는 길은 없다(대시보드의 협의중 행도 BRK-06으로 열린다). 진입 시 게시·신청의 최신 상태를 서버에서 조회하며 "불러오는 중…"을 보인다.</div>
     </div>
 
@@ -152,7 +148,7 @@
         <div class="itm-title">처리 불가 안내 (조건부 노출)</div>
         <div class="itm-desc"><strong>노출</strong> 신청 상태가 '수락 대기'가 아닐 때 해당 1건만 버튼 위에 인라인으로 보인다. 정상 상태에서는 블록 자체가 없고 닫기(×)도 두지 않는다.<br><strong>문구</strong> 중지·신청 만료·게시 만료·이미 처리·회수 5종을 각각 고정 문구로 쓴다(중지는 재게시 안내, 신청 만료는 게재중 복귀 안내, 이미 처리는 내 게시 상세 확인 안내).<br><strong>동작</strong> 노출 중에는 [수락]과 [거절]을 모두 비활성으로 둔다. 중지 상태에서는 수락을 허용하지 않는다(중지 = 대기 신청 자동 종결 · 재개는 재게시만).<br><span class="basis">근거 09 §0 마목 게시 상태 개정</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">안내 블록</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용) · 이동은 [취소](항목 7) → BRK-06</span></div>
+          <div class="nav-row"><span class="nav-el">안내 블록</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용) · 화면 내 이동 버튼 없음 — 나가기는 GNB '교환게시판'(→ BRK-01)</span></div>
         </div>
       </div>
     </div>
@@ -161,7 +157,7 @@
       <div class="num">4</div>
       <div>
         <div class="itm-title">내 중개 수수료 (표시 전용)</div>
-        <div class="itm-desc"><strong>값</strong> kv 1행. 내가 보내는 자산 수량 × {정책값 1.00%}(ADM-03)를 보내는 자산 자릿수로 절사한다(800 USDT × 1% = 8.00 USDT).<br><strong>노출 범위</strong> 자기 측 금액만 표시하고 상대측 금액과 회계 계정명은 노출하지 않는다. "수락(확정) 시 발생"을 병기한다.<br><strong>예상 가스비</strong> 수락하면 게시자도 이전 가스비를 부담하므로 수락 전에 예상액을 ETH 4자리와 원화 환산으로 고지한다. 이전 시 받는 자산에서 차감한다. 이 값은 참고 안내이고 실제 차감액은 BRK-05에 표시한다.<br><span class="basis">근거 09 §0 마목 수수료 · L6 설명의무 · notation 산정값 절사</span></div>
+        <div class="itm-desc"><strong>값</strong> kv 1행. 내가 보내는 자산 수량 × {정책값 1.00%}(ADM-03)를 보내는 자산 자릿수로 절사한다(800 USDT × 1% = 8.00 USDT).<br><strong>노출 범위</strong> 자기 측 금액만 표시하고 상대측 금액과 회계 계정명은 노출하지 않는다. "수락(확정) 시 발생"을 병기한다.<br><strong>예상 가스비</strong> 수락하면 게시자도 이전 가스비를 부담하므로 수락 전에 예상액을 ETH 4자리로 고지한다. 이전 시 받는 자산에서 차감한다. 이 값은 참고 안내이고 실제 차감액은 BRK-05에 표시한다.<br><span class="basis">근거 09 §0 마목 수수료 · L6 설명의무 · notation 산정값 절사</span></div>
       </div>
     </div>
 
@@ -185,7 +181,7 @@
         <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 신청 상태가 '수락 대기'일 때만 활성이다.<br><strong>확인 사항</strong> 확인 다이얼로그와 사유 입력을 두지 않는다(구속력·비가역 행위가 아니고 협상 채널을 열지 않는다).<br><strong>액션</strong> 신청을 종결하고 게시를 '게재중'으로 되돌려 게시판에 다시 노출한다. 자산 이동과 수수료는 발생하지 않는다.<br><span class="basis">근거 V2(통신중개 아님) · 09 §0 마목 게시 상태</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[거절] — 활성 조건</span><span class="nav-act">[수락]과 동일: ①수락 대기 아님 ②게시 협의중 아님 ③조회 실패 ④처리 진행 중</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격) · 사유는 항목 3 인라인 안내</span></div>
-          <div class="nav-row"><span class="nav-el">[거절] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음 → 버튼 라벨 "거절 중…"·[수락]·[취소] 비활성 → 신청 상태 거절(종결) · 게시 상태 게재중 복귀 · 신청자 통지(BRK-07 상태 · DASH-01 — 메일 여부 <span class="chk">[확인필요: 거절 통지 메일 — 4종에 없음]</span>)</span><span class="nav-to"><strong>내 게시 상세·회수(BRK-06)</strong> — 상태 '게재중 · 받은 신청 0건'(빈 상태) · 별도 토스트 없음(기획 가정)</span></div>
+          <div class="nav-row"><span class="nav-el">[거절] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음 → 버튼 라벨 "거절 중…"·[수락] 비활성 → 신청 상태 거절(종결) · 게시 상태 게재중 복귀 · 신청자 통지(BRK-07 상태 · DASH-01 — 메일 여부 <span class="chk">[확인필요: 거절 통지 메일 — 4종에 없음]</span>)</span><span class="nav-to"><strong>내 게시 상세·회수(BRK-06)</strong> — 상태 '게재중 · 받은 신청 0건'(빈 상태) · 별도 토스트 없음(기획 가정)</span></div>
           <div class="nav-row"><span class="nav-el">[거절] — 실패</span><span class="nav-act">클릭 사이 신청 만료·게시 중지·회수(이미 종결) / 시스템 오류</span><span class="nav-to stay">화면 잔류 · 이미 종결 → 항목 3 안내 + 버튼 비활성(결과는 동일하므로 오류 배너 없음) / 오류 → 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 버튼 라벨 복귀</span></div>
         </div>
       </div>
@@ -194,26 +190,13 @@
     <div class="itm" data-idx="6">
       <div class="num">7</div>
       <div>
-        <div class="itm-title">[취소] 버튼</div>
-        <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 항상 활성이다.<br><strong>확인 사항</strong> 없다.<br><strong>액션</strong> 처리 없이 내 게시 상세(BRK-06)로 돌아간다. 신청은 수락 대기로 유지되어 유효기한 내 다시 처리할 수 있다. <span class="chk">[확인필요: notation 종료 동선 표에 BRK-04 [취소] → BRK-06 추가]</span><br><span class="basis">근거 notation 종료 동선</span></div>
-        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">[취소] — 활성 조건</span><span class="nav-act">항상 활성("수락 중…"/"거절 중…" 동안만 비활성) — 처리 불가 상태에서도 활성(유일한 화면 내 이탈 수단)</span><span class="nav-to stay">—</span></div>
-          <div class="nav-row"><span class="nav-el">[취소] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음 → 처리 없음</span><span class="nav-to"><strong>내 게시 상세·회수(BRK-06)</strong> — 받은 신청 1건 목록 유지</span></div>
-          <div class="nav-row"><span class="nav-el">[취소] — 실패</span><span class="nav-act">해당 없음(서버 호출 없음)</span><span class="nav-to stay">—</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="itm" data-idx="7">
-      <div class="num">8</div>
-      <div>
         <div class="itm-title">단독 실행 결과 고지 (표시 전용)</div>
         <div class="itm-desc"><strong>문구</strong> 버튼 아래에 결과 고지 1문장을 상시 노출한다(즉시 확정·구속력·수수료). 수수료 금액은 항목 4 값을 쓴다.<br><strong>내용</strong> 거절·무응답 결과(자산 이동·수수료 없음 · 게재중 복귀)를 함께 적는다. 승인자 지정과 2단계 승인 UI는 두지 않는다(1기관 1가입자).<br><span class="basis">근거 notation 단독 실행 표기 · L6 설명의무</span></div>
       </div>
     </div>
 
-    <div class="itm" data-idx="8">
-      <div class="num">9</div>
+    <div class="itm" data-idx="7">
+      <div class="num">8</div>
       <div>
         <div class="itm-title">"DSRV 비참여·기록만" 고지 (표시 전용)</div>
         <div class="itm-desc"><strong>문구</strong> 고정. BRK-03·07과 같은 문구로 가격 불관여와 당사자성을 적는다. 신청·수락·거절 기록은 15년 보존한다. 변경은 법무 확인 후에 한다.<br><span class="basis">근거 V2 · L6 §9 · [로펌게이트] 비참여 범위</span></div>
@@ -237,7 +220,7 @@
       </div>
       <div class="dtl" data-idx="4">
         <div class="detail-label"><span class="dtl-num">5</span>수락 시 재검증 · 이메일 ② 수락·확정 (수신: 양측)</div>
-      <div class="dtl-body"><span class="box">· 재검증 항목: 신청 유효기한 · 게시 상태(협의중) · 양측 처분 가능분(게시자 800 USDT · 신청자 798.40 USDC) — 신청 시점 검증(BRK-03)의 보완 <span class="chk">[확인필요: 수락 시 양측 잔고 재검증 채택 여부 — 기획 가정]</span> · 실패 문구에 상대측 사유 미노출<br>· 확정 시: 상호 마스킹 해제(양측) · 게시 상태 확정 · DSRV 확인 건 ADM-02 처리함 유입 · 콜드 수동 집행(BRK-05)<br>· <strong>[이메일 ② 수락·확정 (수신: 양측)]</strong> 제목 "[DSRV] 교환 거래 확정 — BRK-20260830-0027" · 본문: "게시자가 신청을 수락하여 거래가 확정되었습니다. 구속력이 발생하며 이전(정산) 절차가 시작됩니다." + 확정 조건(공통 포맷: 요청번호·교환쌍·방향·800 USDT ↔ 798.40 USDC·0.9980 USDC/USDT) · 거래 상대방 상호(확정으로 마스킹 해제) · 중개 수수료(거래액 1% · 자기 측 금액만 — 게시자 8.00 USDT / 신청자 7.98 USDC) · 다음 단계(커스터디 콜드 이전 — 정산 배치 1영업일 3회, 완료 시 재안내) — 발신전용·링크 미포함 등 공통 원칙은 BRK-03 상세 4</span></div>
+      <div class="dtl-body"><span class="box">· 재검증 항목: 신청 유효기한 · 게시 상태(협의중) · 양측 처분 가능분(게시자 800 USDT · 신청자 798.40 USDC) — 신청 시점 검증(BRK-03)의 보완 <span class="chk">[확인필요: 수락 시 양측 잔고 재검증 채택 여부 — 기획 가정]</span> · 실패 문구에 상대측 사유 미노출<br>· 확정 시: 상호 마스킹 해제(양측) · 게시 상태 확정 · DSRV 확인 건 ADM-02 처리함 유입 · 에스크로 전용지갑 예치 → 양건 확인 → 인도 콜드 수동 집행(BRK-05 · 2026-09-03(15))<br>· <strong>[이메일 ② 수락·확정 (수신: 양측)]</strong> 제목 "[DSRV] 교환 거래 확정 — BRK-20260830-0027" · 본문: "게시자가 신청을 수락하여 거래가 확정되었습니다. 구속력이 발생하며 에스크로 예치·인도(정산) 절차가 시작됩니다." + 확정 조건(공통 포맷: 요청번호·교환쌍·방향·800 USDT ↔ 798.40 USDC·0.9980 USDC/USDT) · 거래 상대방 상호(확정으로 마스킹 해제) · 중개 수수료(거래액 1% · 자기 측 금액만 — 게시자 8.00 USDT / 신청자 7.98 USDC) · 다음 단계(에스크로 전용지갑 예치 후 인도 — 정산 배치 1영업일 3회, 완료 시 재안내) — 발신전용·링크 미포함 등 공통 원칙은 BRK-03 상세 4</span></div>
       </div>
       <div class="dtl" data-idx="5">
         <div class="detail-label"><span class="dtl-num">6</span>거절·만료 처리</div>
@@ -253,10 +236,10 @@
     <div class="note-body">
       · <strong>[방어 핵심]</strong> 수락은 게시자의 <strong>능동 행위</strong> — 자동 매칭·자동 체결 없음(시장개설 아님). DSRV는 가격에 관여하지 않고 기록만 보존.<br>
       · 수락은 가입자 단독 실행이지만 확정 건의 DSRV 확인(ADM-02 처리함)·콜드 2인 멀티시그 집행 서명은 유지.<br>
-      · 2026-09-02 변경: 게시당 동시 신청 1건 → 이 화면 = 그 1건 수락/거절(복수 신청 목록·선착순/선택 이슈 소멸) · 중지(price guard) 상태 수락 불가 확정 · [수락] 확인 다이얼로그 문구 확정 · [거절] 확인 없음 명시 · [취소] → BRK-06 추가 · 상태 변형 표(상세 3).<br>
-      · 2026-09-02 설명 형식 개정 적용(핀 = 조작 요소 단위) — 표시 4·조건부 1·버튼 3·고지 1 9핀 · 예시 800 USDT ↔ 798.40 USDC · 수수료 8.00 USDT.<br>
+      · 2026-09-02 변경: 게시당 동시 신청 1건 → 이 화면 = 그 1건 수락/거절(복수 신청 목록·선착순/선택 이슈 소멸) · 중지(price guard) 상태 수락 불가 확정 · [수락] 확인 다이얼로그 문구 확정 · [거절] 확인 없음 명시 · [취소] → BRK-06 추가(→ <strong>2026-09-04 [취소] 삭제</strong> — 화면 내 이탈 버튼 없음 · 나가기는 GNB) · 상태 변형 표(상세 3).<br>
+      · 2026-09-02 설명 형식 개정 적용(핀 = 조작 요소 단위) — 표시 4·조건부 1·버튼 2·고지 1 8핀(2026-09-04 [취소] 삭제) · 예시 800 USDT ↔ 798.40 USDC · 수수료 8.00 USDT.<br>
       · <span class="chk">[확인필요]</span> 수락 시 양측 잔고 재검증 채택 · 거절·만료 통지 메일.<br>
-      · 다음: 수락 → 이전·완료 (BRK-05) / 거절·[취소] → 내 게시 상세·회수 (BRK-06)
+      · 다음: 수락 → 이전·완료 (BRK-05) / 거절 → 화면 잔류(상태 행 갱신) / 나가기 = GNB '교환게시판' → 교환 게시판(BRK-01) · 내 게시 상세(BRK-06)는 목록에서 재진입
     </div>
   </div>
 </section>

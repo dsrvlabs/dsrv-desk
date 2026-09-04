@@ -11,7 +11,7 @@
   <div class="crumb"><span>마목 중개</span><span class="s">›</span><span>교환게시판</span><span class="s">›</span><span>이전·완료</span></div>
   <h1 class="title">이전·완료</h1>
   <span class="sid">BRK-05</span>
-  <span class="defense">정산 연계 · 완결성 담보</span>
+  <span class="defense">정산 연계 · 에스크로 예치→인도 · 완결성 담보</span>
 </header>
 
 <div class="main">
@@ -20,7 +20,7 @@
       <div class="labels" id="labels">
         <div class="lbl"><span class="lbl-text">전역<br>상단</span></div>
         <div class="lbl"><span class="lbl-text">거래 내역</span></div>
-        <div class="lbl"><span class="lbl-text">이전 진행</span></div>
+        <div class="lbl"><span class="lbl-text">예치·인도</span></div>
         <div class="lbl"><span class="lbl-text">수수료</span></div>
         <div class="lbl"><span class="lbl-text">결과 안내</span></div>
         <div class="lbl"><span class="lbl-text">확인</span></div>
@@ -50,36 +50,36 @@
         <div class="item-area" data-highlight="0" style="position:relative;padding:4px;border-radius:8px;">
           <div class="pin" data-idx="0" style="top:-6px;right:-6px;">1</div>
           <div class="kv"><span class="k">게시번호</span><span class="v">BRK-20260902-0001</span></div>
-          <div class="kv"><span class="k">교환쌍 · 방향 (게시 기준)</span><span class="v">USDT → USDC</span></div>
-          <div class="kv"><span class="k">보내는 수량 (게시자)</span><span class="v">800 USDT</span></div>
-          <div class="kv"><span class="k">받는 수량 (게시자)</span><span class="v">798.40 USDC</span></div>
+          <div class="kv"><span class="k">교환쌍 · 방향</span><span class="v">USDC → USDT</span></div>
+          <div class="kv"><span class="k">보내는 수량</span><span class="v">798.40 USDC</span></div>
+          <div class="kv"><span class="k">받는 수량</span><span class="v">800 USDT</span></div>
           <div class="kv"><span class="k">비율</span><span class="v">0.9980 USDC/USDT</span></div>
-          <div class="kv"><span class="k">내 기준 (신청자)</span><span class="v">내가 보내는 798.40 USDC → 받는 800 USDT</span></div>
           <div class="kv"><span class="k">거래 상대방</span><span class="v">B사 (게시자 · 확정으로 마스킹 해제)</span></div>
           <div class="kv"><span class="k">확정 일시</span><span class="v">2026-09-02 15:05</span></div>
         </div>
       </div>
 
-      <!-- 이전 진행 -->
+      <!-- 예치·인도 -->
       <div class="zone" data-idx="1,2">
         <div class="zone-highlight"></div>
-        <div class="zone-title" style="margin-bottom:4px;">커스터디 콜드 수동 이전</div>
+        <div class="zone-title" style="margin-bottom:4px;">에스크로 전용지갑 예치 → 인도 (커스터디 콜드 수동 집행)</div>
         <div class="item-area" data-highlight="1" style="position:relative;padding:4px;border-radius:8px;">
           <div class="pin" data-idx="1" style="top:-6px;right:-6px;">2</div>
           <div class="steps" style="flex-wrap:wrap;gap:8px;">
             <span class="step done"><span class="dot">✓</span>확정</span><span class="arrow">→</span>
-            <span class="step done"><span class="dot">✓</span>양건 확인</span><span class="arrow">→</span>
-            <span class="step now"><span class="dot">3</span>이전 진행</span><span class="arrow">→</span>
+            <span class="step done"><span class="dot">✓</span>예치</span><span class="arrow">→</span>
+            <span class="step now"><span class="dot">3</span>인도</span><span class="arrow">→</span>
             <span class="step"><span class="dot">4</span>완료</span>
           </div>
         </div>
         <div class="item-area" data-highlight="2" style="position:relative;padding:4px;border-radius:8px;">
           <div class="pin" data-idx="2" style="top:-6px;right:-6px;">3</div>
-          <div class="kv"><span class="k">상대(B사) → 나 · 800 USDT</span><span class="v" style="color:#16a34a;">이전 완료 · 2026-09-03 09:40</span></div>
-          <div class="kv"><span class="k">나 → 상대(B사) · 798.40 USDC</span><span class="v">이전 대기 · 다음 정산 배치 편입</span></div>
-          <div class="kv"><span class="k">이전 완결성</span><span class="v" style="color:#16a34a;">양건 확인 완료 · 2026-09-02 17:30</span></div>
+          <div class="kv"><span class="k">내 예치 · 나 → 에스크로 전용지갑 · 798.40 USDC</span><span class="v" style="color:#16a34a;">예치 완료 · 2026-09-02 17:30</span></div>
+          <div class="kv"><span class="k">상대 예치 · B사 → 에스크로 전용지갑 · 800 USDT</span><span class="v" style="color:#16a34a;">예치 완료 · 2026-09-03 09:40</span></div>
+          <div class="kv"><span class="k">예치 완결성</span><span class="v" style="color:#16a34a;">양건 예치 확인 완료 · 2026-09-03 09:40</span></div>
+          <div class="kv"><span class="k">내 인도 · 에스크로 전용지갑 → 나 · 800 USDT</span><span class="v">인도 대기 · 다음 정산 배치 편입</span></div>
           <div class="kv"><span class="k">트래블룰</span><span class="v" style="color:#16a34a;">양측 송·수신인 정보 확인 완료</span></div>
-          <div class="kv"><span class="k">발생 가스비 (내 부담)</span><span class="v">0.0019 ETH ≈ 8,050원 → 5.96 USDT 차감</span></div>
+          <div class="kv"><span class="k">발생 가스비 (내 부담 · 예치 1건 + 인도 1건)</span><span class="v">예치 0.0019 ETH · 인도 — 인도 시 확정 → 합계를 받는 800 USDT에서 차감</span></div>
         </div>
       </div>
 
@@ -88,7 +88,7 @@
         <div class="zone-highlight"></div>
         <div class="item-area" data-highlight="3" style="position:relative;padding:4px;border-radius:8px;">
           <div class="pin" data-idx="3" style="top:-6px;right:-6px;">4</div>
-          <div class="kv"><span class="k">내 중개 수수료 (거래액 1% 고정)</span><span class="v">7.98 USDC <span style="color:#94a3b8;">(내가 보내는 798.40 USDC 기준) — 확정으로 발생 · 이전 시 정산</span></span></div>
+          <div class="kv"><span class="k">내 중개 수수료 (거래액 1% 고정)</span><span class="v">7.98 USDC <span style="color:#94a3b8;">(내가 보내는 798.40 USDC 기준) — 확정으로 발생 · 인도 시 정산</span></span></div>
         </div>
       </div>
 
@@ -97,7 +97,7 @@
         <div class="zone-highlight"></div>
         <div class="item-area" data-highlight="4" style="position:relative;padding:4px;border-radius:8px;">
           <div class="pin" data-idx="4" style="top:-6px;right:-6px;">5</div>
-          <div style="font-size:9px;color:#94a3b8;padding:0 4px 2px;">▼ 상태 '완료'·'이전 보류'·'이전 중지'에서만 노출 (목업 상태 '이전 진행'에서는 없음 · 아래는 완료 예시)</div>
+          <div style="font-size:9px;color:#94a3b8;padding:0 4px 2px;">▼ 상태 '완료'·'이전 보류'·'이전 중지'에서만 노출 (목업 상태 '인도 대기'에서는 없음 · 아래는 완료 예시)</div>
           <div class="c-banner" style="border-radius:8px;background:#f0fdf4;color:#15803d;border:1px solid #86efac;">✓ 거래가 완료되었습니다 — 완료 일시 2026-09-03 14:10 · 상세 내역은 대시보드 &gt; 거래 내역에서 확인할 수 있습니다</div>
         </div>
       </div>
@@ -126,23 +126,23 @@
       <div class="num">1</div>
       <div>
         <div class="itm-title">확정 거래 내역 — 공통 포맷 (표시 전용)</div>
-        <div class="itm-desc"><strong>구성</strong> '교환거래 요청 내역' 공통 폼(게시번호 · 교환쌍·방향 · 보내는 수량 · 받는 수량 · 비율)에 내 기준 · 거래 상대방 · 확정 일시 3행을 덧붙인다. 앞부분 방향·수량은 게시자 기준 그대로 두고 라벨에 "(게시 기준)"·"(게시자)"를 부기한다.<br><strong>내 기준</strong> 1행으로 「내가 보내는 {수량} {자산} → 받는 {수량} {자산}」을 적는다. 게시자 콘솔에서는 게시 방향과 같고 신청자 콘솔에서는 역방향이다. 항목 3 이전 지시와 항목 4 수수료의 기준 수량이 이 값이다.<br><strong>상대방</strong> 확정으로 마스킹을 해제한 상호 전문과 역할을 적는다. 확정 일시는 게시자 [수락] 시각이다(YYYY-MM-DD HH:MM).<br><strong>자릿수</strong> ETH 4 / USDC·USDT 2, 비율은 스테이블 페어 4자리와 ETH 페어 {스테이블}/ETH 2자리.<br><strong>상태</strong> 로딩은 "불러오는 중…"이고 3초 초과 시 상단 배너와 값 "—"로 넘기되 [확인]은 활성으로 남긴다.<br><strong>수수료</strong> 별도 정산이다(2026-09-02 결정). 표시 수량은 게시 조건 그대로이고 수수료를 차감하지 않는다 — 라벨에 "세전/세후" 부기를 두지 않는다.<br><span class="basis">근거 F-1b · 공통 포맷 · notation 채번·자릿수</span></div>
+        <div class="itm-desc"><strong>구성</strong> 7행 고정 — 게시번호 · 교환쌍·방향 · 보내는 수량 · 받는 수량 · 비율 · 거래 상대방 · 확정 일시.<br><strong>기준</strong> 교환쌍·방향과 보내는 수량·받는 수량은 <strong>화면을 보는 고객 기준</strong>으로만 적는다(2026-09-04 변경 · 종전 게시자 기준 2행 + '내 기준' 1행 폐기). 라벨은 '보내는 수량'·'받는 수량'이고 "(게시자)"·"(신청자)" 같은 부기를 두지 않는다. 게시자 콘솔에서는 게시 조건과 같은 방향, 신청자 콘솔에서는 역방향 값이 들어간다(목업은 신청자 콘솔 예시 · 상대방 수량은 표시하지 않는다). 항목 3 이전 지시와 항목 4 수수료의 기준 수량은 이 화면의 보내는 수량이다. 비율은 게시 조건의 값을 그대로 쓴다.<br><strong>상대방</strong> 확정으로 마스킹을 해제한 상호 전문과 역할을 적는다. 확정 일시는 게시자 [수락] 시각이다(YYYY-MM-DD HH:MM).<br><strong>자릿수</strong> ETH 4 / USDC·USDT 2, 비율은 스테이블 페어 4자리와 ETH 페어 {스테이블}/ETH 2자리.<br><strong>상태</strong> 로딩은 "불러오는 중…"이고 3초 초과 시 상단 배너와 값 "—"로 넘기되 [확인]은 활성으로 남긴다.<br><strong>수수료</strong> 별도 정산이다(2026-09-02 결정). 표시 수량은 게시 조건 그대로이고 수수료를 차감하지 않는다 — 라벨에 "세전/세후" 부기를 두지 않는다.<br><span class="basis">근거 F-1b · 공통 포맷 · notation 채번·자릿수</span></div>
       </div>
     </div>
 
     <div class="itm" data-idx="1">
       <div class="num">2</div>
       <div>
-        <div class="itm-title">이전 스텝바 — 확정 → 양건 확인 → 이전 진행 → 완료 (표시 전용)</div>
-        <div class="itm-desc"><strong>구성</strong> 4단계 고정(확정 → 양건 확인 → 이전 진행 → 완료). 완료 스텝은 ✓ 초록, 현재 스텝은 파랑 강조, 미도달은 회색으로 두고 스텝 클릭은 동작시키지 않는다. 일시는 스텝바가 아니라 항목 3 행에 적는다.<br><strong>상태 변형</strong> ① 확정 = 스텝 1 ✓ · 스텝 2 진행 · 항목 3 두 방향 "이전 대기" ② 양건 확인 완료 = 스텝 2 ✓ · 스텝 3 진행 · 완결성 행에 일시 ③ 이전 진행 = 스텝 3 진행(한쪽 완료·다른 쪽 대기 가능) ④ 완료 = 스텝 4 ✓ · 항목 5 완료 배너 · 이메일 ③ · 게시·신청 상태 완료 ⑤ 이전 보류 = 진행 스텝에서 정지(회색 테두리) · 항목 5 보류 배너 · 사유 미노출 ⑥ 이전 중지 = 정지 · 중지 배너 · 역이전 시 항목 3 행에 "역이전 완료 · {일시}".<br><strong>노출 범위</strong> 내부 단계는 노출하지 않고 ADM-02 T2 도메인 상태를 고객 라벨로 변환해 보여준다(상세 2).<br><span class="basis">근거 커스터디 콜드 출고 절차 · ISMS 2.7.2 · states.html T2</span></div>
+        <div class="itm-title">정산 스텝바 — 확정 → 예치 → 인도 → 완료 (표시 전용)</div>
+        <div class="itm-desc"><strong>구성</strong> 4단계 고정(확정 → 예치 → 인도 → 완료). 완료 스텝은 ✓ 초록, 현재 스텝은 파랑 강조, 미도달은 회색으로 두고 스텝 클릭은 동작시키지 않는다. 일시는 스텝바가 아니라 항목 3 행에 적는다.<br><strong>상태 변형</strong> ① 확정 = 스텝 1 ✓ · 스텝 2 진행 · 항목 3 예치 두 행 "예치 대기" ② 예치 진행 = 스텝 2 진행(한쪽 예치 완료·다른 쪽 대기 가능) ③ 양건 예치 확인 = 스텝 2 ✓ · 스텝 3 진행 · 완결성 행에 일시 · 인도 행 "인도 대기" ④ 인도 진행 = 스텝 3 진행 · 인도 행 "인도 진행 · {배치 일시}" ⑤ 완료 = 스텝 4 ✓ · 항목 5 완료 배너 · 이메일 ③ · 게시·신청 상태 완료 ⑥ 이전 보류 = 진행 스텝에서 정지(회색 테두리) · 항목 5 보류 배너 · 사유 미노출 ⑦ 이전 중지 = 정지 · 중지 배너 · 예치분이 있으면 항목 3 예치 행에 "반환 완료 · {일시}".<br><strong>노출 범위</strong> 내부 단계는 노출하지 않고 ADM-02 T2 도메인 상태를 고객 라벨로 변환해 보여준다(상세 2). 인도는 양건 예치 확인 후에만 시작되므로 한쪽만 받는 상태는 생기지 않는다.<br><span class="basis">근거 09 §0 정산(2026-09-03(15) 에스크로 전용지갑) · 약관 제3조 8호·제10조 · 커스터디 콜드 출고 절차 · ISMS 2.7.2 · states.html T2</span></div>
       </div>
     </div>
 
     <div class="itm" data-idx="2">
       <div class="num">3</div>
       <div>
-        <div class="itm-title">양측 이전 지시 상태 · 완결성 · 트래블룰 (표시 전용)</div>
-        <div class="itm-desc"><strong>구성</strong> 4행 고정 — ① 상대 → 나 ② 나 → 상대 ③ 이전 완결성 ④ 트래블룰.<br><strong>①② 값</strong> 「이전 대기 · 다음 정산 배치 편입」 / 「이전 진행 · {배치 일시}」 / 「이전 완료 · {일시}」(초록) / 「이전 보류」 / 「역이전 완료 · {일시}」 중 하나. tx 해시·지갑 주소·회계 계정명·시세 소스명은 넣지 않는다.<br><strong>③ 완결성</strong> 「양건 확인 대기」 → 「양건 확인 완료 · {일시}」. 양쪽 조건(잔고·한도·트래블룰)을 함께 확인한 뒤에만 이전을 시작해 한쪽만 이전되는 것을 막는다. 확인이 실패하면 보류 상태로 둔다.<br><strong>④ 트래블룰</strong> 「양측 송·수신인 정보 확인 중」 → 「확인 완료」. 미완료면 완결성 확인을 대기 상태로 유지하고 사유 문구는 일반화한다.<br><strong>갱신</strong> 정산 배치(1영업일 3회 · 콜드 2인 서명) 반영 시점에 값이 바뀐다. 화면 체류 중 자동 갱신은 없고 재진입 시 반영한다. <span class="chk">[확인필요: 배치 시각·마감 기준]</span><br><span class="basis">근거 L2 §10의10(트래블룰) · ISMS 2.7.2 · 공통 UI 규격 고객 화면 미노출</span></div>
+        <div class="itm-title">예치·인도 상태 · 완결성 · 트래블룰 (표시 전용)</div>
+        <div class="itm-desc"><strong>구성</strong> 6행 고정 — ① 내 예치(나 → 에스크로 전용지갑) ② 상대 예치(상대 → 에스크로 전용지갑) ③ 예치 완결성 ④ 내 인도(에스크로 전용지갑 → 나) ⑤ 트래블룰 ⑥ 발생 가스비. 상대 앞 인도 행은 두지 않는다(상대측 수령 정보 미노출).<br><strong>①② 값</strong> 「예치 대기 · 다음 정산 배치 편입」 / 「예치 진행 · {배치 일시}」 / 「예치 완료 · {일시}」(초록) / 「반환 완료 · {일시}」(이전 중지 시) 중 하나. 라벨에 '에스크로 전용지갑' 명칭은 쓰되(약관 제3조 8호 용어와 화면 용어 일치) 지갑 주소·tx 해시·회계 계정명·시세 소스명은 넣지 않는다.<br><strong>③ 완결성</strong> 「양건 예치 확인 대기」 → 「양건 예치 확인 완료 · {일시}」. 두 예치가 모두 에스크로 전용지갑에 들어와 대사가 끝난 뒤에만 인도가 생성된다 — 한쪽만 이전되는 상황을 구조로 막는다(역이전 없음). 확인이 실패하면 보류 상태로 둔다.<br><strong>④ 값</strong> 「인도 대기 · 양건 예치 확인 후」 / 「인도 대기 · 다음 정산 배치 편입」 / 「인도 진행 · {배치 일시}」 / 「인도 완료 · {일시}」(초록) / 「이전 보류」 중 하나.<br><strong>⑤ 트래블룰</strong> 「양측 송·수신인 정보 확인 중」 → 「확인 완료」. 미완료면 완결성 확인을 대기 상태로 유지하고 사유 문구는 일반화한다.<br><strong>⑥ 발생 가스비</strong> 항목 4 설명 참조 — 예치·인도 2회분을 각각 적고 합계를 받는 수량에서 차감한다.<br><strong>갱신</strong> 정산 배치(1영업일 3회 · 콜드 2인 서명) 반영 시점에 값이 바뀐다. 화면 체류 중 자동 갱신은 없고 재진입 시 반영한다. <span class="chk">[확인필요: 배치 시각·마감 기준 · 예치와 인도가 같은 배치에서 이어질 수 있는지]</span><br><span class="basis">근거 약관 제3조 8호·제10조 · L2 §10의10(트래블룰) · ISMS 2.7.2 · 공통 UI 규격 고객 화면 미노출</span></div>
       </div>
     </div>
 
@@ -150,7 +150,7 @@
       <div class="num">4</div>
       <div>
         <div class="itm-title">내 중개 수수료 (표시 전용)</div>
-        <div class="itm-desc"><strong>값</strong> 수수료율은 {정책값 1.00%}(ADM-03 · 거래액 기준 고정)이고 양 당사자가 각자 부담한다. 기준은 각자 보내는 자산 수량(항목 1 내 기준 행)이며 각 자산 자릿수로 절사한다. 별도 정산이므로 보내는 수량에서 공제하지 않고, 정산 시점은 자산 이전 집행 시점(콜드월렛 출고)이다 — 신청자 798.40 USDC × 1% = 7.98 USDC, 게시자 800 USDT × 1% = 8.00 USDT.<br><strong>노출 범위</strong> 자기 측 금액만 보여주고 상대측 금액과 회계 계정명(중개수익)은 넣지 않는다. 구분회계는 ADM-02 CSV에서만 본다. 거래보고서·영수증은 발급하지 않는다.<br><strong>발생 가스비</strong> 이전 집행에 실제로 쓴 가스비를 ETH 4자리 · 원화 환산 · 받는 자산 환산액으로 적고 자기 부담분만 보여준다(예 0.0019 ETH ≈ 8,050원 → 5.96 USDT 차감). 이 금액이 실제 차감액이며 받는 수량에서 뺀다. BRK-03·04의 예상 가스비는 참고 안내였고 상한이 아니다. 이전 전 상태에서는 "이전 시 확정".<br><strong>접미</strong> 확정 시 「확정으로 발생 · 이전 시 정산」, 완료 시 「정산 완료」, 이전 중지 시 「발생하지 않음」 — 이전 중지 건에는 수수료를 부과하지 않는다(2026-09-02 결정).<br><span class="basis">근거 L6 §9 · V11 · 09 §0 마목 수수료 · notation 절사</span></div>
+        <div class="itm-desc"><strong>값</strong> 수수료율은 {정책값 1.00%}(ADM-03 · 거래액 기준 고정)이고 양 당사자가 각자 부담한다. 기준은 각자 보내는 자산 수량(항목 1 보내는 수량 행)이며 각 자산 자릿수로 절사한다. 별도 정산이므로 보내는 수량에서 공제하지 않고, 정산 시점은 인도 집행 시점(에스크로 전용지갑 → 내 수탁 지갑 콜드 출고 · 2026-09-03(15))이다 — 신청자 798.40 USDC × 1% = 7.98 USDC, 게시자 800 USDT × 1% = 8.00 USDT.<br><strong>노출 범위</strong> 자기 측 금액만 보여주고 상대측 금액과 회계 계정명(중개수익)은 넣지 않는다. 구분회계는 ADM-02 CSV에서만 본다. 거래보고서·영수증은 발급하지 않는다.<br><strong>발생 가스비</strong> 내 예치 1건과 내 앞 인도 1건, 2회분의 실발생 가스비를 각각 ETH 4자리로 적고 합계를 받는 자산 환산액으로 보여준다(예 예치 0.0019 ETH + 인도 0.0019 ETH = 0.0038 ETH → 11.92 USDT 차감). 합계가 실제 차감액이며 인도 수량(받는 수량)에서 뺀다. BRK-02·03·04의 예상 가스비(2회분)는 참고 안내였고 상한이 아니다. 아직 집행되지 않은 건은 "— 예치 시 확정" / "— 인도 시 확정". 상대측 가스비는 보여주지 않는다.<br><strong>접미</strong> 확정 시 「확정으로 발생 · 인도 시 정산」, 완료 시 「정산 완료」, 이전 중지 시 「발생하지 않음」 — 이전 중지 건에는 수수료를 부과하지 않는다(2026-09-02 결정).<br><span class="basis">근거 L6 §9 · V11 · 09 §0 마목 수수료 · notation 절사</span></div>
       </div>
     </div>
 
@@ -184,7 +184,7 @@
     <div class="detail-grid" id="detailCol">
       <div class="dtl" data-idx="1">
         <div class="detail-label"><span class="dtl-num">2</span>고객 표시 상태 ↔ ADM-02 T2 도메인 상태 매핑</div>
-      <div class="dtl-body"><span class="box">· T2 확인 대기 / 에스컬레이션 → 고객 「확정」(스텝 2 진행) — 내부 심사 단계 미노출 · T2 승인 → 「양건 확인 완료」(스텝 3 진행) · 정산 배치 실행 → 항목 3 방향별 「이전 완료」 · T2 완료 → 「완료」(스텝 4) · T2 보류 → 「이전 보류」(배너, 사유 일반화) · T2 이전 중지 → 「이전 중지」(배너)<br>· 고객 라벨 enum: CONFIRMED · VERIFIED · TRANSFERRING · COMPLETED · ON_HOLD · STOPPED <span class="chk">[확인필요: 고객 화면 상태 enum 확정 — states.html 고객 도메인 섹션]</span><br>· 정산 연계 운영절차(4요소③): 양건 조건 동시 확인 → 순차 콜드 출고(2인 서명) · 각 단계 감사로그·해시 기록 · 일방 이전 후 상대방 이전 실패 → <strong>거래 홀드</strong> + 역이전(원상 복구) → 완결성 KPI·이상징후로 ADM-02 워닝 — 고객 화면에는 「이전 중지」 + 「역이전 완료」 행으로만 표시</span></div>
+      <div class="dtl-body"><span class="box">· T2 확인 대기 / 에스컬레이션 → 고객 「확정」(스텝 2 진행 · 예치 행 "예치 대기") — 내부 심사 단계 미노출 · T2 승인 → 예치 진행(스텝 2 · 예치 2건 집행 대기 생성) · 정산 배치 실행 → 항목 3 예치 행별 「예치 완료」 · 양건 예치 대사 완료 → 「양건 예치 확인 완료」(스텝 2 ✓ · 스텝 3 진행 · 인도 2건 자동 생성) · 정산 배치 실행 → 「인도 완료」 · T2 완료 → 「완료」(스텝 4) · T2 보류 → 「이전 보류」(배너, 사유 일반화) · T2 이전 중지 → 「이전 중지」(배너) + 예치 행 「반환 완료」<br>· 고객 라벨 enum 후보: CONFIRMED · DEPOSITING · DEPOSITED · DELIVERING · COMPLETED · ON_HOLD · STOPPED <span class="chk">[확인필요: 고객 화면 상태 enum 확정 — states.html 고객 도메인 섹션]</span><br>· 정산 연계 운영절차(4요소③ · 2026-09-03(15)): T2 승인 → 예치 2건 콜드 출고(2인 서명 · 각 고객 수탁 지갑 → 에스크로 전용지갑) → 에스크로 입금 대사(양건) → 인도 2건 콜드 출고(2인 서명 · 에스크로 전용지갑 → 각 상대방 수탁 지갑) · 각 단계 감사로그·해시 기록 · 인도는 양건 예치 확인 후에만 생성되므로 일방 이전 불가 — 종전 '일방 이전 후 실패 → 거래 홀드 + 역이전(원상 복구)' 절차 폐기 · 예치 후 중지 시 에스크로에서 예치자에게 반환(약관 제10조②) — 고객 화면에는 「이전 중지」 + 예치 행 「반환 완료」로만 표시</span></div>
       </div>
       <div class="dtl" data-idx="3">
         <div class="detail-label"><span class="dtl-num">4</span>구분회계 처리 (고객 화면 미노출)</div>
@@ -192,7 +192,7 @@
       </div>
       <div class="dtl" data-idx="4">
         <div class="detail-label"><span class="dtl-num">5</span>이메일 알림 ③ 거래 완료 (수신: 양측)</div>
-      <div class="dtl-body"><span class="box">· 발송 시점: 양측 콜드 이전 완결(완결성 확인) 시 — 상태 ④ 완료 전이와 동시<br>· 제목: [DSRV] 교환 거래 완료 — BRK-20260902-0001<br>· 본문: "교환 거래의 이전(정산)이 완료되었습니다." + 완료 일시 · 거래 내역(공통 포맷: 게시번호·교환쌍·방향·수량·비율) · 중개 수수료 정산액(자기 측만 표기) + "상세 내역은 DSRV Desk &gt; 대시보드 &gt; 거래 내역에서 확인해 주세요."<br>· 공통 원칙(발신전용·링크 미포함·심사 내용 미포함)은 BRK-03 상세 참조 · 보류·중지 통지는 공통 4종에 미포함 <span class="chk">[확인필요]</span></span></div>
+      <div class="dtl-body"><span class="box">· 발송 시점: 양측 인도 완결(에스크로 전용지갑 → 양측 수탁 지갑 2건 완료 처리) 시 — 상태 ⑤ 완료 전이와 동시<br>· 제목: [DSRV] 교환 거래 완료 — BRK-20260902-0001<br>· 본문: "교환 거래의 인도(정산)가 완료되었습니다." + 완료 일시 · 거래 내역(공통 포맷: 게시번호·교환쌍·방향·수량·비율) · 중개 수수료 정산액(자기 측만 표기) + "상세 내역은 DSRV Desk &gt; 대시보드 &gt; 거래 내역에서 확인해 주세요."<br>· 공통 원칙(발신전용·링크 미포함·심사 내용 미포함)은 BRK-03 상세 참조 · 보류·중지 통지는 공통 4종에 미포함 <span class="chk">[확인필요]</span></span></div>
       </div>
     </div>
   </div>
@@ -202,10 +202,11 @@
   <div class="note-card">
     <div class="note-title">비고</div>
     <div class="note-body">
-      · 마목 중개 flow 종료 화면. <strong>[방어 핵심]</strong> ③ 정산 연계(커스터디 콜드 이전) + ④ 수수료(거래액 1% 고정·양측 각자)를 실제로 집행해 "단순 게시판이 아닌 중개"임을 완결. 완결성 지표로 한쪽만 이전되는 리스크를 차단.<br>
-      · <strong>[화이트리스트 미적용]</strong> 교환·중개는 내부 커스터디 지갑 사이의 이동이라 외부 주소를 다루지 않으므로 화이트리스트를 적용하지 않음.<br>
-      · 2026-09-02 설명 형식 개정 적용(핀 = 조작 요소 단위) — 표시 4 · 조건부 배너 1 · 버튼 1(활성 조건 / 클릭 / 실패 3행) · 스텝바와 이전 지시 상태 분리 · 회계 계정명 행 제거 · 상태 변형(확정·양건 확인·이전 진행·완료·보류·중지)은 항목 2 상태 목록 + 상세 2 매핑.<br>
-      · <span class="chk">[확인필요]</span> 정산 배치(1영업일 3회) 시각·마감 기준 · 이전 중지 건 고객 문구·통지 이메일 · 고객 화면 상태 enum.<br>· <strong>확정(2026-09-02)</strong> — 중개 수수료는 <strong>별도 정산</strong>. 보내는 수량에서 공제하지 않으므로 화면 수량은 게시 조건 그대로 쓰고 세전/세후 부기를 두지 않는다.<br>
+      · 마목 중개 flow 종료 화면. <strong>[방어 핵심]</strong> ③ 정산 연계(에스크로 전용지갑 예치 → 양건 확인 → 인도 · 커스터디 콜드 수동 집행) + ④ 수수료(거래액 1% 고정·양측 각자)를 실제로 집행해 "단순 게시판이 아닌 중개"임을 완결. 인도가 양건 예치 확인 뒤에만 생성되어 한쪽만 이전되는 리스크가 구조적으로 없음. DSRV는 예치·인도만 하고 가격·거래 당사자가 아님(약관 제3조 3호).<br>
+      · <strong>[화이트리스트 미적용]</strong> 교환·중개는 내부 커스터디 지갑 사이의 이동(고객 수탁 지갑 ↔ 에스크로 전용지갑)이라 외부 주소를 다루지 않으므로 화이트리스트를 적용하지 않음. 에스크로 전용지갑 주소는 사전 등록·변경 통제 <span class="chk">[확인필요]</span>.<br>
+      · 2026-09-02 설명 형식 개정 적용(핀 = 조작 요소 단위) — 표시 4 · 조건부 배너 1 · 버튼 1(활성 조건 / 클릭 / 실패 3행) · 스텝바와 예치·인도 상태 분리 · 회계 계정명 행 제거 · 상태 변형(확정·예치·인도·완료·보류·중지)은 항목 2 상태 목록 + 상세 2 매핑.<br>
+      · <strong>확정(2026-09-03(15))</strong> — <strong>에스크로 전용지갑 도입</strong>. 종전 '양건 확인 → 당사자 수탁 지갑 간 직접 순차 이전 → 실패 시 역이전' 흐름을 '예치 → 양건 예치 확인 → 인도'로 교체(스텝바·항목 3·상세 2·이메일 ③ 갱신). 명칭은 약관 제3조 8호 「에스크로 전용지갑」과 일치시켜 ISMS 심사 시 약관·화면 대조에 대응. 가스비는 예치·인도 2회분.<br>
+      · <span class="chk">[확인필요]</span> 정산 배치(1영업일 3회) 시각·마감 기준 · 이전 중지 건 고객 문구·통지 이메일 · 고객 화면 상태 enum · 예치 tx 가스 선지급 경로 · 반환 가스비 부담 주체.<br>· <strong>확정(2026-09-02)</strong> — 중개 수수료는 <strong>별도 정산</strong>. 보내는 수량에서 공제하지 않으므로 화면 수량은 게시 조건 그대로 쓰고 세전/세후 부기를 두지 않는다.<br>
       · 마목 진행 순서: 게시판(BRK-01) → 등록(BRK-02) → 내 게시 상세(BRK-06, 회수 가능) / 신청(BRK-03) → 내 신청 상세(BRK-07) → 수락(BRK-04, 즉시 확정) → <strong>이전·완료(BRK-05, 양측 공용)</strong>
     </div>
   </div>
