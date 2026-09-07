@@ -198,6 +198,7 @@
                     <span class="k">출금 지갑</span><span class="v"><span class="id">RSV-01</span> <span class="sub">나목 교환 재고 지갑(콜드 · 자사 소유)</span></span>
                     <span class="k">수신 주소</span><span class="v"><span class="id">0x2b7d9e41a0c6f3b58d1e7a94c2f0b6d83e5a1c47</span> <span class="sub">ORG-A 수탁 지갑</span></span>
                     <span class="k">자산·수량</span><span class="v">USDC · 받는 수량 <b>955.20</b> − 예상 가스비 <b>6.59</b>(0.0021 ETH ≈ 8,900원) = 이체 수량 <b>948.61</b> <span class="sub">콜드에 지시하는 값 · 실발생 가스비는 영수증 값으로 기록</span></span>
+                    <span class="k">위험 판정</span><span class="v"><span class="chip ok">적정</span> · 커스터디 09-01 16:40 · 메모 없음 <span class="sub">적정 전에는 txhash 입력 비활성</span></span>
                     <span class="k">완료 조건</span><span class="v">txhash의 <b>발신 지갑 · 수신 주소 · 자산 · 수량</b> 4항목이 명세와 일치할 때만 [완료] 활성 · 불일치면 ④ 집행 대사 불일치로 회송 · <span class="sub">명세 Excel 다운로드 여부는 완료를 막지 않는다</span></span>
                   </div>
                   <div class="hist">처리 이력 — <b>09-01 15:10</b> 승인(DSRV-OPS-01)</div>
@@ -558,7 +559,7 @@
       <div class="num">7</div>
       <div>
         <div class="itm-title">② 집행 대기 목록 · 행 확장(집행 명세)<span class="req">필수</span></div>
-        <div class="itm-desc">· <strong>행 하나 = 콜드 이전 1건</strong>이다. 거래 1건이 여러 행으로 나뉜다 — 나목은 입고·출고 2행, 마목은 예치 2행 → 인도 2행이다.<br>· 열: 유형 · 이전(출발 → 도착) · 내용(이체 수량) · 단계 · 집행 결과·처리.<br>· <strong>행 유형 6종</strong>: 입고 · 출고 · 예치 · 인도 · 반환 · 수수료 스윕. 각 유형의 이동·생성 시점은 상세내용 6을 본다.<br>· <strong>확장 패널 = 집행 명세</strong>다. 라벨·값 2열로 건 · 출금 지갑 · 수신 주소(전문·소문자) · 자산·수량 · 명세 무결성(명세 해시·승인자 ID·생성 시각) · 완료 조건 · 다음 단계를 적는다. 같은 내용을 <strong>[명세 Excel]</strong>로 내려받는다(항목 8).<br>· 목록 규격·갱신·행 잠금은 ①과 같다. <strong>건수 집계를 표시하지 않는다.</strong><br>· 정산 배치는 1영업일 3회다 <span class="chk">[확인필요: 배치 시각·마감 기준과 행별 집행의 정합]</span>.<br><span class="basis">근거 states 케이스분기 §2 ② 집행 대기 표 · 09 §0 정산 배치 · 2026-09-04 명세 Excel 존치 결정</span></div>
+        <div class="itm-desc">· <strong>행 하나 = 콜드 이전 1건</strong>이다. 거래 1건이 여러 행으로 나뉜다 — 나목은 입고·출고 2행, 마목은 예치 2행 → 인도 2행이다.<br>· 열: 유형 · 이전(출발 → 도착) · 내용(이체 수량) · 단계 · <strong>위험 판정</strong>(커스터디 입력 · 적정/보완/부적정) · 집행 결과·처리.<br>· <strong>행 유형 6종</strong>: 입고 · 출고 · 예치 · 인도 · 반환 · 수수료 스윕. 각 유형의 이동·생성 시점은 상세내용 6을 본다.<br>· <strong>위험 판정 칸</strong>(2026-09-07 신설 · 커스터디 담당자 계정이 입력): 커스터디가 [명세 Excel]을 받아 블랙리스트·KYT 등 집행 전 심사를 하고, 결과를 행별로 <strong>적정 / 보완 / 부적정</strong> + 내부 메모(고객 미노출)로 넣는다(현행 출금 검토 3분류 재사용). <strong>적정</strong> → 서명 대기 · txhash 입력 활성. <strong>보완</strong> → 행 보류 · 고객 화면 '확인 중' · 재판정 대기(고객 증빙 요청은 현행처럼 커스터디). <strong>부적정</strong> → 행 거절 → 거래 거절 → 마목이면 상대방 예치분 반환 행 자동 생성 → 고객 안내 "거래 위험 검토 결과 진행 불가"(사유·심사 내용 미노출) · 이메일 ⑤. 판정자·시각을 기록한다. <strong>판정 전에는 txhash 입력이 비활성</strong>이다(심사 전 집행 방지 · 제안). 기관이 ADM-03에서 비활성으로 바뀌면 그 기관의 모든 대기 행은 판정과 무관하게 거절된다.<br>· <strong>확장 패널 = 집행 명세</strong>다. 라벨·값 2열로 건 · 출금 지갑 · 수신 주소(전문·소문자) · 자산·수량 · 명세 무결성(명세 해시·승인자 ID·생성 시각) · 완료 조건 · 다음 단계를 적는다. 같은 내용을 <strong>[명세 Excel]</strong>로 내려받는다(항목 8).<br>· 목록 규격·갱신·행 잠금은 ①과 같다. <strong>건수 집계를 표시하지 않는다.</strong><br>· 정산 배치는 1영업일 3회다 <span class="chk">[확인필요: 배치 시각·마감 기준과 행별 집행의 정합]</span>.<br><span class="basis">근거 states 케이스분기 §2 ② 집행 대기 표 · 09 §0 정산 배치 · 2026-09-04 명세 Excel 존치 결정</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">행(입력·버튼 제외 셀 전체)</span><span class="nav-act">클릭 → 확장(동시 1개 · 재클릭 시 접기)</span><span class="nav-to stay">집행 명세 패널 · 이동 없음</span></div>
           <div class="nav-row"><span class="nav-el">단계 칩(입고 ● 출고 ○ 등)</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용). 같은 거래의 다른 행은 목록에서 나란히 보인다.</span></div>
@@ -570,7 +571,7 @@
       <div class="num">8</div>
       <div>
         <div class="itm-title">[명세 Excel]<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>노출</strong> ② 확장 패널 안에 행마다 1개 보인다.<br><strong>클릭 가능</strong> 항상 활성이다. 같은 행의 파일을 만드는 동안만 비활성이다.<br><strong>확인 사항</strong> 없다. 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> 1건 1파일로 동기 생성해 내려받는다. 화면 패널과 같은 값에 <strong>명세 해시·승인자 ID·생성 시각</strong>을 담는다. 콜드 2인 서명자는 콘솔 밖 커스터디 절차라 화면을 보지 않으므로, <strong>이 파일이 서명자에게 넘어가는 전달물</strong>이다. 다운로드는 열람 기록(CSV ⑥)에 남는다.<br>· <strong>완료를 막지 않는다</strong> — 종전 "명세 미다운로드 시 완료 차단" 규칙은 폐지했다(2026-09-04). 완료를 막는 조건은 온체인 대사 불일치 하나다.<br>· 화면 확장 패널과 파일은 <strong>같은 값을 두 곳에 보여주는 것</strong>이고, 관리자 판단은 화면에서, 서명자 전달은 파일로 한다.<br><span class="chk">[확인필요]</span> 서명자에게 파일을 넘기는 경로(별도 채널 / 커스터디 시스템 연동) — 커스터디팀 확인.<br><span class="basis">근거 notation 명세 파일 1건 1파일 동기 생성 · 2026-09-04 인라인+Excel 병기 결정</span></div>
+        <div class="itm-desc"><strong>노출</strong> ② 확장 패널 안에 행마다 1개 보인다.<br><strong>클릭 가능</strong> 항상 활성이다. 같은 행의 파일을 만드는 동안만 비활성이다.<br><strong>확인 사항</strong> 없다. 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> 1건 1파일로 동기 생성해 내려받는다. 화면 패널과 같은 값에 <strong>명세 해시·승인자 ID·생성 시각</strong>을 담는다. 열에 요청 기관 <strong>customerNo·법인명</strong>과 <strong>요청 시점 KRW 환산</strong>(커스터디 AML 등록 krwAmount 참고)을 포함한다 — 이 파일이 커스터디의 품의·위험 심사·AML 등록 근거이므로 열 구성은 커스터디와 합의한다(2026-09-07 · <span class="chk">[확인필요]</span>). 콜드 2인 서명자는 콘솔 밖 커스터디 절차라 화면을 보지 않으므로, <strong>이 파일이 서명자에게 넘어가는 전달물</strong>이다. 다운로드는 열람 기록(CSV ⑥)에 남는다.<br>· <strong>완료를 막지 않는다</strong> — 종전 "명세 미다운로드 시 완료 차단" 규칙은 폐지했다(2026-09-04). 완료를 막는 조건은 온체인 대사 불일치 하나다.<br>· 화면 확장 패널과 파일은 <strong>같은 값을 두 곳에 보여주는 것</strong>이고, 관리자 판단은 화면에서, 서명자 전달은 파일로 한다.<br><span class="chk">[확인필요]</span> 서명자에게 파일을 넘기는 경로(별도 채널 / 커스터디 시스템 연동) — 커스터디팀 확인.<br><span class="basis">근거 notation 명세 파일 1건 1파일 동기 생성 · 2026-09-04 인라인+Excel 병기 결정</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[명세 Excel] — 클릭</span><span class="nav-act">클릭 → 라벨 "생성 중…" → 브라우저 다운로드</span><span class="nav-to stay">화면 잔류 · 토스트 없음(브라우저 다운로드가 피드백) · 열람 기록 적재</span></div>
           <div class="nav-row"><span class="nav-el">[명세 Excel] — 실패</span><span class="nav-act">생성 오류</span><span class="nav-to stay">상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 버튼 라벨 복귀</span></div>
@@ -582,7 +583,7 @@
       <div class="num">9</div>
       <div>
         <div class="itm-title">txhash 입력창<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 행이 활성 단계일 때만 입력할 수 있다. 출고 행은 입고가 완료되기 전에는 "입고 완료 후" 안내만 보이고 입력창이 비활성이다.<br><strong>허용 문자</strong> <code>0x</code> + 16진수 64자(총 66자). 대소문자를 가리지 않고 앞뒤 공백은 잘라낸다.<br><strong>검증</strong> 형식이 맞으면 온체인 조회로 <strong>발신 지갑 · 수신 주소 · 자산 · 수량</strong> 4항목을 명세와 대조한다. 일치하면 녹색 "명세 일치" 표시와 함께 [완료]가 활성된다.<br><strong>실패 처리</strong> 형식 오류는 입력창 아래 인라인 ⚠ "txhash 형식이 올바르지 않습니다". 조회 실패는 "온체인 조회에 실패했습니다 — 잠시 후 다시 시도해 주세요". 대조 불일치는 어긋난 항목을 확장 패널 대사 줄에 빨간 칩으로 표시하고 [완료]를 비활성으로 둔 채 ④에 집행 대사 불일치 알림을 만든다(항목 17·18).<br><strong>연동</strong> 입력값과 대사 결과는 감사로그와 CSV ③에 남는다.<br><span class="basis">근거 states 케이스분기 EX-11·EX-13 · notation 입력창 설명 5단계</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 행이 활성 단계이고 커스터디 <strong>위험 판정이 '적정'</strong>일 때만 입력할 수 있다(판정 전·보완·부적정이면 비활성 · 2026-09-07). 입력 주체는 커스터디 담당자 어드민 계정이다. 출고 행은 입고가 완료되기 전에는 "입고 완료 후" 안내만 보이고 입력창이 비활성이다.<br><strong>허용 문자</strong> <code>0x</code> + 16진수 64자(총 66자). 대소문자를 가리지 않고 앞뒤 공백은 잘라낸다.<br><strong>검증</strong> 형식이 맞으면 온체인 조회로 <strong>발신 지갑 · 수신 주소 · 자산 · 수량</strong> 4항목을 명세와 대조한다. 일치하면 녹색 "명세 일치" 표시와 함께 [완료]가 활성된다.<br><strong>실패 처리</strong> 형식 오류는 입력창 아래 인라인 ⚠ "txhash 형식이 올바르지 않습니다". 조회 실패는 "온체인 조회에 실패했습니다 — 잠시 후 다시 시도해 주세요". 대조 불일치는 어긋난 항목을 확장 패널 대사 줄에 빨간 칩으로 표시하고 [완료]를 비활성으로 둔 채 ④에 집행 대사 불일치 알림을 만든다(항목 17·18).<br><strong>연동</strong> 입력값과 대사 결과는 감사로그와 CSV ③에 남는다.<br><span class="basis">근거 states 케이스분기 EX-11·EX-13 · notation 입력창 설명 5단계</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">txhash 입력창</span><span class="nav-act">입력 후 포커스 이탈 또는 Enter → 온체인 조회·대조</span><span class="nav-to stay">일치 → 녹색 표시 + [완료] 활성 / 불일치 → 빨간 칩 + [완료] 비활성 + ④ 알림 생성</span></div>
           <div class="nav-row"><span class="nav-el">입력창 — 저장 시점</span><span class="nav-act">화면 이동·탭 전환 시</span><span class="nav-to stay">저장하지 않은 입력값은 확인 없이 버린다(전역 이동 규칙과 동일)</span></div>
@@ -803,7 +804,8 @@
         <table class="tbl">
           <thead><tr><th>컬럼</th><th>원천 (테이블.필드)</th><th>비고</th></tr></thead>
           <tbody>
-            <tr><td>고객사 ID</td><td class="src">ORG.org_id</td><td>ORG-NNNN</td></tr>
+            <tr><td>customerNo</td><td class="src">ORG.customer_no</td><td>커스터디 발급 L-XXXXXX-XXXX · 기관 식별자 단일(내부 채번 ORG-NNNN 폐기 · 2026-09-07)</td></tr>
+            <tr><td>수탁 지갑 주소</td><td class="src">ORG.custody_address</td><td>ADM-03 초대 시 입력 · 법인 1사·체인 1개당 1지갑(Ethereum) · 온체인 잔고 조회 대상</td></tr>
             <tr><td>상호</td><td class="src">ORG.name</td><td></td></tr>
             <tr><td>계약 상태</td><td class="src">ORG.contract_status</td><td></td></tr>
             <tr><td>한도등급</td><td class="src">ORG.grade</td><td></td></tr>
