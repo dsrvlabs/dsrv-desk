@@ -68,10 +68,15 @@ window.addEventListener('resize',relayout);
 // 스크롤마다 보이는 영역({type:'viewport', top, height} · top = iframe 문서 기준 보이는 영역의 위쪽)을 보내고,
 // 여기서 .screen-panel을 translateY로 그 영역 안에 붙인다. 단독으로 열면 window 스크롤을 그대로 쓴다.
 // 항목·핀·상세 카드를 선택하면(activeIdx) 패널이 뷰포트보다 클 때 그 항목의 프레임 영역이 보이도록 맞춘다.
+//
+// 끄기(2026-09-07 사용자 지시): <body data-follow-panel="off">를 두면 따라오지 않고 프레임이 제자리에 고정된다.
+// .main은 align-items:flex-start라 transform만 비우면 패널이 컬럼 맨 위에 그대로 머문다. 어드민 화면(ADM-02·03)에 적용.
 let vp=null,snapTimer=null;
 function followPanel(snap){
   const main=document.querySelector('.main'),panel=document.querySelector('.screen-panel'),items=document.querySelector('.items');
-  if(!main||!panel||!vp)return;
+  if(!main||!panel)return;
+  if(document.body.dataset.followPanel==='off'){panel.style.transform='';panel.classList.remove('snap');drawConnectors();return;}
+  if(!vp)return;
   panel.style.transform='';
   const sy=window.scrollY||0,top=r=>r.top+sy;
   const mR=main.getBoundingClientRect(),pR=panel.getBoundingClientRect();
