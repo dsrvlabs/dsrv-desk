@@ -108,7 +108,7 @@
 <div class="doc-head">
   <h1>DB 스키마 — 한글판 <span style="font-size:12px;color:#64748b;font-weight:700;">v0.7 · 2026-09-02</span></h1>
   <div class="sub">
-    교환·중개 콘솔 <b>DSRV Desk</b>(고객)·<b>DSRV Admin</b>(관리자)의 데이터 구조 · 6개 영역 · 총 29개 테이블 ·
+    교환·중개 콘솔 <b>DSRV Desk</b>(고객)·<b>DSRV Admin</b>(관리자)의 데이터 구조 · 6개 영역 · 총 27개 테이블 ·
     취급자산 <b>ETH·USDC·USDT</b> · 체인 <b>Ethereum 단일</b> · 개발자가 처음 읽어도 이해되도록 용어·기호를 앞에서 먼저 풀고(§0), 카드마다 테이블의 역할 한 줄을 붙였다.
   </div>
 </div>
@@ -134,7 +134,7 @@
     <h3>데이터 흐름 한눈에</h3>
     <div class="flowline"><span class="lab">직접 교환 (나목)</span>교환 요청 <span class="arr">→</span> 비율 견적(자동 산정) <span class="arr">→</span> 관리자 승인 <span class="tref">T1</span> <span class="arr">→</span> 콜드 수동 집행·완료</div>
     <div class="flowline"><span class="lab">게시판 중개 (마목)</span>거래의향 게시 <span class="arr">→</span> 신청 <span class="arr">→</span> 게시자 수락 = 확정(딜) <span class="tref">T2</span> <span class="arr">→</span> 이전·정산</div>
-    <div class="flowline"><span class="lab">입출금</span>입금은 자동 감시 후 이상 시 격리 <span class="tref">T4</span> · 출금·이전은 서면 접수 후 관리자 등록 <span class="tref">T3</span></div>
+    <div class="flowline"><span class="lab">자산 이동</span>전부 DSRV 관리 지갑 4묶음 사이의 <b>내부 콜드 이전</b>(입고·출고·예치·인도·반환·수수료 스윕) — 외부 입금·외부 출금은 이 시스템 밖(커스터디 기존 서비스 · 2026-09-04)</div>
     <div class="flowline"><span class="lab">승인·알람</span>승인 대기·경고는 종류가 달라도 <b>처리함 아이템</b> 한 테이블(INBOX_ITEM)에 모이고, 관리자가 하나씩 종결한다</div>
     <p style="margin-top:8px;"><b>설계 원칙 3가지</b> — ⓐ 자동은 <b>검증·산정·아이템 생성</b>까지, <b>승인·거절·종결은 사람</b>이 한다(자동 체결 없음). ⓑ 본인이 올린 건은 본인이 승인할 수 없다. ⓒ 모든 상태 변경은 감사로그(AUDIT_LOG)에 남고 수정·삭제할 수 없다.</p>
     <h3 style="margin-top:12px;">이 DB에 없는 것 (경계)</h3>
@@ -142,7 +142,7 @@
       <li><b>STR(의심거래보고) 작성·보고</b> — 별도 AML 시스템에서 수행. 이 DB에는 처리함 결과코드 'STR 이관'까지만 남는다</li>
       <li><b>KYC 심사 도구</b> — 심사는 별도 시스템. 이 DB는 결과 상태와 다음 재이행 일정만 보관</li>
       <li><b>고객 대상 거래보고서</b> — 발급하지 않음. 조회·집계는 관리자용 CSV 6종으로 대체</li>
-      <li><b>출금 화이트리스트 관리</b> — 기존 커스터디 정책·시스템을 그대로 사용</li>
+      <li><b>외부 입금 감시·외부 출금·화이트리스트</b> — 커스터디 기존 서비스. 이 시스템은 내부 주소만 다루므로 화이트리스트를 쓰지 않는다(2026-09-04)</li>
       <li><b>가격·오더북·자동 매칭</b> — 없음. 직접 교환 비율은 외부 지표 + 고정 스프레드, 게시판 중개는 당사자가 정한 조건 그대로</li>
     </ul>
   </div>
@@ -173,8 +173,7 @@
         <tr><td class="fld">트래블룰</td><td>가상자산을 이전할 때 송신인·수신인 정보를 함께 확인·전달해야 하는 규제 요건. 테이블 TRAVEL_RULE.</td></tr>
         <tr><td class="fld">자동검증 · 에스컬레이션</td><td>자동검증 = 한도·잔고·BLF·KYT를 시스템이 먼저 검사하는 1차 필터. 결과가 '주의' 이상이면 자동 거절하지 않고 <b>에스컬레이션</b>(우선 검토 대상으로 표시)해서 사람이 판단한다.</td></tr>
         <tr><td class="fld">처리함 (INBOX)</td><td>관리자 홈(ADM-02)의 작업 목록. 승인·확인·조사가 필요한 일이 생기면 시스템이 '아이템'을 만들어 쌓고 관리자가 종결한다. 유형은 §0-B.</td></tr>
-        <tr><td class="fld">격리 · 동결</td><td>격리 = 위험 신호가 있는 입금을 고객 잔고에 반영하지 않고 격리 지갑에 따로 두는 것. 동결 = 소명이 인정되지 않거나 제재 적중으로 자산 이동을 막은 상태.</td></tr>
-        <tr><td class="fld">지연발효</td><td>처음 쓰는 출금 주소는 등록 후 일정 시간(24시간)이 지나야 출금 승인이 가능해지는 보호장치. 계정 탈취 시 즉시 출금 피해를 막는다.</td></tr>
+        <tr><td class="fld">격리 · 동결</td><td>에스크로 = 마목 정산 예치분을 담는 DSRV 관리 지갑(고객 자산·콜드·운용 금지). 동결 = 소명이 인정되지 않거나 제재 적중으로 자산 이동을 막은 상태.</td></tr>
         <tr><td class="fld">콜드 · 핫 · 스윕</td><td>콜드월렛 = 인터넷과 분리된 지갑(수탁자산은 100% 콜드). 핫월렛 = 온라인 지갑. 스윕 = 핫월렛 잔고를 콜드로 옮기는 작업. 핫 비중이 20%를 넘으면 스윕 경고.</td></tr>
         <tr><td class="fld">2인 멀티시그</td><td>콜드월렛 출고에 서명자 2명이 필요한 방식. 서명은 화면 밖 커스터디 절차이고 DB에는 서명자 2명만 기록.</td></tr>
         <tr><td class="fld">명세 대사 · 3면 대사</td><td>명세 대사 = 집행 명세(주소·자산·수량)와 온체인 결과(txhash)가 일치하는지 확인. 일치해야 '완료'. 3면 대사 = 내부 장부·온체인 잔고·콜드월렛 기록 세 값을 맞춰보는 정기 점검.</td></tr>
@@ -183,26 +182,25 @@
         <tr><td class="fld">PAM</td><td>특권계정 관리. DSRV 관리자 행위는 전용 세션에서 녹화·감사되며 권한을 분기마다 재검토한다. 내부 정책이고 화면에는 표시하지 않는다.</td></tr>
         <tr><td class="fld">MFA · TOTP · 백업코드</td><td>MFA = 2차 인증. TOTP = Google Authenticator 방식 시간 기반 일회용 코드. 백업코드 = 인증 기기를 잃었을 때 쓰는 1회용 코드(6개 발급).</td></tr>
         <tr><td class="fld">마스킹</td><td>화면·CSV에서 일부만 보이게 가리는 것. 상호는 확정 전 첫 글자만, 이메일은 CSV에서 가림, 주소·해시는 앞 0x+4자…뒤 4자.</td></tr>
-        <tr><td class="fld">서면 접수</td><td>출금·이전은 고객 화면에 기능이 없고, 고객이 문서로 신청하면 관리자가 시스템에 대신 등록한다는 뜻.</td></tr>
+        <tr><td class="fld">서면 접수</td><td><b>이 시스템에서는 쓰지 않는다</b>(2026-09-04). 종전 서면 출금 접수는 커스터디 기존 서비스의 절차이고 이 콘솔에 화면도 테이블도 없다.</td></tr>
       </table>
     </div>
 
     <div>
       <div class="card">
-        <div class="card-h">B. 처리함 아이템 유형 T1~T8 · X3<small>상태 전이 문서(states.html)와 같은 번호</small></div>
+        <div class="card-h">B. 어드민 아이템 유형 (2026-09-04 개편)<small>상태 전이 문서(states.html)와 같은 번호</small></div>
         <table>
           <tr><th style="width:36px;">코드</th><th style="width:110px;">이름</th><th>무엇을 처리하는가</th><th style="width:150px;">대상 테이블</th></tr>
           <tr><td><span class="tref">T1</span></td><td class="fld">직접 교환 승인</td><td>고객이 비율을 수락한 교환 요청을 집행 전에 관리자가 승인. 전건 유입, 자동 통과 없음.</td><td>EXCHANGE_REQUEST · EXCHANGE_APPROVAL</td></tr>
           <tr><td><span class="tref">T2</span></td><td class="fld">중개 확정 확인</td><td>이미 확정된 딜의 자산 이전을 진행해도 되는지 확인. 거래 성립 승인이 아님.</td><td>DEAL</td></tr>
-          <tr><td><span class="tref">T3</span></td><td class="fld">출금·이전</td><td>서면 접수된 출금·이전 요청의 승인. 신규 주소면 지연발효 만료 후에만 승인 가능.</td><td>WITHDRAWAL_REQUEST</td></tr>
-          <tr><td><span class="tref">T4</span></td><td class="fld">입금 격리</td><td>KYT 고위험·BLF 적중 입금을 격리하고 소명·해제·동결을 판단.</td><td>DEPOSIT_TX</td></tr>
           <tr><td><span class="tref">T5</span></td><td class="fld">이상거래</td><td>연관 당사자 간 거래, 게시·취소 반복 등 패턴 룰 적중 건. STR 이관 또는 무혐의로 종결.</td><td>(거래·게시 패턴, 대상 다양)</td></tr>
-          <tr><td><span class="tref">T6</span></td><td class="fld">월렛·키</td><td>콜드월렛 비인가 이체 시도, 핫 비중 20% 초과(스윕 경고), 서명 시스템 장애.</td><td>WALLET</td></tr>
-          <tr><td><span class="tref">T7</span></td><td class="fld">KYC 재이행</td><td>재이행 기한 초과·미응답 시 신규 거래 일시제한. 고객이 재이행하면 자동 종결(유일한 자동 종결).</td><td>ORG · KYC_RECORD</td></tr>
           <tr><td><span class="tref">T8</span></td><td class="fld">계정 잠금</td><td>로그인 5회 실패 자동 잠금 또는 탈취 의심. 본인확인 후 해제 또는 동결.</td><td>USER</td></tr>
-          <tr><td><span class="tref">X3</span></td><td class="fld">3면 대사 불일치</td><td>대사 배치에서 세 값이 다르면 생성 + 해당 지갑 출금 자동 동결. 원인 규명 후 해제.</td><td>RECONCILIATION</td></tr>
+          <tr><td><span class="tref">N1</span></td><td class="fld">시세 소스 중단</td><td>시세 수신이 끊겨 견적·한도 환산·price guard 판정이 멈춘 상태. 신규 요청·게시·신청을 차단하고 복구를 확인해 종결.</td><td>(시스템 감시 · 대상 테이블 없음)</td></tr>
+          <tr><td><span class="tref">N2</span></td><td class="fld">교환 재고 부족</td><td>수락 시 재검증에서 교환 재고 부족으로 만료가 발생하면 생성. 운영 지갑 → 재고 지갑 보충 확인 후 종결.</td><td>WALLET(교환재고)</td></tr>
+          <tr><td><span class="tref">N3</span></td><td class="fld">집행 대사 불일치</td><td>집행 [완료] 시 txhash 내역이 명세와 다르면 생성. 해당 이전 행을 정지하고 정정·재집행 후 재대사로 종결.</td><td>EXCHANGE_EXECUTION · BROKER_SETTLEMENT</td></tr>
+          <tr><td><span class="tref">X3</span></td><td class="fld">3면 대사 불일치</td><td>대사 배치에서 세 값(내부 장부·온체인·커스터디 콜드 기록)이 다르면 생성 + 해당 지갑 신규 이전 정지. 원인 규명 후 최신 배치가 일치일 때만 종결. 대상 = 자산 묶음 4개 전부.</td><td>RECONCILIATION</td></tr>
         </table>
-        <div style="padding:7px 14px;font-size:10.5px;color:#64748b;border-top:1px solid #f1f5f9;">제재·블랙리스트 적중은 독립 유형이 아니다 — 입금에서 걸리면 T4, 출금에서 걸리면 T3(차단)로 귀속. 아이템의 상태는 2계층: <b>공통 상태 5종</b>(OPEN·ESCALATED·IN_PROGRESS·HOLD·RESOLVED, 집계용)과 <b>유형별 업무 상태</b>(대상 테이블의 status). 자세한 전이는 states.html.</div>
+        <div style="padding:7px 14px;font-size:10.5px;color:#64748b;border-top:1px solid #f1f5f9;"><b>삭제(2026-09-04)</b> T3 출금·이전 · T4 입금 격리 · T6 월렛·키 · T7 KYC 재이행 — 전부 커스터디 기존 서비스의 일이고 이 시스템에 화면도 아이템도 없다. WITHDRAWAL_REQUEST·DEPOSIT_TX는 이 시스템의 테이블이 아니다. 제재·블랙리스트 결과값(BLF·KYT)은 커스터디 AML 시스템에서 받아 T1·T2 자동검증 필드로만 쓴다.<br><b>어드민 화면 배치</b> ① 거래 승인 = T1·T2 · ② 집행 대기(아이템 아님 — 대상 테이블 status를 직접 바꾼다) · ③ AML 판단 = T5 · ④ 운영 알림 = N1·N2·N3·X3·T8.<br>아이템 상태는 2계층: <b>공통 상태 5종</b>(OPEN·ESCALATED·IN_PROGRESS·HOLD·RESOLVED)과 <b>유형별 업무 상태</b>(대상 테이블의 status). <b>집계 표시는 하지 않는다.</b> 자세한 전이는 states.html.</div>
       </div>
 
       <div class="card">
@@ -311,7 +309,7 @@
       <div class="f"><span class="m n">·</span><span class="name">PEP 여부</span><span class="col">pep_flag</span><span class="desc">정치적 주요인물 해당 여부</span></div>
       <div class="f"><span class="m n">·</span><span class="name">확인일</span><span class="col">verified_at</span><span class="desc"></span></div>
       <div class="f"><span class="m n">·</span><span class="name">재이행 도래일</span><span class="col">next_review_at</span><span class="desc">위험등급별 주기(고 1년 · 중 2년 · 저 3년) + 실소유자 변경 등 이벤트 발생 시 수시</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">재이행 상태</span><span class="col">review_status</span><span class="desc"><span class="ev">정상 / 도래 / 기한 초과·미응답</span> — 초과 시 처리함 <span class="ref">T7</span>(KYC 재이행) 생성</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">재이행 상태</span><span class="col">review_status</span><span class="desc"><span class="ev">정상 / 도래 / 기한 초과·미응답</span> — 재이행 실행은 오프라인(커스터디). 이 시스템은 결과만 받고 <b>아이템을 만들지 않는다</b>; 필요하면 관리자가 ADM-03에서 기관 상태를 일시제한으로 바꾼다(2026-09-04 · 종전 T7 삭제)</span></div>
     </div>
 
     <div class="tbl">
@@ -329,7 +327,7 @@
 
 <!-- ② 지갑·자산 -->
 <div class="section s-wal">
-  <div class="sec-head"><h2>② 지갑·자산 (WAL)</h2><span class="cnt">테이블 5</span></div>
+  <div class="sec-head"><h2>② 지갑·자산 (WAL)</h2><span class="cnt">테이블 3</span></div>
   <div class="sec-note">무엇을 보관·이동하는가 — 취급자산과 지갑, 직접 교환에 쓰는 DSRV 재고 풀, 입금·출금 트랜잭션. 고객용 지갑 화면은 따로 없고 잔고·입금 주소는 대시보드(DASH-01)에 표시한다.</div>
   <div class="grid">
 
@@ -345,13 +343,13 @@
 
     <div class="tbl">
       <div class="tbl-head"><span class="scr">DASH-01</span><span class="kn">지갑</span><span class="en">WALLET</span></div>
-      <div class="role">DSRV가 운용하는 지갑 1개 = 행 1개(자산·체인별). 고객 수탁 지갑, DSRV 운영 지갑, 교환 재고 지갑, 위험 입금 격리 지갑을 <b>type</b>으로 구분.</div>
+      <div class="role">DSRV가 관리하는 지갑 1개 = 행 1개(자산·체인별). <b>자산 묶음 4개</b>를 <b>type</b>으로 구분한다 — 고객 수탁 · DSRV 운영 · 나목 교환 최소재고 · 에스크로 전용지갑(2026-09-04).</div>
       <div class="f"><span class="m pk">PK</span><span class="name">지갑 ID</span><span class="col">wallet_id</span><span class="desc"></span></div>
-      <div class="f"><span class="m n">·</span><span class="name">지갑 구분</span><span class="col">type</span><span class="desc"><span class="ev">수탁 콜드 / 운영 / 교환재고(풀) / 격리</span><br>격리 = 위험 신호 입금을 고객 잔고에 반영하지 않고 따로 두는 지갑(처리함 <span class="ref">T4</span> 연동)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">지갑 구분</span><span class="col">type</span><span class="desc"><span class="ev">수탁 콜드 / 운영 / 교환재고(풀) / 에스크로</span><br>에스크로 = 마목 정산 예치분을 담는 DSRV 관리 지갑(고객 자산 · 전량 콜드 · 운용 금지 · 약관 제3조 8호). 종전 '격리'는 삭제 — 입금 격리는 이 시스템 밖(커스터디)</span></div>
       <div class="f"><span class="m fk">FK</span><span class="name">자산</span><span class="col">asset_id</span><span class="desc">→ 취급자산(ASSET)</span></div>
       <div class="f"><span class="m fk">FK</span><span class="name">기관</span><span class="col">org_id</span><span class="desc">→ 기관(ORG). 수탁 콜드 지갑만 고객사와 연결, 나머지 유형은 비움</span></div>
       <div class="f"><span class="m n">·</span><span class="name">주소</span><span class="col">address</span><span class="desc">입금용 주소. DASH-01 지갑 잔고 하단에 마스킹 없이 전문 표시(표기 규칙의 유일한 예외)</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">콜드 여부</span><span class="col">is_cold</span><span class="desc">수탁자산은 100% 콜드. 핫월렛 비중이 20%를 넘으면 처리함 <span class="ref">T6</span>(월렛·키) 스윕 경고</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">콜드 여부</span><span class="col">is_cold</span><span class="desc">전 지갑 콜드. <b>핫월렛이 없다</b>(09 §0) — 종전 핫월렛 비중 임계와 T6 스윕 경고는 삭제(2026-09-04)</span></div>
     </div>
 
     <div class="tbl">
@@ -365,33 +363,7 @@
       <div class="f"><span class="m n">·</span><span class="name">반영 시각</span><span class="col">updated_at</span><span class="desc"></span></div>
     </div>
 
-    <div class="tbl">
-      <div class="tbl-head"><span class="scr">ADM-02 (T4)</span><span class="kn">입금 트랜잭션</span><span class="en">DEPOSIT_TX</span></div>
-      <div class="role">고객사 수탁 지갑으로 들어온 온체인 입금 1건 = 행 1개. 자동 감시(KYT·BLF)에 걸리면 잔고에 반영하지 않고 격리한다.</div>
-      <div class="f"><span class="m pk">PK</span><span class="name">입금 ID</span><span class="col">deposit_id</span><span class="desc"></span></div>
-      <div class="f"><span class="m fk">FK</span><span class="name">기관</span><span class="col">org_id</span><span class="desc">→ 기관(ORG)</span></div>
-      <div class="f"><span class="m fk">FK</span><span class="name">자산</span><span class="col">asset_id</span><span class="desc">→ 취급자산(ASSET)</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">온체인 txhash</span><span class="col">txhash</span><span class="desc">블록체인 거래 해시</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">수량</span><span class="col">amount</span><span class="desc"></span></div>
-      <div class="f"><span class="m n">·</span><span class="name">KYT 점수 · BLF 결과</span><span class="col">kyt_score · blf_result</span><span class="desc">KYT = 자금 출처·경로 위험 점수, BLF = 제재·블랙리스트 주소 대조. 적중 시 격리·동결 자동 개시</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">상태</span><span class="col">status</span><span class="desc"><span class="ev">컨펌 중 / 반영 완료 / 격리 중 / 소명 대기 / 해제·반영 / 동결 / 오입금 / 스팸</span><br>격리 중~동결은 처리함 <span class="ref">T4</span>(입금 격리)의 업무 상태와 같은 값</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">입금 시각</span><span class="col">created_at</span><span class="desc">격리·동결 건은 고객 잔고 미반영</span></div>
-    </div>
 
-    <div class="tbl">
-      <div class="tbl-head"><span class="scr">ADM-02 (T3)</span><span class="kn">출금·이전 요청</span><span class="en">WITHDRAWAL_REQUEST</span></div>
-      <div class="role">고객사의 출금·이전 요청 1건 = 행 1개. 고객 화면에 기능이 없고, <b>서면으로 접수해 관리자가 등록</b>한다. 처리함 <span class="ref">T3</span> 아이템의 대상.</div>
-      <div class="f"><span class="m pk">PK</span><span class="name">요청 ID</span><span class="col">wd_id</span><span class="desc"></span></div>
-      <div class="f"><span class="m fk">FK</span><span class="name">기관</span><span class="col">org_id</span><span class="desc">→ 기관(ORG)</span></div>
-      <div class="f"><span class="m fk">FK</span><span class="name">자산</span><span class="col">asset_id</span><span class="desc">→ 취급자산(ASSET)</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">수량</span><span class="col">qty</span><span class="desc"></span></div>
-      <div class="f"><span class="m n">·</span><span class="name">수신 주소</span><span class="col">to_address</span><span class="desc">외부 반출 주소. 화이트리스트 검증은 기존 커스터디 정책·시스템에서</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">신규 주소 여부</span><span class="col">is_new_address</span><span class="desc">처음 쓰는 주소면 지연발효 타이머(24시간) 자동 시작</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">지연발효 만료 시각</span><span class="col">delay_until</span><span class="desc">만료되면 관리자 승인 버튼이 활성화될 뿐, 자동 승인은 아님</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">상태</span><span class="col">status</span><span class="desc"><span class="ev">대기(지연발효 중) / 대기(승인 가능) / 집행 대기 / 완료 / 거절 / 차단</span><br>= 처리함 <span class="ref">T3</span> 업무 상태. 차단 = 출금 실행 시점 BLF 재검사 적중</span></div>
-      <div class="f"><span class="m fk">FK</span><span class="name">승인자</span><span class="col">approver_id</span><span class="desc">→ 가입자 계정(USER), DSRV 관리자</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">온체인 txhash</span><span class="col">txhash</span><span class="desc">콜드월렛 집행 후 관리자가 입력. 명세와 온체인 결과가 일치할 때 완료</span></div>
-    </div>
 
   </div>
 </div>
@@ -508,15 +480,16 @@
 
     <div class="tbl">
       <div class="tbl-head"><span class="scr">BRK-05</span><span class="kn">이전·정산</span><span class="en">BROKER_SETTLEMENT</span></div>
-      <div class="role">확정 거래의 실제 자산 이전(정산) 기록. 커스터디팀이 콜드월렛에서 수동으로 양쪽을 순차 이전하며, 1영업일 3회 배치로 처리한다.</div>
+      <div class="role">확정 거래의 실제 자산 이전(정산) 기록. <b>에스크로 예치 2건 → 양건 확인 → 인도 2건</b>으로 처리하고(2026-09-03(15)), 커스터디팀이 콜드 2인 서명으로 집행하며 1영업일 3회 배치로 돈다. 인도는 양건 예치 확인 후에만 생성되므로 일방 이전이 구조적으로 불가능하다.</div>
       <div class="f"><span class="m pk">PK</span><span class="name">정산 ID</span><span class="col">settle_id</span><span class="desc"></span></div>
       <div class="f"><span class="m fk">FK</span><span class="name">딜</span><span class="col">deal_id</span><span class="desc">→ 조건 확정(DEAL)</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">상태</span><span class="col">status</span><span class="desc"><span class="ev">양건 확인 / B→A 이전 / A→B 이전 / 완료 / 홀드(완결성 실패)</span><br>홀드 시 이미 이전한 쪽을 되돌리고(역이전) 처리함 경고</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">이전 완결성</span><span class="col">completeness_ok</span><span class="desc">양쪽 모두 이전됐는지. 한쪽만 이전된 상태를 막는 지표(KPI·QA)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">상태</span><span class="col">status</span><span class="desc"><span class="ev">예치 진행 / 양건 예치 확인 / 인도 진행 / 완료 / 이전 보류 / 이전 중지</span><br>종전 'B→A 이전 / A→B 이전 / 홀드(역이전)'는 폐기(2026-09-03(15)) — 예치 후 중지 시 역이전이 아니라 <b>예치자에게 반환</b>한다(약관 제10조②)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">이전 완결성</span><span class="col">completeness_ok</span><span class="desc">양측 <b>예치</b>가 모두 끝났는지. 이 값이 참일 때만 인도 2건이 자동 생성된다(별도 승인 클릭 없음)</span></div>
       <div class="f"><span class="m fk">FK</span><span class="name">트래블룰</span><span class="col">travel_rule_id</span><span class="desc">→ 트래블룰 기록(TRAVEL_RULE). 양측 송·수신인 확인</span></div>
       <div class="f"><span class="m fk">FK</span><span class="name">서명자 1·2</span><span class="col">signer1_id · signer2_id</span><span class="desc">→ 가입자 계정(USER). 2인 멀티시그</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">온체인 txhash</span><span class="col">txhash</span><span class="desc">이전 건별 해시. 명세 대사 후 완료 처리</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">중개 수수료 수익</span><span class="col">fee_revenue</span><span class="desc">이 건의 수수료 수익. 구분회계상 '중개수수료' 계정(스프레드 수익과 분리)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">이전 유형</span><span class="col">transfer_type</span><span class="desc"><span class="ev">예치 / 인도 / 반환 / 수수료 스윕</span><br>반환 = 예치 후 이전 중지 시 예치자에게 되돌리는 건(수수료 미부과) · 수수료 스윕 = 인도 후 에스크로에 남은 수수료를 운영 지갑으로 옮기는 건(정책 주기 배치 · 자산별 1건으로 묶음 · 주기 <span class="tg">[확인필요]</span>) — 2026-09-04 신설</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">온체인 txhash</span><span class="col">txhash</span><span class="desc">이전 건별 해시. 명세 대사(발신 지갑·수신 주소·자산·수량 4항목) 후 완료 처리</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">중개 수수료 수익</span><span class="col">fee_revenue</span><span class="desc">이 건의 수수료 수익(각자 보내는 자산의 1%). <b>예치 수량에 포함해 에스크로에 들어갔다가</b> 인도 후 정책 주기 스윕으로 운영 지갑(수수료풀)에 옮겨진다(2026-09-04). 구분회계상 '중개수수료' 계정(스프레드 수익과 분리)</span></div>
       <div class="f"><span class="m n">·</span><span class="name">정산 시각</span><span class="col">settled_at</span><span class="desc">정산 배치 1영업일 3회. 배치 시각·마감 <span class="tg">[확인필요]</span></span></div>
     </div>
 
@@ -535,13 +508,13 @@
       <div class="f"><span class="m pk">PK</span><span class="name">아이템 ID</span><span class="col">item_id</span><span class="desc"></span></div>
       <div class="f"><span class="m n">·</span><span class="name">유형</span><span class="col">type</span><span class="desc"><span class="ev">T1 / T2 / T3 / T4 / T5 / T6 / T7 / T8 / X3</span> — 각 유형의 뜻은 §0-B</span></div>
       <div class="f"><span class="m n">·</span><span class="name">대상 유형 · 대상 ID</span><span class="col">ref_type · ref_id</span><span class="desc">다형 참조. ref_type이 가리키는 테이블(교환 요청 / 딜 / 출금 요청 / 입금 tx / 계정 / 지갑 / 대사)의 PK를 ref_id에 저장. DB 제약(FK)으로 걸 수 없는 참조이므로 구현 방식은 개발 설계에서 확정</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">자동검증 등급</span><span class="col">grade</span><span class="desc"><span class="ev">정상 / 주의(Mid) / High / 지연발효 중 / —</span> — 주의 이상이면 item_status를 ESCALATED로 생성</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">아이템 상태</span><span class="col">item_status</span><span class="desc"><span class="ev">OPEN / ESCALATED / IN_PROGRESS / HOLD / RESOLVED</span><br>유형 공통 5종. '처리 대기 N건' 같은 KPI 집계용. 유형별 실제 업무 상태(승인 대기, 격리 중 등)는 대상 테이블의 status에 있다(2계층)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">자동검증 등급</span><span class="col">grade</span><span class="desc"><span class="ev">정상 / 주의(Mid) / High / —</span> — 주의 이상이면 item_status를 ESCALATED로 생성</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">아이템 상태</span><span class="col">item_status</span><span class="desc"><span class="ev">OPEN / ESCALATED / IN_PROGRESS / HOLD / RESOLVED</span><br>유형 공통 5종. <b>화면에 건수 집계를 표시하지 않는다</b>(2026-09-04). 유형별 실제 업무 상태(승인 대기, 격리 중 등)는 대상 테이블의 status에 있다(2계층)</span></div>
       <div class="f"><span class="m n">·</span><span class="name">결과 코드</span><span class="col">result_code</span><span class="desc"><span class="ev">승인 / 거절 / 소명 인정 / 동결 / STR 이관 / 무혐의 / 조치완료 / 해제 / 제한 적용 / 자동 종결(T7)</span> — RESOLVED일 때 함께 기록</span></div>
       <div class="f"><span class="m n">·</span><span class="name">발생원·세부유형</span><span class="col">source</span><span class="desc">콜드월렛 감시 / 이상거래 룰 ID / 대사 배치 등. 주로 T5·T6·X3에서 사용</span></div>
       <div class="f"><span class="m fk">FK</span><span class="name">담당자</span><span class="col">assignee_id</span><span class="desc">→ 가입자 계정(USER), DSRV 관리자. 본인이 기안한 건은 자기승인 차단</span></div>
       <div class="f"><span class="m n">·</span><span class="name">사유</span><span class="col">reason</span><span class="desc">보류·거절 시 입력 필수. 고객 통지에는 일반화된 사유만(STR 누설 금지)</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">생성 · 종결 시각</span><span class="col">created_at · resolved_at</span><span class="desc">생성은 시스템, 종결은 사람(예외: T7 재이행 완료 자동 종결 <span class="tg">[결정필요 ③]</span>). 모든 상태 변경은 AUDIT_LOG에 기록</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">생성 · 종결 시각</span><span class="col">created_at · resolved_at</span><span class="desc">생성은 시스템, <b>종결은 전부 사람</b>(T7 삭제로 자동 종결 없음 · 종전 [결정필요 ③] 해소 2026-09-04). 모든 상태 변경은 AUDIT_LOG에 기록</span></div>
     </div>
 
     <div class="tbl">
@@ -593,9 +566,7 @@
       <div class="f"><span class="m pk">PK</span><span class="name">룰 ID</span><span class="col">rule_id</span><span class="desc"></span></div>
       <div class="f"><span class="m n">·</span><span class="name">적용 범위</span><span class="col">scope</span><span class="desc"><span class="ev">공통 / 기관 / 등급</span></span></div>
       <div class="f"><span class="m n">·</span><span class="name">건별 한도</span><span class="col">tx_limit</span><span class="desc">1회 1,500,000원 상당(직접 교환·게시판 중개 공통, 2026-09-02(9) 원화 기준으로 변경). KRW 환산: ETH·USDC·USDT 모두 시세 소스의 KRW 시세로 요청 시점 환산(종전 스테이블 USD 1:1 전제 폐기) · 환산값 원 단위 절사. 일간·월간 누적 한도 <span class="tg">[확인필요]</span></span></div>
-      <div class="f"><span class="m n">·</span><span class="name">신규주소 지연발효</span><span class="col">wl_delay</span><span class="desc">24시간. 커스터디 출금(외부 반출) 전용, 교환·중개에는 미적용</span></div>
       <div class="f"><span class="m n">·</span><span class="name">KYT·BLF 임계</span><span class="col">kyt_blf_thr</span><span class="desc">자동검증 1차 필터의 에스컬레이션 기준</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">핫월렛 비중 임계</span><span class="col">hot_ratio_thr</span><span class="desc">20%. 초과 시 스윕 경고(처리함 <span class="ref">T6</span>)</span></div>
       <div class="f"><span class="m fk">FK</span><span class="name">정책 버전</span><span class="col">version</span><span class="desc">→ 정책 변경통제(POLICY_VERSION)</span></div>
     </div>
 
@@ -657,7 +628,7 @@
       <tr><td class="fld">취급자산 · 체인<span class="col">ASSET.chain</span></td><td><span class="v ok">Ethereum</span></td><td>단일 체인 — DASH-01 주소 표기와 정합</td></tr>
       <tr><td class="fld">취급자산 · 페그<span class="col">ASSET.peg</span></td><td><span class="v">USD</span><span class="v">없음(ETH)</span></td><td>USDC↔USDT 동일통화 — 디페그 감시 · ETH 페어는 시세 기준</td></tr>
       <tr><td class="fld">교환 페어<span class="col">POOL.pair · SPREAD_POLICY.pair</span></td><td><span class="v">ETH↔USDC</span><span class="v">ETH↔USDT</span><span class="v">USDC↔USDT</span></td><td>3페어(방향 6) — EXC-01</td></tr>
-      <tr><td class="fld">지갑 구분<span class="col">WALLET.type</span></td><td><span class="v">수탁 콜드</span><span class="v">운영</span><span class="v">교환재고(풀)</span><span class="v bad">격리</span></td><td>격리 = 위험 입금 자동 분리(처리함 T4)</td></tr>
+      <tr><td class="fld">지갑 구분<span class="col">WALLET.type</span></td><td><span class="v">수탁 콜드</span><span class="v">운영</span><span class="v">교환재고(풀)</span><span class="v">에스크로</span></td><td>자산 묶음 4개 = 3면 대사(X3) 대상 전부. 종전 '격리'(T4) 삭제 — 입금 격리는 이 시스템 밖</td></tr>
       <tr><td class="fld">기관 상태<span class="col">ORG.status</span></td><td><span class="v mid">심사중</span><span class="v ok">활성</span><span class="v mid">일시제한</span><span class="v bad">동결</span><span class="v">해지</span></td><td>ADM-03에서만 변경 — 전 화면 기능 차단(전역 게이팅 G-3)의 단일 출처 · 해지 = 진행 거래 완결 → 전량 출금 → 비활성화</td></tr>
       <tr><td class="fld">KYC 상태<span class="col">ORG.kyc_status</span></td><td><span class="v ok">승인</span><span class="v mid">심사중(CDD·EDD)</span><span class="v bad">거절</span></td><td>거절 시 가입 거절 + 사유 기록 · STR 검토 연계</td></tr>
       <tr><td class="fld">확인 수준 / 위험등급<span class="col">KYC_RECORD.level · risk_rating</span></td><td><span class="v">CDD</span><span class="v">EDD</span> ｜ <span class="v bad">고</span><span class="v mid">중</span><span class="v ok">저</span></td><td>재이행 주기: 고 1년 · 중 2년 · 저 3년 + 이벤트 트리거 수시</td></tr>
@@ -680,8 +651,6 @@
       <tr><td class="fld">신청 상태<span class="col">RFQ_APPLICATION.status</span></td><td><span class="v">신청</span><span class="v ok">수락(확정)</span><span class="v">거절</span><span class="v">만료</span><span class="v">종결(게시 만료)</span></td><td>수락 = 즉시 확정·구속력·수수료 발생 · 거절 사유 입력 없음</td></tr>
       <tr><td class="fld">딜 상태<span class="col">DEAL.status</span></td><td><span class="v">확정</span><span class="v mid">이전 진행</span><span class="v ok">완료</span><span class="v bad">이전 중지</span></td><td>처리함 T2 — 거절은 거래 취소가 아니라 이전 중지 · 계약상 귀결 [결정필요 ①]</td></tr>
       <tr><td class="fld">이전·정산 상태<span class="col">BROKER_SETTLEMENT.status</span></td><td><span class="v">양건 확인</span><span class="v mid">B→A 이전</span><span class="v mid">A→B 이전</span><span class="v ok">완료</span><span class="v bad">홀드(완결성 실패)</span></td><td>홀드 시 역이전(원상 복구) + 처리함 경고 · 정산 배치 1영업일 3회</td></tr>
-      <tr><td class="fld">출금·이전 상태<span class="col">WITHDRAWAL_REQUEST.status</span></td><td><span class="v mid">대기(지연발효 중)</span><span class="v">대기(승인 가능)</span><span class="v mid">집행 대기</span><span class="v ok">완료</span><span class="v">거절</span><span class="v bad">차단</span></td><td>처리함 T3 — 지연발효 만료 = 승인 버튼 활성화만 · 차단 = 출금 시점 BLF 적중</td></tr>
-      <tr><td class="fld">입금 상태<span class="col">DEPOSIT_TX.status</span></td><td><span class="v">컨펌 중</span><span class="v ok">반영 완료</span><span class="v mid">격리 중</span><span class="v mid">소명 대기</span><span class="v ok">해제·반영</span><span class="v bad">동결</span><span class="v">오입금</span><span class="v">스팸</span></td><td>처리함 T4 — 격리~동결은 잔고 미반영 · 제재 적중은 즉시 동결로 유입 · 소명 시한 [결정필요 ②]</td></tr>
       <tr><td class="fld">교환 집행 상태<span class="col">EXCHANGE_EXECUTION.status</span></td><td><span class="v mid">집행 대기</span><span class="v ok">완료</span></td><td>완료 확정은 txhash 온체인 대사(주소·자산·수량) 일치 시만</td></tr>
     </table>
   </div>
@@ -690,11 +659,11 @@
     <div class="card-h">C. 처리함(INBOX_ITEM) 상태값</div>
     <table>
       <tr><th style="width:230px;">필드</th><th>허용값</th><th style="width:36%;">비고</th></tr>
-      <tr><td class="fld">유형<span class="col">INBOX_ITEM.type</span></td><td><span class="v">T1 직접 교환 승인</span><span class="v">T2 중개 확정 확인</span><span class="v">T3 출금·이전</span><span class="v">T4 입금 격리</span><span class="v">T5 이상거래</span><span class="v">T6 월렛·키</span><span class="v">T7 KYC 재이행</span><span class="v">T8 계정 잠금</span><span class="v">X3 3면 대사</span></td><td>각 유형 설명은 §0-B · 제재·다크코인 적중은 독립 유형 아님 — 입금은 T4 · 출금은 T3로 귀속(기획 가정)</td></tr>
-      <tr><td class="fld">아이템 상태 (공통 5종)<span class="col">INBOX_ITEM.item_status</span></td><td><span class="v">OPEN 미처리</span><span class="v bad">ESCALATED 에스컬레이션</span><span class="v mid">IN_PROGRESS 처리중</span><span class="v mid">HOLD 보류</span><span class="v ok">RESOLVED 종결</span></td><td>KPI(처리 대기 등) 집계용 · 자동검증 주의 이상 → ESCALATED로 생성</td></tr>
-      <tr><td class="fld">결과 코드 (RESOLVED 동반)<span class="col">INBOX_ITEM.result_code</span></td><td><span class="v ok">승인</span><span class="v bad">거절</span><span class="v ok">소명 인정</span><span class="v bad">동결</span><span class="v bad">STR 이관</span><span class="v ok">무혐의</span><span class="v ok">조치완료</span><span class="v ok">해제</span><span class="v mid">제한 적용</span><span class="v">자동 종결(T7)</span></td><td>종결은 사람 — 자동 종결은 T7 재이행 완료가 유일 예외(기획 가정 [결정필요 ③])</td></tr>
-      <tr><td class="fld">자동검증·등급<span class="col">INBOX_ITEM.grade</span></td><td><span class="v ok">정상</span><span class="v mid">주의(Mid)</span><span class="v bad">High</span><span class="v">지연발효 중</span><span class="v">—</span></td><td>자동검증 = 1차 필터 — 자동 체결·승인·거절 없음</td></tr>
-      <tr><td class="fld">업무 상태 (화면 '상태' 컬럼)<span class="col">유형별 대상 테이블.status</span></td><td colspan="2">T1: 승인 대기·에스컬레이션 → 보류·집행 대기 → 완료·거절 ｜ T2: 확인 대기 → 보류·이전 진행 → 완료·이전 중지 ｜ T3~T8·X3은 위 B표·해당 테이블 status 참조 — 아이템 상태와 2계층 분리(states.html 상태 모델)</td></tr>
+      <tr><td class="fld">유형<span class="col">INBOX_ITEM.type</span></td><td><span class="v">T1 직접 교환 승인</span><span class="v">T2 중개 확정 확인</span><span class="v">T5 이상거래</span><span class="v">T8 계정 잠금</span><span class="v">N1 시세 소스 중단</span><span class="v">N2 교환 재고 부족</span><span class="v">N3 집행 대사 불일치</span><span class="v">X3 3면 대사</span></td><td>각 유형 설명은 §0-B · T3·T4·T6·T7 삭제(2026-09-04 · 커스터디 기존 서비스) · BLF·KYT 결과값은 아이템이 아니라 T1·T2 자동검증 필드</td></tr>
+      <tr><td class="fld">아이템 상태 (공통 5종)<span class="col">INBOX_ITEM.item_status</span></td><td><span class="v">OPEN 미처리</span><span class="v bad">ESCALATED 에스컬레이션</span><span class="v mid">IN_PROGRESS 처리중</span><span class="v mid">HOLD 보류</span><span class="v ok">RESOLVED 종결</span></td><td>유형과 무관한 공통 축 · 자동검증 주의 이상 → ESCALATED로 생성 · <b>화면에 건수 집계를 표시하지 않는다</b>(2026-09-04)</td></tr>
+      <tr><td class="fld">결과 코드 (RESOLVED 동반)<span class="col">INBOX_ITEM.result_code</span></td><td><span class="v ok">승인</span><span class="v bad">거절</span><span class="v bad">이전 중지</span><span class="v bad">동결 전환</span><span class="v bad">STR 이관</span><span class="v ok">무혐의</span><span class="v ok">조치완료</span><span class="v ok">해제</span></td><td><b>종결은 전부 사람</b> — 자동 종결이 없다(T7 재이행 자동 종결은 T7 삭제로 소멸 · 종전 [결정필요 ③] 해소 2026-09-04). '조치완료'는 결과 select를 함께 저장한다(정상 수신 확인 / 재고 보충 확인 / 정정 완료 재대사 / 일치 확인 / 해제 / 동결 전환)</td></tr>
+      <tr><td class="fld">자동검증·등급<span class="col">INBOX_ITEM.grade</span></td><td><span class="v ok">정상</span><span class="v mid">주의(Mid)</span><span class="v bad">High</span><span class="v">—</span></td><td>자동검증 = 1차 필터 — 자동 체결·승인·거절 없음 · 종전 '지연발효 중'은 T3 삭제로 소멸</td></tr>
+      <tr><td class="fld">업무 상태 (화면 '상태' 컬럼)<span class="col">유형별 대상 테이블.status</span></td><td colspan="2">T1: 승인 대기·에스컬레이션 → 보류 → 승인(→ 집행 대기 표)·거절 ｜ T2: 확인 대기·에스컬레이션 → 보류 → 승인(→ 집행 대기 표)·이전 중지 ｜ T5: 미처리·에스컬레이션 → 검토중 → STR 이관·무혐의 ｜ T8·N1~N3·X3: 미처리·에스컬레이션 → 확인·원인 규명 중 → 조치 완료 ｜ <b>② 집행 대기 표는 아이템이 아니다</b> — [완료]는 INBOX_ITEM이 아니라 대상 테이블(EXCHANGE_EXECUTION·BROKER_SETTLEMENT)의 status를 바꾼다 — 아이템 상태와 2계층 분리(states.html 상태 모델)</td></tr>
       <tr><td class="fld">고객 표출 사유 (거절·만료)<span class="col">EXCHANGE_APPROVAL.public_reason 등</span></td><td><span class="v">거절: 한도 초과</span><span class="v">거절: 추가 정보 확인 필요</span><span class="v">거절: 내부 심사 기준 미충족</span><span class="v">만료: 수락 기한 경과</span><span class="v">만료: 가용 풀 부족·비율 변동</span></td><td>보류는 고객 표출 없음(사유 미노출) · STR 관련 여부는 어떤 형태로도 표기 금지(EXC-04) · 문구 확정 [로펌게이트]</td></tr>
     </table>
   </div>
@@ -711,10 +680,8 @@
       <tr><td class="fld">게시 / 신청 유효기간 (게시판 중개)</td><td><span class="v">30일</span> / <span class="v">영업일 2일</span></td><td>화면 확정 표기 (BRK-02·03)</td></tr>
       <tr><td class="fld">시세변동 자동중지 임계 (게시판 중개)</td><td><span class="v">±2.0%</span> (게시 시점 대비)</td><td>ADM-03 연동 <span class="warn2">[확인필요]</span></td></tr>
       <tr><td class="fld">건별 한도 (공통)</td><td><span class="v">1회 1,500,000원 상당</span> · KRW 환산(ETH·스테이블 모두 시세 소스 KRW 시세, 요청 시점 · 원 단위 절사)</td><td>2026-09-02(9) 원화 기준(종전 '1,000 USD 상당'·'1억 원 상당 / 100,000 수량' 표기 폐기) · 일간·월간 누적 한도 <span class="warn2">[확인필요]</span></td></tr>
-      <tr><td class="fld">핫월렛 비중 임계 (지갑)</td><td><span class="v">20%</span> 초과 시 스윕 경고</td><td>ADM-03 표기</td></tr>
-      <tr><td class="fld">신규주소 지연발효</td><td><span class="v">24시간</span></td><td>커스터디 출금 전용 — 교환·중개 미적용</td></tr>
       <tr><td class="fld">인증·세션</td><td>초대 링크 72시간·1회 · 로그인 실패 5회 잠금 · 유휴 15분 · 세션 최대 8시간 · 계정당 1세션 · 백업코드 6개·8자리·1회용</td><td>특권계정 유휴값·동시세션 예외 <span class="warn2">[확인필요]</span></td></tr>
-      <tr><td class="fld">집행·정산 소요</td><td>직접 교환 약 2영업일 · 중개 정산 배치 1영업일 3회</td><td>예시 — ADM-03 정책값으로 확정 예정 · 배치 시각·마감 <span class="warn2">[확인필요]</span></td></tr>
+      <tr><td class="fld">집행·정산 소요</td><td>나목 교환 약 2영업일(입고·출고 2건) · 마목 정산 배치 1영업일 3회(예치 2건 → 인도 2건) · 수수료 스윕 정책 주기</td><td>예시 — ADM-03 정책값으로 확정 예정 · 배치 시각·마감 <span class="warn2">[확인필요]</span></td></tr>
     </table>
   </div>
 </div>

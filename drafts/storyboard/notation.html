@@ -9,11 +9,11 @@
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:'Pretendard', system-ui, -apple-system, sans-serif; background:#fafafa; color:#1e293b;
          font-size:13px; line-height:1.6; padding:28px 32px 60px; }
-  .doc-head { max-width:1060px; margin:0 auto 18px; }
+  .doc-head { max-width:1560px; margin:0 auto 18px; }
   .doc-head h1 { font-size:19px; font-weight:800; letter-spacing:-.01em; }
   .doc-head .sub { font-size:11.5px; color:#64748b; margin-top:3px; }
 
-  .tbl-wrap { max-width:1060px; margin:0 auto; background:#fff; border:1px solid #e2e8f0; border-radius:10px;
+  .tbl-wrap { max-width:1560px; margin:0 auto; background:#fff; border:1px solid #e2e8f0; border-radius:10px;
               overflow-x:auto; }
   table { width:auto; max-width:100%; border-collapse:collapse; table-layout:auto; }
   th { text-align:left; font-size:10.5px; font-weight:700; color:#64748b; background:#f8fafc;
@@ -27,7 +27,7 @@
   .need { display:inline-block; font-size:9.5px; font-weight:700; color:#888; background:#f2f2f2;
           border-radius:5px; padding:0 6px; margin-left:4px; vertical-align:1px; }
 
-  .foot { max-width:1060px; margin:16px auto 0; background:#fbfbf9; border:1px solid #e7e5e0; border-radius:10px;
+  .foot { max-width:1560px; margin:16px auto 0; background:#fbfbf9; border:1px solid #e7e5e0; border-radius:10px;
           padding:12px 16px; font-size:11px; color:#64748b; }
   .foot b { color:#334155; }
 </style>
@@ -257,8 +257,8 @@
     </tr>
     <tr>
       <td class="item">상태 칩</td>
-      <td>한글 라벨 배지(표기 규칙) · 색 3계열만 — 진행(노랑)·대기(파랑)·완료(초록), 종결·거절은 회색 · <b>나목 고객 라벨 6종 확정</b> — 요청됨 / 비율 제시 / 진행 중 / 완료 / 거절 / 만료(관리자 '보류'는 고객에게 노출하지 않고 '진행 중'으로 표시 · 2026-09-02(8))</td>
-      <td>DASH-01 진행중 / 승인 대기 / 완료 · 마목 게시 상태: 게재중 / <b>협의중</b>(신청 1건 접수·추가 신청 차단) / 확정 / 완료 / 회수 / <b>중지</b>(price guard — 대기 신청 전부 종결) (2026-09-02 확정)</td>
+      <td>한글 라벨 배지(표기 규칙) · <b>색 4종만</b> — 대기(파랑)·진행(노랑)·완료(초록)·종결(회색, 거절·만료·회수·중지·해지 포함). <b>빨간 칩을 두지 않는다</b>(2026-09-04 결정) — 차단·잠금·동결처럼 <b>거래 레코드가 없는 상태</b>는 칩이 아니라 <b>상단 배너</b>로 알린다(시세 중단 차단·가용 재고 부족·기관 비활성·계정 잠금) · <b>나목 고객 라벨 6종 확정</b> — 요청됨 / 비율 제시 / 진행 중 / 완료 / 거절 / 만료(관리자 '보류'는 고객에게 노출하지 않고 '진행 중'으로 표시 · 2026-09-02(8))</td>
+      <td>DASH-01 · 마목 게시 상태: 게재중 / <b>협의중</b>(신청 1건 접수·추가 신청 차단) / 확정 / 완료 / 회수 / <b>중지</b>(price guard — 대기 신청 전부 종결) (2026-09-02 확정) · 신청자 상태는 게시 상태를 1:1로 따라간다 · 어드민 업무 상태(승인 대기·검토중 등)는 고객 칩과 <b>별개 축</b>이고 대응은 states §3</td>
     </tr>
     <tr>
       <td class="item">완료 피드백</td>
@@ -268,8 +268,8 @@
     <tr>
       <td class="grp-cell" rowspan="3">목록</td>
       <td class="item">정렬·필터·페이징</td>
-      <td><b class="key">없음</b> — 최신순 단일 리스트, 전체 나열(자동 매칭·조건 검색 부재 담보, BRK-01 결정) · 전량 표시 · 페이지 스크롤 — 페이지네이션·[더 보기]·무한 스크롤을 두지 않는다(2026-09-02 사용자 결정 · 종전 "100행 초과 시 더 보기" 폐기)</td>
-      <td>BRK-01 · DASH-01 · ADM-02 처리함·집행 대기 · ADM-03 기관 목록</td>
+      <td><b class="key">없음</b> — 최신순 단일 리스트, 전체 나열(자동 매칭·조건 검색 부재 담보, BRK-01 결정) · 전량 표시 · 페이지 스크롤 — 페이지네이션·[더 보기]·무한 스크롤을 두지 않는다(2026-09-02 사용자 결정 · 종전 "100행 초과 시 더 보기" 폐기) · <b>건수 집계를 표시하지 않는다</b> — 목록 머리·탭·상단 바 어디에도 "N건"을 쓰지 않는다(2026-09-02 KPI 카드 제거 · 2026-09-04 재확인)</td>
+      <td>BRK-01 · DASH-01 · ADM-02 4섹션·집행 대기 · ADM-03 기관 목록</td>
     </tr>
     <tr>
       <td class="item">행 클릭</td>
@@ -278,8 +278,8 @@
     </tr>
     <tr>
       <td class="item">갱신</td>
-      <td><b class="key">화면 진입 시와 브라우저 새로고침 시에만 조회</b> — 자동 주기 갱신·폴링·푸시·신규 유입 토스트를 두지 않는다 · 화면 안에서 누른 버튼의 결과만 즉시 반영한다 · 시세·풀·비율 같은 외부 값도 자산 선택 시 1회 조회하고 체류 중 다시 조회하지 않는다 · CSV·명세 파일은 클릭 시 전체 기간을 1파일로 동기 생성한다(비동기 생성·완료 알림 없음) (2026-09-02(11))</td>
-      <td>ADM-02 처리함 · DASH-01 거래 목록 · EXC-01·BRK-02 시세 값 · ADM-02 CSV 6종</td>
+      <td><b class="key">화면 진입 시와 브라우저 새로고침 시에만 조회</b> — 자동 주기 갱신·폴링·푸시·신규 유입 토스트를 두지 않는다 · 화면 안에서 누른 버튼의 결과만 즉시 반영한다 · 시세·풀·비율 같은 외부 값도 자산 선택 시 1회 조회하고 체류 중 다시 조회하지 않는다 · CSV는 클릭 시 전체 기간을 1파일로 동기 생성하고, <b>집행 명세는 화면 확장 패널로 보여주면서 같은 값을 [명세 Excel] 1건 1파일로도 내려받는다</b>(콜드 2인 서명자 전달용 · 다운로드 여부가 [완료]를 막지 않는다 · 2026-09-04 결정)(비동기 생성·완료 알림 없음) (2026-09-02(11))</td>
+      <td>ADM-02 4섹션 · DASH-01 거래 목록 · EXC-01·BRK-02 시세 값 · ADM-02 CSV 6종·명세 Excel</td>
     </tr>
     <tr>
       <td class="grp-cell" rowspan="3">어드민</td>
@@ -294,8 +294,8 @@
     </tr>
     <tr>
       <td class="item">처리 버튼</td>
-      <td>처리함 행 내 인라인 버튼(승인·보류·거절·이전 중지 등)만 — 별도 상세 화면 없음 · 보류·거절은 사유 입력 필수(모달) · 상태명·버튼명은 states.html 도메인 상태와 동일</td>
-      <td>ADM-02 처리함</td>
+      <td>행 내 인라인 버튼만 — 별도 상세 화면 없음 · 상태명·버튼명은 states.html 업무 상태와 동일 · <b>섹션당 버튼 세트 1종</b>(2026-09-04 개편): ① 거래 승인 = [승인] [보류] [거절](T1) / [승인] [보류] [이전 중지](T2) · ② 집행 대기 = [완료](+ 마목 예치·인도 행에만 [보류] [이전 중지]) · ③ AML 판단 = [검토] [STR 검토] [무혐의 종결] · ④ 운영 알림 = [확인] [조치 완료 ▾]<br>· <b>사유 다이얼로그 1종</b> — 카테고리 ▾ + 자유입력 10~500자(필수) · <b>결과 select는 [조치 완료]에만</b> 붙는다 · 나머지 버튼은 라벨이 곧 결과다<br>· <b>확인 다이얼로그를 띄우는 것</b> = 승인 · 거절 · 이전 중지 · STR 검토 · 무혐의 종결 · 조치 완료(비가역이거나 구속력 있는 행위) / <b>띄우지 않는 것</b> = 보류(가역) · 검토 · 확인 · 완료(대사 일치가 시스템 판정) · 명세 Excel · CSV 다운로드</td>
+      <td>ADM-02 4섹션</td>
     </tr>
     <tr>
       <td class="grp-cell" rowspan="1">정보 노출</td>

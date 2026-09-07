@@ -201,7 +201,7 @@
       <div class="num">5</div>
       <div>
         <div class="itm-title">지갑 잔고 표 (표시 전용)</div>
-        <div class="itm-desc">· <strong>값</strong> 온체인 컨펌 완료분만 반영하고 격리 입금은 제외한다.<br>· <strong>자릿수</strong> ETH 4 · USDC·USDT 2. 뒤 0은 생략하고 티커를 병기한다.<br>· 보관 칩은 "콜드 100%" 고정. 조회 실패 시 "—"와 상단 배너.<br><span class="basis">근거 L7 §11 · L6 구분회계 · 32 §3 WAL-01</span></div>
+        <div class="itm-desc">· <strong>값</strong> 온체인 컨펌 완료분만 반영한다. 예치 중인 자산(에스크로 전용지갑에 들어가 있는 마목 예치분)은 수탁 잔고에서 빠진다.<br>· <strong>자릿수</strong> ETH 4 · USDC·USDT 2. 뒤 0은 생략하고 티커를 병기한다.<br>· 보관 칩은 "콜드 100%" 고정. 조회 실패 시 "—"와 상단 배너.<br><span class="basis">근거 L7 §11 · L6 구분회계 · 32 §3 WAL-01</span></div>
       </div>
     </div>
 
@@ -269,7 +269,7 @@
       </div>
       <div class="dtl" data-idx="4">
         <div class="detail-label"><span class="dtl-num">5</span>조회 전용 · 집행 분리</div>
-      <div class="dtl-body"><span class="box">· 출금·이전 집행 = ADM-02 처리함 승인 + 콜드 2인 멀티시그 · 고객 화면 기능 없음<br>· 입금 예외 — 오입금·컨펌 중·스팸 = 잔고 미반영 / KYT 고위험·제재 적중 = 격리·동결·STR · 판정은 ADM-02 · 고객 화면은 상태만 <span class="chk">[확인필요: 오입금 반환 가스비 부담]</span></span></div>
+      <div class="dtl-body"><span class="box">· 이 콘솔의 자산 이동은 전부 DSRV 관리 지갑 4묶음(고객 수탁 · 운영 · 나목 교환 최소재고 · 에스크로 전용지갑) 사이의 내부 콜드 이전이다 — 집행 = ADM-02 ② 집행 대기 + 콜드 2인 서명 · 고객 화면에 이전 기능 없음<br>· <strong>외부 입금·외부 출금은 이 시스템 밖</strong>이다(커스터디 기존 서비스). 입금 감시·KYT·격리, 서면 출금·화이트리스트·지연발효는 커스터디 어드민의 일이고 이 콘솔에는 화면도 처리함 행도 없다(2026-09-04 결정 · 종전 T3·T4 삭제) — 결과는 잔고와 기관 상태로만 들어온다</span></div>
       </div>
       <div class="dtl" data-idx="7">
         <div class="detail-label"><span class="dtl-num">8</span>2FA 재설정 흐름</div>
