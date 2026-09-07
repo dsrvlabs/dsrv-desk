@@ -209,7 +209,7 @@
 <tr><td>EX-06</td>
 <td><span class="nm">고객 수락 → 내부 승인 시작</span><span class="wh"><span class="who c">고객</span><span class="scr" data-pid="EXC-02"><span class="sid">EXC-02</span>[수락]</span> 클릭 즉시 확정</span></td>
 <td><span class="st mid">진행 중</span><span class="mono cd">IN_PROGRESS</span><span class="sb"><span class="scr" data-pid="EXC-03"><span class="sid">EXC-03</span></span> 스텝 2 "DSRV 거래 진행중" · 내부 단계·담당자 미노출</span></td>
-<td>서버 재검증 → 자동검증 첨부<span class="sb">한도 · 교환 재고 · 기관 상태 · 이상거래 룰(우리 정책 검증 — BLF·KYT는 커스터디가 집행 전 심사해 ② 행별 위험 판정으로 준다 · 2026-09-07) · <b>불량이면 에스컬레이션으로 올릴 뿐 자동 거절하지 않는다</b></span></td>
+<td>서버 재검증 → 자동검증 첨부<span class="sb">한도 · 교환 재고 · 기관 상태 · 이상거래 룰(우리 정책 검증 — BLF·KYT는 커스터디가 집행 전 심사해 진행 불가 건만 차단 통지 웹훅으로 준다 · 2026-09-07(22)) · <b>불량이면 에스컬레이션으로 올릴 뿐 자동 거절하지 않는다</b></span></td>
 <td><span class="ab">① 승인</span>T1 행 생성 — <span class="st start">승인 대기</span>또는<span class="st mid">에스컬레이션</span><span class="sb">[승인] [보류] [거절]</span></td>
 <td>—</td></tr>
 
@@ -249,7 +249,7 @@
 <td>—</td></tr>
 
 <tr><td>EX-12</td>
-<td><span class="nm">출고 집행 → 거래 완료</span><span class="wh">커스터디 위험 판정 '적정' → 콜드 서명 → <span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>②</span> txhash 입력 · [완료]</span></td>
+<td><span class="nm">출고 집행 → 거래 완료</span><span class="wh">커스터디 집행 전 심사 통과(차단 통지 없음) → 콜드 서명 → <span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>②</span> txhash 입력 · [완료]</span></td>
 <td><span class="st end">완료</span><span class="mono cd">COMPLETED</span><span class="sb"><span class="scr" data-pid="EXC-04"><span class="sid">EXC-04</span></span> 스텝 3 ✓ · 완료 일시 · 발생 가스비 · 실수령 수량 · <span class="scr" data-pid="DASH-01"><span class="sid">DASH-01</span></span> 잔고 반영</span></td>
 <td>온체인 대사 → 완료<span class="sb">스프레드 수익 구분회계 기록 · 재고 차감 확정</span></td>
 <td><span class="ab">② 집행</span>출고 행 제거 → 이후 조회는 CSV</td>
@@ -355,7 +355,7 @@
 <tr><td>ST-01</td>
 <td><span class="nm">수락 → 확정 (구속력 발생)</span><span class="wh"><span class="who c">게시자</span><span class="scr" data-pid="BRK-04"><span class="sid">BRK-04</span>[수락]</span> 확인 다이얼로그</span></td>
 <td>양측 <span class="st mid">확정</span><span class="mono cd">CONFIRMED</span><span class="sb"><span class="scr" data-pid="BRK-06"><span class="sid">BRK-06</span></span> 상호 마스킹 해제 + [이전 진행 보기 →] <span class="scr" data-pid="BRK-05"><span class="sid">BRK-05</span></span> 스텝 1 / <span class="scr" data-pid="BRK-07"><span class="sid">BRK-07</span></span> 스텝 3 / BRK-01 목록 제외</span></td>
-<td>재검증 → 자동검증 첨부<span class="sb">양측 한도 · <b>수수료 포함 잔고</b> · 기관 상태 · 이상거래 룰 · 게시 상태·기한(BLF·KYT는 커스터디가 집행 전 심사 → ② 행별 위험 판정 · 2026-09-07)</span></td>
+<td>재검증 → 자동검증 첨부<span class="sb">양측 한도 · <b>수수료 포함 잔고</b> · 기관 상태 · 이상거래 룰 · 게시 상태·기한(BLF·KYT는 커스터디가 집행 전 심사 → 진행 불가 건만 차단 통지 웹훅 · 2026-09-07(22))</span></td>
 <td><span class="ab">① 승인</span>T2 행 생성 — <span class="st start">확인 대기</span>또는<span class="st mid">에스컬레이션</span><span class="sb">거래 1건 = 행 1개 · [승인] [보류] [이전 중지]</span></td>
 <td>이메일 ② (양측)</td></tr>
 
@@ -381,7 +381,7 @@
 <td><span class="chk">[확인필요]</span></td></tr>
 
 <tr><td>ST-05</td>
-<td><span class="nm">예치 집행 ×2 — 콜드 서명 → txhash → 대사</span><span class="wh">커스터디 위험 판정 '적정' → 콜드 서명 → <span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>②</span> txhash 입력 · [완료] (각 행)</span></td>
+<td><span class="nm">예치 집행 ×2 — 콜드 서명 → txhash → 대사</span><span class="wh">커스터디 집행 전 심사 통과(차단 통지 없음) → 콜드 서명 → <span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>②</span> txhash 입력 · [완료] (각 행)</span></td>
 <td>양측 <span class="st mid">확정</span><span class="sb">BRK-05 내 예치 ✓ / 상대 예치 ✓ · 예치 완결성 표시</span></td>
 <td>온체인 대사 · 에스크로 장부 기록<span class="sb">에스크로 +808 USDT / +806.38 USDC · 실발생 가스비 기록</span></td>
 <td><span class="ab">② 집행</span>예치 행 각각 완료 → 제거</td>
@@ -402,7 +402,7 @@
 <td>—</td></tr>
 
 <tr><td>ST-08</td>
-<td><span class="nm">인도 집행 ×2 → 거래 완료</span><span class="wh">커스터디 위험 판정 '적정' → 콜드 서명 → <span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>②</span> txhash 입력 · [완료] (각 행)</span></td>
+<td><span class="nm">인도 집행 ×2 → 거래 완료</span><span class="wh">커스터디 집행 전 심사 통과(차단 통지 없음) → 콜드 서명 → <span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>②</span> txhash 입력 · [완료] (각 행)</span></td>
 <td>양측 <span class="st end">완료</span><span class="sb">BRK-05 스텝 4 ✓ 완료 배너 · BRK-06 완료 + 링크 · BRK-07 스텝 4 · <span class="scr" data-pid="DASH-01"><span class="sid">DASH-01</span></span> 잔고 반영</span></td>
 <td>온체인 대사 → 완료 · 수수료 정산 확정<span class="sb">중개수수료 구분회계 기록(인도 집행 시점) · 에스크로 잔여 = 수수료 8 USDT + 7.98 USDC + 가스 차감분</span></td>
 <td><span class="ab">② 집행</span>인도 행 각각 완료 → 제거 → CSV</td>
@@ -427,7 +427,7 @@
 <!-- ============ D. AML ============ -->
 <div class="wide" id="am"><div class="panel">
 <div class="panel-title"><span class="tno">D · AM</span>이상거래 · AML 판단 <span class="scope">고객 화면 반영 없음 — 누설 금지</span></div>
-<div class="panel-note">이 시스템의 AML 사건은 <b>이상거래 룰 적중</b> 하나다. BLF·KYT 등 거래 위험 심사는 커스터디가 집행 전에 하고, 결과는 ② 집행 대기 행의 <b>위험 판정(적정/보완/부적정)</b>으로 받는다 — 부적정이면 행 거절·거래 거절·반환 행·고객 안내, 보완이면 보류 '확인 중', 판정 전 txhash 입력 비활성(2026-09-07 결정). 기관 단위 결과(KYC·재이행·요주의인물·사고)는 ADM-03 기관 상태로 받는다. STR 작성·보고는 별도 AML 시스템. <b>이해상충 플래그는 어드민에 두지 않는다</b>(2026-09-04 결정).</div>
+<div class="panel-note">이 시스템의 AML 사건은 <b>이상거래 룰 적중</b> 하나다. BLF·KYT 등 거래 위험 심사는 커스터디가 집행 전에 하고, 진행 불가 거래만 <b>차단 통지 웹훅(거래 건 번호 · 사유 없음)</b>으로 받는다 — 수신하면 미집행 ② 행 거절·거래 거절·(마목 예치 완료분) 반환 행·고객 안내 "진행 불가"(2026-09-07(22)). 통과 거래는 통지 없이 서명·집행 후 txhash 입력. 기관 단위 결과(KYC·재이행·요주의인물·사고)는 커스터디 customerStatusCd를 관문마다 조회해 받는다(AC-07). STR 작성·보고는 별도 AML 시스템. <b>이해상충 플래그는 어드민에 두지 않는다</b>(2026-09-04 결정).</div>
 <div class="tblwrap"><table class="ct">
 <colgroup><col style="width:62px"><col style="width:17%"><col style="width:22%"><col style="width:22%"><col style="width:23%"><col style="width:82px"></colgroup>
 <thead><tr><th>#</th><th>케이스 · 트리거</th><th>고객 (칩 · 코드 · 상세 화면)</th><th>시스템 (자동)</th><th>어드민 (홈 4섹션 · ADM-03)</th><th>통지</th></tr></thead>
@@ -449,7 +449,7 @@
 <tr class="r-branch"><td>AM-03</td>
 <td><span class="nm">STR 검토로 이관</span><span class="wh"><span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>③</span> [STR 검토] + 사유</span><span class="tag">여기서 종결</span></td>
 <td>반영 없음<span class="sb">연계 ① 건을 거절하면 고객에게는 일반화 문구만</span></td>
-<td>별도 AML 시스템에 이관<span class="sb">작성자·보고자 분리 · 기관 일시제한이 필요하면 ADM-03에서 사람이 · 연계 ① 건 처리 규칙 <span class="chk">[확인필요]</span></span></td>
+<td>별도 AML 시스템에 이관<span class="sb">작성자·보고자 분리 · 기관 단위 제한은 커스터디 판단(필요하면 통보) · 연계 ① 건 처리 규칙 <span class="chk">[확인필요]</span></span></td>
 <td><span class="ab">③ AML</span>행 제거 · 종결(STR 이관)</td>
 <td>없음</td></tr>
 
@@ -461,7 +461,7 @@
 <td>없음</td></tr>
 
 <tr><td>AM-05</td>
-<td><span class="nm">다른 곳에서 ③으로 들어오는 건</span><span class="wh">EX-10 AML 사유 거절 · AC-06 동결 전환</span></td>
+<td><span class="nm">다른 곳에서 ③으로 들어오는 건</span><span class="wh">EX-10 AML 사유 거절 · AC-06 잠금 유지·이관</span></td>
 <td>각 케이스 참조</td>
 <td>STR 검토 건 자동 생성</td>
 <td><span class="ab">③ AML</span>행 생성 → AM-02~04와 동일</td>
@@ -510,7 +510,7 @@
 <!-- ============ F. 계정·기관 ============ -->
 <div class="wide" id="ac"><div class="panel">
 <div class="panel-title"><span class="tno">F · AC</span>계정 · 기관 상태 <span class="scope">기관당 가입자 1명 · ORG.status = 게이팅 단일 출처</span></div>
-<div class="panel-note">KYC·CDD·재이행은 오프라인(커스터디)에서 하고 결과만 관리자가 <span class="mono">ADM-03</span>에서 기관 상태로 반영한다(경로 API vs 수동은 결정 대기). 기관 등록은 커스터디 온보딩 완료 후 관리자가 ADM-03 초대 폼에 <b>customerNo·수탁 지갑 주소</b>를 입력하는 것으로 시작하고(초기 상태 활성), 기관 식별자는 customerNo 하나다. 사고·압류·동결도 별도 항목 없이 기관 상태 비활성으로 받는다(2026-09-07). 계정 잠금·동결은 거래 칩이 아니라 배너로 표시한다.</div>
+<div class="panel-note">KYC·CDD·재이행은 커스터디가 하고, 이 시스템은 기관 상태를 <b>커스터디 조회 API(customerStatusCd 01 신규 / 02 활성 / 03 휴면 / 04 거래중지 / 05 거래해지 / 06 거래거절)</b>로 관문마다 읽는다 — 어드민에서 바꾸지 않고 변경 웹훅도 없다(2026-09-07(22) · 종전 5종 라벨·ADM-03 [상태 변경 ▾] 폐기). 02 활성만 거래 가능, 그 외 5종은 전부 같은 비활성 처리. 기관 등록은 커스터디 온보딩 완료 후 관리자가 ADM-03 초대 폼에 <b>customerNo·수탁 지갑 주소</b>를 입력하는 것으로 시작하고(초기 상태 활성), 기관 식별자는 customerNo 하나다. 사고·압류·동결도 별도 항목 없이 기관 상태 비활성으로 받는다(2026-09-07). 계정 잠금·동결은 거래 칩이 아니라 배너로 표시한다.</div>
 <div class="tblwrap"><table class="ct">
 <colgroup><col style="width:62px"><col style="width:17%"><col style="width:22%"><col style="width:22%"><col style="width:23%"><col style="width:82px"></colgroup>
 <thead><tr><th>#</th><th>케이스 · 트리거</th><th>고객 (칩 · 코드 · 상세 화면)</th><th>시스템 (자동)</th><th>어드민 (홈 4섹션 · ADM-03)</th><th>통지</th></tr></thead>
@@ -540,7 +540,7 @@
 <td><span class="nm">로그인 실패 누적 → 계정 잠금</span><span class="wh"><span class="who s">시스템</span><span class="scr" data-pid="AUTH-01"><span class="sid">AUTH-01</span></span> 비밀번호·인증 코드·복구 코드 실패 합산 {정책값 5회}</span><span class="tag">예외 · 알림</span></td>
 <td><span class="ban">배너 AUTH-01</span>로그인 불가<span class="sb">잠금 안내 · 거래 칩과 무관 · 알림 메일 <span class="chk">[확인필요]</span></span></td>
 <td>세션 없음 · 실패 카운터 고정</td>
-<td><span class="ab">④ 알림</span>T8 행 생성 — <span class="st start">미처리</span><span class="sb">[확인] [조치 완료 ▾ 해제 / 동결 전환]</span></td>
+<td><span class="ab">④ 알림</span>T8 행 생성 — <span class="st start">미처리</span><span class="sb">[확인] [조치 완료 ▾ 해제 / 잠금 유지·이관]</span></td>
 <td><span class="chk">[확인필요]</span></td></tr>
 
 <tr><td>AC-05</td>
@@ -551,31 +551,31 @@
 <td>—</td></tr>
 
 <tr class="r-branch"><td>AC-06</td>
-<td><span class="nm">탈취 의심 → 동결 전환</span><span class="wh"><span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>④</span> [조치 완료 · 동결 전환] + 사유</span><span class="tag">여기서 종결</span></td>
-<td><span class="ban">배너 전 화면</span>로그인 세션 종료 · 거래 버튼 비활성<span class="sb">조회는 가능</span></td>
-<td>기관 상태 동결(ORG.status) · STR 검토 건 생성<span class="sb">통지하지 않는다 — STR 누설 금지</span></td>
-<td><span class="ab">④ 알림</span>행 제거 · 종결(동결 전환)<br><span class="ab">③ AML</span>행 생성 → AM-05</td>
+<td><span class="nm">탈취 의심 → 잠금 유지·이관</span><span class="wh"><span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>④</span> [조치 완료 · 잠금 유지·이관] + 사유</span><span class="tag">여기서 종결</span></td>
+<td><span class="ban">배너 AUTH-01</span>로그인 불가(잠금 유지)<span class="sb">거래 칩과 무관</span></td>
+<td>계정 잠금 유지 · STR 검토 건 생성 · <b>커스터디에 통보</b>(기관 상태 판단은 커스터디 — 이 시스템은 기관 상태를 바꾸지 않는다 · 2026-09-07) · ①·② 대기 건 일괄 거절(AC-08)<span class="sb">통지하지 않는다 — STR 누설 금지</span></td>
+<td><span class="ab">④ 알림</span>행 제거 · 종결(잠금 유지·이관)<br><span class="ab">③ AML</span>행 생성 → AM-05</td>
 <td>없음</td></tr>
 
 <tr><td>AC-07</td>
-<td><span class="nm">기관 상태 변경 — 심사중 · 일시제한 · 동결 · 활성 복귀</span><span class="wh"><span class="who a">관리자</span><span class="scr" data-pid="ADM-03"><span class="sid">ADM-03</span></span> [상태 변경 ▾] 확인 다이얼로그 + 사유 (커스터디 KYC·재이행 결과 반영)</span></td>
-<td><span class="ban">배너 전 화면</span>활성 외 상태면 KYC 예외 배너 + 거래 버튼 비활성<span class="sb">EXC-01 · BRK-02 · BRK-03 비활성 · 조회 가능</span></td>
-<td>ORG.status = 게이팅 단일 출처<span class="sb">재이행 실행은 커스터디 · 이 시스템은 결과만 받는다</span></td>
-<td><span class="ab none">행 없음</span><span class="sb">ADM-03 상태 칩 · 감사로그 · 처리함 행 없음</span></td>
+<td><span class="nm">기관 상태 비활성 확인 — 커스터디 조회값이 02 활성 외</span><span class="wh"><span class="who s">시스템</span>관문 조회(T1 로그인 · T2 요청/게시/신청 · T3 수락/확정/① [승인] 클릭 · <span class="scr" data-pid="ADM-03"><span class="sid">ADM-03</span></span> 진입)에서 customerStatusCd = 01 신규·03 휴면·04 거래중지·05 거래해지·06 거래거절</span></td>
+<td><span class="ban">배너 전 화면</span>KYC 예외 배너 + 거래 버튼 비활성<span class="sb">EXC-01 · BRK-02 · BRK-03 비활성 · 조회 가능 · 상태별 문구 차등 없음</span></td>
+<td>ORG.status = 커스터디 조회값(게이팅 단일 출처) · 이 시스템은 쓰지 않는다<span class="sb">상태 변경 웹훅 없음 — 커스터디가 바꾸면 다음 관문 조회에서 반영(2026-09-07(22)) · 재이행·사고·압류도 이 값으로만</span></td>
+<td><span class="ab none">행 없음</span><span class="sb">ADM-03 상태 칩(코드 + 조회 시각) · 감사로그(조회 결과) · 처리함 행 없음</span></td>
 <td><span class="chk">[확인필요]</span></td></tr>
 
 <tr class="r-warn"><td>AC-08</td>
-<td><span class="nm">동결·일시제한 시 대기 건 일괄 거절</span><span class="wh"><span class="who s">시스템</span>AC-06 또는 AC-07로 기관이 활성에서 벗어난 순간</span><span class="tag">예외 · 알림</span></td>
+<td><span class="nm">기관 비활성 확인 시 대기 건 일괄 거절</span><span class="wh"><span class="who s">시스템</span>AC-06(잠금 유지·이관) 또는 AC-07(관문 조회에서 02 활성 외 확인)의 순간 — 특히 ① [승인] 클릭 시 조회</span><span class="tag">예외 · 알림</span></td>
 <td>나목 <span class="st gray">거절</span> / 마목 <span class="st gray">이전 중지</span><span class="sb">EXC-04 「거절 (DSRV 심사)」 · BRK-05 이전 중지 배너 · 일반화 사유만</span></td>
-<td><b>①·② 대기 건을 무조건 거절한다</b>(2026-09-04 결정)<span class="sb">예치가 이미 끝난 마목 건은 반환 행 생성(ST-06과 동일) · 집행 중인 콜드 이전은 대사 완료 후 정지</span></td>
+<td><b>①·② 대기 건을 무조건 거절한다</b>(2026-09-04 결정 · 트리거를 관문 조회로 재정의 2026-09-07)<span class="sb">예치가 이미 끝난 마목 건은 반환 행 생성(ST-06과 동일) · 집행 중인 콜드 이전은 대사 완료 후 정지</span></td>
 <td><span class="ab">① 승인</span>해당 기관 행 전부 제거 · 종결(거절)<br><span class="ab">② 집행</span>미집행 행 제거 · 필요 시 반환 행 생성</td>
 <td>이메일 ⑤</td></tr>
 
 <tr class="r-branch"><td>AC-09</td>
-<td><span class="nm">해지</span><span class="wh"><span class="who a">관리자</span><span class="scr" data-pid="ADM-03"><span class="sid">ADM-03</span></span> 해지 · 진행 거래 완결 · 잔고 0 전제</span><span class="tag">여기서 종결</span></td>
-<td><span class="st gray">해지</span><span class="sb">로그인 불가</span></td>
-<td>비활성화<span class="sb">새 초대는 해지 후에만</span></td>
-<td><span class="ab none">행 없음</span><span class="sb">ADM-03 회색 칩 "해지된 기관입니다"</span></td>
+<td><span class="nm">05 거래해지 수신</span><span class="wh"><span class="who s">시스템</span>관문 조회에서 customerStatusCd = 05 (해지 절차·잔고 반환은 커스터디가 수행 — 이 시스템의 해지 흐름 없음 · 2026-09-07)</span><span class="tag">여기서 종결</span></td>
+<td><span class="st gray">해지</span><span class="sb">로그인 허용 여부 <span class="chk">[확인필요]</span>(현재 안 = 조회만 허용)</span></td>
+<td>AC-07·AC-08과 동일 처리<span class="sb">새 초대는 커스터디의 해지·재등록 확인 후 <span class="chk">[확인필요]</span></span></td>
+<td><span class="ab none">행 없음</span><span class="sb">ADM-03 회색 칩 "05 거래해지"</span></td>
 <td>—</td></tr>
 </tbody></table></div>
 </div></div>
@@ -586,9 +586,9 @@
 <table class="tbl" style="width:100%;">
 <thead><tr><th style="width:110px">섹션</th><th>행이 생기는 사건</th><th style="width:34%">행이 사라지는 사건</th></tr></thead>
 <tbody>
-<tr><td><span class="ab">① 승인</span></td><td>EX-06 나목 수락 · ST-01 마목 수락</td><td>승인(→ ②) · 거절 · 이전 중지 · <b>기관 동결·일시제한 시 일괄 거절(AC-08)</b></td></tr>
+<tr><td><span class="ab">① 승인</span></td><td>EX-06 나목 수락 · ST-01 마목 수락</td><td>승인(→ ②) · 거절 · 이전 중지 · <b>기관 비활성 확인 시 일괄 거절(AC-08)</b></td></tr>
 <tr><td><span class="ab">② 집행</span></td><td>EX-09 나목 승인(입고·출고 2행) · ST-03 마목 승인(예치 2행) · ST-07 양건 예치 확인(인도 2행 자동) · ST-06 예치 후 중지(반환 행) · ST-09 수수료 스윕(정책 주기)</td><td>txhash 온체인 대사 일치 → [완료]</td></tr>
-<tr><td><span class="ab">③ AML</span></td><td>AM-01 이상거래 룰 적중 · <b>EX-10 AML 사유 거절</b> · AC-06 동결 전환</td><td>STR 이관 · 무혐의 종결</td></tr>
+<tr><td><span class="ab">③ AML</span></td><td>AM-01 이상거래 룰 적중 · <b>EX-10 AML 사유 거절</b> · AC-06 잠금 유지·이관</td><td>STR 이관 · 무혐의 종결</td></tr>
 <tr><td><span class="ab">④ 알림</span></td><td>OP-01 시세 중단 · OP-02 재고 부족 · OP-03 집행 대사 불일치 · OP-04 지갑 3면 대사 불일치 · AC-04 계정 잠금</td><td>[조치 완료](결과 선택)</td></tr>
 </tbody></table>
 </div></div>
@@ -603,7 +603,7 @@
 <tr><td><b>T1</b> 나목 교환 승인</td><td><span class="ab">① 승인</span></td><td>승인 대기 → (에스컬레이션) → 보류 ⇄ 승인 대기 → <b>승인</b>(종결 · → ②) / <b>거절</b>(종결)</td><td>[승인] [보류] [거절]</td></tr>
 <tr><td><b>T2</b> 마목 확정 확인</td><td><span class="ab">① 승인</span></td><td>확인 대기 → (에스컬레이션) → 보류 ⇄ 확인 대기 → <b>승인</b>(종결 · → ②) / <b>이전 중지</b>(종결)</td><td>[승인] [보류] [이전 중지]</td></tr>
 <tr><td><b>T5</b> 이상거래 워닝</td><td><span class="ab">③ AML</span></td><td>미처리·에스컬레이션 → 검토중 → <b>STR 이관</b> / <b>무혐의 종결</b></td><td>[검토] [STR 검토] [무혐의 종결]</td></tr>
-<tr><td><b>T8</b> 계정 잠금</td><td><span class="ab">④ 알림</span></td><td>미처리 → 확인 → <b>해제</b> / <b>동결 전환</b>(→ ③ 생성)</td><td>[확인] [조치 완료 ▾]</td></tr>
+<tr><td><b>T8</b> 계정 잠금</td><td><span class="ab">④ 알림</span></td><td>미처리 → 확인 → <b>해제</b> / <b>잠금 유지·이관</b>(→ ③ 생성 · 커스터디 통보)</td><td>[확인] [조치 완료 ▾]</td></tr>
 <tr><td><b>X3</b> 3면 대사 불일치</td><td><span class="ab">④ 알림</span></td><td>미처리 → 원인 규명 중 → <b>해제·종결</b>(최신 배치가 일치일 때만 활성)</td><td>[확인 · 원인 규명] [조치 완료 ▾]</td></tr>
 <tr><td><span class="dec">신설</span><b>N1</b> 시세 소스 중단</td><td><span class="ab">④ 알림</span></td><td>에스컬레이션 → 확인 → <b>정상 수신 확인</b>(차단 해제)</td><td>[확인] [조치 완료 ▾]</td></tr>
 <tr><td><span class="dec">신설</span><b>N2</b> 교환 재고 부족</td><td><span class="ab">④ 알림</span></td><td>미처리 → 확인 → <b>재고 보충 확인</b></td><td>[확인] [조치 완료 ▾]</td></tr>
@@ -636,7 +636,7 @@
 <tr><td>T1 나목 승인</td><td>승인 대기 / 에스컬레이션 / 보류 / 승인 / 거절</td><td>OPEN · ESCALATED · HOLD ｜ 승인·거절 = RESOLVED(행 제거)</td></tr>
 <tr><td>T2 마목 확인</td><td>확인 대기 / 에스컬레이션 / 보류 / 승인 / 이전 중지</td><td>OPEN · ESCALATED · HOLD ｜ 승인·이전 중지 = RESOLVED</td></tr>
 <tr><td>T5 이상거래</td><td>미처리 / 에스컬레이션 / 검토중 / STR 이관 / 무혐의 종결</td><td>OPEN · ESCALATED · IN_PROGRESS ｜ 이관·종결 = RESOLVED</td></tr>
-<tr><td>T8 계정 잠금</td><td>미처리 / 확인 / 해제 / 동결 전환</td><td>OPEN · IN_PROGRESS ｜ 해제·동결 = RESOLVED</td></tr>
+<tr><td>T8 계정 잠금</td><td>미처리 / 확인 / 해제 / 잠금 유지·이관</td><td>OPEN · IN_PROGRESS ｜ 해제·이관 = RESOLVED</td></tr>
 <tr><td>X3 · N1~N3</td><td>미처리·에스컬레이션 / 확인·원인 규명 중 / 조치 완료</td><td>OPEN · ESCALATED · IN_PROGRESS ｜ 조치 완료 = RESOLVED</td></tr>
 </tbody></table>
 <div class="rule">② 집행 대기 표는 처리함 아이템이 아니다. [완료]는 아이템 상태가 아니라 대상 테이블(EXCHANGE_EXECUTION 등)의 status를 바꾼다. <b>어드민 홈은 어느 화면에도 건수 집계를 표시하지 않는다</b>(2026-09-02 KPI 카드 제거 결정 · 2026-09-04 재확인).</div>
@@ -650,7 +650,7 @@
 <tbody>
 <tr><td><b>D 출금·이전 (T3)</b><br><span style="color:#94a3b8;">D1~D4 · 서면 접수 · 지연발효</span></td><td>고객 콘솔에 출금 화면이 없고, 자산 이동은 전부 DSRV 관리 지갑 사이의 내부 콜드 이전이다.</td><td>화이트리스트를 이 시스템 전체에서 제외(2026-09-04 결정). 09 §0 "실질 통제 게이트 = 화이트리스트 + 커스터디팀 콜드 건별 수동집행" 문장을 <b>커스터디팀 콜드 건별 수동집행</b>만 남기도록 수정. <span class="mono">process.html</span> ④ · <span class="mono">adm-02</span> 항목 7 · CSV ②③</td></tr>
 <tr><td><b>E 입금 (T4)</b><br><span style="color:#94a3b8;">E1~E3 · 격리 지갑 · 입금 KYT</span></td><td>외부 입금 감시는 커스터디 기존 서비스가 한다. 이 시스템은 내부 이전만 다룬다.</td><td><span class="mono">dash-01</span> 잔고 "격리 입금은 제외" 문구 삭제 · 용어집 '격리 지갑' 삭제(§6 반영 완료)</td></tr>
-<tr><td><b>F KYC 재이행 (T7)</b><br><span style="color:#94a3b8;">재이행 도래일 · 신규 거래 제한</span></td><td>KYC·CDD·재이행 실행은 오프라인(커스터디). 이 시스템은 <b>결과만</b> ADM-03 기관 상태로 받는다(AC-07).</td><td>09 §0에 "재이행은 커스터디 업무 · 결과만 ORG.status 반영" 결정 문장 추가 · <span class="mono">adm-02</span> CSV ① 재이행 도래일 삭제</td></tr>
+<tr><td><b>F KYC 재이행 (T7)</b><br><span style="color:#94a3b8;">재이행 도래일 · 신규 거래 제한</span></td><td>KYC·CDD·재이행 실행은 오프라인(커스터디). 이 시스템은 <b>결과만</b> 커스터디 조회 API(customerStatusCd)로 읽는다(AC-07).</td><td>09 §0에 "재이행은 커스터디 업무 · 결과만 ORG.status 반영" 결정 문장 추가 · <span class="mono">adm-02</span> CSV ① 재이행 도래일 삭제</td></tr>
 <tr><td><b>G2 월렛·키 (T6)</b><br><span style="color:#94a3b8;">비인가 이체 · 핫월렛 비중 · 서명 장애</span></td><td>핫월렛이 없어 비중 항목은 성립하지 않고, <b>콜드 서명은 커스터디가 집행 성공까지 책임지는 영역</b>이라 이 시스템에 알림을 두지 않는다(2026-09-04 결정).</td><td><span class="mono">adm-03</span> 핫월렛 비중 임계 항목 삭제 · <span class="mono">adm-02</span> 상세 19 BCP/DR 문구는 커스터디 절차 설명으로 이동</td></tr>
 <tr><td><b>X3 대상 지갑</b></td><td>삭제 아님. <b>3면은 그대로 유지</b>하고 대상 지갑에 에스크로 전용지갑을 추가한다.</td><td><span class="mono">adm-02</span> CSV ⑤ 대상에 에스크로 추가 · CSV ④ 원장 4분할(수탁·운영·재고·에스크로)</td></tr>
 </tbody></table>
@@ -674,8 +674,8 @@
 <tr><td>집행 명세</td><td>확장 패널 인라인 + <b>Excel 파일 유지</b>(서명자 전달용)</td><td>§2 집행 대기 표</td></tr>
 <tr><td>콜드 서명 장애</td><td>커스터디 책임. 알림 유형에 두지 않음</td><td>§4 G2 · E장 머리말</td></tr>
 <tr><td>예치 후 보류·중지</td><td>② 예치·인도 행에 [보류]·[이전 중지]. 중지 시 반환 행 생성</td><td>ST-06 · §2</td></tr>
-<tr><td>집행 전 위험 판정 (2026-09-07)</td><td>커스터디가 [명세 Excel]로 블랙리스트·KYT 심사 → ② 행별 적정/보완/부적정 입력. 부적정 → 행 거절·거래 거절·(마목) 반환 행·고객 안내 "거래 위험 검토 결과 진행 불가" · 보완 → 보류 '확인 중' · 판정 전 txhash 입력 비활성. 기관 문제는 ADM-03 기관 상태 비활성 → AC-08 일괄 거절</td><td>EX-09 · ST-05 · ST-08 · §D · AC-08</td></tr>
-<tr><td>대기 중 기관 동결</td><td><b>①·② 대기 건 무조건 거절</b></td><td>AC-08</td></tr>
+<tr><td>집행 전 위험 심사 · 차단 통지 (2026-09-07(22))</td><td>커스터디가 [명세 Excel]로 블랙리스트·KYT 심사 → <b>진행 불가 거래만 웹훅(거래 건 번호 · 사유·단계 없음)</b>. 수신 → 미집행 행 거절·거래 거절·(마목 예치 완료분) 반환 행·고객 안내 "진행 불가"(일반화). 통과 시 통지 없음 → 콜드 서명 → txhash 입력. 적정/보완 판정·판정 전 txhash 차단 없음. 웹훅 미수신 = 커스터디 재시도 → 슬랙 통보(내부 정책) → 관리자가 ② 행 [이전 중지]. 기관 문제는 관문 조회에서 비활성 확인 → AC-08</td><td>EX-09 · ST-05 · ST-08 · §D · AC-07 · AC-08</td></tr>
+<tr><td>관문 조회에서 기관 비활성 확인</td><td><b>①·② 대기 건 무조건 거절</b> · 기관 상태 = 커스터디 customerStatusCd 6종 조회값(변경 웹훅 없음)</td><td>AC-07 · AC-08</td></tr>
 <tr><td>마목 수수료</td><td>예치에 포함 → 인도 시 차감 → 에스크로 잔여를 정책 주기로 수수료풀 스윕</td><td>ST-03 · ST-07 · ST-09</td></tr>
 <tr><td>시세 소스 중단</td><td>대체 소스 없이 <b>차단</b></td><td>OP-01 · EX-02</td></tr>
 <tr><td>교환 재고</td><td>EXC-01 [거래 요청] 비활성 + <b>수락 시점 재검증도 유지</b>(요청~수락 사이 경합)</td><td>EX-01 · EX-02 · EX-07</td></tr>

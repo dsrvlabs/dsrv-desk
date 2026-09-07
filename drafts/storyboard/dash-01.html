@@ -153,7 +153,7 @@
       <div class="num">1</div>
       <div>
         <div class="itm-title">KYC 예외 요약 배너 (조건부 노출)</div>
-        <div class="itm-desc">· <strong>노출</strong> 기관 KYC 상태가 '활성'이 아닐 때만 보인다(심사중(EDD)·일시제한·동결).<br>· <span class="chk">[확인필요: 안내 이메일 주소]</span><br><span class="basis">근거 G-3 · 공통 UI 규격 상태 게이팅</span></div>
+        <div class="itm-desc">· <strong>노출</strong> 기관 KYC 상태가 '02 활성'이 아닐 때만 보인다(커스터디 customerStatusCd 01 신규·03 휴면·04 거래중지·05 거래해지·06 거래거절 · 로그인 시 조회).<br>· <span class="chk">[확인필요: 안내 이메일 주소]</span><br><span class="basis">근거 G-3 · 공통 UI 규격 상태 게이팅</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">배너</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응 · 상태 '활성' 전환 시 다음 진입에서 소멸</span></div>
         </div>
@@ -257,7 +257,7 @@
     <div class="detail-grid" id="detailCol">
       <div class="dtl" data-idx="0">
         <div class="detail-label"><span class="dtl-num">1</span>KYC 상태 → 배너 매핑</div>
-      <div class="dtl-body"><span class="box">· 배너 노출 상태 = 심사중(EDD) · 일시제한 · 동결 / 활성은 미노출 · 문구는 상태 무관 동일<br>· EXC-01·BRK-02·BRK-03과 동일 문구·규격 · 별도 요약 문구 없음</span></div>
+      <div class="dtl-body"><span class="box">· 배너 노출 상태 = 커스터디 customerStatusCd 02 활성 외 전부(01 신규·03 휴면·04 거래중지·05 거래해지·06 거래거절) / 02 활성은 미노출 · 문구는 상태 무관 동일 · 값은 로그인 시 커스터디 조회(2026-09-07(22))<br>· EXC-01·BRK-02·BRK-03과 동일 문구·규격 · 별도 요약 문구 없음</span></div>
       </div>
       <div class="dtl" data-idx="2">
         <div class="detail-label"><span class="dtl-num">3</span>행 클릭 분기 — 판별 키</div>

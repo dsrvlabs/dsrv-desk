@@ -187,7 +187,7 @@
       <div class="num">7</div>
       <div>
         <div class="itm-title">KYC 예외 배너 (조건부 노출)</div>
-        <div class="itm-desc"><strong>노출</strong> 기관 KYC 상태가 '활성'이 아닐 때만 보인다(심사중(EDD)·일시제한·동결).<br><strong>동작</strong> 노출 중에는 [거래 요청]만 비활성으로 두고 자산·수량 입력과 조회는 그대로 둔다. 내부 사유와 심사 내용은 노출하지 않는다.<br><strong>문구</strong> 고정. <span class="chk">[확인필요: 안내 이메일 주소]</span><br><span class="basis">근거 G-3 · 공통 UI 규격 권한·상태 게이팅</span></div>
+        <div class="itm-desc"><strong>노출</strong> 기관 KYC 상태가 '02 활성'이 아닐 때만 보인다(커스터디 customerStatusCd 01 신규·03 휴면·04 거래중지·05 거래해지·06 거래거절 · 이 화면 진입·[거래 요청] 시 조회).<br><strong>동작</strong> 노출 중에는 [거래 요청]만 비활성으로 두고 자산·수량 입력과 조회는 그대로 둔다. 내부 사유와 심사 내용은 노출하지 않는다.<br><strong>문구</strong> 고정. <span class="chk">[확인필요: 안내 이메일 주소]</span><br><span class="basis">근거 G-3 · 공통 UI 규격 권한·상태 게이팅</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">배너</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용) · 상태가 '활성'으로 바뀌면 다음 진입 시 배너 제거·버튼 활성</span></div>
         </div>
@@ -227,7 +227,7 @@
       </div>
       <div class="dtl" data-idx="6">
         <div class="detail-label"><span class="dtl-num">7</span>KYC 상태 → 배너 매핑</div>
-      <div class="dtl-body"><span class="box">· ADM-03 기관 KYC 상태: 활성(배너 없음) / 심사중(EDD)·일시제한·동결(배너 노출·요청 차단) — 상태 라벨은 states.html 도메인 상태와 동일 <span class="chk">[확인필요: 상태별 문구 차등 여부]</span><br>· 배너는 EXC-01·BRK-02·BRK-03(행위 화면)에 동일 규격으로 노출, DASH-01에는 요약 배너 <span class="chk">[확인필요]</span></span></div>
+      <div class="dtl-body"><span class="box">· 기관 상태 = 커스터디 조회값 customerStatusCd(요청 시점에 조회): 02 활성(배너 없음) / 01 신규·03 휴면·04 거래중지·05 거래해지·06 거래거절(배너 노출·요청 차단 · 상태별 문구 차등 없음) — 2026-09-07(22)<br>· 배너는 EXC-01·BRK-02·BRK-03(행위 화면)에 동일 규격으로 노출, DASH-01에는 요약 배너 <span class="chk">[확인필요]</span></span></div>
       </div>
     </div>
   </div>
