@@ -1,0 +1,238 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="940" viewBox="0 0 1240 940" role="img" font-family="'Pretendard','Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif">
+<title>VASP 교환·중개 기획 프로세스 — 조건·참고자료 → 이슈 → 정책 → 산출물 순환 (v1, 2026-09-07)</title>
+<desc>기획팀 내부 설명용. v8 구조도(전제·원천자료·기획 덱·최종 산출의 층 구조)를 바탕으로, 화면 수정이 아니라 전제(knowledge/09 §0)와 근거(knowledge/)·참고자료(reference/)를 입력으로 이슈(issues/)를 등록·판정하고, 정책 정본(§0 변경이력)을 먼저 고친 뒤 drafts → 스토리보드 → DB 스키마 → 공유 아티팩트 순으로 전파하는 순환 과정을 그림. 검증은 에이전트 6종(도메인 4 + 교차 2) 리뷰 → 사람 판정. 하단에 실제 사례 2건(2026-09-03(15) 에스크로 = ⓪ 회귀 · 2026-09-04(17) 어드민 재구성 = 기획 수정).</desc>
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#555" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="arA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#C77E00" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="arR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#C05442" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<style>
+.ttl{font-size:19px;font-weight:800;fill:#1a1a1a}
+.sub{font-size:12px;fill:#555}
+.col{font-size:13px;font-weight:800;fill:#222}
+.th{font-size:12.5px;font-weight:700;fill:#222}
+.ts{font-size:11px;fill:#333}
+.tc{font-size:10.5px;fill:#3d3d3d}
+.sm{font-size:9.5px;fill:#666}
+.path{font-size:9.5px;fill:#5b5b5b;font-family:ui-monospace,Consolas,'Malgun Gothic',monospace}
+.am{fill:#FBF1DE;stroke:#C77E00;stroke-width:1.2}
+.am2{fill:#FFF8EA;stroke:#C77E00;stroke-width:1;stroke-dasharray:4 3}
+.te{fill:#E3F3EE;stroke:#1D9E75;stroke-width:1}
+.co{fill:#FBE9E5;stroke:#C05442;stroke-width:1.2}
+.co2{fill:#FFFFFF;stroke:#C05442;stroke-width:1;stroke-dasharray:4 3}
+.gr{fill:#F1F1EF;stroke:#9A9990;stroke-width:1}
+.gr2{fill:#FAFAF8;stroke:#B5B4AC;stroke-width:1;stroke-dasharray:4 3}
+.pu{fill:#F0EAFB;stroke:#8B6FC7;stroke-width:1.2}
+.bl{fill:#E8F0FB;stroke:#3B6FB6;stroke-width:1}
+.chip{fill:#FFFFFF;stroke:#9A9990;stroke-width:1}
+.band{fill:#F7F7F5;stroke:#D6D6D0;stroke-width:1}
+.arr{stroke:#555;stroke-width:1.5;fill:none}
+.arrA{stroke:#C77E00;stroke-width:1.5;fill:none;stroke-dasharray:6 4}
+.arrR{stroke:#C05442;stroke-width:1.5;fill:none;stroke-dasharray:6 4}
+</style>
+</defs>
+<rect x="0" y="0" width="1240" height="940" fill="#FFFFFF"/>
+
+<!-- 제목 -->
+<text class="ttl" x="20" y="34">VASP 교환·중개 기획 프로세스 — 화면만 고치는 게 아니다</text>
+<text class="sub" x="20" y="54">조건(전제)·근거·참고자료를 입력으로 이슈를 등록·판정하고, 정책 정본을 먼저 고친 뒤 산출물로 전파한다. 어느 단계도 건너뛰지 않는다.</text>
+<text class="sm" x="1220" y="34" text-anchor="end">v1 · 2026-09-07 · 구조도 v8 기반</text>
+<text class="sm" x="1220" y="50" text-anchor="end">폴더 경로 = 레포 02. VASP 중개/</text>
+
+<!-- ───────── 컬럼 A : 입력 ───────── -->
+<text class="col" x="20" y="88">① 입력 — 조건과 참고자료</text>
+<text class="sm" x="20" y="102">기획은 여기서 출발한다. 화면에서 출발하지 않는다.</text>
+
+<rect class="am" x="20" y="112" width="310" height="122" rx="9"/>
+<text class="th" x="34" y="133">⓪ 전제 정본 — 확정 조건</text>
+<text class="path" x="34" y="148">knowledge/09_원천자료_목록.md §0</text>
+<text class="tc" x="34" y="168">· 결정 4(고객·지갑·자산·수수료) + 고려사항 6</text>
+<text class="tc" x="34" y="184">· 변경이력은 날짜(N) 단위 — 예: 2026-09-04(17)</text>
+<text class="tc" x="34" y="200">· 한도 1,500,000원 상당 · 마목 1% 등 정책값의 출처</text>
+<text class="tc" x="34" y="216">· 여기 없는 조건 위에 세운 기획 = 미확정 전제 의존</text>
+
+<rect class="gr" x="20" y="246" width="310" height="122" rx="9"/>
+<text class="th" x="34" y="267">원천 자료 — 규제 주장의 유일한 근거</text>
+<text class="path" x="34" y="282">knowledge/00 · 01a · 01b · 02</text>
+<text class="tc" x="34" y="302">· 특금법·시행령·감독규정·이용자보호법·ISMS-P 고시</text>
+<text class="tc" x="34" y="318">· 조항 단위 · 시행일·확인일 기록 · 개정 diff 유지</text>
+<text class="tc" x="34" y="334">· 인용코드 L(법령) F(확정사실) R(규제변동) X(외국환)</text>
+<text class="tc" x="34" y="350">· 태그 [확인필요] [원문대조필요] [로펌게이트]</text>
+
+<rect class="gr2" x="20" y="380" width="310" height="122" rx="9"/>
+<text class="th" x="34" y="401">참고자료 — 참고일 뿐 근거가 아니다</text>
+<text class="path" x="34" y="416">reference/  (figma · custody · internal_rules …)</text>
+<text class="tc" x="34" y="436">· Figma 시안 · 커스터디 매뉴얼·약관 · 내규 · 벤치마크</text>
+<text class="tc" x="34" y="452">· 기획과 대조표를 만들어 불일치를 찍는다(예: 시안 69건)</text>
+<text class="tc" x="34" y="468">· 불일치는 그대로 반영하지 않고 이슈로 넘긴다</text>
+<text class="tc" x="34" y="484">· 기획 덱·뉴스·타사 자료를 근거로 인용하지 않는다</text>
+
+<!-- A → B 화살표 -->
+<line class="arr" x1="334" y1="173" x2="372" y2="173" marker-end="url(#ar)"/>
+<line class="arr" x1="334" y1="307" x2="372" y2="307" marker-end="url(#ar)"/>
+<line class="arr" x1="334" y1="441" x2="372" y2="441" marker-end="url(#ar)"/>
+
+<!-- ───────── 컬럼 B : 이슈 관리 ───────── -->
+<text class="col" x="380" y="88">② 이슈 관리 — 판단은 여기서만 한다</text>
+<text class="sm" x="380" y="102">"이상하다"를 말이 아니라 이슈로 남긴다. 근거 없는 이슈는 성립하지 않는다.</text>
+
+<!-- 트리거 칩 -->
+<text class="sm" x="380" y="122">이슈가 생기는 계기</text>
+<rect class="chip" x="380" y="128" width="90" height="22" rx="11"/><text class="sm" x="425" y="143" text-anchor="middle">새 자료 수령</text>
+<rect class="chip" x="476" y="128" width="98" height="22" rx="11"/><text class="sm" x="525" y="143" text-anchor="middle">시안·약관 대조</text>
+<rect class="chip" x="580" y="128" width="98" height="22" rx="11"/><text class="sm" x="629" y="143" text-anchor="middle">에이전트 리뷰</text>
+<rect class="chip" x="684" y="128" width="106" height="22" rx="11"/><text class="sm" x="737" y="143" text-anchor="middle">사용자 결정·질문</text>
+<line class="arr" x1="585" y1="154" x2="585" y2="166" marker-end="url(#ar)"/>
+
+<rect class="co" x="380" y="170" width="410" height="104" rx="9"/>
+<text class="th" x="394" y="191">이슈 등록 — 1건 = 1파일</text>
+<text class="path" x="394" y="206">issues/_TEMPLATE.md 포맷</text>
+<text class="tc" x="394" y="226">· 심각도 P0 수리 불가 · P1 수리 지연 · P2 운영 리스크 · P3 개선</text>
+<text class="tc" x="394" y="242">· 필수: 근거(법령·조항 또는 문서·섹션) · 문제 · 수정 제안</text>
+<text class="tc" x="394" y="258">· 태그 [확인필요] [원문대조필요] [로펌게이트] [전제미확정] · 판정란(사람)</text>
+
+<line class="arr" x1="585" y1="278" x2="585" y2="292" marker-end="url(#ar)"/>
+
+<rect class="bl" x="380" y="296" width="410" height="44" rx="9"/>
+<text class="th" x="585" y="314" text-anchor="middle">사람 판정 — 수용 / 기각 / 보류 + 사유 기록</text>
+<text class="sm" x="585" y="330" text-anchor="middle">에이전트 코멘트가 서로 모순이면 사람이 판정하고 판정 기록을 남긴다</text>
+
+<!-- 판정 후 3갈래 -->
+<line class="arr" x1="450" y1="344" x2="450" y2="366" marker-end="url(#ar)"/>
+<line class="arr" x1="585" y1="344" x2="585" y2="366" marker-end="url(#ar)"/>
+<line class="arr" x1="720" y1="344" x2="720" y2="366" marker-end="url(#ar)"/>
+
+<rect class="am" x="380" y="370" width="130" height="96" rx="8"/>
+<text class="th" x="445" y="390" text-anchor="middle">전제가 틀렸다</text>
+<text class="ts" x="445" y="406" text-anchor="middle">→ ⓪ 회귀</text>
+<text class="sm" x="445" y="424" text-anchor="middle">기획을 고치지 않고</text>
+<text class="sm" x="445" y="437" text-anchor="middle">§0 조건을 고친다</text>
+<text class="sm" x="445" y="452" text-anchor="middle">(고려사항 6종 재점검)</text>
+
+<rect class="co2" x="520" y="370" width="130" height="96" rx="8"/>
+<text class="th" x="585" y="390" text-anchor="middle">법률 판단 필요</text>
+<text class="ts" x="585" y="406" text-anchor="middle">→ [로펌게이트]</text>
+<text class="sm" x="585" y="424" text-anchor="middle">질의서로 변환</text>
+<text class="sm" x="585" y="437" text-anchor="middle">답 오기 전까지</text>
+<text class="sm" x="585" y="452" text-anchor="middle">[확인필요] 유지·단정 금지</text>
+
+<rect class="te" x="660" y="370" width="130" height="96" rx="8"/>
+<text class="th" x="725" y="390" text-anchor="middle">기획 수정</text>
+<text class="ts" x="725" y="406" text-anchor="middle">→ 정책 정본 갱신</text>
+<text class="sm" x="725" y="424" text-anchor="middle">화면부터 고치지 않는다</text>
+<text class="sm" x="725" y="437" text-anchor="middle">먼저 §0 변경이력에</text>
+<text class="sm" x="725" y="452" text-anchor="middle">결정을 기록</text>
+
+<!-- ⓪ 회귀 피드백 (B → A1) -->
+<path class="arrA" d="M 445 470 L 445 520 L 355 520 L 355 226 L 336 226" marker-end="url(#arA)"/>
+<text class="sm" x="362" y="535" fill="#8a6300">⓪ 회귀 — 조건 자체를 다시 정한다</text>
+
+<!-- 기획 수정 → C -->
+<line class="arr" x1="794" y1="418" x2="826" y2="418" marker-end="url(#ar)"/>
+
+<!-- ───────── 컬럼 C : 정책 → 산출물 ───────── -->
+<text class="col" x="840" y="88">③ 정책 정본 갱신 → ④ 산출물 전파</text>
+<text class="sm" x="840" y="102">순서가 거꾸로 되면 어딘가 갱신이 샌다(실증: [게시 중단] 결정이 states 2곳 누락).</text>
+
+<rect class="am" x="840" y="112" width="380" height="96" rx="9"/>
+<text class="th" x="854" y="133">③ 정책 정본 갱신 — 09 §0 변경이력</text>
+<text class="path" x="854" y="148">knowledge/09 §0 · 날짜(N) 항목 1개 추가</text>
+<text class="tc" x="854" y="168">· 배경 → 결정 ①②③… → 삭제한 것 → 반영 / 미반영(후속) 목록</text>
+<text class="tc" x="854" y="184">· 결정 근거가 사용자 결정인지 법령인지 참고자료인지 적는다</text>
+<text class="tc" x="854" y="200">· 정책값이 바뀌면 화면·문서의 {정책값 현재값} 병기도 전부 갱신</text>
+
+<line class="arr" x1="1030" y1="212" x2="1030" y2="226" marker-end="url(#ar)"/>
+
+<rect class="te" x="840" y="230" width="380" height="236" rx="9"/>
+<text class="th" x="854" y="251">④ 산출물 전파 — 위에서 아래로, 같은 순서로</text>
+<text class="path" x="854" y="266">drafts/ → drafts/storyboard/ → drafts/schema/ → 공유본</text>
+
+<rect class="chip" x="854" y="278" width="352" height="40" rx="6"/>
+<text class="ts" x="866" y="294">1  기획 문서 — PRD(24·25) · 변경신고 골격(21) · 증적 목록(22)</text>
+<text class="sm" x="866" y="309">   · 알람·처리함 상태전이(34) · 규제요건 매핑(29)</text>
+
+<rect class="chip" x="854" y="324" width="352" height="40" rx="6"/>
+<text class="ts" x="866" y="340">2  스토리보드 — 화면 html(항목설명·상세·비고)</text>
+<text class="sm" x="866" y="355">   · 한눈에 보기(정상 경로) · 케이스분기 states(갈라지는 경우) · 표기 규칙 · IA</text>
+
+<rect class="chip" x="854" y="370" width="352" height="40" rx="6"/>
+<text class="ts" x="866" y="386">3  DB 스키마 한글판 — 개발자 초독용</text>
+<text class="sm" x="866" y="401">   · 상태·처리함 유형·화면 코드가 스토리보드와 같은 값인지 대조</text>
+
+<rect class="chip" x="854" y="416" width="352" height="40" rx="6"/>
+<text class="ts" x="866" y="432">4  공유 아티팩트 재게시 — git 커밋 → build_share.py → 버전 vN</text>
+<text class="sm" x="866" y="447">   · 커밋 단위로 버전이 남아 "언제 무엇이 바뀌었나"를 뷰어에서 되짚음</text>
+
+<line class="arr" x1="1030" y1="470" x2="1030" y2="484" marker-end="url(#ar)"/>
+<path class="pu" d="M 880 488 L 1180 488 L 1220 528 L 840 528 Z"/>
+<text class="th" x="1030" y="505" text-anchor="middle">최종 산출 — VASP 변경신고 제출 문서(나목 교환 + 마목 중개)</text>
+<text class="sm" x="1030" y="520" text-anchor="middle">모든 문장은 ① 원천 자료 근거로만 구성 · 감독당국·심사기관·법무가 읽는다</text>
+
+<!-- ───────── 하단 밴드 1 : 검증 ───────── -->
+<rect class="band" x="20" y="548" width="1200" height="112" rx="9"/>
+<text class="col" x="34" y="570">⑤ 검증 — 사람 판정 전에 에이전트 6종이 먼저 공격한다</text>
+<text class="sm" x="34" y="585">.claude/agents/ · 출력은 issues/_TEMPLATE.md 포맷 → 그대로 ② 이슈 관리로 들어간다. 모든 지적에 담당 원천자료 근거 필수.</text>
+
+<rect class="am" x="34" y="596" width="122" height="52" rx="7"/>
+<text class="ts" x="95" y="614" text-anchor="middle" font-weight="700">premise-expert</text>
+<text class="sm" x="95" y="628" text-anchor="middle">전제 정합성 · ⓪ 회귀 판정</text>
+<text class="sm" x="95" y="641" text-anchor="middle">knowledge/00 · 09 §0</text>
+<line class="arr" x1="160" y1="622" x2="176" y2="622" marker-end="url(#ar)"/>
+
+<rect class="gr" x="180" y="596" width="300" height="52" rx="7"/>
+<text class="sm" x="190" y="608">도메인 3종 · 병렬</text>
+<text class="ts" x="240" y="626" text-anchor="middle" font-weight="700">vasp-expert</text><text class="sm" x="240" y="640" text-anchor="middle">신고·운영·보고 / 01a</text>
+<text class="ts" x="330" y="626" text-anchor="middle" font-weight="700">aml-expert</text><text class="sm" x="330" y="640" text-anchor="middle">자금세탁방지 / 01b</text>
+<text class="ts" x="420" y="626" text-anchor="middle" font-weight="700">isms-expert</text><text class="sm" x="420" y="640" text-anchor="middle">정보보호·사고대응 / 02</text>
+<line class="arr" x1="484" y1="622" x2="500" y2="622" marker-end="url(#ar)"/>
+
+<rect class="co" x="504" y="596" width="150" height="52" rx="7"/>
+<text class="ts" x="579" y="614" text-anchor="middle" font-weight="700">evidence-verifier</text>
+<text class="sm" x="579" y="628" text-anchor="middle">근거 실재·할루시네이션 검증</text>
+<text class="sm" x="579" y="641" text-anchor="middle">교차 검증 ①</text>
+<line class="arr" x1="658" y1="622" x2="674" y2="622" marker-end="url(#ar)"/>
+
+<rect class="co" x="678" y="596" width="150" height="52" rx="7"/>
+<text class="ts" x="753" y="614" text-anchor="middle" font-weight="700">examiner</text>
+<text class="sm" x="753" y="628" text-anchor="middle">FIU 심사역 — 반려 사유 공격</text>
+<text class="sm" x="753" y="641" text-anchor="middle">교차 검증 ②</text>
+<line class="arr" x1="832" y1="622" x2="848" y2="622" marker-end="url(#ar)"/>
+
+<rect class="bl" x="852" y="596" width="150" height="52" rx="7"/>
+<text class="ts" x="927" y="614" text-anchor="middle" font-weight="700">사람 판정</text>
+<text class="sm" x="927" y="628" text-anchor="middle">issues/ 에 수용·기각·보류</text>
+<text class="sm" x="927" y="641" text-anchor="middle">→ ② 이슈 관리로</text>
+
+<text class="sm" x="1016" y="610">경계 이슈(§12 콜드월렛·트래블룰 등)는</text>
+<text class="sm" x="1016" y="624">중복 플래그 허용 — 교차 2종이</text>
+<text class="sm" x="1016" y="638">누락·확증편향을 잡는다</text>
+
+<!-- ───────── 하단 밴드 2 : 실제 사례 ───────── -->
+<rect class="band" x="20" y="672" width="1200" height="150" rx="9"/>
+<text class="col" x="34" y="694">실제 사례 2건 — 같은 프로세스, 다른 갈래</text>
+
+<!-- 사례 A -->
+<rect class="am2" x="34" y="704" width="582" height="108" rx="7"/>
+<text class="th" x="46" y="722">사례 A · ⓪ 회귀 — 2026-09-03(15) 에스크로 전용지갑 도입</text>
+<text class="tc" x="46" y="741">계기: 참고자료(ISMS 정보자산용 약관 docx) 대조표 22항목 → 약관의 '에스크로' 서술이 서비스와 불일치</text>
+<text class="tc" x="46" y="757">판정: 기획 오류가 아니라 전제 충돌 — 2026-07-06 '에스크로 폐기' 결정을 번복(⓪ 회귀)</text>
+<text class="tc" x="46" y="773">정책 갱신: §0 (15) 기록 → 마목 정산 = 예치 → 양건 확인 → 인도 · 자산 묶음 4개(에스크로 전용지갑 추가)</text>
+<text class="tc" x="46" y="789">전파: drafts 21(정산 서술) · 22(에스크로 운영기준 '필요' 복귀) → BRK-05 · states → 공유본 재게시</text>
+<text class="sm" x="46" y="805">후속 [로펌게이트]: 약관 제8조③ vs 수락 후 이탈 만료 충돌 · 수수료 포함 예치가 약관 제10조 범위인지 — 법무 판단 전까지 단정 금지</text>
+
+<!-- 사례 B -->
+<rect class="te" x="626" y="704" width="582" height="108" rx="7"/>
+<text class="th" x="638" y="722">사례 B · 기획 수정 — 2026-09-04(17) 어드민 재구성 14건</text>
+<text class="tc" x="638" y="741">계기: 어드민 홈을 판단 종류별 4섹션으로 개편하다 뒷단 사건(대사·집행·알림) 정의가 흔들림</text>
+<text class="tc" x="638" y="757">판정: 전제는 유효 — 사용자 결정 14건(3면 대사 4묶음 · 수수료 포함 예치 · 알림 유형 삭제 · 칩 4종 …)</text>
+<text class="tc" x="638" y="773">정책 갱신: §0 (17)에 배경·결정 ①~⑭·삭제 유형·반영/미반영 목록 기록 — 화면보다 먼저</text>
+<text class="tc" x="638" y="789">전파: drafts 21·22·24·25·34 → DB 스키마 → adm-02·brk-04·05·dash-01·notation·ia → 공유본 v45</text>
+<text class="sm" x="638" y="805">미반영(후속)으로 남긴 것도 §0에 적어 둔다 — 약관 대조표 재검토 등. "다 했다"가 아니라 "무엇을 안 했다"를 남긴다</text>
+
+<!-- ───────── 규칙 ───────── -->
+<rect class="gr2" x="20" y="834" width="1200" height="92" rx="9"/>
+<text class="th" x="34" y="854">지켜야 할 규칙 (폴더 CLAUDE.md 작업 규칙)</text>
+<text class="tc" x="34" y="872">1. 위층의 모든 문장은 아래층 근거 없이 올라갈 수 없다 — 규제 주장에는 법령명·조항·문서명이 붙어야 한다.</text>
+<text class="tc" x="34" y="888">2. "전제가 틀렸다"는 이슈는 기획 수정이 아니라 ⓪ 요구사항으로 회귀시킨다. 결정을 바꿀 때마다 고려사항 6종을 전부 훑고 통과 기록을 남긴다.</text>
+<text class="tc" x="34" y="904">3. drafts·reference는 근거가 아니다. 기획 덱·시안·뉴스·타사 자료는 참고만 하고 인용하지 않는다.</text>
+<text class="tc" x="34" y="920">4. 미확정은 태그([확인필요]·[원문대조필요]·[로펌게이트])로 남긴다. 근거 없는 단정 한 문장이 반려 사유가 된다.</text>
+</svg>
