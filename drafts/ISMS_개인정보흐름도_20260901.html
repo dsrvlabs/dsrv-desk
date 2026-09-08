@@ -50,6 +50,7 @@ figcaption{font-size:12px;color:var(--muted);margin-top:8px;padding-left:2px;}
 svg text{font-family:'IBM Plex Sans KR',sans-serif;}
 .tag-pii{display:inline-block;font-size:11px;font-weight:700;padding:1px 8px;border-radius:3px;color:var(--pii);border:1px solid var(--pii);}
 .tag-ref{display:inline-block;font-size:11px;font-weight:700;padding:1px 8px;border-radius:3px;color:var(--muted);border:1px solid var(--muted);}
+.tag-out{display:inline-block;font-size:11px;font-weight:700;padding:1px 8px;border-radius:3px;color:var(--ext);border:1px solid var(--ext);}
 .steps{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;row-gap:10px;margin:10px 0;}
 .step{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 12px;font-size:12.5px;max-width:230px;}
 .step .st{font-weight:700;display:block;}
@@ -57,6 +58,7 @@ svg text{font-family:'IBM Plex Sans KR',sans-serif;}
 .step .pi{display:block;margin-top:5px;font-size:11px;color:var(--pii);background:var(--pii-soft);border-radius:3px;padding:1px 6px;line-height:1.5;}
 .step .corp{display:block;margin-top:5px;font-size:11px;color:var(--muted);background:var(--chip);border-radius:3px;padding:1px 6px;line-height:1.5;}
 .step.ext{border-color:var(--ext);border-style:dashed;}
+.step.outscope{border-color:var(--muted);border-style:dashed;background:color-mix(in srgb, var(--soft) 60%, var(--surface));}
 .sarr{align-self:center;padding:0 7px;color:var(--muted);font-size:13px;flex-shrink:0;}
 .flowmeta{font-size:12px;color:var(--muted);margin:4px 0 0;max-width:none;}
 .flowmeta b{color:var(--ink);}
@@ -70,10 +72,13 @@ tr.ref td{color:var(--muted);background:color-mix(in srgb, var(--soft) 45%, var(
 .need{color:var(--danger);font-weight:700;font-size:12px;}
 .basis{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);white-space:nowrap;}
 .note{background:var(--soft);border-left:3px solid var(--muted);border-radius:0 6px 6px 0;padding:10px 14px;font-size:12.5px;color:var(--muted);max-width:none;}
+.note.warn{border-left-color:var(--danger);}
 .chk{padding-left:20px;margin:6px 0;}
 .chk li{margin:4px 0;font-size:13px;}
 .src{font-size:12px;color:var(--muted);border-top:1px solid var(--line);margin-top:44px;padding-top:14px;}
 .src .mono{font-size:11px;}
+.fieldlist{font-size:12.5px;}
+.fieldlist td:first-child{white-space:nowrap;font-weight:700;}
 @media (max-width:760px){ h1{font-size:24px;} }
 @media (prefers-reduced-motion: reduce){ *{scroll-behavior:auto!important;} }
 </style>
@@ -81,301 +86,475 @@ tr.ref td{color:var(--muted);background:color-mix(in srgb, var(--soft) 45%, var(
 <div class="wrap">
 
 <header class="doc">
-  <div class="doc-kicker">DSRV · ISMS 인증신청서 첨부 초안</div>
+  <div class="doc-kicker">DSRV · ISMS 인증신청서 첨부 초안 · v0.2</div>
   <h1>개인정보 흐름도</h1>
-  <p class="doc-sub">교환(나목)·교환 중개(마목) — 개인정보 생애주기(수집 → 보유·이용 → 보존·파기) · 주요 식별정보 포함 · 2026-09-01 기준</p>
+  <p class="doc-sub">교환(나목)·교환 중개(마목) · 개인정보 생애주기(수집 → 보유·이용 → 보존·파기) · 고유식별정보 포함 · 2026-09-07 기준 (v0.1 2026-09-01 개정)</p>
 </header>
 
 <div class="badges">
-  <span class="badge">정보주체 <b>법인 담당자(대표자 또는 대리인) · 실제소유자(RBO)</b> — 개인(자연인) 고객 없음</span>
-  <span class="badge">온라인 수집은 <b>인증정보만</b> (비밀번호·2FA) · 이메일은 <b>오프라인(계약 시)</b> 수집</span>
-  <span class="badge"><b>개인정보 외부 제공·위탁 없음</b> — STR·트래블룰·KYT는 법인 단위 정보</span>
-  <span class="badge">보존 <b>거래 15년 · AML 5년</b> · 개인정보 분리 저장</span>
+  <span class="badge">정보주체 <b>법인 담당자(대표자 또는 대리인) · 실제소유자(UBO)</b> · 개인(자연인) 고객 없음</span>
+  <span class="badge">고객확인(CDD/EDD) 서류 <b>22항목</b>은 커스터디가 접수해 <b>Custody Admin</b>에 증적 · <b>이 서비스 인증범위 밖</b></span>
+  <span class="badge">이 서비스가 보유하는 개인정보 = <b>가입자 이메일 · 인증정보 · 접속·행위기록 · KYC 결과값</b></span>
+  <span class="badge">STR·트래블룰·KYT는 <b>커스터디가 수행</b> · 이 서비스는 수행하지 않음</span>
+  <span class="badge">보존 <b>거래 15년 · AML 5년</b> · WORM 저장 · 개인정보 분리 저장</span>
+</div>
+
+<div class="note warn">
+  <b>v0.1(2026-09-01)에서 바뀐 것</b><br>
+  ① 고객확인 수집 항목이 확정됐다. 대표자 8항목, 대리인은 그에 더해 5항목, 실제소유자(UBO) 9항목을 <b>서류로 접수</b>하고 <b>Custody Admin을 통해 내부 자료로 증적</b>한다. v0.1의 "성명·연락처를 별도 수집하지 않는다"는 서술은 폐기한다.<br>
+  ② 증적 위치가 Custody Admin이므로 이 항목들은 <b>커스터디 인증범위</b>에서 취급된다. 교환·중개 서비스 DB에는 심사 <b>결과값</b>만 들어온다.<br>
+  ③ 이 서비스는 STR 작성·트래블룰 교환·KYT 호출을 하지 않는다(정본 09 §0 AML, 2026-09-07(21)). v0.1의 외부 반출 3경로(FIU·상대방 VASP·KYT 수탁사)는 이 서비스의 흐름이 아니다.<br>
+  ④ 따라서 <b>"개인정보 외부 제공·위탁 없음"의 근거가 v0.1과 달라졌다.</b> v0.1은 "반출 정보가 법인 단위여서 개인정보가 아니다"로 소명했으나, 실제로는 <b>개인정보를 다루는 공정 자체가 커스터디 인증범위에 있어 이 서비스 밖에서 일어난다</b>는 것이 정확한 소명이다. 커스터디 공정에는 AML 솔루션(수탁사) 전송이 포함되며 <b>실명번호가 복호화 상태로 전송</b>된다. <span class="need">이 지점은 커스터디 인증범위의 위탁·국외이전 쟁점으로 남는다</span>.
 </div>
 
 <!-- ============ 1. 총괄 흐름도 ============ -->
 <section>
-  <div class="sec-head"><h2>1. 총괄 개인정보 흐름도</h2><span class="tag-pii">주요 식별정보 포함</span></div>
-  <p>본 서비스는 개인(자연인) 고객을 받지 않으며 거래 주체가 법인이므로, 정보주체는 <b>법인 소속 개인</b> —
-  담당자(대표자 또는 대리인)와 실제소유자(RBO)에 한정된다. 개인정보 수집은 오프라인(계약·고객확인)과
-  온라인(계정 활성화 시 인증정보 생성), 이용 중 자동 생성(접속기록)의 세 경로이며, 성명·연락처를 별도 수집하지 않는다.
-  외부로 나가는 STR 보고·트래블룰·KYT 위탁은 <b>법인 단위 정보(법인명·법인 지갑주소·거래내역)로 구성되어
-  개인 식별정보가 포함되지 않는다</b> — 개인정보는 인증범위 내부(계정 DB·AML 기록·통합로그)에만 존재한다.</p>
+  <div class="sec-head"><h2>1. 총괄 개인정보 흐름도</h2><span class="tag-pii">고유식별정보 포함</span></div>
+  <p>본 서비스는 개인(자연인) 고객을 받지 않으며 거래 주체가 법인이므로, 정보주체는 <b>법인 소속 개인</b>인
+  담당자(대표자 또는 대리인)와 실제소유자(UBO)에 한정된다. 개인정보가 발생하는 공정은 두 층으로 나뉜다.</p>
+  <p><b>상단(회색 점선)</b>은 <b>커스터디 인증범위</b>다. 고객확인 서류를 오프라인으로 접수해 Custody Admin에 증적하고,
+  AML 솔루션(수탁사)에 전송해 심사한다. 대표자·대리인·UBO의 성명·실명번호·주소·국적·성별·납세자번호 등
+  <b>고유식별정보를 포함한 22항목이 여기에서 취급된다</b>.</p>
+  <p><b>하단(초록 실선)</b>이 <b>교환·중개 서비스 인증범위</b>다. 이 서비스가 보유하는 개인정보는
+  가입자 이메일, 계정 인증정보(비밀번호·2FA 키·복구 코드 · 모두 해시 저장), 접속·행위기록, 그리고
+  커스터디 심사 <b>결과값</b>(고객확인 수준·위험등급·PEP 여부·재이행 도래일)뿐이다.
+  서류 원본과 상세 필드는 이 서비스 DB에 존재하지 않는다.</p>
 
   <figure>
     <div class="figscroll">
-      <svg viewBox="0 0 1140 600" role="img" aria-label="개인정보 총괄 흐름도: 정보주체인 법인 담당자와 실제소유자로부터 온라인 계정 활성화(비밀번호·2FA), 오프라인 계약·고객확인(이메일·확인정보), 자동 생성(접속기록)의 세 경로로 수집하고, 계정 DB·AML 기록·통합로그에 분리 보유한다. 외부 반출인 FIU 보고·트래블룰·KYT 위탁은 법인 단위 정보만 포함하여 개인정보 외부 제공이 없다. 하단에 보존·파기 정책." style="min-width:1040px;width:100%;height:auto;display:block;color:var(--ink);">
+      <svg viewBox="0 0 1140 1088" role="img" aria-label="개인정보 총괄 흐름도. 상단 회색 점선 영역은 커스터디 인증범위로, 고객확인 서류 22항목을 오프라인 접수해 Custody Admin에 증적하고 자사 서버에서 운영하는 AML 솔루션으로 심사한다. 그 아래에 저장 시 암호화 대상과 제외 대상 구분, 그리고 구글로의 개인정보 국외이전 동의 취득이 있다. 하단 초록 영역은 교환 중개 서비스 인증범위로, 관리자 초대 폼 입력과 온라인 계정 활성화, 이용 중 자동 생성 세 경로로 수집해 계정 DB, KYC 결과값, 통합 감사로그에 보유한다. 두 범위 사이 접점은 기관 등록 정보 전달, 기관 상태 조회 API, 거래 건 상태 변경 웹훅 세 가지이며 모두 법인 또는 거래 단위다. 이 서비스의 외부 발신은 고객 통지 이메일 6종뿐이다. 맨 아래에 보존 파기 정책." style="min-width:1060px;width:100%;height:auto;display:block;color:var(--ink);">
         <defs>
           <marker id="pa" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="currentColor"/></marker>
           <marker id="pm" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--muted)"/></marker>
         </defs>
 
-        <!-- 정보주체 -->
-        <g transform="translate(30,170)" text-anchor="middle">
-          <rect width="170" height="150" rx="8" fill="none" stroke="currentColor" stroke-width="1.5"/>
-          <text x="85" y="28" font-size="9.5" fill="var(--muted)" letter-spacing="1">정보주체</text>
-          <text x="85" y="54" font-size="12" font-weight="700" fill="currentColor">법인 담당자</text>
-          <text x="85" y="72" font-size="10" fill="var(--muted)">(대표자 또는 대리인)</text>
-          <text x="85" y="94" font-size="12" font-weight="700" fill="currentColor">실제소유자(RBO)</text>
-          <text x="85" y="120" font-size="9.5" fill="var(--muted)">개인 고객 없음 · 거래 주체는 법인</text>
+        <!-- ===== 커스터디 인증범위 ===== -->
+        <rect x="236" y="46" width="884" height="440" rx="10" fill="none" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="7 5"/>
+        <text x="250" y="38" font-family="'IBM Plex Mono',monospace" font-size="11" font-weight="700" letter-spacing="1.5" fill="var(--muted)">커스터디 인증범위 (이 서비스 밖)</text>
+
+        <g transform="translate(254,66)">
+          <rect width="248" height="172" rx="6" fill="var(--soft)" stroke="var(--muted)" stroke-width="1.2"/>
+          <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">① 서류 접수 (오프라인)</text>
+          <text x="14" y="46" font-size="10" fill="var(--muted)">대표자 8항목: 한글·영문이름 · 연락처 ·</text>
+          <text x="14" y="60" font-size="10" fill="var(--muted)">실명번호(국내거소신고번호) · 국적 ·</text>
+          <text x="14" y="74" font-size="10" fill="var(--muted)">성별 · 주소 · 이메일</text>
+          <text x="14" y="96" font-size="10" fill="var(--muted)">대리인 추가 5항목: 직장주소 ·</text>
+          <text x="14" y="110" font-size="10" fill="var(--muted)">직업분류 · 부서명 · 직장명 · 직장전화</text>
+          <text x="14" y="132" font-size="10" fill="var(--muted)">UBO 9항목: 한글·영문이름 · 생년월일 ·</text>
+          <text x="14" y="146" font-size="10" fill="var(--muted)">국적 · 거주관할권 · 전화번호 ·</text>
+          <text x="14" y="160" font-size="10" fill="var(--muted)">납세자번호 · 출생지 · 지분율</text>
         </g>
 
-        <!-- 열 제목 -->
-        <g font-family="'IBM Plex Mono',monospace" font-size="11" font-weight="700" letter-spacing="2" text-anchor="middle">
-          <text x="340" y="42" fill="var(--pii)">수집</text>
-          <text x="625" y="42" fill="var(--pii)">보유 · 이용 (내부)</text>
-          <text x="955" y="42" fill="var(--muted)">외부 반출 — 법인정보만</text>
+        <g transform="translate(534,66)">
+          <rect width="222" height="172" rx="6" fill="var(--soft)" stroke="var(--muted)" stroke-width="1.2"/>
+          <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">② Custody Admin 증적</text>
+          <text x="14" y="46" font-size="10" fill="var(--muted)">서류 기재 항목을 내부 어드민에</text>
+          <text x="14" y="60" font-size="10" fill="var(--muted)">입력해 내부 자료로 증적</text>
+          <text x="14" y="82" font-size="10" fill="var(--muted)">고객확인 이행의 증적 원본이</text>
+          <text x="14" y="96" font-size="10" fill="var(--muted)">여기에 있다</text>
+          <text x="14" y="122" font-size="9.5" fill="var(--muted)">저장 시 암호화 구분은 아래</text>
+        </g>
+
+        <g transform="translate(788,66)">
+          <rect width="308" height="172" rx="6" fill="var(--soft)" stroke="var(--muted)" stroke-width="1.2"/>
+          <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">③ AML 솔루션 심사 (자사 서버)</text>
+          <text x="14" y="46" font-size="10" fill="var(--muted)">putCustomer → relatedPersonList</text>
+          <text x="14" y="60" font-size="10" fill="var(--muted)">(REP 대표이사 · DEL 대리인 · OWN 실소유자)</text>
+          <text x="14" y="80" font-size="10" fill="var(--muted)">심사 결과 콜백 → customerStatusCd</text>
+          <text x="14" y="102" font-size="10" font-weight="700" fill="currentColor">자사 서버에서 운영 · 외부 수탁사 전송 없음</text>
+          <text x="14" y="120" font-size="10" fill="var(--danger)">realNumber는 복호화 상태로 전송 (내부 구간)</text>
+          <text x="14" y="162" font-size="9" font-family="'IBM Plex Mono',monospace" fill="var(--muted)">reference/custody/01_AML솔루션_연동API</text>
+        </g>
+
+        <g stroke="var(--muted)" stroke-width="1.2" fill="none">
+          <line x1="502" y1="152" x2="528" y2="152" marker-end="url(#pm)"/>
+          <line x1="756" y1="152" x2="782" y2="152" marker-end="url(#pm)"/>
+        </g>
+
+        <!-- 저장 시 암호화 구분 -->
+        <g stroke="var(--muted)" stroke-width="1" stroke-dasharray="3 4" fill="none">
+          <line x1="700" y1="238" x2="700" y2="258" marker-end="url(#pm)"/>
+          <line x1="900" y1="238" x2="900" y2="258" marker-end="url(#pm)"/>
+        </g>
+        <g transform="translate(380,262)">
+          <rect width="716" height="128" rx="6" fill="var(--surface)" stroke="var(--danger)" stroke-width="1.3"/>
+          <text x="14" y="22" font-size="11.5" font-weight="700" fill="currentColor">저장 시 암호화 구분 (커스터디 인증범위 저장소)</text>
+          <text x="14" y="46" font-size="10" font-weight="700" fill="var(--danger)">암호화 대상</text>
+          <text x="14" y="62" font-size="9.5" fill="var(--muted)">개인 식별번호 — SOCS 주민등록번호 · ARNU 외국인등록번호</text>
+          <text x="14" y="75" font-size="9.5" fill="var(--muted)">CCPT 여권번호 · DRLC 운전면허번호 · FIIN 외국인투자자번호</text>
+          <text x="14" y="88" font-size="9.5" fill="var(--muted)">TXID 과세당국 부여번호 · IDCD 국가기관 ID 카드번호 · MISC 기타</text>
+          <text x="14" y="103" font-size="9.5" fill="var(--muted)">개인 별도 여권번호 · 위임자 주민등록번호</text>
+          <text x="14" y="116" font-size="9.5" fill="var(--muted)">개인 블랙리스트 식별번호 · 법인 블랙리스트 대표자 식별번호</text>
+          <line x1="450" y1="38" x2="450" y2="118" stroke="var(--line)" stroke-width="1"/>
+          <text x="470" y="46" font-size="10" font-weight="700" fill="var(--muted)">암호화 제외</text>
+          <text x="470" y="62" font-size="9.5" fill="var(--muted)">국적 · 성명(국문·영문) · 연락처</text>
+          <text x="470" y="75" font-size="9.5" fill="var(--muted)">생년월일 · 성별 · 주소</text>
+          <text x="470" y="88" font-size="9.5" fill="var(--muted)">외국인 국내거소 주소</text>
+          <text x="470" y="103" font-size="9.5" fill="var(--muted)">외국인 국내거소 연락처</text>
+        </g>
+
+        <!-- 국외이전 -->
+        <g transform="translate(380,404)">
+          <rect width="580" height="66" rx="6" fill="var(--ext-soft)" stroke="var(--ext)" stroke-width="1.3"/>
+          <text x="14" y="22" font-size="11.5" font-weight="700" fill="currentColor">개인정보 국외이전 — 정보주체 동의 취득</text>
+          <text x="14" y="42" font-size="10" fill="var(--muted)">AML 솔루션은 자사 서버에서 운영해 수탁사 이전이 없다. 다만 개인정보는</text>
+          <text x="14" y="58" font-size="10" fill="var(--muted)">구글로의 국외이전에 대해 동의를 받는다.</text>
+        </g>
+        <g stroke="var(--ext)" stroke-width="1.2" fill="none">
+          <line x1="960" y1="437" x2="978" y2="437" marker-end="url(#pm)"/>
+        </g>
+        <g transform="translate(984,404)">
+          <rect width="112" height="66" rx="6" fill="none" stroke="var(--ext)" stroke-width="1.2" stroke-dasharray="5 4"/>
+          <text x="14" y="26" font-size="11" font-weight="700" fill="currentColor">구글(Google)</text>
+          <text x="14" y="44" font-size="10" fill="var(--muted)">국외 사업자</text>
+        </g>
+
+        <!-- ===== 정보주체 ===== -->
+        <g transform="translate(30,548)" text-anchor="middle">
+          <rect width="176" height="150" rx="8" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <text x="88" y="26" font-size="9.5" fill="var(--muted)" letter-spacing="1">정보주체</text>
+          <text x="88" y="52" font-size="12" font-weight="700" fill="currentColor">법인 담당자</text>
+          <text x="88" y="70" font-size="10" fill="var(--muted)">(대표자 또는 대리인)</text>
+          <text x="88" y="94" font-size="12" font-weight="700" fill="currentColor">실제소유자(UBO)</text>
+          <text x="88" y="122" font-size="9.5" fill="var(--muted)">개인 고객 없음</text>
+          <text x="88" y="136" font-size="9.5" fill="var(--muted)">거래 주체는 법인</text>
+        </g>
+        <g stroke="currentColor" stroke-width="1.3" fill="none">
+          <polyline points="206,578 224,578 224,152 248,152" marker-end="url(#pa)"/>
+          <polyline points="206,648 224,648 224,756 248,756" marker-end="url(#pa)"/>
+        </g>
+        <text x="218" y="96" font-size="9.5" fill="var(--muted)" text-anchor="end">서류 제출 ·</text>
+        <text x="218" y="110" font-size="9.5" fill="var(--muted)" text-anchor="end">국외이전 동의</text>
+        <text x="218" y="740" font-size="9.5" fill="var(--muted)" text-anchor="end">본인 설정</text>
+
+        <!-- ===== 교환·중개 서비스 인증범위 ===== -->
+        <rect x="236" y="540" width="884" height="388" rx="10" fill="none" stroke="var(--pii)" stroke-width="1.6"/>
+        <text x="250" y="532" font-family="'IBM Plex Mono',monospace" font-size="11" font-weight="700" letter-spacing="1.5" fill="var(--pii)">교환·중개 서비스 인증범위</text>
+
+        <g font-family="'IBM Plex Mono',monospace" font-size="10.5" font-weight="700" letter-spacing="1.5" text-anchor="middle">
+          <text x="378" y="564" fill="var(--pii)">수집</text>
+          <text x="645" y="564" fill="var(--pii)">보유 · 이용</text>
+          <text x="942" y="564" fill="var(--muted)">밖으로 나가는 것</text>
         </g>
 
         <!-- 수집 -->
-        <g>
-          <g transform="translate(240,60)">
-            <rect width="200" height="110" rx="6" fill="var(--pii-soft)" stroke="var(--pii)" stroke-width="1.4"/>
-            <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">온라인 — 계정 활성화</text>
-            <text x="14" y="46" font-size="10" fill="var(--muted)">비밀번호 (본인 설정 · 원문 미저장)</text>
-            <text x="14" y="62" font-size="10" fill="var(--muted)">2FA(TOTP) 키 · 백업코드</text>
-            <text x="14" y="84" font-size="9.5" fill="var(--muted)">성명·연락처 수집 없음</text>
-          </g>
-          <g transform="translate(240,200)">
-            <rect width="200" height="110" rx="6" fill="var(--pii-soft)" stroke="var(--pii)" stroke-width="1.4"/>
-            <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">오프라인 — 계약 · CDD/EDD</text>
-            <text x="14" y="42" font-size="10" fill="var(--muted)">담당자 회사 이메일 (초대 발송용)</text>
-            <text x="14" y="58" font-size="10" fill="var(--muted)">대표자·RBO 확인정보(성명 등)</text>
-            <text x="14" y="74" font-size="10" fill="var(--muted)">자금출처 · 제재 스크리닝</text>
-            <text x="14" y="94" font-size="9.5" fill="var(--danger)">세부 항목 [확인필요]</text>
-          </g>
-          <g transform="translate(240,340)">
-            <rect width="200" height="110" rx="6" fill="var(--pii-soft)" stroke="var(--pii)" stroke-width="1.4"/>
-            <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">이용 중 자동 생성</text>
-            <text x="14" y="46" font-size="10" fill="var(--muted)">접속기록(계정 ID·IP 등)</text>
-            <text x="14" y="62" font-size="10" fill="var(--muted)">행위로그 · 거래·승인 이력</text>
-            <text x="14" y="84" font-size="9.5" fill="var(--muted)">담당자 계정 단위 기록</text>
-          </g>
+        <g transform="translate(254,576)">
+          <rect width="248" height="112" rx="6" fill="var(--pii-soft)" stroke="var(--pii)" stroke-width="1.4"/>
+          <text x="14" y="22" font-size="11.5" font-weight="700" fill="currentColor">④ 관리자 입력 (ADM-03 초대 폼)</text>
+          <text x="14" y="42" font-size="10" fill="var(--pii)">가입자 이메일</text>
+          <text x="14" y="58" font-size="9.5" fill="var(--muted)">값의 출처 = 고객이 제공</text>
+          <text x="14" y="74" font-size="9.5" fill="var(--muted)">함께 입력: 기관명 · customerNo ·</text>
+          <text x="14" y="87" font-size="9.5" fill="var(--muted)">수탁 지갑 주소 (모두 법인 단위)</text>
+          <text x="14" y="104" font-size="9.5" fill="var(--muted)">운영자가 입력·신청하면 메일이 나간다</text>
+        </g>
+        <g transform="translate(254,704)">
+          <rect width="248" height="104" rx="6" fill="var(--pii-soft)" stroke="var(--pii)" stroke-width="1.4"/>
+          <text x="14" y="22" font-size="11.5" font-weight="700" fill="currentColor">⑤ 온라인 생성 (ONB-01~03)</text>
+          <text x="14" y="44" font-size="10" fill="var(--pii)">비밀번호 (본인 설정 · 해시 저장)</text>
+          <text x="14" y="60" font-size="10" fill="var(--pii)">2FA(TOTP) 키</text>
+          <text x="14" y="76" font-size="10" fill="var(--pii)">복구 코드 1개 (해시 저장 · 1회용)</text>
+          <text x="14" y="94" font-size="9.5" fill="var(--muted)">성명·연락처는 받지 않는다</text>
+        </g>
+        <g transform="translate(254,824)">
+          <rect width="248" height="88" rx="6" fill="var(--pii-soft)" stroke="var(--pii)" stroke-width="1.4"/>
+          <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">⑥ 이용 중 자동 생성</text>
+          <text x="14" y="46" font-size="10" fill="var(--pii)">접속기록 (계정 ID · IP 등)</text>
+          <text x="14" y="62" font-size="10" fill="var(--pii)">행위로그 · 요청·승인 이력</text>
+          <text x="14" y="78" font-size="9.5" fill="var(--muted)">담당자 계정 단위 기록</text>
         </g>
 
         <!-- 보유·이용 -->
-        <g>
-          <g transform="translate(520,60)">
-            <rect width="210" height="110" rx="6" fill="var(--surface)" stroke="var(--pii)" stroke-width="1.4"/>
-            <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">계정 DB</text>
-            <text x="14" y="46" font-size="10" fill="var(--muted)">이메일 · 2FA 키 · 권한 · 세션</text>
-            <text x="14" y="62" font-size="10" fill="var(--muted)">이용: 본인확인 · 접근통제</text>
-            <text x="14" y="82" font-size="10" fill="var(--muted)">비밀번호 원문 미저장·미전송</text>
-          </g>
-          <g transform="translate(520,200)">
-            <rect width="210" height="110" rx="6" fill="var(--surface)" stroke="var(--pii)" stroke-width="1.4"/>
-            <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">AML 기록 — 분리 보관</text>
-            <text x="14" y="46" font-size="10" fill="var(--muted)">CDD/EDD · 스크리닝 · STR 기록</text>
-            <text x="14" y="62" font-size="10" fill="var(--muted)">이용: AML 의무 이행</text>
-          </g>
-          <g transform="translate(520,340)">
-            <rect width="210" height="110" rx="6" fill="var(--surface)" stroke="var(--pii)" stroke-width="1.4"/>
-            <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">거래원장 · 통합로그(WORM)</text>
-            <text x="14" y="46" font-size="10" fill="var(--muted)">개인정보 분리 저장 · 열람 감사</text>
-            <text x="14" y="62" font-size="10" fill="var(--muted)">조회화면 개인정보 비노출</text>
-            <text x="14" y="78" font-size="10" fill="var(--muted)">개인키·시드 기록 금지</text>
-          </g>
+        <g transform="translate(534,576)">
+          <rect width="222" height="112" rx="6" fill="var(--surface)" stroke="var(--pii)" stroke-width="1.4"/>
+          <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">계정 DB</text>
+          <text x="14" y="46" font-size="10" fill="var(--muted)">USER · INVITE · SESSION ·</text>
+          <text x="14" y="60" font-size="10" fill="var(--muted)">LOGIN_EVENT · RECOVERY_CODE</text>
+          <text x="14" y="80" font-size="10" fill="var(--muted)">이용: 본인확인 · 접근통제</text>
+          <text x="14" y="98" font-size="9.5" fill="var(--muted)">비밀번호·복구 코드 원문 미보관</text>
+        </g>
+        <g transform="translate(534,704)">
+          <rect width="222" height="104" rx="6" fill="var(--surface)" stroke="var(--pii)" stroke-width="1.4"/>
+          <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">KYC 결과값</text>
+          <text x="14" y="46" font-size="10" fill="var(--muted)">ORG.status · rbo_verified</text>
+          <text x="14" y="60" font-size="10" fill="var(--muted)">KYC_RECORD: 확인 수준 ·</text>
+          <text x="14" y="74" font-size="10" fill="var(--muted)">위험등급 · PEP 여부 · 재이행일</text>
+          <text x="14" y="94" font-size="9.5" fill="var(--muted)">서류 원본·상세 필드 없음</text>
+        </g>
+        <g transform="translate(534,824)">
+          <rect width="222" height="88" rx="6" fill="var(--surface)" stroke="var(--pii)" stroke-width="1.4"/>
+          <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">통합 감사로그 (WORM)</text>
+          <text x="14" y="46" font-size="10" fill="var(--muted)">AUDIT_LOG · 해시 무결성</text>
+          <text x="14" y="62" font-size="10" fill="var(--muted)">열람·다운로드도 기록</text>
+          <text x="14" y="78" font-size="10" fill="var(--muted)">개인키·시드 기록 금지</text>
         </g>
 
-        <!-- 외부 반출 (법인정보만 — 개인정보 아님) -->
-        <g>
-          <g transform="translate(800,60)">
-            <rect width="310" height="110" rx="6" fill="var(--surface)" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="5 4"/>
-            <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">FIU (금융정보분석원) — STR 보고</text>
-            <text x="14" y="46" font-size="10" fill="var(--muted)">법인 단위 고객·거래 정보로 보고</text>
-            <text x="14" y="62" font-size="10" fill="var(--muted)">개인 식별정보 미포함</text>
-            <text x="14" y="84" font-size="10" font-family="'IBM Plex Mono',monospace" fill="var(--muted)">특정금융정보법 §4</text>
-          </g>
-          <g transform="translate(800,200)">
-            <rect width="310" height="110" rx="6" fill="var(--surface)" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="5 4"/>
-            <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">상대방 VASP — 트래블룰 교환</text>
-            <text x="14" y="46" font-size="10" fill="var(--muted)">송·수신인 = 법인명 · 법인 가상자산주소</text>
-            <text x="14" y="62" font-size="10" fill="var(--muted)">개인 식별정보 미포함 · CODE·VerifyVASP 경유</text>
-            <text x="14" y="84" font-size="10" font-family="'IBM Plex Mono',monospace" fill="var(--muted)">특금법 시행령 §10의10 · 1백만원 초과</text>
-          </g>
-          <g transform="translate(800,340)">
-            <rect width="310" height="110" rx="6" fill="var(--surface)" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="5 4"/>
-            <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">수탁사 — KYT·트래블룰 솔루션</text>
-            <text x="14" y="46" font-size="10" fill="var(--muted)">법인 지갑주소 · 거래정보 (스코어링·전송)</text>
-            <text x="14" y="62" font-size="10" fill="var(--muted)">개인 식별정보 미포함 → 개인정보 위탁·국외이전 비해당</text>
-            <text x="14" y="84" font-size="10" fill="var(--danger)">수탁사 목록·반출 필드 최종 확정 [확인필요]</text>
-          </g>
+        <!-- 밖으로 나가는 것 -->
+        <g transform="translate(788,576)">
+          <rect width="308" height="112" rx="6" fill="var(--ext-soft)" stroke="var(--ext)" stroke-width="1.3"/>
+          <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">고객 통지 이메일 6종</text>
+          <text x="14" y="46" font-size="10" fill="var(--muted)">신청 접수 · 수락·확정 · 거래 완료 ·</text>
+          <text x="14" y="60" font-size="10" fill="var(--muted)">게시 회수 · 거절·진행 불가 · 거래 만료</text>
+          <text x="14" y="80" font-size="10" fill="var(--muted)">발신전용 · 링크·버튼 없음 · 심사·AML 내용 미포함</text>
+        </g>
+        <g transform="translate(788,704)">
+          <rect width="308" height="104" rx="6" fill="var(--surface)" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="5 4"/>
+          <text x="14" y="24" font-size="11.5" font-weight="700" fill="currentColor">커스터디 접점 (법인 · 거래 단위)</text>
+          <text x="14" y="46" font-size="10" fill="var(--muted)">기관 상태 조회 API: customerNo → customerStatusCd</text>
+          <text x="14" y="60" font-size="10" fill="var(--muted)">거래 건 상태 변경 웹훅: 건 번호 + 상태값</text>
+          <text x="14" y="74" font-size="10" fill="var(--muted)">집행 명세 Excel · txHash 입력</text>
+          <text x="14" y="94" font-size="9.5" fill="var(--muted)">개인 식별정보 없음 · 사유·단계 없음</text>
+        </g>
+        <g transform="translate(788,824)">
+          <rect width="308" height="88" rx="6" fill="none" stroke="var(--muted)" stroke-width="1.1" stroke-dasharray="3 4"/>
+          <text x="14" y="24" font-size="11.5" font-weight="700" fill="var(--muted)">이 서비스가 하지 않는 것</text>
+          <text x="14" y="46" font-size="10" fill="var(--muted)">STR 작성·보고 · 트래블룰 교환 · KYT 호출</text>
+          <text x="14" y="62" font-size="10" fill="var(--muted)">AML 심사 로직 · 보고 데이터 생성</text>
+          <text x="14" y="78" font-size="9.5" fill="var(--muted)">전부 커스터디가 수행 (정본 09 §0 AML)</text>
         </g>
 
-        <!-- 화살표: 정보주체 → 수집 -->
-        <g stroke="currentColor" stroke-width="1.3" fill="none">
-          <polyline points="200,215 220,215 220,115 234,115" marker-end="url(#pa)"/>
-          <line x1="200" y1="255" x2="234" y2="255" marker-end="url(#pa)"/>
-          <polyline points="200,295 220,295 220,395 234,395" marker-end="url(#pa)"/>
+        <!-- 커스터디 → 서비스: 기관 등록 정보 -->
+        <g stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="4 4" fill="none">
+          <polyline points="645,238 645,250 310,250 310,512 400,512 400,572" marker-end="url(#pm)"/>
         </g>
+        <text x="418" y="506" font-size="9.5" fill="var(--muted)">customerNo · 법인명 · 수탁 지갑 주소를 이메일로 전달 → 관리자가 ADM-03 초대 폼에 입력</text>
 
         <!-- 수집 → 보유 -->
         <g stroke="currentColor" stroke-width="1.3" fill="none">
-          <line x1="440" y1="115" x2="514" y2="115" marker-end="url(#pa)"/>
-          <polyline points="440,225 480,225 480,145 514,145" marker-end="url(#pa)"/>
-          <line x1="440" y1="270" x2="514" y2="270" marker-end="url(#pa)"/>
-          <line x1="440" y1="395" x2="514" y2="395" marker-end="url(#pa)"/>
-        </g>
-        <g font-size="9.5" fill="var(--muted)">
-          <text x="446" y="108">인증정보</text>
-          <text x="487" y="160">이메일</text>
-          <text x="446" y="263">확인정보</text>
+          <line x1="502" y1="632" x2="528" y2="632" marker-end="url(#pa)"/>
+          <line x1="502" y1="756" x2="528" y2="756" marker-end="url(#pa)"/>
+          <line x1="502" y1="868" x2="528" y2="868" marker-end="url(#pa)"/>
         </g>
 
-        <!-- 보유 → 외부 (법인정보만 — 점선) -->
+        <!-- 보유 → 밖 -->
         <g stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="4 4" fill="none">
-          <polyline points="730,255 766,255 766,115 794,115" marker-end="url(#pm)"/>
-          <polyline points="730,395 766,395 766,255 794,255" marker-end="url(#pm)"/>
-          <line x1="730" y1="415" x2="794" y2="415" marker-end="url(#pm)"/>
+          <line x1="756" y1="632" x2="782" y2="632" marker-end="url(#pm)"/>
+          <line x1="756" y1="756" x2="782" y2="756" marker-end="url(#pm)"/>
         </g>
-        <g font-size="9.5" fill="var(--muted)">
-          <text x="738" y="140">STR 시 · 법인 단위</text>
-          <text x="738" y="288">이전 시 · 법인 단위</text>
-          <text x="736" y="408">위탁</text>
+
+        <!-- 결과값 유입 (커스터디 → KYC 결과값) -->
+        <g stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="4 4" fill="none">
+          <polyline points="1096,756 1112,756 1112,948 645,948 645,812" marker-end="url(#pm)"/>
         </g>
+        <text x="660" y="962" font-size="9.5" fill="var(--muted)">조회한 기관 상태값을 저장 · 이 서비스는 쓰지 않고 읽기만 한다</text>
 
         <!-- 보존·파기 -->
         <g stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="3 4" fill="none">
-          <line x1="625" y1="450" x2="625" y2="486" marker-end="url(#pm)"/>
+          <line x1="378" y1="916" x2="378" y2="998" marker-end="url(#pm)"/>
         </g>
-        <g transform="translate(240,490)">
-          <rect width="870" height="76" rx="8" fill="var(--soft)" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="5 4"/>
-          <text x="18" y="28" font-size="11.5" font-weight="700" fill="currentColor">보존 · 파기</text>
-          <text x="18" y="48" font-size="10.5" fill="var(--muted)">거래기록 15년 · AML 기록 5년(특정금융정보법 §5의4) · WORM 보존 대상과 파기 대상 분리 저장</text>
-          <text x="18" y="64" font-size="10.5" fill="var(--muted)">보존기한 경과 시 파기 — 절차·방법 및 계정정보(계약 종료 시)·접속기록 보존기한 <tspan fill="var(--danger)">[확인필요]</tspan></text>
+        <g transform="translate(236,1002)">
+          <rect width="884" height="62" rx="8" fill="var(--soft)" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="5 4"/>
+          <text x="18" y="24" font-size="11.5" font-weight="700" fill="currentColor">보존 · 파기</text>
+          <text x="18" y="42" font-size="10.5" fill="var(--muted)">거래 관련 기록: 거래관계 종료일부터 15년 · 고객확인·의심거래 기록: 금융거래관계 종료 후 5년 이상 · 두 기간이 겹치면 긴 쪽 · WORM 저장 + 해시</text>
+          <text x="18" y="56" font-size="10.5" fill="var(--muted)">보존기한 경과 시 파기.</text>
         </g>
       </svg>
     </div>
-    <figcaption>초록 상자(실선)가 인증범위 내 개인정보 취급 지점. 오른쪽 열(점선)은 외부 반출이나 법인 단위 정보만 포함되어 개인정보 제공·위탁에 해당하지 않는다.</figcaption>
+    <figcaption>회색 점선 영역이 커스터디 인증범위, 초록 실선 영역이 교환·중개 서비스 인증범위다. 고유식별정보를 포함한 고객확인 22항목은 회색 영역에서만 취급되고, 초록 영역으로는 심사 결과값과 법인 단위 정보만 넘어온다.</figcaption>
   </figure>
 </section>
 
-<!-- ============ 2. 업무별 흐름 ============ -->
+<!-- ============ 2. 고객확인 수집 항목 ============ -->
 <section>
-  <div class="sec-head"><h2>2. 업무별 개인정보 흐름</h2></div>
-  <p>총괄 흐름도의 각 경로를 업무 단위로 펼친 것이다. 초록 표기가 해당 단계에서 취급되는 주요 식별정보,
-  회색 표기·점선 상자는 법인 단위 정보(개인정보 비해당)다.</p>
+  <div class="sec-head"><h2>2. 고객확인(CDD/EDD) 수집 항목</h2><span class="tag-ref">커스터디 인증범위에서 취급</span></div>
+  <p>서류로 접수해 Custody Admin에 증적하는 항목이다. 대리인이 거래를 수행하는 경우 대표자 항목에 더해 5항목을 받는다.
+  아래 항목은 <b>교환·중개 서비스 DB에 저장되지 않는다</b>.</p>
+  <div class="tblwrap">
+  <table class="fieldlist">
+    <thead><tr><th>정보주체 구분</th><th>항목</th><th>항목 수</th><th>AML 솔루션 대응 필드</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>대표자</td>
+        <td>한글이름 · 영문이름 · 연락처 · <b>실명번호(국내거소신고번호)</b> · 국적 · 성별 · 주소 · 이메일</td>
+        <td class="mono">8</td>
+        <td class="mono">relatedCategorizeCd 02 (REP) · customerName/customerEnName · cellPhoneNo · realNumber + realNumberCd 07 · nationalityCd · genderCd · homeAddress</td>
+      </tr>
+      <tr>
+        <td>대리인<br><span class="basis">대표자 항목 + 아래</span></td>
+        <td>직장주소 · 직업분류 · 부서명 · 직장명 · 직장전화</td>
+        <td class="mono">+5</td>
+        <td class="mono">relatedCategorizeCd 04 (DEL) · jobCd · deptName · companyName · companyNum <span class="need">직장주소 대응 필드 없음</span></td>
+      </tr>
+      <tr>
+        <td>실제소유자<br>(UBO)</td>
+        <td>한글이름 · 영문이름 · 생년월일 · 국적 · 거주관할권 · 전화번호 · <b>납세자번호</b> · 출생지 · 지분율</td>
+        <td class="mono">9</td>
+        <td class="mono">relatedCategorizeCd 03 (OWN) · birthday · nationalityCd · residenceCountryCd · realNumberCd 09 · ownershipRatio <span class="need">출생지 대응 필드 없음</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="flowmeta"><b>증적:</b> 서류 접수 → Custody Admin 입력 → 내부 자료로 증적.
+  <b>심사:</b> Custody Admin이 AML 솔루션에 <span class="mono">putCustomer</span>로 전송(<span class="mono">relatedPersonList</span> 배열)하고 콜백으로 결과를 받는다.
+  <b>근거:</b> <span class="basis">reference/custody/01_Custody_AML솔루션_연동API_20260701.md §② putCustomer</span></p>
 
-  <h3>흐름 A — 온보딩 · 계정 활성화</h3>
-  <div class="steps">
-    <div class="step"><span class="st">① 오프라인 수집</span><span class="sd">계약·CDD 단계 · 수기<br>성명·연락처 별도 수집 없음</span><span class="pi">담당자 회사 이메일</span></div><span class="sarr">→</span>
-    <div class="step"><span class="st">② 초대 발송</span><span class="sd">DSRV 관리자 · ADM-06<br>링크 72시간 · 1회 유효</span><span class="pi">이메일 (발송처)</span></div><span class="sarr">→</span>
-    <div class="step"><span class="st">③ 계정 활성화</span><span class="sd">ONB-01 · 온라인 생성<br>비밀번호 본인 설정 · 2FA 등록</span><span class="pi">비밀번호(원문 미저장) · 2FA 키·백업코드</span></div><span class="sarr">→</span>
-    <div class="step"><span class="st">④ 계정 DB 저장</span><span class="sd">이메일 · 2FA · 권한 · 세션<br>이용: 본인확인 · 접근통제</span></div>
+  <div class="note warn" style="margin-top:14px;">
+  <b>이 항목들이 만드는 쟁점 3건</b><br>
+  ① <b>고유식별정보 해당성</b>: 실명번호(국내거소신고번호)와 납세자번호가 개인정보 보호법 제24조·시행령 제19조의 고유식별정보 열거 항목에 포함되는지 <span class="need">[확인필요]</span>. 해당하면 별도 동의·암호화 저장·분리 보관 요건이 붙는다. 법령 원문 대조 전이므로 이 문서는 판단을 적지 않는다.<br>
+  ② <b>민감정보 해당성</b>: 국적을 개인정보 보호법 제23조·시행령 제18조의 '인종이나 민족에 관한 정보'로 볼 수 있는지 <span class="need">[확인필요]</span>. 성별은 열거 항목이 아니다(미확인).<br>
+  ③ <b>실명번호 평문 전송</b>: AML 솔루션 전송 시 <span class="mono">realNumber</span>가 복호화 상태로 나간다(연동 API 문서 명시). 전송 구간 보호·수탁사 관리·소재지에 따른 국외이전 해당성은 <b>커스터디 인증범위</b>의 확인 사항이다 <span class="need">[확인필요]</span>.
   </div>
-  <p class="flowmeta"><b>담당자 = 대표자 또는 대리인</b>(법인 소속 개인).
-  <b>통제:</b> 초대 기반(계약·CDD 완료 법인의 담당자만 · 셀프가입 없음) · 개인별 계정(공용 금지) · 비밀번호는 활성화 링크로 본인이 직접 설정 — 원문이 서버·이메일에 존재한 적 없음 · 전 권한자 MFA 의무.
-  <b>파기:</b> 계약 종료·담당자 변경 시 — 보존기한 <span class="need">[확인필요]</span></p>
+</section>
 
-  <h3>흐름 B — 고객확인 CDD/EDD (오프라인)</h3>
-  <div class="steps">
-    <div class="step"><span class="st">① 서류 접수</span><span class="sd">오프라인 수기 · 계약 단계</span><span class="pi">대표자·RBO 확인정보(성명 등)<br>세부 항목 [확인필요]</span></div><span class="sarr">→</span>
-    <div class="step"><span class="st">② AML 심사</span><span class="sd">별도 AML 시스템 영역<br>제재 스크리닝 · EDD</span><span class="pi">자금출처 · 스크리닝 결과</span></div><span class="sarr">→</span>
-    <div class="step"><span class="st">③ AML 기록 보관</span><span class="sd">분리 보관 · 계정 DB와 격리<br>재이행: 고1년·중2년·저3년</span><span class="pi">CDD/EDD·STR 관련 기록</span></div><span class="sarr">→</span>
-    <div class="step ext"><span class="st">④ FIU 보고 (STR 시)</span><span class="sd">특정금융정보법 §4</span><span class="corp">법인 단위 정보로 보고 — 개인 식별정보 미포함</span></div>
-  </div>
-  <p class="flowmeta"><b>통제:</b> 서비스 화면(ADM-06)은 KYC 상태 조회·전이만 담당 — 확인정보 원본은 AML 시스템에서 취급(연동 범위 <span class="need">[확인필요]</span>).
-  <b>보존:</b> 5년 <span class="basis">특금법 §5의4</span></p>
+<!-- ============ 3. 업무별 흐름 ============ -->
+<section>
+  <div class="sec-head"><h2>3. 업무별 개인정보 흐름</h2></div>
+  <p>총괄 흐름도의 각 경로를 업무 단위로 펼친 것이다. 초록 표기가 해당 단계에서 취급되는 개인정보,
+  회색 점선 상자는 이 서비스 인증범위 밖이거나 법인 단위 정보(개인정보 비해당)다.</p>
 
-  <h3>흐름 C — 거래 · 이전 <span class="tag-ref">참고 — 외부 반출은 법인 단위 정보 (개인정보 비해당)</span></h3>
+  <h3>흐름 A · 고객확인 CDD/EDD <span class="tag-ref">커스터디 인증범위</span></h3>
   <div class="steps">
-    <div class="step"><span class="st">① 거래 요청</span><span class="sd">교환 RFQ · 중개 게시판<br>담당자 계정으로 수행</span><span class="pi">계정 ID (내부 기록만)</span><span class="corp">법인명 · 법인 지갑주소</span></div><span class="sarr">→</span>
-    <div class="step"><span class="st">② 자동검증 → 승인</span><span class="sd">화이트리스트·한도·KYT·BLF<br>고객사 확인 + DSRV 승인</span><span class="corp">거래내역 · 승인 이력</span></div><span class="sarr">→</span>
-    <div class="step"><span class="st">③ 콜드 수동 집행</span><span class="sd">기존 커스터디 범위<br>거래원장·통합로그 기록</span></div><span class="sarr">→</span>
-    <div class="step ext"><span class="st">④ 트래블룰 교환</span><span class="sd">상대방 VASP · 1백만원 초과<br>CODE·VerifyVASP 경유</span><span class="corp">송·수신인 = 법인명·법인 지갑주소 — 개인 식별정보 미포함</span></div>
+    <div class="step outscope"><span class="st">① 서류 접수</span><span class="sd">오프라인 · 계약 단계<br>커스터디가 접수</span><span class="pi">대표자 8항목 · 대리인 +5항목<br>UBO 9항목 (2절)</span></div><span class="sarr">→</span>
+    <div class="step outscope"><span class="st">② Custody Admin 증적</span><span class="sd">내부 어드민 입력<br>고객확인 이행의 증적 원본</span><span class="pi">식별번호 계열은 암호화 저장<br>성명·연락처·국적 등은 제외 (1절)</span></div><span class="sarr">→</span>
+    <div class="step outscope"><span class="st">③ AML 솔루션 심사</span><span class="sd">자사 서버 운영 · putCustomer<br>결과 콜백 → customerStatusCd</span><span class="pi">realNumber 복호화 상태 전송 (내부 구간)<br>외부 수탁사 이전 없음</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">④ 결과값만 유입</span><span class="sd">이 서비스 DB<br>ORG · KYC_RECORD</span><span class="pi">확인 수준 · 위험등급 · PEP 여부 · 재이행 도래일</span></div>
   </div>
-  <div class="steps">
-    <div class="step"><span class="st">②′ KYT 스코어링</span><span class="sd">②의 자동검증 과정에서 병행</span></div><span class="sarr">→</span>
-    <div class="step ext"><span class="st">수탁사 위탁</span><span class="sd">KYT·트래블룰 솔루션</span><span class="corp">법인 지갑주소 · 거래정보 — 개인정보 위탁·국외이전 비해당</span></div>
-  </div>
-  <p class="flowmeta"><b>통제:</b> 수취 주소는 사전등록 화이트리스트로 한정(직접 입력 없음) · 미신고 VASP 차단·STR 검토. 요청·승인 행위는 담당자 계정 ID로 내부 로그에만 기록(흐름 D).
-  <b>보존:</b> 거래기록 15년. <b>근거:</b> <span class="basis">특금법 시행령 §10의10 (트래블룰)</span></p>
+  <p class="flowmeta"><b>통제:</b> 이 서비스는 고객확인 심사를 하지 않는다. 서류 원본과 상세 필드를 받지도 저장하지도 않으며, ADM-03은 커스터디 조회값을 표시만 한다(상태 변경 기능 없음).
+  <b>재이행:</b> 위험등급별 주기(고 1년 · 중 2년 · 저 3년). 실행은 커스터디 오프라인이고 이 서비스는 결과만 받는다.
+  <b>보존:</b> 5년 이상 <span class="basis">특금법 §5의4</span></p>
 
-  <h3>흐름 D — 접속 · 행위기록 (자동 생성)</h3>
+  <h3>흐름 B · 온보딩 · 계정 활성화</h3>
   <div class="steps">
-    <div class="step"><span class="st">① 이용 중 자동 생성</span><span class="sd">로그인 · 요청 · 승인 등 전 행위</span><span class="pi">계정 ID · 접속기록(IP 등) · 행위로그</span></div><span class="sarr">→</span>
-    <div class="step"><span class="st">② 통합로그 저장</span><span class="sd">WORM · 해시 무결성<br>개인정보 분리 저장</span><span class="pi">조회화면 개인정보 비노출</span></div><span class="sarr">→</span>
-    <div class="step"><span class="st">③ 열람 자체 감사</span><span class="sd">ADM-05 · 누가 무엇을 조회했는지 기록</span></div>
+    <div class="step"><span class="st">① 기관 등록 정보 수신</span><span class="sd">커스터디가 이메일로 전달</span><span class="corp">customerNo · 법인명 · 수탁 지갑 주소</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">② 초대 발송</span><span class="sd">관리자 · ADM-03 초대 폼<br>운영자가 입력·신청하면 발송<br>링크 72시간 · 1회 유효</span><span class="pi">가입자 이메일 (고객이 제공한 값)</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">③ 계정 활성화</span><span class="sd">ONB-01 비밀번호 → ONB-02 2FA<br>→ ONB-03 복구 코드 저장</span><span class="pi">비밀번호 · 2FA(TOTP) 키 · 복구 코드 1개</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">④ 계정 DB 저장</span><span class="sd">USER · INVITE · SESSION<br>RECOVERY_CODE</span><span class="pi">이메일 · 2FA 키 · 권한 · 세션</span></div>
   </div>
-  <p class="flowmeta"><b>통제:</b> 로그는 조회 전용(원장 직접 변경 미구현) · 개인키·passphrase·시드는 기록 금지 필드 · 외부 제공 없음.
+  <p class="flowmeta"><b>담당자 = 대표자 또는 대리인</b>(법인 소속 개인 · 고객사당 1명).
+  <b>통제:</b> 초대 기반이며 셀프 가입이 없다. 비밀번호와 복구 코드는 활성화 링크로 본인이 직접 설정하고 해시로만 저장하므로 원문이 서버·이메일에 존재한 적이 없다. 초대 토큰도 해시 저장. 전 계정 MFA 필수. 계정당 동시 1세션.
+  <b>파기:</b> 계약 종료·담당자 변경 시. 보존기한 <span class="need">[확인필요]</span></p>
+
+  <h3>흐름 C · 거래 · 집행 <span class="tag-ref">법인 · 거래 단위 (개인정보 비해당)</span></h3>
+  <div class="steps">
+    <div class="step"><span class="st">① 거래 요청</span><span class="sd">나목 교환 요청 · 마목 게시·신청<br>담당자 계정으로 수행</span><span class="pi">계정 ID (내부 기록만)</span><span class="corp">법인명 · 수탁 지갑 주소</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">② 정책 검증 → 승인</span><span class="sd">기관 상태 · 건별 한도 · 온체인 잔고<br>재고 · 기준가 편차</span><span class="corp">거래내역 · 승인 이력</span></div><span class="sarr">→</span>
+    <div class="step outscope"><span class="st">③ 커스터디 집행 전 심사</span><span class="sd">BLF · KYT · 트래블룰<br>커스터디가 수행</span><span class="corp">거래 건 중지/해제 웹훅 (건 번호 + 상태값)</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">④ 콜드 수동 집행</span><span class="sd">나목: 재고 ↔ 고객 수탁<br>마목: 에스크로 예치 → 양건 확인 → 인도<br>거래내역을 AML 시스템 · FDS 시스템에 전송 후 실행</span><span class="corp">거래원장 · 감사로그 · txHash</span></div>
+  </div>
+  <p class="flowmeta"><b>통제:</b> 교환·중개는 DSRV 관리 지갑 4묶음(고객 수탁 · 운영 · 교환 재고 · 에스크로 전용지갑) 사이의 내부 이전이므로 외부 주소를 다루지 않는다. 화이트리스트는 이 서비스에서 쓰지 않는다.
+  요청·승인 행위는 담당자 계정 ID로 내부 로그에만 남는다(흐름 D).
+  <b>보존:</b> 거래 관련 기록 15년.
+  <b>트래블룰:</b> 수행 주체는 커스터디이며 기록 위치·분담은 <span class="need">[확인필요]</span>(스키마 TRAVEL_RULE 테이블 존치 여부 포함).</p>
+
+  <h3>흐름 D · 접속 · 행위기록 (자동 생성)</h3>
+  <div class="steps">
+    <div class="step"><span class="st">① 이용 중 자동 생성</span><span class="sd">로그인 · 요청 · 승인 · 열람 등 전 행위</span><span class="pi">계정 ID · 접속기록(IP 등) · 행위로그</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">② 로그인 이력</span><span class="sd">LOGIN_EVENT<br>성공·실패·잠금·복구 코드 사용</span><span class="pi">실패 5회 합산 시 계정 잠금</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">③ 통합 감사로그 저장</span><span class="sd">AUDIT_LOG · WORM · 해시 무결성<br>개인정보 분리 저장</span><span class="pi">조회화면 개인정보 비노출</span></div><span class="sarr">→</span>
+    <div class="step"><span class="st">④ 열람 자체 감사</span><span class="sd">조회·CSV 다운로드도 기록<br>관리자 CSV ⑥ 열람 기록</span></div>
+  </div>
+  <p class="flowmeta"><b>통제:</b> 로그는 조회 전용이며 원장 직접 변경 기능이 없다. 개인키·passphrase·시드는 기록 금지 필드. 외부 제공 없음. 세션은 유휴 15분·최대 8시간.
   <b>보존:</b> 접속기록 보존기한 <span class="need">[확인필요]</span></p>
 </section>
 
-<!-- ============ 3. 흐름표 ============ -->
+<!-- ============ 4. 흐름표 ============ -->
 <section>
-  <div class="sec-head"><h2>3. 개인정보 흐름표 — 주요 식별정보 총괄</h2></div>
+  <div class="sec-head"><h2>4. 개인정보 흐름표 총괄</h2></div>
   <div class="tblwrap">
   <table>
-    <thead><tr><th>흐름</th><th>구분</th><th>주요 식별정보</th><th>수집 경로</th><th>이용 목적</th><th>보관 위치</th><th>외부 제공·위탁</th><th>보존 · 파기</th></tr></thead>
+    <thead><tr><th>흐름</th><th>구분</th><th>개인정보 항목</th><th>수집 경로</th><th>이용 목적</th><th>보관 위치</th><th>외부 제공·위탁</th><th>보존 · 파기</th></tr></thead>
     <tbody>
-      <tr>
+      <tr class="ref">
         <td class="mono">A</td>
-        <td><b>계정·인증정보</b></td>
-        <td>담당자 회사 이메일 · 비밀번호(원문 미저장) · 2FA(TOTP) 키·백업코드 — 성명·연락처 수집 없음</td>
-        <td>이메일: 계약 시 오프라인 / 인증정보: 계정 활성화 시 본인 설정(온라인)</td>
-        <td>본인확인 · 접근통제 · 계정 관리</td>
-        <td>계정 DB</td>
-        <td>—</td>
-        <td>계약 종료 후 파기 <span class="need">[확인필요]</span></td>
+        <td><b>고객확인(CDD/EDD)</b> <span class="tag-ref">커스터디 인증범위</span></td>
+        <td>대표자 8항목 · 대리인 추가 5항목 · UBO 9항목 (2절) · <b>고유식별정보 포함</b></td>
+        <td>오프라인 서류 접수</td>
+        <td>고객확인 의무 이행 (AML)</td>
+        <td>Custody Admin 증적 · AML 솔루션</td>
+        <td>AML 솔루션(수탁사)에 전송 · realNumber 복호화 상태 · 위탁·국외이전 해당성 <span class="need">[확인필요]</span></td>
+        <td>5년 이상 <span class="basis">특금법 §5의4</span></td>
+      </tr>
+      <tr>
+        <td class="mono">A′</td>
+        <td><b>고객확인 결과값</b></td>
+        <td>확인 수준(CDD/EDD) · 위험등급 · <b>PEP 여부</b> · 재이행 도래일 · 실제소유자 확인 완료 여부 · 기관 상태값</td>
+        <td>커스터디 조회 API · 오프라인 전달</td>
+        <td>거래 가능 여부 판정 · 재이행 관리</td>
+        <td>ORG · KYC_RECORD</td>
+        <td>없음</td>
+        <td>5년 이상 <span class="basis">특금법 §5의4</span></td>
       </tr>
       <tr>
         <td class="mono">B</td>
-        <td><b>고객확인(CDD/EDD)</b></td>
-        <td>대표자·실제소유자(RBO) 확인정보(성명 등 — 세부 항목 <span class="need">[확인필요]</span>) · 자금출처 · 제재 스크리닝 결과</td>
-        <td>오프라인 수기 심사</td>
-        <td>고객확인 의무 이행 (AML)</td>
-        <td>AML 기록 (분리 보관)</td>
-        <td>— (STR 보고는 법인 단위 정보로 구성)</td>
-        <td>5년 <span class="basis">특금법 §5의4</span></td>
+        <td><b>계정·인증정보</b></td>
+        <td>가입자 이메일 · 비밀번호(해시) · 2FA(TOTP) 키 · 복구 코드(해시) · 초대 토큰(해시) · 성명·연락처는 받지 않는다</td>
+        <td>이메일: 관리자 ADM-03 초대 폼 입력 / 인증정보: 계정 활성화 시 본인 설정(온라인)</td>
+        <td>본인확인 · 접근통제 · 계정 관리 · 거래 통지</td>
+        <td>계정 DB</td>
+        <td>고객 통지 이메일 6종(발신전용) · 발송 인프라 <span class="need">[확인필요]</span></td>
+        <td>계약 종료 후 파기 <span class="need">[확인필요]</span></td>
       </tr>
       <tr class="ref">
         <td class="mono">C</td>
-        <td><b>거래·이전정보</b> <span class="tag-ref">개인정보 비해당 · 참고</span></td>
-        <td>법인명 · 법인 가상자산주소 · 거래내역 (법인 단위 정보)</td>
+        <td><b>거래·집행정보</b> <span class="tag-ref">개인정보 비해당 · 참고</span></td>
+        <td>법인명 · customerNo · 수탁 지갑 주소 · 거래내역 · txHash (법인 · 거래 단위)</td>
         <td>서비스 이용 중 생성</td>
-        <td>거래 집행 · 트래블룰 · 정산·대사</td>
-        <td>거래원장 · 통합로그(WORM)</td>
-        <td>상대방 VASP(트래블룰 — CODE·VerifyVASP 경유) · KYT 수탁사 — 모두 법인 단위, 개인 식별정보 미포함</td>
+        <td>거래 집행 · 정산 · 3면 대사 · 구분회계</td>
+        <td>거래원장 · 통합 감사로그(WORM)</td>
+        <td>커스터디(집행 명세 Excel · 웹훅 · 조회 API) · 모두 법인·거래 단위</td>
         <td>15년</td>
       </tr>
       <tr>
         <td class="mono">D</td>
         <td><b>접속·행위기록</b></td>
-        <td>계정 ID · 접속기록(IP 등) · 행위로그</td>
+        <td>계정 ID · 접속기록(IP 등) · 행위로그 · 로그인 성공·실패 이력</td>
         <td>이용 중 자동 생성</td>
-        <td>보안 감사 · 책임 추적</td>
-        <td>통합로그(WORM)</td>
-        <td>—</td>
+        <td>보안 감사 · 책임 추적 · 계정 잠금 판단</td>
+        <td>LOGIN_EVENT · AUDIT_LOG(WORM)</td>
+        <td>없음</td>
         <td><span class="need">[확인필요]</span></td>
+      </tr>
+      <tr>
+        <td class="mono">E</td>
+        <td><b>커스터디 담당자 계정</b></td>
+        <td>이메일 (역할: 집행 명세 다운로드 · txHash 입력 전용)</td>
+        <td>관리자 계정 생성</td>
+        <td>집행 업무 접근통제</td>
+        <td>계정 DB (USER.role)</td>
+        <td>없음</td>
+        <td>계정 해지 시 파기 <span class="need">[확인필요]</span></td>
       </tr>
     </tbody>
   </table>
   </div>
 
-  <div class="note" style="margin-top:14px;"><b>개인정보 외부 제공·위탁 없음:</b> STR 보고(FIU)·트래블룰(상대방 VASP)·KYT 위탁은 모두 법인 단위 정보로 구성 — 개인정보는 계정 DB·AML 기록·통합로그 등 인증범위 내부에만 존재한다 (사내 확인 2026-09-01).
-  <b>화면·로그 통제(설계 반영 완료):</b> 통합 로그는 조회 전용(원장 직접변경 미구현) · 조회 노출항목에서 개인정보·주소·잔액 제외 · 개인키·passphrase·시드는 기록 금지 필드 · 로그 열람 행위 자체를 별도 감사(누가·무엇 조회).
-  <b>내부 임직원(운영자) 개인정보:</b> 기존 커스터디 인증범위의 인력·계정 관리 체계를 준용 — 본 문서 범위 외 <span class="need">[확인필요]</span>.
-  <b>ISMS vs ISMS-P:</b> 개인정보가 ① 법인 소속 개인(담당자·RBO)에 한정되고 ② 외부 제공·위탁 없이 내부에만 존재하는 점이 인증 구분(2호 ISMS vs 1호 ISMS-P) 판단의 핵심 논거 — 32 초안 P1 논점과 연동.</div>
+  <div class="note" style="margin-top:14px;"><b>이 서비스의 개인정보 외부 제공·위탁:</b> 고객 통지 이메일 6종의 발송을 제외하면 없다. 커스터디와 주고받는 것(기관 상태 조회 API · 거래 건 상태 변경 웹훅 · 집행 명세 Excel · txHash · 등록 정보 변경 요청)은 모두 법인 또는 거래 단위이며 개인 식별정보를 담지 않는다. 이 서비스는 STR 작성·보고, 트래블룰 교환, KYT 호출, AML 심사 로직을 수행하지 않는다.
+  <b>화면·로그 통제(설계 반영 완료):</b> 통합 감사로그는 조회 전용이며 원장 직접 변경 기능이 없다. 조회 노출 항목에서 개인정보·주소·잔액을 제외하고, 개인키·passphrase·시드는 기록 금지 필드이며, 로그 열람 행위 자체를 별도 감사한다(누가 무엇을 조회했는지). CSV 출력 시 가입자 이메일을 마스킹하고, 게시판에서 거래 확정 전에는 법인명 첫 글자만 노출한다.
+  <b>내부 임직원(운영자) 개인정보:</b> 기존 커스터디 인증범위의 인력·계정 관리 체계를 준용하며 본 문서 범위 외다 <span class="need">[확인필요]</span>. 다만 커스터디 담당자 계정(흐름 E)은 이 서비스 계정 DB에 존재하므로 정보주체 범위 판단이 필요하다.</div>
+
+  <div class="note warn" style="margin-top:12px;"><b>ISMS(2호) vs ISMS-P(1호) 판단에 미치는 영향:</b> v0.1은 "개인정보가 법인 소속 개인에 한정되고 외부 제공·위탁 없이 내부에만 존재한다"를 2호 논거로 삼았다.
+  고객확인 22항목의 증적 위치가 <b>Custody Admin</b>으로 확정됨에 따라, 교환·중개 서비스 인증범위 안의 개인정보는 <b>가입자 이메일 · 인증정보(해시) · 접속·행위기록 · 심사 결과값</b>으로 좁혀진다.
+  다만 결과값에 <b>PEP 여부</b>처럼 개인에 대한 판단 결과가 포함되고, 인증범위 경계를 어디로 그리는지에 따라 결론이 달라진다.
+  <span class="need">인증 구분과 인증범위 경계는 32 초안 P1과 함께 확정해야 한다 [확인필요]</span>.</div>
 </section>
 
 <!-- ============ 확인 필요 ============ -->
 <section>
   <div class="sec-head"><h2>확인 필요 ([확인필요])</h2></div>
   <ul class="chk">
-    <li>CDD/EDD 수집 항목 상세 (대표자·RBO 확인정보의 세부 필드) — 사내 AML 절차서 대조</li>
-    <li>STR·트래블룰·KYT 반출 필드에 개인 식별정보가 없음을 제출 전 최종 확정 (수탁사 목록·반출 필드 명세 대조) — 미포함 확정 시 개인정보 국외이전 쟁점 비해당</li>
-    <li>파기 절차·방법, 계정정보(계약 종료·담당자 변경 시) 보존기한, 접속기록 보존기한</li>
-    <li>접속기록 수집 항목(IP 포함 여부 등) — 시스템 설계 확정치 대조</li>
-    <li>KYC 심사용 AML 시스템과 서비스 화면(ADM-06)의 연동 범위 — 인증범위 경계에 영향</li>
-    <li>ISMS(2호) vs ISMS-P(1호) 인증 구분 — 예비인증 경로와 연동 (32 초안 P1)</li>
+    <li><b>고유식별정보 해당성</b>: 실명번호(국내거소신고번호)·납세자번호가 개인정보 보호법 제24조·시행령 제19조 열거 항목인지 원문 대조. 해당 시 별도 동의·암호화·분리 보관 요건 발생</li>
+    <li><b>민감정보 해당성</b>: 국적을 개인정보 보호법 제23조·시행령 제18조 '인종이나 민족에 관한 정보'로 볼 수 있는지</li>
+    <li><b>Custody Admin 증적 보관 형태</b>: 저장 매체(DB·문서·스캔본), 암호화 적용 범위, 접근권한·열람기록</li>
+    <li><b>AML 솔루션 수탁 관계</b>: 수탁사명·소재지·전송 필드 명세, realNumber 평문 전송 구간 보호, 국외이전 해당성 및 개인정보 처리위탁 문서화 (커스터디 인증범위)</li>
+    <li><b>인증범위 경계</b>: 고객확인 공정을 커스터디 인증범위로 두는 것이 ISMS 심사에서 성립하는지, 두 범위의 접점(조회 API·웹훅)이 경계 서술로 충분한지</li>
+    <li><b>가입자 이메일 값의 출처</b>: ADM-03 초대 폼의 가입자 이메일을 커스터디가 전달하는지, DSRV가 계약 단계에서 별도로 받는지. 정본 09 §0의 커스터디 전달 항목은 customerNo·수탁 지갑 주소·법인명 3개뿐</li>
+    <li><b>통지 이메일 발송 인프라</b>: 외부 메일 서비스 이용 여부. 이용 시 이메일이 개인정보 처리위탁 대상이 되어 "외부 위탁 없음" 서술 수정 필요</li>
+    <li><b>커스터디 담당자 계정</b>: 정보주체 범위에 포함할지, 계정 생성·해지 절차와 보존기한</li>
+    <li><b>트래블룰 기록 분담</b>: 수행 주체가 커스터디임은 확정. 이 서비스 스키마의 TRAVEL_RULE 테이블 존치 여부와 기록 위치</li>
+    <li><b>파기</b>: 파기 절차·방법, 계정정보(계약 종료·담당자 변경 시) 보존기한, 접속기록 보존기한</li>
+    <li><b>접속기록 수집 항목</b>: IP 포함 여부 등 시스템 설계 확정치 대조</li>
+    <li><b>ISMS(2호) vs ISMS-P(1호) 인증 구분</b>: 예비인증 경로와 연동 (32 초안 P1)</li>
   </ul>
 </section>
 
 <div class="src">
-  <b>근거 문서</b> — <span class="mono">ISMS_흐름도_20260901.html §2</span> · <span class="mono">32_ISMS신청_서비스현황_초안.md (2026-08-31)</span> ·
-  <span class="mono">29_규제요건_VASP_ISMS_매핑.md</span> · 화면기획 <span class="mono">ONB-01 · ADM-06 · WAL-02 (storyboard)</span> ·
-  수집 항목·법인 단위 반출은 <span class="mono">사내 확인 2026-09-01</span><br>
-  ISMS 인증신청서 첨부용 <b>내부 초안</b>입니다. 단독 제출 불가 — [확인필요] 항목 확정과 사실관계·법령 인용의 자체 검증(법무·AML·보안 검토)을 거친 뒤 제출하십시오.
+  <b>근거 자료</b> · <span class="mono">knowledge/09_원천자료_목록.md §0</span>(확정 전제 정본 · AML·기관 등록·승인·통제 2026-09-07(21)~(23)) ·
+  <span class="mono">reference/custody/01_Custody_AML솔루션_연동API_20260701.md §② putCustomer</span> ·
+  <span class="mono">drafts/schema/DB스키마_한글판_20260902.html v0.8</span>(ORG · USER · INVITE · SESSION · LOGIN_EVENT · RECOVERY_CODE · KYC_RECORD · AUDIT_LOG) ·
+  <span class="mono">drafts/40_교환중개_업무운영지침_v0.1.md</span>(제42조 기록·보존 · 별표 3 고객 통지) ·
+  <span class="mono">drafts/32_ISMS신청_서비스현황_초안.md</span> · <span class="mono">drafts/29_규제요건_VASP_ISMS_매핑.md</span> ·
+  화면기획 <span class="mono">ONB-00~04 · AUTH-01~03 · DASH-01~03 · ADM-02 · ADM-03 (storyboard)</span><br>
+  고객확인 수집 항목 22개와 Custody Admin 증적 경로는 <span class="mono">사내 확인 2026-09-07</span>.<br>
+  ISMS 인증신청서 첨부용 <b>내부 초안</b>입니다. 단독 제출 불가. [확인필요] 항목 확정과 사실관계·법령 인용의 자체 검증(법무·AML·보안 검토)을 거친 뒤 제출하십시오.
 </div>
 
 </div>
