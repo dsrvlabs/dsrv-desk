@@ -1,0 +1,34 @@
+<svg width="560" height="200" viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans KR','Malgun Gothic','맑은 고딕',sans-serif">
+        <rect x="16" y="14" width="130" height="60" rx="10" fill="#fff" stroke="#16a34a" stroke-width="1.5"/>
+        <text x="81" y="39" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">게시자 (B사)</text>
+        <text x="81" y="57" text-anchor="middle" font-size="10" fill="#64748b">800 USDT 보냄</text>
+        <rect x="414" y="14" width="130" height="60" rx="10" fill="#fff" stroke="#16a34a" stroke-width="1.5"/>
+        <text x="479" y="39" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">신청자 (A사)</text>
+        <text x="479" y="57" text-anchor="middle" font-size="10" fill="#64748b">798.40 USDC 보냄</text>
+        <rect x="200" y="10" width="160" height="68" rx="10" fill="#f0fdf4" stroke="#86efac"/>
+        <text x="280" y="34" text-anchor="middle" font-size="12" font-weight="700" fill="#166534">교환 게시판</text>
+        <text x="280" y="51" text-anchor="middle" font-size="10" fill="#15803d">게시 → 신청 → 수락(확정)</text>
+        <text x="280" y="66" text-anchor="middle" font-size="9.5" fill="#64748b">DSRV Desk</text>
+        <path d="M150 36 H194" stroke="#16a34a" stroke-width="1.6" marker-end="url(#a2)"/>
+        <text x="172" y="29" text-anchor="middle" font-size="9.5" fill="#166534">게시</text>
+        <path d="M410 36 H366" stroke="#16a34a" stroke-width="1.6" marker-end="url(#a2)"/>
+        <text x="388" y="29" text-anchor="middle" font-size="9.5" fill="#166534">신청</text>
+        <rect x="180" y="104" width="200" height="50" rx="10" fill="#0f172a"/>
+        <text x="280" y="125" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">에스크로 전용지갑 (DSRV)</text>
+        <text x="280" y="142" text-anchor="middle" font-size="9.5" fill="#cbd5e1">콜드 · 고객 자산 · 회사 재산과 분리</text>
+        <path d="M81 78 V118 H172" stroke="#16a34a" stroke-width="1.6" fill="none" marker-end="url(#a2)"/>
+        <text x="126" y="112" text-anchor="middle" font-size="9.5" fill="#166534">① 예치 800 USDT</text>
+        <path d="M479 78 V118 H388" stroke="#16a34a" stroke-width="1.6" fill="none" marker-end="url(#a2)"/>
+        <text x="434" y="112" text-anchor="middle" font-size="9.5" fill="#166534">① 예치 798.40 USDC</text>
+        <path d="M180 142 H108" stroke="#64748b" stroke-width="1.6" fill="none" stroke-dasharray="4 3" marker-end="url(#a3)"/>
+        <text x="100" y="172" text-anchor="middle" font-size="9.5" fill="#475569">② 양건 확인 후 인도</text>
+        <text x="100" y="186" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0f172a">B사 ← 798.40 USDC</text>
+        <path d="M380 142 H452" stroke="#64748b" stroke-width="1.6" fill="none" stroke-dasharray="4 3" marker-end="url(#a3)"/>
+        <text x="460" y="172" text-anchor="middle" font-size="9.5" fill="#475569">② 양건 확인 후 인도</text>
+        <text x="460" y="186" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0f172a">A사 ← 800 USDT</text>
+        <text x="280" y="180" text-anchor="middle" font-size="9.5" fill="#64748b">예치·인도 모두 콜드 2인 서명 · 정산 배치로 집행</text>
+        <defs>
+          <marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#16a34a"/></marker>
+          <marker id="a3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#64748b"/></marker>
+        </defs>
+      </svg>

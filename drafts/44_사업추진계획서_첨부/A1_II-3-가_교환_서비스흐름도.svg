@@ -1,0 +1,15 @@
+<svg width="560" height="190" viewBox="0 0 560 190" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans KR','Malgun Gothic','맑은 고딕',sans-serif">
+        <rect x="24" y="52" width="150" height="76" rx="10" fill="#fff" stroke="#2563eb" stroke-width="1.5"/>
+        <text x="99" y="82" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">고객 (A사)</text>
+        <text x="99" y="102" text-anchor="middle" font-size="10.5" fill="#64748b">수탁 지갑</text>
+        <rect x="386" y="52" width="150" height="76" rx="10" fill="#0f172a"/>
+        <text x="461" y="82" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">DSRV</text>
+        <text x="461" y="102" text-anchor="middle" font-size="10.5" fill="#cbd5e1">교환 재고 (콜드 지갑)</text>
+        <path d="M180 72 H370" stroke="#2563eb" stroke-width="2" marker-end="url(#a1)"/>
+        <text x="275" y="64" text-anchor="middle" font-size="10.5" fill="#1d4ed8" font-weight="700">보내는 자산 · 예 900 USDC</text>
+        <path d="M380 108 H190" stroke="#2563eb" stroke-width="2" marker-end="url(#a1)"/>
+        <text x="285" y="124" text-anchor="middle" font-size="10.5" fill="#1d4ed8" font-weight="700">받는 자산 · 예 899.73 USDT</text>
+        <rect x="150" y="146" width="260" height="30" rx="6" fill="#eff6ff" stroke="#bfdbfe"/>
+        <text x="280" y="165" text-anchor="middle" font-size="10.5" fill="#1e3a8a">비율 = 외부 시세 + 고정 스프레드 (DSRV가 제시 · 고객이 수락)</text>
+        <defs><marker id="a1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#2563eb"/></marker></defs>
+      </svg>
