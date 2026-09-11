@@ -422,7 +422,7 @@
       </div>
       <div class="dtl" data-idx="6">
         <div class="detail-label"><span class="dtl-num">7</span>KRW 환산 경로 · 시세 소스</div>
-      <div class="dtl-body"><span class="box">· 용도 3종: ① 나목 기준가(EXC-02 산정 = 기준가 ± 스프레드) ② 건별 한도 KRW 환산(ETH·USDC·USDT 모두 소스 KRW 시세 · USD 마켓 소스면 환율 경유) ③ price guard 이탈 판정(게시 시점 기준가 vs 현재)<br>· 소스명은 고객 콘솔 어디에도 미노출 — 고객 화면은 "외부지표 기준" 문구만<br>· 바이낸스(USD 마켓) 선택 시 USD→KRW 환율 소스·갱신 주기는 <strong>개발 결정</strong>(기획 미지정 · 2026-09-02(10)) · <span class="chk">[확인필요]</span> 소스 장애 시 <strong>대체 소스로 넘기지 않고 신규 요청·게시·신청을 차단한다</strong>(2026-09-04 사용자 결정 · 무수신 임계값 <span class="chk">[확인필요]</span> · 차단 사실은 ADM-02 ④ 운영 알림 N1으로 뜬다) · 마목은 시세 불관여 원칙 — price guard는 '가드'로만 사용</span></div>
+      <div class="dtl-body"><span class="box">· 소스 = <strong>업비트 · 빗썸 · 바이낸스 3사 시세의 단순 산술평균</strong>(2026-09-11(28) 확정 · 사업추진계획서 Ⅱ.3.라와 같은 값)<br>· 용도 3종: ① 나목 기준가(EXC-02 산정 = 기준가 ± 스프레드) ② 건별 한도 KRW 환산(ETH·USDC·USDT 모두 소스 KRW 시세 · USD 마켓 소스면 환율 경유) ③ price guard 이탈 판정(게시 시점 기준가 vs 현재)<br>· 소스명은 고객 콘솔 어디에도 미노출 — 고객 화면은 "외부지표 기준" 문구만<br>· 바이낸스는 USD 마켓이라 USD→KRW 환율 소스·갱신 주기가 따로 필요한데 아직 <strong>미정</strong>이다(2026-09-11(28) 잔여 · 업비트·빗썸은 KRW 마켓이라 직접 환산) · <span class="chk">[확인필요]</span> 소스 장애 시 <strong>대체 소스로 넘기지 않고 신규 요청·게시·신청을 차단한다</strong>(2026-09-04 사용자 결정 · 무수신 임계값 <span class="chk">[확인필요]</span> · 차단 사실은 ADM-02 ④ 운영 알림 N1으로 뜬다) · 마목은 시세 불관여 원칙 — price guard는 '가드'로만 사용</span></div>
       </div>
       <div class="dtl" data-idx="7">
         <div class="detail-label"><span class="dtl-num">8</span>저장·버전·적용 시점</div>
