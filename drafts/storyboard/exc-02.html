@@ -201,7 +201,7 @@
       <div class="dtl" data-idx="1">
         <div class="detail-label"><span class="dtl-num">2</span>외부지표 소스 — 내부 관리 (화면 미노출)</div>
       <div class="dtl-body">
-        <span class="box">· 소스: <strong>업비트·빗썸·바이낸스</strong> 시세 — 조합 방식(중앙값·평균·우선순위) <span class="chk">[확인필요]</span> · 소스명·조합 방식은 고객 화면 어디에도 표시하지 않음<br>· USDC↔USDT: 디페그/1:1 기준(동일통화) — 가격 거의 동일, 지표 1 근접<br>· ETH↔USDC · ETH↔USDT: 거래소 ETH 시세 기준 — 변동성 있음, 확정 후 집행 전 이탈 임계 적용 · ETH 페어 스프레드 요율 <span class="chk">[확인필요]</span><br>· JPYSC 미취급 — 환율지표 페어 없음<br>· 소스·스프레드율·유효시간·이탈 임계는 <strong>ADM-03</strong> 단일 출처에서 관리 — 이 화면은 값을 표출만</span>
+        <span class="box">· 소스: <strong>업비트·빗썸·바이낸스</strong> 3사 시세의 <strong>단순 산술평균</strong> · 소스명·조합 방식은 고객 화면 어디에도 표시하지 않음<br>· USDC↔USDT: 디페그/1:1 기준(동일통화) — 가격 거의 동일, 지표 1 근접<br>· ETH↔USDC · ETH↔USDT: 거래소 ETH 시세 기준 — 변동성 있음, 확정 후 집행 전 이탈 임계 적용 · 스프레드 요율은 페어 3개 모두 0.10% 동일<br>· JPYSC 미취급 — 환율지표 페어 없음<br>· 소스·스프레드율·유효시간·이탈 임계는 <strong>ADM-03</strong> 단일 출처에서 관리 — 이 화면은 값을 표출만</span>
         <span style="display:block;margin-top:6px;" class="red">가격형성(시장가) 아님 — 외부지표에 스프레드만 가산</span>
       </div>
       </div>
