@@ -8,7 +8,7 @@
         <path d="M180 72 H370" stroke="#2563eb" stroke-width="2" marker-end="url(#a1)"/>
         <text x="275" y="64" text-anchor="middle" font-size="10.5" fill="#1d4ed8" font-weight="700">보내는 자산 · 예 900 USDC</text>
         <path d="M380 108 H190" stroke="#2563eb" stroke-width="2" marker-end="url(#a1)"/>
-        <text x="285" y="124" text-anchor="middle" font-size="10.5" fill="#1d4ed8" font-weight="700">받는 자산 · 예 899.73 USDT</text>
+        <text x="285" y="124" text-anchor="middle" font-size="10.5" fill="#1d4ed8" font-weight="700">받는 자산 · 예 0.2826 ETH</text>
         <rect x="150" y="146" width="260" height="30" rx="6" fill="#eff6ff" stroke="#bfdbfe"/>
         <text x="280" y="165" text-anchor="middle" font-size="10.5" fill="#1e3a8a">비율 = 외부 시세 + 고정 스프레드 (DSRV가 제시 · 고객이 수락)</text>
         <defs><marker id="a1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#2563eb"/></marker></defs>
