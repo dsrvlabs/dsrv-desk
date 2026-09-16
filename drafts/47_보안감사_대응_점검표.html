@@ -1,0 +1,474 @@
+<title>Desk 보안감사 대응 점검표</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#F3F4F6; --surface:#FFFFFF; --surface-2:#EDEFF2;
+  --ink:#171A20; --ink-2:#39404C; --muted:#69707E; --faint:#8D94A1;
+  --line:#D9DDE3; --line-soft:#E7EAEF;
+  --accent:#27424F; --accent-2:#3D6476; --accent-wash:#E3EBEF;
+  --gap:#A8521B; --gap-wash:#F6EAE0;
+  --mismatch:#9B2A2E; --mismatch-wash:#F6E5E5;
+  --ok:#255E45; --ok-wash:#E2EFE8;
+  --plan:#3F4C8C; --plan-wash:#E6E9F5;
+  --dev:#7A4A12; --dev-wash:#F3EBDF;
+  --shadow:0 1px 2px rgba(23,26,32,.05), 0 8px 24px -16px rgba(23,26,32,.28);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#13161B; --surface:#1B1F26; --surface-2:#232830;
+    --ink:#EDEFF3; --ink-2:#C6CBD4; --muted:#98A0AD; --faint:#7C848F;
+    --line:#333A45; --line-soft:#272D36;
+    --accent:#8FB6C6; --accent-2:#A9C7D3; --accent-wash:#22303A;
+    --gap:#E09A5E; --gap-wash:#33261B;
+    --mismatch:#E58184; --mismatch-wash:#35211F;
+    --ok:#7FC3A0; --ok-wash:#1B2B25;
+    --plan:#9FA9E0; --plan-wash:#212437;
+    --dev:#D6AE73; --dev-wash:#2E2619;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -18px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13161B; --surface:#1B1F26; --surface-2:#232830;
+  --ink:#EDEFF3; --ink-2:#C6CBD4; --muted:#98A0AD; --faint:#7C848F;
+  --line:#333A45; --line-soft:#272D36;
+  --accent:#8FB6C6; --accent-2:#A9C7D3; --accent-wash:#22303A;
+  --gap:#E09A5E; --gap-wash:#33261B;
+  --mismatch:#E58184; --mismatch-wash:#35211F;
+  --ok:#7FC3A0; --ok-wash:#1B2B25;
+  --plan:#9FA9E0; --plan-wash:#212437;
+  --dev:#D6AE73; --dev-wash:#2E2619;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -18px rgba(0,0,0,.8);
+}
+
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:"IBM Plex Sans KR","Malgun Gothic",system-ui,sans-serif;
+  font-weight:400; line-height:1.72; font-size:15px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1000px; margin:0 auto; padding-inline:20px; padding-block:0 72px;}
+@media (max-width:520px){ .wrap{padding-inline:16px;} }
+
+/* ---------- masthead ---------- */
+.mast{border-bottom:1px solid var(--line); padding-block:40px 26px; margin-bottom:28px;}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11px; font-weight:500;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--accent-2);
+}
+h1{
+  font-family:"Nanum Myeongjo",serif; font-weight:800;
+  font-size:clamp(28px,5.2vw,42px); line-height:1.22; letter-spacing:-.01em;
+  margin:.30em 0 .34em; text-wrap:balance; color:var(--ink);
+}
+.dek{color:var(--ink-2); max-width:62ch; margin:0;}
+.meta{
+  display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:18px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px; color:var(--muted);
+}
+.meta b{color:var(--ink-2); font-weight:500;}
+
+/* ---------- tallies ---------- */
+.tally{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line);
+  border:1px solid var(--line); border-radius:3px; overflow:hidden; margin:0 0 34px;}
+@media (max-width:640px){ .tally{grid-template-columns:repeat(2,1fr);} }
+.tally div{background:var(--surface); padding:14px 14px 12px;}
+.tally .n{font-family:"IBM Plex Mono",monospace; font-size:26px; font-weight:600;
+  font-variant-numeric:tabular-nums; line-height:1.1; color:var(--ink);}
+.tally .k{font-size:12px; color:var(--muted); margin-top:3px;}
+.tally .s{font-size:11.5px; color:var(--faint);}
+
+h2{
+  font-family:"Nanum Myeongjo",serif; font-weight:700; font-size:22px; line-height:1.35;
+  margin:0 0 6px; color:var(--ink); letter-spacing:-.005em;
+}
+h2 .sec{font-family:"IBM Plex Mono",monospace; font-size:13px; font-weight:500;
+  color:var(--accent-2); margin-right:10px; letter-spacing:.02em;}
+.lede{color:var(--ink-2); margin:0 0 20px; max-width:66ch; font-size:14.5px;}
+section{margin-top:46px;}
+
+/* ---------- filter bar ---------- */
+.filters{display:flex; flex-wrap:wrap; gap:8px; align-items:center;
+  padding:12px 0 18px; border-bottom:1px solid var(--line-soft); margin-bottom:22px;}
+.filters .flab{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--faint); margin-right:2px;}
+.chipbtn{
+  font:inherit; font-size:12.5px; line-height:1; cursor:pointer;
+  padding:7px 12px; border-radius:999px; border:1px solid var(--line);
+  background:var(--surface); color:var(--ink-2); transition:background .13s, border-color .13s, color .13s;
+}
+.chipbtn:hover{border-color:var(--accent-2); color:var(--ink);}
+.chipbtn[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:var(--surface);}
+.chipbtn:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px;}
+.count{font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--faint); margin-left:auto;}
+
+/* ---------- finding record ---------- */
+.rec{
+  background:var(--surface); border:1px solid var(--line); border-radius:3px;
+  padding:18px 20px 20px; margin-bottom:12px; box-shadow:var(--shadow);
+  border-left:3px solid var(--line);
+}
+.rec[data-v="갭"]{border-left-color:var(--gap);}
+.rec[data-v="불일치"]{border-left-color:var(--mismatch);}
+.rec[data-v="확인"]{border-left-color:var(--ok);}
+@media (max-width:520px){ .rec{padding:15px 15px 17px;} }
+.rhead{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-bottom:9px;}
+.rid{font-family:"IBM Plex Mono",monospace; font-size:13px; font-weight:600;
+  color:var(--ink); letter-spacing:.02em;}
+.tag{font-size:11px; line-height:1; padding:5px 8px; border-radius:2px; font-weight:500; white-space:nowrap;}
+.tag.v갭{background:var(--gap-wash); color:var(--gap);}
+.tag.v불일치{background:var(--mismatch-wash); color:var(--mismatch);}
+.tag.v확인{background:var(--ok-wash); color:var(--ok);}
+.tag.o기획{background:var(--plan-wash); color:var(--plan);}
+.tag.o개발{background:var(--dev-wash); color:var(--dev);}
+.tag.m{background:var(--surface-2); color:var(--muted);
+  font-family:"IBM Plex Mono",monospace; letter-spacing:.03em;}
+.loc{font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--faint);
+  line-height:1.6; margin-bottom:12px; word-break:keep-all;}
+.loc span{color:var(--muted);}
+blockquote{
+  margin:0 0 14px; padding:10px 0 10px 16px; border-left:2px solid var(--accent-wash);
+  font-family:"Nanum Myeongjo",serif; font-size:15.5px; line-height:1.68; color:var(--ink);
+}
+.fld{margin-top:12px;}
+.fld > .lb{
+  font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--faint); display:block; margin-bottom:3px;
+}
+.fld p{margin:0; color:var(--ink-2); font-size:14.5px;}
+.rec code, .tbl code, p code{
+  font-family:"IBM Plex Mono",monospace; font-size:.88em;
+  background:var(--surface-2); padding:1px 5px; border-radius:2px; color:var(--ink-2);
+  word-break:break-all;
+}
+.rec strong{color:var(--ink); font-weight:600;}
+
+/* ---------- tables ---------- */
+.scroll{overflow-x:auto; -webkit-overflow-scrolling:touch;
+  border:1px solid var(--line); border-radius:3px; background:var(--surface);}
+table.tbl{border-collapse:collapse; width:100%; min-width:520px; font-size:14px;}
+.tbl th, .tbl td{padding:11px 14px; text-align:left; vertical-align:top;
+  border-bottom:1px solid var(--line-soft); line-height:1.6;}
+.tbl thead th{
+  font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--faint); font-weight:500;
+  background:var(--surface-2); border-bottom:1px solid var(--line); white-space:nowrap;
+}
+.tbl tbody tr:last-child td{border-bottom:none;}
+.tbl td:first-child{color:var(--ink); font-weight:500;}
+
+/* ---------- priority ---------- */
+ol.prio{list-style:none; counter-reset:p; margin:0; padding:0;
+  display:grid; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:3px; overflow:hidden;}
+ol.prio li{counter-increment:p; background:var(--surface); padding:14px 16px 14px 54px; position:relative;}
+ol.prio li::before{
+  content:counter(p); position:absolute; left:16px; top:14px;
+  font-family:"IBM Plex Mono",monospace; font-size:13px; font-weight:600;
+  color:var(--surface); background:var(--accent);
+  width:22px; height:22px; border-radius:50%; display:grid; place-items:center; line-height:1;
+}
+ol.prio .pt{font-weight:600; color:var(--ink); display:block; margin-bottom:2px;}
+ol.prio .pw{color:var(--ink-2); font-size:14px;}
+
+/* ---------- open questions ---------- */
+ol.oq{margin:0; padding-left:1.2em; display:grid; gap:14px;}
+ol.oq li{color:var(--ink-2);}
+ol.oq li strong{color:var(--ink); font-weight:600;}
+ol.oq::marker{color:var(--faint);}
+
+.note{
+  background:var(--accent-wash); border:1px solid var(--line);
+  border-radius:3px; padding:14px 16px; color:var(--ink-2); font-size:14px; margin:0 0 24px;
+}
+.note b{color:var(--ink);}
+footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line);
+  font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--faint); line-height:1.9;}
+@media (prefers-reduced-motion: reduce){ *{transition:none !important; animation:none !important;} }
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <div class="eyebrow">DSRV Desk · 내부통제 및 보안감사</div>
+  <h1>Desk 보안감사 대응 점검표</h1>
+  <p class="dek">「2026년 Desk 내부통제 및 보안감사」(2026.08.25) 감사 항목 약 80개 중, <b>프로덕트가 산출물을 고쳐야 하는 것</b>과 <b>플랫폼 개발팀이 구현 여부를 회신해야 하는 것</b>만 뽑았다. 인사총무·Ops·물리보안 소관은 제외 사유만 남겼다.</p>
+  <div class="meta">
+    <span>작성 <b>2026-09-16</b></span>
+    <span>감사기간 <b>2026-08-25 ~ 09-02</b></span>
+    <span>대상 부서 <b>프로덕트 · 플랫폼 개발</b></span>
+    <span>근거 <b>drafts/47_보안감사_대응_점검표_v1.md</b></span>
+  </div>
+</header>
+
+<div class="tally">
+  <div><div class="n">11</div><div class="k">프로덕트 개선</div><div class="s">지침·스키마 수정으로 닫힘</div></div>
+  <div><div class="n">12</div><div class="k">개발 확인·회신</div><div class="s">구현 여부 미확인</div></div>
+  <div><div class="n">4</div><div class="k">증적 제출만</div><div class="s">손댈 것 없음</div></div>
+  <div><div class="n">8</div><div class="k">제외 영역</div><div class="s">타 부서 소관</div></div>
+</div>
+
+<p class="note"><b>읽는 법.</b> 감사 방법이 <b>실사</b>인 항목은 문서 제출이 아니라 화면·설정 시연을 요구한다. 판정은 세 가지다. <b>갭</b> = 감사 기준을 충족할 산출물·조항이 현재 없다. <b>불일치</b> = 규정에는 있으나 구현·운영이 그대로인지 미확인이다. <b>확인</b> = 설계는 있고 실물 증적만 확인하면 된다.</p>
+
+<section id="findings">
+  <h2><span class="sec">§A · §B</span>고쳐야 할 것과 물어봐야 할 것</h2>
+  <p class="lede">각 항목은 감사 문서의 위치와 원문을 그대로 옮기고, 우리 레포의 근거 문서를 붙였다.</p>
+
+  <div class="filters">
+    <span class="flab">담당</span>
+    <button class="chipbtn" data-f="own" data-val="all" aria-pressed="true">전체</button>
+    <button class="chipbtn" data-f="own" data-val="기획" aria-pressed="false">프로덕트</button>
+    <button class="chipbtn" data-f="own" data-val="개발" aria-pressed="false">개발</button>
+    <span class="flab" style="margin-left:14px">판정</span>
+    <button class="chipbtn" data-f="v" data-val="all" aria-pressed="true">전체</button>
+    <button class="chipbtn" data-f="v" data-val="갭" aria-pressed="false">갭</button>
+    <button class="chipbtn" data-f="v" data-val="불일치" aria-pressed="false">불일치</button>
+    <span class="count" id="count"></span>
+  </div>
+
+  <div id="list"></div>
+</section>
+
+<section>
+  <h2><span class="sec">§C</span>손댈 것 없이 증적으로 제출하면 되는 것</h2>
+  <div class="scroll">
+    <table class="tbl">
+      <thead><tr><th>감사 문서 위치</th><th>제출할 우리 증적</th></tr></thead>
+      <tbody>
+        <tr><td>정보보호 관리체계 › 역할·책임</td><td>40 지침 제38조 역할표 5종 · 제39조 직무 분리</td></tr>
+        <tr><td>DB 보안 › DB 식별</td><td>DB 스키마 한글판 v0.8 (테이블 27)</td></tr>
+        <tr><td>개발 및 변경관리 › 코드 변경</td><td>기획 레포 git 이력 (변경자·변경내용·시점)</td></tr>
+        <tr><td>정보자산 관리 › 자산 식별</td><td>부분만. ISMS 기획대응 매트릭스에서 1.2.1 정보자산 식별이 <b>미착수</b>로 남아 있다. 인프라 자산목록은 Ops 소관이나 데이터 자산은 DB 스키마로 갈음 가능</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2><span class="sec">§D</span>제외한 영역과 사유</h2>
+  <div class="scroll">
+    <table class="tbl">
+      <thead><tr><th>영역</th><th>사유</th></tr></thead>
+      <tbody>
+        <tr><td>정보자산 관리</td><td>Ops·정보보안 소관. 자산 식별만 §C로 남긴다</td></tr>
+        <tr><td>서버 및 시스템 보안 (5)</td><td>Ops 소관. 불필요 서비스·보안설정·관리자 접근·보안 업데이트·변경이력</td></tr>
+        <tr><td>네트워크 및 클라우드 보안</td><td>Ops 소관. 자산 노출만 §B12로 남긴다</td></tr>
+        <tr><td>PC 보안 (5)</td><td>인사총무·Ops 소관. 개인 단말 통제라 서비스 기획과 무관</td></tr>
+        <tr><td>물리문서 보관 · 출력물 파기 · 저장매체 파기</td><td>인사총무·물리보안 소관</td></tr>
+        <tr><td>백업 수행 · 실패 관리 · 복구 검증</td><td>Ops 소관. 백업 <b>대상 정의</b>만 §A10으로 남긴다</td></tr>
+        <tr><td>인적보안 (서약·외부인력·퇴직·주요 직무자)</td><td>인사 소관. 교육만 §A11로 남긴다</td></tr>
+        <tr><td>물리적 보안 (5)</td><td>물리보안 소관. 서버실·오퍼레이팅룸·월렛룸</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2><span class="sec">우선순위</span></h2>
+  <p class="lede">감사 방법이 실사이고 우리 규정에 이미 적혀 있는 것부터 확인한다. 규정에 써 두고 구현이 없으면 그대로 부적합이 되기 때문이다.</p>
+  <ol class="prio">
+    <li><span class="pt">B1 · 감사로그</span><span class="pw">규정 두 조항(제40조② · 제42조③④)이 걸려 있는데 QA 커버리지에서 “해당 없음”으로 빠져 있어 구현 여부를 우리가 모른다</span></li>
+    <li><span class="pt">B4 · 어드민 PAM·내부망</span><span class="pw">제40조①에 명시돼 있어 구현이 다르면 바로 지적된다</span></li>
+    <li><span class="pt">B10 · 정책값 maker-checker</span><span class="pw">제39조② · 제41조①과 스키마 POLICY_VERSION에 있는데 ADM-03 화면 동선과 어긋날 가능성이 있다</span></li>
+    <li><span class="pt">A7 · 아티팩트 조직 공유</span><span class="pw">감사 방법이 표본이라 실제로 열어볼 수 있다</span></li>
+    <li><span class="pt">A3~A5 · 계정 통제 3건</span><span class="pw">지침 개정으로 해소되므로 문서 작업만으로 닫을 수 있다</span></li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="sec">§E</span>확인이 필요한 사항</h2>
+  <p class="lede">아래는 미확인 상태다. 확인 전까지 단정하지 않는다.</p>
+  <ol class="oq">
+    <li><strong>감사 일정이 이미 지났다.</strong> 감사기간은 2026년 8월 25일~9월 2일인데 오늘은 9월 16일이다. 이 문서가 여전히 계획 단계인지, 「감사 결과 보고 및 사후관리」 2항(부적합·개선권고 통보 → 부서별 개선계획 제출) 단계인지 확인이 필요하다. 후자라면 이 점검표가 아니라 <b>결과보고서에 적힌 실제 지적사항</b>이 기준이 된다.</li>
+    <li><strong>DSRV 사내 정보보호 규정·지침 원문을 확인하지 못했다.</strong> 감사 기준의 세 번째 축인데, 사내 비밀번호·세션·로그 보존 기준을 모르면 §B2·§B3의 대조를 끝낼 수 없다. 감사 수행 원칙 3이 “회사 내부규정에 정해져 있지 않은 기간·횟수·암호길이·기술 설정값을 감사자가 임의로 기준으로 설정하지 않는다”이므로, 사내 규정에 없는 값은 지적 대상이 아니고 <b>있는데 다르면</b> 부적합이 된다.</li>
+    <li><strong>프로덕트 인터뷰 대상자와 일정이 정해졌는지 모른다.</strong> 감사 방법에 담당자 인터뷰가 있고 감사 대상 부서에 프로덕트가 들어 있다.</li>
+    <li>대상 문서의 「감사팀의 구성」 표는 소속·성명 열 정렬이 어긋나 있다. 원문 표 오류로 보이나 확인하지 않았다.</li>
+  </ol>
+</section>
+
+<footer>
+  DSRV Desk · 교환(나목) · 중개(마목) · 2026-09-16 작성<br>
+  원본 md = drafts/47_보안감사_대응_점검표_v1.md · 대상 문서 = 「2026년 Desk 내부통제 및 보안감사」 2026.08.25
+</footer>
+</div>
+
+<script>
+const DATA = [
+ {id:"A1", own:"기획", v:"갭", m:"문서",
+  loc:"세부 감사 항목 › 정보보호 관리체계 › <span>정책 관리 › 정책 승인</span>",
+  q:"정보보호 규정 및 주요 보안정책이 적절한 권한자의 승인을 받고 있는가? / 내부 승인 절차에 따른 결재·승인 기록 보유 여부",
+  now:"<code>40_교환중개_업무운영지침</code>은 제목이 (안) v0.2이고 부칙 시행일이 미정, 말미 확정 필요 사항 A1~A8 · B1~B16이 미해소다. <code>45_운영업무매뉴얼</code>도 v0.1이다.",
+  todo:"감사 인터뷰 전에 두 문서의 현재 단계(초안 / 검토중 / 이사회 상정 예정)를 표지에 명시한다. <strong>승인 기록이 없으면 있는 것처럼 제출하지 않는다.</strong> 감사 수행 원칙 1이 “확인되지 않은 내용은 감사결과로 작성하지 않는다”이다."},
+
+ {id:"A2", own:"기획", v:"갭", m:"문서",
+  loc:"정보보호 관리체계 › <span>정책 관리 › 정책 검토</span>",
+  q:"정보보호 규정·지침의 변경 필요성을 검토하고 최신본을 유지하고 있는가? / 개정 이력 및 검토 기록 보유 여부",
+  now:"40 지침에 제5조(개정 및 관리) · 제50조(연 1회 문서 점검) · 개정 이력 섹션이 있다. 다만 ① 파일명은 <code>v0.3_클린</code>인데 표지와 판 표시는 <strong>v0.2 2026-09-14</strong>로 어긋나 있고 ② 사내 문서번호 체계·관리 부서가 미정이라 문서번호가 임시값 Exchange-R-01 · Exchange-M-01이다.",
+  todo:"파일명과 표지의 판 번호를 맞추고, 문서번호 체계를 컴플라이언스·커스터디와 확정해 두 문서 표지에 문서번호·관리 부서·시행일을 채운다."},
+
+ {id:"A3", own:"기획", v:"갭", m:"문서 · 실사",
+  loc:"계정 및 접근권한 관리 › <span>사용자 계정 관리 › 공용계정</span>",
+  q:"공용·공유계정의 사용이 통제되고 있는가? / 공용계정의 승인 및 사용자 추적 가능 여부",
+  now:"40 지침 제38조가 가입자를 “고객 기관 대표 계정(1인)”으로 정한다. 기관당 1계정 구조라 고객사 내부에서 여러 담당자가 같은 계정을 쓰면 AUDIT_LOG의 actor_id가 <strong>기관 단위까지만</strong> 추적된다.",
+  todo:"① 약관에 계정 공유 금지와 책임 귀속 조항이 있는지 확인하고 없으면 신설 요청 ② 감사 대응 논리를 “공유 금지 + 커스터디 KYC로 대표자 특정”으로 정리 ③ 기관 내 복수 계정·권한 분리 도입 여부는 별건 결정으로 올린다."},
+
+ {id:"A4", own:"기획", v:"갭", m:"표본",
+  loc:"계정 및 접근권한 관리 › <span>사용자 계정 관리 › 미사용 계정 · 퇴직자 계정</span>",
+  q:"장기간 사용하지 않는 계정을 검토하여 중지 또는 삭제하는가? · 퇴직자의 시스템 계정이 적시에 중지 또는 삭제되는가?",
+  now:"40 지침 제15조(계정 보안)는 로그인 실패 잠금(P17 5회)과 탈취 의심 시 잠금만 정한다. 장기 미접속 계정 처리 조항이 없고, 고객사 담당자 교체 시 계정 승계·회수 절차도 없다. 기관 상태 「03 휴면」은 커스터디 조회값이지 Desk 계정의 휴면이 아니다.",
+  todo:"제15조에 ① 장기 미접속 계정의 중지 기준 ② 담당자 교체 시 계정 회수·재초대 절차를 신설한다. 화면 영향(초대 재발송, P16 72시간 1회용)을 스토리보드에서 확인한다."},
+
+ {id:"A5", own:"기획", v:"갭", m:"문서",
+  loc:"계정 및 접근권한 관리 › <span>접근권한 관리 › 정기 검토</span>",
+  q:"주요 시스템의 사용자 및 접근권한을 정기적으로 검토하는가? / 권한 정기점검 기록 보유 여부",
+  now:"40 지침 제45조는 월 1회 처리 현황 보고와 연 1회 지침 준수 점검만 정한다. 관리자 계정·권한 목록을 주기적으로 검토하는 조항이 없다.",
+  todo:"제40조 또는 제45조에 관리자 계정·권한 정기 검토(주기·수행자·기록) 조항을 넣고, 45 매뉴얼에 절차와 기록 양식을 추가한다."},
+
+ {id:"A6", own:"기획", v:"갭", m:"문서",
+  loc:"로그 및 보안 모니터링 › <span>보안 모니터링 › 로그 점검 · 이상징후 대응</span>",
+  q:"보안 관련 로그·이벤트를 회사의 절차에 따라 검토하는가? · 이상행위 확인 시 담당자에게 전달하고 대응할 수 있는 체계가 있는가?",
+  now:"감사로그 <strong>적재</strong>는 40 제40조② · 제42조③④에 있으나, 적재된 감사로그를 <strong>누가 언제 검토하는지</strong>가 지침·매뉴얼 어디에도 없다. 45 매뉴얼 2장은 처리함·운영 알림 대응 절차이고 계정·접근 이상징후 검토는 다루지 않는다. 제36조 이상거래 감시는 거래 위험이지 보안 이벤트가 아니다.",
+  todo:"45 매뉴얼에 감사로그 정기 검토 절차(주기·대상 행위·확인자·기록)를 신설하고, 이상 확인 시 정보보안팀 전달 경로를 40 제47조 또는 45 매뉴얼에 연결한다."},
+
+ {id:"A7", own:"기획", v:"불일치", m:"표본",
+  loc:"문서·데이터 보안 › <span>문서·데이터 관리 › 정보 공유</span>",
+  q:"중요정보의 공유·전달이 업무상 필요한 범위로 제한되는가? / 비인가 정보 공유 차단 여부",
+  now:"스토리보드와 DB 스키마 한글판을 외부 SaaS 아티팩트로 조직 공유 게시해 운영 중이다. 서비스 설계·정책 파라미터·DB 구조가 사외 서비스에 올라가 있다.",
+  todo:"감사 전에 ① 게시물의 접근 범위(조직 한정 여부) ② 정보보안팀 사전 승인 여부를 확인한다. 승인이 없으면 승인을 받거나 내부 채널로 이관한다. <strong>감사 방법이 표본이라 실제 표본 대상이 될 수 있다.</strong>"},
+
+ {id:"A8", own:"기획", v:"불일치", m:"실사",
+  loc:"개발 및 변경관리 › <span>소스코드 보안 › 소스 접근</span> · 문서·데이터 보안 › 정보 공유",
+  q:"소스코드 저장소 접근권한이 승인된 사용자에게 제한되는가? / 업무상 필요한 사용자로 접근 제한 여부",
+  now:"이 기획 레포의 origin은 조직 소유 Private 레포로 이관 완료다. 다만 원격에 <strong>개인 계정 레포</strong>가 <code>legacy-personal</code>로 남아 있고 같은 이력의 사본을 보유한다.",
+  todo:"개인 계정 사본의 삭제 또는 보존 사유를 결정해 기록한다. 감사에서 “회사 정보의 개인 계정 보관”으로 지적될 수 있다."},
+
+ {id:"A9", own:"기획", v:"갭", m:"문서",
+  loc:"데이터 암호화 및 암호키 관리 › <span>데이터 암호화 › 암호화 대상</span>",
+  q:"암호화가 요구되는 정보가 식별되어 있는가? / 법령 및 회사 정책에 따른 암호화 대상정보 식별 여부",
+  now:"<code>25_교환중개서비스_PRD</code> F-11에 “개인정보는 별도 암호화 저장(가명·해시)” 한 줄이 있다. DB 스키마 한글판 v0.8(테이블 27)에는 컬럼 단위 암호화 대상 표기가 없다. 파일 안에 “암호화” 문자열 자체가 없다.",
+  todo:"DB 스키마에 암호화 대상 컬럼을 표기한다. 40 제40조③의 <strong>마스킹</strong>(화면·CSV 노출 통제)과 <strong>저장 암호화</strong>는 다른 통제이므로 구분해 적는다. §B6과 짝이다."},
+
+ {id:"A10", own:"기획", v:"갭", m:"문서",
+  loc:"백업 및 재해복구 › <span>데이터 백업 › 백업 대상 · 재해복구 › 복구절차</span>",
+  q:"백업이 필요한 시스템 및 데이터가 식별되어 있는가? · 주요 시스템의 장애·재해에 대한 복구절차가 수립되어 있는가?",
+  now:"40 지침 제42조는 보존 기간(거래 15년 · AML 5년)과 WORM 저장만 정한다. 백업 대상·주기·복구 검증은 없다. 제46조는 위기 대응을 Custody 매뉴얼 준용으로 넘긴다.",
+  todo:"보존(WORM)과 백업이 별개 통제임을 전제로, 제42조에 백업 대상을 명시하거나 Ops 소관임을 제4조(다른 규정과의 관계)에 명시한다. 둘 중 무엇이든 “우리 문서에 없다”는 상태는 해소한다."},
+
+ {id:"A11", own:"기획", v:"갭", m:"문서",
+  loc:"인적보안 › <span>일반 원칙 › 교육</span>",
+  q:"정보보호 교육계획을 수립하고 교육을 수행하는가? / 교육계획 수립 및 이수내역 보유 여부",
+  now:"40 지침 제49조가 배치 시·개정 시 지침·매뉴얼 교육을 정한다. 서비스 미개시라 교육자료와 이수 기록이 없다.",
+  todo:"감사 시 “서비스 미개시로 미시행”을 사유로 기록해 N/A 판정을 요청하거나, 교육자료·시행 계획을 제시한다. 판정 기준표의 N/A는 “적용되지 않는 사유를 기록한다”이다."},
+
+ {id:"B1", own:"개발", v:"불일치", m:"실사",
+  loc:"로그 및 보안 모니터링 › <span>로그 관리 › 로그 생성 · 접근로그 · 로그 보호</span> (3항목 전부 실사)",
+  q:"주요 정보시스템에서 보안 관련 로그를 생성하고 있는가? · 사용자 및 관리자 접근기록을 확인할 수 있는가? · 로그에 대한 비인가 변경·삭제가 통제되고 있는가?",
+  now:"설계는 있다. DB 스키마 AUDIT_LOG가 발생원·대상 ID·행위자·행위·해시·기록 시각·보존 기간을 두고 WORM + 해시 무결성 + NTP 동기화를 규정한다. 40 제40조② · 제42조③④.",
+  todo:"① AUDIT_LOG 테이블 구현 여부 ② 적재 범위가 제40조② 9종(승인·보류·거절·이전 중지·AML 판단·조치 완료·정책 변경·txHash 입력·CSV 및 명세 다운로드) 전부인지 ③ 조회·다운로드 열람 기록(제42조④) 적재 여부 ④ WORM 또는 append-only의 실제 구현 수단과 해시 검증 방법 ⑤ 서버 시각 NTP 동기화 여부.<br><strong>QA 커버리지 I-A-13이 “감사로그 적재 : 해당 없음”으로 검증 대상에서 빠져 있어 현재 구현 여부를 우리가 알지 못한다.</strong>"},
+
+ {id:"B2", own:"개발", v:"불일치", m:"실사",
+  loc:"인증 및 접근통제 › <span>접근통제 › 세션관리</span>",
+  q:"사용자 세션이 회사 보안정책에 따라 관리되는가? / 장기 유휴 세션 통제 여부",
+  now:"별표 1 P18 고객 세션 유휴 15분 · 최대 8시간은 <code>member_session.absolute_expires_at</code> 컬럼으로 구현이 확인됐다(43 개발지원요청서 A-4 R-05). P21 관리자 세션 유휴 10분은 아직 <strong>(안)</strong>이고 지침 B3에 미정값으로 남아 있다.",
+  todo:"관리자 콘솔의 유휴 타임아웃 구현값을 회신받아 별표 1을 확정한다."},
+
+ {id:"B3", own:"개발", v:"불일치", m:"실사 · 문서",
+  loc:"인증 및 접근통제 › <span>인증 관리 › 비밀번호 · 인증정보 보호</span>",
+  q:"사용자 인증정보가 회사의 승인된 비밀번호·인증 정책에 따라 설정되는가? · 비밀번호 등 인증정보가 불필요하게 노출되지 않도록 보호되는가?",
+  now:"별표 1 P20 비밀번호 8~20자 영문 대소문자·숫자·특수문자 조합, P22 복구 코드 영숫자 24자 1회용 1개, P19 2FA 사전 인증 120초.",
+  todo:"① 비밀번호·복구 코드의 저장 방식(해시 알고리즘) ② 2FA 시크릿 저장 방식 ③ 로그·에러 응답에 인증정보가 실리지 않는지.<br>별건으로, 감사 기준이 “<strong>회사의</strong> 승인된 정책”이므로 P20이 DSRV 사내 비밀번호 정책과 일치하는지 정보보안팀에 대조를 요청해야 한다. <strong>사내 정책이 더 강하면 P20이 부적합이 된다.</strong>"},
+
+ {id:"B4", own:"개발", v:"불일치", m:"실사",
+  loc:"인증 및 접근통제 › <span>접근통제 › 원격접속</span> · 계정 및 접근권한 관리 › 특권계정",
+  q:"내부 정보시스템 원격접속이 승인된 접근경로를 통해서만 이루어지는가? · 관리자·특권계정이 일반계정과 구분되어 식별·관리되는가?",
+  now:"40 제40조① “관리자 콘솔은 내부망·특권계정관리(PAM) 세션에서만 접속하고, 인증은 이메일·비밀번호 + 인증 앱 코드로 한다.”",
+  todo:"어드민 콘솔이 실제로 내부망·PAM 경유로만 접근되는지, 아니면 공개 URL인지 확인한다. <strong>규정에 PAM을 적어 두고 구현이 다르면 그대로 부적합 사유가 된다.</strong> 다르면 지침을 고칠지 구현을 맞출지 결정해야 한다."},
+
+ {id:"B5", own:"개발", v:"불일치", m:"실사",
+  loc:"문서·데이터 보안 › <span>문서·데이터 관리 › 중요문서 보호</span>",
+  q:"비밀정보 또는 중요정보가 포함된 전자문서가 적절하게 보호되는가? / 중요 전자문서의 접근통제 또는 보호조치 적용 여부",
+  now:"40 제40조③ “개인식별정보는 화면·CSV에서 마스킹한다.”",
+  todo:"어드민 화면과 관리자 CSV 6종의 개인식별정보 마스킹 구현 여부, 마스킹 대상 필드 목록. 다운로드된 CSV 파일 자체의 보호조치 유무."},
+
+ {id:"B6", own:"개발", v:"불일치", m:"실사",
+  loc:"데이터 암호화 및 암호키 관리 › <span>데이터 암호화 › 전송 암호화 · 저장 암호화</span>",
+  q:"보호가 요구되는 데이터 전송구간에 적절한 암호화가 적용되어 있는가? · 보호가 요구되는 저장 데이터에 적절한 암호화가 적용되어 있는가?",
+  now:"25 PRD F-11에 원칙만 있다. 구현 확인 없음.",
+  todo:"TLS 버전과 적용 구간(고객 콘솔 · 어드민 콘솔 · 커스터디 연동 API · 메일), RDS 저장 암호화 적용 여부, 컬럼 단위 암호화 적용 대상. §A9와 짝이다."},
+
+ {id:"B7", own:"개발", v:"불일치", m:"문서 · 실사",
+  loc:"데이터 암호화 및 암호키 관리 › <span>암호키 관리 › 키 접근권한 · 키 생명주기</span>",
+  q:"암호키에 대한 접근이 승인된 사용자로 제한되는가? · 암호키 생성·보관·사용·변경·폐기에 관한 절차가 존재하는가?",
+  now:"DB 스키마 「이 DB에 없는 것(경계)」에 커스터디 소관 범위가 정리돼 있다.",
+  todo:"Desk 애플리케이션이 쓰는 키·시크릿(DB 암호화 키, 커스터디 연동 자격증명, 메일 발송 키)의 보관 위치와 접근 권한자. 콜드월렛 개인키는 커스터디 소관이라 이 서비스 경계 밖임을 감사팀에 명확히 진술한다."},
+
+ {id:"B8", own:"개발", v:"확인", m:"실사",
+  loc:"DB 보안 › <span>DB 식별 · DB 계정 · DB 권한 · DB 로그 · DB 보안설정</span>",
+  q:"주요 데이터베이스 및 저장정보를 식별하고 있는가? · DB 사용자 및 관리자 계정이 관리되고 있는가? · DB 접근권한이 업무상 필요한 범위로 제한되어 있는가? · 중요 DB의 접근 및 주요 작업기록을 확인할 수 있는가? · 주요 보안설정이 회사 기준에 따라 관리되는가?",
+  now:"DB 스키마 한글판 v0.8(테이블 27)이 DB 식별 증적이 된다.",
+  todo:"운영 RDS의 계정 목록과 권한, DB 접근 로그(애플리케이션 AUDIT_LOG와 별개), 운영 DB 직접 접속 경로의 통제 방식. <strong>DB 식별 1항목만 우리 문서로 대응 가능하고 나머지 4항목은 전부 개발·Ops 실사다.</strong>"},
+
+ {id:"B9", own:"개발", v:"불일치", m:"표본",
+  loc:"개발 및 변경관리 › <span>소스코드 보안 › 비밀정보 관리 · 코드 변경 · 소스 접근</span>",
+  q:"소스코드 또는 설정파일에 중요 인증정보가 부적절하게 포함되지 않도록 관리하는가? · 소스코드 변경내역을 추적할 수 있는가?",
+  now:"서비스 레포 소관이라 기획 산출물에 근거가 없다.",
+  todo:"시크릿 스캐닝 또는 사전 커밋 검사 적용 여부, 설정값 주입 방식(환경변수 · 시크릿 매니저), 서비스 레포 접근 권한자 목록."},
+
+ {id:"B10", own:"개발", v:"불일치", m:"표본",
+  loc:"개발 및 변경관리 › <span>변경관리 › 배포통제 · 시스템 변경</span>",
+  q:"운영환경 배포 및 변경권한이 통제되는가? · 운영시스템의 중요 변경사항에 대해 승인 및 변경이력이 관리되는가? / 중요 변경의 승인 및 추적 가능 여부",
+  now:"40 제41조(정책값 변경) + DB 스키마 POLICY_VERSION(기안자 maker_id · 승인자 approver_id · 발효일 · 변경 전후 diff). 40 제39조② “자기 기안 자기 승인을 차단한다.”",
+  todo:"① ADM-03 저장 시 POLICY_VERSION 적재 여부 ② <strong>기안자와 승인자를 분리하는 maker-checker가 실제로 구현됐는지.</strong> 화면 기획상 ADM-03은 단일 저장 동선이라 스키마의 maker/approver 2인 구조와 맞는지 확인이 필요하다 ③ 운영 배포 승인자와 배포 이력 보관처."},
+
+ {id:"B11", own:"개발", v:"갭", m:"문서",
+  loc:"취약점 및 패치 관리 › <span>취약점 관리 › 점검계획 · 취약점 점검 · 조치관리</span>",
+  q:"정보시스템 취약점 점검 대상과 범위가 정해져 있는가? · 대상 시스템에 대한 취약점 점검을 수행하고 있는가? · 발견된 취약점에 대해 개선조치를 수행하고 있는가?",
+  now:"기획 산출물에 근거가 없다.",
+  todo:"Desk 서비스 오픈 전 웹 취약점 점검 또는 모의해킹 계획의 유무와 일정. 변경신고 수리 일정 · ISMS 심사 일정과 겹치는지 확인이 필요하다."},
+
+ {id:"B12", own:"개발", v:"불일치", m:"문서 · 실사",
+  loc:"네트워크 및 클라우드 보안 › <span>네트워크 보안 › 자산 노출</span>",
+  q:"외부에 공개된 시스템 및 서비스가 식별·관리되는가? / 외부 노출 자산의 승인·관리 여부",
+  now:"기획 산출물에 근거가 없다.",
+  todo:"고객 콘솔 · 어드민 콘솔 · API의 외부 노출 도메인 목록과 승인 여부. <strong>QA 환경·스테이징이 외부에 열려 있는지</strong>를 함께 확인한다. 현재 QA 진행 중이라 실사 시점에 노출돼 있을 수 있다."}
+];
+
+const state = {own:"all", v:"all"};
+const list = document.getElementById("list");
+const countEl = document.getElementById("count");
+
+function card(d){
+  return '<article class="rec" data-v="'+d.v+'" data-own="'+d.own+'">'
+    + '<div class="rhead">'
+      + '<span class="rid">'+d.id+'</span>'
+      + '<span class="tag o'+d.own+'">'+(d.own==="기획"?"프로덕트":"개발")+'</span>'
+      + '<span class="tag v'+d.v+'">'+d.v+'</span>'
+      + '<span class="tag m">'+d.m+'</span>'
+    + '</div>'
+    + '<div class="loc">'+d.loc+'</div>'
+    + '<blockquote>'+d.q+'</blockquote>'
+    + '<div class="fld"><span class="lb">현재 상태와 근거</span><p>'+d.now+'</p></div>'
+    + '<div class="fld"><span class="lb">'+(d.own==="기획"?"해야 할 일":"개발팀에 확인할 것")+'</span><p>'+d.todo+'</p></div>'
+  + '</article>';
+}
+
+function render(){
+  const rows = DATA.filter(d =>
+    (state.own==="all" || d.own===state.own) &&
+    (state.v==="all" || d.v===state.v));
+  list.innerHTML = rows.map(card).join("");
+  countEl.textContent = rows.length + " / " + DATA.length + "건";
+}
+
+document.querySelectorAll(".chipbtn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const f = btn.dataset.f;
+    state[f] = btn.dataset.val;
+    document.querySelectorAll('.chipbtn[data-f="'+f+'"]').forEach(b =>
+      b.setAttribute("aria-pressed", String(b === btn)));
+    render();
+  });
+});
+
+render();
+</script>

@@ -244,9 +244,13 @@
     </div>
     <div class="frow">
       <div class="rl ad">관리자<small>DSRV 내부 · 고객에게 안 보임</small></div>
-      <div class="pg" data-go="ADM-02"><span class="pid">ADM-02</span><span class="pn">어드민 홈 · 처리함(승인/거절/중지) · CSV</span></div>
+      <div class="pg" data-go="ADM-02"><span class="pid">ADM-02</span><span class="pn">처리함 · 승인/거절/중지</span></div>
       <div class="ar"><i>·</i></div>
-      <div class="pg" data-go="ADM-03"><span class="pid">ADM-03</span><span class="pn">설정 · 한도·수수료·시세 소스·초대</span></div>
+      <div class="pg" data-go="ADM-04"><span class="pid">ADM-04</span><span class="pn">기관 · 가입자 · 초대</span></div>
+      <div class="ar"><i>·</i></div>
+      <div class="pg" data-go="ADM-03"><span class="pid">ADM-03</span><span class="pn">설정 · 한도·수수료·스프레드</span></div>
+      <div class="ar"><i>·</i></div>
+      <div class="pg" data-go="ADM-05"><span class="pid">ADM-05</span><span class="pn">데이터 다운로드 · CSV 6종</span></div>
     </div>
     <div class="frow">
       <div class="rl on">예외 · 계정 관리<small>필요할 때만 가는 화면</small></div>
@@ -315,9 +319,11 @@
       <div class="pg" data-go="BRK-03"><span class="pid">BRK-03</span><span class="pn">신청하기</span><span class="who">신청자</span></div>
       <div class="pg" data-go="BRK-07"><span class="pid">BRK-07</span><span class="pn">내 신청 상세</span><span class="who">신청자</span></div>
       <div class="pg" data-go="BRK-05"><span class="pid">BRK-05</span><span class="pn">이전·완료 (예치 → 인도)</span><span class="who">양측</span></div>
-      <div class="gt" style="margin-top:12px;">관리자 (DSRV Admin) <small>2</small></div>
-      <div class="pg" data-go="ADM-02"><span class="pid">ADM-02</span><span class="pn">어드민 홈 · 처리함</span></div>
+      <div class="gt" style="margin-top:12px;">관리자 (DSRV Admin) <small>4</small></div>
+      <div class="pg" data-go="ADM-02"><span class="pid">ADM-02</span><span class="pn">처리함</span></div>
+      <div class="pg" data-go="ADM-04"><span class="pid">ADM-04</span><span class="pn">기관 · 가입자</span></div>
       <div class="pg" data-go="ADM-03"><span class="pid">ADM-03</span><span class="pn">설정</span></div>
+      <div class="pg" data-go="ADM-05"><span class="pid">ADM-05</span><span class="pn">데이터 다운로드</span></div>
     </div>
   </div>
 
@@ -330,7 +336,7 @@
   document.addEventListener('click',function(e){
     var go=e.target.closest('[data-go]');if(!go)return;
     if(window.parent&&window.parent!==window){window.parent.postMessage({type:'navigate',pageId:go.dataset.go},'*');}
-    else{var m={'ONB-00':'onb-00','ONB-01':'onb-01','ONB-02':'onb-02','ONB-03':'onb-03','ONB-04':'onb-04','AUTH-01':'auth-01','AUTH-02':'auth-02','AUTH-03':'auth-03','DASH-01':'dash-01','DASH-02':'dash-02','DASH-03':'dash-03','EXC-01':'exc-01','EXC-02':'exc-02','EXC-03':'exc-03','EXC-04':'exc-04','BRK-01':'brk-01','BRK-02':'brk-02','BRK-03':'brk-03','BRK-04':'brk-04','BRK-05':'brk-05','BRK-06':'brk-06','BRK-07':'brk-07','ADM-02':'adm-02','ADM-03':'adm-03'};if(m[go.dataset.go])location.href=m[go.dataset.go]+'.html';}
+    else{var m={'ONB-00':'onb-00','ONB-01':'onb-01','ONB-02':'onb-02','ONB-03':'onb-03','ONB-04':'onb-04','AUTH-01':'auth-01','AUTH-02':'auth-02','AUTH-03':'auth-03','DASH-01':'dash-01','DASH-02':'dash-02','DASH-03':'dash-03','EXC-01':'exc-01','EXC-02':'exc-02','EXC-03':'exc-03','EXC-04':'exc-04','BRK-01':'brk-01','BRK-02':'brk-02','BRK-03':'brk-03','BRK-04':'brk-04','BRK-05':'brk-05','BRK-06':'brk-06','BRK-07':'brk-07','ADM-02':'adm-02','ADM-03':'adm-03','ADM-04':'adm-04','ADM-05':'adm-05'};if(m[go.dataset.go])location.href=m[go.dataset.go]+'.html';}
   });
 })();
 </script>

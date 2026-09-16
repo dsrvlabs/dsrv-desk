@@ -38,8 +38,10 @@ SCREENS = [
     (None, 'BRK-07', '내 신청 상세', 'brk-07.html'),
     (None, 'BRK-04', '받은 신청·수락', 'brk-04.html'),
     (None, 'BRK-05', '이전·완료', 'brk-05.html'),
-    ('관리자 (DSRV Admin)', 'ADM-02', '어드민 홈', 'adm-02.html'),
+    ('관리자 (DSRV Admin)', 'ADM-02', '처리함', 'adm-02.html'),
+    (None, 'ADM-04', '기관 · 가입자', 'adm-04.html'),
     (None, 'ADM-03', '설정', 'adm-03.html'),
+    (None, 'ADM-05', '데이터 다운로드', 'adm-05.html'),
 ]
 
 CUR_LABEL = None

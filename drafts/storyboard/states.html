@@ -169,7 +169,7 @@
 </div>
 <div class="tblwrap"><table class="ct">
 <colgroup><col style="width:62px"><col style="width:17%"><col style="width:22%"><col style="width:22%"><col style="width:23%"><col style="width:82px"></colgroup>
-<thead><tr><th>#</th><th>케이스 · 트리거</th><th>고객 (칩 · 코드 · 상세 화면)</th><th>시스템 (자동)</th><th>어드민 (홈 4섹션 · ADM-03)</th><th>통지</th></tr></thead>
+<thead><tr><th>#</th><th>케이스 · 트리거</th><th>고객 (칩 · 코드 · 상세 화면)</th><th>시스템 (자동)</th><th>어드민 (처리함 4섹션 · ADM-03·04)</th><th>통지</th></tr></thead>
 <tbody>
 <tr><td>EX-01</td>
 <td><span class="nm">거래 요청 접수</span><span class="wh"><span class="who c">고객</span><span class="scr" data-pid="EXC-01"><span class="sid">EXC-01</span>[거래 요청]</span></span></td>
@@ -284,7 +284,7 @@
 </div>
 <div class="tblwrap"><table class="ct">
 <colgroup><col style="width:62px"><col style="width:17%"><col style="width:22%"><col style="width:22%"><col style="width:23%"><col style="width:82px"></colgroup>
-<thead><tr><th>#</th><th>케이스 · 트리거</th><th>고객 (칩 · 코드 · 상세 화면)</th><th>시스템 (자동)</th><th>어드민 (홈 4섹션 · ADM-03)</th><th>통지</th></tr></thead>
+<thead><tr><th>#</th><th>케이스 · 트리거</th><th>고객 (칩 · 코드 · 상세 화면)</th><th>시스템 (자동)</th><th>어드민 (처리함 4섹션 · ADM-03·04)</th><th>통지</th></tr></thead>
 <tbody>
 <tr><td>PB-01</td>
 <td><span class="nm">게시</span><span class="wh"><span class="who c">게시자</span><span class="scr" data-pid="BRK-02"><span class="sid">BRK-02</span>[게시]</span></span></td>
@@ -357,7 +357,7 @@
 </div>
 <div class="tblwrap"><table class="ct">
 <colgroup><col style="width:62px"><col style="width:17%"><col style="width:22%"><col style="width:22%"><col style="width:23%"><col style="width:82px"></colgroup>
-<thead><tr><th>#</th><th>케이스 · 트리거</th><th>고객 (칩 · 코드 · 상세 화면)</th><th>시스템 (자동)</th><th>어드민 (홈 4섹션 · ADM-03)</th><th>통지</th></tr></thead>
+<thead><tr><th>#</th><th>케이스 · 트리거</th><th>고객 (칩 · 코드 · 상세 화면)</th><th>시스템 (자동)</th><th>어드민 (처리함 4섹션 · ADM-03·04)</th><th>통지</th></tr></thead>
 <tbody>
 <tr><td>ST-01</td>
 <td><span class="nm">수락 → 확정 (구속력 발생)</span><span class="wh"><span class="who c">게시자</span><span class="scr" data-pid="BRK-04"><span class="sid">BRK-04</span>[수락]</span> 확인 다이얼로그</span></td>
@@ -444,7 +444,7 @@
 <div class="panel-note">이 시스템의 AML 사건은 <b>이상거래 룰 적중</b> 하나다. BLF·KYT 등 거래 위험 심사는 커스터디가 집행 전에 한다. 문제가 있으면 <b>서명하지 않고 ② 행의 [AML 이슈 미집행]을 눌러</b> 이 시스템에 알린다 — 미집행 ② 행 거절·거래 거절·(마목 예치 완료분) 반환 행·고객 안내 "진행 불가". 사유는 받지 않고 되돌리는 수단도 없다(2026-09-14 · 종전 중지/해제 웹훅 폐지). 통과 거래는 통지 없이 서명·집행 후 txhash 입력. 기관 단위 결과(KYC·재이행·요주의인물·사고)는 커스터디 customerStatusCd를 관문마다 조회해 받는다(AC-07). STR 작성·보고는 별도 AML 시스템. <b>이해상충 플래그는 어드민에 두지 않는다</b>(2026-09-04 결정).</div>
 <div class="tblwrap"><table class="ct">
 <colgroup><col style="width:62px"><col style="width:17%"><col style="width:22%"><col style="width:22%"><col style="width:23%"><col style="width:82px"></colgroup>
-<thead><tr><th>#</th><th>케이스 · 트리거</th><th>고객 (칩 · 코드 · 상세 화면)</th><th>시스템 (자동)</th><th>어드민 (홈 4섹션 · ADM-03)</th><th>통지</th></tr></thead>
+<thead><tr><th>#</th><th>케이스 · 트리거</th><th>고객 (칩 · 코드 · 상세 화면)</th><th>시스템 (자동)</th><th>어드민 (처리함 4섹션 · ADM-03·04)</th><th>통지</th></tr></thead>
 <tbody>
 <tr><td>AM-01</td>
 <td><span class="nm">이상거래 룰 적중</span><span class="wh"><span class="who s">시스템</span>자전 · 통정 · 위장게시 · 비정상 교환패턴 룰</span></td>
@@ -489,7 +489,7 @@
 <div class="panel-note">실제 조치는 화면 밖(시세 소스 복구·재고 보충·재집행·원인 규명)에서 하고, 어드민은 기록만 한다. 계정 잠금은 F에 있다. <b>콜드 서명 장애는 커스터디 책임 영역</b>이라 이 시스템의 알림 유형에 두지 않는다(2026-09-04 결정).</div>
 <div class="tblwrap"><table class="ct">
 <colgroup><col style="width:62px"><col style="width:17%"><col style="width:22%"><col style="width:22%"><col style="width:23%"><col style="width:82px"></colgroup>
-<thead><tr><th>#</th><th>케이스 · 트리거</th><th>고객 (칩 · 코드 · 상세 화면)</th><th>시스템 (자동)</th><th>어드민 (홈 4섹션 · ADM-03)</th><th>통지</th></tr></thead>
+<thead><tr><th>#</th><th>케이스 · 트리거</th><th>고객 (칩 · 코드 · 상세 화면)</th><th>시스템 (자동)</th><th>어드민 (처리함 4섹션 · ADM-03·04)</th><th>통지</th></tr></thead>
 <tbody>
 <tr class="r-warn"><td>OP-01</td>
 <td><span class="nm">시세 소스 수신 중단</span><span class="wh"><span class="who s">시스템</span>무수신 임계 경과 <span class="chk">[확인필요: 임계값]</span></span><span class="tag">예외 · 알림</span></td>
@@ -524,23 +524,23 @@
 <!-- ============ F. 계정·기관 ============ -->
 <div class="wide" id="ac"><div class="panel">
 <div class="panel-title"><span class="tno">F · AC</span>계정 · 기관 상태 <span class="scope">기관당 가입자 1명 · ORG.status = 게이팅 단일 출처</span></div>
-<div class="panel-note">KYC·CDD·재이행은 커스터디가 하고, 이 시스템은 기관 상태를 <b>커스터디 조회 API(customerStatusCd 01 신규 / 02 활성 / 03 휴면 / 04 거래중지 / 05 거래해지 / 06 거래거절)</b>로 관문마다 읽는다 — 어드민에서 바꾸지 않고 커스터디가 밀어 보내는 변경 통지도 없다(2026-09-07(22) · 종전 5종 라벨·ADM-03 [상태 변경 ▾] 폐기). 02 활성만 거래 가능, 그 외 5종은 전부 같은 비활성 처리. 기관 등록은 커스터디 온보딩 완료 후 관리자가 ADM-03 초대 폼에 <b>customerNo·수탁 지갑 주소</b>를 입력하는 것으로 시작하고(초기 상태 활성), 기관 식별자는 customerNo 하나다. 사고·압류·동결도 별도 항목 없이 기관 상태 비활성으로 받는다(2026-09-07). 계정 잠금·동결은 거래 칩이 아니라 배너로 표시한다.</div>
+<div class="panel-note">KYC·CDD·재이행은 커스터디가 하고, 이 시스템은 기관 상태를 <b>커스터디 조회 API(customerStatusCd 01 신규 / 02 활성 / 03 휴면 / 04 거래중지 / 05 거래해지 / 06 거래거절)</b>로 관문마다 읽는다 — 어드민에서 바꾸지 않고 커스터디가 밀어 보내는 변경 통지도 없다(2026-09-07(22) · 종전 5종 라벨·ADM-04 [상태 변경 ▾] 폐기). 02 활성만 거래 가능, 그 외 5종은 전부 같은 비활성 처리. 기관 등록은 커스터디 온보딩 완료 후 관리자가 ADM-04 초대 폼에 <b>customerNo·수탁 지갑 주소</b>를 입력하는 것으로 시작하고(초기 상태 활성), 기관 식별자는 customerNo 하나다. 사고·압류·동결도 별도 항목 없이 기관 상태 비활성으로 받는다(2026-09-07). 계정 잠금·동결은 거래 칩이 아니라 배너로 표시한다.</div>
 <div class="tblwrap"><table class="ct">
 <colgroup><col style="width:62px"><col style="width:17%"><col style="width:22%"><col style="width:22%"><col style="width:23%"><col style="width:82px"></colgroup>
-<thead><tr><th>#</th><th>케이스 · 트리거</th><th>고객 (칩 · 코드 · 상세 화면)</th><th>시스템 (자동)</th><th>어드민 (홈 4섹션 · ADM-03)</th><th>통지</th></tr></thead>
+<thead><tr><th>#</th><th>케이스 · 트리거</th><th>고객 (칩 · 코드 · 상세 화면)</th><th>시스템 (자동)</th><th>어드민 (처리함 4섹션 · ADM-03·04)</th><th>통지</th></tr></thead>
 <tbody>
 <tr><td>AC-01</td>
-<td><span class="nm">초대 발송</span><span class="wh"><span class="who a">관리자</span><span class="scr" data-pid="ADM-03"><span class="sid">ADM-03</span></span> 기관명 · 이메일 · customerNo · 수탁 지갑 주소 · [초대 발송]</span></td>
+<td><span class="nm">초대 발송</span><span class="wh"><span class="who a">관리자</span><span class="scr" data-pid="ADM-04"><span class="sid">ADM-04</span></span> 기관명 · 이메일 · customerNo · 수탁 지갑 주소 · [초대 발송]</span></td>
 <td><span class="st start">초대 발송됨</span><span class="sb">이메일 링크 {정책값 72시간} · 1회용</span></td>
 <td>기관·가입자 생성 · 기관당 1명<span class="sb">식별자 = customerNo · 기관 상태 초기값 활성 · 값 변경은 커스터디 이메일 요청</span></td>
-<td><span class="ab none">행 없음</span><span class="sb">ADM-03 목록 상태 칩</span></td>
+<td><span class="ab none">행 없음</span><span class="sb">ADM-04 목록 상태 칩</span></td>
 <td>초대 메일</td></tr>
 
 <tr class="r-branch"><td>AC-02</td>
 <td><span class="nm">초대 링크 만료</span><span class="wh"><span class="who s">시스템</span>유효시간 경과 또는 이미 사용됨</span><span class="tag">여기서 종결</span></td>
 <td><span class="st gray">만료</span><span class="sb"><span class="scr" data-pid="ONB-00"><span class="sid">ONB-00</span></span> 만료 배너 "관리자에게 재발송을 요청하세요"</span></td>
 <td>기록</td>
-<td><span class="ab none">행 없음</span><span class="sb">ADM-03 [초대 재발송]</span></td>
+<td><span class="ab none">행 없음</span><span class="sb">ADM-04 [초대 재발송]</span></td>
 <td>—</td></tr>
 
 <tr><td>AC-03</td>
@@ -572,10 +572,10 @@
 <td>없음</td></tr>
 
 <tr><td>AC-07</td>
-<td><span class="nm">기관 상태 비활성 확인 — 커스터디 조회값이 02 활성 외</span><span class="wh"><span class="who s">시스템</span>관문 조회(T1 로그인 · T2 요청/게시/신청 · T3 수락/확정/① [승인] 클릭 · <span class="scr" data-pid="ADM-03"><span class="sid">ADM-03</span></span> 진입)에서 customerStatusCd = 01 신규·03 휴면·04 거래중지·05 거래해지·06 거래거절</span></td>
+<td><span class="nm">기관 상태 비활성 확인 — 커스터디 조회값이 02 활성 외</span><span class="wh"><span class="who s">시스템</span>관문 조회(T1 로그인 · T2 요청/게시/신청 · T3 수락/확정/① [승인] 클릭 · <span class="scr" data-pid="ADM-04"><span class="sid">ADM-04</span></span> 진입)에서 customerStatusCd = 01 신규·03 휴면·04 거래중지·05 거래해지·06 거래거절</span></td>
 <td><span class="ban">배너 전 화면</span>KYC 예외 배너 + 거래 버튼 비활성<span class="sb">EXC-01 · BRK-02 · BRK-03 비활성 · 조회 가능 · 상태별 문구 차등 없음</span></td>
 <td>ORG.status = 커스터디 조회값(게이팅 단일 출처) · 이 시스템은 쓰지 않는다<span class="sb">상태 변경 통지 없음 — 커스터디가 바꾸면 다음 관문 조회에서 반영(2026-09-07(22)) · 재이행·사고·압류도 이 값으로만</span></td>
-<td><span class="ab none">행 없음</span><span class="sb">ADM-03 상태 칩(코드 + 조회 시각) · 감사로그(조회 결과) · 처리함 행 없음</span></td>
+<td><span class="ab none">행 없음</span><span class="sb">ADM-04 상태 칩(코드 + 조회 시각) · 감사로그(조회 결과) · 처리함 행 없음</span></td>
 <td><span class="chk">[확인필요]</span></td></tr>
 
 <tr class="r-warn"><td>AC-08</td>
@@ -589,7 +589,7 @@
 <td><span class="nm">05 거래해지 수신</span><span class="wh"><span class="who s">시스템</span>관문 조회에서 customerStatusCd = 05 (해지 절차·잔고 반환은 커스터디가 수행 — 이 시스템의 해지 흐름 없음 · 2026-09-07)</span><span class="tag">여기서 종결</span></td>
 <td><span class="st gray">해지</span><span class="sb">로그인 허용 여부 <span class="chk">[확인필요]</span>(현재 안 = 조회만 허용)</span></td>
 <td>AC-07·AC-08과 동일 처리<span class="sb">새 초대는 커스터디의 해지·재등록 확인 후 <span class="chk">[확인필요]</span></span></td>
-<td><span class="ab none">행 없음</span><span class="sb">ADM-03 회색 칩 "05 거래해지"</span></td>
+<td><span class="ab none">행 없음</span><span class="sb">ADM-04 회색 칩 "05 거래해지"</span></td>
 <td>—</td></tr>
 </tbody></table></div>
 </div></div>

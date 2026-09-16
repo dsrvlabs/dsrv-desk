@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화면기획 — 데이터 다운로드</title>
+<link rel="stylesheet" href="screen.css">
+<style>
+  .csvgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+  .csvbtn{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:#fff;}
+  .csvbtn .ct{font-size:11px;font-weight:700;color:#334155;}
+  .csvbtn .cd{font-size:9.5px;color:#94a3b8;margin-top:3px;}
+  .csvbtn .dl{display:inline-block;margin-top:6px;font-size:9px;font-weight:700;padding:2px 8px;border-radius:6px;border:1px solid #93c5fd;color:#2563eb;}
+</style>
+</head>
+<body data-follow-panel="off">
+
+<header class="header">
+  <div class="crumb"><span>관리자</span><span class="s">›</span><span>데이터 다운로드</span></div>
+  <h1 class="title">데이터 다운로드</h1>
+  <span class="sid">ADM-05</span>
+  <span class="defense">조회성 데이터는 화면 목록을 두지 않고 전부 CSV로 뺀다</span>
+</header>
+
+<div class="main wide-main">
+  <div class="screen-panel">
+    <div style="position:relative;display:flex;">
+      <div class="labels" id="labels">
+        <div class="lbl"><span class="lbl-text">전역·<br>관리 메뉴</span></div>
+        <div class="lbl"><span class="lbl-text">감사·보고용<br>CSV</span></div>
+      </div>
+      <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
+    </div>
+
+    <div class="frame wide" id="frame">
+      <!-- 전역: 관리 메뉴 (핀 없음 — nav-global 행으로 처리) -->
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="c-top admin" style="border-radius:8px 8px 0 0;">
+          <span class="brand" style="cursor:pointer;">DSRV Admin</span>
+          <span class="meta"><span class="c-badge adm">DSRV-OPS-01</span></span>
+        </div>
+        <div class="c-adminbar" style="margin:0;">
+          <span class="m" data-go="ADM-02" style="cursor:pointer;">처리함</span><span class="m" data-go="ADM-04" style="cursor:pointer;">기관 · 가입자</span><span class="m" data-go="ADM-03" style="cursor:pointer;">설정</span><span class="m on">데이터 다운로드</span>
+        </div>
+      </div>
+
+      <!-- 감사 · 보고용 CSV -->
+      <div class="zone" data-idx="0">
+        <div class="zone-highlight"></div>
+        <div class="zone-title" style="margin-bottom:2px;">감사 · 보고용 CSV</div>
+        <div class="item-area" data-highlight="0" style="position:relative;padding:6px;border-radius:8px;">
+          <div class="pin" data-idx="0" style="top:-8px;right:-8px;">1</div>
+          <div style="font-size:10px;color:#94a3b8;margin-bottom:8px;">기간·조건 선택 없이 생성 시점 기준 전체 기간 스냅숏을 내려받는다. 개인식별정보는 마스킹되며, 모든 다운로드는 열람 기록에 남는다.</div>
+          <div class="csvgrid">
+            <div class="csvbtn"><div class="ct">① 고객사 · 가입자</div><div class="cd">기관·가입자 목록. 이메일은 마스킹된다.</div><span class="dl">다운로드</span></div>
+            <div class="csvbtn"><div class="ct">② 거래 요청</div><div class="cd">나목 요청·마목 게시·신청 전부 + 자동검증 결과·처리 이력·만료·중지 사유.</div><span class="dl">다운로드</span></div>
+            <div class="csvbtn"><div class="ct">③ 콜드 이전</div><div class="cd">서명자 · 명세 해시 · 가스비 · 실수령 수량.</div><span class="dl">다운로드</span></div>
+            <div class="csvbtn"><div class="ct">④ 원장</div><div class="cd">원장 4분할과 가스비 발생·회수 계정.</div><span class="dl">다운로드</span></div>
+            <div class="csvbtn"><div class="ct">⑤ 3면 대사</div><div class="cd">지갑 4묶음 전부의 내부·온체인·커스터디 잔액.</div><span class="dl">다운로드</span></div>
+            <div class="csvbtn"><div class="ct">⑥ 열람 기록</div><div class="cd">WORM 해시와 보존 기간이 함께 기록된다.</div><span class="dl">다운로드</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <svg id="connSvg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;"></svg>
+
+  <div class="items" id="items">
+    <div class="nav-global">
+      <div class="nav-global-title">진입 · 전역 이동</div>
+      <div class="nav-note">· <strong>전역 이동</strong> 관리 메뉴 · 관리자 배지 · 뒤로가기의 동작은 처리함(ADM-02)의 표와 같다. 다른 점 = 현재 탭이 '데이터 다운로드'라 다시 클릭해도 무반응.<br>
+      · <strong>진입</strong> 관리 메뉴 '데이터 다운로드' 탭 클릭. 진입 시 조회하는 값이 없다 — 버튼만 있는 화면이다.</div>
+    </div>
+    <div class="itm" data-idx="0">
+      <div class="num">1</div>
+      <div>
+        <div class="itm-title">데이터 다운로드 — CSV 6종<span class="req">필수</span></div>
+        <div class="itm-desc"><strong>노출</strong> 6종 각각 버튼 1개로 항상 보인다(대표 핀 = 영역 전체). 어드민 역할이 1종이라 6종 모두 같은 조건으로 보인다.<br><strong>클릭 가능</strong> 항상 활성이다. 같은 종류를 생성하는 동안만 비활성이고 다른 종류는 함께 받을 수 있다.<br><strong>확인 사항</strong> 없다. 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> 조회성 데이터는 화면 목록을 두지 않고 전부 CSV로 뺀다. 기간·조건 선택 없이 생성 시점 기준 전체 기간 스냅숏을 동기 생성한다. 모든 다운로드는 열람 기록(⑥)에 남는다. 컬럼 정의는 부록을 본다.<br>· <strong>③ 콜드 이전 목록</strong>에 반환·수수료 스윕 행 유형이 추가됐고 명세 해시를 포함한다(2026-09-04).<br>· <strong>⑤는 '3면 대사'</strong>다 — 내부 장부 ↔ 온체인 ↔ 커스터디 콜드 기록 세 값을 자산 묶음 4개 전부에 대해 스냅숏한다. 2면(장부↔온체인)이 아니다.<br>· 개인식별정보는 CSV에서도 마스킹한다.<br><span class="chk">[확인필요]</span> 구현 화면의 ② 설명이 "KYT 점수·BLF 결과를 포함한 감사용 자료"인데, BLF·KYT 임계와 판정은 커스터디 소유로 정리했다(2026-09-07(21) · 종전 kyt_blf_thr → escalation_thr 대체). 이 CSV에 KYT 점수·BLF 결과가 실제로 들어가는지, 들어간다면 어느 값을 받아 적는지 확인이 필요하다.<br><span class="basis">근거 states 케이스분기 §4 · 09 §0 자산 묶음 4개 · 부록 컬럼 정의</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">[CSV 다운로드] — 클릭</span><span class="nav-act">클릭 → 라벨 "생성 중…" → 브라우저 다운로드</span><span class="nav-to stay">화면 잔류 · 토스트 없음 · 열람 기록 적재</span></div>
+          <div class="nav-row"><span class="nav-el">[CSV 다운로드] — 실패</span><span class="nav-act">생성 오류 / 타임아웃</span><span class="nav-to stay">상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 버튼 라벨 복귀</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<section class="footer-note" style="padding-bottom:0;">
+  <div class="note-card">
+    <div class="note-title">상세내용</div>
+    <div class="detail-grid" id="detailCol">
+      <div class="dtl" data-idx="0">
+        <div class="detail-label"><span class="dtl-num">1</span>CSV 6종 원천 · 구분회계 어드민 전용</div>
+        <div class="dtl-body"><span class="box">· 여섯 CSV는 전부 이 화면에서만 받는다. 조회 화면을 따로 두지 않기로 한 결정(2026-09-01 어드민 축소)의 결과다 — ①~⑥에 대응하던 조회 화면들은 그때 삭제했다. ③ 콜드 이전은 EXC-04·BRK-05에서 고객이 보는 이전 건과 같은 원천이고, ④⑤는 같은 배치 집계를 쓴다.<br>· 구분회계 계정명(스프레드수익(운영손익) · 중개수수료)은 이 CSV ④에서만 쓰고 고객 화면에는 표시하지 않는다.<br>· <strong>CSV ④ 원장은 4분할</strong>이다 — 고객 수탁 / 운영 / 나목 교환 최소재고 / 에스크로 전용지갑. 09 §0 자산 묶음 4개와 정합.<br>· <strong>CSV ⑤는 3면 대사</strong>다 — 내부 장부 ↔ 온체인 ↔ 커스터디 콜드 기록. 2면이 아니다.<br>· 컬럼 정의는 아래 부록.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="footer-note">
+  <div class="note-card">
+    <div class="note-title">비고</div>
+    <div class="note-body">
+      · DSRV 내부 관리자 화면(고객사 노출 없음). 어드민은 <strong>처리함(ADM-02) · 설정(ADM-03) · 기관 · 가입자(ADM-04) · 데이터 다운로드(ADM-05) 4화면</strong>이다. 이 화면은 2026-09-16 구현 화면 기준으로 처리함(ADM-02)에서 분리했다.<br>
+      · <strong>①~⑥ 번호는 바꾸지 않는다.</strong> 지침 제42조·DB 스키마·케이스분기·운영 매뉴얼이 'CSV ⑥ 열람 기록'처럼 번호로 참조한다. 카드 이름만 구현 화면 문구를 따랐다.<br>
+      · <strong>다운로드 자체가 열람 기록</strong>이다 — ⑥을 받는 행위도 ⑥에 남는다(지침 제42조④).<br>
+      · 다운로드 이력을 보는 화면은 두지 않는다(2026-09-02(11) 편의기능 축소). 이력은 ⑥ CSV로만 본다.<br>
+      · 연결: ① 기관·가입자 목록 원천 = 기관 · 가입자(ADM-04) · ②③ 원천 = 처리함(ADM-02) ①② · ⑤ 3면 대사 불일치 알림 = 처리함 ④ 운영 알림.<br>
+      · <span class="chk">[확인필요]</span> ② 거래 요청 CSV의 KYT 점수·BLF 결과 포함 여부(항목 1 참조) · 각 CSV의 컬럼 정의(부록) · 생성 시간이 긴 CSV의 동기 생성 한계.
+    </div>
+  </div>
+</section>
+
+<script src="screen.js"></script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화면기획 — 기관 · 가입자</title>
+<link rel="stylesheet" href="screen.css">
+<style>
+  .tbl{width:100%;border-collapse:collapse;font-size:11px;}
+  .tbl th{background:#f1f5f9;color:#64748b;font-weight:700;text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);font-size:10px;}
+  .tbl td{padding:7px 8px;border-bottom:1px solid #f1f1ee;color:#334155;vertical-align:middle;}
+  .act{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;border:1px solid #93c5fd;color:#2563eb;background:#fff;margin:1px 2px 1px 0;white-space:nowrap;}
+  .inp{display:inline-block;border:1px solid #d7dbe0;border-radius:6px;background:#fff;padding:3px 8px;font-family:ui-monospace,'SF Mono',Consolas,monospace;font-size:10.5px;color:#334155;min-width:72px;}
+  .u{color:#64748b;font-family:'Pretendard',system-ui,sans-serif;font-size:9.5px;margin-left:4px;}
+</style>
+</head>
+<body data-follow-panel="off">
+
+<header class="header">
+  <div class="crumb"><span>관리자</span><span class="s">›</span><span>기관 · 가입자</span></div>
+  <h1 class="title">기관 · 가입자</h1>
+  <span class="sid">ADM-04</span>
+  <span class="defense">초대로만 계정이 생긴다 — 셀프 가입 없음 · 기관 상태는 커스터디 조회값</span>
+</header>
+
+<div class="main wide-main">
+  <div class="screen-panel">
+    <div style="position:relative;display:flex;">
+      <div class="labels" id="labels">
+        <div class="lbl"><span class="lbl-text">전역·<br>관리 메뉴</span></div>
+        <div class="lbl"><span class="lbl-text">초대 발송</span></div>
+        <div class="lbl"><span class="lbl-text">기관·<br>가입자</span></div>
+      </div>
+      <svg id="bracketSvg" width="24" style="flex-shrink:0;overflow:visible;"></svg>
+    </div>
+
+    <div class="frame wide" id="frame">
+      <!-- 전역: 관리 메뉴 (핀 없음 — nav-global 행으로 처리) -->
+      <div class="zone" data-idx="">
+        <div class="zone-highlight"></div>
+        <div class="c-top admin" style="border-radius:8px 8px 0 0;">
+          <span class="brand" style="cursor:pointer;">DSRV Admin</span>
+          <span class="meta"><span class="c-badge adm">DSRV-OPS-01</span></span>
+        </div>
+        <div class="c-adminbar" style="margin:0;">
+          <span class="m" data-go="ADM-02" style="cursor:pointer;">처리함</span><span class="m on">기관 · 가입자</span><span class="m" data-go="ADM-03" style="cursor:pointer;">설정</span><span class="m" data-go="ADM-05" style="cursor:pointer;">데이터 다운로드</span>
+        </div>
+      </div>
+
+      <!-- 초대 발송 -->
+      <div class="zone" data-idx="0,1,2,3,4">
+        <div class="zone-highlight"></div>
+        <div class="zone-title">초대 발송</div>
+        <div class="row" style="gap:8px;">
+          <div class="item-area" data-highlight="0" style="position:relative;flex:1;padding:4px;border-radius:8px;"><div class="pin" data-idx="0" style="top:-6px;right:-6px;">1</div><div class="field"><span class="ph">기관명</span></div></div>
+          <div class="item-area" data-highlight="1" style="position:relative;flex:2;padding:4px;border-radius:8px;"><div class="pin" data-idx="1" style="top:-6px;right:-6px;">2</div><div class="field"><span class="ph">가입자 이메일</span></div></div>
+          </div>
+        <div class="row" style="gap:8px;margin-top:6px;">
+          <div class="item-area" data-highlight="2" style="position:relative;flex:1;padding:4px;border-radius:8px;"><div class="pin" data-idx="2" style="top:-6px;right:-6px;">3</div><div class="field"><span class="ph">customerNo (L-XXXXXX-XXXX)</span></div></div>
+          <div class="item-area" data-highlight="3" style="position:relative;flex:2;padding:4px;border-radius:8px;"><div class="pin" data-idx="3" style="top:-6px;right:-6px;">4</div><div class="field"><span class="ph">수탁 지갑 주소 (0x…)</span></div></div>
+          <div class="item-area" data-highlight="4" style="position:relative;flex:0 0 auto;padding:4px;border-radius:8px;"><div class="pin" data-idx="4" style="top:-6px;right:-6px;">5</div><div class="btn primary disabled">초대 발송</div></div>
+        </div>
+        <div style="font-size:10px;color:#64748b;margin-top:6px;">기관당 가입자 1명 — 이미 가입자가 있는 기관은 기존 계정 해지 후에만 신규 초대 가능 · 링크 72시간·1회 유효 · customerNo·지갑 주소는 커스터디 온보딩 완료 안내 값을 그대로 입력 · 등록 후 변경은 커스터디에 이메일 요청</div>
+      </div>
+
+      <!-- 기관·가입자 목록 -->
+      <div class="zone" data-idx="5,6,7">
+        <div class="zone-highlight"></div>
+        <div class="item-area" data-highlight="5" style="position:relative;padding:4px 6px;border-radius:8px;margin-bottom:4px;">
+          <div class="pin" data-idx="5" style="top:-6px;right:-6px;">6</div>
+          <div class="zone-title" style="margin-bottom:2px;">기관 · 가입자</div>
+          <div style="font-size:9.5px;color:#94a3b8;">기관당 가입자 1명 · 최신 등록순 · 검색·필터·정렬 없음(전체 조회는 데이터 다운로드 CSV ①) · 행 클릭 없음 · 기관 상태를 바꾸는 조치는 없다</div>
+        </div>
+        <table class="tbl">
+          <thead><tr><th>기관번호</th><th>기관명</th><th>가입자</th><th>계정 상태</th><th>KYC</th><th>등록</th><th>조치</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>L-260915-0100</td><td>A자산운용</td><td>가입자 K</td><td><span class="chip ok">활성</span></td>
+              <td><div class="item-area" data-highlight="6" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="6" style="top:-10px;right:-10px;">7</div><span class="chip ok">02 활성</span> <span style="font-size:9px;color:#94a3b8;">조회 09-16 13:40</span></div></td>
+              <td>26. 9. 15. 오후 7:57</td><td></td>
+            </tr>
+            <tr>
+              <td>L-260915-0099</td><td>B사</td><td>manager@***.com</td><td><span class="chip info">초대 발송됨</span></td>
+              <td><span class="chip ok">02 활성</span> <span style="font-size:9px;color:#94a3b8;">조회 09-16 13:40</span></td>
+              <td>26. 9. 16. 오후 1:05</td>
+              <td><div class="item-area" data-highlight="7" style="position:relative;display:inline-block;padding:3px;border-radius:8px;"><div class="pin" data-idx="7" style="top:-10px;right:-10px;">8</div><span class="act">재발송</span></div></td>
+            </tr>
+            <tr>
+              <td>L-260915-0098</td><td>C사</td><td>가입자 N</td><td><span class="chip ok">활성</span></td>
+              <td><span class="sev mid">04 거래중지</span> <span style="font-size:9px;color:#94a3b8;">조회 09-16 13:40</span></td>
+              <td>26. 9. 16. 오후 1:06</td><td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <svg id="connSvg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;"></svg>
+
+  <div class="items" id="items">
+    <div class="nav-global">
+      <div class="nav-global-title">진입 · 전역 이동</div>
+      <div class="nav-note">· <strong>전역 이동</strong> 관리 메뉴 · 관리자 배지 · 뒤로가기의 동작은 처리함(ADM-02)의 표와 같다. 다른 점 = 현재 탭이 '기관 · 가입자'라 다시 클릭해도 무반응. 초대 폼에 입력하다 다른 탭으로 나가면 입력값을 확인 없이 버린다.<br>
+      · <strong>진입</strong> 관리 메뉴 '기관 · 가입자' 탭 클릭. 진입·새로고침 시 기관 목록을 조회하고, 기관마다 커스터디 조회 API를 호출해 KYC 칩과 조회 시각을 갱신한다.</div>
+    </div>
+
+    <div class="itm" data-idx="0">
+      <div class="num">1</div>
+      <div>
+        <div class="itm-title">기관명 입력<span class="req">필수</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 선택 목록이 아니라 자유 입력이다(신규 기관 등록). 플레이스홀더는 "기관명"이다.<br><strong>허용 문자</strong> 한글·영문·숫자·공백·괄호·마침표만 받고 2~50자다. 초과 입력은 무시하고 앞뒤 공백은 자동으로 지운다.<br><strong>검증</strong> ① 허용 문자로 2~50자일 것 ② 이미 등록된 기관명이 아닐 것. ①은 포커스 아웃 시 클라이언트가, ②는 [초대 발송] 클릭 시 서버가 본다.<br><strong>실패 처리</strong> ① 위반 → 빨간 테두리 + ⚠ "기관명은 2~50자 한글·영문·숫자로 입력해 주세요". ② 위반 → ⚠ "이미 등록된 기관입니다 — 기존 계정 해지 후에만 새 가입자를 초대할 수 있습니다". 어느 쪽이든 [초대 발송] 비활성. 다시 입력하면 기존 경고를 지운다.<br><strong>연동</strong> 값이 정상이면 [초대 발송] 활성 조건을 다시 본다.<br><strong>저장</strong> ORG.name으로 저장한다. 커스터디에 등록된 법인명과 같게 입력한다(집행 명세 Excel의 법인명 열이 커스터디 품의 서식과 어긋나지 않도록). 기관 식별자는 별도로 채번하지 않고 <strong>customerNo(항목 3)</strong>를 쓴다(종전 ORG-NNNN 자동 채번 폐기 · 2026-09-07 결정).<br><span class="basis">근거 09 §0 2026-09-07(21) 기관 등록·식별자 · 1기관 1가입자(09 §0 승인·통제)</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">기관명 필드 — 정상 입력</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">경고 제거 · [초대 발송] 활성 조건 재검사</span></div>
+          <div class="nav-row"><span class="nav-el">기관명 필드 — 규칙 ① 위반(문자·길이)</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "기관명은 2~50자 한글·영문·숫자로 입력해 주세요" · [초대 발송] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">기관명 필드 — 규칙 ② 위반(중복)</span><span class="nav-act">[초대 발송] 클릭 시 서버 검증</span><span class="nav-to stay">⚠ "이미 등록된 기관입니다 — 기존 계정 해지 후에만 새 가입자를 초대할 수 있습니다" · 입력값 유지</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="itm" data-idx="1">
+      <div class="num">2</div>
+      <div>
+        <div class="itm-title">가입자 이메일 입력<span class="req">필수</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 플레이스홀더는 "가입자 이메일"이다.<br><strong>허용 문자</strong> 로컬@도메인.TLD 형식으로 최대 254자다. 대문자는 소문자로 자동 정규화하고 공백은 지운다.<br><strong>검증</strong> ① 이메일 형식일 것 ② 이미 초대·가입된 이메일이 아닐 것. ①은 포커스 아웃 시 클라이언트가, ②는 [초대 발송] 클릭 시 서버가 본다.<br><strong>실패 처리</strong> ① 위반 → 빨간 테두리 + ⚠ "이메일 형식이 올바르지 않습니다". ② 위반 → ⚠ "이미 초대·가입된 이메일입니다". 어느 쪽이든 [초대 발송] 비활성. 다시 입력하면 기존 경고를 지운다.<br><strong>연동</strong> 값이 정상이면 [초대 발송] 활성 조건을 다시 본다.<br><strong>저장</strong> USER.email로 저장한다. CSV와 화면 표시는 마스킹한다.<br><span class="chk">[확인필요]</span> 개인 이메일 도메인을 허용할지(법인 도메인 제한).<br><span class="basis">근거 ONB-00 본인 이메일 초대(셀프가입 없음) · ISMS 2.5</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">이메일 필드 — 정상 입력</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">경고 제거 · [초대 발송] 활성 조건 재검사</span></div>
+          <div class="nav-row"><span class="nav-el">이메일 필드 — 규칙 ① 위반(형식)</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "이메일 형식이 올바르지 않습니다" · [초대 발송] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">이메일 필드 — 규칙 ② 위반(중복)</span><span class="nav-act">[초대 발송] 클릭 시 서버 검증</span><span class="nav-to stay">⚠ "이미 초대·가입된 이메일입니다" · 입력값 유지</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="itm" data-idx="2">
+      <div class="num">3</div>
+      <div>
+        <div class="itm-title">customerNo 입력<span class="req">필수</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 플레이스홀더는 "customerNo (L-XXXXXX-XXXX)"다. 값은 커스터디가 오프라인 온보딩(CDD)을 마친 뒤 이메일 등으로 알려 준 고객 식별번호를 그대로 옮긴다.<br><strong>허용 문자</strong> <code>L-</code> + 영숫자 6자 + <code>-</code> + 영숫자 4자(총 13자). 대문자로 정규화하고 공백은 지운다.<br><strong>검증</strong> ① 형식 일치 ② 다른 기관에 등록되지 않은 값일 것. ①은 포커스 아웃 시 클라이언트가, ②는 [초대 발송] 클릭 시 서버가 본다.<br><strong>실패 처리</strong> ① 위반 → 빨간 테두리 + ⚠ "customerNo 형식이 올바르지 않습니다 (L-XXXXXX-XXXX)". ② 위반 → ⚠ "이미 등록된 customerNo입니다". 어느 쪽이든 [초대 발송] 비활성.<br><strong>연동</strong> 값이 정상이면 [초대 발송] 활성 조건을 다시 본다.<br><strong>저장</strong> ORG.customer_no로 저장하고 <strong>이 값이 기관 식별자</strong>다(내부 채번 ORG-NNNN 폐기 · 2026-09-07 결정). 목록·집행 명세 Excel·CSV·감사로그가 같은 값을 쓴다. 등록 뒤에는 이 화면에서 고치지 않는다 — 오기·변경은 커스터디에 이메일로 요청하고 커스터디가 처리한다.<br><span class="basis">근거 09 §0 2026-09-07(21) 기관 등록·식별자 · 커스터디 AML 연동 API 문서 customerNo 형식</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">customerNo 필드 — 정상 입력</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">경고 제거 · [초대 발송] 활성 조건 재검사</span></div>
+          <div class="nav-row"><span class="nav-el">customerNo 필드 — 형식 위반</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "customerNo 형식이 올바르지 않습니다 (L-XXXXXX-XXXX)" · [초대 발송] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">customerNo 필드 — 중복</span><span class="nav-act">[초대 발송] 클릭 시 서버 검증</span><span class="nav-to stay">⚠ "이미 등록된 customerNo입니다" · 입력값 유지</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="itm" data-idx="3">
+      <div class="num">4</div>
+      <div>
+        <div class="itm-title">수탁 지갑 주소 입력<span class="req">필수</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 항상 가능하다. 플레이스홀더는 "수탁 지갑 주소 (0x…)"다. 커스터디가 이 법인에 만들어 준 수탁 지갑 주소를 옮긴다 — <strong>법인 1사 · 체인 1개당 1지갑</strong>이고 지금은 Ethereum 단일이라 칸 1개(ETH·USDC·USDT 공용). 체인이 늘면 체인별 칸을 추가한다.<br><strong>허용 문자</strong> <code>0x</code> + 16진수 40자(총 42자). 앞뒤 공백은 지운다.<br><strong>검증</strong> ① 형식 일치 ② EIP-55 체크섬 일치(대소문자 혼용 입력 시) ③ 다른 기관 수탁 주소·운영·교환 재고·에스크로 지갑 주소와 중복 아님. ①②는 포커스 아웃 시 클라이언트가, ③은 [초대 발송] 클릭 시 서버가 본다.<br><strong>실패 처리</strong> ①② 위반 → 빨간 테두리 + ⚠ "지갑 주소 형식이 올바르지 않습니다". ③ 위반 → ⚠ "이미 등록된 지갑 주소입니다". 어느 쪽이든 [초대 발송] 비활성.<br><strong>연동</strong> 이 주소가 P3 온체인 잔고 조회 대상이고, 집행 명세 Excel의 from/to 지갑이며, 마목 예치 tx의 출발지 검증 기준이다. 값이 정상이면 [초대 발송] 활성 조건을 다시 본다.<br><strong>저장</strong> ORG.custody_address로 소문자 정규화 없이 체크섬 표기 그대로 저장한다. 등록 뒤 교체는 이 화면에 없다 — 커스터디에 이메일 요청 → 커스터디 처리.<br><span class="basis">근거 09 §0 2026-09-07(21) 자산 묶음 ① · 기관 등록·식별자</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">지갑 주소 필드 — 정상 입력</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">경고 제거 · [초대 발송] 활성 조건 재검사</span></div>
+          <div class="nav-row"><span class="nav-el">지갑 주소 필드 — 형식·체크섬 위반</span><span class="nav-act">포커스 아웃</span><span class="nav-to stay">⚠ "지갑 주소 형식이 올바르지 않습니다" · [초대 발송] 비활성</span></div>
+          <div class="nav-row"><span class="nav-el">지갑 주소 필드 — 중복</span><span class="nav-act">[초대 발송] 클릭 시 서버 검증</span><span class="nav-to stay">⚠ "이미 등록된 지갑 주소입니다" · 입력값 유지</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="itm" data-idx="4">
+      <div class="num">5</div>
+      <div>
+        <div class="itm-title">[초대 발송] 버튼<span class="req">필수</span></div>
+        <div class="itm-desc"><strong>노출</strong> 항상 보인다(primary).<br><strong>클릭 가능</strong> 기관명·이메일·customerNo·수탁 지갑 주소 4칸이 모두 정상이고 인라인 오류가 0이며 발송 중이 아닐 때만 활성이다. 목업은 빈칸이라 비활성이다.<br><strong>확인 사항</strong> 확인 다이얼로그를 띄우지 않는다. 클릭하면 서버가 기관명·이메일·customerNo·지갑 주소 중복을 검증한다.<br><strong>액션</strong> 라벨을 "발송 중…"으로 바꾸고 필드를 비활성으로 두어 중복 클릭을 막는다. ORG를 만들고(식별자 = customerNo · 수탁 지갑 주소 저장) USER를 만든 뒤(계정 상태 '초대 발송됨') 초대 이메일(ONB-00)을 72시간·1회 유효로 보낸다. 생성과 발송은 원자적으로 처리하고 발송이 실패하면 생성을 되돌린다. 목록 최상단에 행을 추가하고 폼을 비우며 토스트 "초대 이메일을 발송했습니다 — {이메일 마스킹} · 72시간 유효"를 띄운다. 화면 이동은 없다. 이후 가입자는 ONB-01~03에서 계정을 활성화하고 AUTH-01로 들어온다. 기관 상태 초기값은 <strong>'활성'</strong>이다 — customerNo가 발급됐다는 것은 커스터디 오프라인 CDD가 끝났다는 뜻이다(2026-09-07 결정 · 종전 '심사중(EDD)' 초기값과 [확인필요] 종결). 이후 변동은 커스터디 조회값으로 반영된다(항목 7 · 이 콘솔에서 바꾸지 않는다). 기관당 1계정이라 기존 가입자가 있으면 해지 후에만 초대할 수 있다.<br><span class="basis">근거 ONB-00 · ISMS 2.5(계정·인증 관리) · 09 §0 고객(CDD 완료 법인)</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">[초대 발송] — 활성 조건</span><span class="nav-act">다음이 모두 참: ①기관명 ②이메일 ③customerNo ④지갑 주소 정상 ⑤인라인 오류 0 ⑥발송 중 아님</span><span class="nav-to stay">하나라도 미충족 → 회색 비활성(공통 UI 규격) · 사유는 필드 인라인 ⚠</span></div>
+          <div class="nav-row"><span class="nav-el">[초대 발송] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음 → 라벨 "발송 중…"·필드 비활성 → 서버 중복 검증 → ORG·USER 생성 → 이메일 발송(원자적 — 발송 실패 시 생성 롤백)</span><span class="nav-to stay">목록 최상단 행 추가(기관 상태 '활성' · 계정 '초대 발송됨' · [초대 재발송] 노출) · 폼 초기화 · 토스트 "초대 이메일을 발송했습니다 — {이메일 마스킹} · 72시간 유효" · 감사로그 · 이동 없음</span></div>
+          <div class="nav-row"><span class="nav-el">[초대 발송] — 실패</span><span class="nav-act">기관명·이메일·customerNo·지갑 주소 중복 / 발송 실패 / 서버 오류</span><span class="nav-to stay">화면 잔류 · 중복 → 해당 필드 인라인 ⚠ ④ · 입력값 유지 / 발송 실패·오류 → 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · ORG·USER 미생성 · 입력값 유지 · 라벨 복귀</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="itm" data-idx="5">
+      <div class="num">6</div>
+      <div>
+        <div class="itm-title">기관·가입자 목록 (표시 전용)</div>
+        <div class="itm-desc">· 행 클릭 없음 · 열: 기관(customerNo 부기 — 기관 식별자) · 가입자 · KYC 상태 · 계정 상태 · 조치 — 계정 상태 '초대 발송됨' 행에만 [초대 재발송], 그 외 행은 비운다(기관 상태를 바꾸는 조치는 없다 · 2026-09-07)<br>· <strong>KYC 상태 칩</strong>(기관 · G-3 게이팅 단일 출처 · 커스터디 조회값): 커스터디 customerStatusCd 6종 그대로 — 02 활성(초록) / 01 신규·03 휴면·04 거래중지·06 거래거절(노랑) / 05 거래해지(회색) · 코드 + 한글 라벨 + 조회 시각 부기 · 항목 7 · <strong>계정 상태 칩</strong>(가입자): 초대 발송됨(파랑) / 활성(초록) / 잠금(노랑) / 해지(회색) — 계정 상태는 시스템·홈 처리함이 전이(ONB-01~03 활성화 · AUTH-01 잠금 · ADM-02 T8 해제), 이 화면에서 직접 변경 없음<br>· 가입자 열 표시값(이름 vs 이메일 마스킹) <span class="chk">[확인필요]</span> · 기관당 가입자 1명 — 고객사 기안·승인 2인 분리 없음<br>· <strong>목록 규격</strong>: 최신 등록순 단일 리스트 · 검색·필터·정렬 없음(전체 조회는 데이터 다운로드 ADM-05 CSV ①) · 빈 상태 "등록된 기관이 없습니다" + "아래 초대 발송으로 첫 기관을 초대하세요" · 로딩 "불러오는 중…" · 전량 표시 · 페이지 스크롤([더 보기]·페이지네이션·무한 스크롤 없음) · 갱신: KYC 상태는 화면 진입·새로고침 시 커스터디 조회 · 계정 상태는 초대 발송·ADM-02 처리(잠금 해제) 즉시<br><span class="basis">근거 F-12 관리자 콘솔 ORG·KYC 통합 · 예외 A1·A2·A6 · notation 상태 칩·목록 규격</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">기관 행(조치 버튼 제외)</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용 — 기관 상세 화면 없음)</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="itm" data-idx="6">
+      <div class="num">7</div>
+      <div>
+        <div class="itm-title">KYC 상태 칩 — 커스터디 조회값 (표시 전용)</div>
+        <div class="itm-desc">· 값은 커스터디 Custody Admin의 고객 상태 코드(customerStatusCd) 6종 그대로다 — <strong>01 신규 / 02 활성 / 03 휴면 / 04 거래중지 / 05 거래해지 / 06 거래거절</strong>. 이 콘솔에서 바꾸는 기능은 없다(2026-09-07 결정 · 종전 [상태 변경 ▾] 삭제).<br>· <strong>조회 시점</strong> 이 화면 진입·새로고침 시 기관마다 커스터디 조회 API를 호출해 칩과 조회 시각을 갱신한다. 고객 콘솔은 로그인·요청/게시/신청·수락/확정 시점에, 처리함(ADM-02) ① 승인은 [승인] 클릭 시점에 같은 조회를 한다. 커스터디가 상태를 밀어 보내는 통지는 없으므로 커스터디가 상태를 바꾸면 <strong>다음 관문 조회에서</strong> 반영된다. 조회와 조회 사이(관리자 승인 후 콜드 집행까지)에 기관에 문제가 생기면 커스터디가 서명하지 않고 처리함(ADM-02) ② 행의 [AML 이슈 미집행]을 누른다.<br>· <strong>표시</strong> 02 활성 = 초록 칩 · 01·03·04·06 = 노랑 칩 · 05 거래해지 = 회색 칩. 칩 안은 "코드 한글 라벨", 옆에 조회 시각.<br>· <strong>게이팅</strong> 02 활성만 거래 가능. 그 외 5종은 전부 같은 처리 — 고객 화면 KYC 예외 배너 + 거래 버튼 비활성(조회 가능) · 처리함(ADM-02) ①·② 대기 건 일괄 거절(ADM-02 상세내용 20). 상태별 의미 분기는 두지 않는다.<br>· <strong>조회 실패</strong> 칩 자리에 회색 "조회 실패" + 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 마지막 값을 추측해 쓰지 않는다.<br><span class="chk">[확인필요]</span> 05 거래해지·06 거래거절 기관의 로그인 허용 여부(현재 안 = 조회만 허용) · 압류·동결 등 지갑 단위 사고가 어느 코드로 내려오는지 · 조회 API 응답 지연 시 관문 처리.<br><span class="basis">근거 09 §0 2026-09-07(22) · drafts/37 커스터디 요청문 · reference/custody/01 customerStatusCd</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">KYC 상태 칩</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용)</span></div>
+          <div class="nav-row"><span class="nav-el">화면 진입 · 새로고침</span><span class="nav-act">기관별 커스터디 조회 API 호출</span><span class="nav-to stay">칩·조회 시각 갱신 · 실패 시 "조회 실패" + 공통 배너</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="itm" data-idx="7">
+      <div class="num">8</div>
+      <div>
+        <div class="itm-title">[초대 재발송] 버튼</div>
+        <div class="itm-desc"><strong>노출</strong> 계정 상태가 '초대 발송됨'인 행에만 보인다(링크 만료 72h · 미수신 · 분실). 활성 계정 행에는 보이지 않는다.<br><strong>클릭 가능</strong> 발송 중이 아니면 활성이다.<br><strong>확인 사항</strong> 없다. 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> 라벨을 "발송 중…"으로 바꿔 중복 클릭을 막고, 기존 링크를 즉시 무효로 만든 뒤 72시간·1회 유효한 새 링크로 초대 이메일(ONB-00)을 다시 보낸다. 토스트 "초대 이메일을 다시 발송했습니다 — 72시간 유효"를 띄우고 감사로그에 남긴다. 화면 이동은 없다.<br><span class="chk">[확인필요]</span> 재발송 횟수 제한 · 백업코드를 다 쓴 경우 가입자 자체 재설정(DASH-03)과 재초대 중 어느 경로인지.<br><span class="basis">근거 ONB-00 초대(72h·1회) · ISMS 2.5</span></div>
+        <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
+          <div class="nav-row"><span class="nav-el">[초대 재발송] — 활성 조건</span><span class="nav-act">계정 상태 '초대 발송됨' · 발송 중 아님</span><span class="nav-to stay">그 외 → 버튼 미노출(활성 계정) 또는 회색 비활성(발송 중)</span></div>
+          <div class="nav-row"><span class="nav-el">[초대 재발송] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없음 → 라벨 "발송 중…"·중복 클릭 차단</span><span class="nav-to stay">토스트 "초대 이메일을 다시 발송했습니다 — 72시간 유효" · 기존 링크 무효 · 라벨 복귀 · 감사로그 · 이동 없음(<strong>초대 이메일(ONB-00)</strong> 재발송)</span></div>
+          <div class="nav-row"><span class="nav-el">[초대 재발송] — 실패</span><span class="nav-act">이메일 발송 실패 / 서버 오류</span><span class="nav-to stay">화면 잔류 · 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 기존 링크 유지 · 라벨 복귀</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<section class="footer-note" style="padding-bottom:0;">
+  <div class="note-card">
+    <div class="note-title">상세내용</div>
+    <div class="detail-grid" id="detailCol">
+      <div class="dtl" data-idx="4">
+        <div class="detail-label"><span class="dtl-num">17</span>온보딩 연결</div>
+      <div class="dtl-body"><span class="box">· [초대 발송] → 초대 이메일(ONB-00 · 72h·1회 링크 — 이메일 링크 없음 원칙의 유일한 예외) → 계정 활성화(ONB-01~03 · 비밀번호·Google Authenticator·복구 코드) → 로그인(AUTH-01) · 활성화 완료 시 계정 상태 '초대 발송됨' → '활성'(시스템)<br>· 초대 발송·재발송·상태 변경은 전부 감사로그(ISMS 2.5) · 셀프가입·소셜 로그인 없음<br>· 초대 시 기관 상태 초기값 = 활성(2026-09-07 결정) · 기관 정보(customerNo·지갑 주소·법인명)는 이 화면에 수정 기능이 없다 — 변경은 커스터디에 이메일 요청 → 커스터디가 처리<br>· <span class="chk">[확인필요]</span> 재발송 횟수 제한 · 개인 이메일 도메인 허용</span></div>
+      </div>
+      <div class="dtl" data-idx="6">
+        <div class="detail-label"><span class="dtl-num">12</span>기관 상태(커스터디 조회값) → 게이팅·연동</div>
+      <div class="dtl-body"><span class="box">· 기관 상태 = 커스터디 customerStatusCd(01 신규 / 02 활성 / 03 휴면 / 04 거래중지 / 05 거래해지 / 06 거래거절) — 조회 API로만 읽고 이 시스템은 쓰지 않는다(2026-09-07(22)). 종전 5종(심사중·활성·일시제한·동결·해지)과 이 화면의 [상태 변경 ▾]는 폐기. <strong>커스터디 → 이 시스템 방향의 통지(웹훅)는 두지 않는다</strong> — 연동은 이 조회 API 하나와 커스터디 담당자의 어드민 입력(txhash · [AML 이슈 미집행])뿐이다(2026-09-14).<br>· 게이팅: 02 활성 = 배너 없음·전 기능 / 그 외 5종 = EXC-01·BRK-02·BRK-03 KYC 예외 배너 + 요청 차단(내부 사유 미노출) · 조회 가능 · 상태별 분기 없음.<br>· 조회 관문: T1 로그인 · T2 요청/게시/신청 · T3 수락/확정/① [승인] 클릭 · ADM-03 진입. 변경 통지가 없어 비활성 전환은 다음 관문에서 잡히고, 그 순간 처리함(ADM-02) ①·② 대기 건을 일괄 거절한다(ADM-02 상세내용 20 · 케이스분기 AC-07·AC-08).<br>· 계정 상태(가입자)는 이 시스템 것이다 — 잠금·해제는 ADM-02 T8, 탈취 의심은 '잠금 유지·이관'(기관 상태를 이 시스템이 바꾸지 않으므로 커스터디에 통보해 판단을 맡긴다).<br>· 1기관 1가입자: 고객사 내부 기안↔승인 분리 전제 없음 — 구속력 행위는 고객 화면 결과 고지 1문장으로 대체 · DSRV 측 직무분리(자기승인 차단)는 ADM-02 유지<br>· 해지 후에도 기록은 법정 기간 보존 — 거래 15년·AML 5년(L6 §9 · 예외 A5) · CSV ①에 '05 거래해지' 상태로 잔존<br>· <span class="chk">[확인필요]</span> 05·06 로그인 허용 여부 · 사고(압류·동결)의 코드 · 새 초대 가능 조건(커스터디 해지 확인 후?)</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="footer-note">
+  <div class="note-card">
+    <div class="note-title">비고</div>
+    <div class="note-body">
+      · DSRV 내부 관리자 화면(고객사 노출 없음). 어드민은 <strong>처리함(ADM-02) · 설정(ADM-03) · 기관 · 가입자(ADM-04) · 데이터 다운로드(ADM-05) 4화면</strong>이다. 이 화면은 2026-09-16 구현 화면 기준으로 설정(ADM-03)에서 분리했다.<br>
+      · <strong>화면 구성</strong> 초대 발송 카드가 위, 기관·가입자 목록이 아래다. 기관 생성은 초대 발송 하나로만 일어난다 — 기관만 만들고 나중에 초대하는 경로를 두지 않는다.<br>
+      · <strong>기관 상태 초기값 = 활성</strong>(2026-09-07(21) 결정 · 09 §0 정본). customerNo가 발급됐다는 것은 커스터디 오프라인 CDD가 끝났다는 뜻이므로 초대 시점에 커스터디를 조회하지 않고 활성으로 시작한다. 종전 초기값 '심사중(EDD)'과 [확인필요]는 이때 종결했다 — <span class="chk">2026-09-16 구현 화면은 아직 '심사중(EDD)'로 들어가고 있어 개발 수정이 필요하다.</span><br>
+      · <strong>[상태 변경] 버튼을 두지 않는다</strong>(2026-09-07(22) 결정). 기관 상태는 커스터디 Custody Admin의 customerStatusCd이고 이 콘솔은 조회만 한다. 항목 7은 표시 전용 칩이다 — <span class="chk">2026-09-16 구현 화면에 [상태 변경] 버튼이 남아 있어 삭제가 필요하다.</span><br>
+      · <strong>2026-09-14 커스터디 연동 재확정</strong>: 기관 상태는 커스터디 customerStatusCd 6종을 조회 API로 읽는다(변경 통지 없음 · 관문마다 조회). 종전 5종 라벨은 폐기했다. 거래 위험도 통지로 받지 않는다 — 커스터디가 집행 전 심사에서 문제를 발견하면 서명하지 않고 처리함(ADM-02) ② 행의 [AML 이슈 미집행]을 누른다.<br>
+      · <strong>KYC 재이행</strong>은 오프라인(커스터디) 업무이고 이 콘솔은 <strong>결과만</strong> 기관 상태로 받는다 — 재이행 도래일 알림·처리함 행을 두지 않는다(2026-09-04 결정 · 종전 T7 삭제).<br>
+      · <strong>조회 관문</strong> 이 화면 진입·새로고침 · 가입자 로그인 · 요청/게시/신청 · 수락/확정 · 처리함 ① [승인] 클릭 5곳이다. 캐시·폴링 없음. <span class="chk">초대 발송 시점은 관문이 아니다 — customerNo 실재 여부·상태를 검증하지 않고 활성으로 시작하며, 초대 링크 72시간 동안 기관이 비활성으로 바뀌어도 가입은 완주된다(첫 로그인에서 잡힌다). 관문 추가 여부 [확인필요].</span><br>
+      · 연결: 초대 발송 → ONB-00 초대 메일 → ONB-01~03 계정 활성화 → AUTH-01 로그인 · 기관 KYC 상태 = 전 화면 게이팅(G-3) 단일 출처 · 계정 잠금 해제는 처리함(ADM-02) T8 · 전체 목록 조회는 데이터 다운로드(ADM-05) CSV ①.<br>
+      · <span class="chk">[확인필요]</span> 가입자 열 표시값(이름 vs 이메일 마스킹) · 재발송 횟수 제한 · 백업코드 소진 시 경로(DASH-03 자체 재설정 vs 재초대) · 05 거래해지·06 거래거절 기관의 로그인 허용 여부 · 압류·동결 등 지갑 단위 사고가 어느 코드로 내려오는지 · 조회 API 응답 지연 시 관문 처리 · 개인 이메일 도메인 허용 여부 · 등록 값(주소·법인명) 정정이 이 DB에 반영되는 경로(결정 D5).
+    </div>
+  </div>
+</section>
+
+<script src="screen.js"></script>
+</body>
+</html>

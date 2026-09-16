@@ -177,7 +177,7 @@
         <tr><td class="fld">처리함 (INBOX)</td><td>관리자 홈(ADM-02)의 작업 목록. 승인·확인·조사가 필요한 일이 생기면 시스템이 '아이템'을 만들어 쌓고 관리자가 종결한다. 유형은 §0-B.</td></tr>
         <tr><td class="fld">에스크로 전용지갑</td><td>마목 정산 예치분을 담는 DSRV 관리 지갑. 회사 고유재산 지갑·커스터디 수탁 지갑과 지갑·장부·회계를 분리하고 전량 콜드로 두며 운용이 금지된 <b>고객 자산</b>(약관 제3조 8호·제10조). 예치(수수료 포함) → 양건 예치 확인 → 인도(가스 차감) → 잔여 수수료 스윕. 종전 '격리·동결' 용어는 이 시스템 밖(커스터디).</td></tr>
         <tr><td class="fld">customerNo</td><td>커스터디(Custody Admin)가 온보딩 완료 시 부여하는 기관 식별자(형식 <code>L-XXXXXX-XXXX</code>). 이 시스템의 <b>유일한 기관 식별자</b>이며 화면·Excel·CSV·감사로그에 같은 값을 쓴다(내부 채번 ORG-NNNN 폐기 · 2026-09-07(21)).</td></tr>
-        <tr><td class="fld">관문 조회 · 기관 상태</td><td>기관 상태(customerStatusCd 01~06)는 커스터디 조회 API로 <b>읽기만</b> 한다. 조회 시점 = 로그인 · 요청/게시/신청 · 수락/확정/① [승인] 클릭 · ADM-03 진입(캐시·폴링·변경 통지 없음). 02 활성만 거래 가능, 그 외 5종은 동일하게 비활성 처리. 비활성 확인 순간 그 기관의 대기 건을 일괄 거절(2026-09-07(22)).</td></tr>
+        <tr><td class="fld">관문 조회 · 기관 상태</td><td>기관 상태(customerStatusCd 01~06)는 커스터디 조회 API로 <b>읽기만</b> 한다. 조회 시점 = 로그인 · 요청/게시/신청 · 수락/확정/① [승인] 클릭 · ADM-04 진입(캐시·폴링·변경 통지 없음). 02 활성만 거래 가능, 그 외 5종은 동일하게 비활성 처리. 비활성 확인 순간 그 기관의 대기 건을 일괄 거절(2026-09-07(22)).</td></tr>
         <tr><td class="fld">AML 이슈 미집행</td><td>커스터디가 집행 전 심사(BLF·KYT 등)에서 문제를 발견하면 <b>콜드 서명을 하지 않고</b> ADM-02 ② 해당 행의 <b>[AML 이슈 미집행]</b>을 누른다. <b>사유는 받지 않는다.</b> 미집행 이전 전부 제거 · 거래 거절 종결 · 마목 예치 완료분 반환 행 · 고객 안내 "진행 불가" · 이메일 ⑤. 되돌리는 수단은 없다(고객 재요청). 통과 시 통지 없이 서명·집행 후 txHash 입력(2026-09-14 · 종전 중지/해제 웹훅 폐지).</td></tr>
         <tr><td class="fld">가스비</td><td>온체인 이전 수수료(ETH). <b>고객 부담 · 받는 수량에서 차감</b>. 예상액은 참고값이고 실제 차감액은 집행 후 실발생액(gasUsed × effectiveGasPrice). 마목은 예치 1 + 인도 1 = 2회분. 건별 한도 판정에는 미포함(2026-09-02(13)).</td></tr>
         <tr><td class="fld">콜드 · 수수료 스윕</td><td>콜드월렛 = 인터넷과 분리된 지갑. 이 시스템의 지갑 4묶음은 <b>전부 콜드</b>이고 핫월렛이 없다(종전 핫 비중·스윕 경고 삭제 · 2026-09-04). 수수료 스윕 = 인도 후 에스크로 전용지갑에 남은 중개수수료를 정책 주기로 운영 지갑(수수료풀)에 옮기는 콜드 이전(자산별 1건).</td></tr>
@@ -238,7 +238,7 @@
       <tr><th style="width:190px;">표기</th><th>뜻</th></tr>
       <tr><td class="fld">전역 게이팅 G-3</td><td>고객 콘솔 모든 화면 상단에 뜨는 <b>KYC·계약 승인상태 배너</b>. 기관 상태(ORG.status · 커스터디 조회값)가 '02 활성'이 아니면 조회만 가능하고 거래 기능이 막힌다. 기준값은 ORG.status 하나뿐(단일 출처).</td></tr>
       <tr><td class="fld">마목 해당성 4요소</td><td>게시판 중개가 '단순 게시판'(규제 대상 아님)이 아니라 '중개'임을 보여주는 네 가지: <b>① 게재 검증</b>(게시자의 보유·처분권 확인) · <b>② 양측 KYC 담보</b>(당사자 모두 자사 커스터디 고객) · <b>③ 정산 연계</b> · <b>④ 수수료 수취</b>. 본문에서 "4요소 ①"처럼 번호로 가리킨다. <span class="src">근거: FIU 신고매뉴얼 제외요건(L5) · 기획 문서 21·25</span></td></tr>
-      <tr><td class="fld">관리자 CSV ①~⑥</td><td>ADM-02에서 내려받는 조회용 CSV 6종. <b>① 기관-가입자 목록 · ② 거래 요청 목록 · ③ 통합 거래 목록 · ④ 구분회계 집계 · ⑤ 3면 대사 · ⑥ 열람 기록</b>. 조회성 데이터는 화면 대신 이 CSV로 본다. 컬럼 정의는 ADM-02 화면기획 부록.</td></tr>
+      <tr><td class="fld">관리자 CSV ①~⑥</td><td>ADM-05에서 내려받는 조회용 CSV 6종. <b>① 기관-가입자 목록 · ② 거래 요청 목록 · ③ 통합 거래 목록 · ④ 구분회계 집계 · ⑤ 3면 대사 · ⑥ 열람 기록</b>. 조회성 데이터는 화면 대신 이 CSV로 본다. 컬럼 정의는 ADM-02 화면기획 부록.</td></tr>
       <tr><td class="fld">채번 규칙</td><td><code>L-XXXXXX-XXXX</code> 기관 = 커스터디 발급 customerNo(내부 채번 ORG-NNNN 폐기 · 2026-09-07(21)) · <code>EXC-YYYYMMDD-NNNN</code> 직접 교환(요청일 + 당일 일련번호) · <code>BRK-YYYYMMDD-NNNN</code> 게시판 중개(게시일 + 일련번호, 게시·신청·이전이 같은 번호 공유) · <code>DSRV-OPS-NN</code> 내부 승인자. 표기 규칙 전체는 notation.html.</td></tr>
       <tr><td class="fld">"화면은 표출만"</td><td>스프레드·수수료·한도 같은 정책값은 ⑥ 정책 테이블이 유일한 출처이고, 화면·코드에 하드코딩하지 않는다는 뜻.</td></tr>
       <tr><td class="fld">"온체인 확정 기준"</td><td>잔고 차감·완료 처리의 시점은 시스템 내부 처리 시점이 아니라 블록체인에서 거래가 확정된 시점(txhash 대사 일치)이라는 뜻.</td></tr>
@@ -255,12 +255,12 @@
 
     <div class="tbl">
       <div class="tbl-head"><span class="scr">ONB · ADM-03</span><span class="kn">기관 (고객사)</span><span class="en">ORG</span></div>
-      <div class="role">고객사(국내 법인) 1곳 = 행 1개. 커스터디 오프라인 온보딩(CDD) 완료 후 관리자가 ADM-03 초대 폼(기관명 · 가입자 이메일 · <b>customerNo</b> · <b>수탁 지갑 주소</b>)에 입력해 초대를 보낼 때 등록한다(2026-09-07(21)). <b>status</b>(커스터디 조회값)가 고객 콘솔 전체의 기능 사용 가능 여부를 결정한다. 등록 값 변경은 커스터디에 이메일 요청.</div>
+      <div class="role">고객사(국내 법인) 1곳 = 행 1개. 커스터디 오프라인 온보딩(CDD) 완료 후 관리자가 ADM-04 초대 폼(기관명 · 가입자 이메일 · <b>customerNo</b> · <b>수탁 지갑 주소</b>)에 입력해 초대를 보낼 때 등록한다(2026-09-07(21)). <b>status</b>(커스터디 조회값)가 고객 콘솔 전체의 기능 사용 가능 여부를 결정한다. 등록 값 변경은 커스터디에 이메일 요청.</div>
       <div class="f"><span class="m pk">PK</span><span class="name">기관 ID (customerNo)</span><span class="col">customer_no</span><span class="desc">커스터디 발급 <code>L-XXXXXX-XXXX</code> · 기관 식별자 단일(내부 채번 ORG-NNNN 폐기 · 2026-09-07(21)) · 다른 테이블의 <code>org_id</code> FK는 이 값을 가리킨다 <b>[스키마 보완]</b></span></div>
       <div class="f"><span class="m n">·</span><span class="name">상호</span><span class="col">name</span><span class="desc">커스터디 안내 법인명 그대로. 게시판에서 거래 확정 전에는 첫 글자만 보이게 마스킹</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">수탁 지갑 주소</span><span class="col">custody_address</span><span class="desc">ADM-03 초대 시 입력 · 법인 1사·체인 1개당 1지갑(Ethereum 단일 → 1개 · ETH·USDC·USDT 공용) · EIP-55 체크섬 검증 · 기관 간·운영·재고·에스크로 주소와 중복 불가 · 온체인 잔고 조회와 집행 명세 from/to의 원천 · WALLET(수탁 콜드) 행과 1:1 · 변경은 커스터디 이메일 요청(반영 경로 <span class="tg">[결정필요 D5]</span>) <b>[스키마 보완]</b></span></div>
-      <div class="f"><span class="m n">·</span><span class="name">기관 상태</span><span class="col">status</span><span class="desc"><span class="ev">01 신규 / 02 활성 / 03 휴면 / 04 거래중지 / 05 거래해지 / 06 거래거절</span><br>커스터디 Custody Admin의 customerStatusCd를 조회 API로 읽어 저장한 값. <b>이 시스템은 변경하지 않는다</b>(2026-09-07(22) · 종전 5종·ADM-03 상태 변경 폐기). 고객 화면의 기능 차단(전역 게이팅 G-3, §0-D)이 보는 유일한 값 — 02 활성만 거래 가능</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">상태 조회 시각</span><span class="col">status_checked_at</span><span class="desc">마지막 커스터디 조회 성공 시각 — ADM-03 칩에 부기 <b>[스키마 보완]</b></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">수탁 지갑 주소</span><span class="col">custody_address</span><span class="desc">ADM-04 초대 시 입력 · 법인 1사·체인 1개당 1지갑(Ethereum 단일 → 1개 · ETH·USDC·USDT 공용) · EIP-55 체크섬 검증 · 기관 간·운영·재고·에스크로 주소와 중복 불가 · 온체인 잔고 조회와 집행 명세 from/to의 원천 · WALLET(수탁 콜드) 행과 1:1 · 변경은 커스터디 이메일 요청(반영 경로 <span class="tg">[결정필요 D5]</span>) <b>[스키마 보완]</b></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">기관 상태</span><span class="col">status</span><span class="desc"><span class="ev">01 신규 / 02 활성 / 03 휴면 / 04 거래중지 / 05 거래해지 / 06 거래거절</span><br>커스터디 Custody Admin의 customerStatusCd를 조회 API로 읽어 저장한 값. <b>이 시스템은 변경하지 않는다</b>(2026-09-07(22) · 종전 5종·ADM-04 상태 변경 폐기). 고객 화면의 기능 차단(전역 게이팅 G-3, §0-D)이 보는 유일한 값 — 02 활성만 거래 가능</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">상태 조회 시각</span><span class="col">status_checked_at</span><span class="desc">마지막 커스터디 조회 성공 시각 — ADM-04 칩에 부기 <b>[스키마 보완]</b></span></div>
       <div class="f"><span class="m n">·</span><span class="name">KYC 상태</span><span class="col">kyc_status</span><span class="desc"><span class="ev">폐기 예정</span> — 01 신규·06 거래거절이 status(customerStatusCd)에 포함되어 중복(2026-09-07(22)). 개발 설계 시 삭제</span></div>
       <div class="f"><span class="m n">·</span><span class="name">실제소유자 확인</span><span class="col">rbo_verified</span><span class="desc">법인을 실질 지배하는 개인의 확인 완료 여부</span></div>
       <div class="f"><span class="m n">·</span><span class="name">계약 상태</span><span class="col">contract_status</span><span class="desc">서비스 이용계약 체결 상태</span></div>
@@ -602,7 +602,7 @@
     </div>
 
     <div class="tbl">
-      <div class="tbl-head"><span class="scr">ADM-02 CSV ⑥</span><span class="kn">통합 감사로그</span><span class="en">AUDIT_LOG</span></div>
+      <div class="tbl-head"><span class="scr">ADM-05 CSV ⑥</span><span class="kn">통합 감사로그</span><span class="en">AUDIT_LOG</span></div>
       <div class="role">모든 행위·상태 변경·열람의 감사 기록. 한 번 쓰면 수정·삭제할 수 없다. 관리자 CSV ⑥ 열람 기록의 원천.</div>
       <div class="f"><span class="m pk">PK</span><span class="name">로그 ID</span><span class="col">log_id</span><span class="desc"></span></div>
       <div class="f"><span class="m n">·</span><span class="name">발생원</span><span class="col">source</span><span class="desc"><span class="ev">AUTH / EXC / BRK / WAL / 처리함(INBOX) / 정책(ADM-03) / 열람·다운로드 / 커스터디 연동(기관 상태 조회 결과 · txHash 입력 · AML 이슈 미집행)</span></span></div>
@@ -615,7 +615,7 @@
     </div>
 
     <div class="tbl">
-      <div class="tbl-head"><span class="scr">ADM-02 CSV ⑤</span><span class="kn">3면 대사</span><span class="en">RECONCILIATION</span></div>
+      <div class="tbl-head"><span class="scr">ADM-05 CSV ⑤</span><span class="kn">3면 대사</span><span class="en">RECONCILIATION</span></div>
       <div class="role">정기 배치마다 자산별로 내부 장부·온체인 잔고·콜드월렛 기록 세 값을 스냅숏으로 남기고 일치 여부를 기록한다.</div>
       <div class="f"><span class="m pk">PK</span><span class="name">대사 ID</span><span class="col">recon_id</span><span class="desc"></span></div>
       <div class="f"><span class="m n">·</span><span class="name">지갑 묶음</span><span class="col">wallet_group</span><span class="desc"><span class="ev">고객 수탁 / 운영 / 나목 교환 최소재고 / 에스크로 전용지갑</span> — 4묶음 전부 대사(2026-09-04(17)①) <b>[스키마 보완]</b></span></div>
@@ -626,7 +626,7 @@
     </div>
 
     <div class="tbl">
-      <div class="tbl-head"><span class="scr">ADM-02 CSV ④</span><span class="kn">구분회계 계정</span><span class="en">LEDGER_ACCOUNT</span></div>
+      <div class="tbl-head"><span class="scr">ADM-05 CSV ④</span><span class="kn">구분회계 계정</span><span class="en">LEDGER_ACCOUNT</span></div>
       <div class="role">고객 수탁자산과 DSRV 자기 자산·수익을 계정으로 분리한 잔액(조회 전용). 원장을 직접 고치는 기능은 없다.</div>
       <div class="f"><span class="m pk">PK</span><span class="name">계정 ID</span><span class="col">account_id</span><span class="desc"></span></div>
       <div class="f"><span class="m n">·</span><span class="name">계정 구분</span><span class="col">type</span><span class="desc"><span class="ev">수탁 / 운영 / 교환 재고 / 에스크로 / 스프레드수익(운영손익) / 중개수수료 / 가스비 비용(ETH 실발생) / 가스비 회수(고객 차감분)</span> — 원장 4분할(자산 묶음 4개) + 수익 2계정 + 가스비 2계정. 수익 원천: EXCHANGE_EXECUTION.spread_revenue · BROKER_SETTLEMENT.fee_revenue · 가스비 원천: gas_actual_* · 예상액은 회계 항목 아님(2026-09-02(13)④) <b>[스키마 보완]</b></span></div>
