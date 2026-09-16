@@ -68,9 +68,9 @@
             <div class="csvbtn"><div class="ct">① 고객사 · 가입자</div><div class="cd">기관·가입자 목록. 이메일은 마스킹된다.</div><span class="dl">다운로드</span></div>
             <div class="csvbtn"><div class="ct">② 거래 요청</div><div class="cd">나목 요청·마목 게시·신청 전부 + 자동검증 결과·처리 이력·만료·중지 사유.</div><span class="dl">다운로드</span></div>
             <div class="csvbtn"><div class="ct">③ 콜드 이전</div><div class="cd">서명자 · 명세 해시 · 가스비 · 실수령 수량.</div><span class="dl">다운로드</span></div>
-            <div class="csvbtn"><div class="ct">④ 원장</div><div class="cd">원장 4분할과 가스비 발생·회수 계정.</div><span class="dl">다운로드</span></div>
+            <div class="csvbtn"><div class="ct">④ 원장 (xlsx)</div><div class="cd">시트 A 잔액 스냅숏 · 시트 B 전기 원장.</div><span class="dl">다운로드</span></div>
             <div class="csvbtn"><div class="ct">⑤ 3면 대사</div><div class="cd">지갑 4묶음 전부의 내부·온체인·커스터디 잔액.</div><span class="dl">다운로드</span></div>
-            <div class="csvbtn"><div class="ct">⑥ 열람 기록</div><div class="cd">WORM 해시와 보존 기간이 함께 기록된다.</div><span class="dl">다운로드</span></div>
+            <div class="csvbtn"><div class="ct">⑥ 열람 기록</div><div class="cd">감사로그 전량. WORM 해시와 보존 기간 포함.</div><span class="dl">다운로드</span></div>
           </div>
         </div>
       </div>
@@ -89,7 +89,7 @@
       <div class="num">1</div>
       <div>
         <div class="itm-title">데이터 다운로드 — CSV 6종<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>노출</strong> 6종 각각 버튼 1개로 항상 보인다(대표 핀 = 영역 전체). 어드민 역할이 1종이라 6종 모두 같은 조건으로 보인다.<br><strong>클릭 가능</strong> 항상 활성이다. 같은 종류를 생성하는 동안만 비활성이고 다른 종류는 함께 받을 수 있다.<br><strong>확인 사항</strong> 없다. 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> 조회성 데이터는 화면 목록을 두지 않고 전부 CSV로 뺀다. 기간·조건 선택 없이 생성 시점 기준 전체 기간 스냅숏을 동기 생성한다. 모든 다운로드는 열람 기록(⑥)에 남는다. 컬럼 정의·표시 형식·예시값은 아래 부록 1~3을 본다.<br>· <strong>③ 콜드 이전 목록</strong>에 반환·수수료 스윕 행 유형이 추가됐고 명세 해시를 포함한다(2026-09-04).<br>· <strong>⑤는 '3면 대사'</strong>다 — 내부 장부 ↔ 온체인 ↔ 커스터디 콜드 기록 세 값을 자산 묶음 4개 전부에 대해 스냅숏한다. 2면(장부↔온체인)이 아니다.<br>· 개인식별정보는 CSV에서도 마스킹한다.<br><span class="chk">[확인필요]</span> 구현 화면의 ② 설명이 "KYT 점수·BLF 결과를 포함한 감사용 자료"인데, BLF·KYT 임계와 판정은 커스터디 소유로 정리했다(2026-09-07(21) · 종전 kyt_blf_thr → escalation_thr 대체). 이 CSV에 KYT 점수·BLF 결과가 실제로 들어가는지, 들어간다면 어느 값을 받아 적는지 확인이 필요하다.<br><span class="basis">근거 states 케이스분기 §4 · 09 §0 자산 묶음 4개 · 부록 컬럼 정의</span></div>
+        <div class="itm-desc"><strong>노출</strong> 6종 각각 버튼 1개로 항상 보인다(대표 핀 = 영역 전체). 어드민 역할이 1종이라 6종 모두 같은 조건으로 보인다.<br><strong>클릭 가능</strong> 항상 활성이다. 같은 종류를 생성하는 동안만 비활성이고 다른 종류는 함께 받을 수 있다.<br><strong>확인 사항</strong> 없다. 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> 조회성 데이터는 화면 목록을 두지 않고 전부 CSV로 뺀다. 기간·조건 선택 없이 생성 시점 기준 전체 기간 스냅숏을 동기 생성한다. 모든 다운로드는 열람 기록(⑥)에 남는다. 컬럼 정의·표시 형식·예시값은 아래 부록 1~3을 본다.<br>· <strong>③ 콜드 이전 목록</strong>에 반환·수수료 스윕 행 유형이 추가됐고 명세 해시를 포함한다(2026-09-04).<br>· <strong>④는 Excel 1파일 · 시트 2개</strong>다 : 시트 A 잔액 스냅숏(계정 8종 × 자산 3종) · 시트 B 전기 원장(잔액이 움직인 사건 전부). 잔액만으로는 기간 손익도 건별 가스비 전기도 나오지 않는다(2026-09-16 결정).<br>· <strong>⑥은 감사로그 전량</strong>이다 : 조회·다운로드만 거르지 않는다. 지침 제40조②의 승인·보류·거절·이전 중지·AML 판단·조치 완료·정책 변경·txHash 입력이 이 파일로 나간다(2026-09-16 결정).<br>· <strong>①에는 KYC 열을 두지 않는다</strong> : 고객확인은 커스터디 소관이고 우리는 기관 상태 코드로만 받는다(2026-09-16 결정).<br>· <strong>⑤는 '3면 대사'</strong>다 — 내부 장부 ↔ 온체인 ↔ 커스터디 콜드 기록 세 값을 자산 묶음 4개 전부에 대해 스냅숏한다. 2면(장부↔온체인)이 아니다.<br>· 개인식별정보는 CSV에서도 마스킹한다.<br><span class="chk">[확인필요]</span> 구현 화면의 ② 설명이 "KYT 점수·BLF 결과를 포함한 감사용 자료"인데, BLF·KYT 임계와 판정은 커스터디 소유로 정리했다(2026-09-07(21) · 종전 kyt_blf_thr → escalation_thr 대체). 이 CSV에 KYT 점수·BLF 결과가 실제로 들어가는지, 들어간다면 어느 값을 받아 적는지 확인이 필요하다.<br><span class="basis">근거 states 케이스분기 §4 · 09 §0 자산 묶음 4개 · 부록 컬럼 정의</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[CSV 다운로드] — 클릭</span><span class="nav-act">클릭 → 라벨 "생성 중…" → 브라우저 다운로드</span><span class="nav-to stay">화면 잔류 · 토스트 없음 · 열람 기록 적재</span></div>
           <div class="nav-row"><span class="nav-el">[CSV 다운로드] — 실패</span><span class="nav-act">생성 오류 / 타임아웃</span><span class="nav-to stay">상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 버튼 라벨 복귀</span></div>
@@ -121,6 +121,7 @@
       · <strong>다운로드 자체가 열람 기록</strong>이다 — ⑥을 받는 행위도 ⑥에 남는다(지침 제42조④).<br>
       · 다운로드 이력을 보는 화면은 두지 않는다(2026-09-02(11) 편의기능 축소). 이력은 ⑥ CSV로만 본다.<br>
       · 연결: ① 기관·가입자 목록 원천 = 기관 · 가입자(ADM-04) · ②③ 원천 = 처리함(ADM-02) ①② · ⑤ 3면 대사 불일치 알림 = 처리함 ④ 운영 알림.<br>
+      · <strong>2026-09-16 결정 3건</strong>: ④를 Excel 2시트로(잔액 + 전기 · LEDGER_ENTRY 신설 필요) · ⑥을 감사로그 전량으로 · ①에서 KYC 열 삭제. 근거와 뺀 열 목록은 부록 3의 각 카드 머리에 있다.<br>
       · <span class="chk">[확인필요]</span> ② 거래 요청 CSV의 KYT 점수·BLF 결과 포함 여부 — 개발에 회신 요청함(drafts/48 확인 A번): 실제로 들어가는지, 들어간다면 어디서 받아오는지, 안 들어가면 화면 설명 문구를 고쳐야 한다(항목 1 참조) · 각 CSV의 컬럼 정의(부록) · 생성 시간이 긴 CSV의 동기 생성 한계.
     </div>
   </div>
@@ -136,11 +137,12 @@
     <table class="tbl" style="margin-top:8px;">
       <thead><tr><th style="width:110px">항목</th><th style="width:230px">규칙</th><th>예시 · 비고</th></tr></thead>
       <tbody>
-        <tr><td>파일명</td><td><span class="src">DESK_{번호}_{종류}_{생성일시}.csv</span></td><td><span class="ex">DESK_01_고객사가입자_20260916_1430.csv</span> · 생성일시는 KST <span class="src">YYYYMMDD_HHMM</span> · 콜론은 파일명에 못 쓰므로 ISO 형식을 쓰지 않는다 <span class="gap">[신규 · 확인필요]</span></td></tr>
+        <tr><td>파일명</td><td><span class="src">DESK_{번호}_{종류}_{생성일시}.csv</span><br><strong>④만</strong> <span class="src">.xlsx</span></td><td><span class="ex">DESK_01_고객사가입자_20260916_1430.csv</span> · 생성일시는 KST <span class="src">YYYYMMDD_HHMM</span> · 콜론은 파일명에 못 쓰므로 ISO 형식을 쓰지 않는다 <span class="gap">[신규 · 확인필요]</span></td></tr>
+        <tr><td>파일 형식</td><td>①②③⑤⑥ = CSV · <strong>④ = Excel(.xlsx) 시트 2개</strong></td><td>④만 잔액(시트 A)과 전기(시트 B)를 한 파일에 담는다. CSV에는 시트가 없어서 ④만 형식이 다르다. 아래 인코딩·구분자·줄바꿈 규칙은 CSV 다섯 개에만 적용한다 <span class="gap">[2026-09-16 결정]</span></td></tr>
         <tr><td>문자 인코딩</td><td>UTF-8 (BOM 포함)</td><td>BOM을 빼면 Excel에서 한글이 깨진다. 받는 사람이 감독당국·회계라 Excel로 여는 것을 전제한다 <span class="gap">[신규 · 확인필요]</span></td></tr>
         <tr><td>구분자 · 인용</td><td>쉼표( , ) · 값에 쉼표·큰따옴표·줄바꿈이 있으면 <span class="src">"</span>로 감싸고 내부 <span class="src">"</span>는 <span class="src">""</span>로 중복</td><td>사유·문구 컬럼(거절 사유 등)에서 실제로 발생한다</td></tr>
         <tr><td>줄바꿈</td><td>CRLF</td><td>RFC 4180</td></tr>
-        <tr><td>헤더 행</td><td>첫 행 1줄 · 한글 컬럼명</td><td>아래 부록 2의 「컬럼(헤더)」 문자열을 그대로 쓴다</td></tr>
+        <tr><td>헤더 행</td><td>첫 행 1줄 · 한글 컬럼명 · ④는 시트마다 1줄</td><td>아래 부록 2의 「컬럼(헤더)」 문자열을 그대로 쓴다</td></tr>
         <tr><td>주석 · 합계 행</td><td>넣지 않는다</td><td>파일 안에 제목·생성시각·합계 행을 두지 않는다. 기계가 바로 읽을 수 있어야 한다</td></tr>
         <tr><td>빈 값</td><td>빈 문자열</td><td><span class="src">-</span>·<span class="src">N/A</span>·<span class="src">해당없음</span>을 쓰지 않는다. 아직 값이 없는 것과 값이 0인 것을 구분한다</td></tr>
         <tr><td>생성 범위</td><td>클릭 시점 기준 <strong>전체 기간</strong> 스냅숏 · 동기 생성</td><td>기간·조건 선택 UI가 없다(2026-09-02(11) 편의기능 축소)</td></tr>
@@ -186,7 +188,8 @@
     <div class="appx">
       <div class="at">① 고객사 · 가입자</div>
       <div class="as">ORG · USER · KYC_RECORD</div>
-      <div class="ao">기관 1곳 + 그 가입자 1명 = 1행. 정렬 = 등록 시각 내림차순(최신 먼저).</div>
+      <div class="ao">기관 1곳 + 그 가입자 1명 = 1행. 정렬 = 등록 시각 내림차순(최신 먼저).<br>
+        <strong>KYC 열은 두지 않는다</strong>(2026-09-16 결정) : 고객확인은 커스터디가 하고 이 시스템은 결과를 기관 상태 코드 하나로만 받는다(지침 제33조③). 뺀 열 = 확인 수준(CDD/EDD) · 위험등급 · PEP 여부 · 실제소유자 확인 · KYC 확인일. 커스터디에서 우리로 값을 넘기는 경로가 없어 두면 빈 열이 되고, 열이 있으면 회사가 고객확인기록 보존 주체로 읽힐 수 있다. 기관의 고객확인 상태는 「기관 상태」 코드로 본다.</div>
       <table class="tbl">
         <thead><tr><th style="width:120px">컬럼(헤더)</th><th style="width:170px">원천</th><th style="width:200px">표시 형식</th><th>예시값</th></tr></thead>
         <tbody>
@@ -197,11 +200,11 @@
           <tr><td>한도등급</td><td class="src">ORG.grade</td><td>영문 대문자 코드</td><td><span class="ex">STANDARD</span></td></tr>
           <tr><td>기관 상태</td><td class="src">ORG.status</td><td>2자리 코드 단독</td><td><span class="ex">02</span></td></tr>
           <tr><td>상태 조회 시각</td><td class="src">ORG.status_checked_at</td><td>ISO 8601</td><td><span class="ex">2026-09-16T13:40:05+09:00</span></td></tr>
-          <tr><td>확인 수준</td><td class="src">KYC_RECORD.level</td><td><span class="src">CDD</span> / <span class="src">EDD</span></td><td><span class="ex">EDD</span></td></tr>
-          <tr><td>위험등급</td><td class="src">KYC_RECORD.risk_rating</td><td>영문 대문자 코드</td><td><span class="ex">MEDIUM</span></td></tr>
-          <tr><td>PEP 여부</td><td class="src">KYC_RECORD.pep_flag</td><td><span class="src">Y</span> / <span class="src">N</span></td><td><span class="ex">N</span></td></tr>
-          <tr><td>실제소유자 확인</td><td class="src">ORG.rbo_verified</td><td><span class="src">Y</span> / <span class="src">N</span></td><td><span class="ex">Y</span></td></tr>
-          <tr><td>KYC 확인일</td><td class="src">KYC_RECORD.verified_at</td><td>날짜만</td><td><span class="ex">2026-09-10</span></td></tr>
+          
+          
+          
+          
+          
           <tr><td>가입자 계정</td><td class="src">USER.user_id</td><td>계정 식별자 · 기관당 1명</td><td><span class="ex">U-000128</span></td></tr>
           <tr><td>역할</td><td class="src">USER.role</td><td>영문 대문자 코드</td><td><span class="ex">MEMBER</span></td></tr>
           <tr><td><span class="msk">이메일</span></td><td class="src">USER.email</td><td>도메인 마스킹(부록 2)</td><td><span class="ex">manager@***.kr</span></td></tr>
@@ -286,23 +289,47 @@
     </div>
 
     <div class="appx">
-      <div class="at">④ 원장</div>
-      <div class="as">LEDGER_ACCOUNT · ASSET</div>
-      <div class="ao">계정 × 자산 = 1행. 잔액 스냅숏이라 거래 단위가 아니다. 정렬 = 계정 구분 → 자산.</div>
+      <div class="at">④ 원장 <span style="font-weight:400;font-size:10px;color:#64748b;">(Excel 1파일 · 시트 2개)</span></div>
+      <div class="as">시트 A: LEDGER_ACCOUNT · ASSET &nbsp;|&nbsp; 시트 B: LEDGER_ENTRY <span class="gap">[스키마 보완 · 신설]</span></div>
+      <div class="ao">
+        <strong>여섯 개 중 ④만 <span class="src">.xlsx</span>다</strong>(2026-09-16 결정) : 잔액과 전기를 한 파일로 주되 섞이면 못 읽으므로 시트를 나눈다. CSV에는 시트 개념이 없어 이 파일만 Excel로 낸다. 집행 명세 Excel과 같은 방식이다. 나머지 다섯은 그대로 <span class="src">.csv</span>다.<br>
+        <strong>왜 둘로 나누는가</strong> : 시트 A(잔액)만으로는 계정 8종 × 자산 3종 = 24행짜리 스냅숏이라 <strong>기간 손익도 건별 가스비 전기도 나오지 않는다</strong>. 지침 제43조④(건별 가스비를 내부 장부에 전기) · 제44조(구분회계 · 수익 계정 분리) · 제31조①(기관별 보관 수량을 언제든 산출)은 전기 행이 있어야 소명된다. 시트 B가 그 원장이다.
+      </div>
+
+      <div class="at" style="font-size:11px;margin-top:8px;">시트 A — 잔액 스냅숏</div>
+      <div class="ao">계정 × 자산 = 1행. 최대 24행. 정렬 = 계정 구분 → 자산.</div>
       <table class="tbl">
         <thead><tr><th style="width:120px">컬럼(헤더)</th><th style="width:170px">원천</th><th style="width:200px">표시 형식</th><th>예시값</th></tr></thead>
         <tbody>
           <tr><td>계정 ID</td><td class="src">LEDGER_ACCOUNT.account_id</td><td>식별자</td><td><span class="ex">LA-0007</span></td></tr>
-          <tr><td>계정 구분</td><td class="src">LEDGER_ACCOUNT.type</td><td>영문 대문자 코드 · 고객 화면에 노출하지 않는 내부 계정명</td><td><span class="ex">CUSTODY</span> 수탁 / <span class="src">OPERATION</span> 운영 / <span class="src">EXCHANGE_STOCK</span> 교환 재고 / <span class="src">ESCROW</span> 에스크로 / <span class="src">SPREAD_REVENUE</span> 스프레드수익 / <span class="src">BROKER_FEE</span> 중개수수료 / <span class="src">GAS_COST</span> 가스비 비용 / <span class="src">GAS_RECOVERY</span> 가스비 회수</td></tr>
+          <tr><td>계정 구분</td><td class="src">LEDGER_ACCOUNT.type</td><td>영문 대문자 코드 8종 · 고객 화면에 노출하지 않는 내부 계정명</td><td><span class="ex">CUSTODY</span> 수탁 / <span class="src">OPERATION</span> 운영 / <span class="src">EXCHANGE_STOCK</span> 교환 재고 / <span class="src">ESCROW</span> 에스크로 / <span class="src">SPREAD_REVENUE</span> 스프레드수익 / <span class="src">BROKER_FEE</span> 중개수수료 / <span class="src">GAS_COST</span> 가스비 비용 / <span class="src">GAS_RECOVERY</span> 가스비 회수</td></tr>
           <tr><td>자산</td><td class="src">asset_id → ASSET.symbol</td><td>티커</td><td><span class="ex">USDT</span></td></tr>
           <tr><td>체인</td><td class="src">ASSET.chain</td><td>현재 전부 Ethereum</td><td><span class="ex">ETHEREUM</span></td></tr>
           <tr><td>잔액</td><td class="src">LEDGER_ACCOUNT.balance</td><td>자산 자릿수 · 쉼표 없음</td><td><span class="ex">31905.20</span></td></tr>
-          <tr><td>기간 수익 발생분</td><td class="drv">파생 = spread_revenue · fee_revenue 합계</td><td>자산 자릿수 · 수익 계정 행에만 값이 있다</td><td><span class="ex">8.00</span></td></tr>
-          <tr><td>기간 가스비 발생분(ETH)</td><td class="drv">파생 = 실발생 가스비 합계</td><td>ETH 4자리 · 비용</td><td><span class="ex">0.0182</span></td></tr>
-          <tr><td>기간 가스비 회수분</td><td class="drv">파생 = 고객 차감분 합계</td><td>자산 자릿수 · 수익이 아니라 비용 회수다</td><td><span class="ex">54.60</span></td></tr>
           <tr><td>집계 기준 시각</td><td class="src">LEDGER_ACCOUNT.snapshot_at</td><td>ISO 8601 · 전 행 동일</td><td><span class="ex">2026-09-16T14:30:00+09:00</span></td></tr>
         </tbody>
       </table>
+
+      <div class="at" style="font-size:11px;margin-top:10px;">시트 B — 전기 원장</div>
+      <div class="ao">전기 1건 = 1행. 잔액이 움직인 모든 사건이 여기 남는다. 정렬 = 전기 시각 오름차순. <span class="gap">[스키마 보완]</span> LEDGER_ENTRY 테이블 신설이 필요하다.</div>
+      <table class="tbl">
+        <thead><tr><th style="width:120px">컬럼(헤더)</th><th style="width:170px">원천</th><th style="width:200px">표시 형식</th><th>예시값</th></tr></thead>
+        <tbody>
+          <tr><td>전기 ID</td><td class="src">LEDGER_ENTRY.entry_id</td><td>식별자 · 연속</td><td><span class="ex">LE-000004182</span></td></tr>
+          <tr><td>전기 시각</td><td class="src">LEDGER_ENTRY.posted_at</td><td>ISO 8601 · 정렬 키</td><td><span class="ex">2026-09-16T18:02:40+09:00</span></td></tr>
+          <tr><td>계정 구분</td><td class="src">LEDGER_ENTRY.account_type</td><td>시트 A와 같은 8종 코드</td><td><span class="ex">SPREAD_REVENUE</span></td></tr>
+          <tr><td>자산</td><td class="src">asset_id → ASSET.symbol</td><td>티커</td><td><span class="ex">USDT</span></td></tr>
+          <tr><td>증감 수량</td><td class="src">LEDGER_ENTRY.amount</td><td>자산 자릿수 · <strong>부호 포함</strong>(증가 +, 감소 −) · 쉼표 없음</td><td><span class="ex">-899.73</span> · <span class="ex">8.00</span></td></tr>
+          <tr><td>전기 유형</td><td class="src">LEDGER_ENTRY.entry_type</td><td>영문 대문자 코드</td><td><span class="ex">DEPOSIT</span> 입고 / <span class="src">WITHDRAW</span> 출고 / <span class="src">ESCROW_IN</span> 예치 / <span class="src">ESCROW_OUT</span> 인도 / <span class="src">REFUND</span> 반환 / <span class="src">FEE_SWEEP</span> 스윕 / <span class="src">SPREAD_REVENUE</span> 스프레드수익 / <span class="src">BROKER_FEE</span> 중개수수료 / <span class="src">GAS_COST</span> 가스비 비용 / <span class="src">GAS_RECOVERY</span> 가스비 회수</td></tr>
+          <tr><td>원천 행 ID</td><td class="src">LEDGER_ENTRY.ref_id</td><td>③ 콜드 이전의 이전 번호와 잇는 키</td><td><span class="ex">EXE-20260916-0003</span></td></tr>
+          <tr><td>거래 번호</td><td class="src">LEDGER_ENTRY.deal_ref</td><td>② 거래 요청과 잇는 키</td><td><span class="ex">EXC-20260916-0001</span></td></tr>
+          <tr><td>기관번호</td><td class="src">LEDGER_ENTRY.org_id</td><td>customerNo · <strong>수탁·에스크로 계정 행에만</strong> 값이 있다. 운영·수익 계정은 빈 값</td><td><span class="ex">L-260915-0100</span> · 지침 제31조① 기관별 산출의 근거</td></tr>
+          <tr><td>전기 후 잔액</td><td class="src">LEDGER_ENTRY.balance_after</td><td>자산 자릿수 · 그 계정·자산의 전기 직후 잔액</td><td><span class="ex">31905.20</span> · 시트 A 마지막 행과 맞아야 한다</td></tr>
+        </tbody>
+      </table>
+      <div class="ao" style="margin-top:6px;">
+        종전 부록에 있던 「기간 수익 발생분」·「기간 가스비 발생·회수분」 파생 열은 <strong>뺐다</strong> : 기간을 고를 수 없는 전체 스냅숏에서 '기간'이 정의되지 않는다. 월별 집계는 시트 B를 받아 파일에서 계산한다.
+      </div>
     </div>
 
     <div class="appx">
@@ -327,27 +354,33 @@
     </div>
 
     <div class="appx">
-      <div class="at">⑥ 열람 기록</div>
-      <div class="as">AUDIT_LOG (조회 · 다운로드 행위만 필터)</div>
-      <div class="ao">조회·다운로드 행위 1건 = 1행. 정렬 = 기록 시각 오름차순. <strong>이 파일을 받은 행위는 이 파일에 없다</strong> : 적재가 생성 뒤에 일어나므로 다음 번 ⑥에서야 보인다. 그래서 파일마다 어느 파일인지 특정할 값(행 수·파일 해시)이 로그에 있어야 한다.</div>
+      <div class="at">⑥ 열람 기록 <span style="font-weight:400;font-size:10px;color:#64748b;">(감사로그 전량 · 열람 포함)</span></div>
+      <div class="as">AUDIT_LOG 전량 (필터 없음)</div>
+      <div class="ao">감사로그 1행 = 1행. <strong>조회·다운로드만 거르지 않고 AUDIT_LOG를 전량 낸다</strong>(2026-09-16 결정) : 지침 제40조②가 요구하는 승인 · 보류 · 거절 · 이전 중지 · AML 판단 · 조치 완료 · 정책 변경 · txHash 입력 · 명세와 CSV 다운로드가 전부 이 파일 하나로 나가야 한다. 종전처럼 열람만 거르면 나머지가 어느 CSV로도 나가지 않는다. 이름과 번호는 그대로 두고 범위만 넓혔다.<br>
+        정렬 = 기록 시각 오름차순. <strong>이 파일을 받은 행위는 이 파일에 없다</strong> : 적재가 생성 뒤에 일어나므로 다음 번 ⑥에서야 보인다. 그래서 어느 파일인지 특정할 값(행 수 · 파일 해시)을 로그에 남긴다.</div>
       <table class="tbl">
         <thead><tr><th style="width:120px">컬럼(헤더)</th><th style="width:170px">원천</th><th style="width:200px">표시 형식</th><th>예시값</th></tr></thead>
         <tbody>
           <tr><td>로그 ID</td><td class="src">AUDIT_LOG.log_id</td><td>식별자 · 연속</td><td><span class="ex">AL-000128441</span></td></tr>
           <tr><td>열람자</td><td class="src">actor_id → USER.user_id</td><td>계정 식별자 · 관리자 포함</td><td><span class="ex">DSRV-OPS-02</span></td></tr>
           <tr><td>열람자 역할</td><td class="src">actor_id → USER.role</td><td>영문 대문자 코드</td><td><span class="ex">ADMIN</span></td></tr>
-          <tr><td>발생원</td><td class="src">source</td><td>영문 대문자 코드</td><td><span class="ex">ADM-05</span> · AUTH / EXC / BRK / INBOX / ADM-03 / ADM-05</td></tr>
-          <tr><td>행위</td><td class="src">action</td><td>영문 대문자 코드</td><td><span class="ex">CSV_DOWNLOAD</span> / <span class="src">VIEW</span> / <span class="src">SPEC_DOWNLOAD</span></td></tr>
-          <tr><td>대상</td><td class="src">ref_id</td><td>받은 CSV 종류 · 조회 대상 · 거래번호</td><td><span class="ex">CSV_06</span></td></tr>
+          <tr><td>발생원</td><td class="src">source</td><td>영문 대문자 코드</td><td><span class="ex">ADM-05</span> · AUTH / EXC / BRK / WAL / INBOX / ADM-03 정책 / 열람·다운로드 / 커스터디 연동</td></tr>
+          <tr><td>행위</td><td class="src">action</td><td>영문 대문자 코드 · 제40조② 9종 + 열람 2종</td><td><span class="ex">APPROVE</span> / <span class="src">HOLD</span> / <span class="src">REJECT</span> / <span class="src">HALT_TRANSFER</span> / <span class="src">AML_DECIDE</span> / <span class="src">RESOLVE</span> / <span class="src">POLICY_SAVE</span> / <span class="src">TXHASH_INPUT</span> / <span class="src">VIEW</span> / <span class="src">CSV_DOWNLOAD</span> / <span class="src">SPEC_DOWNLOAD</span></td></tr>
+          <tr><td>대상 유형</td><td class="src">ref_type</td><td>ref_id가 어느 테이블의 행인지</td><td><span class="ex">EXCHANGE_REQUEST</span> <span class="gap">[스키마 보완]</span> AUDIT_LOG에 ref_id만 있고 유형 컬럼이 없어 대상 테이블을 알 수 없다</td></tr>
+          <tr><td>대상 ID</td><td class="src">ref_id</td><td>행위 대상 행의 PK · 받은 CSV 종류</td><td><span class="ex">EXC-20260916-0001</span> · <span class="ex">CSV_06</span></td></tr>
+          <tr><td>사유</td><td class="src">detail</td><td>보류·거절·이전 중지·조치 완료의 사유(카테고리 + 자유입력)</td><td><span class="ex">"재고부족: 가용 재고 미달"</span> <span class="gap">[스키마 보완]</span> 제40조②가 사유를 요구하는데 AUDIT_LOG에 컬럼이 없다</td></tr>
+          <tr><td>전후값</td><td class="src">detail</td><td>정책값 변경 등의 before/after</td><td><span class="ex">"spread 0.10→0.15"</span> <span class="gap">[스키마 보완]</span> 위와 같다. 사유와 함께 JSON 1열로 두는 안</td></tr>
           <tr><td>기록 시각</td><td class="src">created_at</td><td>ISO 8601 · NTP 동기화 서버 시각 · 정렬 키</td><td><span class="ex">2026-09-16T14:30:12+09:00</span></td></tr>
           <tr><td>해시</td><td class="src">hash</td><td>16진수 소문자 전문 · WORM 무결성 검증용</td><td><span class="ex">b71c...04ef</span></td></tr>
-          <tr><td>보존 기간</td><td class="src">retention</td><td>연 단위 정수</td><td><span class="ex">15</span> · 거래 15년 / AML 5년</td></tr>
+          <tr><td>직전 해시</td><td class="src">prev_hash</td><td>앞 행의 해시 · 해시 체인</td><td><span class="ex">3a92...c108</span> <span class="gap">[스키마 보완]</span> 체인이 없으면 행 단위 위변조만 잡히고 <strong>행 삭제는 못 잡는다</strong></td></tr>
+          <tr><td>보존 기간</td><td class="src">retention</td><td>연 단위 정수</td><td><span class="ex">15</span> · 거래 15년 / AML 5년 <span class="gap">[확인필요]</span> 어느 행이 어느 값인지 가르는 기준이 문서에 없다</td></tr>
+          <tr><td>다운로드 파일 행 수 · 해시</td><td class="src">detail</td><td>CSV_DOWNLOAD 행에만 · 받은 파일의 행 수와 sha256</td><td><span class="ex">"rows=128441,sha256=9f1c..."</span> <span class="gap">[스키마 보완]</span> 어느 파일을 받았는지 특정하는 값</td></tr>
         </tbody>
       </table>
     </div>
 
     <div class="note-body" style="margin-top:6px;">
-      · <span class="gap">[스키마 보완]</span> 5건은 DB 스키마 개정 때 함께 넣는다: ① 로그인 실패 횟수 · ① 등록 시각 · ② 종결 사유 · ③ 실발생 가스비 2열 · ⑤ 차이 금액.<br>
+      · <span class="gap">[스키마 보완]</span>은 DB 스키마 개정 때 함께 넣는다: ① 로그인 실패 횟수 · ① 등록 시각 · ② 종결 사유 · ⑤ 차이 금액 · <strong>④ LEDGER_ENTRY 테이블 신설</strong> · ⑥ ref_type · 사유 · 전후값 · 직전 해시 · 다운로드 파일 행 수와 해시.<br>
       · ② KYT 점수 · BLF 결과 2열은 <strong>개발 회신 전까지 넣지 않는다</strong>(drafts/48 확인 A번).<br>
       · 이 부록을 고치면 DB 스키마와 표기 규칙(notation)도 같은 날 맞춘다.
     </div>
