@@ -117,7 +117,7 @@
     <div class="note-title">비고</div>
     <div class="note-body">
       · DSRV 내부 관리자 화면(고객사 노출 없음). 어드민은 <strong>처리함(ADM-02) · 설정(ADM-03) · 기관 · 가입자(ADM-04) · 데이터 다운로드(ADM-05) 4화면</strong>이다. 이 화면은 2026-09-16 구현 화면 기준으로 처리함(ADM-02)에서 분리했다.<br>
-      · <strong>①~⑥ 번호는 바꾸지 않는다.</strong> 지침 제42조·DB 스키마·케이스분기·운영 매뉴얼이 'CSV ⑥ 열람 기록'처럼 번호로 참조한다. 카드 이름만 구현 화면 문구를 따랐다.<br>
+      · <strong>①~⑥ 번호는 바꾸지 않는다.</strong> DB 스키마·케이스분기(states)·운영 매뉴얼이 'CSV ⑥ 열람 기록'처럼 번호로 참조한다. <span class="chk">지침 제42조 본문에는 CSV 번호가 나오지 않는다 — 종전에 "제42조가 참조한다"고 적었던 것은 사실과 달라 바로잡았다(2026-09-16).</span> 카드 이름만 구현 화면 문구를 따랐다.<br>
       · <strong>다운로드 자체가 열람 기록</strong>이다 — ⑥을 받는 행위도 ⑥에 남는다(지침 제42조④).<br>
       · 다운로드 이력을 보는 화면은 두지 않는다(2026-09-02(11) 편의기능 축소). 이력은 ⑥ CSV로만 본다.<br>
       · 연결: ① 기관·가입자 목록 원천 = 기관 · 가입자(ADM-04) · ②③ 원천 = 처리함(ADM-02) ①② · ⑤ 3면 대사 불일치 알림 = 처리함 ④ 운영 알림.<br>
@@ -178,7 +178,7 @@
   <div class="note-card">
     <div class="note-title">부록 3 — CSV 6종 컬럼 정의</div>
     <div class="note-body" style="margin-bottom:14px;">
-      · 원천: <strong>DB스키마_한글판_20260902 v0.8(2026-09-07)</strong>. 기획 참고용 초안이므로 실제 컬럼·타입·제약은 개발 설계 시 확정한다.<br>
+      · 원천: <strong>DB스키마_한글판_20260902 v0.9(2026-09-14)</strong>. 기획 참고용 초안이므로 실제 컬럼·타입·제약은 개발 설계 시 확정한다.<br>
       · 표기: <span class="drv">파생</span> = 저장 필드가 아닌 계산값 · <span class="gap">[스키마 보완]</span> = 현행 스키마에 원천 필드가 없어 개정이 필요한 것 · <span class="msk">마스킹</span> = 개인식별정보.<br>
       · 컬럼 순서 = 표의 위에서 아래 순서 그대로 왼쪽에서 오른쪽으로 놓는다.
     </div>
@@ -254,13 +254,13 @@
 
     <div class="appx">
       <div class="at">③ 콜드 이전</div>
-      <div class="as">EXCHANGE_EXECUTION · BROKER_SETTLEMENT · ESCROW_TRANSFER · FEE_SWEEP</div>
-      <div class="ao">온체인 이전 1건 = 1행. 네 테이블을 유형으로 합친다. 정렬 = 집행 시각 오름차순.</div>
+      <div class="as">EXCHANGE_EXECUTION · BROKER_SETTLEMENT</div>
+      <div class="ao">온체인 이전 1건 = 1행. 나목은 EXCHANGE_EXECUTION, 마목 예치·인도·반환·수수료 스윕은 BROKER_SETTLEMENT의 <span class="src">transfer_type</span>으로 갈린다(별도 ESCROW_TRANSFER·FEE_SWEEP 테이블은 없다). 정렬 = 집행 시각 오름차순.</div>
       <table class="tbl">
         <thead><tr><th style="width:120px">컬럼(헤더)</th><th style="width:170px">원천</th><th style="width:200px">표시 형식</th><th>예시값</th></tr></thead>
         <tbody>
-          <tr><td>거래 유형</td><td class="drv">파생(원천 테이블별)</td><td>영문 대문자 코드</td><td><span class="ex">DEPOSIT</span> 입고 / <span class="src">WITHDRAW</span> 출고 / <span class="src">ESCROW_IN</span> 예치 / <span class="src">ESCROW_OUT</span> 인도 / <span class="src">REFUND</span> 반환 / <span class="src">FEE_SWEEP</span> 수수료 스윕</td></tr>
-          <tr><td>이전 번호</td><td class="src">exec_id / settle_id / sweep_id</td><td>식별자</td><td><span class="ex">EXE-20260916-0003</span></td></tr>
+          <tr><td>거래 유형</td><td class="src">leg_type / BROKER_SETTLEMENT.transfer_type</td><td>영문 대문자 코드</td><td><span class="ex">DEPOSIT</span> 입고 / <span class="src">WITHDRAW</span> 출고 / <span class="src">ESCROW_IN</span> 예치 / <span class="src">ESCROW_OUT</span> 인도 / <span class="src">REFUND</span> 반환 / <span class="src">FEE_SWEEP</span> 수수료 스윕</td></tr>
+          <tr><td>이전 번호</td><td class="src">exec_id / settle_id</td><td>식별자</td><td><span class="ex">EXE-20260916-0003</span></td></tr>
           <tr><td>거래 번호</td><td class="src">exc_id / deal_id</td><td>원 거래와 잇는 키</td><td><span class="ex">EXC-20260916-0001</span></td></tr>
           <tr><td>기관번호</td><td class="src">org_id</td><td>customerNo · 중개는 양측이 각각 행을 갖는다</td><td><span class="ex">L-260915-0100</span></td></tr>
           <tr><td>보내는 지갑</td><td class="src">from_address</td><td>전문 · 16진수 소문자</td><td><span class="ex">0x9f3a1c4e...d81c</span></td></tr>
@@ -268,14 +268,15 @@
           <tr><td>자산</td><td class="src">asset_id → ASSET.symbol</td><td>티커</td><td><span class="ex">USDT</span></td></tr>
           <tr><td>수량</td><td class="src">qty</td><td>자산 자릿수 · 쉼표 없음</td><td><span class="ex">899.73</span></td></tr>
           <tr><td>적용 비율</td><td class="src">applied_rate / DEAL.agreed_rate</td><td>스테이블 4자리 / ETH 2자리</td><td><span class="ex">0.9997</span></td></tr>
-          <tr><td>서명자 1 · 2</td><td class="src">signer1_id · signer2_id</td><td>관리자 ID 2개 · 콜드 2인 서명</td><td><span class="ex">DSRV-OPS-02</span> / <span class="ex">DSRV-OPS-07</span></td></tr>
+          <tr><td>서명자 1 · 2</td><td class="src">signer1_id · signer2_id</td><td>관리자 ID 2개 · 콜드 2인 서명</td><td><span class="ex">DSRV-OPS-02</span> / <span class="ex">DSRV-OPS-07</span> <span class="gap">[확인필요]</span> 스키마에 컬럼은 있으나 <strong>값을 넣는 화면이 없다</strong>. 커스터디가 어드민에 입력하는 것은 txHash와 [AML 이슈 미집행] 2종뿐이라(2026-09-07(21)) 지금 구조로는 빈 열이 된다. 입력 경로를 만들지, 열을 뺄지 정해야 한다</td></tr>
           <tr><td>명세 해시</td><td class="src">spec_hash</td><td>16진수 소문자 전문</td><td><span class="ex">a3f1...9c22</span></td></tr>
           <tr><td>txhash</td><td class="src">txhash</td><td>전문 · 마스킹 없음 · 미집행이면 빈 값</td><td><span class="ex">0x4c1b8f...aa07</span></td></tr>
           <tr><td>예상 가스비(ETH)</td><td class="src">gas_est_eth</td><td>ETH 4자리 · 참고값이고 상한이 아니다</td><td><span class="ex">0.0021</span></td></tr>
           <tr><td>예상 가스비(원)</td><td class="src">gas_est_krw</td><td>원 단위 절사 · 쉼표 없음</td><td><span class="ex">8400</span></td></tr>
           <tr><td>예상 가스비(받는 자산)</td><td class="src">gas_est_asset</td><td>받는 자산 자릿수로 절사</td><td><span class="ex">6.30</span></td></tr>
-          <tr><td>실발생 가스비(ETH)</td><td class="src">gas_used_eth</td><td>ETH 4자리 · <span class="src">gasUsed × effectiveGasPrice</span> · [완료] 시 기록</td><td><span class="ex">0.0019</span> <span class="gap">[스키마 보완]</span></td></tr>
-          <tr><td>실발생 가스비(받는 자산)</td><td class="src">gas_used_asset</td><td>받는 자산 자릿수 · <strong>실제 차감액</strong></td><td><span class="ex">5.70</span> <span class="gap">[스키마 보완]</span></td></tr>
+          <tr><td>실발생 가스비(ETH)</td><td class="src">gas_actual_eth</td><td>ETH 4자리 · <span class="src">gasUsed × effectiveGasPrice</span> · [완료] 시 기록</td><td><span class="ex">0.0019</span></td></tr>
+          <tr><td>실발생 가스비(원)</td><td class="src">gas_actual_krw</td><td>원 단위 절사 · 쉼표 없음</td><td><span class="ex">7600</span></td></tr>
+          <tr><td>실발생 가스비(받는 자산)</td><td class="src">gas_actual_asset</td><td>받는 자산 자릿수 · <strong>실제 차감액</strong></td><td><span class="ex">5.70</span></td></tr>
           <tr><td>실수령 수량</td><td class="drv">파생 = 받는 수량 − 실발생 가스비 환산액</td><td>받는 자산 자릿수 · 고객 화면 EXC-04·BRK-05 실수령액과 같아야 한다</td><td><span class="ex">894.03</span></td></tr>
           <tr><td>대사 일치</td><td class="src">recon_ok</td><td><span class="src">Y</span> / <span class="src">N</span> · 지갑·주소·자산·수량 4항목 대조</td><td><span class="ex">Y</span></td></tr>
           <tr><td>상태</td><td class="src">status</td><td>영문 대문자 코드</td><td><span class="ex">COMPLETED</span></td></tr>
@@ -316,7 +317,7 @@
           <tr><td>자산</td><td class="src">asset_id → ASSET.symbol</td><td>티커</td><td><span class="ex">ETH</span></td></tr>
           <tr><td>내부장부 잔액</td><td class="src">internal_bal</td><td>자산 자릿수</td><td><span class="ex">12.4820</span></td></tr>
           <tr><td>온체인 잔액</td><td class="src">onchain_bal</td><td>자산 자릿수</td><td><span class="ex">12.4801</span></td></tr>
-          <tr><td>커스터디 콜드 잔액</td><td class="src">custody_bal</td><td>자산 자릿수</td><td><span class="ex">12.4820</span></td></tr>
+          <tr><td>커스터디 콜드 잔액</td><td class="src">custody_bal</td><td>자산 자릿수</td><td><span class="ex">12.4820</span> <span class="gap">[확인필요]</span> 이 값을 커스터디에서 어떻게 받는지 정해진 바가 없다. 조회 API는 기관 상태 1개뿐이고 커스터디 → 우리 방향 통지도 없앴다(2026-09-14). 수신 경로가 없으면 3면 대사가 2면이 된다</td></tr>
           <tr><td>기간 가스비 소모(ETH)</td><td class="drv">파생 = 전 스냅숏 이후 실발생 가스비 합계</td><td>ETH 4자리 · 내부장부와 온체인 차이의 설명 항목</td><td><span class="ex">0.0019</span></td></tr>
           <tr><td>일치 여부</td><td class="src">matched</td><td><span class="src">Y</span> / <span class="src">N</span> · N이면 X3 알림 + 해당 지갑 신규 이전 정지</td><td><span class="ex">N</span></td></tr>
           <tr><td>차이 금액</td><td class="drv">파생 = 최대값 − 최소값</td><td>자산 자릿수 · 일치면 0</td><td><span class="ex">0.0019</span> <span class="gap">[스키마 보완: 부록에 신설 · 불일치 크기를 바로 보기 위함]</span></td></tr>
@@ -328,7 +329,7 @@
     <div class="appx">
       <div class="at">⑥ 열람 기록</div>
       <div class="as">AUDIT_LOG (조회 · 다운로드 행위만 필터)</div>
-      <div class="ao">조회·다운로드 행위 1건 = 1행. 정렬 = 기록 시각 오름차순. 이 파일을 받는 행위도 이 파일에 남는다.</div>
+      <div class="ao">조회·다운로드 행위 1건 = 1행. 정렬 = 기록 시각 오름차순. <strong>이 파일을 받은 행위는 이 파일에 없다</strong> : 적재가 생성 뒤에 일어나므로 다음 번 ⑥에서야 보인다. 그래서 파일마다 어느 파일인지 특정할 값(행 수·파일 해시)이 로그에 있어야 한다.</div>
       <table class="tbl">
         <thead><tr><th style="width:120px">컬럼(헤더)</th><th style="width:170px">원천</th><th style="width:200px">표시 형식</th><th>예시값</th></tr></thead>
         <tbody>
