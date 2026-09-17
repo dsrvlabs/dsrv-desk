@@ -42,7 +42,10 @@
         <div class="item-area" data-highlight="0" style="position:relative;padding:4px;border-radius:8px;">
           <div class="pin" data-idx="0" style="top:-4px;right:-4px;">1</div>
           <div class="err-chip">⚠ 이 초대 링크는 사용할 수 없습니다</div>
+          <div style="font-size:9px;color:#94a3b8;padding:0 4px 3px;text-align:center;">▼ 초대 토큰(M1)</div>
           <div class="info-box" style="text-align:center;">만료되었거나 이미 사용된 링크입니다.<br>관리자에게 초대 재발송을 요청해 주세요.</div>
+          <div style="font-size:9px;color:#94a3b8;padding:6px 4px 3px;text-align:center;">▼ 재설정 토큰(M2)</div>
+          <div class="info-box" style="text-align:center;">만료되었거나 이미 사용된 링크입니다.<br>다시 로그인해 재설정 메일을 받아 주세요.</div>
         </div>
         <div class="item-area" data-highlight="1" style="position:relative;padding:4px;border-radius:8px;margin-top:6px;">
           <div class="pin" data-idx="1" style="top:-6px;right:-6px;">2</div>
@@ -60,7 +63,7 @@
       <div class="num">1</div>
       <div>
         <div class="itm-title">오류 안내 (표시 전용)</div>
-        <div class="itm-desc"><strong>노출</strong> 초대 링크 토큰이 유효하지 않을 때 이 화면으로 보낸다 — 만료(발송 + 72시간 경과)와 이미 사용됨(활성화 완료로 소멸)을 구분하지 않고 같은 문구를 쓴다.<br><strong>문구</strong> 고정 2단 — 칩 "⚠ 이 초대 링크는 사용할 수 없습니다" + 본문 "만료되었거나 이미 사용된 링크입니다. 관리자에게 초대 재발송을 요청해 주세요."<br><strong>노출 금지</strong> 만료인지 사용된 것인지, 계정이 이미 활성인지 알려주지 않는다.<br><span class="basis">근거 ISMS 2.5(인증정보 관리) · 09 §0 결정(2026-09-02) 오류 케이스 통합</span></div>
+        <div class="itm-desc"><strong>노출</strong> 초대 링크(M1) 또는 인증 수단 재설정 링크(M2) 토큰이 유효하지 않을 때 이 화면으로 보낸다 — 만료(발송 + {정책값 72시간} 경과)와 이미 사용됨을 구분하지 않고 같은 문구를 쓴다.<br><strong>문구</strong> 고정 2단이고 <strong>토큰 종류로만 분기</strong>한다(2026-09-17 신설). 만료/사용됨은 여전히 구분하지 않는다.<br>· 초대 토큰 — 칩 "⚠ 이 초대 링크는 사용할 수 없습니다" + 본문 "만료되었거나 이미 사용된 링크입니다. 관리자에게 초대 재발송을 요청해 주세요."<br>· 재설정 토큰 — 칩 "⚠ 이 재설정 링크는 사용할 수 없습니다" + 본문 "만료되었거나 이미 사용된 링크입니다. 다시 로그인해 재설정 메일을 받아 주세요." 재설정 대기 상태면 재로그인 후 DASH-03 강제 모드로 되돌아가 재발송할 수 있다.<br><strong>노출 금지</strong> 만료인지 사용된 것인지, 계정이 이미 활성인지 알려주지 않는다.<br><span class="basis">근거 ISMS 2.5(인증정보 관리) · 09 §0 결정(2026-09-02) 오류 케이스 통합</span></div>
       </div>
     </div>
 
@@ -90,7 +93,7 @@
 <section class="footer-note">
   <div class="note-card">
     <div class="note-title">비고</div>
-    <div class="note-body">· 초대 링크(ONB-00)를 눌렀을 때 토큰이 유효하지 않으면 진입하는 <strong>종결 화면</strong>. 2026-09-02 사용자 결정으로 신설 — 종전에는 ONB-01 항목 1의 배너 2종(만료·사용됨)으로만 정의돼 있었다.<br>· <strong>확정(구현 단순 우선)</strong> — 만료·사용됨 단일 문구 · 재발급 링크 없음(관리자 요청) · [로그인 화면으로] 버튼 없음 · mailto 없음. 조작 요소가 없는 화면이다.<br>· <span class="chk">[디자인 요청]</span> Figma 시안 없음 — ONB-01~03과 같은 로그인 전 레이아웃으로 기획 유지.<br>· <strong>종결 화면</strong> — 이 화면에서 다른 화면으로 가는 버튼·링크를 두지 않는다(2026-09-02 사용자 결정). 재발급은 관리자 요청, 로그인은 이용자가 직접 접속한다.<br>· 이전 = ONB-00 초대 이메일</div>
+    <div class="note-body">· 초대 링크(ONB-00)를 눌렀을 때 토큰이 유효하지 않으면 진입하는 <strong>종결 화면</strong>. 2026-09-02 사용자 결정으로 신설 — 종전에는 ONB-01 항목 1의 배너 2종(만료·사용됨)으로만 정의돼 있었다.<br>· <strong>확정(구현 단순 우선)</strong> — 만료·사용됨 단일 문구 · 재발급 링크 없음(관리자 요청) · [로그인 화면으로] 버튼 없음 · mailto 없음. 조작 요소가 없는 화면이다.<br>· <span class="chk">[디자인 요청]</span> Figma 시안 없음 — ONB-01~03과 같은 로그인 전 레이아웃으로 기획 유지.<br>· <strong>종결 화면</strong> — 이 화면에서 다른 화면으로 가는 버튼·링크를 두지 않는다(2026-09-02 사용자 결정). 재발급은 관리자 요청, 로그인은 이용자가 직접 접속한다.<br>· <strong>2026-09-17 개정</strong> — 인증 수단 재설정 메일(M2) 토큰의 무효 케이스를 이 화면으로 흡수하고 문구를 토큰 종류로 분기했다. 종결 화면 원칙(조작 요소 없음)은 두 경우 모두 유지한다. 기획 근거 = <span class="mono">drafts/49_복구코드_로그인_강제재설정_기획_20260917.md</span>.<br>· 이전 = ONB-00 초대 이메일 · DASH-03 재설정 메일</div>
   </div>
 </section>
 

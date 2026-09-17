@@ -124,7 +124,7 @@
       <div class="num">1</div>
       <div>
         <div class="itm-title">발신 · 수신 · 제목 (표시 전용)</div>
-        <div class="itm-desc"><strong>값</strong> 수신 주소는 ADM-03 초대 발송에 입력한 {담당자 이메일}이다. 발신 주소와 문의 주소는 하나만 쓴다.<br><span class="basis">근거 초대 기반 계정 개설 · ADM-03 초대 발송</span></div>
+        <div class="itm-desc"><strong>값</strong> 수신 주소는 ADM-03 초대 발송에 입력한 {담당자 이메일}이다. 발신 주소와 문의 주소는 하나만 쓴다.<br><strong>제목</strong> 이 화면이 그리는 <strong>초대 메일(M1)</strong>의 제목은 "[DSRV Desk] 계정 초대 · 활성화 안내"다. 재설정 메일(M2)은 제목이 다르다 — 상세 4.<br><span class="basis">근거 초대 기반 계정 개설 · ADM-03 초대 발송</span></div>
       </div>
     </div>
 
@@ -181,8 +181,18 @@
       <div class="dtl-body"><span class="box"><strong>비밀번호</strong> 메일에 담지 않으므로 서버와 이메일에 평문으로 존재한 적이 없다.<br><strong>1조직 1계정</strong> 계정과 실제 사용자를 1:1로 묶어 행위 책임자를 특정한다. 조직 내 추가 가입 경로는 없다.<br><strong>내용 제한</strong> 심사와 AML 내용은 넣지 않는다.</span></div>
       </div>
       <div class="dtl" data-idx="2">
-        <div class="detail-label"><span class="dtl-num">3</span>토큰 케이스 → 표시 위치</div>
-      <div class="dtl-body"><span class="box"><strong>표시 위치</strong> 토큰 오류는 <strong>초대 링크 오류(ONB-04)</strong> 한 화면에서만 보여준다. ONB-01에 배너 변형을 두지 않는다.<br><strong>통합</strong> 만료(발송 + 72시간 경과)와 이미 사용됨(활성화 완료로 소멸)을 구분하지 않고 같은 문구를 쓴다 — 토큰 상태를 알려주지 않는다.<br><strong>재발급</strong> ADM-03 초대 재발송으로만 한다(새 토큰 · 이전 토큰 즉시 무효).<br><strong>재개</strong> 활성화 미완료 상태의 재클릭은 재개로 처리해 진행 중 화면으로 라우팅하므로 오류 화면에 오지 않는다.</span></div>
+        <div class="detail-label"><span class="dtl-num">4</span>메일 양식 2종 (2026-09-17 신설)</div>
+      <div class="dtl-body"><span class="box">발송 메일은 2종이고 이 화면은 M1을 그린다. 링크 규격(1회용 · 유효 {정책값 72시간} · 재발송 시 이전 링크 즉시 무효 · 최신 1개만 유효)은 두 양식이 같다.<br>
+      · <strong>M1 계정 초대 · 활성화 안내</strong> — 제목 "[DSRV Desk] 계정 초대 · 활성화 안내" · 발송 위치 ADM-04 [초대 발송]·[초대 재발송] · 토큰 모드 <span class="mono">invite</span> · 도착 ONB-01 → 02 → 03<br>
+      · <strong>M2 인증 수단 재설정 안내</strong> — 제목 "[DSRV Desk] 인증 수단 재설정 안내" · 발송 위치 DASH-03 [재설정 메일 발송] · 토큰 모드 2종<br>
+      &nbsp;&nbsp;<span class="mono">full</span>(DASH-03 자발 진입) → 도착 ONB-01 → 02 → 03 · 본문 재설정 항목 = "비밀번호와 2차 인증"<br>
+      &nbsp;&nbsp;<span class="mono">2fa</span>(DASH-03 강제 진입 · 복구 코드 로그인 후) → 도착 <strong>ONB-02</strong> → 03 · 본문 재설정 항목 = "2차 인증"<br>
+      · 본문 레이아웃(로고·제목행·기관/담당자 카드·버튼·하단 연락처)은 M1을 그대로 쓰고 제목·안내 문구·도착지만 바꾼다. <span class="chk">[디자인 요청]</span> M2 전용 시안은 없다.<br>
+      · <strong>이메일 링크 없음 원칙의 예외</strong>에 M2를 추가한다 — 종전 예외는 M1 하나였다.</span></div>
+      </div>
+      <div class="dtl" data-idx="3">
+      <div class="detail-label"><span class="dtl-num">3</span>토큰 케이스 → 표시 위치</div>
+      <div class="dtl-body"><span class="box"><strong>표시 위치</strong> 토큰 오류는 <strong>초대 링크 오류(ONB-04)</strong> 한 화면에서만 보여준다. ONB-01에 배너 변형을 두지 않는다.<br><strong>통합</strong> 만료(발송 + 72시간 경과)와 이미 사용됨(활성화 완료로 소멸)을 구분하지 않고 같은 문구를 쓴다 — 토큰 상태를 알려주지 않는다.<br><strong>재발급</strong> 초대 토큰은 ADM-03 초대 재발송으로만 한다(새 토큰 · 이전 토큰 즉시 무효). 재설정 토큰(M2)은 DASH-03 [재설정 메일 발송]으로 재발급한다.<br><strong>재개</strong> 활성화 미완료 상태의 재클릭은 재개로 처리해 진행 중 화면으로 라우팅하므로 오류 화면에 오지 않는다.</span></div>
       </div>
     </div>
   </div>
@@ -191,7 +201,7 @@
 <section class="footer-note">
   <div class="note-card">
     <div class="note-title">비고</div>
-    <div class="note-body">· 온보딩 시작점 · KYC 게이팅 화면 없음 — 계정은 KYC 완료 법인에만 생성·초대 · KYC 예외는 EXC-01 배너 + 거래 요청 차단으로 처리(ADM-03 종속).<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 메일 프레임 적용 · 1조직 1계정 고지는 시안 없음 → 기획 유지 <span class="chk">[디자인 요청]</span> · 원본 <span class="mono">reference/figma/_crops/F0_mail.png</span>.<br>· <strong>확정(구현 단순 우선)</strong> — 발신·문의 주소 단일 · 유효시간 72시간 고정값 · 연락처·연도 고정 텍스트 · 중도 이탈 재클릭은 재개.<br>· 남은 <span class="chk">[확인필요]</span> — 활성화 URL 도메인.<br>· <strong>확정(2026-09-02)</strong> — 메일 하단 연락처는 portal.kyc@dsrvlabs.com 단일 · 전화번호 미표기.<br>· 다음 = ONB-01 → ONB-02 → ONB-03 / 토큰 오류 = ONB-04</div>
+    <div class="note-body">· 온보딩 시작점 · KYC 게이팅 화면 없음 — 계정은 KYC 완료 법인에만 생성·초대 · KYC 예외는 EXC-01 배너 + 거래 요청 차단으로 처리(ADM-03 종속).<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 메일 프레임 적용 · 1조직 1계정 고지는 시안 없음 → 기획 유지 <span class="chk">[디자인 요청]</span> · 원본 <span class="mono">reference/figma/_crops/F0_mail.png</span>.<br>· <strong>확정(구현 단순 우선)</strong> — 발신·문의 주소 단일 · 유효시간 72시간 고정값 · 연락처·연도 고정 텍스트 · 중도 이탈 재클릭은 재개.<br>· 남은 <span class="chk">[확인필요]</span> — 활성화 URL 도메인.<br>· <strong>확정(2026-09-02)</strong> — 메일 하단 연락처는 portal.kyc@dsrvlabs.com 단일 · 전화번호 미표기.<br>· <strong>2026-09-17 개정</strong> — 메일 양식을 M1(초대)·M2(인증 수단 재설정) 2종으로 분리하고 M2의 토큰 모드(full/2fa)별 도착 화면을 규정했다(상세 4). 기획 근거 = <span class="mono">drafts/49_복구코드_로그인_강제재설정_기획_20260917.md</span>.<br>· 다음 = ONB-01 → ONB-02 → ONB-03(M1 · M2 full) · ONB-02 → ONB-03(M2 2fa) / 토큰 오류 = ONB-04</div>
   </div>
 </section>
 

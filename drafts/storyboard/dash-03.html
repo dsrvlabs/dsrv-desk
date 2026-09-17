@@ -42,12 +42,17 @@
       <!-- 카드: 재설정 안내 (표시 전용) -->
       <div class="zone card" data-idx="0">
         <div class="zone-highlight"></div>
-        <div class="zone-title" style="margin-bottom:10px;">비밀번호 및 2차 인증 재설정</div>
+        <div class="zone-title" style="margin-bottom:10px;">비밀번호 및 2차 인증 재설정 <span style="font-weight:400;color:#94a3b8;">/ 강제 모드 = 2차 인증 재설정</span></div>
         <div class="item-area" data-highlight="0" style="position:relative;padding:4px;border-radius:8px;">
           <div class="pin" data-idx="0" style="top:-6px;right:-6px;">1</div>
           <div class="info-box" style="line-height:1.75;">
+            <div style="font-size:9px;color:#94a3b8;padding:0 0 4px;">▼ 자발 모드 (DASH-01에서 진입)</div>
             인증 앱을 새 기기로 옮기거나 복구 코드를 다시 받으려면 재설정하세요. 본인 이메일 <strong style="color:#2f3747;">{담당자 이메일}</strong>로 재설정 링크가 발송되며, 링크에서 비밀번호 재설정과 2차 인증 재등록을 진행합니다.<br><br>
             ※ 재등록이 끝나면 새 복구 코드가 발급되고 이전 코드는 모두 폐기됩니다<span style="color:#b9c2d2;">. 재등록 완료 전까지 현재 인증 앱·복구 코드는 그대로 사용할 수 있습니다.</span>
+            <div style="border-top:1px dashed #d9dfe8;margin:10px 0 6px;"></div>
+            <div style="font-size:9px;color:#94a3b8;padding:0 0 4px;">▼ 강제 모드 (복구 코드로 로그인해 AUTH-03에서 진입)</div>
+            인증 앱을 다시 등록해야 서비스를 이용할 수 있습니다. 본인 이메일 <strong style="color:#2f3747;">{담당자 이메일}</strong>로 재설정 링크가 발송되며, 링크에서 인증 앱 재등록과 새 복구 코드 발급을 진행합니다.<br><br>
+            ※ 재등록이 끝나면 새 복구 코드가 발급되고 이전 코드는 폐기됩니다<span style="color:#b9c2d2;">. 재등록 완료 전까지 현재 복구 코드로 다시 로그인할 수 있습니다.</span>
           </div>
         </div>
       </div>
@@ -77,6 +82,7 @@
         <div class="hr-line" style="margin-top:0;"></div>
         <div class="item-area" data-highlight="2" style="position:relative;padding:4px;border-radius:8px;">
           <div class="pin" data-idx="2" style="top:-6px;right:-6px;">3</div>
+          <div style="font-size:9px;color:#94a3b8;padding:0 4px 3px;">▼ 자발 모드에서만 노출 (강제 모드에서는 없음)</div>
           <div class="aux-back">‹ &nbsp;이전으로</div>
         </div>
       </div>
@@ -95,15 +101,19 @@
     <div class="nav-global">
       <div class="nav-global-title">진입 · 전역 이동</div>
       <div class="nav-note">· <strong>전역 이동</strong> 프레임(브랜드 패널 · 푸터 · 뒤로가기)의 동작은 계정 활성화 1/3 비밀번호 설정(ONB-01)의 표와 같다. 다른 점 없음(브랜드 패널에 'DSRV 서비스 소개 보기 →' 링크가 없는 것도 ONB-01과 같다). 로그인 상태 화면이지만 콘솔 상단 메뉴(GNB)와 기관 배지가 없어 다른 콘솔 화면으로 바로 갈 수 없고 로그아웃 메뉴도 없다.<br>
-      · <strong>진입</strong> 대시보드(DASH-01) 계정·보안 영역의 '2차 인증 재설정' 카드 클릭.<br>
-      · <strong>나가기</strong> '‹ 이전으로' → 대시보드(DASH-01). 재설정 메일을 보낸 뒤에도 이 화면에 머문다. 재설정 자체는 메일의 링크에서 계정 활성화(ONB-01~03)를 다시 진행하며, 끝나면 로그인(AUTH-01)으로 이어진다.</div>
+      · <strong>진입 2종</strong> — 진입 경로에 따라 재설정 범위·나가기·완료 후 이동이 갈린다(2026-09-17 신설).<br>
+      &nbsp;&nbsp;① <strong>자발 모드</strong>: 대시보드(DASH-01) 계정·보안 영역의 '2차 인증 재설정' 카드 클릭. 범위 = 비밀번호 + 2차 인증. 메일 토큰 모드 <span class="mono">full</span> → ONB-01부터 재수행.<br>
+      &nbsp;&nbsp;② <strong>강제 모드</strong>: 복구 코드로 인증(AUTH-03) 성공 직후 자동 이동. 계정이 <strong>재설정 대기</strong> 상태다. 범위 = 2차 인증 재등록 + 새 복구 코드만(비밀번호 제외). 메일 토큰 모드 <span class="mono">2fa</span> → ONB-02부터.<br>
+      · <strong>강제 모드의 차단</strong> 재설정 대기 상태에서는 이 화면 외 모든 콘솔 화면을 막는다. 주소를 직접 입력하거나 뒤로가기로 빠져나가려 해도 이 화면으로 되돌린다. 허용 동작은 로그아웃뿐이고 '‹ 이전으로'(항목 3)는 노출하지 않는다. 세션이 만료돼 재로그인해도 복구 코드가 살아 있으므로 AUTH-01 → 02 → 03 → 이 화면으로 되돌아온다.<br>
+      · <strong>나가기</strong> 자발 모드 = '‹ 이전으로' → 대시보드(DASH-01). 강제 모드 = 나가는 동선 없음. 두 모드 모두 재설정 메일을 보낸 뒤에도 이 화면에 머문다.<br>
+      · <strong>완료 후</strong> 자발 모드 = ONB-01~03 재수행 → 전체 세션 로그아웃 → 로그인(AUTH-01). 강제 모드 = ONB-02~03 재수행 → 재설정 대기 해제 · 세션 생성 → <strong>대시보드(DASH-01)</strong>(완료 안내 배너).</div>
     </div>
 
     <div class="itm" data-idx="0">
       <div class="num">1</div>
       <div>
         <div class="itm-title">재설정 안내문 (표시 전용)</div>
-        <div class="itm-desc"><strong>값</strong> 발송 대상으로 {담당자 이메일}을 표시한다. 이메일 변경 화면은 만들지 않는다.<br><strong>무효화</strong> 기존 OTP와 복구 코드는 재등록 완료 시 무효화한다(발송 시점 아님).<br><span class="chk">[디자인 요청]</span> 시안 '백업코드'를 '복구 코드'로 통일한다.<br><span class="basis">근거 ISMS 2.5 · ONB-03 상세 1</span></div>
+        <div class="itm-desc"><strong>값</strong> 발송 대상으로 {담당자 이메일}을 표시한다. 이메일 변경 화면은 만들지 않는다.<br><strong>문구 분기</strong> 진입 모드에 따라 본문을 바꾼다. 자발 모드는 "비밀번호 재설정과 2차 인증 재등록", 강제 모드는 "인증 앱 재등록과 새 복구 코드 발급"으로 쓰고, 강제 모드 첫 문장은 선택이 아니라 필수임을 알리는 "인증 앱을 다시 등록해야 서비스를 이용할 수 있습니다"로 시작한다.<br><strong>무효화</strong> 기존 OTP와 복구 코드는 재등록 완료 시 무효화한다(발송 시점 아님). 강제 모드 안내문에는 "재등록 완료 전까지 현재 복구 코드로 다시 로그인할 수 있습니다"를 넣어 세션이 끊겨도 막히지 않음을 알린다.<br><span class="chk">[디자인 요청]</span> 시안 '백업코드'를 '복구 코드'로 통일한다. 강제 모드 안내문은 시안에 없다.<br><span class="basis">근거 ISMS 2.5 · ONB-03 상세 1 · AUTH-03 상세 2</span></div>
       </div>
     </div>
 
@@ -111,10 +121,10 @@
       <div class="num">2</div>
       <div>
         <div class="itm-title">[재설정 메일 발송] 버튼<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 쿨다운 이내이거나 발송 처리 중이면 비활성이다.<br><strong>확인 사항</strong> 없다. 기존 인증수단이 재등록 완료까지 유효하므로 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> ONB-00 초대 재발송 양식으로 1회용 링크를 보낸다(유효기간은 초대 링크와 같다). 이전 미사용 링크를 즉시 무효화해 최신 1개만 유효하게 두고, 발송 이력을 감사기록에 남긴다. 세션은 유지하고 로그아웃은 재등록 완료 시점(ONB-03 [확인])이다.<br><span class="chk">[확인필요: 쿨다운 값]</span><br><span class="basis">근거 ISMS 2.5 · 2.9.4 · ONB-00 재사용</span></div>
+        <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 쿨다운 이내이거나 발송 처리 중이면 비활성이다.<br><strong>확인 사항</strong> 없다. 기존 인증수단이 재등록 완료까지 유효하므로 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> <strong>인증 수단 재설정 메일(M2)</strong>로 1회용 링크를 보낸다 — 초대 메일(M1)과 별개 양식이다(2026-09-17 신설 · ONB-00 상세 참조). 토큰에 모드를 담아 자발 진입은 <span class="mono">full</span>(도착지 ONB-01), 강제 진입은 <span class="mono">2fa</span>(도착지 ONB-02)로 보낸다. 유효기간·1회용·재발송 시 이전 링크 즉시 무효화(최신 1개만 유효)는 초대 링크 규격을 그대로 쓰고, 발송 이력을 감사기록에 남긴다. 세션은 유지한다 — 자발 모드의 전체 로그아웃은 재등록 완료 시점(ONB-03 [확인])이고, 강제 모드는 로그아웃하지 않고 그 컨텍스트에 세션을 새로 만든다.<br><span class="chk">[확인필요: 쿨다운 값]</span><br><span class="basis">근거 ISMS 2.5 · 2.9.4 · ONB-00 메일 양식 2종</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[재설정 메일 발송] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①발송 처리 중 ②쿨다운 중(직전 발송 후 쿨다운 시간 이내)</span><span class="nav-to stay">처리 중 → 회색 비활성 · 라벨 "발송 중…" / 쿨다운 → 회색 비활성 · 라벨 "재발송 ({남은 초}초 후)" 카운트다운 → 0이면 "재설정 메일 재발송"으로 활성 복귀</span></div>
-          <div class="nav-row"><span class="nav-el">[재설정 메일 발송] — 클릭(활성)</span><span class="nav-act">확인 없음 → 라벨 "발송 중…"·비활성(중복 클릭 차단) → 토큰 생성 · 이메일 발송(ONB-00 양식) · 감사로그</span><span class="nav-to stay">화면 잔류 · 항목 4 발송 결과 배너 노출 · 버튼 → 쿨다운 상태 · 이후 흐름: 이메일 링크 → <strong>계정 활성화(ONB-01 → 02 → 03)</strong> 재수행(비밀번호 재설정 → 2FA 재등록 → 새 복구 코드) → [확인] 시 이전 코드 폐기 · 기존 세션 전체 로그아웃 → <strong>로그인(AUTH-01)</strong></span></div>
+          <div class="nav-row"><span class="nav-el">[재설정 메일 발송] — 클릭(활성)</span><span class="nav-act">확인 없음 → 라벨 "발송 중…"·비활성(중복 클릭 차단) → 토큰 생성(모드 포함) · 이메일 발송(M2 양식) · 감사로그</span><span class="nav-to stay">화면 잔류 · 항목 4 발송 결과 배너 노출 · 버튼 → 쿨다운 상태 · 이후 흐름 2분기 —<br><strong>자발(full)</strong>: 메일 링크 → <strong>ONB-01 → 02 → 03</strong>(비밀번호 재설정 → 2FA 재등록 → 새 복구 코드) → [확인] 시 이전 코드 폐기 · 기존 세션 전체 로그아웃 → <strong>로그인(AUTH-01)</strong><br><strong>강제(2fa)</strong>: 메일 링크 → <strong>ONB-02 → 03</strong>(2FA 재등록 → 새 복구 코드) → [확인] 시 이전 코드 폐기 · 재설정 대기 해제 · 그 컨텍스트에 세션 생성(계정당 1세션 → 기존 세션 종료) → <strong>대시보드(DASH-01)</strong></span></div>
           <div class="nav-row"><span class="nav-el">[재설정 메일 발송] — 실패</span><span class="nav-act">발송 오류(메일 서버·서버 오류)</span><span class="nav-to stay">화면 잔류 · 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 버튼 라벨 복귀(쿨다운 없음) · 결과 배너 미노출</span></div>
         </div>
       </div>
@@ -124,9 +134,9 @@
       <div class="num">3</div>
       <div>
         <div class="itm-title">'‹ 이전으로' 링크</div>
-        <div class="itm-desc"><span class="basis">근거 notation 공통 UI 규격 '종료 동선'</span></div>
+        <div class="itm-desc"><strong>노출</strong> 자발 모드에서만 보인다. 강제 모드(재설정 대기)에서는 나갈 동선을 두지 않으므로 노출하지 않는다(2026-09-17).<br><span class="basis">근거 notation 공통 UI 규격 '종료 동선' · AUTH-03 상세 2</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">'이전으로' — 활성 조건</span><span class="nav-act">다음이 아님: ①발송 처리 중</span><span class="nav-to stay">처리 중 → 비활성(회색)</span></div>
+          <div class="nav-row"><span class="nav-el">'이전으로' — 활성 조건</span><span class="nav-act">자발 모드이고 발송 처리 중이 아님</span><span class="nav-to stay">처리 중 → 비활성(회색) / 강제 모드 → 미노출</span></div>
           <div class="nav-row"><span class="nav-el">'이전으로' — 클릭(활성)</span><span class="nav-act">확인 없음</span><span class="nav-to"><strong>대시보드(DASH-01)</strong> · 토스트 없음 · 이미 발송된 링크는 유효 유지</span></div>
         </div>
       </div>
@@ -152,11 +162,11 @@
     <div class="detail-grid" id="detailCol">
       <div class="dtl" data-idx="0">
         <div class="detail-label"><span class="dtl-num">1</span>진입 경로 · 재설정 흐름</div>
-      <div class="dtl-body"><span class="box"><strong>흐름</strong> 발송 → 이메일 링크(ONB-00 방식) → ONB-01~03 재수행 → [확인] 시 새 복구 코드 발급 · 이전 코드 폐기 · 기존 세션 전체 로그아웃 → AUTH-01 재로그인.<br><strong>앱 분실</strong> 복구 코드로 로그인(AUTH-02)한 뒤 이 화면에서 재설정한다.</span></div>
+      <div class="dtl-body"><span class="box"><strong>자발 흐름</strong> DASH-01 카드 → 발송(토큰 <span class="mono">full</span>) → 메일 링크 → ONB-01~03 재수행 → [확인] 시 새 복구 코드 발급 · 이전 코드 폐기 · 기존 세션 전체 로그아웃 → AUTH-01 재로그인.<br><strong>강제 흐름</strong> 앱 분실 → AUTH-03 복구 코드 인증 성공 → 계정 재설정 대기 · 세션 생성 → <strong>이 화면으로 자동 이동</strong> → 발송(토큰 <span class="mono">2fa</span>) → 메일 링크 → ONB-02~03 → [확인] 시 새 복구 코드 발급 · 이전 코드 폐기 · 재설정 대기 해제 · 세션 생성 → DASH-01. 비밀번호는 재설정하지 않는다(2026-09-17 사용자 결정).<br><strong>강제 모드 차단</strong> 재설정 대기 동안 다른 콘솔 화면은 전부 이 화면으로 되돌린다. 로그아웃만 허용한다.</span></div>
       </div>
       <div class="dtl" data-idx="1">
         <div class="detail-label"><span class="dtl-num">2</span>무효화 시점 · 운영 예외</div>
-      <div class="dtl-body"><span class="box"><strong>무효화 시점</strong> 기존 OTP·복구 코드는 재등록 완료 시 무효화한다. 이메일 미수신이나 중도 이탈에도 로그인 수단이 끊기지 않는다.<br><strong>링크</strong> 만료·미사용 링크는 아무 변화를 만들지 않는다. 재발송 시 이전 링크를 즉시 무효화한다.<br><strong>전면 분실</strong> 복구 코드까지 없으면 관리자 본인확인 후 초대 재발송으로 처리한다(AUTH-01 상세 8과 동일 프로세스).<br><span class="chk">[확인필요: 재발송 쿨다운 값]</span></span></div>
+      <div class="dtl-body"><span class="box"><strong>무효화 시점</strong> 기존 OTP·복구 코드는 재등록 완료 시 무효화한다. 이메일 미수신이나 중도 이탈에도 로그인 수단이 끊기지 않는다.<br><strong>링크</strong> 만료·미사용 링크는 아무 변화를 만들지 않는다. 재발송 시 이전 링크를 즉시 무효화한다. 재설정 토큰이 만료·재사용이면 ONB-04로 보내되 재설정용 문구를 쓴다("만료되었거나 이미 사용된 링크입니다. 다시 로그인해 재설정 메일을 받아 주세요").<br><strong>강제 모드 세션 만료</strong> 유휴 {정책값 15분}·최대 {정책값 8시간}으로 세션이 끊겨도 복구 코드가 아직 살아 있으므로 AUTH-01 → 02 → 03으로 다시 들어와 이 화면으로 복귀한다. 재설정 대기는 재로그인해도, 계정 잠금이 해제돼도 유지된다.<br><strong>링크를 다른 기기에서 연 경우</strong> 재등록을 마친 그 컨텍스트에 세션을 만들고 DASH-01로 보낸다. 계정당 1세션이므로 원래 기기의 세션은 종료된다(다음 요청 때 AUTH-01).<br><strong>전면 분실</strong> 복구 코드까지 없으면 관리자 본인확인 후 초대 재발송으로 처리한다(AUTH-01 상세 8과 동일 프로세스). <span class="chk">[확인필요: ADM-04 활성 계정 행에 [초대 재발송]이 없어 화면상 실행 경로가 없다]</span><br><span class="chk">[확인필요: 재발송 쿨다운 값]</span></span></div>
       </div>
     </div>
   </div>
@@ -165,7 +175,7 @@
 <section class="footer-note">
   <div class="note-card">
     <div class="note-title">비고</div>
-    <div class="note-body">· DASH-01 계정·보안 '2차 인증 재설정' 진입 화면 — 안내문 + 발송 버튼 + 발송 결과 배너 + 이전으로 · 독립 페이지(콘솔 GNB 없음).<br>· <strong>[백엔드 통제]</strong> 발송·재등록·폐기 이력은 화면 표시 없이 감사기록 보존 — 근거 ISMS 2.9.4.<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 'Reset Credentials' 적용 · 발송 결과 배너·이메일 전문 표기·'복구 코드' 용어는 기획 유지 <span class="chk">[디자인 요청]</span> · [취소] 버튼은 '이전으로'로 대체 · 원본 <span class="mono">reference/figma/_crops/F8_row2_c4.png</span>.<br>· <strong>확정(2026-09-02)</strong> — 화면에는 이메일을 마스킹하지 않고 전문 표시한다. DB 저장 형식은 추후 결정.<br>· <strong>확정(구현 단순 우선)</strong> — 링크 유효기간은 초대 링크와 동일 규격 재사용 · 재발송 시 이전 링크 즉시 무효화(최신 1개만 유효) · 확인 다이얼로그 없음.<br>· 남은 <span class="chk">[확인필요]</span> — 재발송 쿨다운 값 · 이메일 DB 저장 형식(마스킹 여부).<br>· 이전 = DASH-01 / 관련 = DASH-02 / 재등록 절차 = ONB-01~03</div>
+    <div class="note-body">· DASH-01 계정·보안 '2차 인증 재설정' 진입 화면 — 안내문 + 발송 버튼 + 발송 결과 배너 + 이전으로 · 독립 페이지(콘솔 GNB 없음).<br>· <strong>[백엔드 통제]</strong> 발송·재등록·폐기 이력은 화면 표시 없이 감사기록 보존 — 근거 ISMS 2.9.4.<br>· <strong>[Figma 반영 2026-09-02]</strong> 시안 'Reset Credentials' 적용 · 발송 결과 배너·이메일 전문 표기·'복구 코드' 용어는 기획 유지 <span class="chk">[디자인 요청]</span> · [취소] 버튼은 '이전으로'로 대체 · 원본 <span class="mono">reference/figma/_crops/F8_row2_c4.png</span>.<br>· <strong>확정(2026-09-02)</strong> — 화면에는 이메일을 마스킹하지 않고 전문 표시한다. DB 저장 형식은 추후 결정.<br>· <strong>확정(구현 단순 우선)</strong> — 링크 유효기간은 초대 링크와 동일 규격 재사용 · 재발송 시 이전 링크 즉시 무효화(최신 1개만 유효) · 확인 다이얼로그 없음.<br>· 남은 <span class="chk">[확인필요]</span> — 재발송 쿨다운 값 · 이메일 DB 저장 형식(마스킹 여부).<br>· <strong>2026-09-17 개정</strong> — 진입 2종(자발·강제) 분기 신설 · 강제 모드는 2FA만 재등록하고 '이전으로' 미노출 · 완료 후 DASH-01 직행(전체 로그아웃 없음) · 재설정 메일을 초대 메일과 분리한 별도 양식(M2)으로 신설하고 토큰에 모드(full/2fa)를 담는다. 기획 근거 = <span class="mono">drafts/49_복구코드_로그인_강제재설정_기획_20260917.md</span>.<br>· 이전 = DASH-01(자발) · AUTH-03(강제) / 관련 = DASH-02 / 재등록 절차 = ONB-01~03(자발) · ONB-02~03(강제)</div>
   </div>
 </section>
 
