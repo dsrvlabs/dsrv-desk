@@ -144,7 +144,7 @@
 <div class="wide"><div class="panel"><div class="panel-title">이 문서를 읽는 법</div>
 <div class="intro">
 <p><b>케이스분기</b> = 거래 한 건(나목 교환 요청 · 마목 게시·신청) 또는 계정 하나가 시작해서 끝날 때까지 <b>갈라질 수 있는 경우</b>를 전부 <b>시간 순서로</b> 나열한 것이다. 경우마다 ① 무엇이 상태를 바꾸는지(<b>트리거</b>), ② 고객 화면에 무엇이 보이는지, ③ 시스템이 혼자 무엇을 하는지, ④ 어드민 어느 섹션에 무엇이 생기는지를 한 행에 적었다.</p>
-<p>상태는 세 축으로 나뉜다. <b>고객 라벨</b>(DASH-01 칩 이름 — 내부 심사 단계를 감춘 고객용 이름) · <b>어드민 업무 상태</b>(승인 대기·검토중 등 실제 업무) · <b>처리함 공통 상태 5종</b>(OPEN·ESCALATED·IN_PROGRESS·HOLD·RESOLVED). 같은 순간에 세 축의 값이 다를 수 있고, 그 대응을 §3 표가 정의한다. 코드 후보(영문)는 CSV·DB enum 초안이며 확정 전이다<span class="need">결정필요 ⑨</span>.</p>
+<p>상태는 세 축으로 나뉜다. <b>고객 라벨</b>(DASH-01 칩 이름 — 내부 심사 단계를 감춘 고객용 이름) · <b>어드민 업무 상태</b>(승인 대기·보류·정지 등 실제 업무) · <b>처리함 공통 상태 5종</b>(OPEN·ESCALATED·IN_PROGRESS·HOLD·RESOLVED). 같은 순간에 세 축의 값이 다를 수 있고, 그 대응을 §3 표가 정의한다. 코드 후보(영문)는 CSV·DB enum 초안이며 확정 전이다<span class="need">결정필요 ⑨</span>.</p>
 <p><b>칩은 4종뿐이다</b> — 대기(파랑) · 진행(노랑) · 완료(초록) · 종결(회색). 빨간 칩은 없다. 차단·잠금·동결처럼 <b>거래 레코드가 아직 없거나 거래와 무관한 상태</b>는 칩이 아니라 <span class="ban">배너</span>로 알린다. 화면 박스(<span class="mono">EXC-02</span> 등)를 클릭하면 해당 화면기획으로 이동한다.</p>
 </div>
 <div class="legend-row"><b>주체</b> <span class="who c">고객</span>고객·게시자·신청자 <span class="who a">관리자</span>DSRV 관리자 <span class="who s">시스템</span>타이머·룰·배치·온체인
@@ -450,14 +450,14 @@
 <td><span class="nm">이상거래 룰 적중</span><span class="wh"><span class="who s">시스템</span>자전 · 통정 · 위장게시 · 비정상 교환패턴 룰</span></td>
 <td>반영 없음<span class="sb">STR 누설 금지 — 결과는 개별 거래 상태로만 간접 반영</span></td>
 <td>연계 거래 식별<span class="sb">연계된 ① 승인 대기 건이 있으면 그 행을 에스컬레이션으로 올린다</span></td>
-<td><span class="ab">③ AML</span>T5 행 생성 — <span class="st start">미처리</span>또는<span class="st mid">에스컬레이션</span><span class="sb">[검토] [STR 검토] [무혐의 종결] · 연계 ① 행에 "③ 1건" 표시</span></td>
+<td><span class="ab">③ AML</span>T5 행 생성 — <span class="st start">미처리</span>또는<span class="st mid">에스컬레이션</span><span class="sb">[STR 이관] [무혐의 종결] · 연계 ① 행에 "③ 1건" 표시</span></td>
 <td>없음</td></tr>
 
-<tr><td>AM-02</td>
-<td><span class="nm">검토 착수</span><span class="wh"><span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>③</span> [검토]</span></td>
-<td>반영 없음</td>
-<td>감사로그</td>
-<td><span class="ab">③ AML</span><span class="st mid">검토중</span>행 유지</td>
+<tr style="opacity:.55;"><td><s>AM-02</s></td>
+<td><span class="nm"><s>검토 착수</s></span><span class="wh"><b>폐지 (2026-09-17)</b> — ADM-02 ③ [검토 착수] 버튼 삭제</span></td>
+<td>—</td>
+<td>—</td>
+<td><span class="ab">③ AML</span>중간 상태 <s>검토중</s> 소멸 · 미처리·에스컬레이션에서 AM-03·04로 바로 간다</td>
 <td>없음</td></tr>
 
 <tr class="r-branch"><td>AM-03</td>
@@ -478,7 +478,7 @@
 <td><span class="nm">다른 곳에서 ③으로 들어오는 건</span><span class="wh">EX-10 AML 사유 거절 · AC-06 잠금 유지·이관</span></td>
 <td>각 케이스 참조</td>
 <td>STR 검토 건 자동 생성</td>
-<td><span class="ab">③ AML</span>행 생성 → AM-02~04와 동일</td>
+<td><span class="ab">③ AML</span>행 생성 → AM-03·04와 동일(AM-02 폐지)</td>
 <td>없음</td></tr>
 </tbody></table></div>
 </div></div>
@@ -616,7 +616,7 @@
 <tbody>
 <tr><td><b>T1</b> 나목 교환 승인</td><td><span class="ab">① 승인</span></td><td>승인 대기 → (에스컬레이션) → 보류 ⇄ 승인 대기 → <b>승인</b>(종결 · → ②) / <b>거절</b>(종결)</td><td>[승인] [보류] [거절]</td></tr>
 <tr><td><b>T2</b> 마목 확정 확인</td><td><span class="ab">① 승인</span></td><td>확인 대기 → (에스컬레이션) → 보류 ⇄ 확인 대기 → <b>승인</b>(종결 · → ②) / <b>이전 중지</b>(종결)</td><td>[승인] [보류] [이전 중지]</td></tr>
-<tr><td><b>T5</b> 이상거래 워닝</td><td><span class="ab">③ AML</span></td><td>미처리·에스컬레이션 → 검토중 → <b>STR 이관</b> / <b>무혐의 종결</b></td><td>[검토] [STR 검토] [무혐의 종결]</td></tr>
+<tr><td><b>T5</b> 이상거래 워닝</td><td><span class="ab">③ AML</span></td><td>미처리·에스컬레이션 → <b>STR 이관</b> / <b>무혐의 종결</b> (중간 상태 없음 · 2026-09-17)</td><td>[STR 이관] [무혐의 종결]</td></tr>
 <tr><td><b>T8</b> 계정 잠금</td><td><span class="ab">④ 알림</span></td><td>미처리 → 확인 → <b>해제</b> / <b>잠금 유지·이관</b>(→ ③ 생성 · 커스터디 통보)</td><td>[확인] [조치 완료 ▾]</td></tr>
 <tr><td><b>X3</b> 3면 대사 불일치</td><td><span class="ab">④ 알림</span></td><td>미처리 → 원인 규명 중 → <b>해제·종결</b>(최신 배치가 일치일 때만 활성)</td><td>[확인 · 원인 규명] [조치 완료 ▾]</td></tr>
 <tr><td><span class="dec">신설</span><b>N1</b> 시세 소스 중단</td><td><span class="ab">④ 알림</span></td><td>에스컬레이션 → 확인 → <b>정상 수신 확인</b>(차단 해제)</td><td>[확인] [조치 완료 ▾]</td></tr>
@@ -649,7 +649,7 @@
 <tbody>
 <tr><td>T1 나목 승인</td><td>승인 대기 / 에스컬레이션 / 보류 / 승인 / 거절</td><td>OPEN · ESCALATED · HOLD ｜ 승인·거절 = RESOLVED(행 제거)</td></tr>
 <tr><td>T2 마목 확인</td><td>확인 대기 / 에스컬레이션 / 보류 / 승인 / 이전 중지</td><td>OPEN · ESCALATED · HOLD ｜ 승인·이전 중지 = RESOLVED</td></tr>
-<tr><td>T5 이상거래</td><td>미처리 / 에스컬레이션 / 검토중 / STR 이관 / 무혐의 종결</td><td>OPEN · ESCALATED · IN_PROGRESS ｜ 이관·종결 = RESOLVED</td></tr>
+<tr><td>T5 이상거래</td><td>미처리 / 에스컬레이션 / STR 이관 / 무혐의 종결 <span style="color:#94a3b8;">(검토중 폐지 2026-09-17)</span></td><td>OPEN · ESCALATED ｜ 이관·종결 = RESOLVED — ③은 IN_PROGRESS를 쓰지 않는다</td></tr>
 <tr><td>T8 계정 잠금</td><td>미처리 / 확인 / 해제 / 잠금 유지·이관</td><td>OPEN · IN_PROGRESS ｜ 해제·이관 = RESOLVED</td></tr>
 <tr><td>X3 · N1~N3</td><td>미처리·에스컬레이션 / 확인·원인 규명 중 / 조치 완료</td><td>OPEN · ESCALATED · IN_PROGRESS ｜ 조치 완료 = RESOLVED</td></tr>
 </tbody></table>
