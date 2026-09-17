@@ -283,14 +283,14 @@
 
     <div class="tbl">
       <div class="tbl-head"><span class="scr">ONB-00 · ADM-03</span><span class="kn">초대</span><span class="en">INVITE</span></div>
-      <div class="role">초대·재설정 이메일 1통 = 행 1개. 만료되어 재발송하면 새 행을 만든다(기존 행 갱신 아님). 메일 양식은 2종(M1 계정 초대 / M2 인증 수단 재설정)이고 purpose로 구분한다(2026-09-17).</div>
+      <div class="role">초대·재설정 이메일 1통 = 행 1개. 만료되어 재발송하면 새 행을 만든다(기존 행 갱신 아님). 메일은 템플릿 1종에 문안 세트 3종이고 purpose가 그 세트를 가른다(2026-09-17 · 문안 정본 ONB-00 상세 4).</div>
       <div class="f"><span class="m pk">PK</span><span class="name">초대 ID</span><span class="col">invite_id</span><span class="desc"></span></div>
       <div class="f"><span class="m fk">FK</span><span class="name">기관</span><span class="col">org_id</span><span class="desc">→ 기관(ORG)</span></div>
       <div class="f"><span class="m n">·</span><span class="name">수신 이메일</span><span class="col">email</span><span class="desc">담당자 본인 이메일. 셀프 가입 없음, 초대만</span></div>
       <div class="f"><span class="m n">·</span><span class="name">활성화 토큰</span><span class="col">token</span><span class="desc">1회용 링크 토큰. 해시로만 저장(원문 미보관)</span></div>
       <div class="f"><span class="m n">·</span><span class="name">만료 시각</span><span class="col">expires_at</span><span class="desc">발송 후 72시간</span></div>
       <div class="f"><span class="m n">·</span><span class="name">상태</span><span class="col">status</span><span class="desc"><span class="ev">발송 / 사용(활성화 완료) / 만료</span></span></div>
-      <div class="f"><span class="m n">·</span><span class="name">용도</span><span class="col">purpose</span><span class="desc"><span class="ev">최초 초대 / 재설정 full / 재설정 2fa</span> — <b>[스키마 보완 2026-09-17]</b> 링크 규격(72시간·1회·재발송 시 이전 무효)은 공통이고 <b>메일 양식과 도착 화면</b>이 갈린다. 최초 초대 = M1 메일 → ONB-01 · 재설정 full(DASH-03 자발 진입) = M2 메일 → ONB-01 · 재설정 2fa(DASH-03 강제 진입 · 복구 코드 로그인 후) = M2 메일 → <b>ONB-02</b>. 종전 '2차 인증 재설정' 단일 값은 full/2fa로 분리</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">용도</span><span class="col">purpose</span><span class="desc"><span class="ev">최초 초대 / 재설정 full / 재설정 2fa</span> — <b>[스키마 보완 2026-09-17]</b> 링크 규격(72시간·1회·재발송 시 이전 무효)은 공통이고 <b>메일 양식과 도착 화면</b>이 갈린다. 최초 초대 → ONB-01 · 재설정 full(DASH-03 자발 진입) → ONB-01 · 재설정 2fa(DASH-03 강제 진입 · 복구 코드 로그인 후) → <b>ONB-02</b>. 메일은 템플릿 1종에 문안 세트 3종(ONB-00 상세 4). 종전 '2차 인증 재설정' 단일 값은 full/2fa로 분리</span></div>
     </div>
 
     <div class="tbl">
@@ -658,7 +658,7 @@
       <tr><td class="fld">계정 역할<span class="col">USER.role</span></td><td><span class="v">가입자</span><span class="v">DSRV 관리자</span><span class="v">커스터디 담당자</span></td><td>고객사당 가입자 1명(ADM-03)</td></tr>
       <tr><td class="fld">계정 상태<span class="col">USER.status</span></td><td><span class="v mid">초대 발송됨</span><span class="v ok">활성</span><span class="v bad">잠금</span><span class="v">해지</span></td><td>재설정 대기(USER.mfa_reset_required)는 이 enum이 아닌 별도 플래그다(2026-09-17) · 잠금 = 5회 실패·탈취 의심(처리함 T8) · 추가 초대는 기존 계정 해지 후만</td></tr>
       <tr><td class="fld">초대 상태<span class="col">INVITE.status</span></td><td><span class="v">발송</span><span class="v ok">사용</span><span class="v">만료</span></td><td>72시간 · 1회 유효 — 만료·분실 시 재발송(새 행)</td></tr>
-      <tr><td class="fld">초대 용도<span class="col">INVITE.purpose</span></td><td><span class="v">최초 초대</span><span class="v">재설정 full</span><span class="v">재설정 2fa</span></td><td>2026-09-17 신설 · 메일 양식(M1/M2)과 도착 화면(ONB-01/ONB-02)을 가른다</td></tr>
+      <tr><td class="fld">초대 용도<span class="col">INVITE.purpose</span></td><td><span class="v">최초 초대</span><span class="v">재설정 full</span><span class="v">재설정 2fa</span></td><td>2026-09-17 신설 · 메일 문안 세트와 도착 화면(ONB-01/ONB-02)을 가른다</td></tr>
       <tr><td class="fld">로그인 이력 유형<span class="col">LOGIN_EVENT.type</span></td><td><span class="v ok">성공</span><span class="v bad">실패</span><span class="v bad">잠금</span><span class="v mid">복구 코드 사용</span></td><td>IP·디바이스/위치 이상탐지 미적용(AUTH-01)</td></tr>
       <tr><td class="fld">구분회계 계정 구분<span class="col">LEDGER_ACCOUNT.type</span></td><td><span class="v">수탁</span><span class="v">운영</span><span class="v">교환 재고</span><span class="v">에스크로</span><span class="v">스프레드수익(운영손익)</span><span class="v">중개수수료</span><span class="v">가스비 비용</span><span class="v">가스비 회수</span></td><td>원장 4분할 + 수익 2 + 가스비 2 · 계정명은 CSV ④에서만 쓰고 고객 화면 미노출</td></tr>
       <tr><td class="fld">보존 기간<span class="col">AUDIT_LOG.retention</span></td><td><span class="v">거래 15년</span><span class="v">AML 5년</span></td><td>법정 보존 기간 — WORM · 해시 · NTP</td></tr>
@@ -704,7 +704,7 @@
       <tr><td class="fld">게시 / 신청 유효기간 (게시판 중개)</td><td><span class="v">30일</span> / <span class="v">영업일 2일</span></td><td>화면 확정 표기 (BRK-02·03)</td></tr>
       <tr><td class="fld">시세변동 자동중지 임계 (게시판 중개)</td><td><span class="v">±2.0%</span> (게시 시점 대비)</td><td>ADM-03 연동 <span class="warn2">[확인필요]</span></td></tr>
       <tr><td class="fld">건별 한도 (공통)</td><td><span class="v">1회 1,500,000원 상당</span> · KRW 환산(ETH·스테이블 모두 시세 소스 KRW 시세, 요청 시점 · 원 단위 절사)</td><td>2026-09-02(9) 원화 기준(종전 '1,000 USD 상당'·'1억 원 상당 / 100,000 수량' 표기 폐기) · 일간·월간 누적 한도 <span class="warn2">[확인필요]</span></td></tr>
-      <tr><td class="fld">인증·세션</td><td>초대 링크 72시간·1회 · <b>재설정 링크(M2) 72시간·1회 · 토큰 모드 full/2fa</b>(2026-09-17) · 로그인 2단계(비밀번호 → 인증 앱 6자리) · 실패 5회 잠금(비밀번호·인증 코드·복구 코드 합산) · 2FA 사전 인증 120초 · 유휴 15분 · 세션 최대 8시간 · 계정당 1세션 · 복구 코드 1개·24자·1회용 · 비밀번호 8~20자</td><td>2026-09-02(5)·(12)·(14) 확정 · 관리자 유휴 10분 <span class="warn2">[확인필요]</span></td></tr>
+      <tr><td class="fld">인증·세션</td><td>초대 링크 72시간·1회 · <b>재설정 링크 72시간·1회 · 토큰 모드 full/2fa</b>(2026-09-17) · 로그인 2단계(비밀번호 → 인증 앱 6자리) · 실패 5회 잠금(비밀번호·인증 코드·복구 코드 합산) · 2FA 사전 인증 120초 · 유휴 15분 · 세션 최대 8시간 · 계정당 1세션 · 복구 코드 1개·24자·1회용 · 비밀번호 8~20자</td><td>2026-09-02(5)·(12)·(14) 확정 · 관리자 유휴 10분 <span class="warn2">[확인필요]</span></td></tr>
       <tr><td class="fld">가스비</td><td>고객 부담 · 받는 수량에서 차감 · 예상액 참고(상한 아님) · 실제 차감 = 실발생액 · 마목 2회분(예치 1 + 인도 1) · 건별 한도 판정 미포함</td><td>2026-09-02(13) 확정 · 반환 건 가스비 부담 · 인도 시 뺀 가스 상당액의 귀속 <span class="warn2">[확인필요]</span></td></tr>
       <tr><td class="fld">기관 상태 · 커스터디 연동</td><td>customerStatusCd 6종 조회 API(관문 5곳 · 캐시·폴링 없음) · <b>커스터디 → 우리 push 없음</b> · 커스터디 담당자 어드민 입력(txHash · [AML 이슈 미집행]) · 온체인 컨펌 기준</td><td>2026-09-07(21)~(23) · 2026-09-14 확정 · 조회 지연 임계 · 05·06 로그인 범위 · 컨펌 수 <span class="warn2">[확인필요]</span></td></tr>
       <tr><td class="fld">집행·정산 소요</td><td>나목 교환 약 2영업일(입고·출고 2건) · 마목 정산 배치 1영업일 3회(예치 2건 → 인도 2건) · 수수료 스윕 정책 주기</td><td>예시 — ADM-03 정책값으로 확정 예정 · 배치 시각·마감 <span class="warn2">[확인필요]</span></td></tr>
