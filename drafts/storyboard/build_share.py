@@ -145,6 +145,18 @@ same_as_head = bool(versions) and all(
 if not same_as_head:
     versions.insert(0, cur)
 
+# ── 2.5) git에 없는 게시 버전 보존 ─────────────────────────────────
+#   이전에 게시한 공유본에만 있던 미커밋 작업본(예: 2026-09-22)을 _archive/share_extra_versions.json에
+#   보관해 두고 매 빌드에 날짜 순서대로 끼워 넣는다. 재게시 때 게시본 버전이 사라지지 않게 한다.
+EXTRA = os.path.join(os.path.dirname(os.path.abspath(__file__)), '_archive', 'share_extra_versions.json')
+if os.path.exists(EXTRA):
+    for item in json.load(open(EXTRA, encoding='utf-8')):
+        for sha, content in item['blobs'].items():
+            put(sha, content)
+        ev = dict(item['version'])
+        pos = next((k for k, v in enumerate(versions) if v['date'] < ev['date']), len(versions))
+        versions.insert(pos, ev)
+
 # ── 3) 번호 부여(오래된 것 = v1) · 용량 예산 ─────────────────────────
 total = len(versions)
 for idx, v in enumerate(versions):
