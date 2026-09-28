@@ -80,7 +80,7 @@
         </div>
         <div class="item-area" data-highlight="3" style="position:relative;padding:4px;border-radius:8px;">
           <div class="pin" data-idx="3" style="top:-6px;right:-6px;">4</div>
-          <div class="kv"><span class="k">내 중개 수수료 (거래액 1% 고정)</span><span class="v">7.98 USDC <span style="color:#94a3b8;">(내가 보내는 798.40 USDC 기준) — 확정 시 발생</span></span></div>
+          <div class="kv"><span class="k">내 중개 수수료 (거래액 1% 고정)</span><span class="v">8.00 USDT <span style="color:#94a3b8;">(내가 받는 800 USDT 기준) — 확정 시 발생</span></span></div>
         </div>
       </div>
 
@@ -141,7 +141,7 @@
       <div class="num">4</div>
       <div>
         <div class="itm-title">내 중개 수수료 (표시 전용)</div>
-        <div class="itm-desc"><strong>값</strong> 수수료율 {정책값 1.00%}(ADM-03 · 거래액 기준 고정)를 내가 보내는 자산 수량(항목 1 내 기준 행)에 적용하고 각 자산 자릿수로 절사한다 — 798.40 USDC × 1% = 7.984 → 7.98 USDC.<br><strong>노출 범위</strong> 자기 측 금액만 표시하고 상대측(게시자 8.00 USDT)은 노출하지 않는다.<br><strong>접미</strong> 협의중은 "— 확정 시 발생", 확정·완료는 "— 확정으로 발생 · 인도 시 정산", 종결 3종은 "— 발생하지 않음".<br><strong>정산 방식</strong> 별도 정산이다(2026-09-02 결정) — 내가 보내는 수량에서 공제하지 않는다. 정산 시점은 인도 집행 시점(에스크로 전용지갑 → 내 수탁 지갑 콜드 출고 · 2026-09-03(15))이다.<br><span class="basis">근거 L6 설명의무 · 09 §0 마목 수수료 · notation 절사</span></div>
+        <div class="itm-desc"><strong>값</strong> 수수료율 {정책값 1.00%}(ADM-03 · 거래액 기준 고정)를 <strong>내가 받는 자산 수량</strong>(상대방 거래 수량)에 적용하고 그 자산 자릿수로 절사한다 — 800 USDT × 1% = 8.00 USDT(2026-09-28(37)①). 양측이 항상 쌍으로 주고받으므로 각자 거래액의 1%를 부담한다는 원칙은 같다.<br><strong>노출 범위</strong> 자기 측 금액만 표시하고 상대측(게시자 7.98 USDC)은 노출하지 않는다.<br><strong>접미</strong> 협의중은 "— 확정 시 발생", 확정·완료는 "— 확정으로 발생 · 인도 시 정산", 종결 3종은 "— 발생하지 않음".<br><strong>정산 방식</strong> 인도 시 공제다(2026-09-28(37)①) — 예치는 내가 보내는 거래 수량만 하고, 인도받을 때 받는 수량에서 1%를 뺀다. 정산 시점은 인도 집행 시점(에스크로 전용지갑 → 내 수탁 지갑 콜드 출고 · 2026-09-03(15))이다.<br><span class="basis">근거 L6 설명의무 · 09 §0 마목 수수료 · notation 절사</span></div>
       </div>
     </div>
 
@@ -194,7 +194,7 @@
       · 2026-09-02 신설 — 종전에는 신청 후 신청자가 자기 건을 볼 화면이 없어 대시보드 목록 [확인필요]로만 남아 있었음.<br>
       · <strong>[방어 핵심]</strong> 조회 전용 + 협의·역제안·취소 채널 없음 — 신청 후에는 게시자의 수락/거절과 기한 경과·게시 종결만 존재(통신중개 아님). 수수료는 확정 전 자기 측 금액으로 사전 고지(설명의무).<br>
       · 2026-09-02 설명 형식 개정 적용(핀 = 조작 요소 단위) — 표시 6 · 링크 1 · 버튼 0 · 상태 변형은 프레임 추가 대신 항목 3 상태 목록 · '내 기준(신청자)' 행 추가로 수수료 기준 수량 명시.<br>
-      · <span class="chk">[확인필요]</span> 거절·만료 통지 이메일 신설 여부 · 고객 화면 상태 enum(states.html 고객 도메인 섹션) · 수수료 차감 방식(BRK-05와 공통).<br>
+      · <span class="chk">[확인필요]</span> 거절·만료 통지 이메일 신설 여부 · 고객 화면 상태 enum(states.html 고객 도메인 섹션). 수수료 차감 방식은 인도 시 공제로 해소(2026-09-28(37)①).<br>
       · 다음: 확정 시 [이전 진행 보기] → 이전·완료 (BRK-05, 양측 공용) / 거절·만료·종결 시 대시보드 거래 내역에 잔존
     </div>
   </div>

@@ -69,7 +69,7 @@
             <div class="csvbtn"><div class="ct">② 거래 요청</div><div class="cd">나목 요청·마목 게시·신청 전부 + 자동검증 결과·처리 이력·만료·중지 사유.</div><span class="dl">다운로드</span></div>
             <div class="csvbtn"><div class="ct">③ 콜드 이전</div><div class="cd">서명자 · 명세 해시 · 가스비 · 실수령 수량.</div><span class="dl">다운로드</span></div>
             <div class="csvbtn"><div class="ct">④ 원장 (xlsx)</div><div class="cd">시트 A 잔액 스냅숏 · 시트 B 전기 원장.</div><span class="dl">다운로드</span></div>
-            <div class="csvbtn"><div class="ct">⑤ 3면 대사</div><div class="cd">지갑 4묶음 전부의 내부·온체인·커스터디 잔액.</div><span class="dl">다운로드</span></div>
+            <div class="csvbtn"><div class="ct">⑤ 3면 대사</div><div class="cd">지갑마다 내부·온체인·커스터디 기록 잔액.</div><span class="dl">다운로드</span></div>
             <div class="csvbtn"><div class="ct">⑥ 열람 기록</div><div class="cd">감사로그 전량. WORM 해시와 보존 기간 포함.</div><span class="dl">다운로드</span></div>
           </div>
         </div>
@@ -89,7 +89,7 @@
       <div class="num">1</div>
       <div>
         <div class="itm-title">데이터 다운로드 — CSV 6종<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>노출</strong> 6종 각각 버튼 1개로 항상 보인다(대표 핀 = 영역 전체). 어드민 역할이 1종이라 6종 모두 같은 조건으로 보인다.<br><strong>클릭 가능</strong> 항상 활성이다. 같은 종류를 생성하는 동안만 비활성이고 다른 종류는 함께 받을 수 있다.<br><strong>확인 사항</strong> 없다. 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> 조회성 데이터는 화면 목록을 두지 않고 전부 CSV로 뺀다. 기간·조건 선택 없이 생성 시점 기준 전체 기간 스냅숏을 동기 생성한다. 모든 다운로드는 열람 기록(⑥)에 남는다. 컬럼 정의·표시 형식·예시값은 아래 부록 1~3을 본다.<br>· <strong>③ 콜드 이전 목록</strong>에 반환·수수료 스윕 행 유형이 추가됐고 명세 해시를 포함한다(2026-09-04).<br>· <strong>④는 Excel 1파일 · 시트 2개</strong>다 : 시트 A 잔액 스냅숏(계정 8종 × 자산 3종) · 시트 B 전기 원장(잔액이 움직인 사건 전부). 잔액만으로는 기간 손익도 건별 가스비 전기도 나오지 않는다(2026-09-16 결정).<br>· <strong>⑥은 감사로그 전량</strong>이다 : 조회·다운로드만 거르지 않는다. 지침 제40조②의 승인·보류·거절·이전 중지·AML 판단·조치 완료·정책 변경·txHash 입력이 이 파일로 나간다(2026-09-16 결정).<br>· <strong>①에는 KYC 열을 두지 않는다</strong> : 고객확인은 커스터디 소관이고 우리는 기관 상태 코드로만 받는다(2026-09-16 결정).<br>· <strong>⑤는 '3면 대사'</strong>다 — 내부 장부 ↔ 온체인 ↔ 커스터디 콜드 기록 세 값을 자산 묶음 4개 전부에 대해 스냅숏한다. 2면(장부↔온체인)이 아니다.<br>· 개인식별정보는 CSV에서도 마스킹한다.<br><span class="chk">[확인필요]</span> 구현 화면의 ② 설명이 "KYT 점수·BLF 결과를 포함한 감사용 자료"인데, BLF·KYT 임계와 판정은 커스터디 소유로 정리했다(2026-09-07(21) · 종전 kyt_blf_thr → escalation_thr 대체). 이 CSV에 KYT 점수·BLF 결과가 실제로 들어가는지, 들어간다면 어느 값을 받아 적는지 확인이 필요하다.<br><span class="basis">근거 states 케이스분기 §4 · 09 §0 자산 묶음 4개 · 부록 컬럼 정의</span></div>
+        <div class="itm-desc"><strong>노출</strong> 6종 각각 버튼 1개로 항상 보인다(대표 핀 = 영역 전체). 어드민 역할이 1종이라 6종 모두 같은 조건으로 보인다.<br><strong>클릭 가능</strong> 항상 활성이다. 같은 종류를 생성하는 동안만 비활성이고 다른 종류는 함께 받을 수 있다.<br><strong>확인 사항</strong> 없다. 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> 조회성 데이터는 화면 목록을 두지 않고 전부 CSV로 뺀다. 기간·조건 선택 없이 생성 시점 기준 전체 기간 스냅숏을 동기 생성한다. 모든 다운로드는 열람 기록(⑥)에 남는다. 컬럼 정의·표시 형식·예시값은 아래 부록 1~3을 본다.<br>· <strong>③ 콜드 이전 목록</strong>에 반환·수수료 스윕 행 유형이 추가됐고 명세 해시를 포함한다(2026-09-04).<br>· <strong>④는 Excel 1파일 · 시트 2개</strong>다 : 시트 A 잔액 스냅숏(계정 8종 × 자산 3종) · 시트 B 전기 원장(잔액이 움직인 사건 전부). 잔액만으로는 기간 손익도 건별 가스비 전기도 나오지 않는다(2026-09-16 결정).<br>· <strong>⑥은 감사로그 전량</strong>이다 : 조회·다운로드만 거르지 않는다. 지침 제40조②의 승인·보류·거절·이전 중지·AML 판단·조치 완료·정책 변경·txHash 입력이 이 파일로 나간다(2026-09-16 결정).<br>· <strong>①에는 KYC 열을 두지 않는다</strong> : 고객확인은 커스터디 소관이고 우리는 기관 상태 코드로만 받는다(2026-09-16 결정).<br>· <strong>⑤는 '3면 대사'</strong>다 — 내부 장부 ↔ 온체인 ↔ 커스터디 기록 세 값을 4묶음의 <strong>지갑마다</strong> 스냅숏한다. 커스터디 값은 우리가 아는 이체의 txhash마다 커스터디에 조회한 결과를 기초 잔액에 누적해 만든다 — 이미 온체인·어드민에서 입력한 이체에 대한 크로스체크다(2026-09-23(35) · 2026-09-28(37)④). 2면(장부↔온체인)이 아니다.<br>· 개인식별정보는 CSV에서도 마스킹한다.<br><span class="chk">[확인필요]</span> 구현 화면의 ② 설명이 "KYT 점수·BLF 결과를 포함한 감사용 자료"인데, BLF·KYT 임계와 판정은 커스터디 소유로 정리했다(2026-09-07(21) · 종전 kyt_blf_thr → escalation_thr 대체). 이 CSV에 KYT 점수·BLF 결과가 실제로 들어가는지, 들어간다면 어느 값을 받아 적는지 확인이 필요하다.<br><span class="basis">근거 states 케이스분기 §4 · 09 §0 자산 묶음 4개 · 부록 컬럼 정의</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[CSV 다운로드] — 클릭</span><span class="nav-act">클릭 → 라벨 "생성 중…" → 브라우저 다운로드</span><span class="nav-to stay">화면 잔류 · 토스트 없음 · 열람 기록 적재</span></div>
           <div class="nav-row"><span class="nav-el">[CSV 다운로드] — 실패</span><span class="nav-act">생성 오류 / 타임아웃</span><span class="nav-to stay">상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 버튼 라벨 복귀</span></div>
@@ -115,20 +115,7 @@
 <section class="footer-note">
   <div class="note-card">
     <div class="note-title">비고</div>
-    <div class="note-body">
-      · DSRV 내부 관리자 화면(고객사 노출 없음). 어드민은 <strong>처리함(ADM-02) · 설정(ADM-03) · 기관 · 가입자(ADM-04) · 데이터 다운로드(ADM-05) 4화면</strong>이다. 이 화면은 2026-09-16 구현 화면 기준으로 처리함(ADM-02)에서 분리했다.<br>
-      · <strong>①~⑥ 번호는 바꾸지 않는다.</strong> DB 스키마·케이스분기(states)·운영 매뉴얼이 'CSV ⑥ 열람 기록'처럼 번호로 참조한다. <span class="chk">지침 제42조 본문에는 CSV 번호가 나오지 않는다 — 종전에 "제42조가 참조한다"고 적었던 것은 사실과 달라 바로잡았다(2026-09-16).</span> 카드 이름만 구현 화면 문구를 따랐다.<br>
-      · <strong>다운로드 자체가 열람 기록</strong>이다 — ⑥을 받는 행위도 ⑥에 남는다(지침 제42조④).<br>
-      · 다운로드 이력을 보는 화면은 두지 않는다(2026-09-02(11) 편의기능 축소). 이력은 ⑥ CSV로만 본다.<br>
-      · 연결: ① 기관·가입자 목록 원천 = 기관 · 가입자(ADM-04) · ②③ 원천 = 처리함(ADM-02) ①② · ⑤ 3면 대사 불일치 알림 = 처리함 ④ 운영 알림.<br>
-      · <strong>처리함 아이템 배치</strong>(2026-09-16 결정) — 8종을 대상 축을 따라 6종에 나눠 담고 ⑦을 만들지 않는다.<br>
-      &nbsp;&nbsp;<b>T1</b> 나목 승인 · <b>T2</b> 마목 확정 · <b>T5</b> 이상거래 → <b>② 거래 요청</b>(T1·T2는 승인 아이템 열, T5는 AML 아이템 열로 따로 둔다. 한 거래에 둘이 동시에 붙을 수 있다)<br>
-      &nbsp;&nbsp;<b>T8</b> 계정 잠금 → <b>① 고객사 · 가입자</b> · <b>N3</b> 집행 대사 불일치 → <b>③ 콜드 이전</b> · <b>X3</b> 대사 불일치 → <b>⑤ 3면 대사</b><br>
-      &nbsp;&nbsp;<b>N1</b> 시세 소스 수신 중단 · <b>N2</b> 교환 재고 부족은 거래·계정·이전·대사 어디에도 붙지 않는다 → <b>⑥ 감사로그</b>에서 <span class="src">source</span>로 걸러 본다. 스키마 설계 원칙 ⓒ가 모든 상태 변경을 감사로그에 남기도록 정하고 있고 <span class="src">source</span>에 「시세 소스 감시」·「재고 감시」 값이 이미 있다.<br>
-      &nbsp;&nbsp;이렇게 하면 지침 제45조①의 월 보고 항목(승인 · 거절 · 중지 · 반환 · 대사 불일치 · 알림)이 전부 원천을 갖는다. <span class="chk">다만 ⑥은 행위 로그라 「지금 열려 있는 아이템이 몇 건인가」를 보려면 생성과 종결을 짝지어야 한다. 미종결 건은 종결 행이 없다.</span><br>
-      · <strong>2026-09-16 결정 3건</strong>: ④를 Excel 2시트로(잔액 + 전기 · LEDGER_ENTRY 신설 필요) · ⑥을 감사로그 전량으로 · ①에서 KYC 열 삭제. 근거와 뺀 열 목록은 부록 3의 각 카드 머리에 있다.<br>
-      · <span class="chk">[확인필요]</span> ② 거래 요청 CSV의 KYT 점수·BLF 결과 포함 여부 — 개발에 회신 요청함(drafts/48 확인 A번): 실제로 들어가는지, 들어간다면 어디서 받아오는지, 안 들어가면 화면 설명 문구를 고쳐야 한다(항목 1 참조) · 각 CSV의 컬럼 정의(부록) · 생성 시간이 긴 CSV의 동기 생성 한계.
-    </div>
+    <div class="note-body">· <strong>미결</strong> <span class="chk">[확인필요]</span> ② 거래 요청 CSV의 <strong>KYT 점수·BLF 결과 포함 여부</strong> — 개발 회신 요청함(<span class="mono">drafts/48</span> 확인 A번): 실제로 들어가는지, 들어간다면 어디서 받아오는지, 안 들어가면 항목 1의 화면 문구를 고쳐야 한다 · 각 CSV의 컬럼 정의(부록) · 생성 시간이 긴 CSV의 동기 생성 한계.<br>· <strong>폐기</strong> 다운로드 이력을 보는 화면은 두지 않는다 — 이력은 ⑥ CSV로만 본다. 처리함 아이템 전용 CSV ⑦도 만들지 않는다.<br>· <strong>①~⑥ 번호는 바꾸지 않는다.</strong> DB 스키마·케이스분기(states)·운영 매뉴얼이 'CSV ⑥ 열람 기록'처럼 번호로 참조한다. 카드 이름만 구현 화면 문구를 따랐다. <strong>다운로드 자체가 열람 기록</strong>이다 — ⑥을 받는 행위도 ⑥에 남는다(지침 제42조④).<br>· <strong>처리함 아이템 배치</strong> 8종을 <strong>대상 축</strong>을 따라 6종에 나눠 담는다. 아이템은 언제나 무언가에 붙어 있으므로 그 대상이 실린 파일에 함께 둔다.<br>&nbsp;&nbsp;T1 나목 승인 · T2 마목 확정 · T5 이상거래 → <strong>② 거래 요청</strong>(T1·T2는 승인 아이템 열, T5는 AML 아이템 열로 따로 둔다 — 한 거래에 둘이 동시에 붙을 수 있다)<br>&nbsp;&nbsp;T8 계정 잠금 → <strong>① 고객사·가입자</strong> · N3 집행 대사 불일치 → <strong>③ 콜드 이전</strong> · X3 대사 불일치 → <strong>⑤ 3면 대사</strong><br>&nbsp;&nbsp;N1 시세 소스 수신 중단 · N2 교환 재고 부족은 거래·계정·이전·대사 어디에도 붙지 않는다 → <strong>⑥ 감사로그</strong>에서 <span class="mono">source</span>로 걸러 본다(「시세 소스 감시」·「재고 감시」 값이 이미 있다).<br>&nbsp;&nbsp;이렇게 하면 지침 제45조①의 월 보고 항목(승인·거절·중지·반환·대사 불일치·알림)이 전부 원천을 갖는다. 다만 <strong>⑥은 행위 로그</strong>라 「지금 열려 있는 아이템이 몇 건인가」를 보려면 생성과 종결을 짝지어야 하고, 미종결 건은 종결 행이 없다.<br>· <strong>정본 포인터</strong> 결정 이력 = <span class="mono">knowledge/09 §0</span> 2026-09-02(11) · 2026-09-16(31)(32). 컬럼 정의 = 부록 3. 표기 규칙 = <span class="mono">notation</span>. 화면 구성·연결 = <span class="mono">ia</span> · <span class="mono">overview</span>.</div>
   </div>
 </section>
 
@@ -282,11 +269,11 @@
     <div class="appx">
       <div class="at">③ 콜드 이전</div>
       <div class="as">EXCHANGE_EXECUTION · BROKER_SETTLEMENT</div>
-      <div class="ao">온체인 이전 1건 = 1행. 나목은 EXCHANGE_EXECUTION, 마목 예치·인도·반환·수수료 스윕은 BROKER_SETTLEMENT의 <span class="src">transfer_type</span>으로 갈린다(별도 ESCROW_TRANSFER·FEE_SWEEP 테이블은 없다). 정렬 = 집행 시각 오름차순.</div>
+      <div class="ao">온체인 이전 1건 = 1행. 나목은 EXCHANGE_EXECUTION, 마목 예치·인도·반환·수수료는 BROKER_SETTLEMENT의 <span class="src">transfer_type</span>으로 갈린다(별도 ESCROW_TRANSFER·FEE_SWEEP 테이블은 없다). 정렬 = 집행 시각 오름차순.</div>
       <table class="tbl">
         <thead><tr><th style="width:120px">컬럼(헤더)</th><th style="width:170px">원천</th><th style="width:200px">표시 형식</th><th>예시값</th></tr></thead>
         <tbody>
-          <tr><td>거래 유형</td><td class="src">leg_type / BROKER_SETTLEMENT.transfer_type</td><td>영문 대문자 코드</td><td><span class="ex">DEPOSIT</span> 입고 / <span class="src">WITHDRAW</span> 출고 / <span class="src">ESCROW_IN</span> 예치 / <span class="src">ESCROW_OUT</span> 인도 / <span class="src">REFUND</span> 반환 / <span class="src">FEE_SWEEP</span> 수수료 스윕</td></tr>
+          <tr><td>거래 유형</td><td class="src">leg_type / BROKER_SETTLEMENT.transfer_type</td><td>영문 대문자 코드</td><td><span class="ex">DEPOSIT</span> 입고 / <span class="src">WITHDRAW</span> 출고 / <span class="src">ESCROW_IN</span> 예치 / <span class="src">ESCROW_OUT</span> 인도 / <span class="src">REFUND</span> 반환 / <span class="src">FEE</span> 수수료(나목 3/3 · 마목 5/6·6/6 · 거래별 · 2026-09-21(36))</td></tr>
           <tr><td>이전 번호</td><td class="src">exec_id / settle_id</td><td>식별자</td><td><span class="ex">EXE-20260916-0003</span></td></tr>
           <tr><td>거래 번호</td><td class="src">exc_id / deal_id</td><td>원 거래와 잇는 키</td><td><span class="ex">EXC-20260916-0001</span></td></tr>
           <tr><td>기관번호</td><td class="src">org_id</td><td>customerNo · 중개는 양측이 각각 행을 갖는다</td><td><span class="ex">L-260915-0100</span></td></tr>
@@ -300,11 +287,10 @@
           <tr><td>txhash</td><td class="src">txhash</td><td>전문 · 마스킹 없음 · 미집행이면 빈 값</td><td><span class="ex">0x4c1b8f...aa07</span></td></tr>
           <tr><td>예상 가스비(ETH)</td><td class="src">gas_est_eth</td><td>ETH 4자리 · 참고값이고 상한이 아니다</td><td><span class="ex">0.0021</span></td></tr>
           <tr><td>예상 가스비(원)</td><td class="src">gas_est_krw</td><td>원 단위 절사 · 쉼표 없음</td><td><span class="ex">8400</span></td></tr>
-          <tr><td>예상 가스비(받는 자산)</td><td class="src">gas_est_asset</td><td>받는 자산 자릿수로 절사</td><td><span class="ex">6.30</span></td></tr>
           <tr><td>실발생 가스비(ETH)</td><td class="src">gas_actual_eth</td><td>ETH 4자리 · <span class="src">gasUsed × effectiveGasPrice</span> · [완료] 시 기록</td><td><span class="ex">0.0019</span></td></tr>
           <tr><td>실발생 가스비(원)</td><td class="src">gas_actual_krw</td><td>원 단위 절사 · 쉼표 없음</td><td><span class="ex">7600</span></td></tr>
-          <tr><td>실발생 가스비(받는 자산)</td><td class="src">gas_actual_asset</td><td>받는 자산 자릿수 · <strong>실제 차감액</strong></td><td><span class="ex">5.70</span></td></tr>
-          <tr><td>실수령 수량</td><td class="drv">파생 = 받는 수량 − 실발생 가스비 환산액</td><td>받는 자산 자릿수 · 고객 화면 EXC-04·BRK-05 실수령액과 같아야 한다</td><td><span class="ex">894.03</span></td></tr>
+          <tr><td>실수령 수량</td><td class="drv">파생 = 받는 수량</td><td>받는 자산 자릿수 · 가스비를 차감하지 않는다(2026-09-21(36)) · 고객 화면 EXC-04·BRK-05 실수령액과 같아야 한다</td><td><span class="ex">899.73</span></td></tr>
+          <tr><td>가스비 부담 주체</td><td class="drv">파생 = 이 이전의 출금 지갑 소유자</td><td><span class="src">CUSTOMER</span> 고객(나목 입고 · 마목 자기 예치) / <span class="src">DSRV</span> 그 밖의 이전</td><td><span class="ex">DSRV</span> <span class="gap">[스키마 보완]</span></td></tr>
           <tr><td>대사 일치</td><td class="src">recon_ok</td><td><span class="src">Y</span> / <span class="src">N</span> · 지갑·주소·자산·수량 4항목 대조</td><td><span class="ex">Y</span></td></tr>
           <tr><td>N3 아이템 ID · 상태 · 결과</td><td class="src">INBOX_ITEM (type=N3)</td><td>집행 대사 불일치 알림 · 일치하면 빈 값</td><td><span class="ex">IB-000352</span> / <span class="ex">RESOLVED</span> / <span class="ex">조치완료</span></td></tr>
           <tr><td>상태</td><td class="src">status</td><td>영문 대문자 코드</td><td><span class="ex">COMPLETED</span></td></tr>
@@ -327,7 +313,7 @@
         <thead><tr><th style="width:120px">컬럼(헤더)</th><th style="width:170px">원천</th><th style="width:200px">표시 형식</th><th>예시값</th></tr></thead>
         <tbody>
           <tr><td>계정 ID</td><td class="src">LEDGER_ACCOUNT.account_id</td><td>식별자</td><td><span class="ex">LA-0007</span></td></tr>
-          <tr><td>계정 구분</td><td class="src">LEDGER_ACCOUNT.type</td><td>영문 대문자 코드 8종 · 고객 화면에 노출하지 않는 내부 계정명</td><td><span class="ex">CUSTODY</span> 수탁 / <span class="src">OPERATION</span> 운영 / <span class="src">EXCHANGE_STOCK</span> 교환 재고 / <span class="src">ESCROW</span> 에스크로 / <span class="src">SPREAD_REVENUE</span> 스프레드수익 / <span class="src">BROKER_FEE</span> 중개수수료 / <span class="src">GAS_COST</span> 가스비 비용 / <span class="src">GAS_RECOVERY</span> 가스비 회수</td></tr>
+          <tr><td>계정 구분</td><td class="src">LEDGER_ACCOUNT.type</td><td>영문 대문자 코드 8종 · 고객 화면에 노출하지 않는 내부 계정명</td><td><span class="ex">CUSTODY</span> 수탁 / <span class="src">OPERATION</span> 운영 / <span class="src">EXCHANGE_STOCK</span> 교환 재고 / <span class="src">ESCROW</span> 에스크로 / <span class="src">SPREAD_REVENUE</span> 스프레드수익 / <span class="src">BROKER_FEE</span> 중개수수료 / <span class="src">GAS_COST</span> 가스비 비용 / <span class="src">GAS_RECOVERY</span> 가스비 회수 <span class="gap">[확인필요] 2026-09-21(36)으로 고객 차감분이 없어져 존치 여부 결정 필요</span></td></tr>
           <tr><td>자산</td><td class="src">asset_id → ASSET.symbol</td><td>티커</td><td><span class="ex">USDT</span></td></tr>
           <tr><td>체인</td><td class="src">ASSET.chain</td><td>현재 전부 Ethereum</td><td><span class="ex">ETHEREUM</span></td></tr>
           <tr><td>잔액</td><td class="src">LEDGER_ACCOUNT.balance</td><td>자산 자릿수 · 쉼표 없음</td><td><span class="ex">31905.20</span></td></tr>
@@ -345,10 +331,11 @@
           <tr><td>계정 구분</td><td class="src">LEDGER_ENTRY.account_type</td><td>시트 A와 같은 8종 코드</td><td><span class="ex">SPREAD_REVENUE</span></td></tr>
           <tr><td>자산</td><td class="src">asset_id → ASSET.symbol</td><td>티커</td><td><span class="ex">USDT</span></td></tr>
           <tr><td>증감 수량</td><td class="src">LEDGER_ENTRY.amount</td><td>자산 자릿수 · <strong>부호 포함</strong>(증가 +, 감소 −) · 쉼표 없음</td><td><span class="ex">-899.73</span> · <span class="ex">8.00</span></td></tr>
-          <tr><td>전기 유형</td><td class="src">LEDGER_ENTRY.entry_type</td><td>영문 대문자 코드</td><td><span class="ex">DEPOSIT</span> 입고 / <span class="src">WITHDRAW</span> 출고 / <span class="src">ESCROW_IN</span> 예치 / <span class="src">ESCROW_OUT</span> 인도 / <span class="src">REFUND</span> 반환 / <span class="src">FEE_SWEEP</span> 스윕 / <span class="src">SPREAD_REVENUE</span> 스프레드수익 / <span class="src">BROKER_FEE</span> 중개수수료 / <span class="src">GAS_COST</span> 가스비 비용 / <span class="src">GAS_RECOVERY</span> 가스비 회수</td></tr>
+          <tr><td>전기 유형</td><td class="src">LEDGER_ENTRY.entry_type</td><td>영문 대문자 코드</td><td><span class="ex">DEPOSIT</span> 입고 / <span class="src">WITHDRAW</span> 출고 / <span class="src">ESCROW_IN</span> 예치 / <span class="src">ESCROW_OUT</span> 인도 / <span class="src">REFUND</span> 반환 / <span class="src">FEE</span> 수수료 이전 / <span class="src">SPREAD_REVENUE</span> 스프레드수익 / <span class="src">BROKER_FEE</span> 중개수수료 / <span class="src">GAS_COST</span> 가스비 비용 / <span class="src">GAS_RECOVERY</span> 가스비 회수</td></tr>
           <tr><td>원천 행 ID</td><td class="src">LEDGER_ENTRY.ref_id</td><td>③ 콜드 이전의 이전 번호와 잇는 키</td><td><span class="ex">EXE-20260916-0003</span></td></tr>
           <tr><td>거래 번호</td><td class="src">LEDGER_ENTRY.deal_ref</td><td>② 거래 요청과 잇는 키</td><td><span class="ex">EXC-20260916-0001</span></td></tr>
           <tr><td>기관번호</td><td class="src">LEDGER_ENTRY.org_id</td><td>customerNo · <strong>수탁·에스크로 계정 행에만</strong> 값이 있다. 운영·수익 계정은 빈 값</td><td><span class="ex">L-260915-0100</span> · 지침 제31조① 기관별 산출의 근거</td></tr>
+          <tr><td>지갑 주소</td><td class="src">LEDGER_ENTRY.wallet_address</td><td>전문 · 16진수 소문자 · 모든 행에 값이 있다. 수익·가스비 계정 행도 자산이 실제로 있는 지갑 주소를 적는다</td><td><span class="ex">0x9f3a1c4e...d81c</span> · ⑤ 내부장부 잔액을 지갑별로 합산하는 키 <span class="gap">[스키마 보완]</span></td></tr>
           <tr><td>전기 후 잔액</td><td class="src">LEDGER_ENTRY.balance_after</td><td>자산 자릿수 · 그 계정·자산의 전기 직후 잔액</td><td><span class="ex">31905.20</span> · 시트 A 마지막 행과 맞아야 한다</td></tr>
         </tbody>
       </table>
@@ -359,25 +346,37 @@
 
     <div class="appx">
       <div class="at">⑤ 3면 대사</div>
-      <div class="as">RECONCILIATION · ASSET</div>
-      <div class="ao">배치 1회 × 지갑 묶음 4개 × 자산 3종 = 최대 12행. 정렬 = 대사 시각 내림차순 → 지갑 묶음.</div>
+      <div class="as">RECONCILIATION · CUSTODY_TRANSFER <span class="gap">[스키마 보완 · 신설]</span> · LEDGER_ENTRY · ASSET</div>
+      <div class="ao">배치 1회 × 지갑 1개 × 자산 1종 = 1행(2026-09-23(35)). 행 수 = 배치 수 × (지갑 3개 + 고객 수탁 지갑 수) × 자산 3종. 부록 1의 전체 기간 스냅숏이므로 지난 배치도 모두 담는다. 정렬 = 대사 시각 오름차순 → 지갑 묶음 → 지갑 주소 → 자산.</div>
+      <div class="ao"><strong>세 값의 정의</strong>(2026-09-23(35)) : 셋 다 <strong>같은 기초 잔액</strong>(지갑 등록 시점의 온체인 잔액)에서 출발해 <strong>같은 기준시각</strong>까지 누적한다.<br>· <strong>내부장부</strong> = 기초 잔액 + ④ 시트 B에서 이 지갑 주소에 전기된 증감 수량 합계. 수익·가스비 계정 전기도 자산이 실제로 있는 지갑 주소를 함께 적는다.<br>· <strong>온체인</strong> = 기준 블록 시점에 이 주소의 자산 잔액을 직접 조회한 값.<br>· <strong>커스터디 기록</strong> = 기초 잔액 + ③ 콜드 이전의 txhash마다 커스터디 <span class="mono">GET /transfer/by-hash</span>로 조회한 결과 중 「성공」이면서 거래완료시점이 기준시각 이전인 건의 누적(2026-09-28(37)④). 받는 주소가 이 지갑이면 +, 보내는 주소가 이 지갑이면 −, 가스비는 보내는 지갑에서 가스비 토큰양만큼 −.<br>· 커스터디 면은 <strong>크로스체크</strong>다. 해시 단건 조회라 우리가 모르는 해시는 물을 수 없다. 이 지갑들은 이 서비스만 쓰므로 모든 이체가 ③에 먼저 기록된다는 전제이고, 서비스 밖 흐름을 따로 반영하지 않는다.<br>· 판정은 <strong>허용오차 0</strong>, 온체인 최소 단위(ETH 18자리 · USDC·USDT 6자리) 정수로 비교한다.</div>
       <table class="tbl">
         <thead><tr><th style="width:120px">컬럼(헤더)</th><th style="width:170px">원천</th><th style="width:200px">표시 형식</th><th>예시값</th></tr></thead>
         <tbody>
-          <tr><td>대사 ID</td><td class="src">RECONCILIATION.recon_id</td><td>식별자</td><td><span class="ex">RC-20260916-003</span></td></tr>
+          <tr><td>대사 ID</td><td class="src">RECONCILIATION.recon_id</td><td>식별자 · 행마다 1개</td><td><span class="ex">RC-20260916-003-07</span></td></tr>
+          <tr><td>배치 ID</td><td class="src">RECONCILIATION.batch_id</td><td>식별자 · 같은 배치의 행은 같은 값</td><td><span class="ex">RC-20260916-003</span> <span class="gap">[스키마 보완]</span></td></tr>
           <tr><td>지갑 묶음</td><td class="src">wallet_group</td><td>영문 대문자 코드 · 4묶음 전부</td><td><span class="ex">CUSTODY</span> / <span class="src">OPERATION</span> / <span class="src">EXCHANGE_STOCK</span> / <span class="src">ESCROW</span></td></tr>
+          <tr><td>지갑 주소</td><td class="src">wallet_address</td><td>전문 · 16진수 소문자</td><td><span class="ex">0x9f3a1c4e...d81c</span> <span class="gap">[스키마 보완]</span></td></tr>
+          <tr><td>기관번호</td><td class="src">WALLET.org_id</td><td>customerNo · CUSTODY 행에만 값이 있다</td><td><span class="ex">L-260915-0100</span> <span class="gap">[스키마 보완]</span></td></tr>
           <tr><td>자산</td><td class="src">asset_id → ASSET.symbol</td><td>티커</td><td><span class="ex">ETH</span></td></tr>
-          <tr><td>내부장부 잔액</td><td class="src">internal_bal</td><td>자산 자릿수</td><td><span class="ex">12.4820</span></td></tr>
-          <tr><td>온체인 잔액</td><td class="src">onchain_bal</td><td>자산 자릿수</td><td><span class="ex">12.4801</span></td></tr>
-          <tr><td>커스터디 콜드 잔액</td><td class="src">custody_bal</td><td>자산 자릿수</td><td><span class="ex">12.4820</span> <span class="gap">[확인필요]</span> 이 값을 커스터디에서 어떻게 받는지 정해진 바가 없다. 조회 API는 기관 상태 1개뿐이고 커스터디 → 우리 방향 통지도 없앴다(2026-09-14). 수신 경로가 없으면 3면 대사가 2면이 된다</td></tr>
-          <tr><td>기간 가스비 소모(ETH)</td><td class="drv">파생 = 전 스냅숏 이후 실발생 가스비 합계</td><td>ETH 4자리 · 내부장부와 온체인 차이의 설명 항목</td><td><span class="ex">0.0019</span></td></tr>
-          <tr><td>일치 여부</td><td class="src">matched</td><td><span class="src">Y</span> / <span class="src">N</span> · N이면 X3 알림 + 해당 지갑 신규 이전 정지</td><td><span class="ex">N</span></td></tr>
-          <tr><td>차이 금액</td><td class="drv">파생 = 최대값 − 최소값</td><td>자산 자릿수 · 일치면 0</td><td><span class="ex">0.0019</span> <span class="gap">[스키마 보완: 부록에 신설 · 불일치 크기를 바로 보기 위함]</span></td></tr>
-          <tr><td>X3 아이템 ID · 상태 · 결과</td><td class="src">INBOX_ITEM (type=X3)</td><td>대사 불일치 알림 · 일치하면 빈 값</td><td><span class="ex">IB-000377</span> / <span class="ex">OPEN</span> / <span class="ex"></span></td></tr>
-          <tr><td>X3 담당자 · 사유</td><td class="src">INBOX_ITEM.assignee_id · reason</td><td>미종결이면 빈 값</td><td><span class="ex">DSRV-OPS-02</span></td></tr>
-          <tr><td>대사 시각</td><td class="src">RECONCILIATION.snapshot_at</td><td>ISO 8601 · 정렬 키</td><td><span class="ex">2026-09-16T09:00:00+09:00</span></td></tr>
+          <tr><td>기초 잔액</td><td class="src">opening_bal</td><td>절사 없음 · 온체인 decimals 전 자릿수 · 지갑 등록 시점의 온체인 잔액</td><td><span class="ex">12.500000000000000000</span> <span class="gap">[스키마 보완]</span></td></tr>
+          <tr><td>기초 기준 블록</td><td class="src">opening_block</td><td>정수</td><td><span class="ex">20814377</span> <span class="gap">[스키마 보완]</span></td></tr>
+          <tr><td>내부장부 잔액</td><td class="src">internal_bal</td><td>절사 없음 · 온체인 decimals 전 자릿수</td><td><span class="ex">12.482000000000000000</span></td></tr>
+          <tr><td>온체인 잔액</td><td class="src">onchain_bal</td><td>절사 없음 · 온체인 decimals 전 자릿수</td><td><span class="ex">12.482000000000000000</span></td></tr>
+          <tr><td>커스터디 기록 잔액</td><td class="drv">파생 = 기초 잔액 + CUSTODY_TRANSFER 누적</td><td>절사 없음 · 온체인 decimals 전 자릿수</td><td><span class="ex">12.482000000000000000</span></td></tr>
+          <tr><td>차이(장부−온체인)</td><td class="drv">파생 = internal_bal − onchain_bal</td><td>부호 포함 · 절사 없음 · 일치면 0</td><td><span class="ex">0</span> <span class="gap">[스키마 보완]</span></td></tr>
+          <tr><td>차이(커스터디−온체인)</td><td class="drv">파생 = custody_bal − onchain_bal</td><td>부호 포함 · 절사 없음 · 일치면 0</td><td><span class="ex">0</span> <span class="gap">[스키마 보완]</span></td></tr>
+          <tr><td>장부 단독 건수</td><td class="drv">파생 = 이 지갑의 ③ 콜드 이전 중 커스터디 조회 결과가 없는 건수(미조회 · 조회 실패 · 커스터디 기록 없음)</td><td>정수 · 기준시각 이전 완료 건만 · 0이 아니면 커스터디 면이 덜 채워진 것</td><td><span class="ex">0</span></td></tr>
+          <tr><td>일치 여부</td><td class="src">matched</td><td><span class="src">MATCHED</span> 세 값 일치 / <span class="src">MISMATCHED</span> 하나라도 다름 / <span class="src">INCOMPLETE</span> 커스터디 조회 미실행·실패 또는 온체인 조회 실패로 한 면이 비었음. MISMATCHED·INCOMPLETE면 X3 알림</td><td><span class="ex">MATCHED</span> <span class="gap">[확인필요]</span> INCOMPLETE일 때도 해당 지갑 신규 이전을 정지할지</td></tr>
+          <tr><td>이전 정지 여부</td><td class="src">RECONCILIATION.transfer_halted</td><td><span class="src">Y</span> / <span class="src">N</span> · 이 대사 결과로 이 지갑의 신규 이전을 정지했는지</td><td><span class="ex">N</span> <span class="gap">[스키마 보완]</span></td></tr>
+          <tr><td>X3 아이템 ID · 상태 · 결과</td><td class="src">INBOX_ITEM (type=X3)</td><td>대사 불일치 알림 · MATCHED면 빈 값 · 같은 아이템이 이어지는 배치에 걸쳐 있으면 각 행에 같은 ID를 적는다</td><td><span class="ex"></span></td></tr>
+          <tr><td>X3 담당자 · 사유</td><td class="src">INBOX_ITEM.assignee_id · reason</td><td>담당자는 배정되면 값이 있다 · 사유는 종결 전이면 빈 값</td><td><span class="ex"></span></td></tr>
+          <tr><td>온체인 기준 블록</td><td class="src">RECONCILIATION.onchain_block</td><td>정수 · 기준시각 직전 블록</td><td><span class="ex">20855102</span> <span class="gap">[스키마 보완]</span></td></tr>
+          <tr><td>커스터디 조회 시각</td><td class="src">CUSTODY_TRANSFER.fetched_at</td><td>ISO 8601 · 이번 대사에 반영한 마지막 조회 · 미조회면 빈 값</td><td><span class="ex">2026-09-16T08:40:00+09:00</span></td></tr>
+          <tr><td>내부장부 마감 전기 ID</td><td class="src">RECONCILIATION.ledger_last_entry</td><td>식별자 · 기준시각까지 반영한 마지막 LEDGER_ENTRY</td><td><span class="ex">LE-000004182</span> <span class="gap">[스키마 보완]</span></td></tr>
+          <tr><td>대사 시각</td><td class="src">RECONCILIATION.snapshot_at</td><td>ISO 8601 · 세 값 공통 기준시각 · 정렬 키</td><td><span class="ex">2026-09-16T09:00:00+09:00</span></td></tr>
         </tbody>
       </table>
+      <div class="ao"><strong>커스터디 조회 응답 항목</strong>(CUSTODY_TRANSFER · <span class="mono">GET /transfer/by-hash</span> · 2026-09-28(37)④) : 체인 · txhash · 거래시도시점 · 거래완료시점 · 보내는 주소 · 받는 주소 · 보내는 토큰심볼 · 보내는 토큰주소 · 보내는 토큰양 · 가스비토큰심볼 · 가스비토큰양 · 성공/실패여부. 해시 1건씩 조회하고 우리가 폴링한다(커스터디 → 우리 push 없음 · (29) 유지). 이 CSV에는 누적 결과만 싣고 응답 원본은 싣지 않는다.<br><span class="gap">[확인필요]</span> 조회 실행을 관리자가 누르는 현 구현으로 지침 제43조① 「최소 일 1회」를 어떻게 보장하는지(운영 절차 / 스케줄 자동화) · 어드민 txhash 입력 전 이전은 조회 대상이 아니라는 점 · 실패 건의 가스비 포함 여부.</div>
     </div>
 
     <div class="appx">
@@ -407,7 +406,7 @@
     </div>
 
     <div class="note-body" style="margin-top:6px;">
-      · <span class="gap">[스키마 보완]</span>은 DB 스키마 개정 때 함께 넣는다: ① 로그인 실패 횟수 · ① 등록 시각 · ② 종결 사유 · ⑤ 차이 금액 · <strong>④ LEDGER_ENTRY 테이블 신설</strong> · ⑥ ref_type · 사유 · 전후값 · 직전 해시 · 다운로드 파일 행 수와 해시.<br>
+      · <span class="gap">[스키마 보완]</span>은 DB 스키마 개정 때 함께 넣는다: ① 로그인 실패 횟수 · ① 등록 시각 · ② 종결 사유 · ⑤ 배치 ID · 지갑 주소 · 기관번호 · 기초 잔액·블록 · 차이 2열 · 이전 정지 여부 · 온체인 기준 블록 · 내부장부 마감 전기 ID · <strong>CUSTODY_TRANSFER 테이블 신설</strong> · ④ LEDGER_ENTRY 지갑 주소 · <strong>④ LEDGER_ENTRY 테이블 신설</strong> · ⑥ ref_type · 사유 · 전후값 · 직전 해시 · 다운로드 파일 행 수와 해시.<br>
       · ② KYT 점수 · BLF 결과 2열은 <strong>개발 회신 전까지 넣지 않는다</strong>(drafts/48 확인 A번).<br>
       · 이 부록을 고치면 DB 스키마와 표기 규칙(notation)도 같은 날 맞춘다.
     </div>

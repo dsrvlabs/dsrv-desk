@@ -84,8 +84,8 @@
         <div class="zone-highlight"></div>
         <div class="item-area" data-highlight="3" style="position:relative;padding:4px;border-radius:8px;margin-bottom:6px;">
           <div class="pin" data-idx="3" style="top:-6px;right:-6px;">4</div>
-          <div class="kv"><span class="k">내 중개 수수료 (거래액 1%)</span><span class="v">8.00 USDT — 수락(확정) 시 발생</span></div>
-          <div class="kv"><span class="k">예상 가스비 (내 부담)</span><span class="v">0.0042 ETH (예치·인도 2회분) — 인도 시 차감</span></div>
+          <div class="kv"><span class="k">내 중개 수수료 (거래액 1%)</span><span class="v">7.98 USDC — 수락(확정) 시 발생</span></div>
+          <div class="kv"><span class="k">예상 가스비 (내 부담)</span><span class="v">0.0021 ETH (내 예치 1회분) · 내 수탁 지갑 ETH로 지불</span></div>
         </div>
         <div style="display:flex;gap:8px;">
           <div class="item-area" data-highlight="4" style="position:relative;flex:1;padding:4px;border-radius:8px;">
@@ -99,7 +99,7 @@
         </div>
         <div class="item-area" data-highlight="6" style="position:relative;padding:4px;border-radius:8px;margin-top:4px;">
           <div class="pin" data-idx="6" style="top:-6px;right:-6px;">7</div>
-          <div style="font-size:10px;color:#64748b;">수락하면 <strong>거래가 즉시 확정되어 구속력과 수수료 8.00 USDT가 발생</strong>하고, 별도 확정 절차 없이 에스크로 전용지갑 예치 → 인도(정산)로 진행됩니다. 거절·무응답(기한 경과) 시 자산 이동·수수료 없이 게시는 게재중으로 돌아갑니다.</div>
+          <div style="font-size:10px;color:#64748b;">수락하면 <strong>거래가 즉시 확정되어 구속력과 수수료 7.98 USDC가 발생</strong>하고, 별도 확정 절차 없이 에스크로 전용지갑 예치 → 인도(정산)로 진행됩니다. 거절·무응답(기한 경과) 시 자산 이동·수수료 없이 게시는 게재중으로 돌아갑니다.</div>
         </div>
       </div>
 
@@ -157,7 +157,7 @@
       <div class="num">4</div>
       <div>
         <div class="itm-title">내 중개 수수료 (표시 전용)</div>
-        <div class="itm-desc"><strong>값</strong> kv 1행. 내가 보내는 자산 수량 × {정책값 1.00%}(ADM-03)를 보내는 자산 자릿수로 절사한다(800 USDT × 1% = 8.00 USDT).<br><strong>노출 범위</strong> 자기 측 금액만 표시하고 상대측 금액과 회계 계정명은 노출하지 않는다. "수락(확정) 시 발생"을 병기한다.<br><strong>예상 가스비</strong> 수락하면 게시자도 이전 가스비를 부담하므로 수락 전에 예상액을 ETH 4자리로 고지한다. 이전 시 받는 자산에서 차감한다. 이 값은 참고 안내이고 실제 차감액은 BRK-05에 표시한다.<br><span class="basis">근거 09 §0 마목 수수료 · L6 설명의무 · notation 산정값 절사</span></div>
+        <div class="itm-desc"><strong>값</strong> kv 1행. <strong>내가 받는 자산 수량</strong>(상대방 거래 수량) × {정책값 1.00%}(ADM-03)를 받는 자산 자릿수로 절사한다(798.40 USDC × 1% = 7.984 → 7.98 USDC · 2026-09-28(37)①). 인도받을 때 공제한다.<br><strong>노출 범위</strong> 자기 측 금액만 표시하고 상대측 금액과 회계 계정명은 노출하지 않는다. "수락(확정) 시 발생"을 병기한다.<br><strong>예상 가스비</strong> 수락하면 게시자도 자기 예치 1회분의 가스비를 부담하므로 수락 전에 예상액을 ETH 4자리로 고지한다. 내 수탁 지갑의 ETH로 직접 내며 받는 수량에서 빼지 않는다(2026-09-21(36)). 이 값은 참고 안내이고 실제 금액은 BRK-05에 표시한다. <span class="chk">[확인필요]</span> 내 수탁 지갑 ETH가 가스비에 모자랄 때의 수락 차단·안내 기준.<br><span class="basis">근거 09 §0 마목 수수료 · L6 설명의무 · notation 산정값 절사</span></div>
       </div>
     </div>
 
@@ -168,7 +168,7 @@
         <div class="itm-desc"><strong>노출</strong> 항상 보인다.<br><strong>클릭 가능</strong> 신청 상태가 '수락 대기'일 때만 활성이다. 항목 3 안내가 뜬 상태에서는 비활성이다.<br><strong>확인 사항</strong> 확인 다이얼로그를 띄운다. 수락은 즉시 확정·구속력·수수료 발생을 낳는 비가역 행위다. 클릭 시 서버가 게시·신청 상태를 다시 판정한다(다른 세션 처리·중지·만료 경쟁).<br><strong>액션</strong> 거래를 확정하고 BRK-05로 넘긴다. 별도 확정 화면은 두지 않는다. 수락은 게시자의 능동 선택이며 자동 매칭·체결은 없다.<br><span class="basis">근거 V2(시장개설 아님) · L6 §9 · F-4 · 1기관 1가입자</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[수락] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①신청 상태가 수락 대기 아님(만료·이미 처리) ②게시 상태가 협의중 아님(중지·회수·완료(만료)) ③게시·신청 조회 실패 ④처리 진행 중("수락 중…"/"거절 중…")</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격) · 사유는 항목 3 인라인 안내로 노출(툴팁 없음) · 버튼은 비노출이 아니라 비활성으로 유지</span></div>
-          <div class="nav-row"><span class="nav-el">[수락] — 클릭(활성)</span><span class="nav-act">클릭 → <strong>다이얼로그: 제목 "신청 수락" / 본문 "수락하면 거래가 즉시 확정되어 구속력이 발생하고, 중개 수수료 8.00 USDT(거래액 1%)가 발생합니다. 확정 후에는 취소할 수 없습니다." / [수락] [돌아가기]</strong> → [수락] 클릭 → 버튼 라벨 "수락 중…"·[거절]·[취소] 비활성(중복 클릭 차단) → 신청 유효기한·게시 상태·양측 처분 가능분 서버 재검증 → 상태 확정 · 상호 마스킹 해제 · 양측 이메일 ② · ADM-02 처리함 유입</span><span class="nav-to"><strong>이전·완료(BRK-05)</strong> — 스텝 '확정 ✓ → 이전 진행(현재)' · [돌아가기] = 다이얼로그 닫힘·화면 잔류·변경 없음</span></div>
+          <div class="nav-row"><span class="nav-el">[수락] — 클릭(활성)</span><span class="nav-act">클릭 → <strong>다이얼로그: 제목 "신청 수락" / 본문 "수락하면 거래가 즉시 확정되어 구속력이 발생하고, 중개 수수료 7.98 USDC(거래액 1%)가 발생합니다. 확정 후에는 취소할 수 없습니다." / [수락] [돌아가기]</strong> → [수락] 클릭 → 버튼 라벨 "수락 중…"·[거절]·[취소] 비활성(중복 클릭 차단) → 신청 유효기한·게시 상태·양측 처분 가능분 서버 재검증 → 상태 확정 · 상호 마스킹 해제 · 양측 이메일 ② · ADM-02 처리함 유입</span><span class="nav-to"><strong>이전·완료(BRK-05)</strong> — 스텝 '확정 ✓ → 이전 진행(현재)' · [돌아가기] = 다이얼로그 닫힘·화면 잔류·변경 없음</span></div>
           <div class="nav-row"><span class="nav-el">[수락] — 실패</span><span class="nav-act">재검증 실패: 클릭 사이 신청 만료 · 게시 중지(price guard) · 게시 만료 / 어느 한쪽 처분 가능분 부족(기획 가정 — 상세 5) / 시스템 오류</span><span class="nav-to stay">화면 잔류 · 상태 변경 → 항목 1·2 상태 갱신 + 항목 3 안내 노출 + 버튼 비활성 / 잔고 부족 → 인라인 ⚠ "거래 안전성 검증에 실패해 수락할 수 없습니다 — 보유·처분 가능 수량을 확인해 주세요"(상대측 사유 미노출) / 오류 → 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 버튼 라벨 복귀</span></div>
         </div>
       </div>

@@ -158,7 +158,7 @@
 <!-- ============ A. 나목 교환 ============ -->
 <div class="wide" id="ex"><div class="panel">
 <div class="panel-title"><span class="tno">A · EX</span>나목 교환 — 고객 ↔ DSRV 직접 교환 <span class="scope">1건 = 요청번호 EXC-YYYYMMDD-NNNN</span></div>
-<div class="panel-note">내부 단계(승인 대기·에스컬레이션·보류·집행 대기)는 고객에게 <b>'진행 중' 하나</b>로만 보인다. 자산 이동은 콜드 이전 2건 — 입고(고객 수탁 → 교환 재고), 출고(교환 재고 → 고객 수탁). <b>출고가 실패로 종결되는 경우는 없다</b>. 대사 불일치는 정정·재집행으로 반드시 완결한다. 수수료 없음(수익은 스프레드).</div>
+<div class="panel-note">내부 단계(승인 대기·에스컬레이션·보류·집행 대기)는 고객에게 <b>'진행 중' 하나</b>로만 보인다. 자산 이동은 콜드 이전 3건 — 1/3 입고(고객 수탁 → 교환 재고), 2/3 출고(교환 재고 → 고객 수탁), 3/3 수수료(교환 재고 → 운영 지갑 · 2026-09-21 신설 · 고객 미노출). 거래 완료 = 2/3 출고 완료다. <b>출고도 실패로 종결될 수 있다</b>(2026-09-22 · 종전 "실패 종결 없음" 폐기) — 대사 불일치 자체는 정정·재집행으로 완결하지만 관리자가 [이전 중지]로 종결할 수 있고, 입고가 끝난 뒤 중지하면 <b>3/3 반환</b>이 생긴다(EX-15·EX-16). 고객 수수료 없음(수익은 스프레드).</div>
 <div class="flow">
   <span class="st start">요청됨</span><span class="fa"><span class="by sys">견적 자동 산정</span><i class="ar"></i></span>
   <span class="st start">비율 제시</span><span class="fa"><span class="by">고객 수락</span><i class="ar"></i></span>
@@ -209,7 +209,7 @@
 <tr><td>EX-06</td>
 <td><span class="nm">고객 수락 → 내부 승인 시작</span><span class="wh"><span class="who c">고객</span><span class="scr" data-pid="EXC-02"><span class="sid">EXC-02</span>[수락]</span> 클릭 즉시 확정</span></td>
 <td><span class="st mid">진행 중</span><span class="mono cd">IN_PROGRESS</span><span class="sb"><span class="scr" data-pid="EXC-03"><span class="sid">EXC-03</span></span> 스텝 2 "DSRV 거래 진행중" · 내부 단계·담당자 미노출</span></td>
-<td>서버 재검증 → 자동검증 첨부<span class="sb">한도 · 교환 재고 · 기관 상태 · 이상거래 룰(우리 정책 검증 — BLF·KYT는 커스터디가 집행 전 심사하며, 진행 불가 건은 커스터디가 ② 행의 [AML 이슈 미집행]을 눌러 알린다 · 2026-09-14) · <b>불량이면 에스컬레이션으로 올릴 뿐 자동 거절하지 않는다</b></span></td>
+<td>서버 재검증 → 자동검증 첨부<span class="sb">한도 · 교환 재고 · 기관 상태 · 이상거래 룰(우리 정책 검증 — BLF·KYT는 커스터디가 집행 전 심사하며, 진행 불가 건은 커스터디가 ② 거래 상세의 [AML 이슈 미집행]을 눌러 알린다 · 2026-09-14) · <b>불량이면 에스컬레이션으로 올릴 뿐 자동 거절하지 않는다</b></span></td>
 <td><span class="ab">① 승인</span>T1 행 생성 — <span class="st start">승인 대기</span>또는<span class="st mid">에스컬레이션</span><span class="sb">[승인] [보류] [거절]</span></td>
 <td>—</td></tr>
 
@@ -228,10 +228,10 @@
 <td>—</td></tr>
 
 <tr><td>EX-09</td>
-<td><span class="nm">관리자 승인 → 콜드 이전 2건 생성</span><span class="wh"><span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>①</span> [승인]</span></td>
+<td><span class="nm">관리자 승인 → 콜드 이전 3건 생성</span><span class="wh"><span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>①</span> [승인]</span></td>
 <td><span class="st mid">진행 중</span>변화 없음</td>
-<td>집행 명세 2건 생성 · 재고 예약<span class="sb">입고 고객 수탁 → 교환 재고 <b>900 USDC</b> / 출고 교환 재고 → 고객 수탁 <b>893.14 USDT</b>(스프레드·가스 반영)</span></td>
-<td><span class="ab">① 승인</span>행 제거 · 종결(승인)<br><span class="ab">② 집행</span>입고·출고 2행 생성<span class="sb">출고는 입고 완료 후 활성</span></td>
+<td>집행 명세 3건 생성 · 재고 예약<span class="sb">입고 고객 수탁 → 교환 재고 <b>900 USDC</b> / 출고 교환 재고 → 고객 수탁 <b>899.73 USDT</b>(스프레드 반영 · 가스 차감 없음 · 2026-09-21(36)) / 수수료 교환 재고 → 운영 지갑 <b>0.90 USDC</b>(입고 자산 × 0.10% · 2026-09-28(37)②)</span></td>
+<td><span class="ab">① 승인</span>행 제거 · 종결(승인)<br><span class="ab">② 집행</span>거래 1행 생성(이전 3건 · 2026-09-28(37)③)<span class="sb">출고는 입고 완료 후, 수수료는 출고 완료 후 활성</span></td>
 <td>—</td></tr>
 
 <tr class="r-branch"><td>EX-10</td>
@@ -245,29 +245,50 @@
 <td><span class="nm">입고 집행 — 콜드 서명 → txhash → 대사</span><span class="wh">커스터디팀 서명(화면 밖) → <span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>②</span> txhash 입력 · [완료]</span></td>
 <td><span class="st mid">진행 중</span>변화 없음</td>
 <td>온체인 대사<span class="sb"><b>발신 지갑 · 수신 주소 · 자산 · 수량</b> 4항목이 명세와 일치할 때만 [완료] 활성 · 실발생 가스비 기록</span></td>
-<td><span class="ab">② 집행</span>입고 행 완료 → 제거 · 출고 행 활성</td>
+<td><span class="ab">② 집행</span>1/3 입고 완료 → 2/3 출고 활성(거래 행 유지)</td>
 <td>—</td></tr>
 
 <tr><td>EX-12</td>
 <td><span class="nm">출고 집행 → 거래 완료</span><span class="wh">커스터디 집행 전 심사 통과(미집행 등록 없음) → 콜드 서명 → <span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>②</span> txhash 입력 · [완료]</span></td>
 <td><span class="st end">완료</span><span class="mono cd">COMPLETED</span><span class="sb"><span class="scr" data-pid="EXC-04"><span class="sid">EXC-04</span></span> 스텝 3 ✓ · 완료 일시 · 발생 가스비 · 실수령 수량 · <span class="scr" data-pid="DASH-01"><span class="sid">DASH-01</span></span> 잔고 반영</span></td>
 <td>온체인 대사 → 완료<span class="sb">스프레드 수익 구분회계 기록 · 재고 차감 확정</span></td>
-<td><span class="ab">② 집행</span>출고 행 제거 → 이후 조회는 CSV</td>
+<td><span class="ab">② 집행</span>거래 행 제거(이전 3건 완료) → 이후 조회는 CSV</td>
 <td>이메일 ③</td></tr>
 
 <tr class="r-warn"><td>EX-13</td>
 <td><span class="nm">집행 대사 불일치 → 회송</span><span class="wh"><span class="who s">시스템</span>txhash 내역 ≠ 명세</span><span class="tag">예외 · 알림</span></td>
 <td><span class="st mid">진행 중</span>변화 없음<span class="sb">정지 사실을 고객에게 알리지 않는다</span></td>
-<td>완료 차단 · 행 정지<span class="sb"><b>거래가 실패로 끝나지는 않는다</b> — 정정·재집행으로 반드시 완결 <span class="chk">[확인필요: 후속 절차]</span></span></td>
+<td>완료 차단 · 해당 이전 정지<span class="sb">대사 불일치 자체는 <b>정정·재집행으로 완결</b>한다. 다만 집행을 중단해야 하는 사유가 생기면 [이전 중지](EX-15·EX-16)로 실패 종결할 수 있다 — 2026-09-22 결정으로 "나목 출고는 실패로 종결되지 않는다"가 폐기됐다 <span class="chk">[확인필요: 정정·재집행 후속 절차]</span></span></td>
 <td><span class="ab">② 집행</span>행 유지(정지) · txhash 필드 ⚠<br><span class="ab">④ 알림</span>→ OP-03</td>
 <td>—</td></tr>
 
 <tr class="r-branch"><td>EX-14</td>
 <td><span class="nm">커스터디 AML 이슈 미집행 → 거래 거절</span><span class="wh"><span class="who a">커스터디 담당자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>②</span> [AML 이슈 미집행] · 되돌릴 수 없음</span><span class="tag">여기서 종결</span></td>
 <td><span class="st gray">거절</span><span class="sb"><span class="scr" data-pid="EXC-04"><span class="sid">EXC-04</span></span> 「거절 (DSRV 심사)」 + "이슈로 진행 불가" 배너 · 사유 미노출</span></td>
-<td>미집행 입고·출고 행 제거 · 거래 거절 종결 · 재고 예약 해제<span class="sb">커스터디가 집행 전 심사(BLF·KYT)에서 문제를 발견하면 콜드 서명을 하지 않는다 — 나목은 에스크로에 묶인 자산이 없어 반환 행이 생기지 않는다 · 사유는 받지 않는다</span></td>
+<td>미집행 입고·출고 이전 제거 · 거래 거절 종결 · 재고 예약 해제<span class="sb">커스터디가 집행 전 심사(BLF·KYT)에서 문제를 발견하면 콜드 서명을 하지 않는다 — 나목도 <b>1/3 입고가 대사 완료된 뒤라면 3/3 반환 이전이 생긴다</b>(2026-09-22 · 종전 "나목은 반환 행이 생기지 않는다" 폐기), 입고 전이면 반환 없이 3건 제거 · 사유는 받지 않는다</span></td>
 <td><span class="ab">② 집행</span>해당 거래 행 전부 제거<span class="sb">클릭자·시각은 감사로그·CSV ③ · <b>되살리는 수단 없음</b> — 고객이 새로 요청한다</span></td>
 <td>이메일 ⑤</td></tr>
+
+<tr class="r-branch"><td>EX-15</td>
+<td><span class="nm">관리자 이전 중지 — <b>입고 전</b></span><span class="wh"><span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>②</span> 거래 상세 [이전 중지] · 사유 다이얼로그(비가역)</span><span class="tag">여기서 종결 · 2026-09-22 신설</span></td>
+<td><span class="st gray">이전 중지</span><span class="sb"><span class="scr" data-pid="EXC-04"><span class="sid">EXC-04</span></span> 「이전 중지」 <span class="chk">[확인필요: EXC-04에 이전 중지 표기가 없다 — 고객 화면 수정 대상]</span></span></td>
+<td>미집행 3건 제거 · 종결 · 재고 예약 해제<span class="sb"><b>반환 이전을 만들지 않는다</b>(2026-09-22 결정) — 1/3 입고가 대사 완료되기 전이라 고객 자산이 DSRV 지갑에 들어와 있지 않다</span></td>
+<td><span class="ab">② 집행</span>해당 거래 행 전부 제거</td>
+<td>이메일 ⑤</td></tr>
+
+<tr class="r-branch"><td>EX-16</td>
+<td><span class="nm">관리자 이전 중지 — <b>입고 완료 · 출고 전</b></span><span class="wh"><span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>②</span> 거래 상세 [이전 중지] · 사유 다이얼로그(비가역)</span><span class="tag">반환 발생 · 2026-09-22 신설</span></td>
+<td><span class="st gray">이전 중지</span><span class="sb"><span class="scr" data-pid="EXC-04"><span class="sid">EXC-04</span></span> 「이전 중지」 + 반환 진행 표시 <span class="chk">[확인필요: EXC-04 미구현]</span></span></td>
+<td>출고 취소 · <b>3/3 반환 생성</b><span class="sb">2/3 출고 이전은 '취소' 표시로 남기고 3/3 수수료 이전을 제거한 자리에 <b>3/3 반환</b>(교환 재고 → 고객 수탁 지갑 · <b>입고 수량 전액</b>)을 만들어 이전 3건을 유지한다. <b>수수료를 부과하지 않고 가스비는 DSRV 부담</b> <span class="chk">[확인필요: 취소 행 존치·순번 처리는 가정]</span></span></td>
+<td><span class="ab">② 집행</span>출고·수수료 이전 정리 → <b>반환 이전 1건 활성</b>(거래 행은 유지)<span class="sb">반환 집행은 종전 이전과 같이 콜드 2인 서명 → txhash → 대사 → [완료]</span></td>
+<td>이메일 ⑤</td></tr>
+
+<tr><td>EX-17</td>
+<td><span class="nm">관리자 보류 · 해제</span><span class="wh"><span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>②</span> 거래 상세 [보류] · 사유 다이얼로그(가역)</span><span class="tag">2026-09-22 정리</span></td>
+<td><span class="st mid">진행 중</span>변화 없음<span class="sb">보류 사실을 고객에게 알리지 않는다</span></td>
+<td>미집행 이전 전부 정지<span class="sb">이미 콜드 집행에 들어간 이전은 대사를 마친 뒤 정지한다. <b>보류 중에도 txhash 입력창과 [이전 중지]는 활성</b>이다 <span class="chk">[확인필요: [완료] 시 보류 자동 해제 여부 · 해제 권한 · 최대 보류 기간]</span></span></td>
+<td><span class="ab">② 집행</span>행 유지 · '보류' 표시</td>
+<td>—</td></tr>
 </tbody></table></div>
 </div></div>
 
@@ -346,8 +367,8 @@
 
 <!-- ============ C. 마목 확정·정산 ============ -->
 <div class="wide" id="st"><div class="panel">
-<div class="panel-title"><span class="tno">C · ST</span>마목 중개 — 확정 · 에스크로 예치 → 인도 → 수수료 스윕 <span class="scope">콜드 이전 예치 2 + 인도 2 + 스윕</span></div>
-<div class="panel-note">수락 순간 거래가 확정되어 구속력이 생긴다. 어드민은 거래 성립을 승인하는 게 아니라 <b>에스크로 예치를 시작해도 되는지 확인</b>한다. <b>수수료(각자 1%)는 예치 수량에 포함해서 에스크로에 넣고, 인도할 때 수수료를 뺀 수량만 준다.</b> 에스크로에 남은 수수료는 정책 주기로 수수료풀(운영 지갑)로 옮긴다.</div>
+<div class="panel-title"><span class="tno">C · ST</span>마목 중개 — 확정 · 에스크로 예치 → 인도 → 수수료 이전 <span class="scope">콜드 이전 예치 2 + 인도 2 + 수수료 2</span></div>
+<div class="panel-note">수락 순간 거래가 확정되어 구속력이 생긴다. 어드민은 거래 성립을 승인하는 게 아니라 <b>에스크로 예치를 시작해도 되는지 확인</b>한다. <b>예치는 각자 거래 수량만 하고, 인도할 때 받는 자산 수량의 1%(수수료)를 뺀 수량만 준다(2026-09-28(37)①).</b> 뺀 수수료는 각 인도 완료 후 거래별 수수료 이전으로 운영 지갑에 옮긴다(2026-09-21(36)).</div>
 <div class="flow">
   <span class="st mid">확정</span><span class="fa"><span class="by">관리자 승인(T2)</span><i class="ar"></i></span>
   <span class="st mid">예치 진행</span><span class="fa"><span class="by sys">양건 예치 확인 → 인도 자동 생성</span><i class="ar"></i></span>
@@ -362,7 +383,7 @@
 <tr><td>ST-01</td>
 <td><span class="nm">수락 → 확정 (구속력 발생)</span><span class="wh"><span class="who c">게시자</span><span class="scr" data-pid="BRK-04"><span class="sid">BRK-04</span>[수락]</span> 확인 다이얼로그</span></td>
 <td>양측 <span class="st mid">확정</span><span class="mono cd">CONFIRMED</span><span class="sb"><span class="scr" data-pid="BRK-06"><span class="sid">BRK-06</span></span> 상호 마스킹 해제 + [이전 진행 보기 →] <span class="scr" data-pid="BRK-05"><span class="sid">BRK-05</span></span> 스텝 1 / <span class="scr" data-pid="BRK-07"><span class="sid">BRK-07</span></span> 스텝 3 / BRK-01 목록 제외</span></td>
-<td>재검증 → 자동검증 첨부<span class="sb">양측 한도 · <b>수수료 포함 잔고</b> · 기관 상태 · 이상거래 룰 · 게시 상태·기한(BLF·KYT는 커스터디가 집행 전 심사 → 진행 불가 건은 ② [AML 이슈 미집행] · 2026-09-14)</span></td>
+<td>재검증 → 자동검증 첨부<span class="sb">양측 한도 · <b>거래 수량 잔고</b> · 기관 상태 · 이상거래 룰 · 게시 상태·기한(BLF·KYT는 커스터디가 집행 전 심사 → 진행 불가 건은 ② [AML 이슈 미집행] · 2026-09-14)</span></td>
 <td><span class="ab">① 승인</span>T2 행 생성 — <span class="st start">확인 대기</span>또는<span class="st mid">에스컬레이션</span><span class="sb">거래 1건 = 행 1개 · [승인] [보류] [이전 중지]</span></td>
 <td>이메일 ② (양측)</td></tr>
 
@@ -376,8 +397,8 @@
 <tr><td>ST-03</td>
 <td><span class="nm">관리자 승인 → 예치 2건 생성</span><span class="wh"><span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>①</span> [승인]</span></td>
 <td>양측 <span class="st mid">확정</span><span class="sb">BRK-05 스텝 2 "예치 진행" · 내 예치 / 상대 예치 행</span></td>
-<td>집행 명세 2건 — <b>수수료 포함 수량</b><span class="sb">게시자 수탁 → 에스크로 <b>808 USDT</b>(거래 800 + 수수료 8) · 신청자 수탁 → 에스크로 <b>806.38 USDC</b>(거래 798.40 + 수수료 7.98)</span></td>
-<td><span class="ab">① 승인</span>행 제거 · 종결(승인)<br><span class="ab">② 집행</span>예치 2행 생성</td>
+<td>집행 명세 6건 — 예치 2건 먼저 활성 · <b>거래 수량</b><span class="sb">게시자 수탁 → 에스크로 <b>800 USDT</b> · 신청자 수탁 → 에스크로 <b>798.40 USDC</b>(수수료 미포함 · 2026-09-28(37)①)</span></td>
+<td><span class="ab">① 승인</span>행 제거 · 종결(승인)<br><span class="ab">② 집행</span>거래 1행 생성(이전 6건 · 예치 2건 활성)</td>
 <td>—</td></tr>
 
 <tr class="r-branch"><td>ST-04</td>
@@ -388,52 +409,52 @@
 <td><span class="chk">[확인필요]</span></td></tr>
 
 <tr><td>ST-05</td>
-<td><span class="nm">예치 집행 ×2 — 콜드 서명 → txhash → 대사</span><span class="wh">커스터디 집행 전 심사 통과(미집행 등록 없음) → 콜드 서명 → <span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>②</span> txhash 입력 · [완료] (각 행)</span></td>
+<td><span class="nm">예치 집행 ×2 — 콜드 서명 → txhash → 대사</span><span class="wh">커스터디 집행 전 심사 통과(미집행 등록 없음) → 콜드 서명 → <span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>②</span> txhash 입력 · [완료] (이전 블록마다)</span></td>
 <td>양측 <span class="st mid">확정</span><span class="sb">BRK-05 내 예치 ✓ / 상대 예치 ✓ · 예치 완결성 표시</span></td>
-<td>온체인 대사 · 에스크로 장부 기록<span class="sb">에스크로 +808 USDT / +806.38 USDC · 실발생 가스비 기록</span></td>
-<td><span class="ab">② 집행</span>예치 행 각각 완료 → 제거</td>
+<td>온체인 대사 · 에스크로 장부 기록<span class="sb">에스크로 +800 USDT / +798.40 USDC · 실발생 가스비 기록</span></td>
+<td><span class="ab">② 집행</span>예치 이전 각각 완료</td>
 <td>—</td></tr>
 
 <tr class="r-branch"><td>ST-06</td>
-<td><span class="nm">이전 중지 — 예치 후</span><span class="wh"><span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>②</span> 예치·인도 행 [이전 중지] + 사유</span><span class="tag">여기서 종결</span></td>
+<td><span class="nm">이전 중지 — 예치 후</span><span class="wh"><span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>②</span> 마목 거래 상세 [이전 중지] + 사유</span><span class="tag">여기서 종결</span></td>
 <td>양측 <span class="st gray">이전 중지</span><span class="sb">BRK-05 이전 중지 배너 + 반환 안내</span></td>
-<td>예치분 반환 행 생성<span class="sb">에스크로 → 예치자 수탁 · 예치된 건수만큼(1건 또는 2건) · 수수료 미부과 · 반환 가스비 부담 <span class="chk">[확인필요]</span></span></td>
-<td><span class="ab">② 집행</span>남은 예치·인도 행 제거 · 반환 행 생성 → 콜드 집행 → 완료</td>
+<td>예치분 반환 이전 생성<span class="sb">에스크로 → 예치자 수탁 · 예치된 건수만큼(1건 또는 2건) · 수수료 미부과 · 반환 가스비 부담 <span class="chk">[확인필요]</span></span></td>
+<td><span class="ab">② 집행</span>남은 예치·인도 이전 제거 · 반환 이전 생성 → 콜드 집행 → 완료</td>
 <td><span class="chk">[확인필요]</span></td></tr>
 
 <tr><td>ST-07</td>
 <td><span class="nm">양건 예치 확인 → 인도 2건 자동 생성</span><span class="wh"><span class="who s">시스템</span>예치 2건 모두 완료 · 별도 승인 클릭 없음</span></td>
 <td>양측 <span class="st mid">확정</span><span class="sb">BRK-05 스텝 3 "인도 진행" · 실수령 예정 수량</span></td>
-<td>집행 명세 2건 자동 생성 — <b>수수료·가스 차감 후</b><span class="sb">에스크로 → 게시자 수탁 798.40 − 가스 13.18 = <b>785.22 USDC</b> · 에스크로 → 신청자 수탁 800 − 가스 13.18 = <b>786.82 USDT</b> · 콜드 2인 서명이 사람 게이트라 <b>일방 이전이 구조적으로 불가</b></span></td>
-<td><span class="ab">② 집행</span>인도 2행 생성</td>
+<td>인도 2건 자동 활성 — <b>받는 자산의 1% 공제 · 가스 차감 없음</b><span class="sb">에스크로 → 게시자 수탁 798.40 − 수수료 7.98 = <b>790.42 USDC</b> · 에스크로 → 신청자 수탁 800 − 수수료 8.00 = <b>792.00 USDT</b>(2026-09-28(37)① · 2026-09-21(36)) · 콜드 2인 서명이 사람 게이트라 <b>일방 이전이 구조적으로 불가</b></span></td>
+<td><span class="ab">② 집행</span>인도 2건 활성(같은 거래 행)</td>
 <td>—</td></tr>
 
 <tr><td>ST-08</td>
-<td><span class="nm">인도 집행 ×2 → 거래 완료</span><span class="wh">커스터디 집행 전 심사 통과(미집행 등록 없음) → 콜드 서명 → <span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>②</span> txhash 입력 · [완료] (각 행)</span></td>
+<td><span class="nm">인도 집행 ×2 → 거래 완료</span><span class="wh">커스터디 집행 전 심사 통과(미집행 등록 없음) → 콜드 서명 → <span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>②</span> txhash 입력 · [완료] (이전 블록마다)</span></td>
 <td>양측 <span class="st end">완료</span><span class="sb">BRK-05 스텝 4 ✓ 완료 배너 · BRK-06 완료 + 링크 · BRK-07 스텝 4 · <span class="scr" data-pid="DASH-01"><span class="sid">DASH-01</span></span> 잔고 반영</span></td>
-<td>온체인 대사 → 완료 · 수수료 정산 확정<span class="sb">중개수수료 구분회계 기록(인도 집행 시점) · 에스크로 잔여 = 수수료 8 USDT + 7.98 USDC + 가스 차감분</span></td>
-<td><span class="ab">② 집행</span>인도 행 각각 완료 → 제거 → CSV</td>
+<td>온체인 대사 → 완료 · 수수료 정산 확정<span class="sb">중개수수료 구분회계 기록(인도 집행 시점) · 에스크로 잔여 = 수수료 8.00 USDT + 7.98 USDC → 각 인도 완료 후 수수료 이전(ST-09)</span></td>
+<td><span class="ab">② 집행</span>인도 이전 각각 완료 → 수수료 이전 활성 → CSV</td>
 <td>이메일 ③ (양측)</td></tr>
 
 <tr><td>ST-09</td>
-<td><span class="nm">수수료 스윕 — 에스크로 → 수수료풀</span><span class="wh"><span class="who s">시스템</span>정책 주기 배치 → <span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>②</span> [완료]</span></td>
+<td><span class="nm">수수료 이전 ×2 — 에스크로 → 운영 지갑</span><span class="wh"><span class="who s">시스템</span>각 인도 완료 직후 활성 → <span class="who a">관리자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>②</span> [완료]</span></td>
 <td>반영 없음<span class="sb">고객 화면과 무관 · 거래는 ST-08에서 이미 완료</span></td>
-<td>에스크로 잔여 수수료를 운영 지갑으로 이전<span class="sb">자산별 1행으로 묶음 · 주기 <span class="chk">[확인필요]</span> · 가스 차감분의 귀속 <span class="chk">[확인필요]</span></span></td>
-<td><span class="ab">② 집행</span>수수료 스윕 행 생성 → 콜드 집행 → 완료</td>
+<td>인도 때 공제한 수수료를 운영 지갑으로 이전<span class="sb">거래별 건별 집행(5/6 · 6/6) · 주기 배치 없음 · 가스비 DSRV 부담(2026-09-21(36))</span></td>
+<td><span class="ab">② 집행</span>같은 거래 행의 수수료 이전 → 콜드 집행 → 완료 = 행 종결</td>
 <td>—</td></tr>
 
 <tr class="r-warn"><td>ST-10</td>
-<td><span class="nm">집행 대사 불일치 → 회송</span><span class="wh"><span class="who s">시스템</span>txhash 내역 ≠ 명세 (예치·인도·반환·스윕 공통)</span><span class="tag">예외 · 알림</span></td>
+<td><span class="nm">집행 대사 불일치 → 회송</span><span class="wh"><span class="who s">시스템</span>txhash 내역 ≠ 명세 (예치·인도·반환·수수료 공통)</span><span class="tag">예외 · 알림</span></td>
 <td>양측 <span class="st mid">확정</span>변화 없음</td>
-<td>완료 차단 · 행 정지 · 인도 자동 생성도 정지<span class="sb">정정·재집행으로 완결</span></td>
+<td>완료 차단 · 해당 이전 정지 · 인도 자동 생성도 정지<span class="sb">정정·재집행으로 완결</span></td>
 <td><span class="ab">② 집행</span>행 유지(정지)<br><span class="ab">④ 알림</span>→ OP-03</td>
 <td>—</td></tr>
 
 <tr class="r-branch"><td>ST-11</td>
 <td><span class="nm">커스터디 AML 이슈 미집행 → 거래 거절 · 예치분 반환</span><span class="wh"><span class="who a">커스터디 담당자</span><span class="scr" data-pid="ADM-02"><span class="sid">ADM-02</span>②</span> [AML 이슈 미집행] · 되돌릴 수 없음</span><span class="tag">여기서 종결</span></td>
 <td>양측 <span class="st gray">이전 중지</span><span class="sb"><span class="scr" data-pid="BRK-05"><span class="sid">BRK-05</span></span> 이전 중지 배너 + "이슈로 진행 불가" · 예치가 끝난 쪽에는 반환 안내 병기 · 사유 미노출</span></td>
-<td>미집행 예치·인도 행 제거 · 거래 거절 종결 · <b>예치가 완료된(txhash 대사 완료) 다리마다 반환 행 생성</b> · 수수료 미부과<span class="sb">양측 모두 예치 완료면 반환 2행, 한쪽만이면 1행 · 예치 전이면 반환 행 없음</span></td>
-<td><span class="ab">② 집행</span>미집행 행 제거 → 반환 행 생성(집행·완료는 예치와 같은 절차 — txhash 대사)<span class="sb">클릭자·시각은 감사로그·CSV ③ · <b>되살리는 수단 없음</b> — 고객이 새로 게시·신청한다</span></td>
+<td>미집행 예치·인도 이전 제거 · 거래 거절 종결 · <b>예치가 완료된(txhash 대사 완료) 다리마다 반환 이전 생성</b> · 수수료 미부과<span class="sb">양측 모두 예치 완료면 반환 이전 2건, 한쪽만이면 1건 · 예치 전이면 반환 이전 없음</span></td>
+<td><span class="ab">② 집행</span>미집행 이전 제거 → 반환 이전 생성(집행·완료는 예치와 같은 절차 — txhash 대사)<span class="sb">클릭자·시각은 감사로그·CSV ③ · <b>되살리는 수단 없음</b> — 고객이 새로 게시·신청한다</span></td>
 <td>이메일 ⑤ (양측)</td></tr>
 </tbody></table></div>
 </div></div>
@@ -441,7 +462,7 @@
 <!-- ============ D. AML ============ -->
 <div class="wide" id="am"><div class="panel">
 <div class="panel-title"><span class="tno">D · AM</span>이상거래 · AML 판단 <span class="scope">고객 화면 반영 없음 — 누설 금지</span></div>
-<div class="panel-note">이 시스템의 AML 사건은 <b>이상거래 룰 적중</b> 하나다. BLF·KYT 등 거래 위험 심사는 커스터디가 집행 전에 한다. 문제가 있으면 <b>서명하지 않고 ② 행의 [AML 이슈 미집행]을 눌러</b> 이 시스템에 알린다 — 미집행 ② 행 거절·거래 거절·(마목 예치 완료분) 반환 행·고객 안내 "진행 불가". 사유는 받지 않고 되돌리는 수단도 없다(2026-09-14 · 종전 중지/해제 웹훅 폐지). 통과 거래는 통지 없이 서명·집행 후 txhash 입력. 기관 단위 결과(KYC·재이행·요주의인물·사고)는 커스터디 customerStatusCd를 관문마다 조회해 받는다(AC-07). STR 작성·보고는 별도 AML 시스템. <b>이해상충 플래그는 어드민에 두지 않는다</b>(2026-09-04 결정).</div>
+<div class="panel-note">이 시스템의 AML 사건은 <b>이상거래 룰 적중</b> 하나다. BLF·KYT 등 거래 위험 심사는 커스터디가 집행 전에 한다. 문제가 있으면 <b>서명하지 않고 ② 거래 상세의 [AML 이슈 미집행]을 눌러</b> 이 시스템에 알린다 — 미집행 이전 제거·거래 거절·(마목 예치 완료분) 반환 이전·고객 안내 "진행 불가". 사유는 받지 않고 되돌리는 수단도 없다(2026-09-14 · 종전 중지/해제 웹훅 폐지). 통과 거래는 통지 없이 서명·집행 후 txhash 입력. 기관 단위 결과(KYC·재이행·요주의인물·사고)는 커스터디 customerStatusCd를 관문마다 조회해 받는다(AC-07). STR 작성·보고는 별도 AML 시스템. <b>이해상충 플래그는 어드민에 두지 않는다</b>(2026-09-04 결정).</div>
 <div class="tblwrap"><table class="ct">
 <colgroup><col style="width:62px"><col style="width:17%"><col style="width:22%"><col style="width:22%"><col style="width:23%"><col style="width:82px"></colgroup>
 <thead><tr><th>#</th><th>케이스 · 트리거</th><th>고객 (칩 · 코드 · 상세 화면)</th><th>시스템 (자동)</th><th>어드민 (처리함 4섹션 · ADM-03·04)</th><th>통지</th></tr></thead>
@@ -508,8 +529,8 @@
 <tr class="r-warn"><td>OP-03</td>
 <td><span class="nm">집행 대사 불일치 (회송)</span><span class="wh"><span class="who s">시스템</span>② [완료] 시 txhash 내역 ≠ 명세 (EX-13 · ST-10)</span><span class="tag">예외 · 알림</span></td>
 <td>고객 상태 유지<span class="sb">정지 사실을 알리지 않는다</span></td>
-<td>② 행 정지 · 후속 자동 생성 정지<span class="sb">정정·재집행 절차 <span class="chk">[확인필요]</span></span></td>
-<td><span class="ab">④ 알림</span><span class="st mid">에스컬레이션</span>→ [확인] → [조치 완료 · 정정 완료 재대사]<span class="sb">종결 시 ② 행 재활성</span></td>
+<td>해당 이전 정지 · 후속 자동 생성 정지<span class="sb">정정·재집행 절차 <span class="chk">[확인필요]</span></span></td>
+<td><span class="ab">④ 알림</span><span class="st mid">에스컬레이션</span>→ [확인] → [조치 완료 · 정정 완료 재대사]<span class="sb">종결 시 해당 이전 재활성</span></td>
 <td>—</td></tr>
 
 <tr class="r-warn"><td>OP-04</td>
@@ -581,8 +602,8 @@
 <tr class="r-warn"><td>AC-08</td>
 <td><span class="nm">기관 비활성 확인 시 대기 건 일괄 거절</span><span class="wh"><span class="who s">시스템</span>AC-06(잠금 유지·이관) 또는 AC-07(관문 조회에서 02 활성 외 확인)의 순간 — 특히 ① [승인] 클릭 시 조회</span><span class="tag">예외 · 알림</span></td>
 <td>나목 <span class="st gray">거절</span> / 마목 <span class="st gray">이전 중지</span><span class="sb">EXC-04 「거절 (DSRV 심사)」 · BRK-05 이전 중지 배너 · 일반화 사유만</span></td>
-<td><b>①·② 대기 건을 무조건 거절한다</b>(2026-09-04 결정 · 트리거를 관문 조회로 재정의 2026-09-07)<span class="sb">예치가 이미 끝난 마목 건은 반환 행 생성(ST-06과 동일) · 집행 중인 콜드 이전은 대사 완료 후 정지</span></td>
-<td><span class="ab">① 승인</span>해당 기관 행 전부 제거 · 종결(거절)<br><span class="ab">② 집행</span>미집행 행 제거 · 필요 시 반환 행 생성</td>
+<td><b>①·② 대기 건을 무조건 거절한다</b>(2026-09-04 결정 · 트리거를 관문 조회로 재정의 2026-09-07)<span class="sb">예치가 이미 끝난 마목 건은 반환 이전 생성(ST-06과 동일) · 집행 중인 콜드 이전은 대사 완료 후 정지</span></td>
+<td><span class="ab">① 승인</span>해당 기관 행 전부 제거 · 종결(거절)<br><span class="ab">② 집행</span>미집행 이전 제거 · 필요 시 반환 이전 생성</td>
 <td>이메일 ⑤</td></tr>
 
 <tr class="r-branch"><td>AC-09</td>
@@ -601,7 +622,7 @@
 <thead><tr><th style="width:110px">섹션</th><th>행이 생기는 사건</th><th style="width:34%">행이 사라지는 사건</th></tr></thead>
 <tbody>
 <tr><td><span class="ab">① 승인</span></td><td>EX-06 나목 수락 · ST-01 마목 수락</td><td>승인(→ ②) · 거절 · 이전 중지 · <b>기관 비활성 확인 시 일괄 거절(AC-08)</b></td></tr>
-<tr><td><span class="ab">② 집행</span></td><td>EX-09 나목 승인(입고·출고 2행) · ST-03 마목 승인(예치 2행) · ST-07 양건 예치 확인(인도 2행 자동) · ST-06 예치 후 중지(반환 행) · <b>EX-14·ST-11 커스터디 AML 이슈 미집행(마목은 반환 행)</b> · ST-09 수수료 스윕(정책 주기)</td><td>txhash 온체인 대사 일치 → [완료] · <b>[AML 이슈 미집행] → 행 제거·거래 거절(EX-14·ST-11)</b> · 기관 비활성 확인 시 일괄 거절(AC-08)</td></tr>
+<tr><td><span class="ab">② 집행</span></td><td>EX-09 나목 승인(거래 1행 · 이전 3건) · ST-03 마목 승인(거래 1행 · 이전 6건) · ST-07 양건 예치 확인(인도 2건 자동 활성) · ST-06 예치 후 중지(반환 이전) · <b>EX-16 나목 입고 후 중지(3/3 반환 이전)</b> · <b>EX-14·ST-11 커스터디 AML 이슈 미집행(입고·예치가 끝난 만큼 반환 이전)</b> · ST-09 수수료 이전(인도별 건별)</td><td>txhash 온체인 대사 일치 → [완료] · <b>[AML 이슈 미집행] → 미집행 이전 제거·거래 거절(EX-14·ST-11)</b> · <b>[이전 중지] → 미집행 이전 제거·종결(EX-15·EX-16·ST-06)</b> · 기관 비활성 확인 시 일괄 거절(AC-08)</td></tr>
 <tr><td><span class="ab">③ AML</span></td><td>AM-01 이상거래 룰 적중 · <b>EX-10 AML 사유 거절</b> · AC-06 잠금 유지·이관</td><td>STR 이관 · 무혐의 종결</td></tr>
 <tr><td><span class="ab">④ 알림</span></td><td>OP-01 시세 중단 · OP-02 재고 부족 · OP-03 집행 대사 불일치 · OP-04 지갑 3면 대사 불일치 · AC-04 계정 잠금</td><td>[조치 완료](결과 선택)</td></tr>
 </tbody></table>
@@ -621,24 +642,24 @@
 <tr><td><b>X3</b> 3면 대사 불일치</td><td><span class="ab">④ 알림</span></td><td>미처리 → 원인 규명 중 → <b>해제·종결</b>(최신 배치가 일치일 때만 활성)</td><td>[확인 · 원인 규명] [조치 완료 ▾]</td></tr>
 <tr><td><span class="dec">신설</span><b>N1</b> 시세 소스 중단</td><td><span class="ab">④ 알림</span></td><td>에스컬레이션 → 확인 → <b>정상 수신 확인</b>(차단 해제)</td><td>[확인] [조치 완료 ▾]</td></tr>
 <tr><td><span class="dec">신설</span><b>N2</b> 교환 재고 부족</td><td><span class="ab">④ 알림</span></td><td>미처리 → 확인 → <b>재고 보충 확인</b></td><td>[확인] [조치 완료 ▾]</td></tr>
-<tr><td><span class="dec">신설</span><b>N3</b> 집행 대사 불일치</td><td><span class="ab">④ 알림</span></td><td>에스컬레이션 → 확인 → <b>정정 완료 재대사</b>(② 행 재활성)</td><td>[확인] [조치 완료 ▾]</td></tr>
+<tr><td><span class="dec">신설</span><b>N3</b> 집행 대사 불일치</td><td><span class="ab">④ 알림</span></td><td>에스컬레이션 → 확인 → <b>정정 완료 재대사</b>(해당 이전 재활성)</td><td>[확인] [조치 완료 ▾]</td></tr>
 <tr><td class="del">T3 출금·이전 / T4 입금 격리 / T6 월렛·키 / T7 KYC 재이행</td><td><span class="ab none">삭제</span></td><td colspan="2">이 시스템 밖 — 사유는 §4</td></tr>
 </tbody></table>
 </div>
 
 <div class="panel">
-<div class="panel-title">② 집행 대기 표 — 행 유형 전체 <span class="scope">행 하나 = 콜드 이전 1건</span></div>
+<div class="panel-title">② 집행 대기 — 이전 유형 전체 <span class="scope">목록 행 하나 = 거래 1건 · 이전은 거래 상세의 블록(2026-09-28(37)③)</span></div>
 <table class="tbl" style="width:100%;">
-<thead><tr><th style="width:130px">행 유형</th><th style="width:210px">이동</th><th>생성 시점 · 완료 조건</th><th style="width:190px">버튼</th></tr></thead>
+<thead><tr><th style="width:130px">이전 유형</th><th style="width:210px">이동</th><th>생성 시점 · 완료 조건</th><th style="width:190px">버튼</th></tr></thead>
 <tbody>
 <tr><td><b>입고</b> (나목)</td><td>고객 수탁 → 교환 재고</td><td>T1 승인 시. 온체인 대사(발신 지갑·수신 주소·자산·수량) 일치 시 [완료]</td><td>[완료]</td></tr>
 <tr><td><b>출고</b> (나목)</td><td>교환 재고 → 고객 수탁</td><td>T1 승인 시 함께 생성, <b>입고 완료 후 활성</b>. 완료 = 거래 완료</td><td>[완료]</td></tr>
-<tr><td><b>예치</b> ×2 (마목)</td><td>고객 수탁 → 에스크로</td><td>T2 승인 시. <b>수수료 포함 수량</b>. 양건 완료 시 인도 자동 생성</td><td>[완료] [보류] [이전 중지]</td></tr>
-<tr><td><b>인도</b> ×2 (마목)</td><td>에스크로 → 고객 수탁</td><td>양건 예치 확인 시 자동 생성. <b>수수료·가스 차감 후 수량</b>. 완료 = 거래 완료</td><td>[완료] [보류] [이전 중지]</td></tr>
+<tr><td><b>예치</b> ×2 (마목)</td><td>고객 수탁 → 에스크로</td><td>T2 승인 시. <b>거래 수량</b>(수수료 미포함). 양건 완료 시 인도 자동 활성</td><td>[완료] [보류] [이전 중지]</td></tr>
+<tr><td><b>인도</b> ×2 (마목)</td><td>에스크로 → 고객 수탁</td><td>양건 예치 확인 시 자동 활성. <b>상대방 거래 수량 − 받는 자산의 1%</b>(가스 차감 없음). 완료 = 거래 완료</td><td>[완료] [보류] [이전 중지]</td></tr>
 <tr><td><b>반환</b> (마목)</td><td>에스크로 → 예치자 수탁</td><td>예치 후 [이전 중지] 시 예치분만큼 생성. 수수료 미부과</td><td>[완료]</td></tr>
-<tr><td><b>수수료 스윕</b></td><td>에스크로 → 운영(수수료풀)</td><td>정책 주기 배치로 잔여분 일괄. 자산별 1행 <span class="chk">[확인필요: 주기]</span></td><td>[완료]</td></tr>
+<tr><td><b>수수료</b> (나목 3/3 · 마목 5/6·6/6)</td><td>교환 재고 · 에스크로 → 운영</td><td>나목 = 출고 완료 후 · 입고 자산 × 스프레드율 / 마목 = 각 인도 완료 후 · 공제한 받는 자산의 1%. 거래별 건별(2026-09-21(36) · (37)①②)</td><td>[완료]</td></tr>
 </tbody></table>
-<div class="rule">각 행은 <b>확장 패널에 명세를 그대로 펼쳐 보여주고</b>, 같은 내용을 <b>[명세 Excel]</b> 버튼으로 1건 1파일 내려받는다. 화면은 관리자가 보고 판단하는 용도, 파일은 콘솔 밖 <b>콜드 2인 서명자에게 전달하는 용도</b>다. 명세 해시·승인자 ID는 두 쪽 모두에 같은 값으로 남는다. 완료 차단 조건은 <b>온체인 대사 불일치 하나</b>이며, 명세 다운로드 여부는 완료를 막지 않는다.</div>
+<div class="rule">각 거래 행은 <b>확장 패널에 명세를 그대로 펼쳐 보여주고</b>(txhash 입력·[완료]는 이전 블록마다), 같은 내용을 <b>[명세 Excel]</b> 버튼으로 1건 1파일 내려받는다. 화면은 관리자가 보고 판단하는 용도, 파일은 콘솔 밖 <b>콜드 2인 서명자에게 전달하는 용도</b>다. 명세 해시·승인자 ID는 두 쪽 모두에 같은 값으로 남는다. 완료 차단 조건은 <b>온체인 대사 불일치 하나</b>이며, 명세 다운로드 여부는 완료를 막지 않는다.</div>
 </div></div>
 
 <!-- ============ §3 ============ -->
@@ -684,13 +705,14 @@
 <thead><tr><th style="width:190px">항목</th><th style="width:38%">결정</th><th>반영 위치</th></tr></thead>
 <tbody>
 <tr><td>3면 대사 대상</td><td>4묶음 전부 · 고객 수탁 지갑 포함 · 3면 유지</td><td>OP-04 · §4</td></tr>
-<tr><td>나목 출고 실패</td><td>없다. 대사 불일치는 정정·재집행으로 완결</td><td>EX-13 · A장 머리말</td></tr>
+<tr><td>나목 출고 실패 <b>(2026-09-22 변경)</b></td><td><b>있다</b> — 관리자가 ② 상세에서 [이전 중지]로 실패 종결할 수 있다. 대사 불일치 자체는 종전대로 정정·재집행으로 완결한다. 종전 "출고 실패 종결 없음"(2026-09-04) 폐기</td><td>EX-13 · EX-15·EX-16 · ADM-02 항목 11·12</td></tr>
+<tr><td>나목 이전 중지 · 반환 <b>(2026-09-22 신설)</b></td><td>[이전 중지]를 <b>나목에도</b> 둔다(종전 마목 전용 폐기). <b>1/3 입고 대사 완료 전</b> 중지는 반환 이전을 만들지 않고, <b>입고 완료·출고 전</b> 중지는 3/3 반환(교환 재고 → 고객 수탁 지갑 · 입고 수량 전액)을 만든다. 명칭은 '반환'으로 통일하고 수수료를 부과하지 않으며 <b>가스비는 DSRV 부담</b>. 수수료 이전만 남은 단계에서는 [보류]·[이전 중지] 비활성</td><td>EX-15·EX-16·EX-17 · §3 · ADM-02 항목 12·13</td></tr>
 <tr><td>집행 명세</td><td>확장 패널 인라인 + <b>Excel 파일 유지</b>(서명자 전달용)</td><td>§2 집행 대기 표</td></tr>
 <tr><td>콜드 서명 장애</td><td>커스터디 책임. 알림 유형에 두지 않음</td><td>§4 G2 · E장 머리말</td></tr>
-<tr><td>예치 후 보류·중지</td><td>② 예치·인도 행에 [보류]·[이전 중지]. 중지 시 반환 행 생성</td><td>ST-06 · §2</td></tr>
-<tr><td>집행 전 위험 심사 · 미집행 등록 (2026-09-14)</td><td>커스터디가 [명세 Excel]로 블랙리스트·KYT 심사 → 통과하면 통지 없이 콜드 서명 → txhash 입력. 문제가 있으면 <b>서명하지 않고 ② 행의 [AML 이슈 미집행]을 누른다</b> — 미집행 행 전부 제거 · 거래 거절 종결 · (마목 예치 완료분) 반환 행 · 고객 안내 "진행 불가"(일반화) · 이메일 ⑤. <b>사유를 받지 않고 되돌리는 수단도 두지 않는다</b>(고객이 새로 요청). 커스터디 → 우리 방향의 통지(웹훅)는 두지 않으므로 재시도·슬랙 통보·수동 보정 절차도 없다(종전 중지/해제 웹훅 폐지). 기관 문제는 관문 조회에서 비활성 확인 → AC-08, 조회와 조회 사이의 공백은 이 버튼이 메운다</td><td>EX-14 · ST-11 · EX-09 · ST-05 · ST-08 · §D · AC-07 · AC-08</td></tr>
+<tr><td>예치 후 보류·중지</td><td>② 마목 거래 행의 거래 상세에 [보류]·[이전 중지]. 중지 시 반환 이전 생성</td><td>ST-06 · §2</td></tr>
+<tr><td>집행 전 위험 심사 · 미집행 등록 (2026-09-14)</td><td>커스터디가 [명세 Excel]로 블랙리스트·KYT 심사 → 통과하면 통지 없이 콜드 서명 → txhash 입력. 문제가 있으면 <b>서명하지 않고 ② 거래 상세의 [AML 이슈 미집행]을 누른다</b> — 미집행 이전 전부 제거 · 거래 거절 종결 · (마목 예치 완료분) 반환 이전 · 고객 안내 "진행 불가"(일반화) · 이메일 ⑤. <b>사유를 받지 않고 되돌리는 수단도 두지 않는다</b>(고객이 새로 요청). 커스터디 → 우리 방향의 통지(웹훅)는 두지 않으므로 재시도·슬랙 통보·수동 보정 절차도 없다(종전 중지/해제 웹훅 폐지). 기관 문제는 관문 조회에서 비활성 확인 → AC-08, 조회와 조회 사이의 공백은 이 버튼이 메운다</td><td>EX-14 · ST-11 · EX-09 · ST-05 · ST-08 · §D · AC-07 · AC-08</td></tr>
 <tr><td>관문 조회에서 기관 비활성 확인</td><td><b>①·② 대기 건 무조건 거절</b> · 기관 상태 = 커스터디 customerStatusCd 6종 조회값(변경 통지 없음)</td><td>AC-07 · AC-08</td></tr>
-<tr><td>마목 수수료</td><td>예치에 포함 → 인도 시 차감 → 에스크로 잔여를 정책 주기로 수수료풀 스윕</td><td>ST-03 · ST-07 · ST-09</td></tr>
+<tr><td>마목 수수료</td><td>예치 = 거래 수량 → 인도 시 받는 자산의 1% 공제 → 인도별 수수료 이전으로 운영 지갑</td><td>ST-03 · ST-07 · ST-09</td></tr>
 <tr><td>시세 소스 중단</td><td>대체 소스 없이 <b>차단</b></td><td>OP-01 · EX-02</td></tr>
 <tr><td>교환 재고</td><td>EXC-01 [거래 요청] 비활성 + <b>수락 시점 재검증도 유지</b>(요청~수락 사이 경합)</td><td>EX-01 · EX-02 · EX-07</td></tr>
 <tr><td>보류 만료</td><td>두지 않는다. 관리자가 승인·거절로만 닫는다</td><td>EX-08 · ST-02</td></tr>
@@ -705,8 +727,6 @@
 <div class="panel-title">남은 미결 <span class="scope">이 문서에 <span class="chk">[확인필요]</span>·<span class="chk">[결정필요]</span>로 표시된 것</span></div>
 <div class="rule"><ol>
 <li><b>커스터디 연동 방식</b> — BLF·KYT 결과값과 콜드 기록을 어떤 경로로 받는지. 자동검증 칩과 3면 대사가 모두 여기에 걸린다.</li>
-<li><b>가스 차감분의 귀속</b> — 인도 시 받는 수량에서 뺀 가스 상당액이 에스크로에 남는다. 수수료와 함께 운영 지갑으로 스윕하는지, 별도 계정인지.</li>
-<li><b>수수료 스윕 주기</b> — 정책 주기의 실제 값(일 1회 · 정산 배치와 동시 등).</li>
 <li><b>정산 배치와 건별 집행의 정합</b> — 1영업일 3회 배치와 행별 txhash 입력이 같은 표에 있다. 배치 마감 경계·영업일 캘린더 포함.</li>
 <li><b>집행 대사 불일치 회송의 후속 절차</b> — 정정·재집행을 누가 어떤 순서로 하는지(종전 states G4 미결).</li>
 <li><b>지갑 3면 대사 불일치 시 정지 범위</b> — 해당 지갑만인지 전체인지.</li>
@@ -723,7 +743,7 @@
 <div class="wide"><div class="panel">
 <dl class="gloss">
   <dt>나목 교환</dt><dd>고객이 DSRV를 상대방으로 하는 ETH·USDC·USDT 교환 (예: ETH↔USDC, USDC↔USDT · 2026-09-02 ETH 편입). 가상자산사업자 신고 업종 구분에서 온 이름으로, 이 문서에서는 "DSRV와의 직접 교환"으로 읽으면 된다.</dd>
-  <dt>마목 중개</dt><dd>고객 간 교환을 DSRV가 게시판 방식으로 중개하는 것. 게시자가 신청을 수락하는 순간 거래가 확정되고 법적 구속력이 생긴다. 게시당 신청은 동시에 1건만 받는다(신청 1건 접수 = 게시 '협의중' · 추가 신청 차단). 확정 전까지 게시자는 게시를 회수할 수 있다(BRK-06 · 2026-09-02). 중개 수수료는 거래액의 1% 고정, 양측 각자 부담(기준 = 각자 보내는 자산 수량).</dd>
+  <dt>마목 중개</dt><dd>고객 간 교환을 DSRV가 게시판 방식으로 중개하는 것. 게시자가 신청을 수락하는 순간 거래가 확정되고 법적 구속력이 생긴다. 게시당 신청은 동시에 1건만 받는다(신청 1건 접수 = 게시 '협의중' · 추가 신청 차단). 확정 전까지 게시자는 게시를 회수할 수 있다(BRK-06 · 2026-09-02). 중개 수수료는 거래액의 1% 고정, 양측 각자 부담(기준 = 각자 받는 자산 수량 · 인도 시 공제 · 2026-09-28(37)①).</dd>
   <dt>에스크로 전용지갑</dt><dd>마목 정산 예치분을 담는 DSRV 관리 지갑. 회사 고유재산 지갑·커스터디 수탁 지갑과 지갑·장부·회계를 분리하고, 전량 콜드로 운용하며 운용(재투자)이 금지된 <b>고객 자산</b>이다(약관 제3조 8호 · 제10조). Ethereum 단일이라 지갑 1개로 ETH·USDC·USDT를 함께 담는다. 3면 대사 대상.</dd>
   <dt>KYT</dt><dd>트랜잭션의 자금 출처·경로 위험도를 자동 분석하는 검사 (Know Your Transaction).</dd>
   <dt>BLF</dt><dd>제재 대상·블랙리스트에 오른 지갑 주소인지 대조하는 필터.</dd>
@@ -731,7 +751,7 @@
   <dt>에스컬레이션</dt><dd>자동검증에서 위험등급 '주의' 이상이 잡힌 건. 일반 대기 건과 구분해 우선 검토한다. 자동으로 거절되지는 않는다.</dd>
   <dt>3면 대사</dt><dd>① 이 시스템 내부 장부 · ② 온체인 실제 잔고 · ③ 커스터디 콜드 기록, 세 값을 맞춰보는 정기 점검. 대상은 자산 묶음 4개 전부(고객 수탁 · 운영 · 나목 교환 최소재고 · 에스크로 전용지갑).</dd>
   <dt>price guard</dt><dd>게시 시점에 찍은 기준가 대비 시세가 ±{정책값 2.0%}를 벗어나면 게시를 자동 중지하는 장치. 시세로 가격을 정하는 것이 아니라 이탈을 감지하기만 한다.</dd>
-  <dt>수수료 스윕</dt><dd>인도가 끝난 뒤 에스크로 전용지갑에 남은 중개수수료를 정책 주기로 운영 지갑(수수료풀)에 옮기는 콜드 이전.</dd>
+  <dt>수수료 이전</dt><dd>거래마다 수수료를 운영 지갑으로 옮기는 콜드 이전. 나목은 출고 완료 후 교환 재고에서, 마목은 각 인도 완료 후 에스크로에서 건별로 집행한다(2026-09-21(36) · 종전 정책 주기 스윕 폐지).</dd>
   <dt>트래블룰</dt><dd>가상자산을 이전할 때 송신인·수신인 정보를 함께 전달해야 하는 규제 요건.</dd>
 </dl>
 </div></div>

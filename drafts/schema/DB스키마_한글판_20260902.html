@@ -134,7 +134,7 @@
     <h3>데이터 흐름 한눈에</h3>
     <div class="flowline"><span class="lab">직접 교환 (나목)</span>교환 요청 <span class="arr">→</span> 비율 견적(자동 산정) <span class="arr">→</span> 관리자 승인 <span class="tref">T1</span> <span class="arr">→</span> 콜드 수동 집행·완료</div>
     <div class="flowline"><span class="lab">게시판 중개 (마목)</span>거래의향 게시 <span class="arr">→</span> 신청 <span class="arr">→</span> 게시자 수락 = 확정(딜) <span class="tref">T2</span> <span class="arr">→</span> 이전·정산</div>
-    <div class="flowline"><span class="lab">자산 이동</span>전부 DSRV 관리 지갑 4묶음 사이의 <b>내부 콜드 이전</b>(입고·출고·예치·인도·반환·수수료 스윕) — 외부 입금·외부 출금은 이 시스템 밖(커스터디 기존 서비스 · 2026-09-04)</div>
+    <div class="flowline"><span class="lab">자산 이동</span>전부 DSRV 관리 지갑 4묶음 사이의 <b>내부 콜드 이전</b>(입고·출고·수수료·예치·인도·반환) — 외부 입금·외부 출금은 이 시스템 밖(커스터디 기존 서비스 · 2026-09-04)</div>
     <div class="flowline"><span class="lab">커스터디 접점</span>우리 → 커스터디: <b>기관 상태 조회 API</b>(customerNo → customerStatusCd · 관문마다) · <b>집행 명세 Excel</b>(② 집행 대기) ｜ 커스터디 → 우리: <b>push 없음</b> — 커스터디 담당자의 어드민 입력 2종(<b>txHash 입력</b> · <b>[AML 이슈 미집행]</b>)뿐 ｜ 잔고는 우리가 <b>온체인 직접 조회</b>(2026-09-07(21)~(23) · 2026-09-14 웹훅 폐지)</div>
     <div class="flowline"><span class="lab">승인·알람</span>승인 대기·경고는 종류가 달라도 <b>처리함 아이템</b> 한 테이블(INBOX_ITEM)에 모이고, 관리자가 하나씩 종결한다</div>
     <p style="margin-top:8px;"><b>설계 원칙 3가지</b> — ⓐ 자동은 <b>검증·산정·아이템 생성</b>까지, <b>승인·거절·종결은 사람</b>이 한다(자동 체결 없음). ⓑ 본인이 올린 건은 본인이 승인할 수 없다. ⓒ 모든 상태 변경은 감사로그(AUDIT_LOG)에 남고 수정·삭제할 수 없다.</p>
@@ -175,12 +175,12 @@
         <tr><td class="fld">트래블룰</td><td>가상자산을 이전할 때 송신인·수신인 정보를 함께 확인·전달해야 하는 규제 요건. 테이블 TRAVEL_RULE.</td></tr>
         <tr><td class="fld">자동검증 · 에스컬레이션</td><td>자동검증 = 기관 상태·건별 한도·잔고·교환 재고·기준가 편차·이상거래 룰을 시스템이 먼저 검사하는 <b>우리 정책 검증</b> 1차 필터(BLF·KYT는 커스터디의 집행 전 심사 · 2026-09-07(21)). 결과가 '주의' 이상이면 자동 거절하지 않고 <b>에스컬레이션</b>(우선 검토 대상으로 표시)해서 사람이 판단한다.</td></tr>
         <tr><td class="fld">처리함 (INBOX)</td><td>관리자 홈(ADM-02)의 작업 목록. 승인·확인·조사가 필요한 일이 생기면 시스템이 '아이템'을 만들어 쌓고 관리자가 종결한다. 유형은 §0-B.</td></tr>
-        <tr><td class="fld">에스크로 전용지갑</td><td>마목 정산 예치분을 담는 DSRV 관리 지갑. 회사 고유재산 지갑·커스터디 수탁 지갑과 지갑·장부·회계를 분리하고 전량 콜드로 두며 운용이 금지된 <b>고객 자산</b>(약관 제3조 8호·제10조). 예치(수수료 포함) → 양건 예치 확인 → 인도(가스 차감) → 잔여 수수료 스윕. 종전 '격리·동결' 용어는 이 시스템 밖(커스터디).</td></tr>
+        <tr><td class="fld">에스크로 전용지갑</td><td>마목 정산 예치분을 담는 DSRV 관리 지갑. 회사 고유재산 지갑·커스터디 수탁 지갑과 지갑·장부·회계를 분리하고 전량 콜드로 두며 운용이 금지된 <b>고객 자산</b>(약관 제3조 8호·제10조). 예치(거래 수량 · 수수료 미포함) → 양건 예치 확인 → 인도(상대 거래 수량 − 1% · 가스 차감 없음) → 잔여 수수료 스윕. 종전 '격리·동결' 용어는 이 시스템 밖(커스터디).</td></tr>
         <tr><td class="fld">customerNo</td><td>커스터디(Custody Admin)가 온보딩 완료 시 부여하는 기관 식별자(형식 <code>L-XXXXXX-XXXX</code>). 이 시스템의 <b>유일한 기관 식별자</b>이며 화면·Excel·CSV·감사로그에 같은 값을 쓴다(내부 채번 ORG-NNNN 폐기 · 2026-09-07(21)).</td></tr>
         <tr><td class="fld">관문 조회 · 기관 상태</td><td>기관 상태(customerStatusCd 01~06)는 커스터디 조회 API로 <b>읽기만</b> 한다. 조회 시점 = 로그인 · 요청/게시/신청 · 수락/확정/① [승인] 클릭 · ADM-04 진입(캐시·폴링·변경 통지 없음). 02 활성만 거래 가능, 그 외 5종은 동일하게 비활성 처리. 비활성 확인 순간 그 기관의 대기 건을 일괄 거절(2026-09-07(22)).</td></tr>
         <tr><td class="fld">AML 이슈 미집행</td><td>커스터디가 집행 전 심사(BLF·KYT 등)에서 문제를 발견하면 <b>콜드 서명을 하지 않고</b> ADM-02 ② 해당 행의 <b>[AML 이슈 미집행]</b>을 누른다. <b>사유는 받지 않는다.</b> 미집행 이전 전부 제거 · 거래 거절 종결 · 마목 예치 완료분 반환 행 · 고객 안내 "진행 불가" · 이메일 ⑤. 되돌리는 수단은 없다(고객 재요청). 통과 시 통지 없이 서명·집행 후 txHash 입력(2026-09-14 · 종전 중지/해제 웹훅 폐지).</td></tr>
-        <tr><td class="fld">가스비</td><td>온체인 이전 수수료(ETH). <b>고객 부담 · 받는 수량에서 차감</b>. 예상액은 참고값이고 실제 차감액은 집행 후 실발생액(gasUsed × effectiveGasPrice). 마목은 예치 1 + 인도 1 = 2회분. 건별 한도 판정에는 미포함(2026-09-02(13)).</td></tr>
-        <tr><td class="fld">콜드 · 수수료 스윕</td><td>콜드월렛 = 인터넷과 분리된 지갑. 이 시스템의 지갑 4묶음은 <b>전부 콜드</b>이고 핫월렛이 없다(종전 핫 비중·스윕 경고 삭제 · 2026-09-04). 수수료 스윕 = 인도 후 에스크로 전용지갑에 남은 중개수수료를 정책 주기로 운영 지갑(수수료풀)에 옮기는 콜드 이전(자산별 1건).</td></tr>
+        <tr><td class="fld">가스비</td><td>온체인 이전 수수료(ETH). <b>고객은 첫 이전 1회분(나목 입고 · 마목 자기 예치)만 부담 · 자기 수탁 지갑 ETH로 직접 · 받는 수량에서 차감하지 않음</b>(2026-09-21(36)). 나머지 이전은 DSRV 부담. 예상액은 참고값이고 실발생액은 gasUsed × effectiveGasPrice. 건별 한도 판정에는 미포함(2026-09-02(13)).</td></tr>
+        <tr><td class="fld">콜드 · 수수료 이전</td><td>콜드월렛 = 인터넷과 분리된 지갑. 이 시스템의 지갑 4묶음은 <b>전부 콜드</b>이고 핫월렛이 없다(종전 핫 비중·스윕 경고 삭제 · 2026-09-04). 수수료 이전 = 인도 후 에스크로 전용지갑에 남은 중개수수료를 거래별로 즉시 운영 지갑(수수료풀)에 옮기는 콜드 이전(자산별 1건).</td></tr>
         <tr><td class="fld">2인 멀티시그</td><td>콜드월렛 출고에 서명자 2명이 필요한 방식. 서명은 화면 밖 커스터디 절차이고 DB에는 서명자 2명만 기록.</td></tr>
         <tr><td class="fld">명세 대사 · 3면 대사</td><td>명세 대사 = 집행 명세(주소·자산·수량)와 온체인 결과(txhash)가 일치하는지 확인. 일치해야 '완료'. 3면 대사 = 내부 장부·온체인 잔고·콜드월렛 기록 세 값을 맞춰보는 정기 점검.</td></tr>
         <tr><td class="fld">구분회계</td><td>고객 수탁자산과 DSRV 자기 자산·수익을 계정으로 분리해 집계하는 것. 스프레드 수익과 중개 수수료 수익도 서로 다른 계정.</td></tr>
@@ -492,7 +492,7 @@
       <div class="f"><span class="m fk">FK</span><span class="name">거래의향</span><span class="col">rfq_id</span><span class="desc">→ 거래의향(RFQ_INTENT). 조건 원본</span></div>
       <div class="f"><span class="m n">·</span><span class="name">확정 비율 · 수량</span><span class="col">agreed_rate · qty</span><span class="desc">게시 조건 그대로 복사. 당사자 간 성립, DSRV는 가격에 관여하지 않음</span></div>
       <div class="f"><span class="m fk">FK</span><span class="name">게시 기관 / 신청 기관</span><span class="col">poster_org · applicant_org</span><span class="desc">→ 기관(ORG). 확정 시 양측 상호 마스킹 해제</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">수수료율</span><span class="col">fee_pct</span><span class="desc">거래액의 1.0% 고정, 양측 각자 부담(2026-09-02 확정). 기준 금액 = 각자 보내는 자산 수량(기획 가정). 수락 전 화면에 고시(4요소 ④ 수수료, 설명의무). <b>차감 방식 확정</b>(2026-09-04(17)⑦): 예치 수량에 수수료를 포함해 에스크로에 넣고 인도할 때 빼고 준다 · 정산 확정 시점 = 인도 집행 시점 · 이전 중지·반환 시 미부과</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">수수료율</span><span class="col">fee_pct</span><span class="desc">거래액의 1.0% 고정, 양측 각자 부담(2026-09-02 확정). 기준 금액 = 각자 받는 자산 수량(상대방 거래 수량) · 인도 시 공제(2026-09-28(37)①). 수락 전 화면에 고시(4요소 ④ 수수료, 설명의무). <b>차감 방식 확정</b>(2026-09-04(17)⑦): 예치는 거래 수량 그대로 하고 인도할 때 수수료를 빼고 준다(2026-09-28(37)①로 정정) · 정산 확정 시점 = 인도 집행 시점 · 이전 중지·반환 시 미부과</span></div>
       <div class="f"><span class="m n">·</span><span class="name">커스터디 통지 수신</span><span class="col">custody_notice · custody_notified_at</span><span class="desc"><span class="ev">없음 / 중지 / 해제</span> + 마지막 수신 시각 — EXCHANGE_REQUEST와 같은 규칙. 중지 수신 시 예치 완료 다리가 있으면 반환 행 자동 생성 <b>[스키마 보완]</b></span></div>
       <div class="f"><span class="m n">·</span><span class="name">확정(수락) 시각</span><span class="col">confirmed_at</span><span class="desc">수락 행위자·시각이 계약 성립의 유일한 증적(AUDIT_LOG에도 기록)</span></div>
       <div class="f"><span class="m n">·</span><span class="name">상태</span><span class="col">status</span><span class="desc"><span class="ev">확정 / 예치 진행 / 인도 진행 / 완료 / 이전 보류 / 이전 중지</span>(코드 후보 CONFIRMED·DEPOSITING·DEPOSITED·DELIVERING·COMPLETED·ON_HOLD·STOPPED · 2026-09-03(15)) = 처리함 <span class="ref">T2</span> 업무 상태 · BRK-05 스텝<br>이전 중지 = 확정된 거래를 DSRV가 멈춘 것(관리자 · 커스터디 중지 통지 · 기관 비활성 확인). 계약상 귀결(무산·위약) <span class="tg">[결정필요 ①]</span></span></div>
@@ -507,11 +507,11 @@
       <div class="f"><span class="m n">·</span><span class="name">이전 완결성</span><span class="col">completeness_ok</span><span class="desc">양측 <b>예치</b>가 모두 끝났는지. 이 값이 참일 때만 인도 2건이 자동 생성된다(별도 승인 클릭 없음)</span></div>
       <div class="f"><span class="m fk">FK</span><span class="name">트래블룰</span><span class="col">travel_rule_id</span><span class="desc">→ 트래블룰 기록(TRAVEL_RULE). 양측 송·수신인 확인</span></div>
       <div class="f"><span class="m fk">FK</span><span class="name">서명자 1·2</span><span class="col">signer1_id · signer2_id</span><span class="desc">→ 가입자 계정(USER). 2인 멀티시그</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">이전 유형</span><span class="col">transfer_type</span><span class="desc"><span class="ev">예치 / 인도 / 반환 / 수수료 스윕</span><br>반환 = 예치 후 이전 중지 시 예치자에게 되돌리는 건(수수료 미부과) · 수수료 스윕 = 인도 후 에스크로에 남은 수수료를 운영 지갑으로 옮기는 건(정책 주기 배치 · 자산별 1건으로 묶음 · 주기 <span class="tg">[확인필요]</span>) — 2026-09-04 신설</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">이전 유형</span><span class="col">transfer_type</span><span class="desc"><span class="ev">예치 / 인도 / 반환 / 수수료</span><br>반환 = 예치 후 이전 중지 시 예치자에게 되돌리는 건(수수료 미부과) · 수수료 = 인도 후 에스크로에 남은 수수료를 운영 지갑으로 옮기는 건(각 인도 완료 후 거래별 1건 · 2026-09-21(36)) — 2026-09-04 신설</span></div>
       <div class="f"><span class="m n">·</span><span class="name">온체인 txhash</span><span class="col">txhash</span><span class="desc">이전 건별 해시 · <b>커스터디 담당자 어드민 계정</b>이 입력. 명세 대사(발신 지갑·수신 주소·자산·수량 4항목) 후 완료 처리 · 중지 통지가 온 거래의 미집행 행은 입력 불가</span></div>
       <div class="f"><span class="m n">·</span><span class="name">명세 해시 · 승인자</span><span class="col">spec_hash · approver_id</span><span class="desc">EXCHANGE_EXECUTION과 같은 규칙 · [명세 Excel]과 동일 값 <b>[스키마 보완]</b></span></div>
-      <div class="f"><span class="m n">·</span><span class="name">예상 · 실발생 가스비</span><span class="col">gas_est_* · gas_actual_*</span><span class="desc">EXCHANGE_EXECUTION과 같은 3값 구조. 고객 부담 = 자기 예치 1건 + 자기 앞 인도 1건 2회분 · 인도 수량에서 차감 · 반환 건의 가스비 부담 주체 <span class="tg">[확인필요]</span> <b>[스키마 보완]</b></span></div>
-      <div class="f"><span class="m n">·</span><span class="name">중개 수수료 수익</span><span class="col">fee_revenue</span><span class="desc">이 건의 수수료 수익(각자 보내는 자산의 1%). <b>예치 수량에 포함해 에스크로에 들어갔다가</b> 인도 후 정책 주기 스윕으로 운영 지갑(수수료풀)에 옮겨진다(2026-09-04). 구분회계상 '중개수수료' 계정(스프레드 수익과 분리)</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">예상 · 실발생 가스비</span><span class="col">gas_est_* · gas_actual_*</span><span class="desc">EXCHANGE_EXECUTION과 같은 3값 구조. 고객 부담 = 자기 예치 1건 · 인도 수량에서 차감하지 않는다(2026-09-21(36)) · 반환 건의 가스비 부담 주체 <span class="tg">[확인필요]</span> <b>[스키마 보완]</b></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">중개 수수료 수익</span><span class="col">fee_revenue</span><span class="desc">이 건의 수수료 수익(각자 받는 자산의 1%). <b>인도 시 공제되어 에스크로에 남았다가</b> 거래별 수수료 이전으로 운영 지갑(수수료풀)에 옮겨진다(2026-09-21(36) · 2026-09-28(37)①). 구분회계상 '중개수수료' 계정(스프레드 수익과 분리)</span></div>
       <div class="f"><span class="m n">·</span><span class="name">정산 시각</span><span class="col">settled_at</span><span class="desc">정산 배치 1영업일 3회. 배치 시각·마감 <span class="tg">[확인필요]</span></span></div>
     </div>
 
@@ -617,13 +617,33 @@
 
     <div class="tbl">
       <div class="tbl-head"><span class="scr">ADM-05 CSV ⑤</span><span class="kn">3면 대사</span><span class="en">RECONCILIATION</span></div>
-      <div class="role">정기 배치마다 자산별로 내부 장부·온체인 잔고·콜드월렛 기록 세 값을 스냅숏으로 남기고 일치 여부를 기록한다.</div>
-      <div class="f"><span class="m pk">PK</span><span class="name">대사 ID</span><span class="col">recon_id</span><span class="desc"></span></div>
+      <div class="role">정기 배치마다 <b>지갑 주소 × 자산</b>별로 내부 장부·온체인 잔고·커스터디 기록 세 값을 같은 기준시각으로 스냅숏하고 일치 여부를 기록한다. 세 값 모두 기초 잔액(지갑 등록 시점 온체인 잔액)에서 출발한다(2026-09-23(35)).</div>
+      <div class="f"><span class="m pk">PK</span><span class="name">대사 ID</span><span class="col">recon_id</span><span class="desc">행마다 1개</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">배치 ID</span><span class="col">batch_id</span><span class="desc">같은 배치의 행은 같은 값 <b>[스키마 보완 · 2026-09-23(35)]</b></span></div>
       <div class="f"><span class="m n">·</span><span class="name">지갑 묶음</span><span class="col">wallet_group</span><span class="desc"><span class="ev">고객 수탁 / 운영 / 나목 교환 최소재고 / 에스크로 전용지갑</span> — 4묶음 전부 대사(2026-09-04(17)①) <b>[스키마 보완]</b></span></div>
+      <div class="f"><span class="m fk">FK</span><span class="name">지갑 주소</span><span class="col">wallet_address</span><span class="desc">→ 지갑(WALLET) · 고객 수탁은 기관마다 1행, 합산하지 않음 <b>[스키마 보완 · 2026-09-23(35)]</b></span></div>
       <div class="f"><span class="m fk">FK</span><span class="name">자산</span><span class="col">asset_id</span><span class="desc">→ 취급자산(ASSET)</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">내부장부 · 온체인 · 콜드 잔액</span><span class="col">internal_bal · onchain_bal · custody_bal</span><span class="desc">세 곳의 잔액 스냅숏. ETH는 집행마다 실발생 가스비만큼 줄어드므로 내부장부에 건별 가스비 비용을 전기해야 일치한다</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">일치 여부</span><span class="col">matched</span><span class="desc"><span class="ev">일치 / 불일치</span> — 불일치 시 ④ <span class="ref">X3</span> 생성 + 해당 지갑 신규 이전 정지(범위 <span class="tg">[확인필요]</span>) · 최신 배치가 일치일 때만 종결 가능</span></div>
-      <div class="f"><span class="m n">·</span><span class="name">대사 시각</span><span class="col">snapshot_at</span><span class="desc">정기 배치 스냅숏 시각</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">기초 잔액 · 기초 기준 블록</span><span class="col">opening_bal · opening_block</span><span class="desc">지갑 등록 시점 온체인 잔액 <b>[스키마 보완 · 2026-09-23(35)]</b></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">내부장부 · 온체인 · 커스터디 잔액</span><span class="col">internal_bal · onchain_bal · custody_bal</span><span class="desc">내부장부 = 기초 + LEDGER_ENTRY(이 지갑 주소) 누적 · 온체인 = 기준 블록 직접 조회 · 커스터디 = 기초 + CUSTODY_TRANSFER(우리가 아는 txhash의 단건 조회 결과) 성공 건 누적 · 크로스체크(2026-09-28(37)④). 최소 단위 정수로 저장 · 허용오차 0. ETH는 내부장부에 건별 가스비 비용을 전기해야 일치한다</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">일치 여부</span><span class="col">matched</span><span class="desc"><span class="ev">MATCHED / MISMATCHED / INCOMPLETE</span> — MISMATCHED·INCOMPLETE 시 ④ <span class="ref">X3</span> 생성 · MISMATCHED 시 해당 지갑 신규 이전 정지(INCOMPLETE 정지 여부 <span class="tg">[확인필요]</span>) · 최신 배치가 MATCHED일 때만 종결 가능 <b>[스키마 보완 · 2026-09-23(35)]</b></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">이전 정지 여부</span><span class="col">transfer_halted</span><span class="desc">Y / N <b>[스키마 보완 · 2026-09-23(35)]</b></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">온체인 기준 블록</span><span class="col">onchain_block</span><span class="desc">기준시각 직전 블록 <b>[스키마 보완 · 2026-09-23(35)]</b></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">내부장부 마감 전기 ID</span><span class="col">ledger_last_entry</span><span class="desc">→ LEDGER_ENTRY <b>[스키마 보완 · 2026-09-23(35)]</b></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">대사 시각</span><span class="col">snapshot_at</span><span class="desc">세 값 공통 기준시각</span></div>
+    </div>
+
+    <div class="tbl">
+      <div class="tbl-head"><span class="scr">ADM-05 CSV ⑤</span><span class="kn">커스터디 이체 목록</span><span class="en">CUSTODY_TRANSFER</span></div>
+      <div class="role">커스터디 <span class="mono">GET /transfer/by-hash</span> 단건 조회 응답(2026-09-23(35) 신설 · 2026-09-28(37)④ 정정). 우리가 폴링하며, 이미 온체인·어드민 입력으로 아는 이전만 조회할 수 있다. 3면 대사의 커스터디 기록 잔액을 만드는 원천. <b>[스키마 보완 · 신설]</b> 조회 실행 주체·주기 <span class="tg">[확인필요]</span></div>
+      <div class="f"><span class="m pk">PK</span><span class="name">이체 ID</span><span class="col">ct_id</span><span class="desc"></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">체인</span><span class="col">chain</span><span class="desc"></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">txhash</span><span class="col">txhash</span><span class="desc">③ 콜드 이전의 txhash와 잇는 키</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">거래시도시점 · 거래완료시점</span><span class="col">attempted_at · completed_at</span><span class="desc">완료시점이 기준시각 이전인 건만 누적</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">보내는 주소 · 받는 주소</span><span class="col">from_address · to_address</span><span class="desc"></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">보내는 토큰심볼 · 토큰주소 · 토큰양</span><span class="col">token_symbol · token_address · token_qty</span><span class="desc"></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">가스비토큰심볼 · 가스비토큰양</span><span class="col">gas_symbol · gas_qty</span><span class="desc">보내는 지갑에서 차감 · 실패 건 포함 여부 <span class="tg">[확인필요]</span></span></div>
+      <div class="f"><span class="m n">·</span><span class="name">성공/실패여부</span><span class="col">success</span><span class="desc">성공 건만 잔액에 누적</span></div>
+      <div class="f"><span class="m n">·</span><span class="name">조회 시각</span><span class="col">fetched_at</span><span class="desc">이 행을 커스터디에 조회한 시각</span></div>
     </div>
 
     <div class="tbl">
@@ -674,7 +694,7 @@
       <tr><td class="fld">거래의향 상태<span class="col">RFQ_INTENT.status</span></td><td><span class="v ok">게재중</span><span class="v mid">협의중</span><span class="v">확정</span><span class="v">완료</span><span class="v">완료(유효기간 만료)</span><span class="v bad">중지(price guard)</span><span class="v">회수</span></td><td>협의중 = 신청 1건 접수(동시 1건) · 거절·만료된 신청은 게재중 복귀 · 중지·만료·회수는 BRK-01에서 즉시 제외 · 회수 = BRK-06 [게시 중단]</td></tr>
       <tr><td class="fld">신청 상태<span class="col">RFQ_APPLICATION.status</span></td><td><span class="v">신청</span><span class="v ok">수락(확정)</span><span class="v">거절</span><span class="v">만료</span><span class="v">종결(게시 만료)</span></td><td>수락 = 즉시 확정·구속력·수수료 발생 · 거절 사유 입력 없음</td></tr>
       <tr><td class="fld">딜 상태<span class="col">DEAL.status</span></td><td><span class="v">확정</span><span class="v mid">예치 진행</span><span class="v mid">인도 진행</span><span class="v ok">완료</span><span class="v mid">이전 보류</span><span class="v bad">이전 중지</span></td><td>처리함 T2 · BRK-05 스텝 — 마목에 거절은 없고 이전 중지만(관리자 · 커스터디 중지 통지 · 기관 비활성) · 계약상 귀결 [결정필요 ①]</td></tr>
-      <tr><td class="fld">이전·정산 상태<span class="col">BROKER_SETTLEMENT.status</span></td><td><span class="v mid">예치 진행</span><span class="v">양건 예치 확인</span><span class="v mid">인도 진행</span><span class="v bad">정지(대사 불일치)</span><span class="v ok">완료</span><span class="v mid">이전 보류</span><span class="v bad">이전 중지</span></td><td>행 = 콜드 이전 1건(예치·인도·반환·수수료 스윕) · 인도는 양건 예치 확인 후 자동 생성 · 중지 시 예치분 반환(역이전 폐기 · 2026-09-03(15))</td></tr>
+      <tr><td class="fld">이전·정산 상태<span class="col">BROKER_SETTLEMENT.status</span></td><td><span class="v mid">예치 진행</span><span class="v">양건 예치 확인</span><span class="v mid">인도 진행</span><span class="v bad">정지(대사 불일치)</span><span class="v ok">완료</span><span class="v mid">이전 보류</span><span class="v bad">이전 중지</span></td><td>이전 1건 = 명세 1줄(예치·인도·반환·수수료) · 화면 ② 집행 대기는 거래당 1행(2026-09-28(37)③) · 인도는 양건 예치 확인 후 자동 생성 · 중지 시 예치분 반환(역이전 폐기 · 2026-09-03(15))</td></tr>
       <tr><td class="fld">교환 집행 상태<span class="col">EXCHANGE_EXECUTION.status</span></td><td><span class="v mid">집행 대기</span><span class="v bad">정지(대사 불일치)</span><span class="v ok">완료</span></td><td>행 = 입고·출고 각 1건 · 완료는 txhash 온체인 대사 4항목 완전 일치 시만 · 출고 실패 종결 없음(정정·재집행)</td></tr>
     </table>
   </div>
@@ -700,14 +720,14 @@
       <tr><td class="fld">직접 교환 비율 산정 방식</td><td>시스템이 요청 시점 외부지표 + 고정 스프레드로 자동 산정 · 건별 요청에만(상시 호가 없음)</td><td>2026-09-02 확정 — 자동인 것은 '산정'까지. 체결은 고객 수락 + DSRV 승인 + 콜드 수동 집행</td></tr>
       <tr><td class="fld">고정 스프레드 (직접 교환)</td><td><span class="v">0.10% (USDC↔USDT)</span> · ETH 페어 미정</td><td>예시값 <span class="warn2">[확인필요]</span> — 내부 수수료 정책 문서에서 확정 예정</td></tr>
       <tr><td class="fld">견적 유효시간 (직접 교환)</td><td><span class="v">120초</span></td><td>예시값 <span class="warn2">[확인필요]</span></td></tr>
-      <tr><td class="fld">중개 수수료 (게시판 중개)</td><td><span class="v">거래액의 1.0% 고정 · 양측 각자</span> · 기준 = 각자 보내는 자산 수량</td><td>2026-09-02 확정 · 기준 금액은 기획 가정 · 차감 방식·1% 합리성 <span class="warn2">[확인필요]</span> · 설명의무 소명 수위 [로펌게이트]</td></tr>
+      <tr><td class="fld">중개 수수료 (게시판 중개)</td><td><span class="v">거래액의 1.0% 고정 · 양측 각자</span> · 기준 = 각자 받는 자산 수량 · 인도 시 공제</td><td>2026-09-02 확정 · 2026-09-28(37)① 기준 정정 · 차감 방식·1% 합리성 <span class="warn2">[확인필요]</span> · 설명의무 소명 수위 [로펌게이트]</td></tr>
       <tr><td class="fld">게시 / 신청 유효기간 (게시판 중개)</td><td><span class="v">30일</span> / <span class="v">영업일 2일</span></td><td>화면 확정 표기 (BRK-02·03)</td></tr>
       <tr><td class="fld">시세변동 자동중지 임계 (게시판 중개)</td><td><span class="v">±2.0%</span> (게시 시점 대비)</td><td>ADM-03 연동 <span class="warn2">[확인필요]</span></td></tr>
       <tr><td class="fld">건별 한도 (공통)</td><td><span class="v">1회 1,500,000원 상당</span> · KRW 환산(ETH·스테이블 모두 시세 소스 KRW 시세, 요청 시점 · 원 단위 절사)</td><td>2026-09-02(9) 원화 기준(종전 '1,000 USD 상당'·'1억 원 상당 / 100,000 수량' 표기 폐기) · 일간·월간 누적 한도 <span class="warn2">[확인필요]</span></td></tr>
       <tr><td class="fld">인증·세션</td><td>초대 링크 72시간·1회 · <b>재설정 링크 72시간·1회 · 토큰 모드 full/2fa</b>(2026-09-17) · 로그인 2단계(비밀번호 → 인증 앱 6자리) · 실패 5회 잠금(비밀번호·인증 코드·복구 코드 합산) · 2FA 사전 인증 120초 · 유휴 15분 · 세션 최대 8시간 · 계정당 1세션 · 복구 코드 1개·24자·1회용 · 비밀번호 8~20자</td><td>2026-09-02(5)·(12)·(14) 확정 · 관리자 유휴 10분 <span class="warn2">[확인필요]</span></td></tr>
-      <tr><td class="fld">가스비</td><td>고객 부담 · 받는 수량에서 차감 · 예상액 참고(상한 아님) · 실제 차감 = 실발생액 · 마목 2회분(예치 1 + 인도 1) · 건별 한도 판정 미포함</td><td>2026-09-02(13) 확정 · 반환 건 가스비 부담 · 인도 시 뺀 가스 상당액의 귀속 <span class="warn2">[확인필요]</span></td></tr>
+      <tr><td class="fld">가스비</td><td>고객은 첫 이전 1회분만 부담(자기 지갑 ETH) · 나머지 DSRV 부담 · 받는 수량에서 차감 없음 · 예상액 참고(상한 아님) · 건별 한도 판정 미포함</td><td>2026-09-21(36) 개정 · DSRV 부담 가스의 ETH 원천 <span class="warn2">[확인필요]</span></td></tr>
       <tr><td class="fld">기관 상태 · 커스터디 연동</td><td>customerStatusCd 6종 조회 API(관문 5곳 · 캐시·폴링 없음) · <b>커스터디 → 우리 push 없음</b> · 커스터디 담당자 어드민 입력(txHash · [AML 이슈 미집행]) · 온체인 컨펌 기준</td><td>2026-09-07(21)~(23) · 2026-09-14 확정 · 조회 지연 임계 · 05·06 로그인 범위 · 컨펌 수 <span class="warn2">[확인필요]</span></td></tr>
-      <tr><td class="fld">집행·정산 소요</td><td>나목 교환 약 2영업일(입고·출고 2건) · 마목 정산 배치 1영업일 3회(예치 2건 → 인도 2건) · 수수료 스윕 정책 주기</td><td>예시 — ADM-03 정책값으로 확정 예정 · 배치 시각·마감 <span class="warn2">[확인필요]</span></td></tr>
+      <tr><td class="fld">집행·정산 소요</td><td>나목 교환 약 2영업일(입고·출고·수수료 3건) · 마목 정산 배치 1영업일 3회(예치 2건 → 인도 2건) · 수수료 이전 거래별 즉시</td><td>예시 — ADM-03 정책값으로 확정 예정 · 배치 시각·마감 <span class="warn2">[확인필요]</span></td></tr>
     </table>
   </div>
 </div>
@@ -722,7 +742,7 @@
   · <b>v0.8(2026-09-07)</b> — 2026-09-07(21)~(23) 커스터디 연동 최종 + 09-02(5)·(13) 잔여분 정합. 컬럼 <b>[스키마 보완]</b> 표시 신설: ORG.customer_no(PK 교체 · ORG-NNNN 폐기)·custody_address · EXCHANGE_REQUEST/DEAL.custody_halt·custody_halted_at·custody_halted_by(2026-09-14 · 종전 custody_notice·custody_notified_at 웹훅 수신값 폐기) · EXCHANGE_EXECUTION.leg_type·spec_hash·approver_id·gas_est_*·gas_actual_* · BROKER_SETTLEMENT.spec_hash·gas_* · RECONCILIATION.wallet_group · LEDGER_ACCOUNT.type 계정 4종 추가 · LIMIT_RULESET.kyt_blf_thr → escalation_thr · BACKUP_CODE → RECOVERY_CODE(단일 복구 코드 24자) · USER.role 커스터디 담당자 · INBOX_ITEM.type 8종 정정(T3·T4·T6·T7 → N1~N3) · TRAVEL_RULE 출금 제외 · 상태 enum(RFQ_INTENT 협의중 · DEAL 예치/인도 진행 · BROKER_SETTLEMENT·EXCHANGE_EXECUTION 정지) · 화면 코드 24개 · 부록 D 3행 추가. 테이블 수 27 유지.<br>
   · 별도 ERD(db-schema-erd.svg)는 구버전 — 테이블 구성은 이 문서가 기준이며 ERD는 개정 예정.<br>
   · <span class="warn">[결정필요]</span> ① T2 이전 중지 건의 계약상 귀결(약관·법무 · 커스터디 중지·기관 비활성에 따른 중지·반환 포함) ④ High 등급 경고 방치 시 상위 에스컬레이션 룰 · D5 기관 등록 값(주소·법인명) 정정의 우리 DB 반영 경로 · 이전 중지 고객 칩 신설 · 마목 보류 고객 문구. — ② T4 소명 시한·③ T7 자동 종결은 유형 삭제로 소멸(2026-09-04) · ⑤ 복수 신청 처리는 동시 1건 결정으로 소멸(2026-09-02(3)).<br>
-  · <span class="warn">[확인필요]</span> 트래블룰 수행 주체·기록 위치(내부 이전 · 커스터디 분담) · BLF·KYT 결과값(kyt_score·blf_result) 저장 여부 · 반환 건 가스비 부담 · 가스 차감분 귀속 · 수수료 스윕 주기 · 정산 배치 시각과 행별 집행의 정합 · 3면 대사 불일치 정지 범위 · 정정·재집행 절차 · 기관 상태 조회 지연 임계 · 05·06 기관 로그인 범위 · 지갑 사고의 customerStatusCd 매핑 · 온체인 컨펌 기준 · 통지 신설(이전 중지·반환·잠금·신청 거절/만료·price guard) · 부록 D의 예시값 전반. 종전 '중개 수수료 차감 방식'은 2026-09-04(17)⑦로 확정.<br>
+  · <span class="warn">[확인필요]</span> 트래블룰 수행 주체·기록 위치(내부 이전 · 커스터디 분담) · BLF·KYT 결과값(kyt_score·blf_result) 저장 여부 · 반환 건 가스비 부담 · 정산 배치 시각과 행별 집행의 정합 · 3면 대사 불일치 정지 범위 · 정정·재집행 절차 · 기관 상태 조회 지연 임계 · 05·06 기관 로그인 범위 · 지갑 사고의 customerStatusCd 매핑 · 온체인 컨펌 기준 · 통지 신설(이전 중지·반환·잠금·신청 거절/만료·price guard) · 부록 D의 예시값 전반. 종전 '중개 수수료 차감 방식'은 2026-09-04(17)⑦로 확정.<br>
   · <b>개발 확정 스키마가 아닌 기획 참고용 초안</b> — 실제 데이터 모델·타입·인덱스·제약은 개발 설계 시 확정. 이 문서의 컬럼명은 의미 전달용이며 실제 명명 규칙은 개발팀 컨벤션을 따른다.
 </div>
 

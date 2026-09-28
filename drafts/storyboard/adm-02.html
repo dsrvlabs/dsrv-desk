@@ -10,6 +10,17 @@
   .tbl td{padding:7px 8px;border-bottom:1px solid #f1f1ee;color:#334155;vertical-align:middle;}
   .act{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;border:1px solid #93c5fd;color:#2563eb;background:#fff;margin:1px 2px 1px 0;white-space:nowrap;}
   .act.warn{border-color:#fca5a5;color:#b91c1c;}
+  .dtbl{width:100%;border-collapse:collapse;font-size:10.5px;margin:6px 0 4px;}
+  .dtbl th{background:#f1f5f9;color:#64748b;font-weight:700;text-align:center;padding:4px 5px;border:1px solid var(--line);font-size:9.5px;line-height:1.3;}
+  .dtbl th:first-child{text-align:left;}
+  .dtbl th .g{display:block;color:#2563eb;font-size:9px;}
+  .dtbl td{padding:4px 5px;border:1px solid #e8eae5;text-align:center;color:#334155;vertical-align:middle;}
+  .dtbl td:first-child{text-align:left;font-weight:700;color:#0f172a;white-space:nowrap;}
+  .dtbl td .n{display:block;font-size:9px;font-weight:400;color:#94a3b8;line-height:1.25;}
+  .on{color:#2563eb;font-weight:700;}
+  .cond{color:#15803d;font-weight:700;}
+  .offx{color:#a0aab0;font-weight:700;}
+  .qq{color:#b45309;font-weight:700;}
   .csvgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
   .csvbtn{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:#fff;}
   .csvbtn .ct{font-size:11px;font-weight:700;color:#334155;}
@@ -35,6 +46,26 @@
   .mk-panel .ck.warn{color:#92400e;background:#fffbeb;border-color:#fde68a;}
   .mk-panel .ck.bad{color:#991b1b;background:#fef2f2;border-color:#fecaca;}
   .mk-panel .ck.na{color:#475569;background:#f8fafc;border-color:#e2e8f0;}
+  /* 집행 명세 — 거래 헤더 + 이전 명세 블록 (2026-09-21 개편) */
+  .mk-panel .kv.spec{grid-template-columns:96px 1fr;}
+  .mk-panel .kv.spec .sub{display:block;margin-top:1px;color:#8a97a8;font-size:9px;line-height:1.45;}
+  .mk-panel .xblk{border:1px solid #e2e8f0;border-radius:7px;padding:5px 8px 6px;margin-top:5px;background:#fff;}
+  .mk-panel .xblk.cur{border-color:#bfdbfe;background:#f5f8ff;}
+  .mk-panel .xblk .xh{font-family:var(--font);font-size:10px;font-weight:800;color:#0f172a;padding-bottom:4px;border-bottom:1px dashed #e2e8f0;margin-bottom:4px;}
+  .mk-panel .xblk .xh .ord{font-family:ui-monospace,Consolas,monospace;color:#1d4ed8;}
+  .mk-panel .xblk .xh .pt{font-weight:600;color:#64748b;margin-left:8px;}
+  .mk-panel .xblk .xkv{display:grid;grid-template-columns:96px 1fr;gap:2px 10px;font-family:var(--font);font-size:9.5px;color:#1e293b;line-height:1.5;}
+  .mk-panel .xblk .xkv .k{color:#64748b;font-weight:700;white-space:nowrap;}
+  .mk-panel .xblk .xkv .v{min-width:0;word-break:break-all;}
+  .mk-panel .xblk .xkv .ad{font-family:ui-monospace,Consolas,monospace;color:#0f172a;}
+  .mk-panel .xblk .xkv .lb{color:#64748b;}
+  .mk-panel .xblk .xkv b{font-family:ui-monospace,Consolas,monospace;color:#0f172a;}
+  .mk-panel .dsrv{color:#7c3aed;font-weight:700;}
+  .mk-panel .cust{color:#1d4ed8;font-weight:700;}
+  .mk-panel .specnote{font-family:var(--font);font-size:9px;color:#64748b;margin-top:4px;line-height:1.55;}
+  .mk-panel .actbar{margin-top:8px;padding-top:7px;border-top:1px solid #e2e8f0;}
+  .mk-panel .actbar .albl{font-family:var(--font);font-size:9px;font-weight:700;color:#64748b;margin-bottom:3px;}
+  .mk-panel .txin{display:inline-block;font-family:ui-monospace,Consolas,monospace;font-size:9px;color:#94a3b8;border:1px dashed #cbd5e1;border-radius:6px;padding:3px 10px;min-width:330px;}
 </style>
 </head>
 <body data-follow-panel="off">
@@ -102,9 +133,9 @@
                   <div class="kv">
                     <span class="k">건</span><span class="v"><span class="id">EXC-20260902-0001</span> · ORG-A(가입자 K) · 수락 2026-09-02 10:12</span>
                     <span class="k">교환</span><span class="v">보내는 <b>900 USDC</b> → 받는 <b>899.73 USDT</b> · 확정 비율 0.9997 USDT/USDC · 스프레드 0.10% · 환산 1,215,000원</span>
-                    <span class="k">예상 가스비</span><span class="v"><b>0.0021 ETH</b> ≈ 8,900원 → 6.59 USDT → 예상 기준 실수령 <b>893.14 USDT</b><br><span class="sub">참고 안내 · 받는 수량에서 차감 · 실제 차감액은 이전 후 확정</span></span>
+                    <span class="k">예상 가스비</span><span class="v">고객 부담 <b>0.0021 ETH</b> ≈ 8,900원 <span class="sub">입고 1회분 · ORG-A 수탁 지갑 ETH로 직접 지불</span><br>DSRV 부담 <b>0.0040 ETH</b> ≈ 16,900원 <span class="sub">출고 + 수수료 2건 · 교환 재고 지갑 ETH</span><br><span class="sub">받는 수량에서 차감하지 않는다 — 고객 실수령 <b>899.73 USDT</b> 전액(2026-09-21 개정)</span></span>
                     <span class="k">자동검증</span><span class="v"><span class="ck ok">건별 한도 1,215,000 ≤ 1,500,000</span><span class="ck ok">교환 재고 USDT 충족</span><span class="ck ok">기관 상태 02 활성</span><span class="ck ok">BLF 정상</span><span class="ck ok">KYT 정상</span><span class="ck bad">이상거래 룰 R-07 자전 의심</span><br><span class="sub">BLF·KYT는 커스터디 AML 결과값 참조 · 건별 한도는 가스비 미포함 · 불량 항목이 있어도 자동 거절하지 않고 에스컬레이션으로 올린다</span></span>
-                    <span class="k">이전 계획</span><span class="v">승인 시 ②에 콜드 이전 2건 생성 — 입고 ORG-A 수탁 지갑 → 교환 재고 지갑 <b>900 USDC</b> · 출고 교환 재고 지갑 → ORG-A 수탁 지갑 <b>893.14 USDT</b>(가스비 차감 후)</span>
+                    <span class="k">이전 계획</span><span class="v">승인 시 ②에 콜드 이전 <b>3건</b> 생성 — 1/3 입고 ORG-A 수탁 → 교환 재고 <b>900 USDC</b> · 2/3 출고 교환 재고 → ORG-A 수탁 <b>899.73 USDT</b>(차감 없음) · 3/3 수수료 교환 재고 → 운영 지갑 <b>0.90 USDC</b> <span class="sub">고객이 보낸 자산 × 스프레드 0.10%(900 × 0.10%) · 고객 화면 미표시 · 2026-09-28(37)②</span></span>
                     <span class="k">업무 상태</span><span class="v">승인 대기 · 에스컬레이션</span>
                   </div>
                   <div class="hist">처리 이력 — 접수 <b>09-02 10:12</b> · 최초 생성 <b>10:20</b> 이상거래 룰 적중으로 에스컬레이션</div>
@@ -114,7 +145,7 @@
             <tr class="mk-row" data-exp="t2">
               <td><span class="mk-caret">▶</span><strong>T2</strong> 마목 확정</td>
               <td class="mono">ORG-A ↔ ORG-B<br><span style="font-size:9.5px;color:#94a3b8;">BRK-20260902-0001</span></td>
-              <td class="mono">800 USDT ↔ 798.40 USDC<br><span style="font-size:9.5px;color:#94a3b8;">수수료 8.00 USDT / 7.98 USDC · 각자 1%</span></td>
+              <td class="mono">800 USDT ↔ 798.40 USDC<br><span style="font-size:9.5px;color:#94a3b8;">수수료 8.00 USDT / 7.98 USDC · 각자 받는 자산의 1%</span></td>
               <td><span class="sev mid">에스컬레이션</span><br><span style="font-size:9.5px;color:#94a3b8;">신청자 KYT 주의</span></td>
               <td>
                 <div class="item-area" data-highlight="2" style="position:relative;display:inline-block;padding:3px;border-radius:8px;margin:2px 10px 2px 0;"><div class="pin" data-idx="2" style="top:-10px;right:-10px;">3</div><span class="act">승인</span></div>
@@ -129,10 +160,10 @@
                   <div class="kv">
                     <span class="k">건</span><span class="v"><span class="id">BRK-20260902-0001</span> · 게시자 ORG-A(가입자 K) ↔ 신청자 ORG-B(가입자 M) · 수락 2026-09-02 10:31</span>
                     <span class="k">교환</span><span class="v">게시자 보내는 <b>800 USDT</b> / 신청자 보내는 <b>798.40 USDC</b> · 비율 0.9980 USDC/USDT · 환산 1,080,000 / 1,077,840원</span>
-                    <span class="k">수수료</span><span class="v">게시자 <b>8.00 USDT</b> · 신청자 <b>7.98 USDC</b> <span class="sub">각자 보내는 자산의 1% · <b>예치 수량에 포함해서</b> 에스크로 전용지갑에 넣고, 인도할 때 빼고 준다. 에스크로에 남는 수수료는 정책 주기 스윕으로 운영 지갑에 옮긴다</span></span>
-                    <span class="k">예상 가스비</span><span class="v">양측 각 <b>0.0042 ETH</b> ≈ 17,800원 → 13.18 USDC / 13.18 USDT<br><span class="sub">예치 1건 + 인도 1건 2회분 · 각자 받는 수량(인도)에서 차감 · 실제 차감액은 인도 후 확정</span></span>
-                    <span class="k">자동검증</span><span class="v"><span class="ck ok">건별 한도 양측 ≤ 1,500,000원</span><span class="ck ok">양측 잔고(수수료 포함) 확보</span><span class="ck ok">양측 기관 상태 02 활성</span><span class="ck ok">BLF 양측 정상</span><span class="ck warn">KYT 신청자 주의</span><span class="ck ok">이상거래 룰 정상</span></span>
-                    <span class="k">이전 계획</span><span class="v">승인 시 ②에 예치 2건 생성 — ORG-A 수탁 → 에스크로 <b>808 USDT</b>(800 + 수수료 8) · ORG-B 수탁 → 에스크로 <b>806.38 USDC</b>(798.40 + 수수료 7.98) · 양건 예치 확인 시 인도 2건 자동 생성(수수료·가스 차감 후 수량)</span>
+                    <span class="k">수수료</span><span class="v">게시자 <b>7.98 USDC</b> · 신청자 <b>8.00 USDT</b> <span class="sub">각자 <b>받는 자산 수량의 1%</b> · 예치는 거래 수량만 넣고 <b>인도할 때 1%를 빼고</b> 준다. 뺀 수수료는 각 인도 완료 후 거래별 수수료 이전(5/6·6/6)으로 운영 지갑에 옮긴다(2026-09-21(36) · 2026-09-28(37)①)</span></span>
+                    <span class="k">예상 가스비</span><span class="v">고객 부담 양측 각 <b>0.0021 ETH</b> ≈ 8,900원 <span class="sub">자기 예치 1회분 · 각자 수탁 지갑 ETH로 직접 지불</span><br>DSRV 부담 <b>0.0080 ETH</b> ≈ 33,900원 <span class="sub">인도 2건 + 수수료 2건 · 에스크로 지갑 ETH</span><br><span class="sub">인도 수량에서 가스비를 차감하지 않는다 — 각자 상대방 거래 수량에서 수수료 1%만 빠진 수량을 받는다(2026-09-21(36) · 2026-09-28(37)①)</span></span>
+                    <span class="k">자동검증</span><span class="v"><span class="ck ok">건별 한도 양측 ≤ 1,500,000원</span><span class="ck ok">양측 잔고(거래 수량) 확보</span><span class="ck ok">양측 기관 상태 02 활성</span><span class="ck ok">BLF 양측 정상</span><span class="ck warn">KYT 신청자 주의</span><span class="ck ok">이상거래 룰 정상</span></span>
+                    <span class="k">이전 계획</span><span class="v">승인 시 ②에 콜드 이전 <b>6건</b> 생성 — 1/6·2/6 예치 ORG-A 수탁 → 에스크로 <b>800 USDT</b> · ORG-B 수탁 → 에스크로 <b>798.40 USDC</b>(수수료 미포함) · <b>양건 예치 확인 시</b> 3/6·4/6 인도 자동 활성(ORG-B에 <b>792.00 USDT</b> · ORG-A에 <b>790.42 USDC</b> — 받는 자산에서 수수료 1%만 공제, 가스 차감 없음) · 각 인도 완료 후 5/6·6/6 수수료 이전(<b>8.00 USDT</b> · <b>7.98 USDC</b> → 운영 지갑)</span>
                     <span class="k">업무 상태</span><span class="v">확인 대기 · 에스컬레이션</span>
                   </div>
                   <div class="hist">처리 이력 — 접수 <b>09-02 10:31</b></div>
@@ -149,111 +180,226 @@
         <div class="zone-title" style="margin-bottom:2px;">② 집행 대기</div>
         <div class="item-area" data-highlight="6" style="position:relative;padding:4px 6px;border-radius:8px;margin-bottom:6px;">
           <div class="pin" data-idx="6" style="top:-8px;right:-8px;">7</div>
-          <div style="font-size:10px;color:#94a3b8;">행 하나 = 콜드 이전 1건. 행을 펼쳐 <strong>명세를 확인</strong>하고 같은 내용을 <strong>[명세 Excel]</strong>로 내려받아 콜드 2인 서명자에게 넘긴다. 서명·집행 후 txhash를 입력하고 완료한다. <strong>온체인 대사가 일치할 때만 완료된다.</strong> 정산 배치 1영업일 3회.</div>
+          <div style="font-size:10px;color:#94a3b8;">행 하나 = 거래 1건(2026-09-28(37)③). 행을 클릭하면 <strong>그 거래의 상세(집행 명세 1장)</strong>가 하단에 열린다 — 거래 헤더 ⓐ + 이전 명세 ⓑ + 처리 영역 순서다. 같은 내용을 <strong>[명세 Excel]</strong>로 내려받아 콜드 2인 서명자에게 넘긴다. <strong>txhash 입력과 [완료]는 이전 명세 줄마다</strong>, 보류 · 이전 중지 · AML 이슈 미집행은 상세 하단 처리 영역에서 한다. <strong>온체인 대사가 일치할 때만 완료된다.</strong> 정산 배치 1영업일 3회.<br><span style="color:#b45309;">※ 목업은 설명을 위해 나목·마목 상세를 동시에 펼쳐 두었다. 실제로는 동시 1개만 열린다.</span></div>
         </div>
         <table class="tbl">
-          <thead><tr><th style="width:120px">유형</th><th style="width:180px">이전</th><th>내용</th><th style="width:110px">단계</th><th style="width:260px">집행 결과 · 처리</th></tr></thead>
+          <thead><tr><th style="width:118px">유형</th><th style="width:176px">이전</th><th>내용</th><th style="width:158px">단계</th><th style="width:180px">집행 결과</th></tr></thead>
           <tbody>
-            <tr class="mk-row" data-exp="e1">
-              <td><span class="mk-caret">▶</span><strong>T1</strong> 나목 입고</td>
-              <td class="mono">ORG-A 수탁 → 교환 재고<br><span style="font-size:9.5px;color:#94a3b8;">EXC-20260901-0004</span></td>
-              <td class="mono">이체 <strong>0.3 ETH</strong><br><span style="font-size:9.5px;color:#94a3b8;">고객이 보내는 자산 · 차감 없음</span></td>
-              <td><span class="chip">입고 ● 출고 ○</span></td>
-              <td>
-                <div class="item-area" data-highlight="8" style="position:relative;display:inline-block;padding:3px;border-radius:8px;margin:2px 8px 2px 0;"><div class="pin" data-idx="8" style="top:-10px;right:-10px;">9</div><span style="display:inline-block;font-size:9.5px;color:#94a3b8;border:1px dashed #cbd5e1;border-radius:6px;padding:2px 8px;">txhash 0x…</span></div>
-                <div class="item-area" data-highlight="9" style="position:relative;display:inline-block;padding:3px;border-radius:8px;margin:2px 8px 2px 0;"><div class="pin" data-idx="9" style="top:-10px;right:-10px;">10</div><span class="act warn">AML 이슈 미집행</span></div>
-                <div class="item-area" data-highlight="10" style="position:relative;display:inline-block;padding:3px;border-radius:8px;margin:2px 8px 2px 0;"><div class="pin" data-idx="10" style="top:-10px;right:-10px;">11</div><span class="act" style="opacity:.45;">완료</span></div>
-              </td>
+            <tr class="mk-row open" data-exp="e1">
+              <td><span class="mk-caret">▼</span><strong>T1</strong> 나목 교환</td>
+              <td class="mono">ORG-A 수탁 ↔ 교환 재고<br><span style="font-size:9.5px;color:#94a3b8;">EXC-20260901-0004 · 이전 3건</span></td>
+              <td class="mono"><strong>0.3 ETH → 955.20 USDC</strong><br><span style="font-size:9.5px;color:#94a3b8;">수수료 0.0003 ETH · 가스비 차감 없음</span></td>
+              <td><span class="chip">입고 ● 출고 ○ 수수료 ○</span></td>
+              <td><span style="font-size:9.5px;color:#94a3b8;">1/3 txhash 미입력 · 집행 대기</span></td>
             </tr>
-            <tr class="mk-exp" data-exp="e1" hidden>
+            <tr class="mk-exp" data-exp="e1">
               <td colspan="5">
                 <div class="mk-panel">
-                  <div class="ph2">▼ 확장 패널 — 집행 명세 (나목 입고)</div>
-                  <div class="kv">
-                    <span class="k">건</span><span class="v"><span class="id">EXC-20260901-0004</span> · 입고 1/2 · 승인 09-01 15:10 DSRV-OPS-01</span>
-                    <span class="k">출금 지갑</span><span class="v"><span class="id">0x2b7d…1c47</span> <span class="sub">ORG-A 수탁 지갑(콜드)</span></span>
-                    <span class="k">수신 주소</span><span class="v"><span class="id">0x91c4e7a2d5f08b36c1a9d7e4f2b0c8a5d3e6f1b9</span> <span class="sub">나목 교환 재고 지갑 RSV-01 · 전문 · 소문자</span></span>
-                    <span class="k">자산·수량</span><span class="v">ETH · 이체 수량 <b>0.3</b></span>
+                  <div class="ph2">▼ 거래 상세 — 집행 명세 <strong>1장 = 거래 1건</strong> (현재 집행 대상 = 1/3 입고)</div>
+
+                  <div class="ph2" style="margin-top:5px;color:#475569;font-weight:700;">ⓐ 거래 헤더</div>
+                  <div class="kv spec">
+                    <span class="k">거래</span><span class="v"><span class="id">EXC-20260901-0004</span> · <b>나목 교환</b> · 승인 09-01 15:10 <span class="id">DSRV-OPS-01</span></span>
+                    <span class="k">요청 기관</span><span class="v"><span class="id">L-260915-0100</span> A자산운용 <span class="sub">상대방 = DSRV 자기재고, 상대 기관 없음</span></span>
+                    <span class="k">교환</span><span class="v">ETH → USDC · 확정 비율 <b>3,184.01</b> USDC/ETH <span class="sub">외부지표 기준가 3,187.20 − 스프레드 0.10% 내재</span></span>
+                    <span class="k">DSRV 수수료</span><span class="v">ETH <b>0.0003</b> <span class="sub">입고 0.3 ETH × 스프레드 0.10% · 2026-09-28(37)②</span> → 운영 지갑 <span class="id">0x6f2a8d53c1e04b97a2f5d8c3b6e1904af72c5d38</span></span>
+                    <span class="k">가스비</span><span class="v"><span class="cust">고객 부담 = 1/3 입고 1회분</span>(고객 수탁 지갑 ETH) <span class="sub">2/3·3/3은 DSRV 부담 · 받는 수량에서 차감하지 않는다</span></span>
+                    <span class="k">KRW 환산</span><span class="v">요청 시점 <b>1,271,000원</b> <span class="sub">건별 한도 1,500,000원 이하</span></span>
                     <span class="k">명세 무결성</span><span class="v">명세 해시 <span class="id">sha256:9f1c…a4e0</span> · 승인자 <span class="id">DSRV-OPS-01</span> · 생성 09-01 15:10</span>
-                    <span class="k">다음</span><span class="v">입고 완료 후 출고(교환 재고 → ORG-A 수탁 <b>948.61 USDC</b> · 955.20 − 가스비 6.59)를 집행한다. 두 건이 모두 완료되면 고객 화면 EXC-04 '완료'. <b>출고가 실패로 종결되는 경우는 없다</b> — 대사 불일치는 정정·재집행으로 완결한다</span>
                   </div>
+
+                  <div class="ph2" style="margin-top:8px;color:#475569;font-weight:700;">ⓑ 이전 명세 — 3건</div>
+                  <div class="xblk cur">
+                    <div class="xh"><span class="ord">1/3</span> 입고<span class="pt">당사자: <span class="cust">고객</span></span></div>
+                    <div class="xkv">
+                      <span class="k">보내는 주소</span><span class="v"><span class="ad">0x2b7d9e41a0c6f3b58d1e7a94c2f0b6d83e5a1c47</span> <span class="lb">(ORG-A 수탁·콜드)</span></span>
+                      <span class="k">보내는 토큰</span><span class="v">ETH</span>
+                      <span class="k">토큰 주소</span><span class="v"><span class="lb">네이티브 — 컨트랙트 주소 없음</span></span>
+                      <span class="k">토큰량</span><span class="v"><b>0.3</b></span>
+                      <span class="k">받는 주소</span><span class="v"><span class="ad">0x91c4e7a2d5f08b36c1a9d7e4f2b0c8a5d3e6f1b9</span> <span class="lb">(교환 재고 RSV-01)</span></span>
+                      <span class="k">받는 토큰·량</span><span class="v">ETH / <b>0.3</b></span>
+                      <span class="k">가스비(부담)</span><span class="v">0.0004 ETH ≈ 1,700원 · <span class="cust">고객</span></span>
+                      <span class="k">선행 조건</span><span class="v">없음 — 즉시 활성</span>
+                      <span class="k">txhash</span><span class="v"><div class="item-area" data-highlight="8" style="position:relative;display:inline-block;padding:3px;border-radius:8px;margin:2px 8px 2px 0;"><div class="pin" data-idx="8" style="top:-10px;right:-10px;">9</div><span class="txin">txhash 0x…</span></div><div class="item-area" data-highlight="10" style="position:relative;display:inline-block;padding:3px;border-radius:8px;margin:2px 0;"><div class="pin" data-idx="10" style="top:-10px;right:-10px;">11</div><span class="act" style="opacity:.45;">완료</span></div></span>
+                    </div>
+                  </div>
+                  <div class="xblk">
+                    <div class="xh"><span class="ord">2/3</span> 출고<span class="pt">당사자: <span class="dsrv">DSRV</span></span></div>
+                    <div class="xkv">
+                      <span class="k">보내는 주소</span><span class="v"><span class="ad">0x91c4e7a2d5f08b36c1a9d7e4f2b0c8a5d3e6f1b9</span> <span class="lb">(교환 재고 RSV-01)</span></span>
+                      <span class="k">보내는 토큰</span><span class="v">USDC</span>
+                      <span class="k">토큰 주소</span><span class="v"><span class="ad">0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48</span></span>
+                      <span class="k">토큰량</span><span class="v"><b>955.20</b></span>
+                      <span class="k">받는 주소</span><span class="v"><span class="ad">0x2b7d9e41a0c6f3b58d1e7a94c2f0b6d83e5a1c47</span> <span class="lb">(ORG-A 수탁·콜드)</span></span>
+                      <span class="k">받는 토큰·량</span><span class="v">USDC / <b>955.20</b></span>
+                      <span class="k">가스비(부담)</span><span class="v">0.0021 ETH ≈ 8,900원 · <span class="dsrv">DSRV</span></span>
+                      <span class="k">선행 조건</span><span class="v">1/3 입고 완료 · 대사 일치</span>
+                      <span class="k">txhash</span><span class="v"><span class="txin" style="opacity:.45;">선행 이전 완료 후</span> <span class="act" style="opacity:.45;">완료</span></span>
+                    </div>
+                  </div>
+                  <div class="xblk">
+                    <div class="xh"><span class="ord">3/3</span> 수수료<span class="pt">당사자: <span class="dsrv">DSRV</span></span></div>
+                    <div class="xkv">
+                      <span class="k">보내는 주소</span><span class="v"><span class="ad">0x91c4e7a2d5f08b36c1a9d7e4f2b0c8a5d3e6f1b9</span> <span class="lb">(교환 재고 RSV-01)</span></span>
+                      <span class="k">보내는 토큰</span><span class="v">ETH</span>
+                      <span class="k">토큰 주소</span><span class="v"><span class="lb">네이티브 — 컨트랙트 주소 없음</span></span>
+                      <span class="k">토큰량</span><span class="v"><b>0.0003</b> <span class="lb">(입고 0.3 × 0.10%)</span></span>
+                      <span class="k">받는 주소</span><span class="v"><span class="ad">0x6f2a8d53c1e04b97a2f5d8c3b6e1904af72c5d38</span> <span class="lb">(운영 지갑 OPS-FEE-01)</span></span>
+                      <span class="k">받는 토큰·량</span><span class="v">ETH / <b>0.0003</b></span>
+                      <span class="k">가스비(부담)</span><span class="v">0.0019 ETH ≈ 8,100원 · <span class="dsrv">DSRV</span></span>
+                      <span class="k">선행 조건</span><span class="v">2/3 출고 완료</span>
+                      <span class="k">txhash</span><span class="v"><span class="txin" style="opacity:.45;">선행 이전 완료 후</span> <span class="act" style="opacity:.45;">완료</span></span>
+                    </div>
+                  </div>
+
+                  <div class="specnote">· 이 이전은 <strong>DSRV 수입 회수</strong>다. 고객 자산이 아니라 교환 재고 지갑에 들어온 입고 자산 중 스프레드 상당분(입고 수량 × {정책값 0.10%})을 운영 지갑으로 옮긴다.<br>· 고객 화면에는 표시되지 않는다 — 고객에게 고지된 값은 확정 비율 하나다.<br>· 구분회계에서 <strong>나목 스프레드 수익</strong> 계정으로 잡고 마목 중개수수료 수익과 분리한다.</div>
                   <div style="margin:8px 0 2px;"><span class="act">명세 Excel</span></div>
-                  <div class="hist">처리 이력 — <b>09-01 15:10</b> 승인(DSRV-OPS-01) · 입고·출고 2건 생성</div>
+
+                  <div class="actbar">
+                    <div class="albl">처리 — 거래 단위 <span style="font-family:ui-monospace,Consolas,monospace;color:#1d4ed8;">EXC-20260901-0004</span></div>
+                    <div style="margin-top:3px;">
+                      <div class="item-area" data-highlight="10" style="position:relative;display:inline-block;padding:3px;border-radius:8px;margin:2px 10px 2px 0;"><span class="act">보류</span></div>
+                      <div class="item-area" data-highlight="11" style="position:relative;display:inline-block;padding:3px;border-radius:8px;margin:2px 10px 2px 0;"><span class="act warn">이전 중지</span></div>
+                      <div class="item-area" data-highlight="9" style="position:relative;display:inline-block;padding:3px;border-radius:8px;margin:2px 10px 2px 0;"><div class="pin" data-idx="9" style="top:-10px;right:-10px;">10</div><span class="act warn">AML 이슈 미집행</span></div>
+                    </div>
+                  </div>
+                  <div class="hist">처리 이력 — <b>09-01 15:10</b> 승인(DSRV-OPS-01) · 이전 3건 생성</div>
                 </div>
               </td>
             </tr>
-            <tr class="mk-row" data-exp="e2">
-              <td><span class="mk-caret">▶</span><strong>T1</strong> 나목 출고</td>
-              <td class="mono">교환 재고 → ORG-A 수탁<br><span style="font-size:9.5px;color:#94a3b8;">EXC-20260901-0004</span></td>
-              <td class="mono">이체 <strong>948.61 USDC</strong><br><span style="font-size:9.5px;color:#94a3b8;">받는 수량 955.20 − 예상 가스비 6.59</span></td>
-              <td><span class="chip">입고 ○ 출고 ●</span></td>
-              <td><span style="display:inline-block;font-size:9.5px;color:#94a3b8;border:1px dashed #e2e8f0;border-radius:6px;padding:2px 8px;margin-right:8px;">입고 완료 후</span><span class="act warn" style="margin-right:8px;">AML 이슈 미집행</span><span class="act" style="opacity:.45;">완료</span></td>
+            <tr class="mk-row open" data-exp="e5">
+              <td><span class="mk-caret">▼</span><strong>T2</strong> 마목 중개</td>
+              <td class="mono">ORG-C · ORG-D 수탁 ↔ 에스크로<br><span style="font-size:9.5px;color:#94a3b8;">BRK-20260901-0002 · 이전 6건</span></td>
+              <td class="mono"><strong>500 USDT ↔ 499.00 USDC</strong><br><span style="font-size:9.5px;color:#94a3b8;">수수료 5.00 USDT + 4.99 USDC · 인도 시 공제</span></td>
+              <td><span class="chip">예치 ● 인도 ○ 수수료 ○</span></td>
+              <td><span style="font-size:9.5px;color:#94a3b8;">1/6 txhash 미입력 · </span><span style="display:inline-block;font-size:9.5px;color:#166534;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:2px 8px;">2/6 ✓ 명세 일치</span></td>
             </tr>
-            <tr class="mk-exp" data-exp="e2" hidden>
+            <tr class="mk-exp" data-exp="e5">
               <td colspan="5">
                 <div class="mk-panel">
-                  <div class="ph2">▼ 확장 패널 — 집행 명세 (나목 출고)</div>
-                  <div class="kv">
-                    <span class="k">건</span><span class="v"><span class="id">EXC-20260901-0004</span> · 출고 2/2 · 입고 완료가 선행</span>
-                    <span class="k">출금 지갑</span><span class="v"><span class="id">RSV-01</span> <span class="sub">나목 교환 재고 지갑(콜드 · 자사 소유)</span></span>
-                    <span class="k">수신 주소</span><span class="v"><span class="id">0x2b7d9e41a0c6f3b58d1e7a94c2f0b6d83e5a1c47</span> <span class="sub">ORG-A 수탁 지갑</span></span>
-                    <span class="k">자산·수량</span><span class="v">USDC · 받는 수량 <b>955.20</b> − 예상 가스비 <b>6.59</b>(0.0021 ETH ≈ 8,900원) = 이체 수량 <b>948.61</b> <span class="sub">콜드에 지시하는 값 · 실발생 가스비는 영수증 값으로 기록</span></span>
-                    <span class="k">집행 전 심사</span><span class="v">커스터디팀 <span class="sub">블랙리스트·KYT 심사에서 문제가 있으면 서명하지 않고 [AML 이슈 미집행]을 누른다 · 통과하면 통지 없이 서명·집행 후 txhash를 입력한다</span></span>
-                    <span class="k">완료 조건</span><span class="v">txhash의 <b>발신 지갑 · 수신 주소 · 자산 · 수량</b> 4항목이 명세와 일치할 때만 [완료] 활성 · 불일치면 ④ 집행 대사 불일치로 회송 · <span class="sub">명세 Excel 다운로드 여부는 완료를 막지 않는다</span></span>
+                  <div class="ph2">▼ 거래 상세 — 집행 명세 <strong>1장 = 거래 1건</strong> (강조 = 2/6 예치 · 대사 완료)</div>
+
+                  <div class="ph2" style="margin-top:5px;color:#475569;font-weight:700;">ⓐ 거래 헤더</div>
+                  <div class="kv spec">
+                    <span class="k">거래</span><span class="v"><span class="id">BRK-20260901-0002</span> · <b>마목 중개</b> · 승인 09-01 16:40 <span class="id">DSRV-OPS-01</span></span>
+                    <span class="k">당사자</span><span class="v">게시자 <span class="id">L-260915-0100</span> A자산운용 ↔ 신청자 <span class="id">L-260915-0117</span> B인베스트먼트 <span class="sub">DSRV는 거래 당사자가 아니다(약관 제3조 3호) — 예치·인도만 집행한다</span></span>
+                    <span class="k">교환 비율</span><span class="v">USDT → USDC <b>0.9980</b> <span class="sub">게시 조건 값 · DSRV가 산정하지 않음</span></span>
+                    <span class="k">수량 분해</span><span class="v">게시자 거래 <b>500</b> USDT → 예치 <b>500</b> → 신청자에게 인도 <b>495.00</b> USDT(－수수료 5.00)<br>신청자 거래 <b>499.00</b> USDC → 예치 <b>499.00</b> → 게시자에게 인도 <b>494.01</b> USDC(－수수료 4.99) <span class="sub">각자 받는 자산의 1%를 인도 시 공제 · 2026-09-28(37)①</span></span>
+                    <span class="k">DSRV 수수료</span><span class="v">USDT <b>5.00</b>(신청자 부담) + USDC <b>4.99</b>(게시자 부담) → 운영 지갑 <span class="id">0x6f2a8d53c1e04b97a2f5d8c3b6e1904af72c5d38</span></span>
+                    <span class="k">이전 건수</span><span class="v"><b>6</b>건 · 예치 2 → 인도 2 → 수수료 2</span>
+                    <span class="k">KRW 환산</span><span class="v">게시자 <b>675,000원</b> · 신청자 <b>673,650원</b> <span class="sub">각자 보내는 수량 기준 · 건별 한도 이하</span></span>
+                    <span class="k">명세 무결성</span><span class="v">명세 해시 <span class="id">sha256:41b8…7d2c</span> · 승인자 <span class="id">DSRV-OPS-01</span> · 생성 09-01 16:40</span>
                   </div>
-                  <div class="hist">처리 이력 — <b>09-01 15:10</b> 승인(DSRV-OPS-01)</div>
-                </div>
-              </td>
-            </tr>
-            <tr class="mk-row" data-exp="e3">
-              <td><span class="mk-caret">▶</span><strong>T2</strong> 마목 예치</td>
-              <td class="mono">ORG-C 수탁 → 에스크로<br><span style="font-size:9.5px;color:#94a3b8;">BRK-20260901-0002</span></td>
-              <td class="mono">이체 <strong>505 USDT</strong><br><span style="font-size:9.5px;color:#94a3b8;">거래 500 + 수수료 1% 5 · 가스비는 인도에서 차감</span></td>
-              <td><span class="chip">예치 ● 인도 ○</span></td>
-              <td>
-                <span style="display:inline-block;font-size:9.5px;color:#94a3b8;border:1px dashed #cbd5e1;border-radius:6px;padding:2px 8px;margin-right:8px;">txhash 0x…</span><span class="act warn" style="margin-right:8px;">AML 이슈 미집행</span><span class="act" style="opacity:.45;">완료</span>
-                <div class="item-area" data-highlight="11" style="position:relative;display:inline-block;padding:3px;border-radius:8px;margin:2px 8px 2px 0;"><div class="pin" data-idx="11" style="top:-10px;right:-10px;">12</div><span class="act warn">이전 중지</span></div>
-              </td>
-            </tr>
-            <tr class="mk-exp" data-exp="e3" hidden>
-              <td colspan="5">
-                <div class="mk-panel">
-                  <div class="ph2">▼ 확장 패널 — 집행 명세 (마목 예치 1/2)</div>
-                  <div class="kv">
-                    <span class="k">건</span><span class="v"><span class="id">BRK-20260901-0002</span> · 예치 1/2(게시자 ORG-C) · 승인 09-01 16:40 DSRV-OPS-01</span>
-                    <span class="k">출금 지갑</span><span class="v"><span class="id">0x4d19…c7e3</span> <span class="sub">ORG-C 수탁 지갑</span></span>
-                    <span class="k">수신 주소</span><span class="v"><span class="id">0xe5c0a1f7b93d2e46c8a0f1b7d3e9c2a5f4b6d801</span> <span class="sub">에스크로 전용지갑 · 고객 자산 · 콜드</span></span>
-                    <span class="k">자산·수량</span><span class="v">USDT · 거래 수량 500 + 중개수수료 1% <b>5</b> = 이체 수량 <b>505</b> <span class="sub">수수료를 포함해 에스크로에 넣고, 인도할 때 수수료를 뺀 수량만 준다</span></span>
-                    <span class="k">다음</span><span class="v">상대(ORG-D) 예치도 완료되면 인도 2건이 자동 생성된다(별도 승인 없음). 인도 완료 후 에스크로에 남는 수수료 5 USDT + 4.99 USDC는 정책 주기 스윕 행으로 운영 지갑에 옮긴다</span>
+
+                  <div class="ph2" style="margin-top:8px;color:#475569;font-weight:700;">ⓑ 이전 명세 — 6건</div>
+                  <div class="xblk">
+                    <div class="xh"><span class="ord">1/6</span> 예치<span class="pt">당사자: <span class="cust">게시자 A자산운용</span></span></div>
+                    <div class="xkv">
+                      <span class="k">보내는 주소</span><span class="v"><span class="ad">0x4d19a7c208e3b5f610d947c2a8be035f19d0c7e3</span> <span class="lb">(ORG-C 수탁·콜드)</span></span>
+                      <span class="k">보내는 토큰</span><span class="v">USDT</span>
+                      <span class="k">토큰 주소</span><span class="v"><span class="ad">0xdac17f958d2ee523a2206206994597c13d831ec7</span></span>
+                      <span class="k">토큰량</span><span class="v"><b>500</b> <span class="lb">(거래 수량 · 수수료 미포함)</span></span>
+                      <span class="k">받는 주소</span><span class="v"><span class="ad">0xe5c0a1f7b93d2e46c8a0f1b7d3e9c2a5f4b6d801</span> <span class="lb">(에스크로 전용지갑)</span></span>
+                      <span class="k">받는 토큰·량</span><span class="v">USDT / <b>500</b></span>
+                      <span class="k">가스비(부담)</span><span class="v">0.0021 ETH ≈ 8,900원 · <span class="cust">게시자</span></span>
+                      <span class="k">선행 조건</span><span class="v">없음 — 즉시 활성</span>
+                      <span class="k">txhash</span><span class="v"><span class="txin">txhash 0x…</span> <span class="act" style="opacity:.45;">완료</span></span>
+                    </div>
                   </div>
-                  <div class="hist">처리 이력 — <b>09-01 16:40</b> 승인(DSRV-OPS-01) · 예치 2건 생성</div>
-                </div>
-              </td>
-            </tr>
-            <tr class="mk-row open" data-exp="e4">
-              <td><span class="mk-caret">▼</span><strong>T2</strong> 마목 예치</td>
-              <td class="mono">ORG-D 수탁 → 에스크로<br><span style="font-size:9.5px;color:#94a3b8;">BRK-20260901-0002</span></td>
-              <td class="mono">이체 <strong>503.99 USDC</strong><br><span style="font-size:9.5px;color:#94a3b8;">거래 499.00 + 수수료 1% 4.99</span></td>
-              <td><span class="chip">예치 ● 인도 ○</span></td>
-              <td><span style="display:inline-block;font-size:9.5px;color:#166534;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:2px 8px;margin-right:8px;">0x7c1e… ✓ 명세 일치</span><span class="act">완료</span><span class="act warn">이전 중지</span></td>
-            </tr>
-            <tr class="mk-exp" data-exp="e4">
-              <td colspan="5">
-                <div class="mk-panel">
-                  <div class="ph2">▼ 확장 패널 — 집행 명세 (마목 예치 2/2 · 대사 완료)</div>
-                  <div class="kv">
-                    <span class="k">건</span><span class="v"><span class="id">BRK-20260901-0002</span> · 예치 2/2(신청자 ORG-D) · 승인 09-01 16:40 DSRV-OPS-01</span>
-                    <span class="k">출금 지갑</span><span class="v"><span class="id">0x8a41…f0b2</span> <span class="sub">ORG-D 수탁 지갑</span></span>
-                    <span class="k">수신 주소</span><span class="v"><span class="id">0xe5c0a1f7b93d2e46c8a0f1b7d3e9c2a5f4b6d801</span> <span class="sub">에스크로 전용지갑</span></span>
-                    <span class="k">자산·수량</span><span class="v">USDC · 거래 수량 499.00 + 중개수수료 1% <b>4.99</b> = 이체 수량 <b>503.99</b></span>
-                    <span class="k">온체인 대사</span><span class="v"><span class="ck ok">발신 지갑 일치</span><span class="ck ok">수신 주소 일치</span><span class="ck ok">자산 USDC 일치</span><span class="ck ok">수량 503.99 일치</span> · 실발생 가스비 <b>0.0019 ETH</b> 기록 → 인도 시 차감</span>
-                    <span class="k">명세 무결성</span><span class="v">명세 해시 <span class="id">sha256:41b8…7d2c</span> · 승인자 <span class="id">DSRV-OPS-01</span></span>
+                  <div class="xblk cur">
+                    <div class="xh"><span class="ord">2/6</span> 예치<span class="pt">당사자: <span class="cust">신청자 B인베스트먼트</span></span></div>
+                    <div class="xkv">
+                      <span class="k">보내는 주소</span><span class="v"><span class="ad">0x8a41e6b30c92d7f5a1e84b06c3d9a715e28cf0b2</span> <span class="lb">(ORG-D 수탁·콜드)</span></span>
+                      <span class="k">보내는 토큰</span><span class="v">USDC</span>
+                      <span class="k">토큰 주소</span><span class="v"><span class="ad">0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48</span></span>
+                      <span class="k">토큰량</span><span class="v"><b>499.00</b> <span class="lb">(거래 수량 · 수수료 미포함)</span></span>
+                      <span class="k">받는 주소</span><span class="v"><span class="ad">0xe5c0a1f7b93d2e46c8a0f1b7d3e9c2a5f4b6d801</span> <span class="lb">(에스크로 전용지갑)</span></span>
+                      <span class="k">받는 토큰·량</span><span class="v">USDC / <b>499.00</b></span>
+                      <span class="k">가스비(부담)</span><span class="v">0.0019 ETH 실발생 · <span class="cust">신청자</span></span>
+                      <span class="k">선행 조건</span><span class="v">없음 — 즉시 활성</span>
+                      <span class="k">txhash</span><span class="v"><span class="txin" style="color:#166534;background:#f0fdf4;border-style:solid;border-color:#bbf7d0;">0x7c1e4b90a2f5…d318 &nbsp;✓ 명세 일치</span> <span class="act">완료</span></span>
+                    </div>
                   </div>
+                  <div class="xblk">
+                    <div class="xh"><span class="ord">3/6</span> 인도<span class="pt">당사자: → <span class="cust">신청자 B인베스트먼트</span></span></div>
+                    <div class="xkv">
+                      <span class="k">보내는 주소</span><span class="v"><span class="ad">0xe5c0a1f7b93d2e46c8a0f1b7d3e9c2a5f4b6d801</span> <span class="lb">(에스크로 전용지갑)</span></span>
+                      <span class="k">보내는 토큰</span><span class="v">USDT</span>
+                      <span class="k">토큰 주소</span><span class="v"><span class="ad">0xdac17f958d2ee523a2206206994597c13d831ec7</span></span>
+                      <span class="k">토큰량</span><span class="v"><b>495.00</b> <span class="lb">(500−수수료 5.00)</span></span>
+                      <span class="k">받는 주소</span><span class="v"><span class="ad">0x8a41e6b30c92d7f5a1e84b06c3d9a715e28cf0b2</span> <span class="lb">(ORG-D 수탁·콜드)</span></span>
+                      <span class="k">받는 토큰·량</span><span class="v">USDT / <b>495.00</b></span>
+                      <span class="k">가스비(부담)</span><span class="v">0.0021 ETH ≈ 8,900원 · <span class="dsrv">DSRV</span></span>
+                      <span class="k">선행 조건</span><span class="v"><strong>양건 예치 확인</strong> — 1/6·2/6 대사 일치</span>
+                      <span class="k">txhash</span><span class="v"><span class="txin" style="opacity:.45;">선행 이전 완료 후</span> <span class="act" style="opacity:.45;">완료</span></span>
+                    </div>
+                  </div>
+                  <div class="xblk">
+                    <div class="xh"><span class="ord">4/6</span> 인도<span class="pt">당사자: → <span class="cust">게시자 A자산운용</span></span></div>
+                    <div class="xkv">
+                      <span class="k">보내는 주소</span><span class="v"><span class="ad">0xe5c0a1f7b93d2e46c8a0f1b7d3e9c2a5f4b6d801</span> <span class="lb">(에스크로 전용지갑)</span></span>
+                      <span class="k">보내는 토큰</span><span class="v">USDC</span>
+                      <span class="k">토큰 주소</span><span class="v"><span class="ad">0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48</span></span>
+                      <span class="k">토큰량</span><span class="v"><b>494.01</b> <span class="lb">(499.00−수수료 4.99)</span></span>
+                      <span class="k">받는 주소</span><span class="v"><span class="ad">0x4d19a7c208e3b5f610d947c2a8be035f19d0c7e3</span> <span class="lb">(ORG-C 수탁·콜드)</span></span>
+                      <span class="k">받는 토큰·량</span><span class="v">USDC / <b>494.01</b></span>
+                      <span class="k">가스비(부담)</span><span class="v">0.0021 ETH ≈ 8,900원 · <span class="dsrv">DSRV</span></span>
+                      <span class="k">선행 조건</span><span class="v"><strong>양건 예치 확인</strong> — 1/6·2/6 대사 일치</span>
+                      <span class="k">txhash</span><span class="v"><span class="txin" style="opacity:.45;">선행 이전 완료 후</span> <span class="act" style="opacity:.45;">완료</span></span>
+                    </div>
+                  </div>
+                  <div class="xblk">
+                    <div class="xh"><span class="ord">5/6</span> 수수료<span class="pt">당사자: <span class="dsrv">DSRV</span> (신청자 부담분 · 받는 USDT의 1%)</span></div>
+                    <div class="xkv">
+                      <span class="k">보내는 주소</span><span class="v"><span class="ad">0xe5c0a1f7b93d2e46c8a0f1b7d3e9c2a5f4b6d801</span> <span class="lb">(에스크로 전용지갑)</span></span>
+                      <span class="k">보내는 토큰</span><span class="v">USDT</span>
+                      <span class="k">토큰 주소</span><span class="v"><span class="ad">0xdac17f958d2ee523a2206206994597c13d831ec7</span></span>
+                      <span class="k">토큰량</span><span class="v"><b>5.00</b></span>
+                      <span class="k">받는 주소</span><span class="v"><span class="ad">0x6f2a8d53c1e04b97a2f5d8c3b6e1904af72c5d38</span> <span class="lb">(운영 지갑 OPS-FEE-01)</span></span>
+                      <span class="k">받는 토큰·량</span><span class="v">USDT / <b>5.00</b></span>
+                      <span class="k">가스비(부담)</span><span class="v">0.0019 ETH ≈ 8,100원 · <span class="dsrv">DSRV</span></span>
+                      <span class="k">선행 조건</span><span class="v">3/6 인도 완료</span>
+                      <span class="k">txhash</span><span class="v"><span class="txin" style="opacity:.45;">선행 이전 완료 후</span> <span class="act" style="opacity:.45;">완료</span></span>
+                    </div>
+                  </div>
+                  <div class="xblk">
+                    <div class="xh"><span class="ord">6/6</span> 수수료<span class="pt">당사자: <span class="dsrv">DSRV</span> (게시자 부담분 · 받는 USDC의 1%)</span></div>
+                    <div class="xkv">
+                      <span class="k">보내는 주소</span><span class="v"><span class="ad">0xe5c0a1f7b93d2e46c8a0f1b7d3e9c2a5f4b6d801</span> <span class="lb">(에스크로 전용지갑)</span></span>
+                      <span class="k">보내는 토큰</span><span class="v">USDC</span>
+                      <span class="k">토큰 주소</span><span class="v"><span class="ad">0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48</span></span>
+                      <span class="k">토큰량</span><span class="v"><b>4.99</b></span>
+                      <span class="k">받는 주소</span><span class="v"><span class="ad">0x6f2a8d53c1e04b97a2f5d8c3b6e1904af72c5d38</span> <span class="lb">(운영 지갑 OPS-FEE-01)</span></span>
+                      <span class="k">받는 토큰·량</span><span class="v">USDC / <b>4.99</b></span>
+                      <span class="k">가스비(부담)</span><span class="v">0.0019 ETH ≈ 8,100원 · <span class="dsrv">DSRV</span></span>
+                      <span class="k">선행 조건</span><span class="v">4/6 인도 완료</span>
+                      <span class="k">txhash</span><span class="v"><span class="txin" style="opacity:.45;">선행 이전 완료 후</span> <span class="act" style="opacity:.45;">완료</span></span>
+                    </div>
+                  </div>
+
+                  <div class="ph2" style="margin-top:8px;color:#475569;font-weight:700;">마목 전용 추가 블록 (교환에는 없음)</div>
+                  <div class="kv spec">
+                    <span class="k">온체인 대사</span><span class="v"><span class="ck ok">발신 지갑 일치</span><span class="ck ok">수신 주소 일치</span><span class="ck ok">자산 USDC 일치</span><span class="ck ok">수량 499.00 일치</span> <span class="sub">2/6 행 · 실발생 가스비 0.0019 ETH는 신청자 수탁 지갑에서 지불, 이 시스템은 영수증 값으로 기록만 한다</span></span>
+                    <span class="k">상대 다리</span><span class="v">2/6의 반대급부 = <b>1/6</b> (게시자 A자산운용 · USDT 500) <span class="sub">서명자는 자기 다리만 보고 집행하지 않는다 — 양건 대사 전에는 3/6·4/6 인도가 생성되지 않는다</span></span>
+                  </div>
+
+                  <div class="specnote">· <strong>이 서비스의 핵심 통제</strong> — 인도는 양건 예치가 모두 확인된 뒤에만 활성된다. 한쪽만 예치된 상태에서 일방 이전이 구조적으로 불가능하다.<br>· <strong>이전 중지</strong> 시 미집행 이전을 전부 제거하고, 이미 예치된 다리는 <strong>반환</strong>을 만든다. 수수료를 부과하지 않으므로 5/6·6/6도 생성되지 않고 예치에 포함됐던 1%가 함께 반환된다.<br>· <span class="chk">[확인필요]</span> 인도·수수료 4건의 가스를 DSRV가 부담하므로 <strong>에스크로 전용지갑에 ETH 잔고</strong>가 있어야 한다. 에스크로는 고객 자산 지갑(약관 제10조①②)이라 고유재산 ETH를 어떤 계정으로 넣어 두는지 — 커스터디팀·회계 확인.</div>
+
                   <div class="item-area" data-highlight="7" style="position:relative;display:inline-block;padding:3px;border-radius:8px;margin:8px 8px 2px 0;"><div class="pin" data-idx="7" style="top:-10px;right:-10px;">8</div><span class="act">명세 Excel</span></div>
+
                   <div class="item-area" data-highlight="12" style="position:relative;padding:6px 8px;border-radius:8px;margin:8px 0 2px;background:#f8fafc;border:1px solid #e2e8f0;"><div class="pin" data-idx="12" style="top:-10px;right:-10px;">13</div>
-                    <div style="font-family:var(--font);font-size:9.5px;color:#475569;line-height:1.6;"><strong>후속 이전 자동 생성</strong> — 이 건이 완료되면 양건 예치 확인이 성립해 <strong>인도 2건</strong>이 자동으로 ②에 생긴다(에스크로 → 각자 수탁 · 수수료·가스 차감 후). 인도 2건이 완료되면 <strong>수수료 스윕 행</strong>이 정책 주기 배치로 생긴다.</div>
+                    <div style="font-family:var(--font);font-size:9.5px;color:#475569;line-height:1.6;"><strong>후속 이전 자동 생성</strong> — 이 이전(2/6)이 완료되면 양건 예치 확인이 성립해 <strong>인도 2건(3/6·4/6)</strong>이 자동 활성된다. 각 인도가 완료되면 대응하는 <strong>수수료 이전(5/6·6/6)</strong>이 활성된다. 어느 것도 자동 승인이 아니다 — 콜드 2인 서명이 사람 게이트로 남는다.</div>
                   </div>
-                  <div class="hist">처리 이력 — <b>09-01 16:40</b> 승인(DSRV-OPS-01) · <b>09-02 09:05</b> txhash 입력 · 대사 일치</div>
+
+                  <div class="actbar">
+                    <div class="albl">처리 — 거래 단위 <span style="font-family:ui-monospace,Consolas,monospace;color:#1d4ed8;">BRK-20260901-0002</span></div>
+                    <div style="margin-top:5px;">
+                      <span class="act">보류</span>
+                      <div class="item-area" data-highlight="11" style="position:relative;display:inline-block;padding:3px;border-radius:8px;margin:2px 10px 2px 0;"><div class="pin" data-idx="11" style="top:-10px;right:-10px;">12</div><span class="act warn">이전 중지</span></div>
+                      <span class="act warn">AML 이슈 미집행</span>
+                    </div>
+                  </div>
+                  <div class="hist">처리 이력 — <b>09-01 16:40</b> 승인(DSRV-OPS-01) · 이전 6건 생성 · <b>09-02 09:05</b> txhash 입력 · 대사 일치</div>
                 </div>
               </td>
             </tr>
@@ -379,7 +525,7 @@
             <tr class="mk-row" data-exp="o3">
               <td><span class="mk-caret">▶</span><strong>N3</strong> 집행 대사</td>
               <td class="mono">EXC-20260831-0002<br><span style="font-size:9.5px;color:#94a3b8;">출고 · 0x3f9a…c41d</span></td>
-              <td class="mono">수량 불일치 · 명세 893.14 / 온체인 899.73 USDT<br><span style="font-size:9.5px;color:#94a3b8;">가스비 차감 없이 집행됨 · 완료 불가 회송</span></td>
+              <td class="mono">수량 불일치 · 명세 899.73 / 온체인 893.14 USDT<br><span style="font-size:9.5px;color:#94a3b8;">가스비를 차감해 집행됨(종전 규칙 적용) · 완료 불가 회송</span></td>
               <td><span class="sev mid">에스컬레이션</span><br><span style="font-size:9.5px;color:#94a3b8;">고객 '진행 중' 정지</span></td>
               <td><span class="act" style="opacity:.45;">확인</span><span class="act">조치 완료</span></td>
             </tr>
@@ -389,8 +535,8 @@
                   <div class="ph2">▼ 확장 패널 — 집행 대사 불일치 (N3)</div>
                   <div class="kv">
                     <span class="k">건</span><span class="v"><span class="id">EXC-20260831-0002</span> 출고 · txhash <span class="id">0x3f9a…c41d</span> 입력 09-02 09:12(DSRV-OPS-01)</span>
-                    <span class="k">대사</span><span class="v"><span class="ck ok">발신 지갑 일치</span><span class="ck ok">수신 주소 일치</span><span class="ck ok">자산 USDT 일치</span><span class="ck bad">수량 명세 893.14 ≠ 온체인 899.73</span></span>
-                    <span class="k">조치</span><span class="v">차액 6.59 USDT 회수 이전을 ②에 생성해 집행한 뒤 재대사한다. 온체인은 되돌릴 수 없으므로 <b>명세를 고치지 않는다</b> <span class="chk">[확인필요: 회송 후속 절차]</span></span>
+                    <span class="k">대사</span><span class="v"><span class="ck ok">발신 지갑 일치</span><span class="ck ok">수신 주소 일치</span><span class="ck ok">자산 USDT 일치</span><span class="ck bad">수량 명세 899.73 ≠ 온체인 893.14</span></span>
+                    <span class="k">조치</span><span class="v">부족분 <b>6.59 USDT</b> 추가 이전을 ②에 생성해 집행한 뒤 재대사한다. 온체인은 되돌릴 수 없으므로 <b>명세를 고치지 않는다</b> <span class="sub">2026-09-21 가스비 개정으로 출고 명세에 차감이 없다 — 커스터디가 종전대로 차감하면 고객 수령액이 모자라므로 반드시 보전한다</span> <span class="chk">[확인필요: 회송 후속 절차]</span></span>
                     <span class="k">업무 상태</span><span class="v">확인됨 · 원인 규명 중</span>
                   </div>
                   <div class="hist">처리 이력 — <b>09-02 09:12</b> 대사 불일치 감지 · <b>09-02 09:20</b> 확인(DSRV-OPS-01)</div>
@@ -478,10 +624,10 @@
       <div class="num">2</div>
       <div>
         <div class="itm-title">[승인] — 나목 교환(T1)<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>노출</strong> 유형 T1 행에만 보인다. 행마다 반복하고 대표 핀은 1개다.<br><strong>클릭 가능</strong> 행 상태가 승인 대기·에스컬레이션·보류 중 하나이고, 다른 관리자가 그 행을 처리하고 있지 않으며, 교환 재고가 받는 수량 이상이고, 기관 상태가 '02 활성'(클릭 시 커스터디 조회)일 때만 활성이다.<br><strong>확인 사항</strong> 확인 다이얼로그를 띄운다(집행 개시는 구속력 있는 행위다). 판단 재료는 확장 패널에서 본다 — 자동검증(건별 한도 {정책값 1,500,000원 상당} 이하 · 교환 재고 · 기관 상태 · BLF · KYT · 이상거래 룰) · 확정 비율과 스프레드 · 예상 가스비와 예상 실수령액(EXC-02 고지값과 같아야 한다).<br><strong>액션</strong> 행을 제거하고 ② 집행 대기에 <strong>콜드 이전 2건</strong>(입고 · 출고)을 만든다. 출고 행은 입고 완료 후에 활성된다. 고객 화면은 승인 대기부터 집행 대기까지 EXC-03 '거래 진행중' 하나로만 보이므로 승인 시점에 고객 통지는 없다.<br><span class="basis">근거 states 케이스분기 EX-09 · 09 §0 승인·통제(DSRV 단일 처리 + 콜드 수동 집행) · ISMS 2.2.2</span></div>
+        <div class="itm-desc"><strong>노출</strong> 유형 T1 행에만 보인다. 행마다 반복하고 대표 핀은 1개다.<br><strong>클릭 가능</strong> 행 상태가 승인 대기·에스컬레이션·보류 중 하나이고, 다른 관리자가 그 행을 처리하고 있지 않으며, 교환 재고가 받는 수량 이상이고, 기관 상태가 '02 활성'(클릭 시 커스터디 조회)일 때만 활성이다.<br><strong>확인 사항</strong> 확인 다이얼로그를 띄운다(집행 개시는 구속력 있는 행위다). 판단 재료는 확장 패널에서 본다 — 자동검증(건별 한도 {정책값 1,500,000원 상당} 이하 · 교환 재고 · 기관 상태 · BLF · KYT · 이상거래 룰) · 확정 비율과 스프레드 · 예상 가스비와 예상 실수령액(EXC-02 고지값과 같아야 한다).<br><strong>액션</strong> 행을 제거하고 ② 집행 대기에 <strong>콜드 이전 3건</strong>(입고 · 출고 · 수수료)을 만든다(2026-09-21 개정 · 종전 2건). 출고는 입고 완료 후, 수수료는 출고 완료 후에 활성된다. 고객 화면은 승인 대기부터 집행 대기까지 EXC-03 '거래 진행중' 하나로만 보이므로 승인 시점에 고객 통지는 없다.<br><span class="basis">근거 states 케이스분기 EX-09 · 09 §0 승인·통제(DSRV 단일 처리 + 콜드 수동 집행) · ISMS 2.2.2</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[승인] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①행 상태가 승인 대기·에스컬레이션·보류 이외 ②다른 관리자가 처리 중(행 잠금) ③교환 재고 &lt; 받는 수량 ④기관 상태 '활성' 아님(ADM-03)</span><span class="nav-to stay">하나라도 해당 → 회색 비활성(공통 UI 규격) · 사유는 확장 패널 상단 인라인 ⚠(예 "교환 재고가 부족합니다 — 재고 보충 후 승인해 주세요")</span></div>
-          <div class="nav-row"><span class="nav-el">[승인] — 클릭(활성)</span><span class="nav-act">클릭 → 다이얼로그: 제목 "나목 교환 승인" / 본문 "EXC-20260902-0001 · ORG-A · 900 USDC → 899.73 USDT(확정 비율 0.9997 · 예상 가스비 6.59 USDT 차감 시 실수령 893.14 USDT · 실제 차감액은 이전 후 확정)를 승인합니다. 승인 즉시 집행 대기에 입고·출고 2건이 생기며, 집행은 콜드월렛 수동 절차로 진행됩니다." / [승인] [돌아가기] → 라벨 "처리 중…"·행 버튼 전부 비활성</span><span class="nav-to stay">행 제거 + 토스트 "EXC-20260902-0001 승인 — 집행 대기로 이동했습니다" · ② 표에 입고·출고 2행 추가 · 재고 예약 · 감사로그(처리자·시각)</span></div>
+          <div class="nav-row"><span class="nav-el">[승인] — 클릭(활성)</span><span class="nav-act">클릭 → 다이얼로그: 제목 "나목 교환 승인" / 본문 "EXC-20260902-0001 · ORG-A · 900 USDC → 899.73 USDT(확정 비율 0.9997 · 가스비 차감 없음)를 승인합니다. 승인 즉시 집행 대기에 입고·출고·수수료 3건이 생기며, 집행은 콜드월렛 수동 절차로 진행됩니다." / [승인] [돌아가기] → 라벨 "처리 중…"·행 버튼 전부 비활성</span><span class="nav-to stay">행 제거 + 토스트 "EXC-20260902-0001 승인 — 집행 대기로 이동했습니다" · ② 표에 거래 1행 추가(입고·출고·수수료 이전 3건) · 재고 예약 · 감사로그(처리자·시각)</span></div>
           <div class="nav-row"><span class="nav-el">[승인] — 실패</span><span class="nav-act">경쟁 상태(다른 관리자가 먼저 처리) / 재고 재검증 실패 / 서버 오류</span><span class="nav-to stay">화면 잔류 · 경쟁 → 상단 배너 "이미 처리된 건입니다 — 목록을 갱신했습니다" + 행 최신 상태로 갱신 / 재고 → 인라인 ⚠ 재노출 / 오류 → 상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 버튼 라벨 복귀</span></div>
         </div>
       </div>
@@ -493,8 +639,8 @@
         <div class="itm-title">[승인] — 마목 확정(T2)<span class="req">필수</span></div>
         <div class="itm-desc"><strong>노출</strong> 유형 T2 행에만 보인다.<br><strong>클릭 가능</strong> 행 상태가 확인 대기·에스컬레이션·보류 중 하나이고, 다른 관리자가 처리 중이 아니며, <strong>양측</strong> 잔고가 수수료를 포함해 확보되어 있고, 양측 기관 상태가 '02 활성'(클릭 시 커스터디 조회)일 때만 활성이다.<br><strong>확인 사항</strong> 확인 다이얼로그를 띄운다. 어드민이 정하는 것은 <strong>거래 성립 여부가 아니라 에스크로 예치를 시작해도 되는지</strong>다 — 거래는 게시자 수락 시점(BRK-04)에 이미 확정되어 구속력이 있다.<br><strong>액션</strong> 행을 제거하고 ②에 <strong>예치 2건</strong>을 만든다. 예치 수량은 <strong>거래 수량 + 각자 수수료 1%</strong>다. 양건 예치가 완료되면 인도 2건이 자동 생성된다(별도 승인 클릭 없음 — 콜드 2인 서명이 사람 게이트라 일방 이전이 구조적으로 불가능하다).<br><span class="basis">근거 states 케이스분기 ST-03 · 09 §0 2026-09-03(15) 에스크로 전용지갑 · 2026-09-04 수수료 흐름 결정</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">[승인] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①행 상태가 확인 대기·에스컬레이션·보류 이외 ②다른 관리자가 처리 중 ③어느 한쪽 잔고(수수료 포함) 부족 ④어느 한쪽 기관 상태 '활성' 아님</span><span class="nav-to stay">하나라도 해당 → 회색 비활성 · 사유는 확장 패널 상단 인라인 ⚠(어느 쪽인지 명시)</span></div>
-          <div class="nav-row"><span class="nav-el">[승인] — 클릭(활성)</span><span class="nav-act">클릭 → 다이얼로그: 제목 "마목 확정 확인" / 본문 "BRK-20260902-0001 · ORG-A ↔ ORG-B · 800 USDT ↔ 798.40 USDC를 승인합니다. 승인 즉시 집행 대기에 예치 2건(수수료 포함 808 USDT · 806.38 USDC)이 생깁니다." / [승인] [돌아가기]</span><span class="nav-to stay">행 제거 + 토스트 · ② 표에 예치 2행 추가 · 고객 화면 BRK-05 스텝 2 '예치 진행' · 감사로그</span></div>
+          <div class="nav-row"><span class="nav-el">[승인] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①행 상태가 확인 대기·에스컬레이션·보류 이외 ②다른 관리자가 처리 중 ③어느 한쪽 잔고(거래 수량) 부족 ④어느 한쪽 기관 상태 '활성' 아님</span><span class="nav-to stay">하나라도 해당 → 회색 비활성 · 사유는 확장 패널 상단 인라인 ⚠(어느 쪽인지 명시)</span></div>
+          <div class="nav-row"><span class="nav-el">[승인] — 클릭(활성)</span><span class="nav-act">클릭 → 다이얼로그: 제목 "마목 확정 확인" / 본문 "BRK-20260902-0001 · ORG-A ↔ ORG-B · 800 USDT ↔ 798.40 USDC를 승인합니다. 승인 즉시 집행 대기에 이전 6건(예치 2 · 인도 2 · 수수료 2)이 생기며, 먼저 예치 2건(800 USDT · 798.40 USDC)이 활성됩니다." / [승인] [돌아가기]</span><span class="nav-to stay">행 제거 + 토스트 · ② 표에 거래 1행 추가(이전 6건 · 예치 2건 활성 · 나머지 대기) · 고객 화면 BRK-05 스텝 2 '예치 진행' · 감사로그</span></div>
           <div class="nav-row"><span class="nav-el">[승인] — 실패</span><span class="nav-act">경쟁 상태 / 잔고 재검증 실패 / 서버 오류</span><span class="nav-to stay">화면 잔류 · 잔고 실패면 행을 <strong>보류</strong>로 두고 인라인 ⚠ "확정 후 잔고가 부족해졌습니다 — 보완 후 승인해 주세요" · 그 외 공통 배너</span></div>
         </div>
       </div>
@@ -543,10 +689,10 @@
       <div class="num">7</div>
       <div>
         <div class="itm-title">② 집행 대기 목록 · 행 확장(집행 명세)<span class="req">필수</span></div>
-        <div class="itm-desc">· <strong>행 하나 = 콜드 이전 1건</strong>이다. 거래 1건이 여러 행으로 나뉜다 — 나목은 입고·출고 2행, 마목은 예치 2행 → 인도 2행이다.<br>· 열: 유형 · 이전(출발 → 도착) · 내용(이체 수량) · 단계 · 집행 결과·처리.<br>· <strong>행 유형 6종</strong>: 입고 · 출고 · 예치 · 인도 · 반환 · 수수료 스윕. 각 유형의 이동·생성 시점은 상세내용 6을 본다.<br>· <strong>커스터디의 집행 전 심사</strong>(2026-09-14): 커스터디가 [명세 Excel]을 받아 블랙리스트·KYT 등 집행 전 심사를 한다. 통과하면 통지 없이 콜드 서명·집행 후 txhash를 입력한다. 문제가 있으면 <strong>서명하지 않고</strong> 그 행의 <strong>[AML 이슈 미집행]</strong>(항목 10)을 누른다 — 커스터디가 상태 변경을 밀어 보내는 통지(웹훅)는 두지 않으므로, 멈춘 사실이 이 시스템에 들어오는 경로는 이 버튼 하나다. 누르면 그 거래의 미집행 행을 전부 제거 → 거래 거절 종결 → 마목에서 예치가 끝난 다리가 있으면(txhash 입력·대사 완료 기준) 상대방 예치분 반환 행 자동 생성 → 고객 안내 "진행 불가"(사유 미노출) · 이메일 ⑤. 사유는 받지 않고 되돌리는 수단도 두지 않는다. 기관이 관문 조회에서 비활성으로 확인되면 그 기관의 모든 대기 행은 이 버튼과 무관하게 거절된다(상세내용 20).<br>· <strong>확장 패널 = 집행 명세</strong>다. 라벨·값 2열로 건 · 출금 지갑 · 수신 주소(전문·소문자) · 자산·수량 · 명세 무결성(명세 해시·승인자 ID·생성 시각) · 완료 조건 · 다음 단계를 적는다. 같은 내용을 <strong>[명세 Excel]</strong>로 내려받는다(항목 8).<br>· 목록 규격·갱신·행 잠금은 ①과 같다. <strong>건수 집계를 표시하지 않는다.</strong><br>· 정산 배치는 1영업일 3회다 <span class="chk">[확인필요: 배치 시각·마감 기준과 행별 집행의 정합]</span>.<br><span class="basis">근거 states 케이스분기 §2 ② 집행 대기 표 · 09 §0 정산 배치 · 2026-09-04 명세 Excel 존치 결정</span></div>
+        <div class="itm-desc">· <strong>행 하나 = 거래 1건</strong>(2026-09-22 사용자 지시 · 2026-09-28(37)③ 등재). 콜드 이전(나목 3건 · 마목 6건)은 행으로 나누지 않고 상세의 이전 명세 블록으로 본다. 나목을 입고 완료 후 [이전 중지]하면 상세에서 3/3 수수료 블록이 <strong>반환 블록으로 대체</strong>된다. 종전 "행 하나 = 콜드 이전 1건"은 폐기.<br>· 열: 유형 · 이전(당사자 지갑 ↔ DSRV 지갑) · 내용(교환 수량) · 단계 · 집행 결과. 이전 열에 <strong>거래번호와 이전 건수</strong>를 함께 적는다. <strong>마지막 열은 표시 전용</strong>이다(현재 집행 대상 이전의 txhash 미입력 / 대사 일치 / 선행 대기) — 처리는 전부 상세에서 한다.<br>· <strong>이전 유형 6종</strong>: 입고 · 출고 · 예치 · 인도 · 반환 · 수수료. 유형을 늘리지 않고 '환불'이라는 말을 쓰지 않는다. 반환은 나목·마목 공통이다. 생성·활성 시점은 항목 13.<br>· <strong>행을 클릭하면 거래 상세가 하단에 열린다.</strong> 상세 1장 = <strong>거래 1건</strong>이고, <strong>현재 집행 대상 이전 블록이 강조</strong>된다. 서명자가 자기 이전만 보고 집행하지 않도록 그 거래의 이전 전체를 항상 함께 보여준다.<br>· <strong>구성 3블록</strong>이고 순서를 바꾸지 않는다.<br>&nbsp;&nbsp;ⓐ <strong>거래 헤더</strong>(라벨·값 2열) — 거래(번호·유형·승인자·승인 시각) · 요청 기관(customerNo·법인명) · 교환 비율(기준가와 스프레드) · DSRV 수수료(토큰량·받는 지갑·<strong>산출 근거</strong> — 나목 = 스프레드 <span class="mono">{정책값 0.10%}</span> 내재분 / 마목 = 각자 받는 자산 수량의 1% · 인도 시 공제) · 가스비(부담 구분) · 이전 건수 · KRW 환산 · 명세 무결성. <strong>마목은</strong> 여기에 <strong>상대 기관</strong>과 <strong>수량 분해</strong>(거래 → 예치 → 인도 · 인도 = 상대방 거래 수량 − 1%)가 더 붙는다.<br>&nbsp;&nbsp;ⓑ <strong>이전 명세</strong> — 이전 1건 = 블록 1개를 순번대로 세로로 쌓는다(나목 3 · 마목 6). 블록 머리에 「n/m 유형 · 당사자」, 그 아래 9항목: 보내는 주소 · 보내는 토큰 · <strong>토큰 주소</strong> · 토큰량 · 받는 주소 · 받는 토큰 · 받는 토큰량 · 가스비(부담) · 선행 조건. 블록 맨 아래에 <strong>그 이전의 txhash 입력창과 [완료]</strong>를 둔다(2026-09-28(37)③). 표로 가로 나열하지 않는다 — 주소가 전문이라 가로로는 읽히지 않는다.<br>&nbsp;&nbsp;ⓒ <strong>처리 영역</strong> — txhash 입력창과 [완료]는 ⓑ 블록마다, [보류] · [이전 중지] · [AML 이슈 미집행]은 거래 단위로 하단에 둔다. 종류와 순서는 여섯 단계가 모두 같고 <strong>활성 여부만 달라진다</strong>.<br><table class="dtbl"><thead><tr><th>ⓒ 처리 영역 (위 → 아래)</th><th><span class="g">나목</span>1/3 입고</th><th><span class="g">나목</span>2/3 출고</th><th><span class="g">나목</span>3/3 수수료</th><th><span class="g">마목</span>예치 1·2/6</th><th><span class="g">마목</span>인도 3·4/6</th><th><span class="g">마목</span>수수료 5·6/6</th></tr></thead><tbody><tr><td>txhash 입력창(블록마다)</td><td class="on">활성</td><td class="on">활성</td><td class="on">활성</td><td class="on">활성<span class="n">블록마다 1개</span></td><td class="on">활성<span class="n">블록마다 1개</span></td><td class="on">활성</td></tr><tr><td>[완료](블록마다)</td><td class="cond">대사 일치 시</td><td class="cond">대사 일치 시<span class="n">= 거래 완료</span></td><td class="cond">대사 일치 시</td><td class="cond">대사 일치 시<span class="n">양건 완료 → 인도 생성</span></td><td class="cond">대사 일치 시<span class="n">2건 완료 = 거래 완료</span></td><td class="cond">대사 일치 시</td></tr><tr><td>[보류]</td><td class="on">활성</td><td class="on">활성</td><td class="offx">비활성</td><td class="on">활성</td><td class="on">활성</td><td class="offx">비활성</td></tr><tr><td>[이전 중지]</td><td class="on">활성<span class="n">반환 없음</span></td><td class="on">활성<span class="n">반환 1건</span></td><td class="offx">비활성</td><td class="on">활성<span class="n">반환 0 또는 1건</span></td><td class="on">활성<span class="n">반환 2건</span></td><td class="offx">비활성</td></tr><tr><td>[AML 이슈 미집행]</td><td class="on">활성<span class="n">커스터디 계정만</span></td><td class="on">활성<span class="n">커스터디 계정만</span></td><td class="qq">확인필요</td><td class="on">활성<span class="n">커스터디 계정만</span></td><td class="on">활성<span class="n">커스터디 계정만</span></td><td class="qq">확인필요</td></tr></tbody></table>· <strong>마목만</strong> ⓑ와 ⓒ 사이에 <strong>온체인 대사</strong>(그 이전의 4항목 판정)와 <strong>상대 다리</strong>(반대급부 이전의 순번·상대 기관·토큰·수량) 블록이 붙는다.<br>· <strong>주소는 전부 전문·소문자</strong>로 적는다(지갑 주소 · ERC-20 컨트랙트 주소). ETH는 네이티브라 컨트랙트 주소가 없고 「네이티브 — 컨트랙트 주소 없음」으로 표기한다 <span class="chk">[확인필요: 0xEeee…EEeE 관용 표기를 쓸지 — 커스터디·개발 합의]</span>.<br>· 같은 내용을 <strong>[명세 Excel]</strong>로 내려받는다(항목 8). 커스터디의 집행 전 심사와 <strong>[AML 이슈 미집행]</strong>은 항목 10.<br>· 목록 규격·갱신·행 잠금은 ①과 같다. <strong>건수 집계를 표시하지 않는다.</strong> 정산 배치는 1영업일 3회다 <span class="chk">[확인필요: 배치 시각·마감 기준과 행별 집행의 정합]</span>.<br><span class="basis">근거 states 케이스분기 §2 ② 집행 대기 표 · 09 §0 (17) 명세 Excel 존치 · (30) 명세 단위 · (36) 수수료 이전·가스비 · (34) 나목 이전 중지·반환 · (37) 거래당 1행·블록별 txhash</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">행(입력·버튼 제외 셀 전체)</span><span class="nav-act">클릭 → 확장(동시 1개 · 재클릭 시 접기)</span><span class="nav-to stay">집행 명세 패널 · 이동 없음</span></div>
-          <div class="nav-row"><span class="nav-el">단계 칩(입고 ● 출고 ○ 등)</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용). 같은 거래의 다른 행은 목록에서 나란히 보인다.</span></div>
+          <div class="nav-row"><span class="nav-el">행(셀 전체 — 행에 입력·버튼이 없다)</span><span class="nav-act">클릭 → 거래 상세 확장(동시 1개 · 재클릭 시 접기)</span><span class="nav-to stay">거래 상세(ⓐ 헤더 · ⓑ 이전 명세 · ⓒ 처리) · 이동 없음</span></div>
+          <div class="nav-row"><span class="nav-el">단계 칩(입고 ● 출고 ○ 수수료 ○ 등)</span><span class="nav-act">클릭</span><span class="nav-to stay">무반응(표시 전용). 같은 거래의 다른 행은 목록에서 나란히 보인다.</span></div>
         </div>
       </div>
     </div>
@@ -555,9 +701,9 @@
       <div class="num">8</div>
       <div>
         <div class="itm-title">[명세 Excel]<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>노출</strong> ② 확장 패널 안에 행마다 1개 보인다.<br><strong>클릭 가능</strong> 항상 활성이다. 같은 행의 파일을 만드는 동안만 비활성이다.<br><strong>확인 사항</strong> 없다. 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> 1건 1파일로 동기 생성해 내려받는다. 화면 패널과 같은 값에 <strong>명세 해시·승인자 ID·생성 시각</strong>을 담는다. 열에 요청 기관 <strong>customerNo·법인명</strong>과 <strong>요청 시점 KRW 환산</strong>(커스터디 AML 등록 krwAmount 참고)을 포함한다 — 이 파일이 커스터디의 품의·위험 심사·AML 등록 근거이므로 열 구성은 커스터디와 합의한다(2026-09-07 · <span class="chk">[확인필요]</span>). 콜드 2인 서명자는 콘솔 밖 커스터디 절차라 화면을 보지 않으므로, <strong>이 파일이 서명자에게 넘어가는 전달물</strong>이다. 다운로드는 열람 기록(CSV ⑥)에 남는다.<br>· <strong>완료를 막지 않는다</strong> — 종전 "명세 미다운로드 시 완료 차단" 규칙은 폐지했다(2026-09-04). 완료를 막는 조건은 온체인 대사 불일치 하나다.<br>· 화면 확장 패널과 파일은 <strong>같은 값을 두 곳에 보여주는 것</strong>이고, 관리자 판단은 화면에서, 서명자 전달은 파일로 한다.<br><span class="chk">[확인필요]</span> 서명자에게 파일을 넘기는 경로(별도 채널 / 커스터디 시스템 연동) — 커스터디팀 확인.<br><span class="basis">근거 notation 명세 파일 1건 1파일 동기 생성 · 2026-09-04 인라인+Excel 병기 결정</span></div>
+        <div class="itm-desc"><strong>노출</strong> ② 거래 상세 안에 1개 보인다.<br><strong>클릭 가능</strong> 항상 활성이다. 파일을 만드는 동안만 비활성이다.<br><strong>확인 사항</strong> 없다. 확인 다이얼로그를 띄우지 않는다.<br><strong>액션</strong> <strong>거래 1건 1파일</strong>로 동기 생성해 내려받는다. 같은 거래의 어느 행에서 눌러도 같은 파일이고, <strong>화면 상세 ⓐ·ⓑ와 같은 값·같은 순서</strong>를 담는다(항목 7). 파일에만 <strong>집행 상태</strong>와 <strong>txhash</strong>(입력된 행만) 2열이 더 붙는다. 다운로드는 열람 기록(CSV ⑥)에 남는다.<br>· 이전 전체를 한 장에 담아 <strong>선행 조건과 반대급부를 파일 안에서 대조</strong>하게 한다 — 서명자가 자기 행만 보고 집행하면 마목에서 한쪽 다리만 나가거나 나목에서 수수료 이전이 누락된다.<br>· 콜드 2인 서명자는 콘솔 밖 커스터디 절차라 화면을 보지 않는다. <strong>이 파일이 서명자에게 넘어가는 전달물</strong>이고, 커스터디의 품의·위험 심사·AML 등록 근거다.<br>· <strong>완료를 막지 않는다</strong> — 완료를 막는 조건은 온체인 대사 불일치 하나다.<br><span class="chk">[확인필요]</span> 열 구성 커스터디 합의 · 서명자에게 파일을 넘기는 경로(별도 채널 / 커스터디 시스템 연동).<br><span class="basis">근거 notation 명세 파일 동기 생성 · 09 §0 (17) 인라인+Excel 병기 · (30) 거래 1건 1파일·열 구성</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">[명세 Excel] — 클릭</span><span class="nav-act">클릭 → 라벨 "생성 중…" → 브라우저 다운로드</span><span class="nav-to stay">화면 잔류 · 토스트 없음(브라우저 다운로드가 피드백) · 열람 기록 적재</span></div>
+          <div class="nav-row"><span class="nav-el">[명세 Excel] — 클릭</span><span class="nav-act">클릭 → 라벨 "생성 중…" → 브라우저 다운로드(거래 1건 1파일)</span><span class="nav-to stay">화면 잔류 · 토스트 없음(브라우저 다운로드가 피드백) · 열람 기록 적재</span></div>
           <div class="nav-row"><span class="nav-el">[명세 Excel] — 실패</span><span class="nav-act">생성 오류</span><span class="nav-to stay">상단 배너 "일시적인 오류입니다. 잠시 후 다시 시도해 주세요" · 버튼 라벨 복귀</span></div>
         </div>
       </div>
@@ -567,7 +713,7 @@
       <div class="num">9</div>
       <div>
         <div class="itm-title">txhash 입력창<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>입력 가능</strong> 행이 활성 단계일 때 입력할 수 있다. 입력 주체는 커스터디 담당자 어드민 계정이다. 같은 셀의 [AML 이슈 미집행](항목 10)을 누르면 행이 제거되어 입력창이 사라진다. 출고 행은 입고가 완료되기 전에는 "입고 완료 후" 안내만 보이고 입력창이 비활성이다.<br><strong>허용 문자</strong> <code>0x</code> + 16진수 64자(총 66자). 대소문자를 가리지 않고 앞뒤 공백은 잘라낸다.<br><strong>검증</strong> 형식이 맞으면 온체인 조회로 <strong>발신 지갑 · 수신 주소 · 자산 · 수량</strong> 4항목을 명세와 대조한다. 일치하면 녹색 "명세 일치" 표시와 함께 [완료]가 활성된다.<br><strong>실패 처리</strong> 형식 오류는 입력창 아래 인라인 ⚠ "txhash 형식이 올바르지 않습니다". 조회 실패는 "온체인 조회에 실패했습니다 — 잠시 후 다시 시도해 주세요". 대조 불일치는 어긋난 항목을 확장 패널 대사 줄에 빨간 칩으로 표시하고 [완료]를 비활성으로 둔 채 ④에 집행 대사 불일치 알림을 만든다(항목 17·18).<br><strong>연동</strong> 입력값과 대사 결과는 감사로그와 CSV ③에 남는다.<br><span class="basis">근거 states 케이스분기 EX-11·EX-13 · notation 입력창 설명 5단계</span></div>
+        <div class="itm-desc"><strong>입력 가능</strong> 거래 상세의 <strong>이전 명세 블록마다 1개</strong> 둔다(2026-09-28(37)③ · 종전 "처리 영역에 1개" 폐지). 입력창이 활성되는 블록은 선행 조건을 만족해 활성된 이전뿐이다. 마목 예치 1/6·2/6, 인도 3/6·4/6처럼 동시에 활성되는 이전은 각자 입력창을 가지므로 입력 대상을 고를 필요가 없다. 입력 주체는 커스터디 담당자 어드민 계정이다. 선행 대기 블록의 입력창은 비활성이고 "선행 이전 완료 후" 안내만 보인다. [AML 이슈 미집행](항목 10)을 누르면 미집행 이전이 제거되어 그 블록의 입력창이 사라진다.<br><span class="chk">[확인필요]</span> [완료]도 블록마다 두었다(구현 화면 기준 확인 필요).<br><strong>허용 문자</strong> <code>0x</code> + 16진수 64자(총 66자). 대소문자를 가리지 않고 앞뒤 공백은 잘라낸다.<br><strong>검증</strong> 형식이 맞으면 온체인 조회로 <strong>발신 지갑 · 수신 주소 · 자산 · 수량</strong> 4항목을 <strong>그 이전의 명세</strong>와 대조한다. 일치하면 녹색 "명세 일치" 표시와 함께 [완료]가 활성되고, 목록 행의 집행 결과 열에도 같은 표시가 나간다.<br><strong>실패 처리</strong> 형식 오류는 입력창 아래 인라인 ⚠ "txhash 형식이 올바르지 않습니다". 조회 실패는 "온체인 조회에 실패했습니다 — 잠시 후 다시 시도해 주세요". 대조 불일치는 어긋난 항목을 상세의 온체인 대사 줄에 빨간 칩으로 표시하고 [완료]를 비활성으로 둔 채 ④에 집행 대사 불일치 알림을 만든다(항목 17·18).<br><strong>연동</strong> 입력값과 대사 결과는 감사로그와 CSV ③에 남는다.<br><span class="basis">근거 states 케이스분기 EX-11·EX-13 · notation 입력창 설명 5단계</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">txhash 입력창</span><span class="nav-act">입력 후 포커스 이탈 또는 Enter → 온체인 조회·대조</span><span class="nav-to stay">일치 → 녹색 표시 + [완료] 활성 / 불일치 → 빨간 칩 + [완료] 비활성 + ④ 알림 생성</span></div>
           <div class="nav-row"><span class="nav-el">입력창 — 저장 시점</span><span class="nav-act">화면 이동·탭 전환 시</span><span class="nav-to stay">저장하지 않은 입력값은 확인 없이 버린다(전역 이동 규칙과 동일)</span></div>
@@ -579,7 +725,7 @@
       <div class="num">10</div>
       <div>
         <div class="itm-title">[AML 이슈 미집행] — 커스터디 담당자<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>노출</strong> ② 모든 행의 처리 셀에 txhash 입력창과 나란히 보인다. 누르는 주체는 <strong>커스터디 담당자 어드민 계정</strong>이다. 운영 관리자에게는 보이지만 클릭할 수 없다.<br><strong>왜 여기 있나</strong> 집행 전 심사(블랙리스트·KYT)와 콜드 서명이 모두 커스터디 소관이라, 문제를 발견하면 커스터디가 서명하지 않는 것으로 이미 자산이 멈춘다. 이 버튼은 <strong>멈췄다는 사실을 이 시스템에 알리는 입력</strong>이다. 커스터디가 상태 변경을 밀어 보내는 통지(웹훅)는 두지 않는다.<br><strong>클릭 가능</strong> 그 거래의 이전이 전부 완료되지 않았고 다른 관리자가 처리 중이 아닐 때 활성이다. 완료된 행에는 보이되 비활성이다.<br><strong>확인 사항</strong> 확인 다이얼로그 1개만 띄운다 — "되돌릴 수 없습니다. 이 거래의 미집행 이전을 취소하고 거래를 거절 종결합니다." <strong>사유는 받지 않는다</strong>. 심사 내용은 이 시스템이 수신하지 않는다는 원칙 때문이다.<br><strong>액션</strong> 그 거래의 <strong>미집행 행을 전부 제거</strong>하고 거래를 거절 종결한다. 마목에서 예치가 완료된 다리가 있으면 <strong>반환 행</strong>을 예치 건수만큼 만든다(항목 12와 같은 처리). 고객 화면에는 "이슈로 진행 불가"만 표시하고 거절 메일 ⑤를 보낸다 — 나목은 EXC-04 「거절 (DSRV 심사)」, 마목은 BRK-05 이전 중지 배너다. <strong>되돌리는 수단은 두지 않는다</strong> — 심사가 풀려도 거래를 되살리지 않고 고객이 새로 요청한다.<br>· 클릭자·시각은 감사로그와 CSV ③에 남는다.<br><span class="basis">근거 states 케이스분기 EX-14·ST-11 · 09 §0 2026-09-14 커스터디 연동 재확정</span></div>
+        <div class="itm-desc"><strong>노출</strong> ② 거래 상세 처리 영역 <strong>맨 아래</strong>에 1개 보인다(항목 7 표). 누르는 주체는 <strong>커스터디 담당자 어드민 계정</strong>이고, 운영 관리자에게는 보이지만 클릭할 수 없다.<br><strong>클릭 가능</strong> 그 거래의 이전이 전부 완료되지 않았고 다른 관리자가 처리 중이 아닐 때 활성이다. 완료된 행에는 보이되 비활성이다.<br><strong>확인 사항</strong> 확인 다이얼로그 1개만 띄운다 — "되돌릴 수 없습니다. 이 거래의 미집행 이전을 취소하고 거래를 거절 종결합니다." <strong>사유는 받지 않는다</strong> — 심사 내용을 이 시스템이 수신하지 않는다는 원칙이다.<br><strong>액션</strong> 그 거래의 <strong>미집행 행을 전부 제거</strong>하고 거절 종결한다. 자산이 이미 회사 지갑에 들어와 있으면 <strong>반환 행</strong>을 만든다(항목 12와 같은 규칙). 고객 화면에는 "이슈로 진행 불가"만 표시하고 거절 메일 ⑤를 보낸다 — 나목 EXC-04 「거절 (DSRV 심사)」 · 마목 BRK-05 이전 중지 배너. <strong>되돌리는 수단은 두지 않는다</strong> — 심사가 풀려도 고객이 새로 요청한다. 클릭자·시각은 감사로그와 CSV ③에 남는다.<br>· 커스터디가 상태 변경을 밀어 보내는 통지(웹훅)는 두지 않으므로, <strong>집행이 멈춘 사실이 이 시스템에 들어오는 경로는 이 버튼 하나</strong>다.<br><span class="basis">근거 states 케이스분기 EX-14·ST-11 · 09 §0 2026-09-14 커스터디 연동 재확정</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[AML 이슈 미집행] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①그 거래의 이전이 전부 완료됨 ②다른 관리자 처리 중 ③커스터디 담당자 계정이 아님</span><span class="nav-to stay">하나라도 해당 → 회색 비활성</span></div>
           <div class="nav-row"><span class="nav-el">[AML 이슈 미집행] — 클릭(활성)</span><span class="nav-act">클릭 → 다이얼로그: 제목 "AML 이슈 미집행 — {거래번호}" / 본문 "되돌릴 수 없습니다. 이 거래의 미집행 이전을 취소하고 거래를 거절 종결합니다. 마목에서 예치가 완료된 자산은 반환 이전을 만듭니다." / [미집행 처리] [돌아가기]</span><span class="nav-to stay">미집행 행 제거 + (마목) 반환 행 생성 + 토스트 · 고객 화면 "이슈로 진행 불가" · 메일 ⑤ · 감사로그</span></div>
@@ -591,8 +737,8 @@
     <div class="itm" data-idx="10">
       <div class="num">11</div>
       <div>
-        <div class="itm-title">[완료]<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>노출</strong> ② 모든 행에 보인다.<br><strong>클릭 가능</strong> txhash가 입력되어 있고 <strong>온체인 대사 4항목이 전부 일치</strong>하며 다른 관리자가 처리 중이 아닐 때만 활성이다. 출고·인도 행은 선행 단계가 완료되어야 한다.<br><strong>확인 사항</strong> 확인 다이얼로그를 띄우지 않는다. 대사 일치가 시스템 판정이라 사람이 다시 확정할 여지가 없다.<br><strong>액션</strong> 대상 테이블의 status를 바꾸고 행을 제거한다(처리함 아이템 상태가 아니다). 마지막 행이 완료되면 거래가 완료되어 고객 화면에 반영되고 완료 메일 ③을 보낸다. 실발생 가스비를 영수증 값으로 기록하고 구분회계에 반영한다.<br>· <strong>나목 출고가 실패로 종결되는 경우는 없다</strong>(2026-09-04 결정). 대사 불일치는 정정·재집행으로 반드시 완결한다.<br>· 마목은 양건 예치가 완료되는 순간 <strong>인도 2건이 자동 생성</strong>된다(항목 13).<br><span class="basis">근거 states 케이스분기 EX-11·EX-12·ST-05·ST-08 · §3 집행 대기는 처리함 아이템이 아님</span></div>
+        <div class="itm-title">[완료] · [보류]<span class="req">필수</span></div>
+        <div class="itm-desc"><strong>노출</strong> ② 거래 상세 처리 영역에 txhash 입력창 바로 아래, <strong>[완료] → [보류] → [이전 중지]</strong> 순서로 보인다. 단계별 활성 여부는 항목 7 표를 본다.<br><strong>클릭 가능</strong> [완료]는 집행 대상 이전에 txhash가 입력되어 있고 <strong>온체인 대사 4항목이 전부 일치</strong>하며 다른 관리자가 처리 중이 아닐 때만 활성이다. 선행 조건을 만족하지 못한 이전은 애초에 집행 대상이 되지 않는다.<br><strong>확인 사항</strong> 확인 다이얼로그를 띄우지 않는다 — 대사 일치가 시스템 판정이라 사람이 다시 확정할 여지가 없다.<br><strong>액션</strong> 대상 테이블의 status를 바꾸고 행을 제거한다(처리함 아이템 상태가 아니다). 실발생 가스비를 영수증 값으로 기록하되 <strong>부담 주체(고객 / DSRV)를 함께 기록</strong>해 구분회계에 반영한다.<br>· <strong>거래 완료 시점 = 고객 자산 이전이 끝난 때</strong>다. 나목 <strong>2/3 출고</strong> · 마목 <strong>인도 2건</strong>이 완료되면 고객 화면에 반영되고 완료 메일 ③을 보낸다. 뒤따르는 수수료 이전은 DSRV 내부 회수라 <strong>거래 완료를 늦추지 않고</strong> 고객은 그 행의 존재를 알지 못한다.<br>· <strong>나목 출고도 실패로 종결될 수 있다</strong>(2026-09-22 · 종전 "실패 종결 없음" 폐기). 대사 불일치 자체는 정정·재집행으로 완결하지만, 집행을 중단해야 하면 [이전 중지](항목 12)로 종결한다.<br><br>▸ <strong>[보류]</strong><br><strong>클릭 가능</strong> 그 거래에 <strong>수수료 외 미집행 이전이 남아 있고</strong> 다른 관리자가 처리 중이 아닐 때 활성이다.<br><strong>확인 사항</strong> 사유 다이얼로그를 띄운다(상세내용 7의 1종 — 카테고리 ▾ + 자유입력 10~500자). 가역이므로 별도 확인 다이얼로그는 없다.<br><strong>액션</strong> 그 거래의 <strong>미집행 이전을 전부 정지</strong>시키고 사유를 남긴다. 행은 제거하지 않고 '보류' 표시로 남으며 같은 버튼을 다시 눌러 해제한다. 이미 콜드 집행에 들어간 이전은 <strong>대사를 마친 뒤</strong> 정지한다 — 온체인 이전을 중간에 끊을 수 없다. 고객 화면에는 아무 표시도 하지 않는다.<br>· <strong>보류 중에도 txhash 입력창과 [이전 중지]는 활성</strong>이다 — 먼저 해제하지 않아도 되고, 콜드 서명에 들어간 이전의 txhash는 어차피 받아야 한다.<br><span class="chk">[확인필요]</span> [완료] 시 보류 <strong>자동 해제</strong> 여부(목업은 자동 해제로 그렸다) · 해제 권한 · 최대 보류 기간. 나목 집행 대기의 보류·중지는 새로 생긴 것이라 states 상태 기계·지침 제20조·DB 아이템 상태 반영이 필요하다.<br><span class="basis">근거 states 케이스분기 EX-11·EX-12·EX-17·ST-05·ST-08 · §3 집행 대기는 처리함 아이템이 아님 · 09 §0 (34)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
           <div class="nav-row"><span class="nav-el">[완료] — 활성 조건</span><span class="nav-act">다음이 모두 성립: ①txhash 입력됨 ②대사 4항목 전부 일치 ③선행 단계 완료 ④다른 관리자 처리 중 아님</span><span class="nav-to stay">하나라도 미성립 → 회색 비활성 · 사유는 확장 패널 대사 줄에서 읽는다</span></div>
           <div class="nav-row"><span class="nav-el">[완료] — 클릭(활성)</span><span class="nav-act">클릭 → 확인 없이 즉시 → 라벨 "처리 중…"</span><span class="nav-to stay">행 제거 + 토스트 "{거래번호} {단계} 완료" · 후속 행 활성 또는 자동 생성 · 거래 최종 완료면 고객 화면 반영·메일 ③ · 감사로그</span></div>
@@ -604,11 +750,13 @@
     <div class="itm" data-idx="11">
       <div class="num">12</div>
       <div>
-        <div class="itm-title">[이전 중지] — ② 마목 예치·인도 행<span class="req">필수</span></div>
-        <div class="itm-desc"><strong>노출</strong> ② 섹션의 마목 <strong>예치·인도 행</strong>에만 보인다. 나목 입고·출고 행과 반환·수수료 스윕 행에는 없다.<br><strong>왜 여기 있나</strong> T2 승인으로 ① 행이 사라지므로, 예치 후에 중지하려면 누를 곳이 없어진다. 09 §0 2026-09-03(15) ③은 "보류는 예치 전·인도 전 모두 가능"이라고 하므로 ②에 버튼을 둔다(2026-09-04 결정).<br><strong>클릭 가능</strong> 해당 거래의 이전이 전부 완료되지 않았고 다른 관리자가 처리 중이 아닐 때 활성이다.<br><strong>확인 사항</strong> 사유 다이얼로그가 확인 다이얼로그를 겸한다(비가역).<br><strong>액션</strong> 그 거래의 <strong>미집행 행을 전부 제거</strong>하고, 이미 에스크로에 들어간 예치분이 있으면 <strong>반환 행</strong>을 예치 건수만큼(1건 또는 2건) 만든다. 반환은 에스크로 → 예치자 수탁 지갑이고 <strong>수수료를 부과하지 않는다</strong>. 함께 두는 [보류]는 사유만 남기고 행을 정지시켜 재검토 여지를 남긴다.<br><span class="chk">[확인필요]</span> 반환 이전의 가스비를 누가 부담하는지.<br><span class="basis">근거 states 케이스분기 ST-06 · 약관 제10조② · 09 §0 2026-09-03(15) ③</span></div>
+        <div class="itm-title">[이전 중지] — ② 집행 대기 (나목·마목)<span class="req">필수</span></div>
+        <div class="itm-desc"><strong>노출</strong> ② 거래 상세 처리 영역의 [보류] 뒤에 보인다. <strong>나목·마목 모두에 둔다</strong>(2026-09-22 · 종전 "마목 전용" 폐기). 단계별 활성 여부는 항목 7 표를 본다.<br><strong>클릭 가능</strong> 그 거래에 <strong>수수료 외 미집행 이전이 남아 있고</strong> 다른 관리자가 처리 중이 아닐 때 활성이다. <strong>[보류] 중에도 활성</strong>이다.<br><strong>확인 사항</strong> 사유 다이얼로그가 확인 다이얼로그를 겸한다(비가역). 카테고리 ▾ + 자유입력 10~500자. 본문에 <strong>되돌아가는 수량을 적어</strong> 보여준다.<br><strong>액션</strong> 그 거래의 <strong>미집행 행을 전부 제거</strong>하고(수수료 행 포함) 이전 중지로 종결한다. 자산이 이미 회사 지갑에 들어와 있으면 <strong>반환</strong> 이전을 만든다. 반환에는 <strong>수수료를 부과하지 않고 가스비는 DSRV가 부담</strong>한다. 명칭은 <strong>'반환'</strong>으로 통일하고 '환불'을 쓰지 않는다.<br>&nbsp;&nbsp;· <strong>나목</strong> — <span class="mono">1/3</span> 입고 대사 <strong>완료 전</strong>이면 반환 없이 3건 제거. <strong>완료 후·출고 전</strong>이면 <span class="mono">2/3</span> 출고를 '취소'로 남기고 <span class="mono">3/3</span> 수수료 자리에 <strong><span class="mono">3/3</span> 반환</strong>(교환 재고 → 고객 수탁 · 입고 수량 전액)을 만들어 3건을 유지한다. 출고 완료 후에는 거래가 이미 완료라 비활성이다.<br>&nbsp;&nbsp;· <strong>마목</strong> — 예치가 끝난 다리마다 <strong>반환 1건</strong>(에스크로 → 예치자 수탁). 수수료 이전이 생성되지 않으므로 예치에 포함됐던 1%가 그대로 함께 반환된다.<br><strong>고객 화면</strong> 나목 EXC-04 · 마목 BRK-05 이전 중지 배너. 반환이 있으면 진행 상태를 함께 보인다.<br><span class="chk">[확인필요]</span> 취소된 출고 행을 명세에 남기고 반환이 <span class="mono">3/3</span>을 받는 것은 <strong>가정</strong>이다 — 취소 행을 제거하고 반환을 <span class="mono">2/3</span>으로 당기는 안과 택일이 필요하다. 나목 이전 중지는 새로 생긴 것이라 states·지침 제20조·09 §0 반영이 필요하고, EXC-04에 이전 중지·반환 표기가 없다(화면 범위 밖).<br><span class="chk">[로펌게이트]</span> DSRV가 확정 거래의 이전을 중지했을 때의 계약상 귀결(무산·위약)은 나목·마목 모두 약관 제10조②와의 정합 확인 사항이다.<br><span class="basis">근거 states 케이스분기 EX-15·EX-16·ST-06 · 약관 제10조② · 09 §0 2026-09-03(15)③ · (34)</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">[이전 중지] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①그 거래의 이전이 전부 완료됨 ②다른 관리자 처리 중</span><span class="nav-to stay">하나라도 해당 → 회색 비활성</span></div>
-          <div class="nav-row"><span class="nav-el">[이전 중지] — 클릭(활성)</span><span class="nav-act">클릭 → 다이얼로그: 제목 "이전 중지 — {거래번호}" / 본문 "되돌릴 수 없습니다. 미집행 이전을 취소하고, 이미 예치된 자산은 예치자에게 반환하는 이전 건을 만듭니다." / 카테고리 ▾ + 사유 / [이전 중지] [돌아가기]</span><span class="nav-to stay">미집행 행 제거 + 반환 행 생성 + 토스트 · 양측 BRK-05 이전 중지 배너 + 반환 안내 · 감사로그</span></div>
+          <div class="nav-row"><span class="nav-el">[이전 중지] — 활성 조건</span><span class="nav-act">다음이 모두 아님: ①그 거래의 이전이 전부 완료됨 ②<strong>수수료 이전만 남음</strong> ③다른 관리자 처리 중</span><span class="nav-to stay">하나라도 해당 → 회색 비활성 · [보류] 중에는 활성</span></div>
+          <div class="nav-row"><span class="nav-el">[이전 중지] — 클릭(마목)</span><span class="nav-act">클릭 → 다이얼로그: 제목 "이전 중지 — {거래번호}" / 본문 "되돌릴 수 없습니다. 미집행 이전을 취소하고, 이미 예치된 자산은 예치자에게 반환하는 이전 건을 만듭니다." / 카테고리 ▾ + 사유 / [이전 중지] [돌아가기]</span><span class="nav-to stay">미집행 행 제거 + 반환 행 예치 건수만큼 생성 + 토스트 · 양측 BRK-05 이전 중지 배너 + 반환 안내 · 감사로그</span></div>
+          <div class="nav-row"><span class="nav-el">[이전 중지] — 클릭(나목 · <strong>입고 전</strong>)</span><span class="nav-act">클릭 → 다이얼로그 본문 "되돌릴 수 없습니다. 이 거래의 이전 3건을 취소하고 종결합니다. <strong>입금된 자산이 없어 반환 이전은 생기지 않습니다.</strong>" / 카테고리 ▾ + 사유</span><span class="nav-to stay">이전 3건 전부 제거 + 토스트 · EXC-04 이전 중지 · 감사로그 · <strong>반환 행 없음</strong></span></div>
+          <div class="nav-row"><span class="nav-el">[이전 중지] — 클릭(나목 · <strong>입고 완료·출고 전</strong>)</span><span class="nav-act">클릭 → 다이얼로그 본문 "되돌릴 수 없습니다. 출고를 취소하고, 입금된 {수량} {토큰}을 고객 수탁 지갑으로 반환하는 이전 건을 만듭니다. <strong>수수료는 부과하지 않습니다.</strong>" / 카테고리 ▾ + 사유</span><span class="nav-to stay">2/3 출고 '취소' 표시 · 3/3 수수료 제거 · <strong>3/3 반환 행 생성</strong> + 토스트 · EXC-04 이전 중지 + 반환 진행 · 감사로그</span></div>
           <div class="nav-row"><span class="nav-el">[보류] — 클릭</span><span class="nav-act">사유 다이얼로그(가역)</span><span class="nav-to stay">해당 거래의 미집행 행을 정지시키고 사유를 남긴다 · 재개는 같은 행에서 · <strong>만료 시한 없음</strong></span></div>
         </div>
       </div>
@@ -617,11 +765,11 @@
     <div class="itm" data-idx="12">
       <div class="num">13</div>
       <div>
-        <div class="itm-title">후속 이전 자동 생성 — 인도 · 반환 · 수수료 스윕<span class="req">필수</span></div>
-        <div class="itm-desc">사람이 누르지 않아도 ②에 행이 생기는 경우가 셋이다. 어느 것도 <strong>자동 승인이 아니다</strong> — 콜드 2인 서명이 사람 게이트로 남는다.<br>· <strong>인도 2건</strong> — 마목 예치 2건이 모두 완료되는 순간(양건 예치 확인) 자동 생성된다. 수량은 <strong>거래 수량 − 가스비</strong>다(수수료는 이미 에스크로에 남는다). 예치가 한쪽만 끝난 상태에서는 절대 생기지 않으므로 일방 이전이 구조적으로 불가능하다.<br>· <strong>반환</strong> — [이전 중지](항목 12) 시 예치 건수만큼 생성된다.<br>· <strong>수수료 스윕</strong> — 인도가 완료되면 에스크로에 각자 수수료 1%가 남는다. 이를 <strong>정책 주기 배치</strong>로 모아 운영 지갑(수수료풀)으로 옮기는 행이 자산별 1행 생긴다. 거래별로 만들지 않는다 — 콜드 서명 횟수를 줄이기 위해서다.<br><span class="chk">[확인필요]</span> 스윕 주기의 실제 값 · 인도 시 받는 수량에서 뺀 가스 상당액이 에스크로에 남는데 그 귀속(수수료와 함께 운영 지갑인지 별도 계정인지).<br><span class="basis">근거 09 §0 2026-09-03(15) ② 양건 예치 확인 → 인도 · 2026-09-04 수수료 흐름 결정</span></div>
+        <div class="itm-title">후속 이전 자동 생성 — 인도 · 반환 · 수수료 이전<span class="req">필수</span></div>
+        <div class="itm-desc">사람이 누르지 않아도 ② 거래 상세에 이전이 생기거나 활성되는 경우가 셋이다. 어느 것도 <strong>자동 승인이 아니다</strong> — 콜드 2인 서명이 사람 게이트로 남는다.<br>· <strong>인도 2건</strong> — 마목 예치 2건이 모두 완료되는 순간(양건 예치 확인) 활성된다. 수량은 <strong>상대방 예치 수량 − 받는 자산의 1%</strong>이고(2026-09-28(37)①) <strong>가스비를 빼지 않는다</strong>(2026-09-21(36)). 예치가 한쪽만 끝난 상태에서는 절대 활성되지 않으므로 일방 이전이 구조적으로 불가능하다.<br>· <strong>반환</strong> — [이전 중지](항목 12)·[AML 이슈 미집행](항목 10) 시 생성된다. <strong>마목</strong>은 예치가 끝난 다리 수만큼(1건 또는 2건 · 에스크로 → 예치자 수탁 지갑), <strong>나목</strong>은 1/3 입고가 <strong>대사 완료된 경우에만 1건</strong>(3/3 반환 · 교환 재고 → 고객 수탁 지갑)이다(2026-09-22 신설). 입고 전 중지면 반환을 만들지 않는다. 반환에는 수수료를 부과하지 않고 <strong>가스비는 DSRV가 부담</strong>한다.<br>· <strong>수수료 이전</strong>(2026-09-21 개정) — 나목은 <strong>출고 완료 후 1건</strong>(교환 재고 → 운영 지갑 · 입고 자산 × 스프레드율 · (37)②), 마목은 <strong>각 인도 완료 후 1건씩 2건</strong>(에스크로 → 운영 지갑 · 인도 때 공제한 받는 자산의 1%)이 활성된다. <strong>거래별 건별 집행</strong>이고 주기 배치로 묶지 않는다 — 거래와 수수료가 1:1로 이어져 구분회계·대사 증적이 단순해진다. 대신 콜드 서명 횟수가 거래당 1~2회 늘어난다. 종전 "정책 주기 배치로 자산별 1행 일괄 스윕"은 폐지.<br><span class="chk">[확인필요]</span> DSRV 부담 가스의 원천 — 나목은 교환 재고 지갑, 마목은 에스크로 전용지갑의 ETH 잔고를 어떤 계정·절차로 유지하는지.<br><span class="basis">근거 09 §0 2026-09-03(15) ② 양건 예치 확인 → 인도 · 2026-09-04 수수료 흐름 결정 · 2026-09-21(36) 수수료 이전 건별 집행·가스비 부담 결정 · 2026-09-28(37)①② 수수료 산정 기준</span></div>
         <div class="itm-nav"><span class="nav-tag">화면 이동 · 인터랙션</span>
-          <div class="nav-row"><span class="nav-el">양건 예치 확인</span><span class="nav-act">두 번째 예치 행 [완료] 직후 시스템 판정</span><span class="nav-to stay">② 표에 인도 2행 추가 + 토스트 "인도 2건이 생성되었습니다" · 고객 BRK-05 스텝 3 '인도 진행'</span></div>
-          <div class="nav-row"><span class="nav-el">수수료 스윕 배치</span><span class="nav-act">정책 주기 도래</span><span class="nav-to stay">② 표에 자산별 스윕 행 추가 · 토스트 없음(진입 시 목록에서 확인) · 감사로그</span></div>
+          <div class="nav-row"><span class="nav-el">양건 예치 확인</span><span class="nav-act">두 번째 예치 행 [완료] 직후 시스템 판정</span><span class="nav-to stay">같은 거래 행의 인도 2건 활성 + 토스트 "인도 2건이 생성되었습니다" · 고객 BRK-05 스텝 3 '인도 진행'</span></div>
+          <div class="nav-row"><span class="nav-el">수수료 이전 활성</span><span class="nav-act">대응하는 출고·인도 [완료] 직후 시스템 판정</span><span class="nav-to stay">거래 상세의 수수료 블록 활성 · 토스트 없음 · 감사로그</span></div>
         </div>
       </div>
     </div>
@@ -718,16 +866,16 @@
         <div class="dtl-body"><span class="box">· <strong>사유 다이얼로그 1종</strong>(보류 · 거절 · 이전 중지 · STR 검토 · 무혐의 종결 · 조치 완료): 카테고리 ▾(유형별) + 자유입력 10~500자 · 빈칸·10자 미만이면 실행 버튼 비활성 + 인라인 ⚠ · 내부 사유는 감사로그·CSV에만 남고 고객에게 보이지 않는다.<br>· <strong>결과 select는 [조치 완료]에만</strong> 붙는다. 나머지 버튼은 라벨이 곧 결과다.<br>· <strong>확인 다이얼로그를 띄우는 것</strong>: 승인(집행 개시) · 거절 · 이전 중지 · STR 검토 · 무혐의 종결 · 조치 완료 — 비가역이거나 구속력 있는 행위.<br>· <strong>띄우지 않는 것</strong>: 보류(가역) · 검토 · 확인 · 완료(대사 일치가 시스템 판정) · 명세 Excel · CSV 다운로드.<br>· 경쟁 상태(다른 관리자·다른 세션이 먼저 처리)는 시스템 오류와 같은 배너 1종으로 처리하고 최신 값을 다시 불러온다 — 경쟁 전용 문구를 두지 않는다(2026-09-02(11)).</span></div>
       </div>
       <div class="dtl" data-idx="5">
-        <div class="detail-label"><span class="dtl-num">6</span>② 집행 대기 — 행 유형 6종</div>
-        <div class="dtl-body"><span class="box">· <strong>입고</strong>(나목) 고객 수탁 → 교환 재고 · T1 승인 시 생성<br>· <strong>출고</strong>(나목) 교환 재고 → 고객 수탁 · T1 승인 시 함께 생성, 입고 완료 후 활성 · 완료 = 거래 완료<br>· <strong>예치</strong> ×2(마목) 고객 수탁 → 에스크로 · T2 승인 시 생성 · <strong>수수료 포함 수량</strong> · 양건 완료 시 인도 자동 생성<br>· <strong>인도</strong> ×2(마목) 에스크로 → 고객 수탁 · 양건 예치 확인 시 자동 생성 · <strong>수수료·가스 차감 후 수량</strong> · 완료 = 거래 완료<br>· <strong>반환</strong>(마목) 에스크로 → 예치자 수탁 · 예치 후 이전 중지 시 예치 건수만큼 · 수수료 미부과<br>· <strong>수수료 스윕</strong> 에스크로 → 운영(수수료풀) · 정책 주기 배치로 잔여분 일괄 · 자산별 1행 <span class="chk">[확인필요: 주기]</span><br>· 완료 조건은 6종 공통으로 <strong>온체인 대사 4항목 일치</strong> 하나다.</span></div>
+        <div class="detail-label"><span class="dtl-num">6</span>② 집행 대기 — 행 유형 6종 (2026-09-21 개정)</div>
+        <div class="dtl-body"><span class="box">· <strong>입고</strong>(나목 1/3) 고객 수탁 → 교환 재고 · T1 승인 시 생성 · 즉시 활성 · <strong>가스비 고객 부담</strong>(고객 수탁 지갑 ETH)<br>· <strong>출고</strong>(나목 2/3) 교환 재고 → 고객 수탁 · T1 승인 시 함께 생성, 입고 완료 후 활성 · <strong>고객이 받는 수량 전액</strong>(가스비 차감 없음) · 가스비 DSRV 부담<br>· <strong>수수료</strong>(나목 3/3) 교환 재고 → 운영 지갑 · T1 승인 시 함께 생성, 출고 완료 후 활성 · 수량 = <strong>입고 수량 × 스프레드 {정책값 0.10%}</strong>(입고 자산 단위 · 2026-09-28(37)②) · 가스비 DSRV 부담 · 고객 화면 미표시<br>· <strong>예치</strong> ×2(마목 1/6·2/6) 고객 수탁 → 에스크로 · T2 승인 시 생성 · 즉시 활성 · <strong>거래 수량</strong>(수수료 미포함 · (37)①) · <strong>가스비 고객 부담</strong>(각자 수탁 지갑 ETH) · 양건 완료 시 인도 자동 생성<br>· <strong>인도</strong> ×2(마목 3/6·4/6) 에스크로 → 상대 수탁 · 양건 예치 확인 시 자동 생성 · 수량 = <strong>상대방 예치 수량 − 받는 자산의 1%</strong>(가스비 차감 없음) · 가스비 DSRV 부담<br>· <strong>수수료</strong> ×2(마목 5/6·6/6) 에스크로 → 운영 지갑 · 각 인도 완료 후 활성 · 인도 때 공제한 받는 자산의 1% · 가스비 DSRV 부담<br>· <strong>반환</strong>(마목) 에스크로 → 예치자 수탁 · 예치 후 이전 중지 시 예치 건수만큼 · 수수료 미부과(수수료 행도 생성하지 않는다) <span class="chk">[확인필요: 반환 가스비 부담 주체]</span><br>· <strong>가스비 원칙</strong>(2026-09-21 사용자 결정) — <strong>고객 지갑에서 나가는 첫 이전 1회분만 고객 부담</strong>이고 나머지는 전부 DSRV 부담이다. 가스는 보내는 지갑이 내므로 부담 주체 = 그 이전의 출금 지갑 소유자다. 종전 "받는 수량에서 차감"(나목 1회 · 마목 2회분)은 폐지.<br>· <strong>수수료 이전은 건별 즉시</strong>다(2026-09-21 사용자 결정) — 거래마다 수수료 이전이 생긴다. 종전 마목 "정책 주기 배치로 자산별 1행 일괄 스윕"은 폐지. 거래↔수수료가 1:1로 이어져 구분회계·대사가 단순해지는 대신 콜드 서명 횟수가 거래당 1~2회 늘어난다.<br>· 완료 조건은 6종 공통으로 <strong>온체인 대사 4항목 일치</strong> 하나다.</span></div>
       </div>
       <div class="dtl" data-idx="8">
         <div class="detail-label"><span class="dtl-num">9</span>txhash 대사 규칙</div>
         <div class="dtl-body"><span class="box">· <strong>대사 항목 4가지</strong>: 발신 지갑(명세의 출금 지갑과 일치) · 수신 주소(명세 전문과 대소문자 무시 비교) · 자산(ETH 네이티브 / ERC-20 컨트랙트 주소 일치) · 수량(온체인 decimals 환산 후 명세의 <strong>이체 수량</strong>과 완전 일치 — 절사 규칙 아님).<br>· 하나라도 어긋나면 [완료] 비활성 + ④에 <strong>N3 집행 대사 불일치</strong> 알림을 만들고 ② 행을 정지시킨다. 후속 자동 생성(인도 등)도 함께 멈춘다.<br>· <strong>온체인은 되돌릴 수 없으므로 명세를 고치지 않는다.</strong> 차액이 생겼으면 회수 이전을 ②에 새로 만들어 집행한 뒤 재대사한다. <span class="chk">[확인필요: 회송 후속 절차의 주체·순서]</span><br>· 실발생 가스비는 영수증 값으로 기록해 CSV ③과 구분회계에 반영한다. 예상 가스비는 참고값이고 상한이 아니다(2026-09-02(13)).</span></div>
       </div>
       <div class="dtl" data-idx="12">
-        <div class="detail-label"><span class="dtl-num">13</span>마목 수수료 · 가스 흐름 (2026-09-04 결정)</div>
-        <div class="dtl-body"><span class="box">· <strong>예치</strong> 거래 수량 + 각자 수수료 1%를 <strong>함께</strong> 에스크로 전용지갑에 넣는다. 예: 게시자 800 + 8 = 808 USDT, 신청자 798.40 + 7.98 = 806.38 USDC.<br>· <strong>인도</strong> 상대가 보낸 거래 수량에서 가스비를 뺀 만큼만 준다. 수수료는 에스크로에 남는다.<br>· <strong>스윕</strong> 에스크로에 남은 수수료(8 USDT + 7.98 USDC)를 정책 주기로 운영 지갑(수수료풀)에 옮긴다. 거래별로 옮기지 않는 이유는 콜드 서명 횟수를 줄이기 위해서다.<br>· 중개수수료 수익은 나목 스프레드 수익과 분리한 내부 구분회계 계정으로 처리하고, 계정명은 고객 화면 어디에도 표시하지 않는다.<br>· <span class="chk">[확인필요]</span> 인도 시 받는 수량에서 뺀 가스 상당액도 에스크로에 남는다. 수수료와 함께 운영 지갑으로 스윕하는지 별도 계정인지.<br>· 종전 "수수료는 인도 집행 시점에 별도 정산"(09 §0 (15)④)을 이 흐름으로 구체화했다. brk-05 '보내는 수량 미공제' 문구는 이에 맞춰 수정 대상이다.</span></div>
+        <div class="detail-label"><span class="dtl-num">13</span>수수료 · 가스 흐름 (나목·마목 · 2026-09-21 개정)</div>
+        <div class="dtl-body"><span class="box">· <strong>나목 수수료</strong>(2026-09-21 신설) 고객에게는 스프레드 {정책값 0.10%}가 <strong>확정 비율에 내재</strong>되어 별도 항목으로 보이지 않는다. 자사에는 그 내재분이 수입이므로, 출고 후 <strong>고객이 보낸 자산(입고 자산) × 스프레드율</strong>을 교환 재고에서 <strong>운영 지갑으로 옮기는 이전(3/3)</strong>을 만든다(2026-09-28(37)②). 예: 0.3 ETH 입고 · 고객에게 955.20 USDC를 주고 <strong>0.0003 ETH</strong>(0.3 × 0.10%)를 운영 지갑으로 옮긴다. 종전 "받는 자산 기준(0.96 USDC)"은 폐기한다. 받는 수량은 이미 스프레드로 줄어든 값이라 거기서 다시 떼면 출고 자산 재고가 매 거래 그만큼 더 빠진다.<br>&nbsp;&nbsp;→ <strong>고객 화면은 바뀌지 않는다.</strong> 고객에게 고지되는 값은 확정 비율 하나이고, 이 이전은 어드민·명세·구분회계에만 나타난다.<br>&nbsp;&nbsp;→ 종전 09 §0 2026-09-15(30)④ "나목은 별도 수수료 항목으로 청구하지 않고 <strong>수수료 회수용 이전이 없다</strong>(자산 이동 = 고객→DSRV 1회, DSRV→고객 1회)"는 이 결정으로 <strong>폐지</strong>된다. 고객 청구 방식(스프레드 내재·별도 청구 없음)은 그대로다.<br>· <strong>마목 수수료</strong> 각자 <strong>거래 수량만</strong> 에스크로에 넣고(예치), 인도할 때 <strong>받는 자산 수량의 1%</strong>를 빼고 주며, 뺀 수수료를 <strong>거래별 수수료 이전(5/6·6/6)</strong>으로 운영 지갑에 옮긴다(2026-09-28(37)①). 양 당사자가 항상 쌍으로 주고받으므로 각 당사자가 거래액의 1%를 부담한다는 원칙은 같다. 종전 "각자 보내는 자산의 1%를 예치에 더해 넣는다"와 정책 주기 배치 일괄 스윕은 폐지(2026-09-21(36)).<br>· <strong>가스비</strong>(2026-09-21 사용자 결정) 고객은 <strong>자기 지갑에서 나가는 첫 이전 1회분만</strong> 부담하고, 자기 수탁 지갑의 ETH로 직접 낸다. 나머지 이전(나목 출고·수수료, 마목 인도·수수료)의 가스는 DSRV가 부담한다.<br>&nbsp;&nbsp;→ <strong>받는 수량에서 가스비를 빼지 않는다.</strong> 나목 고객은 955.20 USDC를, 마목 고객은 상대방 거래 수량에서 수수료 1%만 빠진 수량을 받는다.<br>· <strong>구분회계</strong> 나목 스프레드 수익과 마목 중개수수료 수익은 분리한 내부 계정으로 처리하고, 계정명은 고객 화면 어디에도 표시하지 않는다.<br>· <span class="chk">[확인필요]</span> DSRV 부담 가스의 원천 지갑에 ETH 잔고가 있어야 한다 — 나목은 교환 재고 지갑, 마목은 <strong>에스크로 전용지갑</strong>이다. 에스크로는 고객 자산 지갑(약관 제10조①②)이라 고유재산 ETH를 어떤 계정·절차로 넣어 두는지 커스터디팀·회계 확인.<br>· <span class="chk">[확인필요]</span> 고객 수탁 지갑에 가스용 ETH가 없을 때 첫 이전(나목 입고·마목 예치)을 어떻게 집행하는지.<br>· 종전 "수수료는 인도 집행 시점에 별도 정산"(09 §0 (15)④)을 이 흐름으로 구체화했다. 고객 화면(EXC-01·02·04 · BRK-02~05)의 가스비 표시는 이 결정에 맞춰 1회분 · 내 수탁 지갑 ETH 지불 · 받는 수량 차감 없음으로 고쳤다(2026-09-28).</span></div>
       </div>
       <div class="dtl" data-idx="16">
         <div class="detail-label"><span class="dtl-num">18</span>삭제한 유형과 그 근거</div>
@@ -745,21 +893,7 @@
 <section class="footer-note">
   <div class="note-card">
     <div class="note-title">비고</div>
-    <div class="note-body">· <strong>2026-09-17 개정</strong> — ③ AML 판단에서 <strong>[검토 착수] 버튼 폐지</strong>(항목 15 삭제 · 이후 항목 번호 1씩 당김). 섹션 버튼이 [STR 이관]·[무혐의 종결] 2종이 되고 업무 상태가 미처리·에스컬레이션 2종으로 줄었다(중간 상태 '검토중' 소멸). 미결이던 "검토 담당자 잠금" [확인필요]도 함께 소멸한다.<br>· <strong>2026-09-04 개편</strong> — 처리함 1표(유형 9종)를 <strong>4섹션</strong>(① 거래 승인 · ② 집행 대기 · ③ AML 판단 · ④ 운영 알림)으로 나눴다. 섹션당 버튼 세트 1종 · 사유 다이얼로그 1종 · 확장 패널 라벨·값 2열 1종으로 통일하고, 등급 별도 컬럼·카운트다운을 없앴다. 케이스 대응은 states 케이스분기 v0.5.<br>
-      · <strong>집계 표시를 하지 않는다</strong> — 처리 현황 KPI 카드 제거(2026-09-02 사용자 결정)를 2026-09-04 재확인. 상단 바·섹션 헤더 어디에도 건수를 쓰지 않는다.<br>
-      · <strong>프레임 폭</strong>을 810px에서 <strong>1180px</strong>로 넓혔다(2026-09-04). 4섹션 표가 5열이라 종전 폭에서는 내용이 접혔다. 고객 화면 프레임도 540px → 640px로 함께 넓혔다(screen.css).<br>
-      · <strong>목업 인터랙션</strong>: 행 클릭 → 확장 패널을 목업에서 실제로 열 수 있다(동시 1개 · 같은 행 재클릭 = 접기 · 처리 버튼·입력 클릭은 확장 토글에서 제외).<br>
-      · DSRV 내부 관리자 화면(고객사 노출 없음). 어드민은 <strong>4화면</strong>(처리함 ADM-02 · 설정 ADM-03 · 기관 · 가입자 ADM-04 · 데이터 다운로드 ADM-05)이고 관리 메뉴 4탭으로 오간다(2026-09-16 구현 화면 기준 재편).<br>
-      · <strong>2026-09-16 재편</strong> — 이 화면은 처리할 일 4섹션만 남긴다. 종전 이 화면에 있던 <strong>CSV 다운로드 6종은 데이터 다운로드(ADM-05)</strong>로, 설정(ADM-03)에 있던 <strong>기관·가입자 관리와 초대 발송은 기관 · 가입자(ADM-04)</strong>로 옮겼다. 다른 문서가 쓰는 <strong>CSV ①~⑥ 번호는 그대로</strong>다.<br>
-      · <span class="chk"><strong>개발 수정 요청</strong> — 2026-09-16 구현 화면의 ③ 대상 열이 <b>ORG-0001</b>로 나온다. 기관 번호는 커스터디가 준 <b>customerNo</b>(형식 L-XXXXXX-XXXX) 하나로 통일했으므로 <b>L-260915-0100 한국디지털거래소</b> 형태로 바꿔야 한다. 우리 자체 채번 ORG-NNNN은 2026-09-07에 폐기했다 — 번호가 둘이면 커스터디와 이야기할 때 어긋난다. 화면·Excel·CSV·감사로그 전부 같은 번호를 쓴다(drafts/48 수정요청 4번).</span><br>
-      · <strong>③ 버튼명</strong>은 [STR 검토] → <strong>[STR 이관]</strong>으로 바꿨다(처리함 결과코드가 'STR 이관'이라 그쪽이 일관된다 · 2026-09-16). <strong>[검토 착수]는 2026-09-17 폐지</strong> — 종전 [검토]를 [검토 착수]로 개명했다가, 종결 버튼 2종의 선행 게이트로 쓰지 않을 바에는 상태만 늘린다고 보아 버튼과 중간 상태 '검토중'을 함께 없앴다(사용자 결정). 담당자·착수 시각 기록도 함께 사라지고 처리자 기록은 종결 시점 하나로 남는다.<br>
-      · <strong>[방어 핵심]</strong> 자동검증은 1차 필터일 뿐, 승인·보류·거절은 전부 사람의 판단 — "자동체결·자동심사 아님" 소명. 마목 인도는 양건 예치 확인 후에만 생성되어 일방 이전이 구조적으로 불가능하고, 콜드 2인 서명이 사람 게이트로 남는다.<br>
-      · <strong>화이트리스트 제외</strong>(2026-09-04) — 교환·중개는 내부 지갑 간 이동이라 외부 주소를 다루지 않는다. 09 §0 79행의 통제 게이트 서술을 수정해야 하고, 나목 '자동체결 아님' 방어가 커스터디팀 콜드 건별 수동집행 하나에 걸리게 되므로 로펌 확인이 필요할 수 있다.<br>
-      · <strong>이해상충 플래그 미도입</strong>(2026-09-04) — 나목은 DSRV가 항상 상대방이라 모든 건에 붙어 판단 대상이 되지 않는다. 09 §0 52행의 시장감시 플래그·정기 이해상충 보고는 CSV ④와 정기 보고 산출물로 처리한다.<br>
-      · 접속은 내부 전용 · PAM 전용세션에서만 · 관리자 배지 표시값 = 관리자 ID(DSRV-OPS-NN) <span class="chk">[확인필요: 이름 병기 여부]</span> · 어드민 역할 1종(운영 관리자) — 화면·버튼 노출 차이 없음.<br>
-      · 연결: 유입 EXC-02·BRK-04·AUTH-01(잠금)·대사 배치 / 정책값·기관 관리는 설정(ADM-03) / 처리 결과는 고객 화면에 상태로만 반영(STR 누설 금지).<br>
-      · <strong>가스비</strong>(2026-09-02(13) 사용자 결정) — 고객 부담 · 받는 수량에서 차감 · 예상액은 참고 안내(상한·확정값 아님) · 실제 차감액은 실발생 가스비 · 건별 한도 판정 미포함.<br>
-      · <strong>[확인필요] 잔여</strong> 유휴 10분·관리자 배지 표시값 · 목록 정렬(에스컬레이션 상단 고정 여부) · 마목 보류 시 고객 문구 · 이전 중지의 계약상 귀결 · 반환 가스비 부담 주체 · 수수료 스윕 주기 · 가스 차감분 귀속 · 정산 배치와 건별 집행의 정합 · 회송 후속 절차 · 3면 대사 불일치 시 정지 범위 · STR 이관 시 연계 ① 건 처리 · 재고 하한 임계값 · 무수신 임계값 · 명세 파일의 서명자 전달 경로 · 검토 담당자 잠금 · 커스터디 어드민과의 연동 방식.</div>
+    <div class="note-body">· <strong>미결</strong> <span class="chk">[확인필요]</span> 잔여 유휴 10분 · 관리자 배지 표시값(이름 병기 여부) · 목록 정렬(에스컬레이션 상단 고정 여부) · 마목 보류 시 고객 문구 · 반환 가스비 부담 주체 · DSRV 부담 가스의 원천 지갑 ETH 유지 방법(교환 재고·에스크로) · 고객 수탁 지갑에 가스용 ETH가 없을 때 첫 이전 집행 방법 · ETH 토큰 주소 표기(네이티브 문구 vs 0xEeee…EEeE) · 정산 배치와 건별 집행의 정합 · 대사 불일치 회송 후속 절차 · 3면 대사 불일치 시 정지 범위 · STR 이관 시 연계 ① 승인 대기 건 처리 · 재고 하한 임계값 · 시세 무수신 임계값 · 명세 파일의 서명자 전달 경로 · 커스터디 어드민과의 연동 방식 · 취소된 출고 행 존치와 반환 순번 · [완료] 시 보류 자동 해제 여부 · 수수료 단계에서 [AML 이슈 미집행]만 활성으로 남는지. <span class="chk">[로펌게이트]</span> 확정 거래를 DSRV가 중지·반환할 때의 계약상 귀결(약관 제10조②) · 화이트리스트를 두지 않아 나목 '자동체결 아님' 방어가 커스터디 콜드 건별 수동집행 하나에 걸리는 점.<br>· <strong>폐기 — 구 스펙으로 구현하지 않는다.</strong> 처리 현황 KPI 카드(건수 집계) · 처리함 1표(유형 9종) · ③ [검토 착수] 버튼과 중간 상태 '검토중' · [이전 중지] 마목 전용 · "나목 출고가 실패로 종결되는 경우는 없다" · 명세 1장 = 이전 1건 · 커스터디 상태 변경 웹훅 · 수수료 주기 배치 스윕 · 화이트리스트 통제 · 이해상충 플래그 · 우리 자체 채번 ORG-NNNN(기관 번호는 커스터디 customerNo <span class="mono">L-XXXXXX-XXXX</span> 하나) · 가스비를 받는 수량에서 차감.<br>· <strong>가스비</strong> 고객 지갑에서 나가는 <strong>첫 이전 1회분만 고객 부담</strong>(나목 <span class="mono">1/3</span> 입고 · 마목 자기 예치)이고 자기 수탁 지갑 ETH로 직접 낸다. 나머지 이전은 전부 <strong>DSRV 부담</strong>이고 <strong>받는 수량에서 차감하지 않는다</strong>. 예상액은 참고 안내(상한·확정값 아님) · 실발생액은 부담 주체와 함께 기록 · 건별 한도 판정 미포함.<br>· <strong>DSRV 수수료</strong> 나목은 입고 자산 × 스프레드 <span class="mono">{정책값 0.10%}</span>를 교환 재고 → 운영 지갑으로, 마목은 각자 받는 자산의 1%를 인도 시 공제해 에스크로 → 운영 지갑으로 회수한다(2026-09-28(37)①②). 둘 다 <strong>거래별 건별 집행</strong>이고 고객 화면에 표시하지 않는다.<br>· <strong>접속·권한</strong> DSRV 내부 전용 · PAM 전용세션에서만 · 어드민 역할 1종(운영 관리자)으로 화면·버튼 노출 차이가 없다. 단 <strong>커스터디 담당자 계정</strong>만 ② 상세의 txhash 입력과 [AML 이슈 미집행]을 쓴다. 관리자 배지 = 관리자 ID(<span class="mono">DSRV-OPS-NN</span>).<br>· <strong>방어 핵심</strong> 자동검증은 1차 필터일 뿐 승인·보류·거절은 전부 사람의 판단이다 — "자동체결·자동심사 아님" 소명의 화면 근거다. 마목 인도는 양건 예치 확인 후에만 생성되어 일방 이전이 구조적으로 불가능하고, 콜드 2인 서명이 사람 게이트로 남는다.<br>· <strong>정본 포인터</strong> 결정 이력 = <span class="mono">knowledge/09 §0</span> (17) · 2026-09-16(31)(32) · 2026-09-17 · 2026-09-21(36) · 2026-09-28(37) · 2026-09-22(34). 케이스 대응 = <span class="mono">states</span> 케이스분기. 개발 수정요청 = <span class="mono">drafts/48 · 50</span>. 프레임 규격 = <span class="mono">screen.css</span>. 화면 구성·연결 = <span class="mono">ia</span> · <span class="mono">overview</span>.</div>
   </div>
 </section>
 

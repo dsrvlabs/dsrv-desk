@@ -1,0 +1,204 @@
+<title>3면 대사 변경 전후</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#f5f7f8; --panel:#ffffff; --ink:#18232b; --muted:#5b6b75; --line:#dbe2e6;
+  --accent:#1f6f78; --accent-soft:#e3f0f1;
+  --add:#1c7a45; --add-bg:#e6f4ec; --chg:#9a6200; --chg-bg:#fbf1dc; --del:#b3362f; --del-bg:#fbe7e5; --keep:#5b6b75; --keep-bg:#eef1f3;
+  --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --bg:#11181c; --panel:#182227; --ink:#e4ebee; --muted:#95a5ad; --line:#2a3840;
+  --accent:#5fb7bf; --accent-soft:#1b3337;
+  --add:#6fcf97; --add-bg:#16301f; --chg:#e3b35a; --chg-bg:#33280f; --del:#f08a82; --del-bg:#3a1a18; --keep:#95a5ad; --keep-bg:#212d33;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#11181c; --panel:#182227; --ink:#e4ebee; --muted:#95a5ad; --line:#2a3840;
+  --accent:#5fb7bf; --accent-soft:#1b3337;
+  --add:#6fcf97; --add-bg:#16301f; --chg:#e3b35a; --chg-bg:#33280f; --del:#f08a82; --del-bg:#3a1a18; --keep:#95a5ad; --keep-bg:#212d33;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;padding-inline:16px;padding-block:28px 56px}
+.wrap{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+h1{font-size:26px;line-height:1.3;margin:0;text-wrap:balance}
+h2{font-size:18px;margin:0 0 12px;text-wrap:balance}
+.eyebrow{font-size:12px;letter-spacing:.08em;color:var(--accent);font-weight:600}
+.lede{color:var(--muted);max-width:68ch;margin:6px 0 0}
+.draft{display:inline-block;margin-top:10px;font-size:12px;color:var(--chg);background:var(--chg-bg);padding:3px 8px;border-radius:4px}
+.mono{font-family:var(--mono);font-size:.92em}
+/* 요약 수치 */
+.tally{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.tally div{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px}
+.tally b{display:block;font-size:24px;font-variant-numeric:tabular-nums}
+.tally span{font-size:13px;color:var(--muted)}
+/* 전후 비교 */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:720px){.pair{grid-template-columns:1fr}}
+.side{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px}
+.side.after{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.side h3{margin:0 0 8px;font-size:14px;color:var(--muted);font-weight:600}
+.side.after h3{color:var(--accent)}
+.side ul{margin:0;padding-left:18px}
+.side li+li{margin-top:4px}
+/* 표 */
+.tw{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;min-width:720px;font-size:14px}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+th{font-size:12px;letter-spacing:.04em;color:var(--muted);font-weight:600;background:var(--bg)}
+tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;color:var(--muted);width:36px}
+.chip{display:inline-block;font-size:12px;font-weight:600;padding:1px 8px;border-radius:999px;white-space:nowrap}
+.c-keep{color:var(--keep);background:var(--keep-bg)}
+.c-chg{color:var(--chg);background:var(--chg-bg)}
+.c-add{color:var(--add);background:var(--add-bg)}
+.c-del{color:var(--del);background:var(--del-bg)}
+.strike{text-decoration:line-through;color:var(--muted)}
+.why{color:var(--muted)}
+.tag{font-size:12px;color:var(--chg)}
+/* 예시 행 */
+.ex table{min-width:560px}
+.ex td.v{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.ex .hide{color:var(--del);font-weight:600}
+.ex .caption{padding:10px 14px;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
+.open{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px}
+.open ul{margin:0;padding-left:18px}
+.foot{font-size:13px;color:var(--muted)}
+</style>
+
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">ADM-05 · CSV ⑤ · 2026-09-23(35)</div>
+  <h1>3면 대사, 무엇이 바뀌었나</h1>
+  <p class="lede">커스터디가 이체 목록을 배치로 보내게 되면서 세 번째 면(커스터디 기록)을 실제로 채울 수 있게 됐다. 잔액 대사는 유지하고, 대사 단위를 지갑 주소로 내렸다.</p>
+  <span class="draft">기획 초안 · 책임자 검토·승인 전 참고용 · 개발 미전달</span>
+</header>
+
+<section class="tally" aria-label="컬럼 변화 요약">
+  <div><b>12 → 23</b><span>컬럼 수</span></div>
+  <div><b>3</b><span>그대로 유지</span></div>
+  <div><b>7</b><span>의미·값 변경</span></div>
+  <div><b>2</b><span>삭제</span></div>
+  <div><b>13</b><span>신설</span></div>
+</section>
+
+<section>
+  <h2>핵심 변화 세 가지</h2>
+  <div class="pair">
+    <div class="side">
+      <h3>이전</h3>
+      <ul>
+        <li>커스터디 값을 받을 경로가 없음. 사실상 2면 대사</li>
+        <li>1행 = <b>지갑 묶음</b> × 자산 (최대 12행)</li>
+        <li>일치 여부 Y / N, 차이는 최대값 − 최소값 1열</li>
+        <li>세 값이 어느 시점 기준인지 기록 없음</li>
+      </ul>
+    </div>
+    <div class="side after">
+      <h3>이후</h3>
+      <ul>
+        <li>커스터디 기록 = 기초 잔액 + 커스터디 이체 목록 성공 건 누적</li>
+        <li>1행 = <b>지갑 주소</b> × 자산. 고객 수탁은 기관마다 1행</li>
+        <li>MATCHED / MISMATCHED / INCOMPLETE, 부호 있는 차이 2열</li>
+        <li>기준 블록 · 배치 수신 시각 · 마감 전기 ID로 시점 증명</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>세 값을 만드는 방법</h2>
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:150px">면</th><th>이전</th><th>이후</th></tr></thead>
+      <tbody>
+        <tr><td><b>내부 장부</b></td><td>잔액 스냅숏 (계정 매핑 정의 없음)</td><td>기초 잔액 + ④ 원장 시트 B에서 <b>이 지갑 주소</b>로 전기된 증감 누적</td></tr>
+        <tr><td><b>온체인</b></td><td>잔액 조회값</td><td>기준시각 직전 블록에서 이 주소를 직접 조회</td></tr>
+        <tr><td><b>커스터디 기록</b></td><td class="why">받을 경로 없음 <span class="tag">[확인필요]</span></td><td>기초 잔액 + 커스터디 이체 목록 중 「성공」·기준시각 이전 완료 건 누적<br><span class="why">받는 주소면 +, 보내는 주소면 −, 가스비는 보내는 지갑에서 −</span></td></tr>
+        <tr><td><b>공통 출발점</b></td><td class="why">없음</td><td>기초 잔액 = 지갑 등록 시점의 온체인 잔액</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="ex">
+  <h2>행 단위가 바뀌면 무엇이 보이나</h2>
+  <div class="tw">
+    <table>
+      <thead><tr><th>구분</th><th>행</th><th>내부 장부</th><th>온체인</th><th>판정</th></tr></thead>
+      <tbody>
+        <tr><td><span class="chip c-keep">이전</span></td><td>CUSTODY · ETH (A사+B사 합산)</td><td class="v">20.0</td><td class="v">20.0</td><td class="hide">일치로 보임</td></tr>
+        <tr><td><span class="chip c-add">이후</span></td><td>CUSTODY · A사 지갑 · ETH</td><td class="v">11.0</td><td class="v">10.0</td><td>MISMATCHED</td></tr>
+        <tr><td><span class="chip c-add">이후</span></td><td>CUSTODY · B사 지갑 · ETH</td><td class="v">9.0</td><td class="v">10.0</td><td>MISMATCHED</td></tr>
+      </tbody>
+    </table>
+    <div class="caption">가상 예시. A사 +1, B사 −1 오류는 합산하면 서로 지워진다. 지갑별로 나누면 드러나고, 이전을 멈출 지갑도 특정된다.</div>
+  </div>
+</section>
+
+<section>
+  <h2>컬럼 대조</h2>
+  <div class="tw">
+    <table>
+      <thead><tr><th>#</th><th style="width:88px">구분</th><th style="width:210px">이전</th><th style="width:230px">이후</th><th>이유</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td><span class="chip c-chg">변경</span></td><td>대사 ID (배치당 1개)</td><td>대사 ID (행마다 1개)</td><td class="why">배치 식별은 배치 ID가 맡음</td></tr>
+        <tr><td class="num">2</td><td><span class="chip c-add">신설</span></td><td>—</td><td>배치 ID</td><td class="why">같은 배치 행을 묶는 키</td></tr>
+        <tr><td class="num">3</td><td><span class="chip c-keep">유지</span></td><td>지갑 묶음</td><td>지갑 묶음</td><td class="why">CUSTODY / OPERATION / EXCHANGE_STOCK / ESCROW</td></tr>
+        <tr><td class="num">4</td><td><span class="chip c-add">신설</span></td><td>—</td><td>지갑 주소</td><td class="why">대사 단위를 지갑으로</td></tr>
+        <tr><td class="num">5</td><td><span class="chip c-add">신설</span></td><td>—</td><td>기관번호</td><td class="why">고객 수탁 행에만 값</td></tr>
+        <tr><td class="num">6</td><td><span class="chip c-keep">유지</span></td><td>자산</td><td>자산</td><td class="why">ETH · USDC · USDT</td></tr>
+        <tr><td class="num">7</td><td><span class="chip c-add">신설</span></td><td>—</td><td>기초 잔액 · 기초 기준 블록</td><td class="why">세 면의 공통 출발점</td></tr>
+        <tr><td class="num">8</td><td><span class="chip c-chg">변경</span></td><td>내부장부 잔액 (자산 자릿수 절사)</td><td>내부장부 잔액 (전 자릿수)</td><td class="why">절사로 작은 차이가 0으로 보이는 것 방지 · 지갑 주소별 누적으로 정의</td></tr>
+        <tr><td class="num">9</td><td><span class="chip c-chg">변경</span></td><td>온체인 잔액 (자산 자릿수 절사)</td><td>온체인 잔액 (전 자릿수)</td><td class="why">위와 같음</td></tr>
+        <tr><td class="num">10</td><td><span class="chip c-chg">변경</span></td><td>커스터디 콜드 잔액 (경로 없음)</td><td>커스터디 기록 잔액</td><td class="why">이체 목록 누적으로 산출</td></tr>
+        <tr><td class="num">11</td><td><span class="chip c-del">삭제</span></td><td class="strike">기간 가스비 소모(ETH)</td><td>—</td><td class="why">지침 제43조④ 건별 가스비 전기와 충돌. 가스비 차이는 정상 차이가 아님</td></tr>
+        <tr><td class="num">12</td><td><span class="chip c-del">삭제</span></td><td class="strike">차이 금액 (최대값 − 최소값)</td><td>—</td><td class="why">어느 면이 틀렸는지 알 수 없음</td></tr>
+        <tr><td class="num">13</td><td><span class="chip c-add">신설</span></td><td>—</td><td>차이(장부−온체인)</td><td class="why">부호로 방향 표시</td></tr>
+        <tr><td class="num">14</td><td><span class="chip c-add">신설</span></td><td>—</td><td>차이(커스터디−온체인)</td><td class="why">부호로 방향 표시</td></tr>
+        <tr><td class="num">15</td><td><span class="chip c-add">신설</span></td><td>—</td><td>장부 단독 건수</td><td class="why">txhash 대조 · 우리 기록에만 있는 이체</td></tr>
+        <tr><td class="num">16</td><td><span class="chip c-add">신설</span></td><td>—</td><td>커스터디 단독 건수</td><td class="why">txhash 대조 · 서비스가 모르는 이체</td></tr>
+        <tr><td class="num">17</td><td><span class="chip c-chg">변경</span></td><td>일치 여부 Y / N</td><td>MATCHED / MISMATCHED / INCOMPLETE</td><td class="why">한 면이 비면 일치로 보지 않음</td></tr>
+        <tr><td class="num">18</td><td><span class="chip c-add">신설</span></td><td>—</td><td>이전 정지 여부</td><td class="why">지침 제43조② 정지 조치 기록</td></tr>
+        <tr><td class="num">19</td><td><span class="chip c-chg">변경</span></td><td>X3 아이템 ID · 상태 · 결과</td><td>같음 + 배치 간 동일 ID 기재</td><td class="why">X3는 최신 배치가 일치여야 종결 · 여러 배치에 걸침</td></tr>
+        <tr><td class="num">20</td><td><span class="chip c-chg">변경</span></td><td>X3 담당자 · 사유 (미종결이면 빈 값)</td><td>담당자는 배정 시 표시 · 사유만 종결 전 빈 값</td><td class="why">이전 예시와 규칙이 서로 달랐음</td></tr>
+        <tr><td class="num">21</td><td><span class="chip c-add">신설</span></td><td>—</td><td>온체인 기준 블록</td><td class="why">온체인 값의 시점 증명</td></tr>
+        <tr><td class="num">22</td><td><span class="chip c-add">신설</span></td><td>—</td><td>커스터디 배치 수신 시각</td><td class="why">커스터디 값의 시점 증명 · 미수신이면 빈 값</td></tr>
+        <tr><td class="num">23</td><td><span class="chip c-add">신설</span></td><td>—</td><td>내부장부 마감 전기 ID</td><td class="why">장부 값의 시점 증명</td></tr>
+        <tr><td class="num">24</td><td><span class="chip c-keep">유지</span></td><td>대사 시각</td><td>대사 시각 (세 값 공통 기준시각)</td><td class="why">정렬은 내림차순 → 오름차순으로 다른 CSV와 통일</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="foot">이전 컬럼 12개와 이후 컬럼 23개를 한 표에 대응시켰다. 7번은 컬럼 2개를 한 줄로 묶었다.</p>
+</section>
+
+<section>
+  <h2>함께 바뀐 곳</h2>
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:220px">위치</th><th>변경</th></tr></thead>
+      <tbody>
+        <tr><td>④ 원장 시트 B</td><td>지갑 주소 열 추가. 수익·가스비 계정 전기도 실제 지갑 주소를 적음</td></tr>
+        <tr><td>DB 스키마</td><td>RECONCILIATION 필드 확장 · 커스터디 이체 목록 테이블(CUSTODY_TRANSFER) 신설</td></tr>
+        <tr><td>업무운영지침</td><td>제13조① 커스터디 유입값에 이체 목록 배치 추가 · 제43조⑤~⑦ 신설</td></tr>
+        <tr><td>정본 09 §0</td><td>2026-09-23(35) 결정 등재</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="open">
+  <h2>아직 정해지지 않은 것</h2>
+  <ul>
+    <li>이체 목록 수신 방식 (우리가 조회 / 커스터디가 파일 전달)</li>
+    <li>배치 주기가 지침 제43조① "최소 일 1회"를 충족하는지</li>
+    <li>실패 tx의 가스비가 목록에 포함되는지</li>
+    <li>INCOMPLETE일 때도 해당 지갑 신규 이전을 정지하는지</li>
+    <li>기획이 채운 규칙(공통 기준시각 · 허용오차 0 · 판정 3값 · 장부 지갑 주소 기재)의 확정</li>
+  </ul>
+</section>
+
+</div>

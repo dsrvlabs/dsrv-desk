@@ -1,0 +1,356 @@
+<title>교환·중개 출시 준비 현황판</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;500;600&family=Gothic+A1:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --paper: #eef0ef;
+    --sheet: #fafbfa;
+    --ink: #1a201d;
+    --ink-2: #414b46;
+    --soft: #6b756f;
+    --rule: #d6dbd8;
+    --rule-2: #c0c7c3;
+    --pine: #2c5a4c;
+    --ochre: #856216;
+    --dim: #8b948f;
+    --brick: #8d3f3c;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0f1211;
+      --sheet: #171b19;
+      --ink: #e7ebe8;
+      --ink-2: #c2cac6;
+      --soft: #949d98;
+      --rule: #272d2a;
+      --rule-2: #39413d;
+      --pine: #6fb69f;
+      --ochre: #cfa84f;
+      --dim: #7e8783;
+      --brick: #d1837f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0f1211;
+    --sheet: #171b19;
+    --ink: #e7ebe8;
+    --ink-2: #c2cac6;
+    --soft: #949d98;
+    --rule: #272d2a;
+    --rule-2: #39413d;
+    --pine: #6fb69f;
+    --ochre: #cfa84f;
+    --dim: #7e8783;
+    --brick: #d1837f;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Gothic A1", system-ui, -apple-system, "Malgun Gothic", sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  .sheet {
+    max-width: 940px;
+    margin: 0 auto;
+    background: var(--sheet);
+    border-left: 1px solid var(--rule);
+    border-right: 1px solid var(--rule);
+    padding-inline: 34px;
+    padding-block: 52px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+  }
+  h1 {
+    margin: 0;
+    font-family: Hahmlet, Georgia, serif;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.35;
+    letter-spacing: -.02em;
+    text-wrap: balance;
+  }
+  h2 {
+    margin: 0;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--soft);
+  }
+  h3 {
+    margin: 0;
+    font-family: Hahmlet, Georgia, serif;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: -.01em;
+  }
+
+  section { display: flex; flex-direction: column; gap: 14px; }
+
+  /* ledger rows */
+  .rows { display: flex; flex-direction: column; }
+  .r {
+    display: grid;
+    grid-template-columns: 96px 1fr auto;
+    gap: 4px 18px;
+    align-items: baseline;
+    padding: 10px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .r:first-child { border-top: 1px solid var(--rule-2); }
+  .r:last-child { border-bottom: 1px solid var(--rule); }
+  .when {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 12px;
+    color: var(--soft);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .what { font-size: 15px; color: var(--ink); }
+  .what .sub { color: var(--soft); font-size: 13.5px; }
+  .mark {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: .06em;
+    color: var(--dim);
+    white-space: nowrap;
+  }
+  .m-done { color: var(--pine); }
+  .m-run { color: var(--ochre); }
+  .m-hold { color: var(--brick); }
+
+  /* today row */
+  .r.now {
+    background: var(--paper);
+    padding-inline: 12px;
+    margin-inline: -12px;
+    border-top: 1px solid var(--rule-2);
+    border-bottom: 1px solid var(--rule-2);
+  }
+  .r.now .when { color: var(--ink); font-weight: 500; }
+  .r.now .what { font-weight: 500; }
+
+  /* track groups */
+  .groups { display: grid; grid-template-columns: 1fr 1fr; gap: 34px 46px; }
+  .group { display: flex; flex-direction: column; gap: 9px; }
+  .group-head {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 14px;
+    padding-bottom: 7px; border-bottom: 1px solid var(--rule-2);
+  }
+  .group-head .who { font-size: 12px; color: var(--soft); }
+  .group .r { grid-template-columns: 1fr auto; padding: 7px 0; }
+  .group .r:first-child { border-top: 0; }
+  .group .r:last-child { border-bottom: 0; }
+  .group .what { font-size: 14px; }
+  .group .what .sub { display: block; font-size: 12.5px; line-height: 1.5; }
+
+  /* now strip */
+  .now-list { display: flex; flex-direction: column; }
+  .now-list .r { grid-template-columns: 26px 1fr auto; }
+  .now-list .num {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 12px; color: var(--soft);
+  }
+  .now-list .what { font-size: 15.5px; }
+
+  .base { font-size: 12.5px; color: var(--dim); }
+
+  @media (max-width: 860px) {
+    .groups { grid-template-columns: 1fr; gap: 30px; }
+  }
+  @media (max-width: 620px) {
+    .sheet { padding-inline: 18px; border-left: 0; border-right: 0; padding-block: 36px 44px; }
+    h1 { font-size: 24px; }
+    .r { grid-template-columns: 1fr auto; }
+    .r .when { grid-column: 1 / -1; }
+    .now-list .r { grid-template-columns: 26px 1fr auto; }
+  }
+</style>
+
+<div class="sheet">
+
+  <h1>교환(나목)·중개(마목) 출시 준비 현황</h1>
+
+  <section>
+    <h2>일정</h2>
+    <div class="rows">
+      <div class="r">
+        <span class="when">9/1 주</span>
+        <span class="what">기획·설계 완료</span>
+        <span class="mark m-done">완료</span>
+      </div>
+      <div class="r">
+        <span class="when">9/11</span>
+        <span class="what">ISMS 신청서 제출 <span class="sub">심사 일정 10/12 확정</span></span>
+        <span class="mark m-done">완료</span>
+      </div>
+      <div class="r now">
+        <span class="when">9/21</span>
+        <span class="what">오늘. 개발 트랙 종료 예정일</span>
+        <span class="mark"></span>
+      </div>
+      <div class="r">
+        <span class="when">9/22</span>
+        <span class="what">커스터디 연결 테스트</span>
+        <span class="mark">예정</span>
+      </div>
+      <div class="r">
+        <span class="when">~9/29</span>
+        <span class="what">QA 마감, 사이트 개발·홈페이지 게시</span>
+        <span class="mark">예정</span>
+      </div>
+      <div class="r">
+        <span class="when">9/30~10/2</span>
+        <span class="what">정보보안점검</span>
+        <span class="mark">예정</span>
+      </div>
+      <div class="r">
+        <span class="when">10/5</span>
+        <span class="what">개발·점검 완료</span>
+        <span class="mark">예정</span>
+      </div>
+      <div class="r">
+        <span class="when">10/6~10/8</span>
+        <span class="what">보안 결함 조치</span>
+        <span class="mark">예정</span>
+      </div>
+      <div class="r">
+        <span class="when">10/12~16</span>
+        <span class="what">ISMS 본심사</span>
+        <span class="mark">예정</span>
+      </div>
+      <div class="r">
+        <span class="when">10/19~11/2</span>
+        <span class="what">ISMS 결함 조치</span>
+        <span class="mark">예정</span>
+      </div>
+      <div class="r">
+        <span class="when">11/4</span>
+        <span class="what">인증위원회 상정</span>
+        <span class="mark">예정</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>현재 구간 · QA</h2>
+    <div class="rows now-list">
+      <div class="r">
+        <span class="num">1</span>
+        <span class="what">서비스 기능 테스트</span>
+        <span class="mark m-done">완료</span>
+      </div>
+      <div class="r">
+        <span class="num">2</span>
+        <span class="what">실체인 연결 테스트</span>
+        <span class="mark m-run">진행중</span>
+      </div>
+      <div class="r">
+        <span class="num">3</span>
+        <span class="what">커스터디 연결 테스트</span>
+        <span class="mark">9/22</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>트랙별 상태</h2>
+    <div class="groups">
+
+      <div class="group">
+        <div class="group-head"><h3>제품 기획</h3><span class="who">프로덕트팀 · 8/28~9/1</span></div>
+        <div class="rows">
+          <div class="r"><span class="what">서비스 정의·흐름도·화면 기획 <span class="sub">화면 24종, 케이스 51건</span></span><span class="mark m-done">완료</span></div>
+          <div class="r"><span class="what">기획구조 설명</span><span class="mark m-done">완료</span></div>
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="group-head"><h3>디자인</h3><span class="who">BX디자인팀 · 9/1~9/4</span></div>
+        <div class="rows">
+          <div class="r"><span class="what">인증·대시보드·나목 교환·마목 중개 4종</span><span class="mark m-done">완료</span></div>
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="group-head"><h3>ISMS 신청 문서</h3><span class="who">정보보안팀·프로덕트팀 · 9/1~9/4</span></div>
+        <div class="rows">
+          <div class="r"><span class="what">신청서 내 서비스 소개</span><span class="mark m-done">완료</span></div>
+          <div class="r"><span class="what">서비스·개인정보 흐름도 2종</span><span class="mark m-done">완료</span></div>
+          <div class="r"><span class="what">신청서 제출</span><span class="mark m-done">완료</span></div>
+          <div class="r"><span class="what">정보자산 정리</span><span class="mark m-done">완료</span></div>
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="group-head"><h3>DEVOPS</h3><span class="who">옵스팀 · 9/1~9/9</span></div>
+        <div class="rows">
+          <div class="r"><span class="what">환경 구축, CI/CD</span><span class="mark">미기재</span></div>
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="group-head"><h3>백엔드·어드민 개발</h3><span class="who">플랫폼개발팀 · 9/4~9/21</span></div>
+        <div class="rows">
+          <div class="r"><span class="what">DESK 백엔드 개발</span><span class="mark">미기재</span></div>
+          <div class="r"><span class="what">DESK 어드민 개발 <span class="sub">수정요청 9/16·9/17 발행</span></span><span class="mark m-run">진행</span></div>
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="group-head"><h3>커스터디 연동</h3><span class="who">커스터디팀 · 9/1~9/21</span></div>
+        <div class="rows">
+          <div class="r"><span class="what">연동 범위 확정</span><span class="mark m-done">완료</span></div>
+          <div class="r"><span class="what">제공 필요사항 정의, 개발 일정 반영</span><span class="mark m-done">완료</span></div>
+          <div class="r"><span class="what">고객 상태(KYC) 조회 API</span><span class="mark m-done">완료</span></div>
+          <div class="r"><span class="what">연계 테스트</span><span class="mark">9/22</span></div>
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="group-head"><h3>프론트 개발</h3><span class="who">웹3개발팀 · 9/8~9/21</span></div>
+        <div class="rows">
+          <div class="r"><span class="what">화면 구현, API 연결</span><span class="mark m-run">90%</span></div>
+          <div class="r"><span class="what">테스트 코드 작성</span><span class="mark">미기재</span></div>
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="group-head"><h3>규제 문서</h3><span class="who">법무·컴플라이언스·프로덕트팀 · 9/10~9/15</span></div>
+        <div class="rows">
+          <div class="r"><span class="what">이용약관</span><span class="mark m-done">완료</span></div>
+          <div class="r"><span class="what">운영 매뉴얼</span><span class="mark m-done">완료</span></div>
+          <div class="r"><span class="what">FIU 제출 문서 요구사항 파악</span><span class="mark m-done">완료</span></div>
+          <div class="r"><span class="what">사업추진계획서 초안 <span class="sub">외부 법무법인 확인중</span></span><span class="mark m-run">진행</span></div>
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="group-head"><h3>사이트</h3><span class="who">프로덕트팀·BX디자인팀 · 9/10~9/29</span></div>
+        <div class="rows">
+          <div class="r"><span class="what">사이트 기획, 내용 검수</span><span class="mark m-done">완료</span></div>
+          <div class="r"><span class="what">사이트 디자인·개발 <span class="sub">디자인 작업 할당 확정 필요</span></span><span class="mark">~9/29</span></div>
+          <div class="r"><span class="what">DSRV 홈페이지 통합 게시</span><span class="mark">~9/29</span></div>
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="group-head"><h3>보안·심사</h3><span class="who">정보보안팀·플랫폼개발팀 · 9/30~11/4</span></div>
+        <div class="rows">
+          <div class="r"><span class="what">보안성 심사 1차 지적 체크</span><span class="mark m-done">완료</span></div>
+          <div class="r"><span class="what">웹 취약점 진단, 진단 보고서</span><span class="mark m-hold">일정 미정</span></div>
+          <div class="r"><span class="what">보안 결함 조치</span><span class="mark">10/6~8</span></div>
+          <div class="r"><span class="what">본심사 대응, 결함 조치</span><span class="mark">10/12~</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <p class="base">상태는 주간보고 기준, 순서와 기간은 프로젝트 태스크 기준.</p>
+
+</div>
